@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Infrastructure.Runtime;
-using LQCE.Repositorio;
 using LQCE.Modelo;
-using LQCE.Transaccion.DTO;
+using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
 	public partial class TrxCONVENIO_TARIFARIO
 	{
-		#region Manejo del estado de la instancia
-
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
 		/// </summary>
@@ -24,7 +21,7 @@ namespace LQCE.Transaccion
 
 		public TrxCONVENIO_TARIFARIO()
 		{
-		    Init();
+		     Init();
 		}
 
 		private void Init()
@@ -33,188 +30,225 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		#endregion
-
-		#region Metodos Autogenerados
-		
-			/// <summary>
-	      /// Obtiene un registro en base a su key.
-	      /// </summary>
-	      /// <param name="id">key.</param>
-	      /// <returns></returns>
-		public CONVENIO_TARIFARIO GetById(int id)
-		{
+		public List<CONVENIO_TARIFARIO> GetAll()
+        {
 			Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+                    return repositorio.GetAll().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
 
-			using (var context = new LQCEEntities())
+		public List<CONVENIO_TARIFARIO> GetAllWithReferences()
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public CONVENIO_TARIFARIO GetById(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+                    return repositorio.GetById(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public CONVENIO_TARIFARIO GetByIdWithReferences(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+                    return repositorio.GetByIdWithReferences(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+	 	
+		public List<CONVENIO_TARIFARIO> GetByFilter(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null, bool? ACTIVO = null)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+                    return repositorio.GetByFilter(CONVENIOId, FECHA_VIGENCIA, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+		public List<CONVENIO_TARIFARIO> GetByFilterWithReferences(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null, bool? ACTIVO = null)
+        {
+			Init();
+            try
+            {
+                 using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+                    return repositorio.GetByFilterWithReferences(CONVENIOId, FECHA_VIGENCIA, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+        public int Add(int CONVENIOId, System.DateTime FECHA_VIGENCIA)
+        {
+		Init();
+            try
+            {
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioCONVENIO _repositorioCONVENIO = new RepositorioCONVENIO(context);
+					CONVENIO _objCONVENIO = _repositorioCONVENIO.GetById(CONVENIOId);
+					if(Equals(_objCONVENIO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CONVENIO con Id =",CONVENIOId.ToString()));
+					}
+
+					CONVENIO_TARIFARIO _CONVENIO_TARIFARIO = new CONVENIO_TARIFARIO();
+
+					//properties
+
+                    _CONVENIO_TARIFARIO.FECHA_VIGENCIA = FECHA_VIGENCIA;
+                    _CONVENIO_TARIFARIO.ACTIVO = true;				
+
+					//parents
+						 
+                    _CONVENIO_TARIFARIO.CONVENIO = _objCONVENIO;
+                    
+					context.AddObject("CONVENIO_TARIFARIO",_CONVENIO_TARIFARIO);
+                    context.SaveChanges();
+
+					return _CONVENIO_TARIFARIO.ID;
+                }
+            }
+			catch(Exception ex)
 			{
-				var dato = new RepositorioCONVENIO_TARIFARIO(context);
-				var entity = dato.GetById(id);
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+			}
+        }
 
-				//Se procesa el resultado de la operacion.
-				Error = dato.Error;
-				Success = entity != null;
+		public void Update(int Id, int CONVENIOId, System.DateTime FECHA_VIGENCIA)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+                    RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+                    CONVENIO_TARIFARIO _CONVENIO_TARIFARIO = repositorio.GetById(Id);
+                    if(Equals(_CONVENIO_TARIFARIO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CONVENIO_TARIFARIO con Id =",Id.ToString()));
+					}
+					
+					RepositorioCONVENIO _repositorioCONVENIO = new RepositorioCONVENIO(context);
+					CONVENIO _objCONVENIO = _repositorioCONVENIO.GetById(CONVENIOId);
+					if(Equals(_objCONVENIO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CONVENIO con Id =",CONVENIOId.ToString()));
+					}
+	
+					//properties
 
-				return entity;
+						_CONVENIO_TARIFARIO.FECHA_VIGENCIA = FECHA_VIGENCIA;
+	
+					//parents
+					 
+                    _CONVENIO_TARIFARIO.CONVENIO = _objCONVENIO;
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
 			}
 		}
 
-	  	/// <summary>
-      /// Busca todos los registros activos.
-      /// </summary>
-      /// <returns></returns>
-      public IList<CONVENIO_TARIFARIO> GetAll()
-      {
-          Init();
+		public void Delete (int Id)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
+					CONVENIO_TARIFARIO _CONVENIO_TARIFARIO = repositorio.GetById(Id); 
+					
+					if(Equals(_CONVENIO_TARIFARIO ,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CONVENIO_TARIFARIO con Id =",Id.ToString()));
+					}
 
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioCONVENIO_TARIFARIO(context);
-              var q = dato.GetAll();
-              q = q.Where(i => i.ACTIVO);
+					_CONVENIO_TARIFARIO.ACTIVO = false;
 
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
-      /// </summary>
-      /// <param name="dto">Dto con parametros de busqueda.</param>
-      /// <returns></returns>
-      public IList<CONVENIO_TARIFARIO> Find(DTO_CONVENIO_TARIFARIO dto)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioCONVENIO_TARIFARIO(context);
-              var q = dato.GetAll();
-              if (dto != null)
-              {
-					if (dto.ID != null)
-						q = q.Where(i => i.ID  == dto.ID);		
-					if (dto.FECHA_VIGENCIA != null)
-						q = q.Where(i => i.FECHA_VIGENCIA  == dto.FECHA_VIGENCIA);		
-					if (dto.ACTIVO != null)
-						q = q.Where(i => i.ACTIVO  == dto.ACTIVO);		
-					if (dto.ID_CONVENIO != null)
-						q = q.Where(i => i.CONVENIO.ID == dto.ID_CONVENIO);				
-              }
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
-      /// </summary>
-      /// <param name="entity">Entidad a persistir.</param>
-      /// <returns></returns>
-      public int Save(CONVENIO_TARIFARIO entity)
-      {
-          Init();
-
-          if (entity == null)
-          {
-              Error = "ArgumentNullException. La entidad a persistir 'CONVENIO_TARIFARIO' no puede ser nula.";
-              ISException.RegisterExcepcion(Error);
-              return 0;
-          }
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioCONVENIO_TARIFARIO(context);
-              var oldEntity = dato.GetById(entity.ID);
-              //Dependiendo de su key, el registro se crea o actualiza.
-              if (oldEntity == null)
-              {
-                  entity.ACTIVO = true;
-                  var id = dato.Insert(entity);
-                  Success = id > 0;
-                  Error = dato.Error;
-                  return id;
-              }
-
-              oldEntity.FECHA_VIGENCIA = entity.FECHA_VIGENCIA;				
-              Success = dato.Update(oldEntity);
-              Error = dato.Error;
-              return Success ? oldEntity.ID : 0;
-          }
-      }
-
-      /// <summary>
-      /// Elimina un registro en base a su key.
-      /// </summary>
-      /// <param name="id">key.</param>
-      /// <returns></returns>
-      public bool Delete(int id)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioCONVENIO_TARIFARIO(context);
-              var entity = dato.GetById(id);
-
-              //Se procesa el resultado de la operacion.
-              if (entity == null)
-              {
-                  Error = String.Format("Registro '{0}' en 'CONVENIO_TARIFARIO' no encontrado. {1}", id, dato.Error);
-                  ISException.RegisterExcepcion(Error);
-                  return false;
-              }
-
-              //Eliminacion logica.
-               entity.ACTIVO = false;
-              //Se procesa el resultado de la operacion.
-              Success = dato.Update(entity);
-              Error = dato.Error;
-
-              return Success;
-          }
-      }
-
-      #endregion 	
+                 throw ex;
+			}
+		}
 	}
 }

@@ -42,6 +42,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioCARGA_PRESTACIONES_ENCABEZADO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCARGA_PRESTACIONES_VETERINARIAS_EXAMEN.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="RepositorioCLIENTE.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>

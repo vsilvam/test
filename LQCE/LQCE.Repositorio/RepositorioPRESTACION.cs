@@ -1,146 +1,187 @@
 using System;
-using System.Data;
 using System.Linq;
-using App.Infrastructure.Runtime;
 using LQCE.Modelo;
+using App.Infrastructure.Runtime;
 
 namespace LQCE.Repositorio
 {
 	public partial class RepositorioPRESTACION
 	{
-		//Contexto del entity model
-        private readonly LQCEEntities _contextBd;
-
-        #region Manejo del estado de la instancia
-
-        /// <summary>
-        /// Propiedad que contiene el error actual de la instancia de acceso a datos.
-        /// </summary>
-        public string Error { get; private set; }
-
-        public RepositorioPRESTACION(LQCEEntities context)
-        {
-            Error = string.Empty;
-            _contextBd = context;
-        }
-
-        #endregion
-
-        #region Metodos CRUD Autogenerados - NO MODIFICAR
+		private LQCEEntities _context;
+		public string Error { get; private set; }
 		
+		public RepositorioPRESTACION(LQCEEntities Context)
+		{
+			Error = string.Empty;
+			this._context = Context;
+		}
 
-        /// <summary>
-        /// Obtiene el registro desde BD en base a su key.
-        /// </summary
-        /// <param name="id">key.</param>
-        /// <returns></returns>
-        public PRESTACION GetById(int id)
-        {
-            Error = string.Empty;
-            try
-            {
-                return _contextBd.PRESTACION
-					.Include("CLIENTE")				
-					.Include("GARANTIA")				
-					.Include("PREVISION")				
-					.Include("TIPO_PRESTACION")				
-					.FirstOrDefault(i => i.ID == id);
-            }
-            catch (Exception ex)
+		public PRESTACION GetById(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.PRESTACION.FirstOrDefault(i => i.ID == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Busca todos los registros.
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<PRESTACION> GetAll()
-        {
-            Error = string.Empty;
-            try
-            {
-                return from i in _contextBd.PRESTACION select i;
-            }
-            catch (Exception ex)
+		public PRESTACION GetByIdWithReferences(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Inserta un nuevo registro en BD, retornando su id.
-        /// </summary>
-        /// <param name="entity">Nueva entidad.</param>
-        /// <returns></returns>
-        public int Insert(PRESTACION entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.AddToPRESTACION(entity);
-                _contextBd.SaveChanges();
-                return entity.ID;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<PRESTACION> GetAll()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.PRESTACION select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return 0;
-            }
-            catch (Exception ex)
+		}
+
+		public IQueryable<PRESTACION> GetAllWithReferences()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Actualiza el registro en BD.
-        /// </summary>
-        /// <param name="entity">Entidad a actualizar.</param>
-        /// <returns></returns>
-        public bool Update(PRESTACION entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.ApplyPropertyChanges("PRESTACION", entity);
-                return _contextBd.SaveChanges() > 0;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, bool? ACTIVO = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.PRESTACION select i;
+
+				if (!string.IsNullOrEmpty(MEDICO))
+				{
+				   q = q.Where(i => i.MEDICO.Contains(MEDICO));
+				}
+				if (FECHA_MUESTRA.HasValue)
+				{
+				  q = q.Where(i => i.FECHA_MUESTRA == FECHA_MUESTRA.Value);
+				}
+				if (FECHA_RECEPCION.HasValue)
+				{
+				  q = q.Where(i => i.FECHA_RECEPCION == FECHA_RECEPCION.Value);
+				}
+				if (FECHA_ENTREGA_RESULTADOS.HasValue)
+				{
+				  q = q.Where(i => i.FECHA_ENTREGA_RESULTADOS == FECHA_ENTREGA_RESULTADOS.Value);
+				}
+				if (ACTIVO.HasValue)
+				{
+				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				}
+				if (CLIENTEId.HasValue)
+				{
+				  q = q.Where(i => i.CLIENTE.ID == CLIENTEId.Value);
+				}
+				if (GARANTIAId.HasValue)
+				{
+				  q = q.Where(i => i.GARANTIA.ID == GARANTIAId.Value);
+				}
+				if (PREVISIONId.HasValue)
+				{
+				  q = q.Where(i => i.PREVISION.ID == PREVISIONId.Value);
+				}
+				if (TIPO_PRESTACIONId.HasValue)
+				{
+				  q = q.Where(i => i.TIPO_PRESTACION.ID == TIPO_PRESTACIONId.Value);
+				}
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return false;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
+		}
+
+		public IQueryable<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, bool? ACTIVO = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") select i;
+
+				if (!string.IsNullOrEmpty(MEDICO))
+				{
+					q = q.Where(i => i.MEDICO.Contains(MEDICO));
+				}
+				if (FECHA_MUESTRA.HasValue)
+				{
+					q = q.Where(i => i.FECHA_MUESTRA == FECHA_MUESTRA.Value);
+				}
+				if (FECHA_RECEPCION.HasValue)
+				{
+					q = q.Where(i => i.FECHA_RECEPCION == FECHA_RECEPCION.Value);
+				}
+				if (FECHA_ENTREGA_RESULTADOS.HasValue)
+				{
+					q = q.Where(i => i.FECHA_ENTREGA_RESULTADOS == FECHA_ENTREGA_RESULTADOS.Value);
+				}
+				if (ACTIVO.HasValue)
+				{
+					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				}
+				if (CLIENTEId.HasValue)
+				{
+					q = q.Where(i => i.CLIENTE.ID == CLIENTEId.Value);
+				}
+				if (GARANTIAId.HasValue)
+				{
+					q = q.Where(i => i.GARANTIA.ID == GARANTIAId.Value);
+				}
+				if (PREVISIONId.HasValue)
+				{
+					q = q.Where(i => i.PREVISION.ID == PREVISIONId.Value);
+				}
+				if (TIPO_PRESTACIONId.HasValue)
+				{
+					q = q.Where(i => i.TIPO_PRESTACION.ID == TIPO_PRESTACIONId.Value);
+				}
+				return q;
+			}
+			catch (Exception ex)
+			{
+				ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
-            }
-
-        }
-
-        #endregion
+                return null;
+			}
+		}
 	}
 }

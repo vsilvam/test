@@ -1,142 +1,131 @@
 using System;
-using System.Data;
 using System.Linq;
-using App.Infrastructure.Runtime;
 using LQCE.Modelo;
+using App.Infrastructure.Runtime;
 
 namespace LQCE.Repositorio
 {
 	public partial class RepositorioREGION
 	{
-		//Contexto del entity model
-        private readonly LQCEEntities _contextBd;
-
-        #region Manejo del estado de la instancia
-
-        /// <summary>
-        /// Propiedad que contiene el error actual de la instancia de acceso a datos.
-        /// </summary>
-        public string Error { get; private set; }
-
-        public RepositorioREGION(LQCEEntities context)
-        {
-            Error = string.Empty;
-            _contextBd = context;
-        }
-
-        #endregion
-
-        #region Metodos CRUD Autogenerados - NO MODIFICAR
+		private LQCEEntities _context;
+		public string Error { get; private set; }
 		
+		public RepositorioREGION(LQCEEntities Context)
+		{
+			Error = string.Empty;
+			this._context = Context;
+		}
 
-        /// <summary>
-        /// Obtiene el registro desde BD en base a su key.
-        /// </summary
-        /// <param name="id">key.</param>
-        /// <returns></returns>
-        public REGION GetById(int id)
-        {
-            Error = string.Empty;
-            try
-            {
-                return _contextBd.REGION
-					.FirstOrDefault(i => i.ID == id);
-            }
-            catch (Exception ex)
+		public REGION GetById(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.REGION.FirstOrDefault(i => i.ID == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Busca todos los registros.
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<REGION> GetAll()
-        {
-            Error = string.Empty;
-            try
-            {
-                return from i in _contextBd.REGION select i;
-            }
-            catch (Exception ex)
+		public REGION GetByIdWithReferences(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.REGION.Include("COMUNA").FirstOrDefault(i => i.ID == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Inserta un nuevo registro en BD, retornando su id.
-        /// </summary>
-        /// <param name="entity">Nueva entidad.</param>
-        /// <returns></returns>
-        public int Insert(REGION entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.AddToREGION(entity);
-                _contextBd.SaveChanges();
-                return entity.ID;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<REGION> GetAll()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.REGION select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return 0;
-            }
-            catch (Exception ex)
+		}
+
+		public IQueryable<REGION> GetAllWithReferences()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.REGION.Include("COMUNA") select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Actualiza el registro en BD.
-        /// </summary>
-        /// <param name="entity">Entidad a actualizar.</param>
-        /// <returns></returns>
-        public bool Update(REGION entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.ApplyPropertyChanges("REGION", entity);
-                return _contextBd.SaveChanges() > 0;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<REGION> GetByFilter(string NOMBRE = "", bool? ACTIVO = null)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.REGION select i;
+
+				if (!string.IsNullOrEmpty(NOMBRE))
+				{
+				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
+				}
+				if (ACTIVO.HasValue)
+				{
+				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				}
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return false;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
+		}
+
+		public IQueryable<REGION> GetByFilterWithReferences(string NOMBRE = "", bool? ACTIVO = null)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.REGION.Include("COMUNA") select i;
+
+				if (!string.IsNullOrEmpty(NOMBRE))
+				{
+					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
+				}
+				if (ACTIVO.HasValue)
+				{
+					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				}
+				return q;
+			}
+			catch (Exception ex)
+			{
+				ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
-            }
-
-        }
-
-        #endregion
+                return null;
+			}
+		}
 	}
 }

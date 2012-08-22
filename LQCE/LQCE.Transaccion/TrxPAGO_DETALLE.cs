@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Infrastructure.Runtime;
-using LQCE.Repositorio;
 using LQCE.Modelo;
-using LQCE.Transaccion.DTO;
+using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
 	public partial class TrxPAGO_DETALLE
 	{
-		#region Manejo del estado de la instancia
-
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
 		/// </summary>
@@ -24,7 +21,7 @@ namespace LQCE.Transaccion
 
 		public TrxPAGO_DETALLE()
 		{
-		    Init();
+		     Init();
 		}
 
 		private void Init()
@@ -33,190 +30,241 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		#endregion
-
-		#region Metodos Autogenerados
-		
-			/// <summary>
-	      /// Obtiene un registro en base a su key.
-	      /// </summary>
-	      /// <param name="id">key.</param>
-	      /// <returns></returns>
-		public PAGO_DETALLE GetById(int id)
-		{
+		public List<PAGO_DETALLE> GetAll()
+        {
 			Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+                    return repositorio.GetAll().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
 
-			using (var context = new LQCEEntities())
+		public List<PAGO_DETALLE> GetAllWithReferences()
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public PAGO_DETALLE GetById(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+                    return repositorio.GetById(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public PAGO_DETALLE GetByIdWithReferences(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+                    return repositorio.GetByIdWithReferences(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+	 	
+		public List<PAGO_DETALLE> GetByFilter(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null, bool? ACTIVO = null)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+                    return repositorio.GetByFilter(FACTURA_DETALLEId, PAGOId, MONTO, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+		public List<PAGO_DETALLE> GetByFilterWithReferences(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null, bool? ACTIVO = null)
+        {
+			Init();
+            try
+            {
+                 using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+                    return repositorio.GetByFilterWithReferences(FACTURA_DETALLEId, PAGOId, MONTO, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+        public int Add(int FACTURA_DETALLEId, int PAGOId, int MONTO)
+        {
+		Init();
+            try
+            {
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioFACTURA_DETALLE _repositorioFACTURA_DETALLE = new RepositorioFACTURA_DETALLE(context);
+					FACTURA_DETALLE _objFACTURA_DETALLE = _repositorioFACTURA_DETALLE.GetById(FACTURA_DETALLEId);
+					if(Equals(_objFACTURA_DETALLE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado FACTURA_DETALLE con Id =",FACTURA_DETALLEId.ToString()));
+					}
+
+					RepositorioPAGO _repositorioPAGO = new RepositorioPAGO(context);
+					PAGO _objPAGO = _repositorioPAGO.GetById(PAGOId);
+					if(Equals(_objPAGO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PAGO con Id =",PAGOId.ToString()));
+					}
+
+					PAGO_DETALLE _PAGO_DETALLE = new PAGO_DETALLE();
+
+					//properties
+
+                    _PAGO_DETALLE.MONTO = MONTO;
+                    _PAGO_DETALLE.ACTIVO = true;				
+
+					//parents
+						 
+                    _PAGO_DETALLE.FACTURA_DETALLE = _objFACTURA_DETALLE;
+                    _PAGO_DETALLE.PAGO = _objPAGO;
+                    
+					context.AddObject("PAGO_DETALLE",_PAGO_DETALLE);
+                    context.SaveChanges();
+
+					return _PAGO_DETALLE.ID;
+                }
+            }
+			catch(Exception ex)
 			{
-				var dato = new RepositorioPAGO_DETALLE(context);
-				var entity = dato.GetById(id);
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+			}
+        }
 
-				//Se procesa el resultado de la operacion.
-				Error = dato.Error;
-				Success = entity != null;
+		public void Update(int Id, int FACTURA_DETALLEId, int PAGOId, int MONTO)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+                    RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+                    PAGO_DETALLE _PAGO_DETALLE = repositorio.GetById(Id);
+                    if(Equals(_PAGO_DETALLE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PAGO_DETALLE con Id =",Id.ToString()));
+					}
+					
+					RepositorioFACTURA_DETALLE _repositorioFACTURA_DETALLE = new RepositorioFACTURA_DETALLE(context);
+					FACTURA_DETALLE _objFACTURA_DETALLE = _repositorioFACTURA_DETALLE.GetById(FACTURA_DETALLEId);
+					if(Equals(_objFACTURA_DETALLE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado FACTURA_DETALLE con Id =",FACTURA_DETALLEId.ToString()));
+					}
+						
+					RepositorioPAGO _repositorioPAGO = new RepositorioPAGO(context);
+					PAGO _objPAGO = _repositorioPAGO.GetById(PAGOId);
+					if(Equals(_objPAGO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PAGO con Id =",PAGOId.ToString()));
+					}
+	
+					//properties
 
-				return entity;
+						_PAGO_DETALLE.MONTO = MONTO;
+	
+					//parents
+					 
+                    _PAGO_DETALLE.FACTURA_DETALLE = _objFACTURA_DETALLE;
+                    _PAGO_DETALLE.PAGO = _objPAGO;
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
 			}
 		}
 
-	  	/// <summary>
-      /// Busca todos los registros activos.
-      /// </summary>
-      /// <returns></returns>
-      public IList<PAGO_DETALLE> GetAll()
-      {
-          Init();
+		public void Delete (int Id)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
+					PAGO_DETALLE _PAGO_DETALLE = repositorio.GetById(Id); 
+					
+					if(Equals(_PAGO_DETALLE ,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PAGO_DETALLE con Id =",Id.ToString()));
+					}
 
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPAGO_DETALLE(context);
-              var q = dato.GetAll();
-              q = q.Where(i => i.ACTIVO);
+					_PAGO_DETALLE.ACTIVO = false;
 
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
-      /// </summary>
-      /// <param name="dto">Dto con parametros de busqueda.</param>
-      /// <returns></returns>
-      public IList<PAGO_DETALLE> Find(DTO_PAGO_DETALLE dto)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPAGO_DETALLE(context);
-              var q = dato.GetAll();
-              if (dto != null)
-              {
-					if (dto.ID != null)
-						q = q.Where(i => i.ID  == dto.ID);		
-					if (dto.MONTO != null)
-						q = q.Where(i => i.MONTO  == dto.MONTO);		
-					if (dto.ACTIVO != null)
-						q = q.Where(i => i.ACTIVO  == dto.ACTIVO);		
-					if (dto.ID_FACTURA_DETALLE != null)
-						q = q.Where(i => i.FACTURA_DETALLE.ID == dto.ID_FACTURA_DETALLE);				
-					if (dto.ID_PAGO != null)
-						q = q.Where(i => i.PAGO.ID == dto.ID_PAGO);				
-              }
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
-      /// </summary>
-      /// <param name="entity">Entidad a persistir.</param>
-      /// <returns></returns>
-      public int Save(PAGO_DETALLE entity)
-      {
-          Init();
-
-          if (entity == null)
-          {
-              Error = "ArgumentNullException. La entidad a persistir 'PAGO_DETALLE' no puede ser nula.";
-              ISException.RegisterExcepcion(Error);
-              return 0;
-          }
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPAGO_DETALLE(context);
-              var oldEntity = dato.GetById(entity.ID);
-              //Dependiendo de su key, el registro se crea o actualiza.
-              if (oldEntity == null)
-              {
-                  entity.ACTIVO = true;
-                  var id = dato.Insert(entity);
-                  Success = id > 0;
-                  Error = dato.Error;
-                  return id;
-              }
-
-              oldEntity.MONTO = entity.MONTO;				
-              Success = dato.Update(oldEntity);
-              Error = dato.Error;
-              return Success ? oldEntity.ID : 0;
-          }
-      }
-
-      /// <summary>
-      /// Elimina un registro en base a su key.
-      /// </summary>
-      /// <param name="id">key.</param>
-      /// <returns></returns>
-      public bool Delete(int id)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPAGO_DETALLE(context);
-              var entity = dato.GetById(id);
-
-              //Se procesa el resultado de la operacion.
-              if (entity == null)
-              {
-                  Error = String.Format("Registro '{0}' en 'PAGO_DETALLE' no encontrado. {1}", id, dato.Error);
-                  ISException.RegisterExcepcion(Error);
-                  return false;
-              }
-
-              //Eliminacion logica.
-               entity.ACTIVO = false;
-              //Se procesa el resultado de la operacion.
-              Success = dato.Update(entity);
-              Error = dato.Error;
-
-              return Success;
-          }
-      }
-
-      #endregion 	
+                 throw ex;
+			}
+		}
 	}
 }

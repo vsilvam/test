@@ -8,13 +8,14 @@ MetadataLoader loader = new MetadataLoader(this);
 CodeRegion region = new CodeRegion(this, 1);
 MetadataTools ef = new MetadataTools(this);
 
-string inputFile = @"../LQCE.Modelo/ModeloLQCE.edmx";
+string inputFile = @"..\LQCE.Modelo\ModeloLQCE.edmx";
+
 MetadataWorkspace metadataWorkspace = null;
 bool allMetadataLoaded =loader.TryLoadAllMetadata(inputFile, out metadataWorkspace);
 EdmItemCollection ItemCollection = (EdmItemCollection)metadataWorkspace.GetItemCollection(DataSpace.CSpace);
 string namespaceName = code.VsNamespaceSuggestion();
 
-EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this); 
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this);
 
 // Emit Entity Types
 foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
@@ -22,157 +23,340 @@ foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e =>
     fileManager.StartNewFile("Repositorio" + entity.Name + ".cs");
 #>
 using System;
-using System.Data;
 using System.Linq;
-using App.Infrastructure.Runtime;
 using LQCE.Modelo;
+using App.Infrastructure.Runtime;
 
 namespace LQCE.Repositorio
 {
-	<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#>partial class Repositorio<#=code.Escape(entity)#>
+	<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#>partial class Repositorio<#=code.Escape(entity)#><#=code.StringBefore(" : ", code.Escape(entity.BaseType))#>
 	{
-		//Contexto del entity model
-        private readonly LQCEEntities _contextBd;
-
-        #region Manejo del estado de la instancia
-
-        /// <summary>
-        /// Propiedad que contiene el error actual de la instancia de acceso a datos.
-        /// </summary>
-        public string Error { get; private set; }
-
-        public Repositorio<#=code.Escape(entity)#>(LQCEEntities context)
-        {
-            Error = string.Empty;
-            _contextBd = context;
-        }
-
-        #endregion
-
-        #region Metodos CRUD Autogenerados - NO MODIFICAR
+		private LQCEEntities _context;
+		public string Error { get; private set; }
 		
-
-        /// <summary>
-        /// Obtiene el registro desde BD en base a su key.
-        /// </summary
-        /// <param name="id">key.</param>
-        /// <returns></returns>
-        public <#=code.Escape(entity)#> GetById(int id)
-        {
-            Error = string.Empty;
-            try
-            {
-                return _contextBd.<#=code.Escape(entity)#>
-		<#
-		//claves foraneas
-		foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+		public Repositorio<#=code.Escape(entity)#>(LQCEEntities Context)
 		{
-		#>
-			.Include("<#=code.Escape(navProperty.Name)#>")				
-		<#	
+			Error = string.Empty;
+			this._context = Context;
 		}
-		#>
-			.FirstOrDefault(i => i.ID == id);
-            }
-            catch (Exception ex)
+
+<#
+string keyName = "";
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+{
+	if (ef.IsKey(edmProperty))
+	{ 
+		keyName = code.Escape(edmProperty);
+	}
+}
+#>
+<#
+
+// get Include
+
+string parametrosInclude = "";
+bool primero = true;
+
+//claves foraneas
+//foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity))
+{
+		parametrosInclude+= ".Include(" + '"' + code.Escape(navProperty) + '"' + ")";
+}
+
+// metodo GetByFilter
+
+string parametrosGetByFilter = "";
+primero = true;
+
+foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+{
+		if(!primero)
+		{
+			parametrosGetByFilter += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+		parametrosGetByFilter+= "int?" + " " + code.Escape(navProperty) + "Id = null";		
+}
+
+//propiedades no nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosGetByFilter+= ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosGetByFilter+= code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty) + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "int")
+		{
+			parametrosGetByFilter+= "int? " + code.Escape(edmProperty)  + " = null"; 
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "bool") 
+		{
+			parametrosGetByFilter+= "bool? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "DateTime")
+		{
+			parametrosGetByFilter+= "DateTime? " + code.Escape(edmProperty) + " = null"; 
+		}
+		else
+		{
+			parametrosGetByFilter += code.Escape(edmProperty.TypeUsage) + "? " + code.Escape(edmProperty) + " = null";
+		}
+	}
+}
+//propiedades nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.Nullable))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosGetByFilter+= ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosGetByFilter+= code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty) + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "Nullable<bool>")
+		{
+			parametrosGetByFilter+= "bool? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<int>")
+		{
+			parametrosGetByFilter+= "int? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.Guid>")
+		{
+			parametrosGetByFilter+= "Guid? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.DateTime>")
+		{
+			parametrosGetByFilter+= "DateTime? " + code.Escape(edmProperty) + " = null";
+		}
+		else
+		{
+			parametrosGetByFilter += code.Escape(edmProperty.TypeUsage) + "? " + code.Escape(edmProperty) + " = null";
+		}
+	}
+}
+
+#>		public <#=code.Escape(entity)#> GetById(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.<#=code.Escape(entity)#>.FirstOrDefault(i => i.<#=keyName#> == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Busca todos los registros.
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<<#=code.Escape(entity)#>> GetAll()
-        {
-            Error = string.Empty;
-            try
-            {
-                return from i in _contextBd.<#=code.Escape(entity)#> select i;
-            }
-            catch (Exception ex)
+		public <#=code.Escape(entity)#> GetByIdWithReferences(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.<#=code.Escape(entity)#><#=parametrosInclude#>.FirstOrDefault(i => i.<#=keyName#> == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Inserta un nuevo registro en BD, retornando su id.
-        /// </summary>
-        /// <param name="entity">Nueva entidad.</param>
-        /// <returns></returns>
-        public int Insert(<#=code.Escape(entity)#> entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.AddTo<#=code.Escape(entity)#>(entity);
-                _contextBd.SaveChanges();
-                return entity.ID;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<<#=code.Escape(entity)#>> GetAll()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.<#=code.Escape(entity)#> select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return 0;
-            }
-            catch (Exception ex)
+		}
+
+		public IQueryable<<#=code.Escape(entity)#>> GetAllWithReferences()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.<#=code.Escape(entity)#><#=parametrosInclude#> select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Actualiza el registro en BD.
-        /// </summary>
-        /// <param name="entity">Entidad a actualizar.</param>
-        /// <returns></returns>
-        public bool Update(<#=code.Escape(entity)#> entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.ApplyPropertyChanges("<#=code.Escape(entity)#>", entity);
-                return _contextBd.SaveChanges() > 0;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<<#=code.Escape(entity)#>> GetByFilter(<#=parametrosGetByFilter#>)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.<#=code.Escape(entity)#> select i;
+
+<#
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+#>
+				if (!string.IsNullOrEmpty(<#=code.Escape(edmProperty)#>))
+				{
+				   q = q.Where(i => i.<#=code.Escape(edmProperty)#>.Contains(<#=code.Escape(edmProperty)#>));
+				}
+<#
+		}
+		else
+		{
+#>
+				if (<#=code.Escape(edmProperty)#>.HasValue)
+				{
+				  q = q.Where(i => i.<#=code.Escape(edmProperty)#> == <#=code.Escape(edmProperty)#>.Value);
+				}
+<#
+		}
+	}
+}
+
+
+foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+{
+		if(code.Escape(navProperty.TypeUsage) == "string")
+		{
+#>
+				if (!string.IsNullOrEmpty(<#=code.Escape(navProperty)#>))
+				{
+				   q = q.Where(i => i.<#=code.Escape(navProperty)#>.Contains(<#=code.Escape(navProperty)#>));
+				}
+<#
+		}
+		else
+		{
+#>
+				if (<#=code.Escape(navProperty)#>Id.HasValue)
+				{
+				  q = q.Where(i => i.<#=code.Escape(navProperty)#>.ID == <#=code.Escape(navProperty)#>Id.Value);
+				}
+<#
+		}
+}
+#>
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return false;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
+		}
+
+		public IQueryable<<#=code.Escape(entity)#>> GetByFilterWithReferences(<#=parametrosGetByFilter#>)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.<#=code.Escape(entity)#><#=parametrosInclude#> select i;
+
+<#
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+#>
+				if (!string.IsNullOrEmpty(<#=code.Escape(edmProperty)#>))
+				{
+					q = q.Where(i => i.<#=code.Escape(edmProperty)#>.Contains(<#=code.Escape(edmProperty)#>));
+				}
+<#
+		}
+		else
+		{
+#>
+				if (<#=code.Escape(edmProperty)#>.HasValue)
+				{
+					q = q.Where(i => i.<#=code.Escape(edmProperty)#> == <#=code.Escape(edmProperty)#>.Value);
+				}
+<#
+		}
+	}
+}
+
+
+foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+{
+		if(code.Escape(navProperty.TypeUsage) == "string")
+		{
+#>
+				if (!string.IsNullOrEmpty(<#=code.Escape(navProperty)#>))
+				{
+					q = q.Where(i => i.<#=code.Escape(navProperty)#>.Contains(<#=code.Escape(navProperty)#>));
+				}
+<#
+		}
+		else
+		{
+#>
+				if (<#=code.Escape(navProperty)#>Id.HasValue)
+				{
+					q = q.Where(i => i.<#=code.Escape(navProperty)#>.ID == <#=code.Escape(navProperty)#>Id.Value);
+				}
+<#
+		}
+}
+#>
+				return q;
+			}
+			catch (Exception ex)
+			{
+				ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
-            }
-
-        }
-
-        #endregion
+                return null;
+			}
+		}
 	}
 }
 <#
-}
-fileManager.Process();
+}	fileManager.Process();
+
 #>

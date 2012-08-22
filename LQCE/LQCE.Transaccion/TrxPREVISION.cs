@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Infrastructure.Runtime;
-using LQCE.Repositorio;
 using LQCE.Modelo;
-using LQCE.Transaccion.DTO;
+using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
 	public partial class TrxPREVISION
 	{
-		#region Manejo del estado de la instancia
-
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
 		/// </summary>
@@ -24,7 +21,7 @@ namespace LQCE.Transaccion
 
 		public TrxPREVISION()
 		{
-		    Init();
+		     Init();
 		}
 
 		private void Init()
@@ -33,186 +30,212 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		#endregion
-
-		#region Metodos Autogenerados
-		
-			/// <summary>
-	      /// Obtiene un registro en base a su key.
-	      /// </summary>
-	      /// <param name="id">key.</param>
-	      /// <returns></returns>
-		public PREVISION GetById(int id)
-		{
+		public List<PREVISION> GetAll()
+        {
 			Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+                    return repositorio.GetAll().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
 
-			using (var context = new LQCEEntities())
+		public List<PREVISION> GetAllWithReferences()
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public PREVISION GetById(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+                    return repositorio.GetById(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public PREVISION GetByIdWithReferences(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+                    return repositorio.GetByIdWithReferences(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+	 	
+		public List<PREVISION> GetByFilter(string NOMBRE = "", bool? ACTIVO = null)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+                    return repositorio.GetByFilter(NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+		public List<PREVISION> GetByFilterWithReferences(string NOMBRE = "", bool? ACTIVO = null)
+        {
+			Init();
+            try
+            {
+                 using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+                    return repositorio.GetByFilterWithReferences(NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+        public int Add(string NOMBRE)
+        {
+		Init();
+            try
+            {
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					PREVISION _PREVISION = new PREVISION();
+
+					//properties
+
+                    _PREVISION.NOMBRE = NOMBRE;				
+                    _PREVISION.ACTIVO = true;				
+
+					//parents
+						 
+                    
+					context.AddObject("PREVISION",_PREVISION);
+                    context.SaveChanges();
+
+					return _PREVISION.ID;
+                }
+            }
+			catch(Exception ex)
 			{
-				var dato = new RepositorioPREVISION(context);
-				var entity = dato.GetById(id);
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+			}
+        }
 
-				//Se procesa el resultado de la operacion.
-				Error = dato.Error;
-				Success = entity != null;
+		public void Update(int Id, string NOMBRE)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+                    RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+                    PREVISION _PREVISION = repositorio.GetById(Id);
+                    if(Equals(_PREVISION,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PREVISION con Id =",Id.ToString()));
+					}
 
-				return entity;
+					//properties
+
+					if (!string.IsNullOrEmpty(NOMBRE))
+					{
+						_PREVISION.NOMBRE = NOMBRE;
+					}
+	
+					//parents
+					 
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
 			}
 		}
 
-	  	/// <summary>
-      /// Busca todos los registros activos.
-      /// </summary>
-      /// <returns></returns>
-      public IList<PREVISION> GetAll()
-      {
-          Init();
+		public void Delete (int Id)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioPREVISION repositorio = new RepositorioPREVISION(context);
+					PREVISION _PREVISION = repositorio.GetById(Id); 
+					
+					if(Equals(_PREVISION ,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PREVISION con Id =",Id.ToString()));
+					}
 
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPREVISION(context);
-              var q = dato.GetAll();
-              q = q.Where(i => i.ACTIVO);
+					_PREVISION.ACTIVO = false;
 
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
-      /// </summary>
-      /// <param name="dto">Dto con parametros de busqueda.</param>
-      /// <returns></returns>
-      public IList<PREVISION> Find(DTO_PREVISION dto)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPREVISION(context);
-              var q = dato.GetAll();
-              if (dto != null)
-              {
-					if (dto.ID != null)
-						q = q.Where(i => i.ID  == dto.ID);		
-					if (dto.NOMBRE != null)
-						q = q.Where(i => i.NOMBRE.Contains(dto.NOMBRE));					
-					if (dto.ACTIVO != null)
-						q = q.Where(i => i.ACTIVO  == dto.ACTIVO);		
-              }
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
-      /// </summary>
-      /// <param name="entity">Entidad a persistir.</param>
-      /// <returns></returns>
-      public int Save(PREVISION entity)
-      {
-          Init();
-
-          if (entity == null)
-          {
-              Error = "ArgumentNullException. La entidad a persistir 'PREVISION' no puede ser nula.";
-              ISException.RegisterExcepcion(Error);
-              return 0;
-          }
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPREVISION(context);
-              var oldEntity = dato.GetById(entity.ID);
-              //Dependiendo de su key, el registro se crea o actualiza.
-              if (oldEntity == null)
-              {
-                  entity.ACTIVO = true;
-                  var id = dato.Insert(entity);
-                  Success = id > 0;
-                  Error = dato.Error;
-                  return id;
-              }
-
-              oldEntity.NOMBRE = entity.NOMBRE;				
-              Success = dato.Update(oldEntity);
-              Error = dato.Error;
-              return Success ? oldEntity.ID : 0;
-          }
-      }
-
-      /// <summary>
-      /// Elimina un registro en base a su key.
-      /// </summary>
-      /// <param name="id">key.</param>
-      /// <returns></returns>
-      public bool Delete(int id)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPREVISION(context);
-              var entity = dato.GetById(id);
-
-              //Se procesa el resultado de la operacion.
-              if (entity == null)
-              {
-                  Error = String.Format("Registro '{0}' en 'PREVISION' no encontrado. {1}", id, dato.Error);
-                  ISException.RegisterExcepcion(Error);
-                  return false;
-              }
-
-              //Eliminacion logica.
-               entity.ACTIVO = false;
-              //Se procesa el resultado de la operacion.
-              Success = dato.Update(entity);
-              Error = dato.Error;
-
-              return Success;
-          }
-      }
-
-      #endregion 	
+                 throw ex;
+			}
+		}
 	}
 }

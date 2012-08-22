@@ -6,10 +6,3 @@
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCCargaMasivaPrestacionesVeterinarias.ascx.cs" Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.UCCargaMasivaPrestacionesVeterinarias" %>
-<asp:Panel ID="jhjk" runat="server">
-    <table>
-        <tr>
-            <td></td>
-        </tr>
-    </table>
-</asp:Panel>

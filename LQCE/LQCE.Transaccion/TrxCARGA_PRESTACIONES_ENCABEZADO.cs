@@ -7,7 +7,7 @@ using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
-	public partial class TrxCOMUNA
+	public partial class TrxCARGA_PRESTACIONES_ENCABEZADO
 	{
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
@@ -19,7 +19,7 @@ namespace LQCE.Transaccion
 		/// </summary>
 		public bool Success { get; private set; }
 
-		public TrxCOMUNA()
+		public TrxCARGA_PRESTACIONES_ENCABEZADO()
 		{
 		     Init();
 		}
@@ -30,14 +30,14 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		public List<COMUNA> GetAll()
+		public List<CARGA_PRESTACIONES_ENCABEZADO> GetAll()
         {
 			Init();
             try
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
                     return repositorio.GetAll().OrderBy(i => i.ID).ToList();
                 }
             }
@@ -49,14 +49,14 @@ namespace LQCE.Transaccion
             }
         }
 
-		public List<COMUNA> GetAllWithReferences()
+		public List<CARGA_PRESTACIONES_ENCABEZADO> GetAllWithReferences()
         {
 			Init();
 			try
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
                     return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
                 }
             }
@@ -68,14 +68,14 @@ namespace LQCE.Transaccion
             }
         }
 
-		public COMUNA GetById(int ID)
+		public CARGA_PRESTACIONES_ENCABEZADO GetById(int ID)
         {
 			Init();
 			try
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
                     return repositorio.GetById(ID);
                 }
             }
@@ -87,14 +87,14 @@ namespace LQCE.Transaccion
             }
         }
 
-		public COMUNA GetByIdWithReferences(int ID)
+		public CARGA_PRESTACIONES_ENCABEZADO GetByIdWithReferences(int ID)
         {
 			Init();
 			try
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
                     return repositorio.GetByIdWithReferences(ID);
                 }
             }
@@ -106,15 +106,15 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<COMUNA> GetByFilter(int? REGIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public List<CARGA_PRESTACIONES_ENCABEZADO> GetByFilter(System.DateTime? FECHA_CARGA = null, int? ID_TIPO_PRESTACION = null, string ARCHIVO = "", bool? ACTIVO = null)
         {
 			Init();
 			try
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
-                    return repositorio.GetByFilter(REGIONId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
+                    return repositorio.GetByFilter(FECHA_CARGA, ID_TIPO_PRESTACION, ARCHIVO, ACTIVO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,15 +125,15 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<COMUNA> GetByFilterWithReferences(int? REGIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public List<CARGA_PRESTACIONES_ENCABEZADO> GetByFilterWithReferences(System.DateTime? FECHA_CARGA = null, int? ID_TIPO_PRESTACION = null, string ARCHIVO = "", bool? ACTIVO = null)
         {
 			Init();
             try
             {
                  using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
-                    return repositorio.GetByFilterWithReferences(REGIONId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
+                    return repositorio.GetByFilterWithReferences(FECHA_CARGA, ID_TIPO_PRESTACION, ARCHIVO, ACTIVO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,35 +144,29 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int REGIONId, string NOMBRE)
+        public int Add(System.DateTime FECHA_CARGA, int ID_TIPO_PRESTACION, string ARCHIVO)
         {
 		Init();
             try
             {
 				 using (LQCEEntities context = new LQCEEntities())
 				{
-					RepositorioREGION _repositorioREGION = new RepositorioREGION(context);
-					REGION _objREGION = _repositorioREGION.GetById(REGIONId);
-					if(Equals(_objREGION,null))
-					{
-						throw new Exception(String.Concat("No se ha encontrado REGION con Id =",REGIONId.ToString()));
-					}
-
-					COMUNA _COMUNA = new COMUNA();
+					CARGA_PRESTACIONES_ENCABEZADO _CARGA_PRESTACIONES_ENCABEZADO = new CARGA_PRESTACIONES_ENCABEZADO();
 
 					//properties
 
-                    _COMUNA.NOMBRE = NOMBRE;				
-                    _COMUNA.ACTIVO = true;				
+                    _CARGA_PRESTACIONES_ENCABEZADO.FECHA_CARGA = FECHA_CARGA;
+                    _CARGA_PRESTACIONES_ENCABEZADO.ID_TIPO_PRESTACION = ID_TIPO_PRESTACION;
+                    _CARGA_PRESTACIONES_ENCABEZADO.ARCHIVO = ARCHIVO;				
+                    _CARGA_PRESTACIONES_ENCABEZADO.ACTIVO = true;				
 
 					//parents
 						 
-                    _COMUNA.REGION = _objREGION;
                     
-					context.AddObject("COMUNA",_COMUNA);
+					context.AddObject("CARGA_PRESTACIONES_ENCABEZADO",_CARGA_PRESTACIONES_ENCABEZADO);
                     context.SaveChanges();
 
-					return _COMUNA.ID;
+					return _CARGA_PRESTACIONES_ENCABEZADO.ID;
                 }
             }
 			catch(Exception ex)
@@ -183,37 +177,31 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int REGIONId, string NOMBRE)
+		public void Update(int Id, System.DateTime FECHA_CARGA, int ID_TIPO_PRESTACION, string ARCHIVO)
 		{
 		Init();
 			try
 			{
 				 using (LQCEEntities context = new LQCEEntities())
 				{
-                    RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
-                    COMUNA _COMUNA = repositorio.GetById(Id);
-                    if(Equals(_COMUNA,null))
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
+                    CARGA_PRESTACIONES_ENCABEZADO _CARGA_PRESTACIONES_ENCABEZADO = repositorio.GetById(Id);
+                    if(Equals(_CARGA_PRESTACIONES_ENCABEZADO,null))
 					{
-						throw new Exception(String.Concat("No se ha encontrado COMUNA con Id =",Id.ToString()));
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_ENCABEZADO con Id =",Id.ToString()));
 					}
-					
-					RepositorioREGION _repositorioREGION = new RepositorioREGION(context);
-					REGION _objREGION = _repositorioREGION.GetById(REGIONId);
-					if(Equals(_objREGION,null))
-					{
-						throw new Exception(String.Concat("No se ha encontrado REGION con Id =",REGIONId.ToString()));
-					}
-	
+
 					//properties
 
-					if (!string.IsNullOrEmpty(NOMBRE))
+						_CARGA_PRESTACIONES_ENCABEZADO.FECHA_CARGA = FECHA_CARGA;
+						_CARGA_PRESTACIONES_ENCABEZADO.ID_TIPO_PRESTACION = ID_TIPO_PRESTACION;
+					if (!string.IsNullOrEmpty(ARCHIVO))
 					{
-						_COMUNA.NOMBRE = NOMBRE;
+						_CARGA_PRESTACIONES_ENCABEZADO.ARCHIVO = ARCHIVO;
 					}
 	
 					//parents
 					 
-                    _COMUNA.REGION = _objREGION;
 
 					context.SaveChanges();
 				}
@@ -233,15 +221,15 @@ namespace LQCE.Transaccion
 			{
 				 using (LQCEEntities context = new LQCEEntities())
 				{
-					RepositorioCOMUNA repositorio = new RepositorioCOMUNA(context);
-					COMUNA _COMUNA = repositorio.GetById(Id); 
+					RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
+					CARGA_PRESTACIONES_ENCABEZADO _CARGA_PRESTACIONES_ENCABEZADO = repositorio.GetById(Id); 
 					
-					if(Equals(_COMUNA ,null))
+					if(Equals(_CARGA_PRESTACIONES_ENCABEZADO ,null))
 					{
-						throw new Exception(String.Concat("No se ha encontrado COMUNA con Id =",Id.ToString()));
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_ENCABEZADO con Id =",Id.ToString()));
 					}
 
-					_COMUNA.ACTIVO = false;
+					_CARGA_PRESTACIONES_ENCABEZADO.ACTIVO = false;
 
 					context.SaveChanges();
 				}

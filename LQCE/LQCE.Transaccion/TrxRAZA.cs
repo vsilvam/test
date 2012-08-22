@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Infrastructure.Runtime;
-using LQCE.Repositorio;
 using LQCE.Modelo;
-using LQCE.Transaccion.DTO;
+using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
 	public partial class TrxRAZA
 	{
-		#region Manejo del estado de la instancia
-
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
 		/// </summary>
@@ -24,7 +21,7 @@ namespace LQCE.Transaccion
 
 		public TrxRAZA()
 		{
-		    Init();
+		     Init();
 		}
 
 		private void Init()
@@ -33,188 +30,228 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		#endregion
-
-		#region Metodos Autogenerados
-		
-			/// <summary>
-	      /// Obtiene un registro en base a su key.
-	      /// </summary>
-	      /// <param name="id">key.</param>
-	      /// <returns></returns>
-		public RAZA GetById(int id)
-		{
+		public List<RAZA> GetAll()
+        {
 			Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioRAZA repositorio = new RepositorioRAZA(context);
+                    return repositorio.GetAll().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
 
-			using (var context = new LQCEEntities())
+		public List<RAZA> GetAllWithReferences()
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioRAZA repositorio = new RepositorioRAZA(context);
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public RAZA GetById(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioRAZA repositorio = new RepositorioRAZA(context);
+                    return repositorio.GetById(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public RAZA GetByIdWithReferences(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioRAZA repositorio = new RepositorioRAZA(context);
+                    return repositorio.GetByIdWithReferences(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+	 	
+		public List<RAZA> GetByFilter(int? ESPECIEId = null, string NOMBRE = "", bool? ACTIVO = null)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioRAZA repositorio = new RepositorioRAZA(context);
+                    return repositorio.GetByFilter(ESPECIEId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+		public List<RAZA> GetByFilterWithReferences(int? ESPECIEId = null, string NOMBRE = "", bool? ACTIVO = null)
+        {
+			Init();
+            try
+            {
+                 using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioRAZA repositorio = new RepositorioRAZA(context);
+                    return repositorio.GetByFilterWithReferences(ESPECIEId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+        public int Add(int ESPECIEId, string NOMBRE)
+        {
+		Init();
+            try
+            {
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioESPECIE _repositorioESPECIE = new RepositorioESPECIE(context);
+					ESPECIE _objESPECIE = _repositorioESPECIE.GetById(ESPECIEId);
+					if(Equals(_objESPECIE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado ESPECIE con Id =",ESPECIEId.ToString()));
+					}
+
+					RAZA _RAZA = new RAZA();
+
+					//properties
+
+                    _RAZA.NOMBRE = NOMBRE;				
+                    _RAZA.ACTIVO = true;				
+
+					//parents
+						 
+                    _RAZA.ESPECIE = _objESPECIE;
+                    
+					context.AddObject("RAZA",_RAZA);
+                    context.SaveChanges();
+
+					return _RAZA.ID;
+                }
+            }
+			catch(Exception ex)
 			{
-				var dato = new RepositorioRAZA(context);
-				var entity = dato.GetById(id);
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+			}
+        }
 
-				//Se procesa el resultado de la operacion.
-				Error = dato.Error;
-				Success = entity != null;
+		public void Update(int Id, int ESPECIEId, string NOMBRE)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+                    RepositorioRAZA repositorio = new RepositorioRAZA(context);
+                    RAZA _RAZA = repositorio.GetById(Id);
+                    if(Equals(_RAZA,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado RAZA con Id =",Id.ToString()));
+					}
+					
+					RepositorioESPECIE _repositorioESPECIE = new RepositorioESPECIE(context);
+					ESPECIE _objESPECIE = _repositorioESPECIE.GetById(ESPECIEId);
+					if(Equals(_objESPECIE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado ESPECIE con Id =",ESPECIEId.ToString()));
+					}
+	
+					//properties
 
-				return entity;
+					if (!string.IsNullOrEmpty(NOMBRE))
+					{
+						_RAZA.NOMBRE = NOMBRE;
+					}
+	
+					//parents
+					 
+                    _RAZA.ESPECIE = _objESPECIE;
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
 			}
 		}
 
-	  	/// <summary>
-      /// Busca todos los registros activos.
-      /// </summary>
-      /// <returns></returns>
-      public IList<RAZA> GetAll()
-      {
-          Init();
+		public void Delete (int Id)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioRAZA repositorio = new RepositorioRAZA(context);
+					RAZA _RAZA = repositorio.GetById(Id); 
+					
+					if(Equals(_RAZA ,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado RAZA con Id =",Id.ToString()));
+					}
 
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioRAZA(context);
-              var q = dato.GetAll();
-              q = q.Where(i => i.ACTIVO);
+					_RAZA.ACTIVO = false;
 
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
-      /// </summary>
-      /// <param name="dto">Dto con parametros de busqueda.</param>
-      /// <returns></returns>
-      public IList<RAZA> Find(DTO_RAZA dto)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioRAZA(context);
-              var q = dato.GetAll();
-              if (dto != null)
-              {
-					if (dto.ID != null)
-						q = q.Where(i => i.ID  == dto.ID);		
-					if (dto.NOMBRE != null)
-						q = q.Where(i => i.NOMBRE.Contains(dto.NOMBRE));					
-					if (dto.ACTIVO != null)
-						q = q.Where(i => i.ACTIVO  == dto.ACTIVO);		
-					if (dto.ID_ESPECIE != null)
-						q = q.Where(i => i.ESPECIE.ID == dto.ID_ESPECIE);				
-              }
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
-      /// </summary>
-      /// <param name="entity">Entidad a persistir.</param>
-      /// <returns></returns>
-      public int Save(RAZA entity)
-      {
-          Init();
-
-          if (entity == null)
-          {
-              Error = "ArgumentNullException. La entidad a persistir 'RAZA' no puede ser nula.";
-              ISException.RegisterExcepcion(Error);
-              return 0;
-          }
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioRAZA(context);
-              var oldEntity = dato.GetById(entity.ID);
-              //Dependiendo de su key, el registro se crea o actualiza.
-              if (oldEntity == null)
-              {
-                  entity.ACTIVO = true;
-                  var id = dato.Insert(entity);
-                  Success = id > 0;
-                  Error = dato.Error;
-                  return id;
-              }
-
-              oldEntity.NOMBRE = entity.NOMBRE;				
-              Success = dato.Update(oldEntity);
-              Error = dato.Error;
-              return Success ? oldEntity.ID : 0;
-          }
-      }
-
-      /// <summary>
-      /// Elimina un registro en base a su key.
-      /// </summary>
-      /// <param name="id">key.</param>
-      /// <returns></returns>
-      public bool Delete(int id)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioRAZA(context);
-              var entity = dato.GetById(id);
-
-              //Se procesa el resultado de la operacion.
-              if (entity == null)
-              {
-                  Error = String.Format("Registro '{0}' en 'RAZA' no encontrado. {1}", id, dato.Error);
-                  ISException.RegisterExcepcion(Error);
-                  return false;
-              }
-
-              //Eliminacion logica.
-               entity.ACTIVO = false;
-              //Se procesa el resultado de la operacion.
-              Success = dato.Update(entity);
-              Error = dato.Error;
-
-              return Success;
-          }
-      }
-
-      #endregion 	
+                 throw ex;
+			}
+		}
 	}
 }

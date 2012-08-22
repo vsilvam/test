@@ -41,7 +41,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
-                lblMensaje.Text = ex.Message;
+                lblMensaje.Text = "Cambio de Prueba";// ex.Message;
                 return;
             }
         }

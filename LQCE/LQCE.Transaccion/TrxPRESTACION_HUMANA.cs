@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Infrastructure.Runtime;
-using LQCE.Repositorio;
 using LQCE.Modelo;
-using LQCE.Transaccion.DTO;
+using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
 	public partial class TrxPRESTACION_HUMANA
 	{
-		#region Manejo del estado de la instancia
-
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
 		/// </summary>
@@ -24,7 +21,7 @@ namespace LQCE.Transaccion
 
 		public TrxPRESTACION_HUMANA()
 		{
-		    Init();
+		     Init();
 		}
 
 		private void Init()
@@ -33,195 +30,227 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		#endregion
-
-		#region Metodos Autogenerados
-		
-			/// <summary>
-	      /// Obtiene un registro en base a su key.
-	      /// </summary>
-	      /// <param name="id">key.</param>
-	      /// <returns></returns>
-		public PRESTACION_HUMANA GetById(int id)
-		{
+		public List<PRESTACION_HUMANA> GetAll()
+        {
 			Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+                    return repositorio.GetAll().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
 
-			using (var context = new LQCEEntities())
+		public List<PRESTACION_HUMANA> GetAllWithReferences()
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public PRESTACION_HUMANA GetById(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+                    return repositorio.GetById(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public PRESTACION_HUMANA GetByIdWithReferences(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+                    return repositorio.GetByIdWithReferences(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+	 	
+		public List<PRESTACION_HUMANA> GetByFilter(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+                    return repositorio.GetByFilter(NOMBRE, RUT, EDAD, TELEFONO, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+		public List<PRESTACION_HUMANA> GetByFilterWithReferences(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+        {
+			Init();
+            try
+            {
+                 using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+                    return repositorio.GetByFilterWithReferences(NOMBRE, RUT, EDAD, TELEFONO, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+        public int Add(string NOMBRE, string RUT, string EDAD, string TELEFONO)
+        {
+		Init();
+            try
+            {
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					PRESTACION_HUMANA _PRESTACION_HUMANA = new PRESTACION_HUMANA();
+
+					//properties
+
+                    _PRESTACION_HUMANA.NOMBRE = NOMBRE;				
+                    _PRESTACION_HUMANA.RUT = RUT;				
+                    _PRESTACION_HUMANA.EDAD = EDAD;				
+                    _PRESTACION_HUMANA.TELEFONO = TELEFONO;				
+                    _PRESTACION_HUMANA.ACTIVO = true;				
+
+					//parents
+						 
+                    
+					context.AddObject("PRESTACION_HUMANA",_PRESTACION_HUMANA);
+                    context.SaveChanges();
+
+					return _PRESTACION_HUMANA.ID;
+                }
+            }
+			catch(Exception ex)
 			{
-				var dato = new RepositorioPRESTACION_HUMANA(context);
-				var entity = dato.GetById(id);
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+			}
+        }
 
-				//Se procesa el resultado de la operacion.
-				Error = dato.Error;
-				Success = entity != null;
+		public void Update(int Id, string NOMBRE, string RUT, string EDAD, string TELEFONO)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+                    RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+                    PRESTACION_HUMANA _PRESTACION_HUMANA = repositorio.GetById(Id);
+                    if(Equals(_PRESTACION_HUMANA,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PRESTACION_HUMANA con Id =",Id.ToString()));
+					}
 
-				return entity;
+					//properties
+
+					if (!string.IsNullOrEmpty(NOMBRE))
+					{
+						_PRESTACION_HUMANA.NOMBRE = NOMBRE;
+					}
+					if (!string.IsNullOrEmpty(RUT))
+					{
+						_PRESTACION_HUMANA.RUT = RUT;
+					}
+					if (!string.IsNullOrEmpty(EDAD))
+					{
+						_PRESTACION_HUMANA.EDAD = EDAD;
+					}
+					if (!string.IsNullOrEmpty(TELEFONO))
+					{
+						_PRESTACION_HUMANA.TELEFONO = TELEFONO;
+					}
+	
+					//parents
+					 
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
 			}
 		}
 
-	  	/// <summary>
-      /// Busca todos los registros activos.
-      /// </summary>
-      /// <returns></returns>
-      public IList<PRESTACION_HUMANA> GetAll()
-      {
-          Init();
+		public void Delete (int Id)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
+					PRESTACION_HUMANA _PRESTACION_HUMANA = repositorio.GetById(Id); 
+					
+					if(Equals(_PRESTACION_HUMANA ,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PRESTACION_HUMANA con Id =",Id.ToString()));
+					}
 
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPRESTACION_HUMANA(context);
-              var q = dato.GetAll();
-              q = q.Where(i => i.ACTIVO);
+					_PRESTACION_HUMANA.ACTIVO = false;
 
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
-      /// </summary>
-      /// <param name="dto">Dto con parametros de busqueda.</param>
-      /// <returns></returns>
-      public IList<PRESTACION_HUMANA> Find(DTO_PRESTACION_HUMANA dto)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPRESTACION_HUMANA(context);
-              var q = dato.GetAll();
-              if (dto != null)
-              {
-					if (dto.ID != null)
-						q = q.Where(i => i.ID  == dto.ID);		
-					if (dto.NOMBRE != null)
-						q = q.Where(i => i.NOMBRE.Contains(dto.NOMBRE));					
-					if (dto.RUT != null)
-						q = q.Where(i => i.RUT.Contains(dto.RUT));					
-					if (dto.EDAD != null)
-						q = q.Where(i => i.EDAD.Contains(dto.EDAD));					
-					if (dto.TELEFONO != null)
-						q = q.Where(i => i.TELEFONO.Contains(dto.TELEFONO));					
-					if (dto.ACTIVO != null)
-						q = q.Where(i => i.ACTIVO  == dto.ACTIVO);		
-              }
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
-      /// </summary>
-      /// <param name="entity">Entidad a persistir.</param>
-      /// <returns></returns>
-      public int Save(PRESTACION_HUMANA entity)
-      {
-          Init();
-
-          if (entity == null)
-          {
-              Error = "ArgumentNullException. La entidad a persistir 'PRESTACION_HUMANA' no puede ser nula.";
-              ISException.RegisterExcepcion(Error);
-              return 0;
-          }
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPRESTACION_HUMANA(context);
-              var oldEntity = dato.GetById(entity.ID);
-              //Dependiendo de su key, el registro se crea o actualiza.
-              if (oldEntity == null)
-              {
-                  entity.ACTIVO = true;
-                  var id = dato.Insert(entity);
-                  Success = id > 0;
-                  Error = dato.Error;
-                  return id;
-              }
-
-              oldEntity.NOMBRE = entity.NOMBRE;				
-              oldEntity.RUT = entity.RUT;				
-              oldEntity.EDAD = entity.EDAD;				
-              oldEntity.TELEFONO = entity.TELEFONO;				
-              Success = dato.Update(oldEntity);
-              Error = dato.Error;
-              return Success ? oldEntity.ID : 0;
-          }
-      }
-
-      /// <summary>
-      /// Elimina un registro en base a su key.
-      /// </summary>
-      /// <param name="id">key.</param>
-      /// <returns></returns>
-      public bool Delete(int id)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioPRESTACION_HUMANA(context);
-              var entity = dato.GetById(id);
-
-              //Se procesa el resultado de la operacion.
-              if (entity == null)
-              {
-                  Error = String.Format("Registro '{0}' en 'PRESTACION_HUMANA' no encontrado. {1}", id, dato.Error);
-                  ISException.RegisterExcepcion(Error);
-                  return false;
-              }
-
-              //Eliminacion logica.
-               entity.ACTIVO = false;
-              //Se procesa el resultado de la operacion.
-              Success = dato.Update(entity);
-              Error = dato.Error;
-
-              return Success;
-          }
-      }
-
-      #endregion 	
+                 throw ex;
+			}
+		}
 	}
 }

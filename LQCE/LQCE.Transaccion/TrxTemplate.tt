@@ -8,7 +8,8 @@ MetadataLoader loader = new MetadataLoader(this);
 CodeRegion region = new CodeRegion(this, 1);
 MetadataTools ef = new MetadataTools(this);
 
-string inputFile = @"../LQCE.Modelo/ModeloLQCE.edmx";
+string inputFile = @"..\LQCE.Modelo\ModeloLQCE.edmx";
+
 MetadataWorkspace metadataWorkspace = null;
 bool allMetadataLoaded =loader.TryLoadAllMetadata(inputFile, out metadataWorkspace);
 EdmItemCollection ItemCollection = (EdmItemCollection)metadataWorkspace.GetItemCollection(DataSpace.CSpace);
@@ -25,16 +26,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Infrastructure.Runtime;
-using LQCE.Repositorio;
 using LQCE.Modelo;
-using LQCE.Transaccion.DTO;
+using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
 	<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#>partial class Trx<#=code.Escape(entity)#>
 	{
-		#region Manejo del estado de la instancia
-
+<#
+string keyName = "";
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+{
+	if (ef.IsKey(edmProperty))
+	{ 
+		keyName = code.Escape(edmProperty);
+	}
+}
+#>
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
 		/// </summary>
@@ -47,7 +55,7 @@ namespace LQCE.Transaccion
 
 		public Trx<#=code.Escape(entity)#>()
 		{
-		    Init();
+		     Init();
 		}
 
 		private void Init()
@@ -56,245 +64,646 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		#endregion
-
-		#region Metodos Autogenerados
-		
-			/// <summary>
-	      /// Obtiene un registro en base a su key.
-	      /// </summary>
-	      /// <param name="id">key.</param>
-	      /// <returns></returns>
-		public <#=code.Escape(entity)#> GetById(int id)
-		{
+		public List<<#=code.Escape(entity)#>> GetAll()
+        {
 			Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+                    return repositorio.GetAll().OrderBy(i => i.<#=keyName#>).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
 
-			using (var context = new LQCEEntities())
+		public List<<#=code.Escape(entity)#>> GetAllWithReferences()
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.<#=keyName#>).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public <#=code.Escape(entity)#> GetById(int <#=keyName#>)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+                    return repositorio.GetById(<#=keyName#>);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public <#=code.Escape(entity)#> GetByIdWithReferences(int <#=keyName#>)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+                    return repositorio.GetByIdWithReferences(<#=keyName#>);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+<#
+
+
+
+
+// Parametros GetByFilter
+
+bool primero = true;
+string parametrosGetByFilter = "";
+string parametrosGetByFilterAll = "";
+
+//claves foraneas
+
+foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+{
+		if(!primero)
+		{
+			parametrosGetByFilter += ", ";
+			parametrosGetByFilterAll += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+	
+		parametrosGetByFilter+= "int?" + " " + code.Escape(navProperty) + "Id = null"; 
+		parametrosGetByFilterAll += code.Escape(navProperty) + "Id";
+}
+
+//propiedades no nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosGetByFilter+= ", ";
+			parametrosGetByFilterAll += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosGetByFilter+= code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty) + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "int")
+		{
+			parametrosGetByFilter+= "int? " + code.Escape(edmProperty)  + " = null"; 
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "bool") 
+		{
+			parametrosGetByFilter+= "bool? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "DateTime")
+		{
+			parametrosGetByFilter+= "DateTime? " + code.Escape(edmProperty) + " = null"; 
+		}
+		else
+		{
+			parametrosGetByFilter += code.Escape(edmProperty.TypeUsage) + "? " + code.Escape(edmProperty) + " = null";
+		}
+		
+		parametrosGetByFilterAll += code.Escape(edmProperty);
+	}
+}
+//propiedades nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.Nullable))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosGetByFilter+= ", ";
+			parametrosGetByFilterAll += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosGetByFilter+= code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty) + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "Nullable<bool>")
+		{
+			parametrosGetByFilter+= "bool? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<int>")
+		{
+			parametrosGetByFilter+= "int? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.Guid>")
+		{
+			parametrosGetByFilter+= "Guid? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.DateTime>")
+		{
+			parametrosGetByFilter+= "DateTime? " + code.Escape(edmProperty) + " = null";
+		}
+		else
+		{
+			parametrosGetByFilter += code.Escape(edmProperty.TypeUsage) + "? " + code.Escape(edmProperty) + " = null";
+		}
+		
+		parametrosGetByFilterAll += code.Escape(edmProperty);
+	}
+}
+
+
+// Parametros Add
+
+primero = true;
+string parametrosAdd = "";
+
+//claves foraneas
+foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+{
+		if(!primero)
+		{
+			parametrosAdd += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+		parametrosAdd += "int" + " " + code.Escape(navProperty) + "Id";		
+}
+
+//propiedades no nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable && code.Escape(p) != "ACTIVO"))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosAdd += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosAdd += code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty);// + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "int")
+		{
+			parametrosAdd += "int " + code.Escape(edmProperty) ; 
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "bool") 
+		{
+			parametrosAdd += "bool " + code.Escape(edmProperty);
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "DateTime")
+		{
+			parametrosAdd += "DateTime " + code.Escape(edmProperty);
+		}
+		else
+		{
+			parametrosAdd += code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty);// + " = null";
+		}
+	}
+}
+//propiedades nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.Nullable))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosAdd += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosAdd += code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty) + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "Nullable<bool>")
+		{
+			parametrosAdd += "bool? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<int>")
+		{
+			parametrosAdd += "int? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<decimal>")
+		{
+			parametrosAdd+= "decimal? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.Guid>")
+		{
+			parametrosAdd += "Guid? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.DateTime>")
+		{
+			parametrosAdd += "DateTime? " + code.Escape(edmProperty) + " = null";
+		}
+		else
+		{
+			parametrosAdd += code.Escape(edmProperty.TypeUsage) + "? " + code.Escape(edmProperty) + " = null";
+		}
+	}
+}
+
+
+//parametros Update
+
+primero = true;
+string parametrosUpdate = "";
+
+
+//claves foraneas
+foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+{
+		if(!primero)
+		{
+			parametrosUpdate += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		parametrosUpdate += "int" + " " + code.Escape(navProperty) + "Id";		
+}
+
+//propiedades no nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable && code.Escape(p) != "ACTIVO"))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosUpdate += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosUpdate += code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty);// + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "int")
+		{
+			parametrosUpdate += "int " + code.Escape(edmProperty) ; 
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "bool") 
+		{
+			parametrosUpdate += "bool " + code.Escape(edmProperty);
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "DateTime")
+		{
+			parametrosUpdate += "DateTime " + code.Escape(edmProperty);
+		}
+		else
+		{
+			parametrosUpdate += code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty);// + " = null";
+		}
+	}
+}
+//propiedades nulables
+
+foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.Nullable))
+{
+	if (!ef.IsKey(edmProperty))
+	{ 
+		if(!primero)
+		{
+			parametrosUpdate += ", ";
+		}
+		else
+		{
+			primero = false;
+		}
+
+		if(code.Escape(edmProperty.TypeUsage) == "string")
+		{
+			parametrosUpdate += code.Escape(edmProperty.TypeUsage) + " " + code.Escape(edmProperty) + " = \"\"";
+		}
+        else if(code.Escape(edmProperty.TypeUsage) == "Nullable<bool>")
+		{
+			parametrosUpdate += "bool? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<decimal>")
+		{
+			parametrosUpdate+= "decimal? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<int>")
+		{
+			parametrosUpdate += "int? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.Guid>")
+		{
+			parametrosUpdate += "Guid? " + code.Escape(edmProperty) + " = null";
+		}
+		else if(code.Escape(edmProperty.TypeUsage) == "Nullable<System.DateTime>")
+		{
+			parametrosUpdate += "DateTime? " + code.Escape(edmProperty) + " = null";
+		}
+		else
+		{
+			parametrosUpdate += code.Escape(edmProperty.TypeUsage) + "? " + code.Escape(edmProperty) + " = null";
+		}
+	}
+}
+
+
+
+if(parametrosGetByFilterAll != "")
+{
+#>	 	
+		public List<<#=code.Escape(entity)#>> GetByFilter(<#=parametrosGetByFilter#>)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+                    return repositorio.GetByFilter(<#=parametrosGetByFilterAll#>).OrderBy(i => i.<#=keyName#>).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+		public List<<#=code.Escape(entity)#>> GetByFilterWithReferences(<#=parametrosGetByFilter#>)
+        {
+			Init();
+            try
+            {
+                 using (LQCEEntities context = new LQCEEntities())
+                {
+                    Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+                    return repositorio.GetByFilterWithReferences(<#=parametrosGetByFilterAll#>).OrderBy(i => i.<#=keyName#>).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+        public int Add(<#=parametrosAdd#>)
+        {
+		Init();
+            try
+            {
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+<#				    foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+					{
+#>
+					Repositorio<#=code.Escape(navProperty)#> _repositorio<#=code.Escape(navProperty)#> = new Repositorio<#=code.Escape(navProperty)#>(context);
+					<#=code.Escape(navProperty)#> _obj<#=code.Escape(navProperty)#> = _repositorio<#=code.Escape(navProperty)#>.GetById(<#=code.Escape(navProperty)#>Id);
+					if(Equals(_obj<#=code.Escape(navProperty)#>,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado <#=code.Escape(navProperty)#> con Id =",<#=code.Escape(navProperty)#>Id.ToString()));
+					}
+
+<#
+				}
+#>
+					<#=code.Escape(entity)#> _<#=code.Escape(entity)#> = new <#=code.Escape(entity)#>();
+
+					//properties
+
+<#
+						foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && code.Escape(p) != "ACTIVO"))
+                        {
+                                if (!ef.IsKey(edmProperty))
+                                { 
+                                        if(code.Escape(edmProperty.TypeUsage) != "string")
+                                        {
+#>
+                    _<#=code.Escape(entity)#>.<#=code.Escape(edmProperty)#> = <#=code.Escape(edmProperty)#>;
+<#
+                                        }
+                                        else
+                                        {
+#>
+                    _<#=code.Escape(entity)#>.<#=code.Escape(edmProperty)#> = <#=code.Escape(edmProperty)#>;				
+<#
+                                        }
+                                }
+                        }
+
+#>
+                    _<#=code.Escape(entity)#>.ACTIVO = true;				
+<#
+
+#>
+
+					//parents
+						 
+<#                                      
+                        foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity &&  n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+                        {
+                                //if(((AssociationType).RelationshipType).IsForeignKey)
+                                //{
+#>
+                    _<#=code.Escape(entity)#>.<#=code.Escape(navProperty)#> = _obj<#=code.Escape(navProperty)#>;
+<#                                      
+                                //}
+                        }
+#>
+                    
+					context.AddObject("<#=code.Escape(entity)#>",_<#=code.Escape(entity)#>);
+                    context.SaveChanges();
+
+					return _<#=code.Escape(entity)#>.ID;
+                }
+            }
+			catch(Exception ex)
 			{
-				var dato = new Repositorio<#=code.Escape(entity)#>(context);
-				var entity = dato.GetById(id);
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+			}
+        }
 
-				//Se procesa el resultado de la operacion.
-				Error = dato.Error;
-				Success = entity != null;
+		public void Update(int Id, <#=parametrosUpdate#>)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+                    Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+                    <#=code.Escape(entity)#> _<#=code.Escape(entity)#> = repositorio.GetById(Id);
+                    if(Equals(_<#=code.Escape(entity)#>,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado <#=code.Escape(entity)#> con Id =",Id.ToString()));
+					}
+<#					foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many  ))
+					{
+#>
+					
+					Repositorio<#=code.Escape(navProperty)#> _repositorio<#=code.Escape(navProperty)#> = new Repositorio<#=code.Escape(navProperty)#>(context);
+					<#=code.Escape(navProperty)#> _obj<#=code.Escape(navProperty)#> = _repositorio<#=code.Escape(navProperty)#>.GetById(<#=code.Escape(navProperty)#>Id);
+					if(Equals(_obj<#=code.Escape(navProperty)#>,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado <#=code.Escape(navProperty)#> con Id =",<#=code.Escape(navProperty)#>Id.ToString()));
+					}
+	<#
+				} 
+	#>
 
-				return entity;
+					//properties
+
+<#
+ 			foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && code.Escape(p) != "ACTIVO"))
+            {
+
+			if (!ef.IsKey(edmProperty))
+			{ 
+				if(code.Escape(edmProperty.TypeUsage) == "string")
+				{
+#>
+					if (!string.IsNullOrEmpty(<#=code.Escape(edmProperty)#>))
+					{
+						_<#=code.Escape(entity)#>.<#=code.Escape(edmProperty)#> = <#=code.Escape(edmProperty)#>;
+					}
+<#
+				}
+				else if(edmProperty.Nullable)
+				{
+#>
+					if (<#=code.Escape(edmProperty)#>.HasValue)
+					{
+						_<#=code.Escape(entity)#>.<#=code.Escape(edmProperty)#> = <#=code.Escape(edmProperty)#>.Value;
+					}
+<#
+				}
+				else 
+				{
+#>
+						_<#=code.Escape(entity)#>.<#=code.Escape(edmProperty)#> = <#=code.Escape(edmProperty)#>;
+<#
+				}
+			}
+		}
+#>
+	
+					//parents
+					 
+<#                                      
+                        foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity &&  n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+                        {
+                                //if(((AssociationType).RelationshipType).IsForeignKey)
+                                //{
+#>
+                    _<#=code.Escape(entity)#>.<#=code.Escape(navProperty)#> = _obj<#=code.Escape(navProperty)#>;
+<#                                      
+                                //}
+                        }
+#>
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
 			}
 		}
 
-	  	/// <summary>
-      /// Busca todos los registros activos.
-      /// </summary>
-      /// <returns></returns>
-      public IList<<#=code.Escape(entity)#>> GetAll()
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new Repositorio<#=code.Escape(entity)#>(context);
-              var q = dato.GetAll();
-              q = q.Where(i => i.ACTIVO);
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
-      /// </summary>
-      /// <param name="dto">Dto con parametros de busqueda.</param>
-      /// <returns></returns>
-      public IList<<#=code.Escape(entity)#>> Find(DTO_<#=code.Escape(entity)#> dto)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new Repositorio<#=code.Escape(entity)#>(context);
-              var q = dato.GetAll();
-              if (dto != null)
-              {
-<# 
-	foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
-    {
-		string tipo = (code.Escape(edmProperty.TypeUsage)).Replace("Nullable<", string.Empty).Replace(">", string.Empty);
-		switch(tipo)
+		public void Delete (int Id)
 		{
-			case "int":
-			case "bool":
-			case "double":
-			case "System.DateTime":
-#>
-					if (dto.<#=code.Escape(edmProperty)#> != null)
-						q = q.Where(i => i.<#=code.Escape(edmProperty)#>  == dto.<#=code.Escape(edmProperty)#>);		
-<#
-				break;
-			default:
-#>
-					if (dto.<#=code.Escape(edmProperty)#> != null)
-						q = q.Where(i => i.<#=code.Escape(edmProperty)#>.Contains(dto.<#=code.Escape(edmProperty)#>));					
-<#
-				break;
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
+					<#=code.Escape(entity)#> _<#=code.Escape(entity)#> = repositorio.GetById(Id); 
+					
+					if(Equals(_<#=code.Escape(entity)#> ,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado <#=code.Escape(entity)#> con Id =",Id.ToString()));
+					}
+
+					_<#=code.Escape(entity)#>.ACTIVO = false;
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
+			}
 		}
-	}
-	//claves foraneas
-	foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
-	{
-#>
-					if (dto.ID_<#=code.Escape(navProperty.Name)#> != null)
-						q = q.Where(i => i.<#=code.Escape(navProperty.Name)#>.ID == dto.ID_<#=code.Escape(navProperty.Name)#>);				
-<#	
-	}
-		#>
-              }
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
-      /// </summary>
-      /// <param name="entity">Entidad a persistir.</param>
-      /// <returns></returns>
-      public int Save(<#=code.Escape(entity)#> entity)
-      {
-          Init();
-
-          if (entity == null)
-          {
-              Error = "ArgumentNullException. La entidad a persistir '<#=code.Escape(entity)#>' no puede ser nula.";
-              ISException.RegisterExcepcion(Error);
-              return 0;
-          }
-
 <#
-	var campofecha = "";
-						foreach(EdmProperty campo in entity.Properties.Where(i => i.Name.IndexOf("FechaCreacion") >= 0 ))
-						{
-							campofecha = campo.Name;
-						}
+}
 #>
-          using (var context = new LQCEEntities())
-          {
-              var dato = new Repositorio<#=code.Escape(entity)#>(context);
-              var oldEntity = dato.GetById(entity.ID);
-              //Dependiendo de su key, el registro se crea o actualiza.
-              if (oldEntity == null)
-              {
-<#if(campofecha != "") { #>
-			  	  entity.<#=campofecha#> = DateTime.Now;
-<# } #>
-                  entity.ACTIVO = true;
-                  var id = dato.Insert(entity);
-                  Success = id > 0;
-                  Error = dato.Error;
-                  return id;
-              }
-
-<#
- 						foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
-                        {
-                                if (!ef.IsKey(edmProperty))
-                                {
-									if(edmProperty.Name.IndexOf("FechaCreacion") < 0 && edmProperty.Name.IndexOf("ACTIVO") < 0 && edmProperty.Name.IndexOf("FechaModificacion") < 0)
-									{
-#>
-              oldEntity.<#=code.Escape(edmProperty)#> = entity.<#=code.Escape(edmProperty)#>;				
-<#
-									}
-									else if(edmProperty.Name.IndexOf("FechaModificacion") >= 0)
-									{
-#>
-              oldEntity.<#=code.Escape(edmProperty)#> = DateTime.Now;				
-<#										
-									}
-                                }
-                        }
-#>
-              Success = dato.Update(oldEntity);
-              Error = dato.Error;
-              return Success ? oldEntity.ID : 0;
-          }
-      }
-
-      /// <summary>
-      /// Elimina un registro en base a su key.
-      /// </summary>
-      /// <param name="id">key.</param>
-      /// <returns></returns>
-      public bool Delete(int id)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new Repositorio<#=code.Escape(entity)#>(context);
-              var entity = dato.GetById(id);
-
-              //Se procesa el resultado de la operacion.
-              if (entity == null)
-              {
-                  Error = String.Format("Registro '{0}' en '<#=code.Escape(entity)#>' no encontrado. {1}", id, dato.Error);
-                  ISException.RegisterExcepcion(Error);
-                  return false;
-              }
-
-              //Eliminacion logica.
-               entity.ACTIVO = false;
-              //Se procesa el resultado de la operacion.
-              Success = dato.Update(entity);
-              Error = dato.Error;
-
-              return Success;
-          }
-      }
-
-      #endregion 	
 	}
 }
 <#
-}
-fileManager.Process();
+
+}	fileManager.Process();
+
 #>

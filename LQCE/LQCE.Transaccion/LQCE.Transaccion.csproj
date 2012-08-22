@@ -41,100 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DtoTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Include="DTO\DTO_CARGA_MASIVA_PRESTACION_HUMANA.cs" />
-    <Compile Include="DTO\DTO_CLIENTE.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_CLIENTE_SINONIMO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_COBRO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_COMUNA.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_CONVENIO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_CONVENIO_EXAMEN.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_CONVENIO_TARIFARIO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_ESPECIE.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_EXAMEN.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_EXAMEN_DETALLE.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_EXAMEN_SINONIMO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_FACTURA.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_FACTURACION.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_FACTURA_DETALLE.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_GARANTIA.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_NOTA_COBRO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_NOTA_COBRO_DETALLE.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PAGO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PAGO_DETALLE.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PRESTACION.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PRESTACION_EXAMEN.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PRESTACION_HUMANA.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PRESTACION_MUESTRA.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PRESTACION_VETERINARIA.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_PREVISION.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_RAZA.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_REGION.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_TIPO_COBRO.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DTO\DTO_TIPO_PRESTACION.cs">
-      <DependentUpon>DtoTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrxCARGA_PRESTACIONES_ENCABEZADO.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrxCARGA_PRESTACIONES_HUMANAS_DETALLE.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrxCARGA_PRESTACIONES_HUMANAS_EXAMEN.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrxCARGA_PRESTACIONES_VETERINARIAS_EXAMEN.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="TrxCLIENTE.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
@@ -156,6 +79,7 @@
     <Compile Include="TrxCONVENIO_TARIFARIO.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="TrxCustomCargaPrestaciones.cs" />
     <Compile Include="TrxESPECIE.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
@@ -229,10 +153,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DTO\DtoTemplate.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DtoTemplate.cs</LastGenOutput>
-    </None>
     <None Include="TrxTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TrxTemplate.cs</LastGenOutput>

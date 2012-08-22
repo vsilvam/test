@@ -6,6 +6,11 @@
     <edmx:StorageModels>
     <Schema Namespace="LQCEModelo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
         <EntityContainer Name="LQCEModeloStoreContainer">
+          <EntitySet Name="CARGA_PRESTACIONES_ENCABEZADO" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_ENCABEZADO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_DETALLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_EXAMEN" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CLIENTE" EntityType="LQCEModelo.Store.CLIENTE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CLIENTE_SINONIMO" EntityType="LQCEModelo.Store.CLIENTE_SINONIMO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="COBRO" EntityType="LQCEModelo.Store.COBRO" store:Type="Tables" Schema="dbo" />
@@ -35,6 +40,22 @@
           <EntitySet Name="REGION" EntityType="LQCEModelo.Store.REGION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TIPO_COBRO" EntityType="LQCEModelo.Store.TIPO_COBRO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TIPO_PRESTACION" EntityType="LQCEModelo.Store.TIPO_PRESTACION" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+            <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE">
+            <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+            <End Role="CARGA_PRESTACIONES_HUMANAS_EXAMEN" EntitySet="CARGA_PRESTACIONES_HUMANAS_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+            <End Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+            <End Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+            <End Role="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" />
+          </AssociationSet>
           <AssociationSet Name="FK_CLIENTE_COMUNA" Association="LQCEModelo.Store.FK_CLIENTE_COMUNA">
             <End Role="COMUNA" EntitySet="COMUNA" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
@@ -180,6 +201,90 @@
             <End Role="RAZA" EntitySet="RAZA" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CARGA_PRESTACIONES_ENCABEZADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA_CARGA" Type="datetime" Nullable="false" />
+          <Property Name="ID_TIPO_PRESTACION" Type="int" Nullable="false" />
+          <Property Name="ARCHIVO" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CARGA_PRESTACIONES_ENCABEZADO" Type="int" Nullable="false" />
+          <Property Name="FICHA" Type="nvarchar(max)" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" />
+          <Property Name="RUT" Type="nvarchar(max)" />
+          <Property Name="MEDICO" Type="nvarchar(max)" />
+          <Property Name="EDAD" Type="nvarchar(max)" />
+          <Property Name="TELEFONO" Type="nvarchar(max)" />
+          <Property Name="PROCEDENCIA" Type="nvarchar(max)" />
+          <Property Name="FECHA_RECEPCION" Type="nvarchar(max)" />
+          <Property Name="MUESTRA" Type="nvarchar(max)" />
+          <Property Name="FECHA_RESULTADOS" Type="nvarchar(max)" />
+          <Property Name="PREVISION" Type="nvarchar(max)" />
+          <Property Name="GARANTIA" Type="nvarchar(max)" />
+          <Property Name="PAGADO" Type="nvarchar(max)" />
+          <Property Name="PENDIENTE" Type="nvarchar(max)" />
+          <Property Name="TOTAL" Type="nvarchar(max)" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="VALIDADO" Type="bit" Nullable="false" />
+          <Property Name="ERROR" Type="bit" Nullable="false" />
+          <Property Name="MENSAJE_ERROR" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CARGA_PRESTACIONES_HUMANAS_DETALLE" Type="int" Nullable="false" />
+          <Property Name="NOMBRE_EXAMEN" Type="nvarchar(max)" />
+          <Property Name="VALOR_EXAMEN" Type="nvarchar(max)" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CARGA_PRESTACIONES_ENCABEZADO" Type="int" Nullable="false" />
+          <Property Name="FICHA" Type="nvarchar(max)" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" />
+          <Property Name="ESPECIE" Type="nvarchar(max)" />
+          <Property Name="RAZA" Type="nvarchar(max)" />
+          <Property Name="EDAD" Type="nvarchar(max)" />
+          <Property Name="SEXO" Type="nvarchar(max)" />
+          <Property Name="SOLICITA" Type="nvarchar(max)" />
+          <Property Name="TELEFONO" Type="nvarchar(max)" />
+          <Property Name="MEDICO" Type="nvarchar(max)" />
+          <Property Name="PROCEDENCIA" Type="nvarchar(max)" />
+          <Property Name="FECHA_RECEPCION" Type="nvarchar(max)" />
+          <Property Name="FECHA_MUESTRA" Type="nvarchar(max)" />
+          <Property Name="FECHA_RESULTADOS" Type="nvarchar(max)" />
+          <Property Name="PENDIENTE" Type="nvarchar(max)" />
+          <Property Name="GARANTIA" Type="nvarchar(max)" />
+          <Property Name="PAGADO" Type="nvarchar(max)" />
+          <Property Name="TOTAL" Type="nvarchar(max)" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="VALIDADO" Type="bit" Nullable="false" />
+          <Property Name="ERROR" Type="bit" Nullable="false" />
+          <Property Name="MENSAJE_ERROR" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Type="int" Nullable="false" />
+          <Property Name="NOMBRE_EXAMEN" Type="nvarchar(max)" />
+          <Property Name="VALOR_EXAMEN" Type="nvarchar(max)" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="CLIENTE">
           <Key>
             <PropertyRef Name="ID" />
@@ -460,6 +565,54 @@
           <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+          <End Role="CARGA_PRESTACIONES_ENCABEZADO" Type="LQCEModelo.Store.CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="1" />
+          <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" Type="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGA_PRESTACIONES_ENCABEZADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+              <PropertyRef Name="ID_CARGA_PRESTACIONES_ENCABEZADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE">
+          <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" Type="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_DETALLE" Multiplicity="1" />
+          <End Role="CARGA_PRESTACIONES_HUMANAS_EXAMEN" Type="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+              <PropertyRef Name="ID_CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+          <End Role="CARGA_PRESTACIONES_ENCABEZADO" Type="LQCEModelo.Store.CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="1" />
+          <End Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Type="LQCEModelo.Store.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGA_PRESTACIONES_ENCABEZADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+              <PropertyRef Name="ID_CARGA_PRESTACIONES_ENCABEZADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+          <End Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Type="LQCEModelo.Store.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Multiplicity="1" />
+          <End Role="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Type="LQCEModelo.Store.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+              <PropertyRef Name="ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CLIENTE_COMUNA">
           <End Role="COMUNA" Type="LQCEModelo.Store.COMUNA" Multiplicity="1" />
           <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="*" />
@@ -1085,6 +1238,27 @@
             <End Role="RAZA" EntitySet="RAZA" />
             <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
           </AssociationSet>
+          <EntitySet Name="CARGA_PRESTACIONES_ENCABEZADO" EntityType="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" />
+          <EntitySet Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntityType="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+          <EntitySet Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN" EntityType="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN" />
+          <EntitySet Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+          <EntitySet Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" />
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+            <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+            <End Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE">
+            <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+            <End Role="CARGA_PRESTACIONES_HUMANAS_EXAMEN" EntitySet="CARGA_PRESTACIONES_HUMANAS_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+            <End Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+            <End Role="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CLIENTE">
           <Key>
@@ -1565,6 +1739,110 @@
         <Association Name="FK_PRESTACION_VETERINARIA_RAZA">
           <End Type="LQCEModelo.RAZA" Role="RAZA" Multiplicity="1" />
           <End Type="LQCEModelo.PRESTACION_VETERINARIA" Role="PRESTACION_VETERINARIA" Multiplicity="*" />
+        </Association>
+        <EntityType Name="CARGA_PRESTACIONES_ENCABEZADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="FECHA_CARGA" Nullable="false" />
+          <Property Type="Int32" Name="ID_TIPO_PRESTACION" Nullable="false" />
+          <Property Type="String" Name="ARCHIVO" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_ENCABEZADO" ToRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_ENCABEZADO" ToRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FICHA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NOMBRE" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RUT" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MEDICO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EDAD" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TELEFONO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PROCEDENCIA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FECHA_RECEPCION" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MUESTRA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FECHA_RESULTADOS" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PREVISION" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GARANTIA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PAGADO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PENDIENTE" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TOTAL" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <Property Type="Boolean" Name="VALIDADO" Nullable="false" />
+          <Property Type="Boolean" Name="ERROR" Nullable="false" />
+          <Property Type="String" Name="MENSAJE_ERROR" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_ENCABEZADO" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" ToRole="CARGA_PRESTACIONES_ENCABEZADO" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" FromRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" ToRole="CARGA_PRESTACIONES_HUMANAS_EXAMEN" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE_EXAMEN" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VALOR_EXAMEN" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" FromRole="CARGA_PRESTACIONES_HUMANAS_EXAMEN" ToRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FICHA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NOMBRE" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ESPECIE" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RAZA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EDAD" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SEXO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SOLICITA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TELEFONO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MEDICO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PROCEDENCIA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FECHA_RECEPCION" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FECHA_MUESTRA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FECHA_RESULTADOS" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PENDIENTE" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GARANTIA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PAGADO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TOTAL" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <Property Type="Boolean" Name="VALIDADO" Nullable="false" />
+          <Property Type="Boolean" Name="ERROR" Nullable="false" />
+          <Property Type="String" Name="MENSAJE_ERROR" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_ENCABEZADO" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" ToRole="CARGA_PRESTACIONES_ENCABEZADO" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" FromRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" ToRole="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE_EXAMEN" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VALOR_EXAMEN" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" FromRole="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" ToRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+        </EntityType>
+        <Association Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Role="CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="1" />
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE" Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Role="CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="1" />
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE">
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE" Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" Multiplicity="1" />
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN" Role="CARGA_PRESTACIONES_HUMANAS_EXAMEN" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Multiplicity="1" />
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Role="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -2137,6 +2415,123 @@
               <ScalarProperty Name="ID" ColumnName="ID_RAZA" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="CARGA_PRESTACIONES_ENCABEZADO">
+            <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO">
+              <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_ENCABEZADO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="ARCHIVO" ColumnName="ARCHIVO" />
+                <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
+                <ScalarProperty Name="FECHA_CARGA" ColumnName="FECHA_CARGA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+            <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE">
+              <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+                <ScalarProperty Name="MENSAJE_ERROR" ColumnName="MENSAJE_ERROR" />
+                <ScalarProperty Name="ERROR" ColumnName="ERROR" />
+                <ScalarProperty Name="VALIDADO" ColumnName="VALIDADO" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="PENDIENTE" ColumnName="PENDIENTE" />
+                <ScalarProperty Name="PAGADO" ColumnName="PAGADO" />
+                <ScalarProperty Name="GARANTIA" ColumnName="GARANTIA" />
+                <ScalarProperty Name="PREVISION" ColumnName="PREVISION" />
+                <ScalarProperty Name="FECHA_RESULTADOS" ColumnName="FECHA_RESULTADOS" />
+                <ScalarProperty Name="MUESTRA" ColumnName="MUESTRA" />
+                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
+                <ScalarProperty Name="PROCEDENCIA" ColumnName="PROCEDENCIA" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="MEDICO" ColumnName="MEDICO" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="FICHA" ColumnName="FICHA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+            <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+              <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="VALOR_EXAMEN" ColumnName="VALOR_EXAMEN" />
+                <ScalarProperty Name="NOMBRE_EXAMEN" ColumnName="NOMBRE_EXAMEN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+            <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+              <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+                <ScalarProperty Name="MENSAJE_ERROR" ColumnName="MENSAJE_ERROR" />
+                <ScalarProperty Name="ERROR" ColumnName="ERROR" />
+                <ScalarProperty Name="VALIDADO" ColumnName="VALIDADO" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="PAGADO" ColumnName="PAGADO" />
+                <ScalarProperty Name="GARANTIA" ColumnName="GARANTIA" />
+                <ScalarProperty Name="PENDIENTE" ColumnName="PENDIENTE" />
+                <ScalarProperty Name="FECHA_RESULTADOS" ColumnName="FECHA_RESULTADOS" />
+                <ScalarProperty Name="FECHA_MUESTRA" ColumnName="FECHA_MUESTRA" />
+                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
+                <ScalarProperty Name="PROCEDENCIA" ColumnName="PROCEDENCIA" />
+                <ScalarProperty Name="MEDICO" ColumnName="MEDICO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="SOLICITA" ColumnName="SOLICITA" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="RAZA" ColumnName="RAZA" />
+                <ScalarProperty Name="ESPECIE" ColumnName="ESPECIE" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="FICHA" ColumnName="FICHA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+            <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+              <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="VALOR_EXAMEN" ColumnName="VALOR_EXAMEN" />
+                <ScalarProperty Name="NOMBRE_EXAMEN" ColumnName="NOMBRE_EXAMEN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" TypeName="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" StoreEntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+            <EndProperty Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CARGA_PRESTACIONES_ENCABEZADO">
+              <ScalarProperty Name="ID" ColumnName="ID_CARGA_PRESTACIONES_ENCABEZADO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" TypeName="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" StoreEntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+            <EndProperty Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CARGA_PRESTACIONES_ENCABEZADO">
+              <ScalarProperty Name="ID" ColumnName="ID_CARGA_PRESTACIONES_ENCABEZADO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" TypeName="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" StoreEntitySet="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+            <EndProperty Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID_CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" TypeName="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" StoreEntitySet="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+            <EndProperty Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2412,6 +2807,27 @@
           <ConnectorPoint PointX="14.765625" PointY="22.5" />
           <ConnectorPoint PointX="14.765625" PointY="15.125002499999994" />
           <ConnectorPoint PointX="15.75" PointY="15.125002499999994" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Width="1.5" PointX="16.375" PointY="6" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE" Width="1.5" PointX="18.625" PointY="1.375" Height="5.2494108072916674" />
+        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN" Width="1.5" PointX="20.875" PointY="3" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Width="1.5" PointX="18.625" PointY="7.375" Height="5.63401367187501" />
+        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Width="1.5" PointX="20.875" PointY="9.25" Height="1.9802864583333246" />
+        <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" >
+          <ConnectorPoint PointX="17.875" PointY="6.3122054036458337" />
+          <ConnectorPoint PointX="18.625" PointY="6.3122054036458337" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" >
+          <ConnectorPoint PointX="17.875" PointY="7.8699446614583337" />
+          <ConnectorPoint PointX="18.625" PointY="7.8699446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" >
+          <ConnectorPoint PointX="20.125" PointY="3.9901432291666623" />
+          <ConnectorPoint PointX="20.875" PointY="3.9901432291666623" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" >
+          <ConnectorPoint PointX="20.125" PointY="10.240143229166662" />
+          <ConnectorPoint PointX="20.875" PointY="10.240143229166662" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using System.IO;
+using System.Threading;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -41,13 +42,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
-                lblMensaje.Text = "Cambio de Prueba";// ex.Message;
+                lblMensaje.Text = ex.Message;
                 return;
             }
         }
 
         protected void btnPaso1Adjuntar_Click(object sender, EventArgs e)
         {
+            /*
             try
             {
                 if (Page.IsValid)
@@ -114,6 +116,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 btnPaso1Adjuntar.Visible = true;
             }
+             */ 
         }
 
 

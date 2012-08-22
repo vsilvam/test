@@ -2,16 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using App.Infrastructure.Runtime;
-using LQCE.Repositorio;
 using LQCE.Modelo;
-using LQCE.Transaccion.DTO;
+using LQCE.Repositorio;
 
 namespace LQCE.Transaccion
 {
 	public partial class TrxNOTA_COBRO
 	{
-		#region Manejo del estado de la instancia
-
 		/// <summary>
 		/// Propiedad que contiene el error actual de la instancia de negocio.
 		/// </summary>
@@ -24,7 +21,7 @@ namespace LQCE.Transaccion
 
 		public TrxNOTA_COBRO()
 		{
-		    Init();
+		     Init();
 		}
 
 		private void Init()
@@ -33,191 +30,227 @@ namespace LQCE.Transaccion
 		    Success = false;
 		}
 
-		#endregion
-
-		#region Metodos Autogenerados
-		
-			/// <summary>
-	      /// Obtiene un registro en base a su key.
-	      /// </summary>
-	      /// <param name="id">key.</param>
-	      /// <returns></returns>
-		public NOTA_COBRO GetById(int id)
-		{
+		public List<NOTA_COBRO> GetAll()
+        {
 			Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+                    return repositorio.GetAll().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
 
-			using (var context = new LQCEEntities())
+		public List<NOTA_COBRO> GetAllWithReferences()
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+           {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public NOTA_COBRO GetById(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+                    return repositorio.GetById(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
+		public NOTA_COBRO GetByIdWithReferences(int ID)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+                    return repositorio.GetByIdWithReferences(ID);
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+	 	
+		public List<NOTA_COBRO> GetByFilter(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null, bool? ACTIVO = null)
+        {
+			Init();
+			try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+                    return repositorio.GetByFilter(COBROId, CORRELATIVO, ID_CLIENTE, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+		public List<NOTA_COBRO> GetByFilterWithReferences(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null, bool? ACTIVO = null)
+        {
+			Init();
+            try
+            {
+                 using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+                    return repositorio.GetByFilterWithReferences(COBROId, CORRELATIVO, ID_CLIENTE, ACTIVO).OrderBy(i => i.ID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        } 
+
+        public int Add(int COBROId, int CORRELATIVO, int ID_CLIENTE)
+        {
+		Init();
+            try
+            {
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioCOBRO _repositorioCOBRO = new RepositorioCOBRO(context);
+					COBRO _objCOBRO = _repositorioCOBRO.GetById(COBROId);
+					if(Equals(_objCOBRO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado COBRO con Id =",COBROId.ToString()));
+					}
+
+					NOTA_COBRO _NOTA_COBRO = new NOTA_COBRO();
+
+					//properties
+
+                    _NOTA_COBRO.CORRELATIVO = CORRELATIVO;
+                    _NOTA_COBRO.ID_CLIENTE = ID_CLIENTE;
+                    _NOTA_COBRO.ACTIVO = true;				
+
+					//parents
+						 
+                    _NOTA_COBRO.COBRO = _objCOBRO;
+                    
+					context.AddObject("NOTA_COBRO",_NOTA_COBRO);
+                    context.SaveChanges();
+
+					return _NOTA_COBRO.ID;
+                }
+            }
+			catch(Exception ex)
 			{
-				var dato = new RepositorioNOTA_COBRO(context);
-				var entity = dato.GetById(id);
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+			}
+        }
 
-				//Se procesa el resultado de la operacion.
-				Error = dato.Error;
-				Success = entity != null;
+		public void Update(int Id, int COBROId, int CORRELATIVO, int ID_CLIENTE)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+                    RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+                    NOTA_COBRO _NOTA_COBRO = repositorio.GetById(Id);
+                    if(Equals(_NOTA_COBRO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado NOTA_COBRO con Id =",Id.ToString()));
+					}
+					
+					RepositorioCOBRO _repositorioCOBRO = new RepositorioCOBRO(context);
+					COBRO _objCOBRO = _repositorioCOBRO.GetById(COBROId);
+					if(Equals(_objCOBRO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado COBRO con Id =",COBROId.ToString()));
+					}
+	
+					//properties
 
-				return entity;
+						_NOTA_COBRO.CORRELATIVO = CORRELATIVO;
+						_NOTA_COBRO.ID_CLIENTE = ID_CLIENTE;
+	
+					//parents
+					 
+                    _NOTA_COBRO.COBRO = _objCOBRO;
+
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                 throw ex;
 			}
 		}
 
-	  	/// <summary>
-      /// Busca todos los registros activos.
-      /// </summary>
-      /// <returns></returns>
-      public IList<NOTA_COBRO> GetAll()
-      {
-          Init();
+		public void Delete (int Id)
+		{
+		Init();
+			try
+			{
+				 using (LQCEEntities context = new LQCEEntities())
+				{
+					RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
+					NOTA_COBRO _NOTA_COBRO = repositorio.GetById(Id); 
+					
+					if(Equals(_NOTA_COBRO ,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado NOTA_COBRO con Id =",Id.ToString()));
+					}
 
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioNOTA_COBRO(context);
-              var q = dato.GetAll();
-              q = q.Where(i => i.ACTIVO);
+					_NOTA_COBRO.ACTIVO = false;
 
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
+					context.SaveChanges();
+				}
+			}
+			catch(Exception ex)
+			{
+				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
-      /// </summary>
-      /// <param name="dto">Dto con parametros de busqueda.</param>
-      /// <returns></returns>
-      public IList<NOTA_COBRO> Find(DTO_NOTA_COBRO dto)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioNOTA_COBRO(context);
-              var q = dato.GetAll();
-              if (dto != null)
-              {
-					if (dto.ID != null)
-						q = q.Where(i => i.ID  == dto.ID);		
-					if (dto.CORRELATIVO != null)
-						q = q.Where(i => i.CORRELATIVO  == dto.CORRELATIVO);		
-					if (dto.ID_CLIENTE != null)
-						q = q.Where(i => i.ID_CLIENTE  == dto.ID_CLIENTE);		
-					if (dto.ACTIVO != null)
-						q = q.Where(i => i.ACTIVO  == dto.ACTIVO);		
-					if (dto.ID_COBRO != null)
-						q = q.Where(i => i.COBRO.ID == dto.ID_COBRO);				
-              }
-
-            try
-            {
-              //Se procesa el resultado de la operacion.
-              var list = q.ToList();
-              Error = dato.Error;
-              Success = true;
-
-              return list;
-            }
-            catch (ArgumentNullException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                return null;
-            }
-          }
-      }
-
-      /// <summary>
-      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
-      /// </summary>
-      /// <param name="entity">Entidad a persistir.</param>
-      /// <returns></returns>
-      public int Save(NOTA_COBRO entity)
-      {
-          Init();
-
-          if (entity == null)
-          {
-              Error = "ArgumentNullException. La entidad a persistir 'NOTA_COBRO' no puede ser nula.";
-              ISException.RegisterExcepcion(Error);
-              return 0;
-          }
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioNOTA_COBRO(context);
-              var oldEntity = dato.GetById(entity.ID);
-              //Dependiendo de su key, el registro se crea o actualiza.
-              if (oldEntity == null)
-              {
-                  entity.ACTIVO = true;
-                  var id = dato.Insert(entity);
-                  Success = id > 0;
-                  Error = dato.Error;
-                  return id;
-              }
-
-              oldEntity.CORRELATIVO = entity.CORRELATIVO;				
-              oldEntity.ID_CLIENTE = entity.ID_CLIENTE;				
-              Success = dato.Update(oldEntity);
-              Error = dato.Error;
-              return Success ? oldEntity.ID : 0;
-          }
-      }
-
-      /// <summary>
-      /// Elimina un registro en base a su key.
-      /// </summary>
-      /// <param name="id">key.</param>
-      /// <returns></returns>
-      public bool Delete(int id)
-      {
-          Init();
-
-          using (var context = new LQCEEntities())
-          {
-              var dato = new RepositorioNOTA_COBRO(context);
-              var entity = dato.GetById(id);
-
-              //Se procesa el resultado de la operacion.
-              if (entity == null)
-              {
-                  Error = String.Format("Registro '{0}' en 'NOTA_COBRO' no encontrado. {1}", id, dato.Error);
-                  ISException.RegisterExcepcion(Error);
-                  return false;
-              }
-
-              //Eliminacion logica.
-               entity.ACTIVO = false;
-              //Se procesa el resultado de la operacion.
-              Success = dato.Update(entity);
-              Error = dato.Error;
-
-              return Success;
-          }
-      }
-
-      #endregion 	
+                 throw ex;
+			}
+		}
 	}
 }

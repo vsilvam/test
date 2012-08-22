@@ -45,9 +45,14 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_PRESTACION), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_RAZA", "RAZA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.RAZA), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_ENCABEZADO), "CARGA_PRESTACIONES_HUMANAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_ENCABEZADO), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE", "CARGA_PRESTACIONES_HUMANAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_DETALLE), "CARGA_PRESTACIONES_HUMANAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" +
+    "", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE), "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN))]
 
 // Nombre de archivo original:
-// Fecha de generación: 17-06-2012 22:24:19
+// Fecha de generación: 2012/08/22 12:20:50
 namespace LQCE.Modelo
 {
     
@@ -575,6 +580,91 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         private global::System.Data.Objects.ObjectQuery<TIPO_PRESTACION> _TIPO_PRESTACION;
         /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_ENCABEZADO> CARGA_PRESTACIONES_ENCABEZADO
+        {
+            get
+            {
+                if ((this._CARGA_PRESTACIONES_ENCABEZADO == null))
+                {
+                    this._CARGA_PRESTACIONES_ENCABEZADO = base.CreateQuery<CARGA_PRESTACIONES_ENCABEZADO>("[CARGA_PRESTACIONES_ENCABEZADO]");
+                }
+                return this._CARGA_PRESTACIONES_ENCABEZADO;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_ENCABEZADO> _CARGA_PRESTACIONES_ENCABEZADO;
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_HUMANAS_DETALLE> CARGA_PRESTACIONES_HUMANAS_DETALLE
+        {
+            get
+            {
+                if ((this._CARGA_PRESTACIONES_HUMANAS_DETALLE == null))
+                {
+                    this._CARGA_PRESTACIONES_HUMANAS_DETALLE = base.CreateQuery<CARGA_PRESTACIONES_HUMANAS_DETALLE>("[CARGA_PRESTACIONES_HUMANAS_DETALLE]");
+                }
+                return this._CARGA_PRESTACIONES_HUMANAS_DETALLE;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_HUMANAS_DETALLE> _CARGA_PRESTACIONES_HUMANAS_DETALLE;
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_HUMANAS_EXAMEN> CARGA_PRESTACIONES_HUMANAS_EXAMEN
+        {
+            get
+            {
+                if ((this._CARGA_PRESTACIONES_HUMANAS_EXAMEN == null))
+                {
+                    this._CARGA_PRESTACIONES_HUMANAS_EXAMEN = base.CreateQuery<CARGA_PRESTACIONES_HUMANAS_EXAMEN>("[CARGA_PRESTACIONES_HUMANAS_EXAMEN]");
+                }
+                return this._CARGA_PRESTACIONES_HUMANAS_EXAMEN;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_HUMANAS_EXAMEN> _CARGA_PRESTACIONES_HUMANAS_EXAMEN;
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                if ((this._CARGA_PRESTACIONES_VETERINARIAS_DETALLE == null))
+                {
+                    this._CARGA_PRESTACIONES_VETERINARIAS_DETALLE = base.CreateQuery<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("[CARGA_PRESTACIONES_VETERINARIAS_DETALLE]");
+                }
+                return this._CARGA_PRESTACIONES_VETERINARIAS_DETALLE;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> _CARGA_PRESTACIONES_VETERINARIAS_DETALLE;
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> CARGA_PRESTACIONES_VETERINARIAS_EXAMEN
+        {
+            get
+            {
+                if ((this._CARGA_PRESTACIONES_VETERINARIAS_EXAMEN == null))
+                {
+                    this._CARGA_PRESTACIONES_VETERINARIAS_EXAMEN = base.CreateQuery<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN>("[CARGA_PRESTACIONES_VETERINARIAS_EXAMEN]");
+                }
+                return this._CARGA_PRESTACIONES_VETERINARIAS_EXAMEN;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN;
+        /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
@@ -805,6 +895,46 @@ namespace LQCE.Modelo
         public void AddToTIPO_PRESTACION(TIPO_PRESTACION tIPO_PRESTACION)
         {
             base.AddObject("TIPO_PRESTACION", tIPO_PRESTACION);
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToCARGA_PRESTACIONES_ENCABEZADO(CARGA_PRESTACIONES_ENCABEZADO cARGA_PRESTACIONES_ENCABEZADO)
+        {
+            base.AddObject("CARGA_PRESTACIONES_ENCABEZADO", cARGA_PRESTACIONES_ENCABEZADO);
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(CARGA_PRESTACIONES_HUMANAS_DETALLE cARGA_PRESTACIONES_HUMANAS_DETALLE)
+        {
+            base.AddObject("CARGA_PRESTACIONES_HUMANAS_DETALLE", cARGA_PRESTACIONES_HUMANAS_DETALLE);
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToCARGA_PRESTACIONES_HUMANAS_EXAMEN(CARGA_PRESTACIONES_HUMANAS_EXAMEN cARGA_PRESTACIONES_HUMANAS_EXAMEN)
+        {
+            base.AddObject("CARGA_PRESTACIONES_HUMANAS_EXAMEN", cARGA_PRESTACIONES_HUMANAS_EXAMEN);
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToCARGA_PRESTACIONES_VETERINARIAS_DETALLE(CARGA_PRESTACIONES_VETERINARIAS_DETALLE cARGA_PRESTACIONES_VETERINARIAS_DETALLE)
+        {
+            base.AddObject("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", cARGA_PRESTACIONES_VETERINARIAS_DETALLE);
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToCARGA_PRESTACIONES_VETERINARIAS_EXAMEN(CARGA_PRESTACIONES_VETERINARIAS_EXAMEN cARGA_PRESTACIONES_VETERINARIAS_EXAMEN)
+        {
+            base.AddObject("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", cARGA_PRESTACIONES_VETERINARIAS_EXAMEN);
         }
     }
     /// <summary>
@@ -6563,6 +6693,1894 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "PRESTACION", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="CARGA_PRESTACIONES_ENCABEZADO")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class CARGA_PRESTACIONES_ENCABEZADO : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto CARGA_PRESTACIONES_ENCABEZADO.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="fECHA_CARGA">Valor inicial de FECHA_CARGA.</param>
+        /// <param name="iD_TIPO_PRESTACION">Valor inicial de ID_TIPO_PRESTACION.</param>
+        /// <param name="aRCHIVO">Valor inicial de ARCHIVO.</param>
+        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static CARGA_PRESTACIONES_ENCABEZADO CreateCARGA_PRESTACIONES_ENCABEZADO(int id, global::System.DateTime fECHA_CARGA, int iD_TIPO_PRESTACION, string aRCHIVO, bool aCTIVO)
+        {
+            CARGA_PRESTACIONES_ENCABEZADO cARGA_PRESTACIONES_ENCABEZADO = new CARGA_PRESTACIONES_ENCABEZADO();
+            cARGA_PRESTACIONES_ENCABEZADO.ID = id;
+            cARGA_PRESTACIONES_ENCABEZADO.FECHA_CARGA = fECHA_CARGA;
+            cARGA_PRESTACIONES_ENCABEZADO.ID_TIPO_PRESTACION = iD_TIPO_PRESTACION;
+            cARGA_PRESTACIONES_ENCABEZADO.ARCHIVO = aRCHIVO;
+            cARGA_PRESTACIONES_ENCABEZADO.ACTIVO = aCTIVO;
+            return cARGA_PRESTACIONES_ENCABEZADO;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_CARGA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime FECHA_CARGA
+        {
+            get
+            {
+                return this._FECHA_CARGA;
+            }
+            set
+            {
+                this.OnFECHA_CARGAChanging(value);
+                this.ReportPropertyChanging("FECHA_CARGA");
+                this._FECHA_CARGA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("FECHA_CARGA");
+                this.OnFECHA_CARGAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _FECHA_CARGA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_CARGAChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_CARGAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID_TIPO_PRESTACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID_TIPO_PRESTACION
+        {
+            get
+            {
+                return this._ID_TIPO_PRESTACION;
+            }
+            set
+            {
+                this.OnID_TIPO_PRESTACIONChanging(value);
+                this.ReportPropertyChanging("ID_TIPO_PRESTACION");
+                this._ID_TIPO_PRESTACION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID_TIPO_PRESTACION");
+                this.OnID_TIPO_PRESTACIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID_TIPO_PRESTACION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_TIPO_PRESTACIONChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_TIPO_PRESTACIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ARCHIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string ARCHIVO
+        {
+            get
+            {
+                return this._ARCHIVO;
+            }
+            set
+            {
+                this.OnARCHIVOChanging(value);
+                this.ReportPropertyChanging("ARCHIVO");
+                this._ARCHIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("ARCHIVO");
+                this.OnARCHIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _ARCHIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnARCHIVOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnARCHIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ACTIVO
+        {
+            get
+            {
+                return this._ACTIVO;
+            }
+            set
+            {
+                this.OnACTIVOChanging(value);
+                this.ReportPropertyChanging("ACTIVO");
+                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ACTIVO");
+                this.OnACTIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ACTIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE> CARGA_PRESTACIONES_HUMANAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_HUMANAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_HUMANAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZA" +
+                        "DO", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZA" +
+                            "DO", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="CARGA_PRESTACIONES_HUMANAS_DETALLE")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class CARGA_PRESTACIONES_HUMANAS_DETALLE : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto CARGA_PRESTACIONES_HUMANAS_DETALLE.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        /// <param name="vALIDADO">Valor inicial de VALIDADO.</param>
+        /// <param name="eRROR">Valor inicial de ERROR.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static CARGA_PRESTACIONES_HUMANAS_DETALLE CreateCARGA_PRESTACIONES_HUMANAS_DETALLE(int id, bool aCTIVO, bool vALIDADO, bool eRROR)
+        {
+            CARGA_PRESTACIONES_HUMANAS_DETALLE cARGA_PRESTACIONES_HUMANAS_DETALLE = new CARGA_PRESTACIONES_HUMANAS_DETALLE();
+            cARGA_PRESTACIONES_HUMANAS_DETALLE.ID = id;
+            cARGA_PRESTACIONES_HUMANAS_DETALLE.ACTIVO = aCTIVO;
+            cARGA_PRESTACIONES_HUMANAS_DETALLE.VALIDADO = vALIDADO;
+            cARGA_PRESTACIONES_HUMANAS_DETALLE.ERROR = eRROR;
+            return cARGA_PRESTACIONES_HUMANAS_DETALLE;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FICHA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string FICHA
+        {
+            get
+            {
+                return this._FICHA;
+            }
+            set
+            {
+                this.OnFICHAChanging(value);
+                this.ReportPropertyChanging("FICHA");
+                this._FICHA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("FICHA");
+                this.OnFICHAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _FICHA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFICHAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFICHAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE
+        {
+            get
+            {
+                return this._NOMBRE;
+            }
+            set
+            {
+                this.OnNOMBREChanging(value);
+                this.ReportPropertyChanging("NOMBRE");
+                this._NOMBRE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("NOMBRE");
+                this.OnNOMBREChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad RUT en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string RUT
+        {
+            get
+            {
+                return this._RUT;
+            }
+            set
+            {
+                this.OnRUTChanging(value);
+                this.ReportPropertyChanging("RUT");
+                this._RUT = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("RUT");
+                this.OnRUTChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _RUT;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRUTChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRUTChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad MEDICO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string MEDICO
+        {
+            get
+            {
+                return this._MEDICO;
+            }
+            set
+            {
+                this.OnMEDICOChanging(value);
+                this.ReportPropertyChanging("MEDICO");
+                this._MEDICO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("MEDICO");
+                this.OnMEDICOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _MEDICO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMEDICOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMEDICOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad EDAD en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string EDAD
+        {
+            get
+            {
+                return this._EDAD;
+            }
+            set
+            {
+                this.OnEDADChanging(value);
+                this.ReportPropertyChanging("EDAD");
+                this._EDAD = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("EDAD");
+                this.OnEDADChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _EDAD;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnEDADChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnEDADChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad TELEFONO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string TELEFONO
+        {
+            get
+            {
+                return this._TELEFONO;
+            }
+            set
+            {
+                this.OnTELEFONOChanging(value);
+                this.ReportPropertyChanging("TELEFONO");
+                this._TELEFONO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("TELEFONO");
+                this.OnTELEFONOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _TELEFONO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTELEFONOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTELEFONOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad PROCEDENCIA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string PROCEDENCIA
+        {
+            get
+            {
+                return this._PROCEDENCIA;
+            }
+            set
+            {
+                this.OnPROCEDENCIAChanging(value);
+                this.ReportPropertyChanging("PROCEDENCIA");
+                this._PROCEDENCIA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("PROCEDENCIA");
+                this.OnPROCEDENCIAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _PROCEDENCIA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPROCEDENCIAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPROCEDENCIAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_RECEPCION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string FECHA_RECEPCION
+        {
+            get
+            {
+                return this._FECHA_RECEPCION;
+            }
+            set
+            {
+                this.OnFECHA_RECEPCIONChanging(value);
+                this.ReportPropertyChanging("FECHA_RECEPCION");
+                this._FECHA_RECEPCION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("FECHA_RECEPCION");
+                this.OnFECHA_RECEPCIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _FECHA_RECEPCION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad MUESTRA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string MUESTRA
+        {
+            get
+            {
+                return this._MUESTRA;
+            }
+            set
+            {
+                this.OnMUESTRAChanging(value);
+                this.ReportPropertyChanging("MUESTRA");
+                this._MUESTRA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("MUESTRA");
+                this.OnMUESTRAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _MUESTRA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMUESTRAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMUESTRAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_RESULTADOS en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string FECHA_RESULTADOS
+        {
+            get
+            {
+                return this._FECHA_RESULTADOS;
+            }
+            set
+            {
+                this.OnFECHA_RESULTADOSChanging(value);
+                this.ReportPropertyChanging("FECHA_RESULTADOS");
+                this._FECHA_RESULTADOS = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("FECHA_RESULTADOS");
+                this.OnFECHA_RESULTADOSChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _FECHA_RESULTADOS;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RESULTADOSChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RESULTADOSChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad PREVISION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string PREVISION
+        {
+            get
+            {
+                return this._PREVISION;
+            }
+            set
+            {
+                this.OnPREVISIONChanging(value);
+                this.ReportPropertyChanging("PREVISION");
+                this._PREVISION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("PREVISION");
+                this.OnPREVISIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _PREVISION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPREVISIONChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPREVISIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad GARANTIA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string GARANTIA
+        {
+            get
+            {
+                return this._GARANTIA;
+            }
+            set
+            {
+                this.OnGARANTIAChanging(value);
+                this.ReportPropertyChanging("GARANTIA");
+                this._GARANTIA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("GARANTIA");
+                this.OnGARANTIAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _GARANTIA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnGARANTIAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnGARANTIAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad PAGADO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string PAGADO
+        {
+            get
+            {
+                return this._PAGADO;
+            }
+            set
+            {
+                this.OnPAGADOChanging(value);
+                this.ReportPropertyChanging("PAGADO");
+                this._PAGADO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("PAGADO");
+                this.OnPAGADOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _PAGADO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPAGADOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPAGADOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad PENDIENTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string PENDIENTE
+        {
+            get
+            {
+                return this._PENDIENTE;
+            }
+            set
+            {
+                this.OnPENDIENTEChanging(value);
+                this.ReportPropertyChanging("PENDIENTE");
+                this._PENDIENTE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("PENDIENTE");
+                this.OnPENDIENTEChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _PENDIENTE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPENDIENTEChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPENDIENTEChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad TOTAL en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string TOTAL
+        {
+            get
+            {
+                return this._TOTAL;
+            }
+            set
+            {
+                this.OnTOTALChanging(value);
+                this.ReportPropertyChanging("TOTAL");
+                this._TOTAL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("TOTAL");
+                this.OnTOTALChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _TOTAL;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTOTALChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTOTALChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ACTIVO
+        {
+            get
+            {
+                return this._ACTIVO;
+            }
+            set
+            {
+                this.OnACTIVOChanging(value);
+                this.ReportPropertyChanging("ACTIVO");
+                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ACTIVO");
+                this.OnACTIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ACTIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALIDADO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool VALIDADO
+        {
+            get
+            {
+                return this._VALIDADO;
+            }
+            set
+            {
+                this.OnVALIDADOChanging(value);
+                this.ReportPropertyChanging("VALIDADO");
+                this._VALIDADO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALIDADO");
+                this.OnVALIDADOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _VALIDADO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALIDADOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALIDADOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ERROR en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ERROR
+        {
+            get
+            {
+                return this._ERROR;
+            }
+            set
+            {
+                this.OnERRORChanging(value);
+                this.ReportPropertyChanging("ERROR");
+                this._ERROR = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ERROR");
+                this.OnERRORChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ERROR;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnERRORChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnERRORChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad MENSAJE_ERROR en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string MENSAJE_ERROR
+        {
+            get
+            {
+                return this._MENSAJE_ERROR;
+            }
+            set
+            {
+                this.OnMENSAJE_ERRORChanging(value);
+                this.ReportPropertyChanging("MENSAJE_ERROR");
+                this._MENSAJE_ERROR = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("MENSAJE_ERROR");
+                this.OnMENSAJE_ERRORChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _MENSAJE_ERROR;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMENSAJE_ERRORChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMENSAJE_ERRORChanged();
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public CARGA_PRESTACIONES_ENCABEZADO CARGA_PRESTACIONES_ENCABEZADO
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<CARGA_PRESTACIONES_ENCABEZADO> CARGA_PRESTACIONES_ENCABEZADOReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE", "CARGA_PRESTACIONES_HUMANAS_EXAMEN")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_HUMANAS_EXAMEN> CARGA_PRESTACIONES_HUMANAS_EXAMEN
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_HUMANAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALL" +
+                        "E", "CARGA_PRESTACIONES_HUMANAS_EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_HUMANAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALL" +
+                            "E", "CARGA_PRESTACIONES_HUMANAS_EXAMEN", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class CARGA_PRESTACIONES_HUMANAS_EXAMEN : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto CARGA_PRESTACIONES_HUMANAS_EXAMEN.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static CARGA_PRESTACIONES_HUMANAS_EXAMEN CreateCARGA_PRESTACIONES_HUMANAS_EXAMEN(int id, bool aCTIVO)
+        {
+            CARGA_PRESTACIONES_HUMANAS_EXAMEN cARGA_PRESTACIONES_HUMANAS_EXAMEN = new CARGA_PRESTACIONES_HUMANAS_EXAMEN();
+            cARGA_PRESTACIONES_HUMANAS_EXAMEN.ID = id;
+            cARGA_PRESTACIONES_HUMANAS_EXAMEN.ACTIVO = aCTIVO;
+            return cARGA_PRESTACIONES_HUMANAS_EXAMEN;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE_EXAMEN
+        {
+            get
+            {
+                return this._NOMBRE_EXAMEN;
+            }
+            set
+            {
+                this.OnNOMBRE_EXAMENChanging(value);
+                this.ReportPropertyChanging("NOMBRE_EXAMEN");
+                this._NOMBRE_EXAMEN = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("NOMBRE_EXAMEN");
+                this.OnNOMBRE_EXAMENChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE_EXAMEN;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_EXAMENChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_EXAMENChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string VALOR_EXAMEN
+        {
+            get
+            {
+                return this._VALOR_EXAMEN;
+            }
+            set
+            {
+                this.OnVALOR_EXAMENChanging(value);
+                this.ReportPropertyChanging("VALOR_EXAMEN");
+                this._VALOR_EXAMEN = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("VALOR_EXAMEN");
+                this.OnVALOR_EXAMENChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _VALOR_EXAMEN;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_EXAMENChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_EXAMENChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ACTIVO
+        {
+            get
+            {
+                return this._ACTIVO;
+            }
+            set
+            {
+                this.OnACTIVOChanging(value);
+                this.ReportPropertyChanging("ACTIVO");
+                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ACTIVO");
+                this.OnACTIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ACTIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public CARGA_PRESTACIONES_HUMANAS_DETALLE CARGA_PRESTACIONES_HUMANAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALL" +
+                        "E", "CARGA_PRESTACIONES_HUMANAS_DETALLE").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALL" +
+                        "E", "CARGA_PRESTACIONES_HUMANAS_DETALLE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<CARGA_PRESTACIONES_HUMANAS_DETALLE> CARGA_PRESTACIONES_HUMANAS_DETALLEReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALL" +
+                        "E", "CARGA_PRESTACIONES_HUMANAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALL" +
+                            "E", "CARGA_PRESTACIONES_HUMANAS_DETALLE", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class CARGA_PRESTACIONES_VETERINARIAS_DETALLE : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto CARGA_PRESTACIONES_VETERINARIAS_DETALLE.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        /// <param name="vALIDADO">Valor inicial de VALIDADO.</param>
+        /// <param name="eRROR">Valor inicial de ERROR.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static CARGA_PRESTACIONES_VETERINARIAS_DETALLE CreateCARGA_PRESTACIONES_VETERINARIAS_DETALLE(int id, bool aCTIVO, bool vALIDADO, bool eRROR)
+        {
+            CARGA_PRESTACIONES_VETERINARIAS_DETALLE cARGA_PRESTACIONES_VETERINARIAS_DETALLE = new CARGA_PRESTACIONES_VETERINARIAS_DETALLE();
+            cARGA_PRESTACIONES_VETERINARIAS_DETALLE.ID = id;
+            cARGA_PRESTACIONES_VETERINARIAS_DETALLE.ACTIVO = aCTIVO;
+            cARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALIDADO = vALIDADO;
+            cARGA_PRESTACIONES_VETERINARIAS_DETALLE.ERROR = eRROR;
+            return cARGA_PRESTACIONES_VETERINARIAS_DETALLE;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FICHA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string FICHA
+        {
+            get
+            {
+                return this._FICHA;
+            }
+            set
+            {
+                this.OnFICHAChanging(value);
+                this.ReportPropertyChanging("FICHA");
+                this._FICHA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("FICHA");
+                this.OnFICHAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _FICHA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFICHAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFICHAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE
+        {
+            get
+            {
+                return this._NOMBRE;
+            }
+            set
+            {
+                this.OnNOMBREChanging(value);
+                this.ReportPropertyChanging("NOMBRE");
+                this._NOMBRE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("NOMBRE");
+                this.OnNOMBREChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ESPECIE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string ESPECIE
+        {
+            get
+            {
+                return this._ESPECIE;
+            }
+            set
+            {
+                this.OnESPECIEChanging(value);
+                this.ReportPropertyChanging("ESPECIE");
+                this._ESPECIE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("ESPECIE");
+                this.OnESPECIEChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _ESPECIE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnESPECIEChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnESPECIEChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad RAZA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string RAZA
+        {
+            get
+            {
+                return this._RAZA;
+            }
+            set
+            {
+                this.OnRAZAChanging(value);
+                this.ReportPropertyChanging("RAZA");
+                this._RAZA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("RAZA");
+                this.OnRAZAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _RAZA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRAZAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRAZAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad EDAD en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string EDAD
+        {
+            get
+            {
+                return this._EDAD;
+            }
+            set
+            {
+                this.OnEDADChanging(value);
+                this.ReportPropertyChanging("EDAD");
+                this._EDAD = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("EDAD");
+                this.OnEDADChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _EDAD;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnEDADChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnEDADChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad SEXO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string SEXO
+        {
+            get
+            {
+                return this._SEXO;
+            }
+            set
+            {
+                this.OnSEXOChanging(value);
+                this.ReportPropertyChanging("SEXO");
+                this._SEXO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("SEXO");
+                this.OnSEXOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _SEXO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnSEXOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnSEXOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad SOLICITA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string SOLICITA
+        {
+            get
+            {
+                return this._SOLICITA;
+            }
+            set
+            {
+                this.OnSOLICITAChanging(value);
+                this.ReportPropertyChanging("SOLICITA");
+                this._SOLICITA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("SOLICITA");
+                this.OnSOLICITAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _SOLICITA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnSOLICITAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnSOLICITAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad TELEFONO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string TELEFONO
+        {
+            get
+            {
+                return this._TELEFONO;
+            }
+            set
+            {
+                this.OnTELEFONOChanging(value);
+                this.ReportPropertyChanging("TELEFONO");
+                this._TELEFONO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("TELEFONO");
+                this.OnTELEFONOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _TELEFONO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTELEFONOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTELEFONOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad MEDICO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string MEDICO
+        {
+            get
+            {
+                return this._MEDICO;
+            }
+            set
+            {
+                this.OnMEDICOChanging(value);
+                this.ReportPropertyChanging("MEDICO");
+                this._MEDICO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("MEDICO");
+                this.OnMEDICOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _MEDICO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMEDICOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMEDICOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad PROCEDENCIA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string PROCEDENCIA
+        {
+            get
+            {
+                return this._PROCEDENCIA;
+            }
+            set
+            {
+                this.OnPROCEDENCIAChanging(value);
+                this.ReportPropertyChanging("PROCEDENCIA");
+                this._PROCEDENCIA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("PROCEDENCIA");
+                this.OnPROCEDENCIAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _PROCEDENCIA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPROCEDENCIAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPROCEDENCIAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_RECEPCION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string FECHA_RECEPCION
+        {
+            get
+            {
+                return this._FECHA_RECEPCION;
+            }
+            set
+            {
+                this.OnFECHA_RECEPCIONChanging(value);
+                this.ReportPropertyChanging("FECHA_RECEPCION");
+                this._FECHA_RECEPCION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("FECHA_RECEPCION");
+                this.OnFECHA_RECEPCIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _FECHA_RECEPCION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_MUESTRA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string FECHA_MUESTRA
+        {
+            get
+            {
+                return this._FECHA_MUESTRA;
+            }
+            set
+            {
+                this.OnFECHA_MUESTRAChanging(value);
+                this.ReportPropertyChanging("FECHA_MUESTRA");
+                this._FECHA_MUESTRA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("FECHA_MUESTRA");
+                this.OnFECHA_MUESTRAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _FECHA_MUESTRA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_MUESTRAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_MUESTRAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_RESULTADOS en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string FECHA_RESULTADOS
+        {
+            get
+            {
+                return this._FECHA_RESULTADOS;
+            }
+            set
+            {
+                this.OnFECHA_RESULTADOSChanging(value);
+                this.ReportPropertyChanging("FECHA_RESULTADOS");
+                this._FECHA_RESULTADOS = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("FECHA_RESULTADOS");
+                this.OnFECHA_RESULTADOSChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _FECHA_RESULTADOS;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RESULTADOSChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RESULTADOSChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad PENDIENTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string PENDIENTE
+        {
+            get
+            {
+                return this._PENDIENTE;
+            }
+            set
+            {
+                this.OnPENDIENTEChanging(value);
+                this.ReportPropertyChanging("PENDIENTE");
+                this._PENDIENTE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("PENDIENTE");
+                this.OnPENDIENTEChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _PENDIENTE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPENDIENTEChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPENDIENTEChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad GARANTIA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string GARANTIA
+        {
+            get
+            {
+                return this._GARANTIA;
+            }
+            set
+            {
+                this.OnGARANTIAChanging(value);
+                this.ReportPropertyChanging("GARANTIA");
+                this._GARANTIA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("GARANTIA");
+                this.OnGARANTIAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _GARANTIA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnGARANTIAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnGARANTIAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad PAGADO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string PAGADO
+        {
+            get
+            {
+                return this._PAGADO;
+            }
+            set
+            {
+                this.OnPAGADOChanging(value);
+                this.ReportPropertyChanging("PAGADO");
+                this._PAGADO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("PAGADO");
+                this.OnPAGADOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _PAGADO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPAGADOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnPAGADOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad TOTAL en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string TOTAL
+        {
+            get
+            {
+                return this._TOTAL;
+            }
+            set
+            {
+                this.OnTOTALChanging(value);
+                this.ReportPropertyChanging("TOTAL");
+                this._TOTAL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("TOTAL");
+                this.OnTOTALChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _TOTAL;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTOTALChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTOTALChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ACTIVO
+        {
+            get
+            {
+                return this._ACTIVO;
+            }
+            set
+            {
+                this.OnACTIVOChanging(value);
+                this.ReportPropertyChanging("ACTIVO");
+                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ACTIVO");
+                this.OnACTIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ACTIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALIDADO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool VALIDADO
+        {
+            get
+            {
+                return this._VALIDADO;
+            }
+            set
+            {
+                this.OnVALIDADOChanging(value);
+                this.ReportPropertyChanging("VALIDADO");
+                this._VALIDADO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALIDADO");
+                this.OnVALIDADOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _VALIDADO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALIDADOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALIDADOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ERROR en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ERROR
+        {
+            get
+            {
+                return this._ERROR;
+            }
+            set
+            {
+                this.OnERRORChanging(value);
+                this.ReportPropertyChanging("ERROR");
+                this._ERROR = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ERROR");
+                this.OnERRORChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ERROR;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnERRORChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnERRORChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad MENSAJE_ERROR en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string MENSAJE_ERROR
+        {
+            get
+            {
+                return this._MENSAJE_ERROR;
+            }
+            set
+            {
+                this.OnMENSAJE_ERRORChanging(value);
+                this.ReportPropertyChanging("MENSAJE_ERROR");
+                this._MENSAJE_ERROR = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("MENSAJE_ERROR");
+                this.OnMENSAJE_ERRORChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _MENSAJE_ERROR;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMENSAJE_ERRORChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMENSAJE_ERRORChanged();
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public CARGA_PRESTACIONES_ENCABEZADO CARGA_PRESTACIONES_ENCABEZADO
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZA" +
+                        "DO", "CARGA_PRESTACIONES_ENCABEZADO").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZA" +
+                        "DO", "CARGA_PRESTACIONES_ENCABEZADO").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<CARGA_PRESTACIONES_ENCABEZADO> CARGA_PRESTACIONES_ENCABEZADOReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZA" +
+                        "DO", "CARGA_PRESTACIONES_ENCABEZADO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZA" +
+                            "DO", "CARGA_PRESTACIONES_ENCABEZADO", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" +
+            "", "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> CARGA_PRESTACIONES_VETERINARIAS_EXAMEN
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINAR" +
+                        "IAS_DETALLE", "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINAR" +
+                            "IAS_DETALLE", "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class CARGA_PRESTACIONES_VETERINARIAS_EXAMEN : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static CARGA_PRESTACIONES_VETERINARIAS_EXAMEN CreateCARGA_PRESTACIONES_VETERINARIAS_EXAMEN(int id, bool aCTIVO)
+        {
+            CARGA_PRESTACIONES_VETERINARIAS_EXAMEN cARGA_PRESTACIONES_VETERINARIAS_EXAMEN = new CARGA_PRESTACIONES_VETERINARIAS_EXAMEN();
+            cARGA_PRESTACIONES_VETERINARIAS_EXAMEN.ID = id;
+            cARGA_PRESTACIONES_VETERINARIAS_EXAMEN.ACTIVO = aCTIVO;
+            return cARGA_PRESTACIONES_VETERINARIAS_EXAMEN;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE_EXAMEN
+        {
+            get
+            {
+                return this._NOMBRE_EXAMEN;
+            }
+            set
+            {
+                this.OnNOMBRE_EXAMENChanging(value);
+                this.ReportPropertyChanging("NOMBRE_EXAMEN");
+                this._NOMBRE_EXAMEN = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("NOMBRE_EXAMEN");
+                this.OnNOMBRE_EXAMENChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE_EXAMEN;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_EXAMENChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_EXAMENChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string VALOR_EXAMEN
+        {
+            get
+            {
+                return this._VALOR_EXAMEN;
+            }
+            set
+            {
+                this.OnVALOR_EXAMENChanging(value);
+                this.ReportPropertyChanging("VALOR_EXAMEN");
+                this._VALOR_EXAMEN = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("VALOR_EXAMEN");
+                this.OnVALOR_EXAMENChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _VALOR_EXAMEN;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_EXAMENChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_EXAMENChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ACTIVO
+        {
+            get
+            {
+                return this._ACTIVO;
+            }
+            set
+            {
+                this.OnACTIVOChanging(value);
+                this.ReportPropertyChanging("ACTIVO");
+                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ACTIVO");
+                this.OnACTIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ACTIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" +
+            "", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public CARGA_PRESTACIONES_VETERINARIAS_DETALLE CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINAR" +
+                        "IAS_DETALLE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINAR" +
+                        "IAS_DETALLE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLEReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINAR" +
+                        "IAS_DETALLE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINAR" +
+                            "IAS_DETALLE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
                 }
             }
         }

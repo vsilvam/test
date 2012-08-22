@@ -1,144 +1,139 @@
 using System;
-using System.Data;
 using System.Linq;
-using App.Infrastructure.Runtime;
 using LQCE.Modelo;
+using App.Infrastructure.Runtime;
 
 namespace LQCE.Repositorio
 {
 	public partial class RepositorioEXAMEN_DETALLE
 	{
-		//Contexto del entity model
-        private readonly LQCEEntities _contextBd;
-
-        #region Manejo del estado de la instancia
-
-        /// <summary>
-        /// Propiedad que contiene el error actual de la instancia de acceso a datos.
-        /// </summary>
-        public string Error { get; private set; }
-
-        public RepositorioEXAMEN_DETALLE(LQCEEntities context)
-        {
-            Error = string.Empty;
-            _contextBd = context;
-        }
-
-        #endregion
-
-        #region Metodos CRUD Autogenerados - NO MODIFICAR
+		private LQCEEntities _context;
+		public string Error { get; private set; }
 		
+		public RepositorioEXAMEN_DETALLE(LQCEEntities Context)
+		{
+			Error = string.Empty;
+			this._context = Context;
+		}
 
-        /// <summary>
-        /// Obtiene el registro desde BD en base a su key.
-        /// </summary
-        /// <param name="id">key.</param>
-        /// <returns></returns>
-        public EXAMEN_DETALLE GetById(int id)
-        {
-            Error = string.Empty;
-            try
-            {
-                return _contextBd.EXAMEN_DETALLE
-					.Include("EXAMEN")				
-					.Include("EXAMEN1")				
-					.FirstOrDefault(i => i.ID == id);
-            }
-            catch (Exception ex)
+		public EXAMEN_DETALLE GetById(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.EXAMEN_DETALLE.FirstOrDefault(i => i.ID == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Busca todos los registros.
-        /// </summary>
-        /// <returns></returns>
-        public IQueryable<EXAMEN_DETALLE> GetAll()
-        {
-            Error = string.Empty;
-            try
-            {
-                return from i in _contextBd.EXAMEN_DETALLE select i;
-            }
-            catch (Exception ex)
+		public EXAMEN_DETALLE GetByIdWithReferences(int id)
+		{
+			Error = string.Empty;
+			try
+			{
+				return _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1").FirstOrDefault(i => i.ID == id);
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Inserta un nuevo registro en BD, retornando su id.
-        /// </summary>
-        /// <param name="entity">Nueva entidad.</param>
-        /// <returns></returns>
-        public int Insert(EXAMEN_DETALLE entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.AddToEXAMEN_DETALLE(entity);
-                _contextBd.SaveChanges();
-                return entity.ID;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<EXAMEN_DETALLE> GetAll()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.EXAMEN_DETALLE select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return 0;
-            }
-            catch (Exception ex)
+		}
+
+		public IQueryable<EXAMEN_DETALLE> GetAllWithReferences()
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") select i;
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return 0;
+                return null;
             }
-        }
+		}
 
-        /// <summary>
-        /// Actualiza el registro en BD.
-        /// </summary>
-        /// <param name="entity">Entidad a actualizar.</param>
-        /// <returns></returns>
-        public bool Update(EXAMEN_DETALLE entity)
-        {
-            Error = string.Empty;
-            try
-            {
-                _contextBd.ApplyPropertyChanges("EXAMEN_DETALLE", entity);
-                return _contextBd.SaveChanges() > 0;
-            }
-            catch (NullReferenceException ex)
+		public IQueryable<EXAMEN_DETALLE> GetByFilter(int? EXAMENId = null, int? EXAMEN1Id = null, bool? ACTIVO = null)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.EXAMEN_DETALLE select i;
+
+				if (ACTIVO.HasValue)
+				{
+				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				}
+				if (EXAMENId.HasValue)
+				{
+				  q = q.Where(i => i.EXAMEN.ID == EXAMENId.Value);
+				}
+				if (EXAMEN1Id.HasValue)
+				{
+				  q = q.Where(i => i.EXAMEN1.ID == EXAMEN1Id.Value);
+				}
+				return q;
+			}
+			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
+                return null;
             }
-            catch (UpdateException ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.InnerException == null ? ex.Message : ex.InnerException.Message;
-                return false;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
+		}
+
+		public IQueryable<EXAMEN_DETALLE> GetByFilterWithReferences(int? EXAMENId = null, int? EXAMEN1Id = null, bool? ACTIVO = null)
+		{
+			Error = string.Empty;
+			try
+			{
+				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") select i;
+
+				if (ACTIVO.HasValue)
+				{
+					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				}
+				if (EXAMENId.HasValue)
+				{
+					q = q.Where(i => i.EXAMEN.ID == EXAMENId.Value);
+				}
+				if (EXAMEN1Id.HasValue)
+				{
+					q = q.Where(i => i.EXAMEN1.ID == EXAMEN1Id.Value);
+				}
+				return q;
+			}
+			catch (Exception ex)
+			{
+				ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return false;
-            }
-
-        }
-
-        #endregion
+                return null;
+			}
+		}
 	}
 }

@@ -1,0 +1,2419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LQCEModelo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="LQCEModeloStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="LQCEModelo.Store.CLIENTE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CLIENTE_SINONIMO" EntityType="LQCEModelo.Store.CLIENTE_SINONIMO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="COBRO" EntityType="LQCEModelo.Store.COBRO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="COMUNA" EntityType="LQCEModelo.Store.COMUNA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CONVENIO" EntityType="LQCEModelo.Store.CONVENIO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CONVENIO_EXAMEN" EntityType="LQCEModelo.Store.CONVENIO_EXAMEN" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CONVENIO_TARIFARIO" EntityType="LQCEModelo.Store.CONVENIO_TARIFARIO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ESPECIE" EntityType="LQCEModelo.Store.ESPECIE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EXAMEN" EntityType="LQCEModelo.Store.EXAMEN" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EXAMEN_DETALLE" EntityType="LQCEModelo.Store.EXAMEN_DETALLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EXAMEN_SINONIMO" EntityType="LQCEModelo.Store.EXAMEN_SINONIMO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FACTURA" EntityType="LQCEModelo.Store.FACTURA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FACTURA_DETALLE" EntityType="LQCEModelo.Store.FACTURA_DETALLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FACTURACION" EntityType="LQCEModelo.Store.FACTURACION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GARANTIA" EntityType="LQCEModelo.Store.GARANTIA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NOTA_COBRO" EntityType="LQCEModelo.Store.NOTA_COBRO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="NOTA_COBRO_DETALLE" EntityType="LQCEModelo.Store.NOTA_COBRO_DETALLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PAGO" EntityType="LQCEModelo.Store.PAGO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PAGO_DETALLE" EntityType="LQCEModelo.Store.PAGO_DETALLE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRESTACION" EntityType="LQCEModelo.Store.PRESTACION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRESTACION_EXAMEN" EntityType="LQCEModelo.Store.PRESTACION_EXAMEN" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRESTACION_HUMANA" EntityType="LQCEModelo.Store.PRESTACION_HUMANA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRESTACION_MUESTRA" EntityType="LQCEModelo.Store.PRESTACION_MUESTRA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRESTACION_VETERINARIA" EntityType="LQCEModelo.Store.PRESTACION_VETERINARIA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PREVISION" EntityType="LQCEModelo.Store.PREVISION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RAZA" EntityType="LQCEModelo.Store.RAZA" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="REGION" EntityType="LQCEModelo.Store.REGION" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TIPO_COBRO" EntityType="LQCEModelo.Store.TIPO_COBRO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TIPO_PRESTACION" EntityType="LQCEModelo.Store.TIPO_PRESTACION" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CLIENTE_COMUNA" Association="LQCEModelo.Store.FK_CLIENTE_COMUNA">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_CONVENIO" Association="LQCEModelo.Store.FK_CLIENTE_CONVENIO">
+            <End Role="CONVENIO" EntitySet="CONVENIO" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_SINONIMO_CLIENTE" Association="LQCEModelo.Store.FK_CLIENTE_SINONIMO_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CLIENTE_SINONIMO" EntitySet="CLIENTE_SINONIMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_TIPO_PRESTACION" Association="LQCEModelo.Store.FK_CLIENTE_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COBRO_TIPO_COBRO" Association="LQCEModelo.Store.FK_COBRO_TIPO_COBRO">
+            <End Role="TIPO_COBRO" EntitySet="TIPO_COBRO" />
+            <End Role="COBRO" EntitySet="COBRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMUNA_REGION" Association="LQCEModelo.Store.FK_COMUNA_REGION">
+            <End Role="REGION" EntitySet="REGION" />
+            <End Role="COMUNA" EntitySet="COMUNA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" Association="LQCEModelo.Store.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO">
+            <End Role="CONVENIO_TARIFARIO" EntitySet="CONVENIO_TARIFARIO" />
+            <End Role="CONVENIO_EXAMEN" EntitySet="CONVENIO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_EXAMEN_EXAMEN" Association="LQCEModelo.Store.FK_CONVENIO_EXAMEN_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="CONVENIO_EXAMEN" EntitySet="CONVENIO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_TARIFARIO_CONVENIO" Association="LQCEModelo.Store.FK_CONVENIO_TARIFARIO_CONVENIO">
+            <End Role="CONVENIO" EntitySet="CONVENIO" />
+            <End Role="CONVENIO_TARIFARIO" EntitySet="CONVENIO_TARIFARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_TIPO_PRESTACION" Association="LQCEModelo.Store.FK_CONVENIO_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="CONVENIO" EntitySet="CONVENIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_DETALLE_EXAMEN" Association="LQCEModelo.Store.FK_EXAMEN_DETALLE_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="EXAMEN_DETALLE" EntitySet="EXAMEN_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_DETALLE_EXAMEN1" Association="LQCEModelo.Store.FK_EXAMEN_DETALLE_EXAMEN1">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="EXAMEN_DETALLE" EntitySet="EXAMEN_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_SINONIMO_EXAMEN" Association="LQCEModelo.Store.FK_EXAMEN_SINONIMO_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="EXAMEN_SINONIMO" EntitySet="EXAMEN_SINONIMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_TIPO_PRESTACION" Association="LQCEModelo.Store.FK_EXAMEN_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_CLIENTE" Association="LQCEModelo.Store.FK_FACTURA_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_DETALLE_FACTURA" Association="LQCEModelo.Store.FK_FACTURA_DETALLE_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_DETALLE_PRESTACION" Association="LQCEModelo.Store.FK_FACTURA_DETALLE_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_FACTURACION" Association="LQCEModelo.Store.FK_FACTURA_FACTURACION">
+            <End Role="FACTURACION" EntitySet="FACTURACION" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTA_COBRO_COBRO" Association="LQCEModelo.Store.FK_NOTA_COBRO_COBRO">
+            <End Role="COBRO" EntitySet="COBRO" />
+            <End Role="NOTA_COBRO" EntitySet="NOTA_COBRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTA_COBRO_DETALLE_FACTURA" Association="LQCEModelo.Store.FK_NOTA_COBRO_DETALLE_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="NOTA_COBRO_DETALLE" EntitySet="NOTA_COBRO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTA_COBRO_DETALLE_NOTA_COBRO" Association="LQCEModelo.Store.FK_NOTA_COBRO_DETALLE_NOTA_COBRO">
+            <End Role="NOTA_COBRO" EntitySet="NOTA_COBRO" />
+            <End Role="NOTA_COBRO_DETALLE" EntitySet="NOTA_COBRO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_CLIENTE" Association="LQCEModelo.Store.FK_PAGO_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_DETALLE_FACTURA_DETALLE" Association="LQCEModelo.Store.FK_PAGO_DETALLE_FACTURA_DETALLE">
+            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
+            <End Role="PAGO_DETALLE" EntitySet="PAGO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_DETALLE_PAGO" Association="LQCEModelo.Store.FK_PAGO_DETALLE_PAGO">
+            <End Role="PAGO" EntitySet="PAGO" />
+            <End Role="PAGO_DETALLE" EntitySet="PAGO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_CLIENTE" Association="LQCEModelo.Store.FK_PRESTACION_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_EXAMEN_EXAMEN" Association="LQCEModelo.Store.FK_PRESTACION_EXAMEN_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="PRESTACION_EXAMEN" EntitySet="PRESTACION_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_EXAMEN_PRESTACION" Association="LQCEModelo.Store.FK_PRESTACION_EXAMEN_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="PRESTACION_EXAMEN" EntitySet="PRESTACION_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_GARANTIA" Association="LQCEModelo.Store.FK_PRESTACION_GARANTIA">
+            <End Role="GARANTIA" EntitySet="GARANTIA" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_MUESTRA_PRESTACION" Association="LQCEModelo.Store.FK_PRESTACION_MUESTRA_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="PRESTACION_MUESTRA" EntitySet="PRESTACION_MUESTRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_PRESTACION_HUMANA" Association="LQCEModelo.Store.FK_PRESTACION_PRESTACION_HUMANA">
+            <End Role="PRESTACION_HUMANA" EntitySet="PRESTACION_HUMANA" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_PREVISION" Association="LQCEModelo.Store.FK_PRESTACION_PREVISION">
+            <End Role="PREVISION" EntitySet="PREVISION" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_TIPO_PRESTACION" Association="LQCEModelo.Store.FK_PRESTACION_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_VETERINARIA_ESPECIE" Association="LQCEModelo.Store.FK_PRESTACION_VETERINARIA_ESPECIE">
+            <End Role="ESPECIE" EntitySet="ESPECIE" />
+            <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_VETERINARIA_PRESTACION" Association="LQCEModelo.Store.FK_PRESTACION_VETERINARIA_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_VETERINARIA_RAZA" Association="LQCEModelo.Store.FK_PRESTACION_VETERINARIA_RAZA">
+            <End Role="RAZA" EntitySet="RAZA" />
+            <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAZA_ESPECIE" Association="LQCEModelo.Store.FK_RAZA_ESPECIE">
+            <End Role="ESPECIE" EntitySet="ESPECIE" />
+            <End Role="RAZA" EntitySet="RAZA" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RUT" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_TIPO_PRESTACION" Type="int" Nullable="false" />
+          <Property Name="ID_CONVENIO" Type="int" Nullable="false" />
+          <Property Name="ID_COMUNA" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTE_SINONIMO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COBRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA_COBRO" Type="datetime" Nullable="false" />
+          <Property Name="ID_TIPO_COBRO" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMUNA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_REGION" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONVENIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TIPO_PRESTACION" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONVENIO_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CONVENIO_TARIFARIO" Type="int" Nullable="false" />
+          <Property Name="ID_EXAMEN" Type="int" Nullable="false" />
+          <Property Name="VALOR" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONVENIO_TARIFARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CONVENIO" Type="int" Nullable="false" />
+          <Property Name="FECHA_VIGENCIA" Type="datetime" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESPECIE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_TIPO_PRESTACION" Type="int" Nullable="false" />
+          <Property Name="CODIGO" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXAMEN_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EXAMEN" Type="int" Nullable="false" />
+          <Property Name="ID_SUB_EXAMEN" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXAMEN_SINONIMO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EXAMEN" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_FACTURACION" Type="int" Nullable="false" />
+          <Property Name="CORRELATIVO" Type="int" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="NUMERO_FACTURA" Type="int" />
+          <Property Name="RUT_LABORATORIO" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURA_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_FACTURA" Type="int" Nullable="false" />
+          <Property Name="NUMERO_FICHA" Type="int" Nullable="false" />
+          <Property Name="MONTO_TOTAL" Type="int" Nullable="false" />
+          <Property Name="MONTO_COBRADO" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA_FACTURACION" Type="datetime" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GARANTIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTA_COBRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_COBRO" Type="int" Nullable="false" />
+          <Property Name="CORRELATIVO" Type="int" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTA_COBRO_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_NOTA_COBRO" Type="int" Nullable="false" />
+          <Property Name="ID_FACTURA" Type="int" Nullable="false" />
+          <Property Name="MONTO_PENDIENTE" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAGO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="FECHA_PAGO" Type="int" Nullable="false" />
+          <Property Name="MONTO_PAGO" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAGO_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PAGO" Type="int" Nullable="false" />
+          <Property Name="ID_FACTURA_DETALLE" Type="int" Nullable="false" />
+          <Property Name="MONTO" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_PRESTACION" Type="int" Nullable="false" />
+          <Property Name="MEDICO" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="FECHA_MUESTRA" Type="datetime" />
+          <Property Name="FECHA_RECEPCION" Type="datetime" Nullable="false" />
+          <Property Name="ID_PREVISION" Type="int" />
+          <Property Name="ID_GARANTIA" Type="int" />
+          <Property Name="FECHA_ENTREGA_RESULTADOS" Type="datetime" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NUMERO_FICHA" Type="int" Nullable="false" />
+          <Property Name="ID_EXAMEN" Type="int" Nullable="false" />
+          <Property Name="VALOR" Type="int" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_HUMANA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RUT" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EDAD" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TELEFONO" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_MUESTRA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NUMERO_FICHA" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_VETERINARIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EDAD" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="TELEFONO" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_ESPECIE" Type="int" Nullable="false" />
+          <Property Name="ID_RAZA" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PREVISION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RAZA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ID_ESPECIE" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_COBRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_PRESTACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_COMUNA">
+          <End Role="COMUNA" Type="LQCEModelo.Store.COMUNA" Multiplicity="1" />
+          <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMUNA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="ID_COMUNA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTE_CONVENIO">
+          <End Role="CONVENIO" Type="LQCEModelo.Store.CONVENIO" Multiplicity="1" />
+          <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONVENIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="ID_CONVENIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTE_SINONIMO_CLIENTE">
+          <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="1" />
+          <End Role="CLIENTE_SINONIMO" Type="LQCEModelo.Store.CLIENTE_SINONIMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE_SINONIMO">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CLIENTE_TIPO_PRESTACION">
+          <End Role="TIPO_PRESTACION" Type="LQCEModelo.Store.TIPO_PRESTACION" Multiplicity="1" />
+          <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COBRO_TIPO_COBRO">
+          <End Role="TIPO_COBRO" Type="LQCEModelo.Store.TIPO_COBRO" Multiplicity="1" />
+          <End Role="COBRO" Type="LQCEModelo.Store.COBRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_COBRO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COBRO">
+              <PropertyRef Name="ID_TIPO_COBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMUNA_REGION">
+          <End Role="REGION" Type="LQCEModelo.Store.REGION" Multiplicity="1" />
+          <End Role="COMUNA" Type="LQCEModelo.Store.COMUNA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMUNA">
+              <PropertyRef Name="ID_REGION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO">
+          <End Role="CONVENIO_TARIFARIO" Type="LQCEModelo.Store.CONVENIO_TARIFARIO" Multiplicity="1" />
+          <End Role="CONVENIO_EXAMEN" Type="LQCEModelo.Store.CONVENIO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONVENIO_TARIFARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONVENIO_EXAMEN">
+              <PropertyRef Name="ID_CONVENIO_TARIFARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONVENIO_EXAMEN_EXAMEN">
+          <End Role="EXAMEN" Type="LQCEModelo.Store.EXAMEN" Multiplicity="1" />
+          <End Role="CONVENIO_EXAMEN" Type="LQCEModelo.Store.CONVENIO_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXAMEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONVENIO_EXAMEN">
+              <PropertyRef Name="ID_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONVENIO_TARIFARIO_CONVENIO">
+          <End Role="CONVENIO" Type="LQCEModelo.Store.CONVENIO" Multiplicity="1" />
+          <End Role="CONVENIO_TARIFARIO" Type="LQCEModelo.Store.CONVENIO_TARIFARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONVENIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONVENIO_TARIFARIO">
+              <PropertyRef Name="ID_CONVENIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONVENIO_TIPO_PRESTACION">
+          <End Role="TIPO_PRESTACION" Type="LQCEModelo.Store.TIPO_PRESTACION" Multiplicity="1" />
+          <End Role="CONVENIO" Type="LQCEModelo.Store.CONVENIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CONVENIO">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXAMEN_DETALLE_EXAMEN">
+          <End Role="EXAMEN" Type="LQCEModelo.Store.EXAMEN" Multiplicity="1" />
+          <End Role="EXAMEN_DETALLE" Type="LQCEModelo.Store.EXAMEN_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXAMEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EXAMEN_DETALLE">
+              <PropertyRef Name="ID_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXAMEN_DETALLE_EXAMEN1">
+          <End Role="EXAMEN" Type="LQCEModelo.Store.EXAMEN" Multiplicity="1" />
+          <End Role="EXAMEN_DETALLE" Type="LQCEModelo.Store.EXAMEN_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXAMEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EXAMEN_DETALLE">
+              <PropertyRef Name="ID_SUB_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXAMEN_SINONIMO_EXAMEN">
+          <End Role="EXAMEN" Type="LQCEModelo.Store.EXAMEN" Multiplicity="1" />
+          <End Role="EXAMEN_SINONIMO" Type="LQCEModelo.Store.EXAMEN_SINONIMO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXAMEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EXAMEN_SINONIMO">
+              <PropertyRef Name="ID_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXAMEN_TIPO_PRESTACION">
+          <End Role="TIPO_PRESTACION" Type="LQCEModelo.Store.TIPO_PRESTACION" Multiplicity="1" />
+          <End Role="EXAMEN" Type="LQCEModelo.Store.EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EXAMEN">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_CLIENTE">
+          <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="1" />
+          <End Role="FACTURA" Type="LQCEModelo.Store.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_DETALLE_FACTURA">
+          <End Role="FACTURA" Type="LQCEModelo.Store.FACTURA" Multiplicity="1" />
+          <End Role="FACTURA_DETALLE" Type="LQCEModelo.Store.FACTURA_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FACTURA_DETALLE">
+              <PropertyRef Name="ID_FACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_DETALLE_PRESTACION">
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="1" />
+          <End Role="FACTURA_DETALLE" Type="LQCEModelo.Store.FACTURA_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FACTURA_DETALLE">
+              <PropertyRef Name="NUMERO_FICHA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FACTURA_FACTURACION">
+          <End Role="FACTURACION" Type="LQCEModelo.Store.FACTURACION" Multiplicity="1" />
+          <End Role="FACTURA" Type="LQCEModelo.Store.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="ID_FACTURACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOTA_COBRO_COBRO">
+          <End Role="COBRO" Type="LQCEModelo.Store.COBRO" Multiplicity="1" />
+          <End Role="NOTA_COBRO" Type="LQCEModelo.Store.NOTA_COBRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COBRO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NOTA_COBRO">
+              <PropertyRef Name="ID_COBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOTA_COBRO_DETALLE_FACTURA">
+          <End Role="FACTURA" Type="LQCEModelo.Store.FACTURA" Multiplicity="1" />
+          <End Role="NOTA_COBRO_DETALLE" Type="LQCEModelo.Store.NOTA_COBRO_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NOTA_COBRO_DETALLE">
+              <PropertyRef Name="ID_FACTURA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NOTA_COBRO_DETALLE_NOTA_COBRO">
+          <End Role="NOTA_COBRO" Type="LQCEModelo.Store.NOTA_COBRO" Multiplicity="1" />
+          <End Role="NOTA_COBRO_DETALLE" Type="LQCEModelo.Store.NOTA_COBRO_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NOTA_COBRO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NOTA_COBRO_DETALLE">
+              <PropertyRef Name="ID_NOTA_COBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAGO_CLIENTE">
+          <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="1" />
+          <End Role="PAGO" Type="LQCEModelo.Store.PAGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PAGO">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAGO_DETALLE_FACTURA_DETALLE">
+          <End Role="FACTURA_DETALLE" Type="LQCEModelo.Store.FACTURA_DETALLE" Multiplicity="1" />
+          <End Role="PAGO_DETALLE" Type="LQCEModelo.Store.PAGO_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACTURA_DETALLE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PAGO_DETALLE">
+              <PropertyRef Name="ID_FACTURA_DETALLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAGO_DETALLE_PAGO">
+          <End Role="PAGO" Type="LQCEModelo.Store.PAGO" Multiplicity="1" />
+          <End Role="PAGO_DETALLE" Type="LQCEModelo.Store.PAGO_DETALLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAGO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PAGO_DETALLE">
+              <PropertyRef Name="ID_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_CLIENTE">
+          <End Role="CLIENTE" Type="LQCEModelo.Store.CLIENTE" Multiplicity="1" />
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_EXAMEN_EXAMEN">
+          <End Role="EXAMEN" Type="LQCEModelo.Store.EXAMEN" Multiplicity="1" />
+          <End Role="PRESTACION_EXAMEN" Type="LQCEModelo.Store.PRESTACION_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXAMEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION_EXAMEN">
+              <PropertyRef Name="ID_EXAMEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_EXAMEN_PRESTACION">
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="1" />
+          <End Role="PRESTACION_EXAMEN" Type="LQCEModelo.Store.PRESTACION_EXAMEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION_EXAMEN">
+              <PropertyRef Name="NUMERO_FICHA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_GARANTIA">
+          <End Role="GARANTIA" Type="LQCEModelo.Store.GARANTIA" Multiplicity="0..1" />
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GARANTIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_GARANTIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_MUESTRA_PRESTACION">
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="1" />
+          <End Role="PRESTACION_MUESTRA" Type="LQCEModelo.Store.PRESTACION_MUESTRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION_MUESTRA">
+              <PropertyRef Name="NUMERO_FICHA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_PRESTACION_HUMANA">
+          <End Role="PRESTACION_HUMANA" Type="LQCEModelo.Store.PRESTACION_HUMANA" Multiplicity="1" />
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION_HUMANA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_PREVISION">
+          <End Role="PREVISION" Type="LQCEModelo.Store.PREVISION" Multiplicity="0..1" />
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PREVISION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_PREVISION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_TIPO_PRESTACION">
+          <End Role="TIPO_PRESTACION" Type="LQCEModelo.Store.TIPO_PRESTACION" Multiplicity="1" />
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_VETERINARIA_ESPECIE">
+          <End Role="ESPECIE" Type="LQCEModelo.Store.ESPECIE" Multiplicity="1" />
+          <End Role="PRESTACION_VETERINARIA" Type="LQCEModelo.Store.PRESTACION_VETERINARIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION_VETERINARIA">
+              <PropertyRef Name="ID_ESPECIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_VETERINARIA_PRESTACION">
+          <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="1" />
+          <End Role="PRESTACION_VETERINARIA" Type="LQCEModelo.Store.PRESTACION_VETERINARIA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION_VETERINARIA">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PRESTACION_VETERINARIA_RAZA">
+          <End Role="RAZA" Type="LQCEModelo.Store.RAZA" Multiplicity="1" />
+          <End Role="PRESTACION_VETERINARIA" Type="LQCEModelo.Store.PRESTACION_VETERINARIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RAZA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION_VETERINARIA">
+              <PropertyRef Name="ID_RAZA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RAZA_ESPECIE">
+          <End Role="ESPECIE" Type="LQCEModelo.Store.ESPECIE" Multiplicity="1" />
+          <End Role="RAZA" Type="LQCEModelo.Store.RAZA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESPECIE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RAZA">
+              <PropertyRef Name="ID_ESPECIE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Se encontraron errores durante la generación:
+      advertencia 6037: La restricción de clave externa 'FK_PRESTACION_EXAMEN_PRESTACION1' se ha omitido en el modelo de almacenamiento. La columna 'NUMERO_FICHA' de la tabla 'LQCEModelo.Store.PRESTACION_EXAMEN' es una clave externa que participa en varias relaciones. No se validará un modelo de entidad de uno a uno, ya que puede existir incoherencia en los datos.
+      
+      <Association Name="FK_PRESTACION_EXAMEN_PRESTACION1">
+        <End Role="PRESTACION" Type="LQCEModelo.Store.PRESTACION" Multiplicity="1" />
+        <End Role="PRESTACION_EXAMEN" Type="LQCEModelo.Store.PRESTACION_EXAMEN" Multiplicity="*" />
+        <ReferentialConstraint>
+          <Principal Role="PRESTACION">
+            <PropertyRef Name="ID" />
+          </Principal>
+          <Dependent Role="PRESTACION_EXAMEN">
+            <PropertyRef Name="NUMERO_FICHA" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>-->
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LQCEModelo" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="LQCEEntities">
+          <EntitySet Name="CLIENTE" EntityType="LQCEModelo.CLIENTE" />
+          <EntitySet Name="CLIENTE_SINONIMO" EntityType="LQCEModelo.CLIENTE_SINONIMO" />
+          <EntitySet Name="COBRO" EntityType="LQCEModelo.COBRO" />
+          <EntitySet Name="COMUNA" EntityType="LQCEModelo.COMUNA" />
+          <EntitySet Name="CONVENIO" EntityType="LQCEModelo.CONVENIO" />
+          <EntitySet Name="CONVENIO_EXAMEN" EntityType="LQCEModelo.CONVENIO_EXAMEN" />
+          <EntitySet Name="CONVENIO_TARIFARIO" EntityType="LQCEModelo.CONVENIO_TARIFARIO" />
+          <EntitySet Name="ESPECIE" EntityType="LQCEModelo.ESPECIE" />
+          <EntitySet Name="EXAMEN" EntityType="LQCEModelo.EXAMEN" />
+          <EntitySet Name="EXAMEN_DETALLE" EntityType="LQCEModelo.EXAMEN_DETALLE" />
+          <EntitySet Name="EXAMEN_SINONIMO" EntityType="LQCEModelo.EXAMEN_SINONIMO" />
+          <EntitySet Name="FACTURA" EntityType="LQCEModelo.FACTURA" />
+          <EntitySet Name="FACTURA_DETALLE" EntityType="LQCEModelo.FACTURA_DETALLE" />
+          <EntitySet Name="FACTURACION" EntityType="LQCEModelo.FACTURACION" />
+          <EntitySet Name="GARANTIA" EntityType="LQCEModelo.GARANTIA" />
+          <EntitySet Name="NOTA_COBRO" EntityType="LQCEModelo.NOTA_COBRO" />
+          <EntitySet Name="NOTA_COBRO_DETALLE" EntityType="LQCEModelo.NOTA_COBRO_DETALLE" />
+          <EntitySet Name="PAGO" EntityType="LQCEModelo.PAGO" />
+          <EntitySet Name="PAGO_DETALLE" EntityType="LQCEModelo.PAGO_DETALLE" />
+          <EntitySet Name="PRESTACION" EntityType="LQCEModelo.PRESTACION" />
+          <EntitySet Name="PRESTACION_EXAMEN" EntityType="LQCEModelo.PRESTACION_EXAMEN" />
+          <EntitySet Name="PRESTACION_HUMANA" EntityType="LQCEModelo.PRESTACION_HUMANA" />
+          <EntitySet Name="PRESTACION_MUESTRA" EntityType="LQCEModelo.PRESTACION_MUESTRA" />
+          <EntitySet Name="PRESTACION_VETERINARIA" EntityType="LQCEModelo.PRESTACION_VETERINARIA" />
+          <EntitySet Name="PREVISION" EntityType="LQCEModelo.PREVISION" />
+          <EntitySet Name="RAZA" EntityType="LQCEModelo.RAZA" />
+          <EntitySet Name="REGION" EntityType="LQCEModelo.REGION" />
+          <EntitySet Name="TIPO_COBRO" EntityType="LQCEModelo.TIPO_COBRO" />
+          <EntitySet Name="TIPO_PRESTACION" EntityType="LQCEModelo.TIPO_PRESTACION" />
+          <AssociationSet Name="FK_CLIENTE_COMUNA" Association="LQCEModelo.FK_CLIENTE_COMUNA">
+            <End Role="COMUNA" EntitySet="COMUNA" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_CONVENIO" Association="LQCEModelo.FK_CLIENTE_CONVENIO">
+            <End Role="CONVENIO" EntitySet="CONVENIO" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_SINONIMO_CLIENTE" Association="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CLIENTE_SINONIMO" EntitySet="CLIENTE_SINONIMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CLIENTE_TIPO_PRESTACION" Association="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_CLIENTE" Association="LQCEModelo.FK_FACTURA_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_CLIENTE" Association="LQCEModelo.FK_PAGO_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PAGO" EntitySet="PAGO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_CLIENTE" Association="LQCEModelo.FK_PRESTACION_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COBRO_TIPO_COBRO" Association="LQCEModelo.FK_COBRO_TIPO_COBRO">
+            <End Role="TIPO_COBRO" EntitySet="TIPO_COBRO" />
+            <End Role="COBRO" EntitySet="COBRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTA_COBRO_COBRO" Association="LQCEModelo.FK_NOTA_COBRO_COBRO">
+            <End Role="COBRO" EntitySet="COBRO" />
+            <End Role="NOTA_COBRO" EntitySet="NOTA_COBRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMUNA_REGION" Association="LQCEModelo.FK_COMUNA_REGION">
+            <End Role="REGION" EntitySet="REGION" />
+            <End Role="COMUNA" EntitySet="COMUNA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_TARIFARIO_CONVENIO" Association="LQCEModelo.FK_CONVENIO_TARIFARIO_CONVENIO">
+            <End Role="CONVENIO" EntitySet="CONVENIO" />
+            <End Role="CONVENIO_TARIFARIO" EntitySet="CONVENIO_TARIFARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_TIPO_PRESTACION" Association="LQCEModelo.FK_CONVENIO_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="CONVENIO" EntitySet="CONVENIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" Association="LQCEModelo.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO">
+            <End Role="CONVENIO_TARIFARIO" EntitySet="CONVENIO_TARIFARIO" />
+            <End Role="CONVENIO_EXAMEN" EntitySet="CONVENIO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONVENIO_EXAMEN_EXAMEN" Association="LQCEModelo.FK_CONVENIO_EXAMEN_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="CONVENIO_EXAMEN" EntitySet="CONVENIO_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_VETERINARIA_ESPECIE" Association="LQCEModelo.FK_PRESTACION_VETERINARIA_ESPECIE">
+            <End Role="ESPECIE" EntitySet="ESPECIE" />
+            <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RAZA_ESPECIE" Association="LQCEModelo.FK_RAZA_ESPECIE">
+            <End Role="ESPECIE" EntitySet="ESPECIE" />
+            <End Role="RAZA" EntitySet="RAZA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_DETALLE_EXAMEN" Association="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="EXAMEN_DETALLE" EntitySet="EXAMEN_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_DETALLE_EXAMEN1" Association="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN1">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="EXAMEN_DETALLE" EntitySet="EXAMEN_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_SINONIMO_EXAMEN" Association="LQCEModelo.FK_EXAMEN_SINONIMO_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="EXAMEN_SINONIMO" EntitySet="EXAMEN_SINONIMO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXAMEN_TIPO_PRESTACION" Association="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_EXAMEN_EXAMEN" Association="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN">
+            <End Role="EXAMEN" EntitySet="EXAMEN" />
+            <End Role="PRESTACION_EXAMEN" EntitySet="PRESTACION_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_DETALLE_FACTURA" Association="LQCEModelo.FK_FACTURA_DETALLE_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_FACTURACION" Association="LQCEModelo.FK_FACTURA_FACTURACION">
+            <End Role="FACTURACION" EntitySet="FACTURACION" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTA_COBRO_DETALLE_FACTURA" Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="NOTA_COBRO_DETALLE" EntitySet="NOTA_COBRO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_DETALLE_PRESTACION" Association="LQCEModelo.FK_FACTURA_DETALLE_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_DETALLE_FACTURA_DETALLE" Association="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE">
+            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
+            <End Role="PAGO_DETALLE" EntitySet="PAGO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_GARANTIA" Association="LQCEModelo.FK_PRESTACION_GARANTIA">
+            <End Role="GARANTIA" EntitySet="GARANTIA" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTA_COBRO_DETALLE_NOTA_COBRO" Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO">
+            <End Role="NOTA_COBRO" EntitySet="NOTA_COBRO" />
+            <End Role="NOTA_COBRO_DETALLE" EntitySet="NOTA_COBRO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAGO_DETALLE_PAGO" Association="LQCEModelo.FK_PAGO_DETALLE_PAGO">
+            <End Role="PAGO" EntitySet="PAGO" />
+            <End Role="PAGO_DETALLE" EntitySet="PAGO_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_EXAMEN_PRESTACION" Association="LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="PRESTACION_EXAMEN" EntitySet="PRESTACION_EXAMEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_MUESTRA_PRESTACION" Association="LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="PRESTACION_MUESTRA" EntitySet="PRESTACION_MUESTRA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_PRESTACION_HUMANA" Association="LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA">
+            <End Role="PRESTACION_HUMANA" EntitySet="PRESTACION_HUMANA" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_PREVISION" Association="LQCEModelo.FK_PRESTACION_PREVISION">
+            <End Role="PREVISION" EntitySet="PREVISION" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_TIPO_PRESTACION" Association="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_VETERINARIA_PRESTACION" Association="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION">
+            <End Role="PRESTACION" EntitySet="PRESTACION" />
+            <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PRESTACION_VETERINARIA_RAZA" Association="LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA">
+            <End Role="RAZA" EntitySet="RAZA" />
+            <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="RUT" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="COMUNA" Relationship="LQCEModelo.FK_CLIENTE_COMUNA" FromRole="CLIENTE" ToRole="COMUNA" />
+          <NavigationProperty Name="CONVENIO" Relationship="LQCEModelo.FK_CLIENTE_CONVENIO" FromRole="CLIENTE" ToRole="CONVENIO" />
+          <NavigationProperty Name="CLIENTE_SINONIMO" Relationship="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" FromRole="CLIENTE" ToRole="CLIENTE_SINONIMO" />
+          <NavigationProperty Name="TIPO_PRESTACION" Relationship="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" FromRole="CLIENTE" ToRole="TIPO_PRESTACION" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_CLIENTE" FromRole="CLIENTE" ToRole="FACTURA" />
+          <NavigationProperty Name="PAGO" Relationship="LQCEModelo.FK_PAGO_CLIENTE" FromRole="CLIENTE" ToRole="PAGO" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_CLIENTE" FromRole="CLIENTE" ToRole="PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTE_SINONIMO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" FromRole="CLIENTE_SINONIMO" ToRole="CLIENTE" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COBRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="FECHA_COBRO" Nullable="false" />
+          <NavigationProperty Name="TIPO_COBRO" Relationship="LQCEModelo.FK_COBRO_TIPO_COBRO" FromRole="COBRO" ToRole="TIPO_COBRO" />
+          <NavigationProperty Name="NOTA_COBRO" Relationship="LQCEModelo.FK_NOTA_COBRO_COBRO" FromRole="COBRO" ToRole="NOTA_COBRO" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COMUNA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_CLIENTE_COMUNA" FromRole="COMUNA" ToRole="CLIENTE" />
+          <NavigationProperty Name="REGION" Relationship="LQCEModelo.FK_COMUNA_REGION" FromRole="COMUNA" ToRole="REGION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONVENIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_CLIENTE_CONVENIO" FromRole="CONVENIO" ToRole="CLIENTE" />
+          <NavigationProperty Name="CONVENIO_TARIFARIO" Relationship="LQCEModelo.FK_CONVENIO_TARIFARIO_CONVENIO" FromRole="CONVENIO" ToRole="CONVENIO_TARIFARIO" />
+          <NavigationProperty Name="TIPO_PRESTACION" Relationship="LQCEModelo.FK_CONVENIO_TIPO_PRESTACION" FromRole="CONVENIO" ToRole="TIPO_PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONVENIO_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="VALOR" Nullable="false" />
+          <NavigationProperty Name="CONVENIO_TARIFARIO" Relationship="LQCEModelo.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" FromRole="CONVENIO_EXAMEN" ToRole="CONVENIO_TARIFARIO" />
+          <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_CONVENIO_EXAMEN_EXAMEN" FromRole="CONVENIO_EXAMEN" ToRole="EXAMEN" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CONVENIO_TARIFARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="FECHA_VIGENCIA" Nullable="false" />
+          <NavigationProperty Name="CONVENIO" Relationship="LQCEModelo.FK_CONVENIO_TARIFARIO_CONVENIO" FromRole="CONVENIO_TARIFARIO" ToRole="CONVENIO" />
+          <NavigationProperty Name="CONVENIO_EXAMEN" Relationship="LQCEModelo.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" FromRole="CONVENIO_TARIFARIO" ToRole="CONVENIO_EXAMEN" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ESPECIE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRESTACION_VETERINARIA" Relationship="LQCEModelo.FK_PRESTACION_VETERINARIA_ESPECIE" FromRole="ESPECIE" ToRole="PRESTACION_VETERINARIA" />
+          <NavigationProperty Name="RAZA" Relationship="LQCEModelo.FK_RAZA_ESPECIE" FromRole="ESPECIE" ToRole="RAZA" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CODIGO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CONVENIO_EXAMEN" Relationship="LQCEModelo.FK_CONVENIO_EXAMEN_EXAMEN" FromRole="EXAMEN" ToRole="CONVENIO_EXAMEN" />
+          <NavigationProperty Name="EXAMEN_DETALLE" Relationship="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN" FromRole="EXAMEN" ToRole="EXAMEN_DETALLE" />
+          <NavigationProperty Name="EXAMEN_DETALLE1" Relationship="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN1" FromRole="EXAMEN" ToRole="EXAMEN_DETALLE" />
+          <NavigationProperty Name="EXAMEN_SINONIMO" Relationship="LQCEModelo.FK_EXAMEN_SINONIMO_EXAMEN" FromRole="EXAMEN" ToRole="EXAMEN_SINONIMO" />
+          <NavigationProperty Name="TIPO_PRESTACION" Relationship="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION" FromRole="EXAMEN" ToRole="TIPO_PRESTACION" />
+          <NavigationProperty Name="PRESTACION_EXAMEN" Relationship="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN" FromRole="EXAMEN" ToRole="PRESTACION_EXAMEN" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXAMEN_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN" FromRole="EXAMEN_DETALLE" ToRole="EXAMEN" />
+          <NavigationProperty Name="EXAMEN1" Relationship="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN1" FromRole="EXAMEN_DETALLE" ToRole="EXAMEN" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXAMEN_SINONIMO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_EXAMEN_SINONIMO_EXAMEN" FromRole="EXAMEN_SINONIMO" ToRole="EXAMEN" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CORRELATIVO" Nullable="false" />
+          <Property Type="Int32" Name="NUMERO_FACTURA" />
+          <Property Type="String" Name="RUT_LABORATORIO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_FACTURA_CLIENTE" FromRole="FACTURA" ToRole="CLIENTE" />
+          <NavigationProperty Name="FACTURA_DETALLE" Relationship="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" FromRole="FACTURA" ToRole="FACTURA_DETALLE" />
+          <NavigationProperty Name="FACTURACION" Relationship="LQCEModelo.FK_FACTURA_FACTURACION" FromRole="FACTURA" ToRole="FACTURACION" />
+          <NavigationProperty Name="NOTA_COBRO_DETALLE" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" FromRole="FACTURA" ToRole="NOTA_COBRO_DETALLE" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURA_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="MONTO_TOTAL" Nullable="false" />
+          <Property Type="Int32" Name="MONTO_COBRADO" Nullable="false" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" FromRole="FACTURA_DETALLE" ToRole="FACTURA" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_FACTURA_DETALLE_PRESTACION" FromRole="FACTURA_DETALLE" ToRole="PRESTACION" />
+          <NavigationProperty Name="PAGO_DETALLE" Relationship="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE" FromRole="FACTURA_DETALLE" ToRole="PAGO_DETALLE" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FACTURACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="FECHA_FACTURACION" Nullable="false" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_FACTURACION" FromRole="FACTURACION" ToRole="FACTURA" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GARANTIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_GARANTIA" FromRole="GARANTIA" ToRole="PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTA_COBRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CORRELATIVO" Nullable="false" />
+          <Property Type="Int32" Name="ID_CLIENTE" Nullable="false" />
+          <NavigationProperty Name="COBRO" Relationship="LQCEModelo.FK_NOTA_COBRO_COBRO" FromRole="NOTA_COBRO" ToRole="COBRO" />
+          <NavigationProperty Name="NOTA_COBRO_DETALLE" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO" FromRole="NOTA_COBRO" ToRole="NOTA_COBRO_DETALLE" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOTA_COBRO_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="MONTO_PENDIENTE" Nullable="false" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" FromRole="NOTA_COBRO_DETALLE" ToRole="FACTURA" />
+          <NavigationProperty Name="NOTA_COBRO" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO" FromRole="NOTA_COBRO_DETALLE" ToRole="NOTA_COBRO" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAGO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="FECHA_PAGO" Nullable="false" />
+          <Property Type="Int32" Name="MONTO_PAGO" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_PAGO_CLIENTE" FromRole="PAGO" ToRole="CLIENTE" />
+          <NavigationProperty Name="PAGO_DETALLE" Relationship="LQCEModelo.FK_PAGO_DETALLE_PAGO" FromRole="PAGO" ToRole="PAGO_DETALLE" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAGO_DETALLE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="MONTO" Nullable="false" />
+          <NavigationProperty Name="FACTURA_DETALLE" Relationship="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE" FromRole="PAGO_DETALLE" ToRole="FACTURA_DETALLE" />
+          <NavigationProperty Name="PAGO" Relationship="LQCEModelo.FK_PAGO_DETALLE_PAGO" FromRole="PAGO_DETALLE" ToRole="PAGO" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="MEDICO" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FECHA_MUESTRA" />
+          <Property Type="DateTime" Name="FECHA_RECEPCION" Nullable="false" />
+          <Property Type="DateTime" Name="FECHA_ENTREGA_RESULTADOS" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_PRESTACION_CLIENTE" FromRole="PRESTACION" ToRole="CLIENTE" />
+          <NavigationProperty Name="FACTURA_DETALLE" Relationship="LQCEModelo.FK_FACTURA_DETALLE_PRESTACION" FromRole="PRESTACION" ToRole="FACTURA_DETALLE" />
+          <NavigationProperty Name="GARANTIA" Relationship="LQCEModelo.FK_PRESTACION_GARANTIA" FromRole="PRESTACION" ToRole="GARANTIA" />
+          <NavigationProperty Name="PRESTACION_EXAMEN" Relationship="LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION" FromRole="PRESTACION" ToRole="PRESTACION_EXAMEN" />
+          <NavigationProperty Name="PRESTACION_MUESTRA" Relationship="LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION" FromRole="PRESTACION" ToRole="PRESTACION_MUESTRA" />
+          <NavigationProperty Name="PRESTACION_HUMANA" Relationship="LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA" FromRole="PRESTACION" ToRole="PRESTACION_HUMANA" />
+          <NavigationProperty Name="PREVISION" Relationship="LQCEModelo.FK_PRESTACION_PREVISION" FromRole="PRESTACION" ToRole="PREVISION" />
+          <NavigationProperty Name="TIPO_PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" FromRole="PRESTACION" ToRole="TIPO_PRESTACION" />
+          <NavigationProperty Name="PRESTACION_VETERINARIA" Relationship="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION" FromRole="PRESTACION" ToRole="PRESTACION_VETERINARIA" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_EXAMEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="VALOR" />
+          <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN" FromRole="PRESTACION_EXAMEN" ToRole="EXAMEN" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION" FromRole="PRESTACION_EXAMEN" ToRole="PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_HUMANA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RUT" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EDAD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TELEFONO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA" FromRole="PRESTACION_HUMANA" ToRole="PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_MUESTRA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION" FromRole="PRESTACION_MUESTRA" ToRole="PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRESTACION_VETERINARIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EDAD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TELEFONO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ESPECIE" Relationship="LQCEModelo.FK_PRESTACION_VETERINARIA_ESPECIE" FromRole="PRESTACION_VETERINARIA" ToRole="ESPECIE" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION" FromRole="PRESTACION_VETERINARIA" ToRole="PRESTACION" />
+          <NavigationProperty Name="RAZA" Relationship="LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA" FromRole="PRESTACION_VETERINARIA" ToRole="RAZA" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PREVISION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_PREVISION" FromRole="PREVISION" ToRole="PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RAZA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ESPECIE" Relationship="LQCEModelo.FK_RAZA_ESPECIE" FromRole="RAZA" ToRole="ESPECIE" />
+          <NavigationProperty Name="PRESTACION_VETERINARIA" Relationship="LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA" FromRole="RAZA" ToRole="PRESTACION_VETERINARIA" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="COMUNA" Relationship="LQCEModelo.FK_COMUNA_REGION" FromRole="REGION" ToRole="COMUNA" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_COBRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="COBRO" Relationship="LQCEModelo.FK_COBRO_TIPO_COBRO" FromRole="TIPO_COBRO" ToRole="COBRO" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TIPO_PRESTACION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" FromRole="TIPO_PRESTACION" ToRole="CLIENTE" />
+          <NavigationProperty Name="CONVENIO" Relationship="LQCEModelo.FK_CONVENIO_TIPO_PRESTACION" FromRole="TIPO_PRESTACION" ToRole="CONVENIO" />
+          <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION" FromRole="TIPO_PRESTACION" ToRole="EXAMEN" />
+          <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" FromRole="TIPO_PRESTACION" ToRole="PRESTACION" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CLIENTE_COMUNA">
+          <End Type="LQCEModelo.COMUNA" Role="COMUNA" Multiplicity="1" />
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CLIENTE_CONVENIO">
+          <End Type="LQCEModelo.CONVENIO" Role="CONVENIO" Multiplicity="1" />
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CLIENTE_SINONIMO_CLIENTE">
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="LQCEModelo.CLIENTE_SINONIMO" Role="CLIENTE_SINONIMO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CLIENTE_TIPO_PRESTACION">
+          <End Type="LQCEModelo.TIPO_PRESTACION" Role="TIPO_PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_FACTURA_CLIENTE">
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PAGO_CLIENTE">
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="LQCEModelo.PAGO" Role="PAGO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_CLIENTE">
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_COBRO_TIPO_COBRO">
+          <End Type="LQCEModelo.TIPO_COBRO" Role="TIPO_COBRO" Multiplicity="1" />
+          <End Type="LQCEModelo.COBRO" Role="COBRO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_NOTA_COBRO_COBRO">
+          <End Type="LQCEModelo.COBRO" Role="COBRO" Multiplicity="1" />
+          <End Type="LQCEModelo.NOTA_COBRO" Role="NOTA_COBRO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_COMUNA_REGION">
+          <End Type="LQCEModelo.REGION" Role="REGION" Multiplicity="1" />
+          <End Type="LQCEModelo.COMUNA" Role="COMUNA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CONVENIO_TARIFARIO_CONVENIO">
+          <End Type="LQCEModelo.CONVENIO" Role="CONVENIO" Multiplicity="1" />
+          <End Type="LQCEModelo.CONVENIO_TARIFARIO" Role="CONVENIO_TARIFARIO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CONVENIO_TIPO_PRESTACION">
+          <End Type="LQCEModelo.TIPO_PRESTACION" Role="TIPO_PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.CONVENIO" Role="CONVENIO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO">
+          <End Type="LQCEModelo.CONVENIO_TARIFARIO" Role="CONVENIO_TARIFARIO" Multiplicity="1" />
+          <End Type="LQCEModelo.CONVENIO_EXAMEN" Role="CONVENIO_EXAMEN" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CONVENIO_EXAMEN_EXAMEN">
+          <End Type="LQCEModelo.EXAMEN" Role="EXAMEN" Multiplicity="1" />
+          <End Type="LQCEModelo.CONVENIO_EXAMEN" Role="CONVENIO_EXAMEN" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_VETERINARIA_ESPECIE">
+          <End Type="LQCEModelo.ESPECIE" Role="ESPECIE" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION_VETERINARIA" Role="PRESTACION_VETERINARIA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_RAZA_ESPECIE">
+          <End Type="LQCEModelo.ESPECIE" Role="ESPECIE" Multiplicity="1" />
+          <End Type="LQCEModelo.RAZA" Role="RAZA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_EXAMEN_DETALLE_EXAMEN">
+          <End Type="LQCEModelo.EXAMEN" Role="EXAMEN" Multiplicity="1" />
+          <End Type="LQCEModelo.EXAMEN_DETALLE" Role="EXAMEN_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_EXAMEN_DETALLE_EXAMEN1">
+          <End Type="LQCEModelo.EXAMEN" Role="EXAMEN" Multiplicity="1" />
+          <End Type="LQCEModelo.EXAMEN_DETALLE" Role="EXAMEN_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_EXAMEN_SINONIMO_EXAMEN">
+          <End Type="LQCEModelo.EXAMEN" Role="EXAMEN" Multiplicity="1" />
+          <End Type="LQCEModelo.EXAMEN_SINONIMO" Role="EXAMEN_SINONIMO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_EXAMEN_TIPO_PRESTACION">
+          <End Type="LQCEModelo.TIPO_PRESTACION" Role="TIPO_PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.EXAMEN" Role="EXAMEN" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_EXAMEN_EXAMEN">
+          <End Type="LQCEModelo.EXAMEN" Role="EXAMEN" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION_EXAMEN" Role="PRESTACION_EXAMEN" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_FACTURA_DETALLE_FACTURA">
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA_DETALLE" Role="FACTURA_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_FACTURA_FACTURACION">
+          <End Type="LQCEModelo.FACTURACION" Role="FACTURACION" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_NOTA_COBRO_DETALLE_FACTURA">
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="1" />
+          <End Type="LQCEModelo.NOTA_COBRO_DETALLE" Role="NOTA_COBRO_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_FACTURA_DETALLE_PRESTACION">
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA_DETALLE" Role="FACTURA_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PAGO_DETALLE_FACTURA_DETALLE">
+          <End Type="LQCEModelo.FACTURA_DETALLE" Role="FACTURA_DETALLE" Multiplicity="1" />
+          <End Type="LQCEModelo.PAGO_DETALLE" Role="PAGO_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_GARANTIA">
+          <End Type="LQCEModelo.GARANTIA" Role="GARANTIA" Multiplicity="0..1" />
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_NOTA_COBRO_DETALLE_NOTA_COBRO">
+          <End Type="LQCEModelo.NOTA_COBRO" Role="NOTA_COBRO" Multiplicity="1" />
+          <End Type="LQCEModelo.NOTA_COBRO_DETALLE" Role="NOTA_COBRO_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PAGO_DETALLE_PAGO">
+          <End Type="LQCEModelo.PAGO" Role="PAGO" Multiplicity="1" />
+          <End Type="LQCEModelo.PAGO_DETALLE" Role="PAGO_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_EXAMEN_PRESTACION">
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION_EXAMEN" Role="PRESTACION_EXAMEN" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_MUESTRA_PRESTACION">
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION_MUESTRA" Role="PRESTACION_MUESTRA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_PRESTACION_HUMANA">
+          <End Type="LQCEModelo.PRESTACION_HUMANA" Role="PRESTACION_HUMANA" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION_HUMANA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+          
+        </Association>
+        <Association Name="FK_PRESTACION_PREVISION">
+          <End Type="LQCEModelo.PREVISION" Role="PREVISION" Multiplicity="0..1" />
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_TIPO_PRESTACION">
+          <End Type="LQCEModelo.TIPO_PRESTACION" Role="TIPO_PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_PRESTACION_VETERINARIA_PRESTACION">
+          <End Type="LQCEModelo.PRESTACION" Role="PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION_VETERINARIA" Role="PRESTACION_VETERINARIA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRESTACION_VETERINARIA">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+          
+        </Association>
+        <Association Name="FK_PRESTACION_VETERINARIA_RAZA">
+          <End Type="LQCEModelo.RAZA" Role="RAZA" Multiplicity="1" />
+          <End Type="LQCEModelo.PRESTACION_VETERINARIA" Role="PRESTACION_VETERINARIA" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="LQCEModeloStoreContainer" CdmEntityContainer="LQCEEntities">
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="LQCEModelo.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE_SINONIMO">
+            <EntityTypeMapping TypeName="LQCEModelo.CLIENTE_SINONIMO">
+              <MappingFragment StoreEntitySet="CLIENTE_SINONIMO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COBRO">
+            <EntityTypeMapping TypeName="LQCEModelo.COBRO">
+              <MappingFragment StoreEntitySet="COBRO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="FECHA_COBRO" ColumnName="FECHA_COBRO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMUNA">
+            <EntityTypeMapping TypeName="LQCEModelo.COMUNA">
+              <MappingFragment StoreEntitySet="COMUNA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONVENIO">
+            <EntityTypeMapping TypeName="LQCEModelo.CONVENIO">
+              <MappingFragment StoreEntitySet="CONVENIO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONVENIO_EXAMEN">
+            <EntityTypeMapping TypeName="LQCEModelo.CONVENIO_EXAMEN">
+              <MappingFragment StoreEntitySet="CONVENIO_EXAMEN">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONVENIO_TARIFARIO">
+            <EntityTypeMapping TypeName="LQCEModelo.CONVENIO_TARIFARIO">
+              <MappingFragment StoreEntitySet="CONVENIO_TARIFARIO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="FECHA_VIGENCIA" ColumnName="FECHA_VIGENCIA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESPECIE">
+            <EntityTypeMapping TypeName="LQCEModelo.ESPECIE">
+              <MappingFragment StoreEntitySet="ESPECIE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXAMEN">
+            <EntityTypeMapping TypeName="LQCEModelo.EXAMEN">
+              <MappingFragment StoreEntitySet="EXAMEN">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXAMEN_DETALLE">
+            <EntityTypeMapping TypeName="LQCEModelo.EXAMEN_DETALLE">
+              <MappingFragment StoreEntitySet="EXAMEN_DETALLE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXAMEN_SINONIMO">
+            <EntityTypeMapping TypeName="LQCEModelo.EXAMEN_SINONIMO">
+              <MappingFragment StoreEntitySet="EXAMEN_SINONIMO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="LQCEModelo.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="RUT_LABORATORIO" ColumnName="RUT_LABORATORIO" />
+                <ScalarProperty Name="NUMERO_FACTURA" ColumnName="NUMERO_FACTURA" />
+                <ScalarProperty Name="CORRELATIVO" ColumnName="CORRELATIVO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA_DETALLE">
+            <EntityTypeMapping TypeName="LQCEModelo.FACTURA_DETALLE">
+              <MappingFragment StoreEntitySet="FACTURA_DETALLE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="MONTO_COBRADO" ColumnName="MONTO_COBRADO" />
+                <ScalarProperty Name="MONTO_TOTAL" ColumnName="MONTO_TOTAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURACION">
+            <EntityTypeMapping TypeName="LQCEModelo.FACTURACION">
+              <MappingFragment StoreEntitySet="FACTURACION">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="FECHA_FACTURACION" ColumnName="FECHA_FACTURACION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GARANTIA">
+            <EntityTypeMapping TypeName="LQCEModelo.GARANTIA">
+              <MappingFragment StoreEntitySet="GARANTIA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTA_COBRO">
+            <EntityTypeMapping TypeName="LQCEModelo.NOTA_COBRO">
+              <MappingFragment StoreEntitySet="NOTA_COBRO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="CORRELATIVO" ColumnName="CORRELATIVO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTA_COBRO_DETALLE">
+            <EntityTypeMapping TypeName="LQCEModelo.NOTA_COBRO_DETALLE">
+              <MappingFragment StoreEntitySet="NOTA_COBRO_DETALLE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="MONTO_PENDIENTE" ColumnName="MONTO_PENDIENTE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGO">
+            <EntityTypeMapping TypeName="LQCEModelo.PAGO">
+              <MappingFragment StoreEntitySet="PAGO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="MONTO_PAGO" ColumnName="MONTO_PAGO" />
+                <ScalarProperty Name="FECHA_PAGO" ColumnName="FECHA_PAGO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGO_DETALLE">
+            <EntityTypeMapping TypeName="LQCEModelo.PAGO_DETALLE">
+              <MappingFragment StoreEntitySet="PAGO_DETALLE">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTACION">
+            <EntityTypeMapping TypeName="LQCEModelo.PRESTACION">
+              <MappingFragment StoreEntitySet="PRESTACION">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="FECHA_ENTREGA_RESULTADOS" ColumnName="FECHA_ENTREGA_RESULTADOS" />
+                <ScalarProperty Name="FECHA_RECEPCION" ColumnName="FECHA_RECEPCION" />
+                <ScalarProperty Name="FECHA_MUESTRA" ColumnName="FECHA_MUESTRA" />
+                <ScalarProperty Name="MEDICO" ColumnName="MEDICO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTACION_EXAMEN">
+            <EntityTypeMapping TypeName="LQCEModelo.PRESTACION_EXAMEN">
+              <MappingFragment StoreEntitySet="PRESTACION_EXAMEN">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTACION_HUMANA">
+            <EntityTypeMapping TypeName="LQCEModelo.PRESTACION_HUMANA">
+              <MappingFragment StoreEntitySet="PRESTACION_HUMANA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTACION_MUESTRA">
+            <EntityTypeMapping TypeName="LQCEModelo.PRESTACION_MUESTRA">
+              <MappingFragment StoreEntitySet="PRESTACION_MUESTRA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRESTACION_VETERINARIA">
+            <EntityTypeMapping TypeName="LQCEModelo.PRESTACION_VETERINARIA">
+              <MappingFragment StoreEntitySet="PRESTACION_VETERINARIA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PREVISION">
+            <EntityTypeMapping TypeName="LQCEModelo.PREVISION">
+              <MappingFragment StoreEntitySet="PREVISION">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RAZA">
+            <EntityTypeMapping TypeName="LQCEModelo.RAZA">
+              <MappingFragment StoreEntitySet="RAZA">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGION">
+            <EntityTypeMapping TypeName="LQCEModelo.REGION">
+              <MappingFragment StoreEntitySet="REGION">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_COBRO">
+            <EntityTypeMapping TypeName="LQCEModelo.TIPO_COBRO">
+              <MappingFragment StoreEntitySet="TIPO_COBRO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_PRESTACION">
+            <EntityTypeMapping TypeName="LQCEModelo.TIPO_PRESTACION">
+              <MappingFragment StoreEntitySet="TIPO_PRESTACION">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_CLIENTE_COMUNA" TypeName="LQCEModelo.FK_CLIENTE_COMUNA" StoreEntitySet="CLIENTE">
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="COMUNA">
+              <ScalarProperty Name="ID" ColumnName="ID_COMUNA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CLIENTE_CONVENIO" TypeName="LQCEModelo.FK_CLIENTE_CONVENIO" StoreEntitySet="CLIENTE">
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CONVENIO">
+              <ScalarProperty Name="ID" ColumnName="ID_CONVENIO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CLIENTE_SINONIMO_CLIENTE" TypeName="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" StoreEntitySet="CLIENTE_SINONIMO">
+            <EndProperty Name="CLIENTE_SINONIMO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID_CLIENTE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CLIENTE_TIPO_PRESTACION" TypeName="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" StoreEntitySet="CLIENTE">
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="TIPO_PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID_TIPO_PRESTACION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_CLIENTE" TypeName="LQCEModelo.FK_FACTURA_CLIENTE" StoreEntitySet="FACTURA">
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID_CLIENTE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PAGO_CLIENTE" TypeName="LQCEModelo.FK_PAGO_CLIENTE" StoreEntitySet="PAGO">
+            <EndProperty Name="PAGO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID_CLIENTE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_CLIENTE" TypeName="LQCEModelo.FK_PRESTACION_CLIENTE" StoreEntitySet="PRESTACION">
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID_CLIENTE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_COBRO_TIPO_COBRO" TypeName="LQCEModelo.FK_COBRO_TIPO_COBRO" StoreEntitySet="COBRO">
+            <EndProperty Name="COBRO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="TIPO_COBRO">
+              <ScalarProperty Name="ID" ColumnName="ID_TIPO_COBRO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_NOTA_COBRO_COBRO" TypeName="LQCEModelo.FK_NOTA_COBRO_COBRO" StoreEntitySet="NOTA_COBRO">
+            <EndProperty Name="NOTA_COBRO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="COBRO">
+              <ScalarProperty Name="ID" ColumnName="ID_COBRO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_COMUNA_REGION" TypeName="LQCEModelo.FK_COMUNA_REGION" StoreEntitySet="COMUNA">
+            <EndProperty Name="COMUNA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="REGION">
+              <ScalarProperty Name="ID" ColumnName="ID_REGION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CONVENIO_TARIFARIO_CONVENIO" TypeName="LQCEModelo.FK_CONVENIO_TARIFARIO_CONVENIO" StoreEntitySet="CONVENIO_TARIFARIO">
+            <EndProperty Name="CONVENIO_TARIFARIO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CONVENIO">
+              <ScalarProperty Name="ID" ColumnName="ID_CONVENIO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CONVENIO_TIPO_PRESTACION" TypeName="LQCEModelo.FK_CONVENIO_TIPO_PRESTACION" StoreEntitySet="CONVENIO">
+            <EndProperty Name="CONVENIO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="TIPO_PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID_TIPO_PRESTACION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" TypeName="LQCEModelo.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" StoreEntitySet="CONVENIO_EXAMEN">
+            <EndProperty Name="CONVENIO_EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CONVENIO_TARIFARIO">
+              <ScalarProperty Name="ID" ColumnName="ID_CONVENIO_TARIFARIO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CONVENIO_EXAMEN_EXAMEN" TypeName="LQCEModelo.FK_CONVENIO_EXAMEN_EXAMEN" StoreEntitySet="CONVENIO_EXAMEN">
+            <EndProperty Name="CONVENIO_EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID_EXAMEN" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_VETERINARIA_ESPECIE" TypeName="LQCEModelo.FK_PRESTACION_VETERINARIA_ESPECIE" StoreEntitySet="PRESTACION_VETERINARIA">
+            <EndProperty Name="PRESTACION_VETERINARIA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="ESPECIE">
+              <ScalarProperty Name="ID" ColumnName="ID_ESPECIE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_RAZA_ESPECIE" TypeName="LQCEModelo.FK_RAZA_ESPECIE" StoreEntitySet="RAZA">
+            <EndProperty Name="RAZA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="ESPECIE">
+              <ScalarProperty Name="ID" ColumnName="ID_ESPECIE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_EXAMEN_DETALLE_EXAMEN" TypeName="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN" StoreEntitySet="EXAMEN_DETALLE">
+            <EndProperty Name="EXAMEN_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID_EXAMEN" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_EXAMEN_DETALLE_EXAMEN1" TypeName="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN1" StoreEntitySet="EXAMEN_DETALLE">
+            <EndProperty Name="EXAMEN_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID_SUB_EXAMEN" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_EXAMEN_SINONIMO_EXAMEN" TypeName="LQCEModelo.FK_EXAMEN_SINONIMO_EXAMEN" StoreEntitySet="EXAMEN_SINONIMO">
+            <EndProperty Name="EXAMEN_SINONIMO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID_EXAMEN" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_EXAMEN_TIPO_PRESTACION" TypeName="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION" StoreEntitySet="EXAMEN">
+            <EndProperty Name="EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="TIPO_PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID_TIPO_PRESTACION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_EXAMEN_EXAMEN" TypeName="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN" StoreEntitySet="PRESTACION_EXAMEN">
+            <EndProperty Name="PRESTACION_EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID_EXAMEN" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_DETALLE_FACTURA" TypeName="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" StoreEntitySet="FACTURA_DETALLE">
+            <EndProperty Name="FACTURA_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID_FACTURA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_FACTURACION" TypeName="LQCEModelo.FK_FACTURA_FACTURACION" StoreEntitySet="FACTURA">
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="FACTURACION">
+              <ScalarProperty Name="ID" ColumnName="ID_FACTURACION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_NOTA_COBRO_DETALLE_FACTURA" TypeName="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" StoreEntitySet="NOTA_COBRO_DETALLE">
+            <EndProperty Name="NOTA_COBRO_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID_FACTURA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_DETALLE_PRESTACION" TypeName="LQCEModelo.FK_FACTURA_DETALLE_PRESTACION" StoreEntitySet="FACTURA_DETALLE">
+            <EndProperty Name="FACTURA_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="NUMERO_FICHA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PAGO_DETALLE_FACTURA_DETALLE" TypeName="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE" StoreEntitySet="PAGO_DETALLE">
+            <EndProperty Name="PAGO_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="FACTURA_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID_FACTURA_DETALLE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_GARANTIA" TypeName="LQCEModelo.FK_PRESTACION_GARANTIA" StoreEntitySet="PRESTACION">
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="GARANTIA">
+              <ScalarProperty Name="ID" ColumnName="ID_GARANTIA" />
+            </EndProperty>
+            <Condition ColumnName="ID_GARANTIA" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_NOTA_COBRO_DETALLE_NOTA_COBRO" TypeName="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO" StoreEntitySet="NOTA_COBRO_DETALLE">
+            <EndProperty Name="NOTA_COBRO_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="NOTA_COBRO">
+              <ScalarProperty Name="ID" ColumnName="ID_NOTA_COBRO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PAGO_DETALLE_PAGO" TypeName="LQCEModelo.FK_PAGO_DETALLE_PAGO" StoreEntitySet="PAGO_DETALLE">
+            <EndProperty Name="PAGO_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="PAGO">
+              <ScalarProperty Name="ID" ColumnName="ID_PAGO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_EXAMEN_PRESTACION" TypeName="LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION" StoreEntitySet="PRESTACION_EXAMEN">
+            <EndProperty Name="PRESTACION_EXAMEN">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="NUMERO_FICHA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_MUESTRA_PRESTACION" TypeName="LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION" StoreEntitySet="PRESTACION_MUESTRA">
+            <EndProperty Name="PRESTACION_MUESTRA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="NUMERO_FICHA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_PRESTACION_HUMANA" TypeName="LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA" StoreEntitySet="PRESTACION">
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="PRESTACION_HUMANA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_PREVISION" TypeName="LQCEModelo.FK_PRESTACION_PREVISION" StoreEntitySet="PRESTACION">
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="PREVISION">
+              <ScalarProperty Name="ID" ColumnName="ID_PREVISION" />
+            </EndProperty>
+            <Condition ColumnName="ID_PREVISION" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_TIPO_PRESTACION" TypeName="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" StoreEntitySet="PRESTACION">
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="TIPO_PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID_TIPO_PRESTACION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_VETERINARIA_PRESTACION" TypeName="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION" StoreEntitySet="PRESTACION_VETERINARIA">
+            <EndProperty Name="PRESTACION_VETERINARIA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_PRESTACION_VETERINARIA_RAZA" TypeName="LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA" StoreEntitySet="PRESTACION_VETERINARIA">
+            <EndProperty Name="PRESTACION_VETERINARIA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="RAZA">
+              <ScalarProperty Name="ID" ColumnName="ID_RAZA" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="ModeloLQCE">
+        <EntityTypeShape EntityType="LQCEModelo.CLIENTE" Width="1.5" PointX="5.25" PointY="12.5" Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="LQCEModelo.CLIENTE_SINONIMO" Width="1.5" PointX="7.5" PointY="11.875" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="LQCEModelo.COBRO" Width="1.5" PointX="8.25" PointY="6.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.COMUNA" Width="1.5" PointX="3" PointY="10.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.CONVENIO" Width="1.5" PointX="3" PointY="16.375" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="LQCEModelo.CONVENIO_EXAMEN" Width="1.5" PointX="7.5" PointY="18.625" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.CONVENIO_TARIFARIO" Width="1.5" PointX="5.25" PointY="16.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.ESPECIE" Width="1.5" PointX="13.5" PointY="9" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.EXAMEN" Width="1.5" PointX="3" PointY="19.75" Height="2.749492187499996" />
+        <EntityTypeShape EntityType="LQCEModelo.EXAMEN_DETALLE" Width="1.5" PointX="5.25" PointY="19.125" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="LQCEModelo.EXAMEN_SINONIMO" Width="1.5" PointX="5.25" PointY="21.5" Height="1.5956835937500102" />
+        <EntityTypeShape EntityType="LQCEModelo.FACTURA" Width="1.5" PointX="10.5" PointY="12.75" Height="2.557190755208353" />
+        <EntityTypeShape EntityType="LQCEModelo.FACTURA_DETALLE" Width="1.5" PointX="12.75" PointY="15.25" Height="2.1725878906249818" />
+        <EntityTypeShape EntityType="LQCEModelo.FACTURACION" Width="1.5" PointX="8.25" PointY="9.25" Height="1.5956835937499818" />
+        <EntityTypeShape EntityType="LQCEModelo.GARANTIA" Width="1.5" PointX="8.25" PointY="21.75" Height="1.5956835937499818" />
+        <EntityTypeShape EntityType="LQCEModelo.NOTA_COBRO" Width="1.5" PointX="10.5" PointY="6" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="LQCEModelo.NOTA_COBRO_DETALLE" Width="1.5" PointX="12.75" PointY="12.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.PAGO" Width="1.5" PointX="7.5" PointY="15.5" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="LQCEModelo.PAGO_DETALLE" Width="1.5" PointX="18" PointY="15.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.PRESTACION" Width="1.5" PointX="10.5" PointY="16.25" Height="3.7109993489583246" />
+        <EntityTypeShape EntityType="LQCEModelo.PRESTACION_EXAMEN" Width="1.5" PointX="15.75" PointY="18.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.PRESTACION_HUMANA" Width="1.5" PointX="8.25" PointY="24.125" Height="2.1725878906249818" />
+        <EntityTypeShape EntityType="LQCEModelo.PRESTACION_MUESTRA" Width="1.5" PointX="12.75" PointY="19.875" Height="1.5956835937499818" />
+        <EntityTypeShape EntityType="LQCEModelo.PRESTACION_VETERINARIA" Width="1.5" PointX="15.75" PointY="15" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="LQCEModelo.PREVISION" Width="1.5" PointX="8.25" PointY="27" Height="1.5956835937499818" />
+        <EntityTypeShape EntityType="LQCEModelo.RAZA" Width="1.5" PointX="13.5" PointY="22.5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="LQCEModelo.REGION" Width="1.5" PointX="0.75" PointY="10.25" Height="1.5956835937499818" />
+        <EntityTypeShape EntityType="LQCEModelo.TIPO_COBRO" Width="1.5" PointX="6" PointY="6.25" Height="1.5956835937499818" />
+        <EntityTypeShape EntityType="LQCEModelo.TIPO_PRESTACION" Width="1.5" PointX="0.75" PointY="13.625" Height="2.1725878906249818" />
+        <AssociationConnector Association="LQCEModelo.FK_CLIENTE_COMUNA" >
+          <ConnectorPoint PointX="4.5" PointY="11.018992513020834" />
+          <ConnectorPoint PointX="6" PointY="11.018992513020834" />
+          <ConnectorPoint PointX="6" PointY="12.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CLIENTE_CONVENIO" >
+          <ConnectorPoint PointX="3.75" PointY="16.375" />
+          <ConnectorPoint PointX="3.75" PointY="13.970896809895834" />
+          <ConnectorPoint PointX="5.25" PointY="13.970896809895834" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" >
+          <ConnectorPoint PointX="6.75" PointY="12.985341796874998" />
+          <ConnectorPoint PointX="7.5" PointY="12.985341796874998" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" >
+          <ConnectorPoint PointX="2.25" PointY="14.768845214843751" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="14.768845214843751" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="14.768845214843751" />
+          <ConnectorPoint PointX="5.25" PointY="14.768845214843751" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_CLIENTE" >
+          <ConnectorPoint PointX="6.75" PointY="14.420187174479175" />
+          <ConnectorPoint PointX="10.5" PointY="14.420187174479175" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PAGO_CLIENTE" >
+          <ConnectorPoint PointX="6.75" PointY="15.385254158253206" />
+          <ConnectorPoint PointX="7.28125" PointY="15.916504158253206" />
+          <ConnectorPoint PointX="7.28125" PointY="15.280097153846153" />
+          <ConnectorPoint PointX="7.5011528461538459" PointY="15.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_CLIENTE" >
+          <ConnectorPoint PointX="6.72576923076923" PointY="15.441793619791667" />
+          <ConnectorPoint PointX="7.125" PointY="15.841024389022437" />
+          <ConnectorPoint PointX="7.125" PointY="18.052643229166662" />
+          <ConnectorPoint PointX="10.5" PointY="18.052643229166662" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_COBRO_TIPO_COBRO" >
+          <ConnectorPoint PointX="7.5" PointY="7.0478417968749909" />
+          <ConnectorPoint PointX="8.25" PointY="7.0478417968749909" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_COBRO" >
+          <ConnectorPoint PointX="9.75" PointY="7.0189925130208337" />
+          <ConnectorPoint PointX="10.5" PointY="7.0189925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_COMUNA_REGION" >
+          <ConnectorPoint PointX="2.25" PointY="11.047841796874991" />
+          <ConnectorPoint PointX="3" PointY="11.047841796874991" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CONVENIO_TARIFARIO_CONVENIO" >
+          <ConnectorPoint PointX="4.5" PointY="17.393992513020834" />
+          <ConnectorPoint PointX="5.25" PointY="17.393992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CONVENIO_TIPO_PRESTACION" >
+          <ConnectorPoint PointX="2.25" PointY="15.31446905273436" />
+          <ConnectorPoint PointX="3.3437475" PointY="15.31446905273436" />
+          <ConnectorPoint PointX="3.3437475" PointY="16.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" >
+          <ConnectorPoint PointX="6.75" PointY="18.225676333733976" />
+          <ConnectorPoint PointX="7.3125" PointY="18.788176333733976" />
+          <ConnectorPoint PointX="7.3125" PointY="18.436347153846153" />
+          <ConnectorPoint PointX="7.5011528461538459" PointY="18.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CONVENIO_EXAMEN_EXAMEN" >
+          <ConnectorPoint PointX="4.5" PointY="21.110341796874998" />
+          <ConnectorPoint PointX="7.84375" PointY="21.110341796874998" />
+          <ConnectorPoint PointX="7.84375" PointY="20.412985026041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_ESPECIE" >
+          <ConnectorPoint PointX="14.65625" PointY="10.787985026041667" />
+          <ConnectorPoint PointX="14.65625" PointY="15.09375" />
+          <ConnectorPoint PointX="15.75" PointY="15.09375" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_RAZA_ESPECIE" >
+          <ConnectorPoint PointX="14.421875" PointY="10.787985026041667" />
+          <ConnectorPoint PointX="14.421875" PointY="22.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN" >
+          <ConnectorPoint PointX="4.5" PointY="20.235341796874998" />
+          <ConnectorPoint PointX="5.25" PointY="20.235341796874998" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN1" >
+          <ConnectorPoint PointX="4.5" PointY="19.9301708984375" />
+          <ConnectorPoint PointX="5.25" PointY="19.9301708984375" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_EXAMEN_SINONIMO_EXAMEN" >
+          <ConnectorPoint PointX="4.5" PointY="21.999746093749998" />
+          <ConnectorPoint PointX="5.25" PointY="21.999746093749998" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION" >
+          <ConnectorPoint PointX="1.5" PointY="15.797587890624982" />
+          <ConnectorPoint PointX="1.5" PointY="21.124746093749998" />
+          <ConnectorPoint PointX="3" PointY="21.124746093749998" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN" >
+          <ConnectorPoint PointX="4.5" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="7.760416666666667" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="10.760414166666665" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="10.927080833333333" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="11.572919166666667" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="11.739585833333335" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="12.5" PointY="20.915510195312503" />
+          <ConnectorPoint PointX="12.5" PointY="19.625" />
+          <ConnectorPoint PointX="14.338541666666666" PointY="19.625" />
+          <ConnectorPoint PointX="14.505208333333334" PointY="19.625" />
+          <ConnectorPoint PointX="14.682291666666666" PointY="19.625" />
+          <ConnectorPoint PointX="14.848958333333334" PointY="19.625" />
+          <ConnectorPoint PointX="15.5" PointY="19.625" />
+          <ConnectorPoint PointX="15.5" PointY="20.537985026041667" />
+          <ConnectorPoint PointX="16.5" PointY="20.537985026041667" />
+          <ConnectorPoint PointX="16.5" PointY="20.287985026041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" >
+          <ConnectorPoint PointX="12" PointY="15.307190755208353" />
+          <ConnectorPoint PointX="12.375" PointY="15.682190755208353" />
+          <ConnectorPoint PointX="12.375" PointY="14.875" />
+          <ConnectorPoint PointX="12.441074434901122" PointY="14.94107443490112" />
+          <ConnectorPoint PointX="12.558925565098878" PointY="15.058925565098878" />
+          <ConnectorPoint PointX="12.75" PointY="15.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_FACTURACION" >
+          <ConnectorPoint PointX="9.40625" PointY="10.845683593749982" />
+          <ConnectorPoint PointX="9.40625" PointY="13.945432884114592" />
+          <ConnectorPoint PointX="10.5" PointY="13.945432884114592" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" >
+          <ConnectorPoint PointX="12" PointY="13.331492513020834" />
+          <ConnectorPoint PointX="12.75" PointY="13.331492513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_DETALLE_PRESTACION" >
+          <ConnectorPoint PointX="12" PointY="16.836293945312491" />
+          <ConnectorPoint PointX="12.75" PointY="16.836293945312491" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE" >
+          <ConnectorPoint PointX="14.25" PointY="17.422587890624982" />
+          <ConnectorPoint PointX="14.362949434901122" PointY="17.535537325526104" />
+          <ConnectorPoint PointX="14.480800565098878" PointY="17.65338845572386" />
+          <ConnectorPoint PointX="14.706699434901122" PointY="17.879287325526104" />
+          <ConnectorPoint PointX="14.824550565098878" PointY="17.99713845572386" />
+          <ConnectorPoint PointX="14.875" PointY="18.047587890624982" />
+          <ConnectorPoint PointX="14.875" PointY="17.662985026041667" />
+          <ConnectorPoint PointX="15.368570963541666" PointY="17.662985026041667" />
+          <ConnectorPoint PointX="15.535237630208334" PointY="17.662985026041667" />
+          <ConnectorPoint PointX="17.625" PointY="17.662985026041667" />
+          <ConnectorPoint PointX="18" PointY="17.287985026041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_GARANTIA" >
+          <ConnectorPoint PointX="9.40625" PointY="21.75" />
+          <ConnectorPoint PointX="9.40625" PointY="18.338824114583325" />
+          <ConnectorPoint PointX="10.5" PointY="18.338824114583325" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO" >
+          <ConnectorPoint PointX="12" PointY="6.9901432291666623" />
+          <ConnectorPoint PointX="13.09375" PointY="6.9901432291666623" />
+          <ConnectorPoint PointX="13.09375" PointY="12.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PAGO_DETALLE_PAGO" >
+          <ConnectorPoint PointX="9" PointY="16.490143229166662" />
+          <ConnectorPoint PointX="10.25" PointY="16.490143229166662" />
+          <ConnectorPoint PointX="10.25" PointY="16" />
+          <ConnectorPoint PointX="12.5" PointY="16" />
+          <ConnectorPoint PointX="12.5" PointY="14.75" />
+          <ConnectorPoint PointX="14.338541666666666" PointY="14.75" />
+          <ConnectorPoint PointX="14.505208333333334" PointY="14.75" />
+          <ConnectorPoint PointX="14.572916666666666" PointY="14.75" />
+          <ConnectorPoint PointX="14.739583333333334" PointY="14.75" />
+          <ConnectorPoint PointX="18.75" PointY="14.75" />
+          <ConnectorPoint PointX="18.75" PointY="15.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION" >
+          <ConnectorPoint PointX="12" PointY="19" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="19" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="19" />
+          <ConnectorPoint PointX="14.338541666666666" PointY="19" />
+          <ConnectorPoint PointX="14.505208333333334" PointY="19" />
+          <ConnectorPoint PointX="14.682291666666666" PointY="19" />
+          <ConnectorPoint PointX="14.848958333333334" PointY="19" />
+          <ConnectorPoint PointX="15.75" PointY="19" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION" >
+          <ConnectorPoint PointX="11.25" PointY="19.960999348958325" />
+          <ConnectorPoint PointX="11.25" PointY="20.438255272135414" />
+          <ConnectorPoint PointX="11.572919166666667" PointY="20.438255272135414" />
+          <ConnectorPoint PointX="11.739585833333335" PointY="20.438255272135414" />
+          <ConnectorPoint PointX="12.416666666666666" PointY="20.438255272135414" />
+          <ConnectorPoint PointX="12.583333333333334" PointY="20.438255272135414" />
+          <ConnectorPoint PointX="12.75" PointY="20.438255272135414" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA" >
+          <ConnectorPoint PointX="9.75" PointY="25.211293945312491" />
+          <ConnectorPoint PointX="10.8437475" PointY="25.211293945312491" />
+          <ConnectorPoint PointX="10.8437475" PointY="19.960999348958325" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_PREVISION" >
+          <ConnectorPoint PointX="9.75" PointY="27.797841796874991" />
+          <ConnectorPoint PointX="11.6562525" PointY="27.797841796874991" />
+          <ConnectorPoint PointX="11.6562525" PointY="19.960999348958325" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" >
+          <ConnectorPoint PointX="1.9062525" PointY="15.797587890624982" />
+          <ConnectorPoint PointX="1.9062525" PointY="18.490143229166662" />
+          <ConnectorPoint PointX="6.9311335620993537" PointY="18.490143229166662" />
+          <ConnectorPoint PointX="7.09780022876602" PointY="18.490143229166662" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="18.490143229166662" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="18.490143229166662" />
+          <ConnectorPoint PointX="10.5" PointY="18.490143229166662" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION" >
+          <ConnectorPoint PointX="12" PointY="19.960999348958325" />
+          <ConnectorPoint PointX="12.375" PointY="20.335999348958325" />
+          <ConnectorPoint PointX="12.375" PointY="17.739889322916667" />
+          <ConnectorPoint PointX="14.338541666666666" PointY="17.739889322916667" />
+          <ConnectorPoint PointX="14.65063476562502" PointY="17.739889322916667" />
+          <ConnectorPoint PointX="14.682291666666666" PointY="17.739889322916667" />
+          <ConnectorPoint PointX="14.848958333333334" PointY="17.739889322916667" />
+          <ConnectorPoint PointX="15.375" PointY="17.739889322916667" />
+          <ConnectorPoint PointX="15.75" PointY="17.364889322916667" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA" >
+          <ConnectorPoint PointX="14.765625" PointY="22.5" />
+          <ConnectorPoint PointX="14.765625" PointY="15.125002499999994" />
+          <ConnectorPoint PointX="15.75" PointY="15.125002499999994" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Configuration>
+  <Connections></Connections>
+  <Exception>
+    <add key="EventLogName" value="Everis.Infraestructura" />
+    <add key="ComputerName" value="." />
+    <add key="EntryName" value="Everis.Infraestructura" />
+    <add key="PathFileLog" value="C:\Everis.InfraestructuraLog" />
+    <add key="CreateEventLog" value="True" />
+    <add key="CreateFileLog" value="True" />
+    <add key="AdminEmail" value="admin.everis@gmail.com" />
+    <add key="Subject" value="Error Sistema" />
+    <add key="SendMailOnError" value="False" />
+  </Exception>
+  <Email>
+    <add key="SmtpServer" value="smtp.gmail.com" />
+    <add key="SmtpPort" value="465" />
+    <add key="AuthenticationRequired" value="True" />
+    <add key="User" value="admin.everis@gmail.com" />
+    <add key="Password" value="neteveco" />
+    <add key="Domain" value="" />
+    <add key="FromAddress" value="admin.everis@gmail.com" />
+  </Email>
+  <Security>
+    <add key="pkey" value="infraes" />
+    <add key="pIV" value="everis" />
+  </Security>
+  <Ldap>
+    <add key="LdapPath" value="LDAP://wall-e/dc=user,dc=desa,dc=cl" />
+    <add key="LdapUser" value="userdesa\administrator" />
+    <add key="LdapPassword" value="neteveco" />
+  </Ldap>
+  <GeneralParameters></GeneralParameters>
+</Configuration>

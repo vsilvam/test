@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LQCE.Modelo", "LQCE.Modelo\LQCE.Modelo.csproj", "{C4ACE72E-D657-4A1C-829D-BBD2888EB72C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LQCE.Repositorio", "LQCE.Repositorio\LQCE.Repositorio.csproj", "{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructure", "App.Infrastructure\App.Infrastructure.csproj", "{3332CA54-3AA9-4BBF-A561-FEC8EA6CE53B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LQCE.Transaccion", "LQCE.Transaccion\LQCE.Transaccion.csproj", "{1205D298-04AA-4A24-AE36-D4024E471B5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LQCE.SharePoint", "LQCE.SharePoint\LQCE.SharePoint.csproj", "{9A711969-5D3A-46F6-B15B-EBE949EB64B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4ACE72E-D657-4A1C-829D-BBD2888EB72C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4ACE72E-D657-4A1C-829D-BBD2888EB72C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4ACE72E-D657-4A1C-829D-BBD2888EB72C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4ACE72E-D657-4A1C-829D-BBD2888EB72C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3332CA54-3AA9-4BBF-A561-FEC8EA6CE53B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3332CA54-3AA9-4BBF-A561-FEC8EA6CE53B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3332CA54-3AA9-4BBF-A561-FEC8EA6CE53B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3332CA54-3AA9-4BBF-A561-FEC8EA6CE53B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1205D298-04AA-4A24-AE36-D4024E471B5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1205D298-04AA-4A24-AE36-D4024E471B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1205D298-04AA-4A24-AE36-D4024E471B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1205D298-04AA-4A24-AE36-D4024E471B5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A711969-5D3A-46F6-B15B-EBE949EB64B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A711969-5D3A-46F6-B15B-EBE949EB64B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A711969-5D3A-46F6-B15B-EBE949EB64B9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9A711969-5D3A-46F6-B15B-EBE949EB64B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A711969-5D3A-46F6-B15B-EBE949EB64B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A711969-5D3A-46F6-B15B-EBE949EB64B9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

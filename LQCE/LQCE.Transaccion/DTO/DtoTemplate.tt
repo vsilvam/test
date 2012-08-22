@@ -1,0 +1,66 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#><#@
+ output extension=".cs"#><#
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = @"../../LQCE.Modelo/ModeloLQCE.edmx";
+MetadataWorkspace metadataWorkspace = null;
+bool allMetadataLoaded =loader.TryLoadAllMetadata(inputFile, out metadataWorkspace);
+EdmItemCollection ItemCollection = (EdmItemCollection)metadataWorkspace.GetItemCollection(DataSpace.CSpace);
+string namespaceName = code.VsNamespaceSuggestion();
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this); 
+
+// Emit Entity Types
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+    fileManager.StartNewFile("DTO_" + entity.Name + ".cs");
+#>
+using System;
+
+namespace LQCE.Transaccion.DTO
+{
+	[Serializable()]
+	<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#>class DTO_<#=code.Escape(entity)#>
+	{
+<#
+	foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+    {
+		string tipo = (code.Escape(edmProperty.TypeUsage)).Replace("Nullable<", string.Empty).Replace(">", string.Empty);
+		switch(tipo)
+		{
+			case "int":
+			case "bool":
+			case "System.DateTime":
+			case "double":
+#>
+		public <#=tipo.Replace("System.", string.Empty)#>? <#=code.Escape(edmProperty)#> { get; set; }				
+<#
+				break;
+			default:
+#>
+		public <#=tipo#> <#=code.Escape(edmProperty)#> { get; set; }				
+<#
+				break;
+		}
+	}
+	
+	//claves foraneas
+	foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+	{
+#>
+		public int? ID_<#=code.Escape(navProperty.Name)#> { get; set; }				
+<#	
+	}
+#>
+	}
+}
+<#
+}
+fileManager.Process();
+#>

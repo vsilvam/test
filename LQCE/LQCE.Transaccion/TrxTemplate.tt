@@ -1,0 +1,300 @@
+﻿<#@ template language="C#" debug="false" hostspecific="true"#>
+<#@ include file="EF.Utility.CS.ttinclude"#><#@
+ output extension=".cs"#><#
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+
+CodeGenerationTools code = new CodeGenerationTools(this);
+MetadataLoader loader = new MetadataLoader(this);
+CodeRegion region = new CodeRegion(this, 1);
+MetadataTools ef = new MetadataTools(this);
+
+string inputFile = @"../LQCE.Modelo/ModeloLQCE.edmx";
+MetadataWorkspace metadataWorkspace = null;
+bool allMetadataLoaded =loader.TryLoadAllMetadata(inputFile, out metadataWorkspace);
+EdmItemCollection ItemCollection = (EdmItemCollection)metadataWorkspace.GetItemCollection(DataSpace.CSpace);
+string namespaceName = code.VsNamespaceSuggestion();
+
+EntityFrameworkTemplateFileManager fileManager = EntityFrameworkTemplateFileManager.Create(this); 
+
+// Emit Entity Types
+foreach (EntityType entity in ItemCollection.GetItems<EntityType>().OrderBy(e => e.Name))
+{
+    fileManager.StartNewFile("Trx" + entity.Name + ".cs");
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using App.Infrastructure.Runtime;
+using LQCE.Repositorio;
+using LQCE.Modelo;
+using LQCE.Transaccion.DTO;
+
+namespace LQCE.Transaccion
+{
+	<#=Accessibility.ForType(entity)#> <#=code.SpaceAfter(code.AbstractOption(entity))#>partial class Trx<#=code.Escape(entity)#>
+	{
+		#region Manejo del estado de la instancia
+
+		/// <summary>
+		/// Propiedad que contiene el error actual de la instancia de negocio.
+		/// </summary>
+		public string Error { get; private set; }
+
+		/// <summary>
+		/// Propiedad que indica si el metodo actual se ejecuto satisfactoriamente.
+		/// </summary>
+		public bool Success { get; private set; }
+
+		public Trx<#=code.Escape(entity)#>()
+		{
+		    Init();
+		}
+
+		private void Init()
+		{
+		    Error = string.Empty;
+		    Success = false;
+		}
+
+		#endregion
+
+		#region Metodos Autogenerados
+		
+			/// <summary>
+	      /// Obtiene un registro en base a su key.
+	      /// </summary>
+	      /// <param name="id">key.</param>
+	      /// <returns></returns>
+		public <#=code.Escape(entity)#> GetById(int id)
+		{
+			Init();
+
+			using (var context = new LQCEEntities())
+			{
+				var dato = new Repositorio<#=code.Escape(entity)#>(context);
+				var entity = dato.GetById(id);
+
+				//Se procesa el resultado de la operacion.
+				Error = dato.Error;
+				Success = entity != null;
+
+				return entity;
+			}
+		}
+
+	  	/// <summary>
+      /// Busca todos los registros activos.
+      /// </summary>
+      /// <returns></returns>
+      public IList<<#=code.Escape(entity)#>> GetAll()
+      {
+          Init();
+
+          using (var context = new LQCEEntities())
+          {
+              var dato = new Repositorio<#=code.Escape(entity)#>(context);
+              var q = dato.GetAll();
+              q = q.Where(i => i.ACTIVO);
+
+            try
+            {
+              //Se procesa el resultado de la operacion.
+              var list = q.ToList();
+              Error = dato.Error;
+              Success = true;
+
+              return list;
+            }
+            catch (ArgumentNullException ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+          }
+      }
+
+      /// <summary>
+      /// Busca todos los registros que coinciden con los campos del dto de busqueda.
+      /// </summary>
+      /// <param name="dto">Dto con parametros de busqueda.</param>
+      /// <returns></returns>
+      public IList<<#=code.Escape(entity)#>> Find(DTO_<#=code.Escape(entity)#> dto)
+      {
+          Init();
+
+          using (var context = new LQCEEntities())
+          {
+              var dato = new Repositorio<#=code.Escape(entity)#>(context);
+              var q = dato.GetAll();
+              if (dto != null)
+              {
+<# 
+	foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+    {
+		string tipo = (code.Escape(edmProperty.TypeUsage)).Replace("Nullable<", string.Empty).Replace(">", string.Empty);
+		switch(tipo)
+		{
+			case "int":
+			case "bool":
+			case "double":
+			case "System.DateTime":
+#>
+					if (dto.<#=code.Escape(edmProperty)#> != null)
+						q = q.Where(i => i.<#=code.Escape(edmProperty)#>  == dto.<#=code.Escape(edmProperty)#>);		
+<#
+				break;
+			default:
+#>
+					if (dto.<#=code.Escape(edmProperty)#> != null)
+						q = q.Where(i => i.<#=code.Escape(edmProperty)#>.Contains(dto.<#=code.Escape(edmProperty)#>));					
+<#
+				break;
+		}
+	}
+	//claves foraneas
+	foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
+	{
+#>
+					if (dto.ID_<#=code.Escape(navProperty.Name)#> != null)
+						q = q.Where(i => i.<#=code.Escape(navProperty.Name)#>.ID == dto.ID_<#=code.Escape(navProperty.Name)#>);				
+<#	
+	}
+		#>
+              }
+
+            try
+            {
+              //Se procesa el resultado de la operacion.
+              var list = q.ToList();
+              Error = dato.Error;
+              Success = true;
+
+              return list;
+            }
+            catch (ArgumentNullException ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+          }
+      }
+
+      /// <summary>
+      /// Crea o actualiza un registro en la base de datos dependiendo de su key.
+      /// </summary>
+      /// <param name="entity">Entidad a persistir.</param>
+      /// <returns></returns>
+      public int Save(<#=code.Escape(entity)#> entity)
+      {
+          Init();
+
+          if (entity == null)
+          {
+              Error = "ArgumentNullException. La entidad a persistir '<#=code.Escape(entity)#>' no puede ser nula.";
+              ISException.RegisterExcepcion(Error);
+              return 0;
+          }
+
+<#
+	var campofecha = "";
+						foreach(EdmProperty campo in entity.Properties.Where(i => i.Name.IndexOf("FechaCreacion") >= 0 ))
+						{
+							campofecha = campo.Name;
+						}
+#>
+          using (var context = new LQCEEntities())
+          {
+              var dato = new Repositorio<#=code.Escape(entity)#>(context);
+              var oldEntity = dato.GetById(entity.ID);
+              //Dependiendo de su key, el registro se crea o actualiza.
+              if (oldEntity == null)
+              {
+<#if(campofecha != "") { #>
+			  	  entity.<#=campofecha#> = DateTime.Now;
+<# } #>
+                  entity.ACTIVO = true;
+                  var id = dato.Insert(entity);
+                  Success = id > 0;
+                  Error = dato.Error;
+                  return id;
+              }
+
+<#
+ 						foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
+                        {
+                                if (!ef.IsKey(edmProperty))
+                                {
+									if(edmProperty.Name.IndexOf("FechaCreacion") < 0 && edmProperty.Name.IndexOf("ACTIVO") < 0 && edmProperty.Name.IndexOf("FechaModificacion") < 0)
+									{
+#>
+              oldEntity.<#=code.Escape(edmProperty)#> = entity.<#=code.Escape(edmProperty)#>;				
+<#
+									}
+									else if(edmProperty.Name.IndexOf("FechaModificacion") >= 0)
+									{
+#>
+              oldEntity.<#=code.Escape(edmProperty)#> = DateTime.Now;				
+<#										
+									}
+                                }
+                        }
+#>
+              Success = dato.Update(oldEntity);
+              Error = dato.Error;
+              return Success ? oldEntity.ID : 0;
+          }
+      }
+
+      /// <summary>
+      /// Elimina un registro en base a su key.
+      /// </summary>
+      /// <param name="id">key.</param>
+      /// <returns></returns>
+      public bool Delete(int id)
+      {
+          Init();
+
+          using (var context = new LQCEEntities())
+          {
+              var dato = new Repositorio<#=code.Escape(entity)#>(context);
+              var entity = dato.GetById(id);
+
+              //Se procesa el resultado de la operacion.
+              if (entity == null)
+              {
+                  Error = String.Format("Registro '{0}' en '<#=code.Escape(entity)#>' no encontrado. {1}", id, dato.Error);
+                  ISException.RegisterExcepcion(Error);
+                  return false;
+              }
+
+              //Eliminacion logica.
+               entity.ACTIVO = false;
+              //Se procesa el resultado de la operacion.
+              Success = dato.Update(entity);
+              Error = dato.Error;
+
+              return Success;
+          }
+      }
+
+      #endregion 	
+	}
+}
+<#
+}
+fileManager.Process();
+#>

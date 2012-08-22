@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LQCE.Repositorio</RootNamespace>
+    <AssemblyName>LQCE.Repositorio</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioCLIENTE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCLIENTE_SINONIMO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCOBRO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCOMUNA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCONVENIO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCONVENIO_EXAMEN.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioCONVENIO_TARIFARIO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioESPECIE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioEXAMEN.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioEXAMEN_DETALLE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioEXAMEN_SINONIMO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioFACTURA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioFACTURACION.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioFACTURA_DETALLE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioGARANTIA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioNOTA_COBRO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioNOTA_COBRO_DETALLE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPAGO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPAGO_DETALLE.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPRESTACION.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPRESTACION_EXAMEN.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPRESTACION_HUMANA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPRESTACION_MUESTRA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPRESTACION_VETERINARIA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioPREVISION.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioRAZA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioREGION.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioTIPO_COBRO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioTIPO_PRESTACION.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="RepositorioTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>RepositorioTemplate.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\App.Infrastructure\App.Infrastructure.csproj">
+      <Project>{3332CA54-3AA9-4BBF-A561-FEC8EA6CE53B}</Project>
+      <Name>App.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LQCE.Modelo\LQCE.Modelo.csproj">
+      <Project>{C4ACE72E-D657-4A1C-829D-BBD2888EB72C}</Project>
+      <Name>LQCE.Modelo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

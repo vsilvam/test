@@ -158,8 +158,8 @@ namespace LQCE.Transaccion
 						throw new Exception(String.Concat("No se ha encontrado EXAMEN con Id =",EXAMENId.ToString()));
 					}
 
-					RepositorioEXAMEN1 _repositorioEXAMEN1 = new RepositorioEXAMEN1(context);
-					EXAMEN1 _objEXAMEN1 = _repositorioEXAMEN1.GetById(EXAMEN1Id);
+					RepositorioEXAMEN _repositorioEXAMEN1 = new RepositorioEXAMEN(context);
+					EXAMEN _objEXAMEN1 = _repositorioEXAMEN.GetById(EXAMEN1Id);
 					if(Equals(_objEXAMEN1,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado EXAMEN1 con Id =",EXAMEN1Id.ToString()));
@@ -211,8 +211,8 @@ namespace LQCE.Transaccion
 						throw new Exception(String.Concat("No se ha encontrado EXAMEN con Id =",EXAMENId.ToString()));
 					}
 						
-					RepositorioEXAMEN1 _repositorioEXAMEN1 = new RepositorioEXAMEN1(context);
-					EXAMEN1 _objEXAMEN1 = _repositorioEXAMEN1.GetById(EXAMEN1Id);
+					RepositorioEXAMEN _repositorioEXAMEN1 = new RepositorioEXAMEN(context);
+					EXAMEN _objEXAMEN1 = _repositorioEXAMEN.GetById(EXAMEN1Id);
 					if(Equals(_objEXAMEN1,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado EXAMEN1 con Id =",EXAMEN1Id.ToString()));

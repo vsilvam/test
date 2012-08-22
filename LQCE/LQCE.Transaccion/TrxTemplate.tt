@@ -514,8 +514,8 @@ if(parametrosGetByFilterAll != "")
 <#				    foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n => n.DeclaringType == entity && n.FromEndMember.RelationshipMultiplicity == RelationshipMultiplicity.Many))
 					{
 #>
-					Repositorio<#=code.Escape(navProperty)#> _repositorio<#=code.Escape(navProperty)#> = new Repositorio<#=code.Escape(navProperty)#>(context);
-					<#=code.Escape(navProperty)#> _obj<#=code.Escape(navProperty)#> = _repositorio<#=code.Escape(navProperty)#>.GetById(<#=code.Escape(navProperty)#>Id);
+					Repositorio<#=code.Escape(navProperty.ToEndMember.GetEntityType())#> _repositorio<#=code.Escape(navProperty)#> = new Repositorio<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>(context);
+					<#=code.Escape(navProperty.ToEndMember.GetEntityType())#> _obj<#=code.Escape(navProperty)#> = _repositorio<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>.GetById(<#=code.Escape(navProperty)#>Id);
 					if(Equals(_obj<#=code.Escape(navProperty)#>,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado <#=code.Escape(navProperty)#> con Id =",<#=code.Escape(navProperty)#>Id.ToString()));
@@ -599,8 +599,8 @@ if(parametrosGetByFilterAll != "")
 					{
 #>
 					
-					Repositorio<#=code.Escape(navProperty)#> _repositorio<#=code.Escape(navProperty)#> = new Repositorio<#=code.Escape(navProperty)#>(context);
-					<#=code.Escape(navProperty)#> _obj<#=code.Escape(navProperty)#> = _repositorio<#=code.Escape(navProperty)#>.GetById(<#=code.Escape(navProperty)#>Id);
+					Repositorio<#=code.Escape(navProperty.ToEndMember.GetEntityType())#> _repositorio<#=code.Escape(navProperty)#> = new Repositorio<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>(context);
+					<#=code.Escape(navProperty.ToEndMember.GetEntityType())#> _obj<#=code.Escape(navProperty)#> = _repositorio<#=code.Escape(navProperty.ToEndMember.GetEntityType())#>.GetById(<#=code.Escape(navProperty)#>Id);
 					if(Equals(_obj<#=code.Escape(navProperty)#>,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado <#=code.Escape(navProperty)#> con Id =",<#=code.Escape(navProperty)#>Id.ToString()));

@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<ESPECIE> GetByFilter(string NOMBRE = "", bool? ACTIVO = null)
+		public List<ESPECIE> GetByFilter(string NOMBRE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioESPECIE repositorio = new RepositorioESPECIE(context);
-                    return repositorio.GetByFilter(NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<ESPECIE> GetByFilterWithReferences(string NOMBRE = "", bool? ACTIVO = null)
+		public List<ESPECIE> GetByFilterWithReferences(string NOMBRE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioESPECIE repositorio = new RepositorioESPECIE(context);
-                    return repositorio.GetByFilterWithReferences(NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

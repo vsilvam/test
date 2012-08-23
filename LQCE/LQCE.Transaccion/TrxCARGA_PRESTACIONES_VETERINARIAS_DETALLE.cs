@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_ENCABEZADOId = null, bool? ACTIVO = null, bool? VALIDADO = null, bool? ERROR = null, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public List<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_ENCABEZADOId = null, bool? VALIDADO = null, bool? ERROR = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE repositorio = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
-                    return repositorio.GetByFilter(CARGA_PRESTACIONES_ENCABEZADOId, ACTIVO, VALIDADO, ERROR, FICHA, NOMBRE, ESPECIE, RAZA, EDAD, SEXO, SOLICITA, TELEFONO, MEDICO, PROCEDENCIA, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_RESULTADOS, PENDIENTE, GARANTIA, PAGADO, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CARGA_PRESTACIONES_ENCABEZADOId, VALIDADO, ERROR, FECHA_ACTUALIZACION, FICHA, NOMBRE, ESPECIE, RAZA, EDAD, SEXO, SOLICITA, TELEFONO, MEDICO, PROCEDENCIA, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_RESULTADOS, PENDIENTE, GARANTIA, PAGADO, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ENCABEZADOId = null, bool? ACTIVO = null, bool? VALIDADO = null, bool? ERROR = null, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public List<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ENCABEZADOId = null, bool? VALIDADO = null, bool? ERROR = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE repositorio = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
-                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_ENCABEZADOId, ACTIVO, VALIDADO, ERROR, FICHA, NOMBRE, ESPECIE, RAZA, EDAD, SEXO, SOLICITA, TELEFONO, MEDICO, PROCEDENCIA, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_RESULTADOS, PENDIENTE, GARANTIA, PAGADO, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_ENCABEZADOId, VALIDADO, ERROR, FECHA_ACTUALIZACION, FICHA, NOMBRE, ESPECIE, RAZA, EDAD, SEXO, SOLICITA, TELEFONO, MEDICO, PROCEDENCIA, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_RESULTADOS, PENDIENTE, GARANTIA, PAGADO, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, bool VALIDADO, bool ERROR, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
+        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, bool VALIDADO, bool ERROR, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
         {
 		Init();
             try
@@ -182,6 +182,7 @@ namespace LQCE.Transaccion
                     _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALIDADO = VALIDADO;
                     _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.ERROR = ERROR;
                     _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.MENSAJE_ERROR = MENSAJE_ERROR;				
+                    _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
                     _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.ACTIVO = true;				
 
 					//parents
@@ -202,7 +203,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CARGA_PRESTACIONES_ENCABEZADOId, bool VALIDADO, bool ERROR, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public void Update(int Id, int CARGA_PRESTACIONES_ENCABEZADOId, bool VALIDADO, bool ERROR, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "")
 		{
 		Init();
 			try
@@ -299,6 +300,7 @@ namespace LQCE.Transaccion
 					{
 						_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.MENSAJE_ERROR = MENSAJE_ERROR;
 					}
+						_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
 	
 					//parents
 					 

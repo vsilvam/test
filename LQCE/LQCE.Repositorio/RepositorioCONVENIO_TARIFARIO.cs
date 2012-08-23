@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CONVENIO_TARIFARIO.FirstOrDefault(i => i.ID == id);
+				return _context.CONVENIO_TARIFARIO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CONVENIO_TARIFARIO.Include("CONVENIO").Include("CONVENIO_EXAMEN").FirstOrDefault(i => i.ID == id);
+				return _context.CONVENIO_TARIFARIO.Include("CONVENIO").Include("CONVENIO_EXAMEN").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO_TARIFARIO select i;
+				var q = from i in _context.CONVENIO_TARIFARIO  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO_TARIFARIO.Include("CONVENIO").Include("CONVENIO_EXAMEN") select i;
+				var q = from i in _context.CONVENIO_TARIFARIO.Include("CONVENIO").Include("CONVENIO_EXAMEN") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CONVENIO_TARIFARIO> GetByFilter(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null, bool? ACTIVO = null)
+		public IQueryable<CONVENIO_TARIFARIO> GetByFilter(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO_TARIFARIO select i;
+				var q = from i in _context.CONVENIO_TARIFARIO  where i.ACTIVO  select i;
 
 				if (FECHA_VIGENCIA.HasValue)
 				{
 				  q = q.Where(i => i.FECHA_VIGENCIA == FECHA_VIGENCIA.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (CONVENIOId.HasValue)
 				{
@@ -107,20 +103,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CONVENIO_TARIFARIO> GetByFilterWithReferences(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null, bool? ACTIVO = null)
+		public IQueryable<CONVENIO_TARIFARIO> GetByFilterWithReferences(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO_TARIFARIO.Include("CONVENIO").Include("CONVENIO_EXAMEN") select i;
+				var q = from i in _context.CONVENIO_TARIFARIO.Include("CONVENIO").Include("CONVENIO_EXAMEN")  where i.ACTIVO select i;
 
 				if (FECHA_VIGENCIA.HasValue)
 				{
 					q = q.Where(i => i.FECHA_VIGENCIA == FECHA_VIGENCIA.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (CONVENIOId.HasValue)
 				{

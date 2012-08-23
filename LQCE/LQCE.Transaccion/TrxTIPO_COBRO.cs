@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<TIPO_COBRO> GetByFilter(string NOMBRE = "", bool? ACTIVO = null)
+		public List<TIPO_COBRO> GetByFilter(string NOMBRE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_COBRO repositorio = new RepositorioTIPO_COBRO(context);
-                    return repositorio.GetByFilter(NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<TIPO_COBRO> GetByFilterWithReferences(string NOMBRE = "", bool? ACTIVO = null)
+		public List<TIPO_COBRO> GetByFilterWithReferences(string NOMBRE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_COBRO repositorio = new RepositorioTIPO_COBRO(context);
-                    return repositorio.GetByFilterWithReferences(NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

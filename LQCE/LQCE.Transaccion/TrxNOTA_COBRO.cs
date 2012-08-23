@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<NOTA_COBRO> GetByFilter(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null, bool? ACTIVO = null)
+		public List<NOTA_COBRO> GetByFilter(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
-                    return repositorio.GetByFilter(COBROId, CORRELATIVO, ID_CLIENTE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(COBROId, CORRELATIVO, ID_CLIENTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<NOTA_COBRO> GetByFilterWithReferences(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null, bool? ACTIVO = null)
+		public List<NOTA_COBRO> GetByFilterWithReferences(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
-                    return repositorio.GetByFilterWithReferences(COBROId, CORRELATIVO, ID_CLIENTE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(COBROId, CORRELATIVO, ID_CLIENTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

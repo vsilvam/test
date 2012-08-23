@@ -86,7 +86,7 @@ foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n =
 
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable))
 {
-	if (!ef.IsKey(edmProperty))
+	if (!ef.IsKey(edmProperty) && code.Escape(edmProperty) != "ACTIVO")
 	{ 
 		if(!primero)
 		{
@@ -123,7 +123,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.Nullable))
 {
-	if (!ef.IsKey(edmProperty))
+	if (!ef.IsKey(edmProperty)  && code.Escape(edmProperty) != "ACTIVO")
 	{ 
 		if(!primero)
 		{
@@ -166,7 +166,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 			Error = string.Empty;
 			try
 			{
-				return _context.<#=code.Escape(entity)#>.FirstOrDefault(i => i.<#=keyName#> == id);
+				return _context.<#=code.Escape(entity)#>.FirstOrDefault(i => i.<#=keyName#> == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -181,7 +181,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 			Error = string.Empty;
 			try
 			{
-				return _context.<#=code.Escape(entity)#><#=parametrosInclude#>.FirstOrDefault(i => i.<#=keyName#> == id);
+				return _context.<#=code.Escape(entity)#><#=parametrosInclude#>.FirstOrDefault(i => i.<#=keyName#> == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -196,7 +196,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.<#=code.Escape(entity)#> select i;
+				var q = from i in _context.<#=code.Escape(entity)#>  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -212,7 +212,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.<#=code.Escape(entity)#><#=parametrosInclude#> select i;
+				var q = from i in _context.<#=code.Escape(entity)#><#=parametrosInclude#> where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -228,12 +228,12 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.<#=code.Escape(entity)#> select i;
+				var q = from i in _context.<#=code.Escape(entity)#>  where i.ACTIVO  select i;
 
 <#
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
 {
-	if (!ef.IsKey(edmProperty))
+	if (!ef.IsKey(edmProperty)  && code.Escape(edmProperty) != "ACTIVO")
 	{ 
 		if(code.Escape(edmProperty.TypeUsage) == "string")
 		{
@@ -294,12 +294,12 @@ foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n =
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.<#=code.Escape(entity)#><#=parametrosInclude#> select i;
+				var q = from i in _context.<#=code.Escape(entity)#><#=parametrosInclude#>  where i.ACTIVO select i;
 
 <#
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
 {
-	if (!ef.IsKey(edmProperty))
+	if (!ef.IsKey(edmProperty)  && code.Escape(edmProperty) != "ACTIVO")
 	{ 
 		if(code.Escape(edmProperty.TypeUsage) == "string")
 		{

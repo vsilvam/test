@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<COBRO> GetByFilter(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null, bool? ACTIVO = null)
+		public List<COBRO> GetByFilter(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCOBRO repositorio = new RepositorioCOBRO(context);
-                    return repositorio.GetByFilter(TIPO_COBROId, FECHA_COBRO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(TIPO_COBROId, FECHA_COBRO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<COBRO> GetByFilterWithReferences(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null, bool? ACTIVO = null)
+		public List<COBRO> GetByFilterWithReferences(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCOBRO repositorio = new RepositorioCOBRO(context);
-                    return repositorio.GetByFilterWithReferences(TIPO_COBROId, FECHA_COBRO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(TIPO_COBROId, FECHA_COBRO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

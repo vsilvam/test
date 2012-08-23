@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<FACTURACION> GetByFilter(System.DateTime? FECHA_FACTURACION = null, bool? ACTIVO = null)
+		public List<FACTURACION> GetByFilter(System.DateTime? FECHA_FACTURACION = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURACION repositorio = new RepositorioFACTURACION(context);
-                    return repositorio.GetByFilter(FECHA_FACTURACION, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(FECHA_FACTURACION).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<FACTURACION> GetByFilterWithReferences(System.DateTime? FECHA_FACTURACION = null, bool? ACTIVO = null)
+		public List<FACTURACION> GetByFilterWithReferences(System.DateTime? FECHA_FACTURACION = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURACION repositorio = new RepositorioFACTURACION(context);
-                    return repositorio.GetByFilterWithReferences(FECHA_FACTURACION, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(FECHA_FACTURACION).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

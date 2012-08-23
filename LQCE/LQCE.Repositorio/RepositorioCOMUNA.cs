@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.COMUNA.FirstOrDefault(i => i.ID == id);
+				return _context.COMUNA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.COMUNA.Include("CLIENTE").Include("REGION").FirstOrDefault(i => i.ID == id);
+				return _context.COMUNA.Include("CLIENTE").Include("REGION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COMUNA select i;
+				var q = from i in _context.COMUNA  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COMUNA.Include("CLIENTE").Include("REGION") select i;
+				var q = from i in _context.COMUNA.Include("CLIENTE").Include("REGION") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<COMUNA> GetByFilter(int? REGIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<COMUNA> GetByFilter(int? REGIONId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COMUNA select i;
+				var q = from i in _context.COMUNA  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (REGIONId.HasValue)
 				{
@@ -107,20 +103,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<COMUNA> GetByFilterWithReferences(int? REGIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<COMUNA> GetByFilterWithReferences(int? REGIONId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COMUNA.Include("CLIENTE").Include("REGION") select i;
+				var q = from i in _context.COMUNA.Include("CLIENTE").Include("REGION")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (REGIONId.HasValue)
 				{

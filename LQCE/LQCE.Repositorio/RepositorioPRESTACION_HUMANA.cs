@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_HUMANA.FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION_HUMANA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_HUMANA.Include("PRESTACION").FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION_HUMANA.Include("PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA select i;
+				var q = from i in _context.PRESTACION_HUMANA  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION") select i;
+				var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,12 +78,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_HUMANA> GetByFilter(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+		public IQueryable<PRESTACION_HUMANA> GetByFilter(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA select i;
+				var q = from i in _context.PRESTACION_HUMANA  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
@@ -101,10 +101,6 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
 				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
-				}
 				return q;
 			}
 			catch (Exception ex)
@@ -115,12 +111,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_HUMANA> GetByFilterWithReferences(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+		public IQueryable<PRESTACION_HUMANA> GetByFilterWithReferences(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION") select i;
+				var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
@@ -137,10 +133,6 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(TELEFONO))
 				{
 					q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				return q;
 			}

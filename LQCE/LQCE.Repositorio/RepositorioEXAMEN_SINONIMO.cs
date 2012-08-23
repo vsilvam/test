@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.EXAMEN_SINONIMO.FirstOrDefault(i => i.ID == id);
+				return _context.EXAMEN_SINONIMO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.EXAMEN_SINONIMO.Include("EXAMEN").FirstOrDefault(i => i.ID == id);
+				return _context.EXAMEN_SINONIMO.Include("EXAMEN").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_SINONIMO select i;
+				var q = from i in _context.EXAMEN_SINONIMO  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_SINONIMO.Include("EXAMEN") select i;
+				var q = from i in _context.EXAMEN_SINONIMO.Include("EXAMEN") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<EXAMEN_SINONIMO> GetByFilter(int? EXAMENId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<EXAMEN_SINONIMO> GetByFilter(int? EXAMENId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_SINONIMO select i;
+				var q = from i in _context.EXAMEN_SINONIMO  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (EXAMENId.HasValue)
 				{
@@ -107,20 +103,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<EXAMEN_SINONIMO> GetByFilterWithReferences(int? EXAMENId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<EXAMEN_SINONIMO> GetByFilterWithReferences(int? EXAMENId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_SINONIMO.Include("EXAMEN") select i;
+				var q = from i in _context.EXAMEN_SINONIMO.Include("EXAMEN")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (EXAMENId.HasValue)
 				{

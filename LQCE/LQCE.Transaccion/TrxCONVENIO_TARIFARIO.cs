@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CONVENIO_TARIFARIO> GetByFilter(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null, bool? ACTIVO = null)
+		public List<CONVENIO_TARIFARIO> GetByFilter(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
-                    return repositorio.GetByFilter(CONVENIOId, FECHA_VIGENCIA, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CONVENIOId, FECHA_VIGENCIA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CONVENIO_TARIFARIO> GetByFilterWithReferences(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null, bool? ACTIVO = null)
+		public List<CONVENIO_TARIFARIO> GetByFilterWithReferences(int? CONVENIOId = null, System.DateTime? FECHA_VIGENCIA = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCONVENIO_TARIFARIO repositorio = new RepositorioCONVENIO_TARIFARIO(context);
-                    return repositorio.GetByFilterWithReferences(CONVENIOId, FECHA_VIGENCIA, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CONVENIOId, FECHA_VIGENCIA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

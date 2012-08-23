@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_ENCABEZADO.FirstOrDefault(i => i.ID == id);
+				return _context.CARGA_PRESTACIONES_ENCABEZADO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_ENCABEZADO.Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id);
+				return _context.CARGA_PRESTACIONES_ENCABEZADO.Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("CARGA_PRESTACIONES_ESTADO").Include("TIPO_PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO select i;
+				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO.Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO.Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("CARGA_PRESTACIONES_ESTADO").Include("TIPO_PRESTACION") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,28 +78,28 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_ENCABEZADO> GetByFilter(System.DateTime? FECHA_CARGA = null, int? ID_TIPO_PRESTACION = null, string ARCHIVO = "", bool? ACTIVO = null)
+		public IQueryable<CARGA_PRESTACIONES_ENCABEZADO> GetByFilter(int? CARGA_PRESTACIONES_ESTADOId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_CARGA = null, string ARCHIVO = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO select i;
+				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO  where i.ACTIVO  select i;
 
 				if (FECHA_CARGA.HasValue)
 				{
 				  q = q.Where(i => i.FECHA_CARGA == FECHA_CARGA.Value);
 				}
-				if (ID_TIPO_PRESTACION.HasValue)
-				{
-				  q = q.Where(i => i.ID_TIPO_PRESTACION == ID_TIPO_PRESTACION.Value);
-				}
 				if (!string.IsNullOrEmpty(ARCHIVO))
 				{
 				   q = q.Where(i => i.ARCHIVO.Contains(ARCHIVO));
 				}
-				if (ACTIVO.HasValue)
+				if (CARGA_PRESTACIONES_ESTADOId.HasValue)
 				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				  q = q.Where(i => i.CARGA_PRESTACIONES_ESTADO.ID == CARGA_PRESTACIONES_ESTADOId.Value);
+				}
+				if (TIPO_PRESTACIONId.HasValue)
+				{
+				  q = q.Where(i => i.TIPO_PRESTACION.ID == TIPO_PRESTACIONId.Value);
 				}
 				return q;
 			}
@@ -111,28 +111,28 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_ENCABEZADO> GetByFilterWithReferences(System.DateTime? FECHA_CARGA = null, int? ID_TIPO_PRESTACION = null, string ARCHIVO = "", bool? ACTIVO = null)
+		public IQueryable<CARGA_PRESTACIONES_ENCABEZADO> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ESTADOId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_CARGA = null, string ARCHIVO = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO.Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+				var q = from i in _context.CARGA_PRESTACIONES_ENCABEZADO.Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("CARGA_PRESTACIONES_ESTADO").Include("TIPO_PRESTACION")  where i.ACTIVO select i;
 
 				if (FECHA_CARGA.HasValue)
 				{
 					q = q.Where(i => i.FECHA_CARGA == FECHA_CARGA.Value);
 				}
-				if (ID_TIPO_PRESTACION.HasValue)
-				{
-					q = q.Where(i => i.ID_TIPO_PRESTACION == ID_TIPO_PRESTACION.Value);
-				}
 				if (!string.IsNullOrEmpty(ARCHIVO))
 				{
 					q = q.Where(i => i.ARCHIVO.Contains(ARCHIVO));
 				}
-				if (ACTIVO.HasValue)
+				if (CARGA_PRESTACIONES_ESTADOId.HasValue)
 				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+					q = q.Where(i => i.CARGA_PRESTACIONES_ESTADO.ID == CARGA_PRESTACIONES_ESTADOId.Value);
+				}
+				if (TIPO_PRESTACIONId.HasValue)
+				{
+					q = q.Where(i => i.TIPO_PRESTACION.ID == TIPO_PRESTACIONId.Value);
 				}
 				return q;
 			}

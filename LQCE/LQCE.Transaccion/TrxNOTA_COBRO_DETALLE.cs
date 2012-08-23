@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<NOTA_COBRO_DETALLE> GetByFilter(int? FACTURAId = null, int? NOTA_COBROId = null, int? MONTO_PENDIENTE = null, bool? ACTIVO = null)
+		public List<NOTA_COBRO_DETALLE> GetByFilter(int? FACTURAId = null, int? NOTA_COBROId = null, int? MONTO_PENDIENTE = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioNOTA_COBRO_DETALLE repositorio = new RepositorioNOTA_COBRO_DETALLE(context);
-                    return repositorio.GetByFilter(FACTURAId, NOTA_COBROId, MONTO_PENDIENTE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(FACTURAId, NOTA_COBROId, MONTO_PENDIENTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<NOTA_COBRO_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? NOTA_COBROId = null, int? MONTO_PENDIENTE = null, bool? ACTIVO = null)
+		public List<NOTA_COBRO_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? NOTA_COBROId = null, int? MONTO_PENDIENTE = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioNOTA_COBRO_DETALLE repositorio = new RepositorioNOTA_COBRO_DETALLE(context);
-                    return repositorio.GetByFilterWithReferences(FACTURAId, NOTA_COBROId, MONTO_PENDIENTE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(FACTURAId, NOTA_COBROId, MONTO_PENDIENTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

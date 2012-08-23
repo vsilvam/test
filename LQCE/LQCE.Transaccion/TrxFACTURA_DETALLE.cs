@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<FACTURA_DETALLE> GetByFilter(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null, bool? ACTIVO = null)
+		public List<FACTURA_DETALLE> GetByFilter(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA_DETALLE repositorio = new RepositorioFACTURA_DETALLE(context);
-                    return repositorio.GetByFilter(FACTURAId, PRESTACIONId, MONTO_TOTAL, MONTO_COBRADO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(FACTURAId, PRESTACIONId, MONTO_TOTAL, MONTO_COBRADO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<FACTURA_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null, bool? ACTIVO = null)
+		public List<FACTURA_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA_DETALLE repositorio = new RepositorioFACTURA_DETALLE(context);
-                    return repositorio.GetByFilterWithReferences(FACTURAId, PRESTACIONId, MONTO_TOTAL, MONTO_COBRADO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(FACTURAId, PRESTACIONId, MONTO_TOTAL, MONTO_COBRADO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

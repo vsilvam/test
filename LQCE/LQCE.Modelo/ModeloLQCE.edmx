@@ -7,6 +7,7 @@
     <Schema Namespace="LQCEModelo.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
         <EntityContainer Name="LQCEModeloStoreContainer">
           <EntitySet Name="CARGA_PRESTACIONES_ENCABEZADO" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_ENCABEZADO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CARGA_PRESTACIONES_ESTADO" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_ESTADO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_DETALLE" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_EXAMEN" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntityType="LQCEModelo.Store.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" store:Type="Tables" Schema="dbo" />
@@ -40,6 +41,14 @@
           <EntitySet Name="REGION" EntityType="LQCEModelo.Store.REGION" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TIPO_COBRO" EntityType="LQCEModelo.Store.TIPO_COBRO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TIPO_PRESTACION" EntityType="LQCEModelo.Store.TIPO_PRESTACION" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO">
+            <End Role="CARGA_PRESTACIONES_ESTADO" EntitySet="CARGA_PRESTACIONES_ESTADO" />
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+          </AssociationSet>
           <AssociationSet Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
             <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
             <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" EntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
@@ -210,6 +219,15 @@
           <Property Name="ID_TIPO_PRESTACION" Type="int" Nullable="false" />
           <Property Name="ARCHIVO" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="ID_CARGA_PRESTACIONES_ESTADO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CARGA_PRESTACIONES_ESTADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ACTIVO" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
           <Key>
@@ -236,6 +254,7 @@
           <Property Name="VALIDADO" Type="bit" Nullable="false" />
           <Property Name="ERROR" Type="bit" Nullable="false" />
           <Property Name="MENSAJE_ERROR" Type="nvarchar(max)" />
+          <Property Name="FECHA_ACTUALIZACION" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
           <Key>
@@ -246,6 +265,7 @@
           <Property Name="NOMBRE_EXAMEN" Type="nvarchar(max)" />
           <Property Name="VALOR_EXAMEN" Type="nvarchar(max)" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="FECHA_ACTUALIZACION" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
           <Key>
@@ -274,6 +294,7 @@
           <Property Name="VALIDADO" Type="bit" Nullable="false" />
           <Property Name="ERROR" Type="bit" Nullable="false" />
           <Property Name="MENSAJE_ERROR" Type="nvarchar(max)" />
+          <Property Name="FECHA_ACTUALIZACION" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
           <Key>
@@ -284,6 +305,7 @@
           <Property Name="NOMBRE_EXAMEN" Type="nvarchar(max)" />
           <Property Name="VALOR_EXAMEN" Type="nvarchar(max)" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
+          <Property Name="FECHA_ACTUALIZACION" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="CLIENTE">
           <Key>
@@ -561,10 +583,34 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO">
+          <End Role="CARGA_PRESTACIONES_ESTADO" Type="LQCEModelo.Store.CARGA_PRESTACIONES_ESTADO" Multiplicity="1" />
+          <End Role="CARGA_PRESTACIONES_ENCABEZADO" Type="LQCEModelo.Store.CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CARGA_PRESTACIONES_ESTADO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARGA_PRESTACIONES_ENCABEZADO">
+              <PropertyRef Name="ID_CARGA_PRESTACIONES_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION">
+          <End Role="TIPO_PRESTACION" Type="LQCEModelo.Store.TIPO_PRESTACION" Multiplicity="1" />
+          <End Role="CARGA_PRESTACIONES_ENCABEZADO" Type="LQCEModelo.Store.CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_PRESTACION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CARGA_PRESTACIONES_ENCABEZADO">
+              <PropertyRef Name="ID_TIPO_PRESTACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
           <End Role="CARGA_PRESTACIONES_ENCABEZADO" Type="LQCEModelo.Store.CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="1" />
           <End Role="CARGA_PRESTACIONES_HUMANAS_DETALLE" Type="LQCEModelo.Store.CARGA_PRESTACIONES_HUMANAS_DETALLE" Multiplicity="*" />
@@ -1259,6 +1305,15 @@
             <End Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
             <End Role="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" EntitySet="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" />
           </AssociationSet>
+          <EntitySet Name="CARGA_PRESTACIONES_ESTADO" EntityType="LQCEModelo.CARGA_PRESTACIONES_ESTADO" />
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" Association="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO">
+            <End Role="CARGA_PRESTACIONES_ESTADO" EntitySet="CARGA_PRESTACIONES_ESTADO" />
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION" Association="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION">
+            <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
+            <End Role="CARGA_PRESTACIONES_ENCABEZADO" EntitySet="CARGA_PRESTACIONES_ENCABEZADO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CLIENTE">
           <Key>
@@ -1577,6 +1632,7 @@
           <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION" FromRole="TIPO_PRESTACION" ToRole="EXAMEN" />
           <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" FromRole="TIPO_PRESTACION" ToRole="PRESTACION" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_ENCABEZADO" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION" FromRole="TIPO_PRESTACION" ToRole="CARGA_PRESTACIONES_ENCABEZADO" />
         </EntityType>
         <Association Name="FK_CLIENTE_COMUNA">
           <End Type="LQCEModelo.COMUNA" Role="COMUNA" Multiplicity="1" />
@@ -1746,11 +1802,12 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="FECHA_CARGA" Nullable="false" />
-          <Property Type="Int32" Name="ID_TIPO_PRESTACION" Nullable="false" />
           <Property Type="String" Name="ARCHIVO" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_ENCABEZADO" ToRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
           <NavigationProperty Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_ENCABEZADO" ToRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_ESTADO" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" FromRole="CARGA_PRESTACIONES_ENCABEZADO" ToRole="CARGA_PRESTACIONES_ESTADO" />
+          <NavigationProperty Name="TIPO_PRESTACION" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION" FromRole="CARGA_PRESTACIONES_ENCABEZADO" ToRole="TIPO_PRESTACION" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
           <Key>
@@ -1778,6 +1835,7 @@
           <Property Type="String" Name="MENSAJE_ERROR" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CARGA_PRESTACIONES_ENCABEZADO" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" ToRole="CARGA_PRESTACIONES_ENCABEZADO" />
           <NavigationProperty Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" FromRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" ToRole="CARGA_PRESTACIONES_HUMANAS_EXAMEN" />
+          <Property Type="DateTime" Name="FECHA_ACTUALIZACION" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
           <Key>
@@ -1788,6 +1846,7 @@
           <Property Type="String" Name="VALOR_EXAMEN" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" FromRole="CARGA_PRESTACIONES_HUMANAS_EXAMEN" ToRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
+          <Property Type="DateTime" Name="FECHA_ACTUALIZACION" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
           <Key>
@@ -1817,6 +1876,7 @@
           <Property Type="String" Name="MENSAJE_ERROR" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CARGA_PRESTACIONES_ENCABEZADO" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" FromRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" ToRole="CARGA_PRESTACIONES_ENCABEZADO" />
           <NavigationProperty Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" FromRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" ToRole="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" />
+          <Property Type="DateTime" Name="FECHA_ACTUALIZACION" Nullable="false" />
         </EntityType>
         <EntityType Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
           <Key>
@@ -1827,6 +1887,7 @@
           <Property Type="String" Name="VALOR_EXAMEN" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" FromRole="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" ToRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
+          <Property Type="DateTime" Name="FECHA_ACTUALIZACION" Nullable="false" />
         </EntityType>
         <Association Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
           <End Type="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Role="CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="1" />
@@ -1843,6 +1904,23 @@
         <Association Name="FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
           <End Type="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Role="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Multiplicity="1" />
           <End Type="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Role="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Multiplicity="*" />
+        </Association>
+        <EntityType Name="CARGA_PRESTACIONES_ESTADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <NavigationProperty Name="CARGA_PRESTACIONES_ENCABEZADO" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" FromRole="CARGA_PRESTACIONES_ESTADO" ToRole="CARGA_PRESTACIONES_ENCABEZADO" />
+        </EntityType>
+        <Association Name="FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO">
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_ESTADO" Role="CARGA_PRESTACIONES_ESTADO" Multiplicity="1" />
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Role="CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION">
+          <End Type="LQCEModelo.TIPO_PRESTACION" Role="TIPO_PRESTACION" Multiplicity="1" />
+          <End Type="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Role="CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -2420,7 +2498,6 @@
               <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_ENCABEZADO">
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="ARCHIVO" ColumnName="ARCHIVO" />
-                <ScalarProperty Name="ID_TIPO_PRESTACION" ColumnName="ID_TIPO_PRESTACION" />
                 <ScalarProperty Name="FECHA_CARGA" ColumnName="FECHA_CARGA" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -2429,6 +2506,7 @@
           <EntitySetMapping Name="CARGA_PRESTACIONES_HUMANAS_DETALLE">
             <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE">
               <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_HUMANAS_DETALLE">
+                <ScalarProperty Name="FECHA_ACTUALIZACION" ColumnName="FECHA_ACTUALIZACION" />
                 <ScalarProperty Name="MENSAJE_ERROR" ColumnName="MENSAJE_ERROR" />
                 <ScalarProperty Name="ERROR" ColumnName="ERROR" />
                 <ScalarProperty Name="VALIDADO" ColumnName="VALIDADO" />
@@ -2455,6 +2533,7 @@
           <EntitySetMapping Name="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
             <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN">
               <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_HUMANAS_EXAMEN">
+                <ScalarProperty Name="FECHA_ACTUALIZACION" ColumnName="FECHA_ACTUALIZACION" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="VALOR_EXAMEN" ColumnName="VALOR_EXAMEN" />
                 <ScalarProperty Name="NOMBRE_EXAMEN" ColumnName="NOMBRE_EXAMEN" />
@@ -2465,6 +2544,7 @@
           <EntitySetMapping Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
             <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
               <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_VETERINARIAS_DETALLE">
+                <ScalarProperty Name="FECHA_ACTUALIZACION" ColumnName="FECHA_ACTUALIZACION" />
                 <ScalarProperty Name="MENSAJE_ERROR" ColumnName="MENSAJE_ERROR" />
                 <ScalarProperty Name="ERROR" ColumnName="ERROR" />
                 <ScalarProperty Name="VALIDADO" ColumnName="VALIDADO" />
@@ -2493,6 +2573,7 @@
           <EntitySetMapping Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
             <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
               <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+                <ScalarProperty Name="FECHA_ACTUALIZACION" ColumnName="FECHA_ACTUALIZACION" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="VALOR_EXAMEN" ColumnName="VALOR_EXAMEN" />
                 <ScalarProperty Name="NOMBRE_EXAMEN" ColumnName="NOMBRE_EXAMEN" />
@@ -2532,6 +2613,31 @@
               <ScalarProperty Name="ID" ColumnName="ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="CARGA_PRESTACIONES_ESTADO">
+            <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_ESTADO">
+              <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_ESTADO">
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" TypeName="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" StoreEntitySet="CARGA_PRESTACIONES_ENCABEZADO">
+            <EndProperty Name="CARGA_PRESTACIONES_ENCABEZADO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CARGA_PRESTACIONES_ESTADO">
+              <ScalarProperty Name="ID" ColumnName="ID_CARGA_PRESTACIONES_ESTADO" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION" TypeName="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION" StoreEntitySet="CARGA_PRESTACIONES_ENCABEZADO">
+            <EndProperty Name="CARGA_PRESTACIONES_ENCABEZADO">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="TIPO_PRESTACION">
+              <ScalarProperty Name="ID" ColumnName="ID_TIPO_PRESTACION" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2568,7 +2674,7 @@
         <EntityTypeShape EntityType="LQCEModelo.FACTURA_DETALLE" Width="1.5" PointX="12.75" PointY="15.25" Height="2.1725878906249818" />
         <EntityTypeShape EntityType="LQCEModelo.FACTURACION" Width="1.5" PointX="8.25" PointY="9.25" Height="1.5956835937499818" />
         <EntityTypeShape EntityType="LQCEModelo.GARANTIA" Width="1.5" PointX="8.25" PointY="21.75" Height="1.5956835937499818" />
-        <EntityTypeShape EntityType="LQCEModelo.NOTA_COBRO" Width="1.5" PointX="10.5" PointY="6" Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="LQCEModelo.NOTA_COBRO" Width="1.5" PointX="10.875" PointY="5.375" Height="2.1725878906249996" />
         <EntityTypeShape EntityType="LQCEModelo.NOTA_COBRO_DETALLE" Width="1.5" PointX="12.75" PointY="12.125" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LQCEModelo.PAGO" Width="1.5" PointX="7.5" PointY="15.5" Height="1.9802864583333246" />
         <EntityTypeShape EntityType="LQCEModelo.PAGO_DETALLE" Width="1.5" PointX="18" PointY="15.5" Height="1.7879850260416674" />
@@ -2583,33 +2689,39 @@
         <EntityTypeShape EntityType="LQCEModelo.TIPO_COBRO" Width="1.5" PointX="6" PointY="6.25" Height="1.5956835937499818" />
         <EntityTypeShape EntityType="LQCEModelo.TIPO_PRESTACION" Width="1.5" PointX="0.75" PointY="13.625" Height="2.1725878906249818" />
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_COMUNA" >
-          <ConnectorPoint PointX="4.5" PointY="11.018992513020834" />
-          <ConnectorPoint PointX="6" PointY="11.018992513020834" />
+          <ConnectorPoint PointX="4.5" PointY="11.115143229166666" />
+          <ConnectorPoint PointX="5.666666666666667" PointY="11.115143229166666" />
+          <ConnectorPoint PointX="5.833333333333333" PointY="11.115143229166666" />
+          <ConnectorPoint PointX="6" PointY="11.115143229166666" />
           <ConnectorPoint PointX="6" PointY="12.5" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_CONVENIO" >
-          <ConnectorPoint PointX="3.75" PointY="16.375" />
-          <ConnectorPoint PointX="3.75" PointY="13.970896809895834" />
-          <ConnectorPoint PointX="5.25" PointY="13.970896809895834" />
+          <ConnectorPoint PointX="3.95312625" PointY="16.375" />
+          <ConnectorPoint PointX="3.95312625" PointY="13.634422607421875" />
+          <ConnectorPoint PointX="5.25" PointY="13.634422607421875" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" >
           <ConnectorPoint PointX="6.75" PointY="12.985341796874998" />
           <ConnectorPoint PointX="7.5" PointY="12.985341796874998" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" >
-          <ConnectorPoint PointX="2.25" PointY="14.768845214843751" />
-          <ConnectorPoint PointX="3.6666666666666665" PointY="14.768845214843751" />
-          <ConnectorPoint PointX="3.8333333333333335" PointY="14.768845214843751" />
-          <ConnectorPoint PointX="5.25" PointY="14.768845214843751" />
+          <ConnectorPoint PointX="2.25" PointY="14.643300897623695" />
+          <ConnectorPoint PointX="3.8697929166666665" PointY="14.643300897623695" />
+          <ConnectorPoint PointX="4.0364595833333334" PointY="14.643300897623695" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="14.643300897623695" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="14.643300897623695" />
+          <ConnectorPoint PointX="5.25" PointY="14.643300897623695" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_FACTURA_CLIENTE" >
           <ConnectorPoint PointX="6.75" PointY="14.420187174479175" />
           <ConnectorPoint PointX="10.5" PointY="14.420187174479175" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PAGO_CLIENTE" >
-          <ConnectorPoint PointX="6.75" PointY="15.385254158253206" />
-          <ConnectorPoint PointX="7.28125" PointY="15.916504158253206" />
-          <ConnectorPoint PointX="7.28125" PointY="15.280097153846153" />
+          <ConnectorPoint PointX="6.75" PointY="15.57178635977564" />
+          <ConnectorPoint PointX="7.1697073386915919" PointY="15.45519089736325" />
+          <ConnectorPoint PointX="7.3302926613084081" PointY="15.410580002529914" />
+          <ConnectorPoint PointX="7.6875" PointY="15.311347153846153" />
+          <ConnectorPoint PointX="7.3125" PointY="15.311347153846153" />
           <ConnectorPoint PointX="7.5011528461538459" PointY="15.5" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_CLIENTE" >
@@ -2623,8 +2735,8 @@
           <ConnectorPoint PointX="8.25" PointY="7.0478417968749909" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_COBRO" >
-          <ConnectorPoint PointX="9.75" PointY="7.0189925130208337" />
-          <ConnectorPoint PointX="10.5" PointY="7.0189925130208337" />
+          <ConnectorPoint PointX="9.75" PointY="6.8362939453125" />
+          <ConnectorPoint PointX="10.875" PointY="6.8362939453125" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_COMUNA_REGION" >
           <ConnectorPoint PointX="2.25" PointY="11.047841796874991" />
@@ -2635,9 +2747,9 @@
           <ConnectorPoint PointX="5.25" PointY="17.393992513020834" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CONVENIO_TIPO_PRESTACION" >
-          <ConnectorPoint PointX="2.25" PointY="15.31446905273436" />
-          <ConnectorPoint PointX="3.3437475" PointY="15.31446905273436" />
-          <ConnectorPoint PointX="3.3437475" PointY="16.375" />
+          <ConnectorPoint PointX="2.25" PointY="15.443998326416008" />
+          <ConnectorPoint PointX="3.4453106250000003" PointY="15.443998326416008" />
+          <ConnectorPoint PointX="3.4453106250000003" PointY="16.375" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" >
           <ConnectorPoint PointX="6.75" PointY="18.225676333733976" />
@@ -2651,13 +2763,13 @@
           <ConnectorPoint PointX="7.84375" PointY="20.412985026041667" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_ESPECIE" >
-          <ConnectorPoint PointX="14.65625" PointY="10.787985026041667" />
-          <ConnectorPoint PointX="14.65625" PointY="15.09375" />
-          <ConnectorPoint PointX="15.75" PointY="15.09375" />
+          <ConnectorPoint PointX="15.0859375" PointY="10.980286458333334" />
+          <ConnectorPoint PointX="15.0859375" PointY="15.050760693148764" />
+          <ConnectorPoint PointX="16.125" PointY="15.050760693148764" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_RAZA_ESPECIE" >
-          <ConnectorPoint PointX="14.421875" PointY="10.787985026041667" />
-          <ConnectorPoint PointX="14.421875" PointY="22.5" />
+          <ConnectorPoint PointX="14.82421875" PointY="10.980286458333334" />
+          <ConnectorPoint PointX="14.82421875" PointY="22.5" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN" >
           <ConnectorPoint PointX="4.5" PointY="20.235341796874998" />
@@ -2672,9 +2784,9 @@
           <ConnectorPoint PointX="5.25" PointY="21.999746093749998" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION" >
-          <ConnectorPoint PointX="1.5" PointY="15.797587890624982" />
-          <ConnectorPoint PointX="1.5" PointY="21.124746093749998" />
-          <ConnectorPoint PointX="3" PointY="21.124746093749998" />
+          <ConnectorPoint PointX="1.5" PointY="16.182190755208335" />
+          <ConnectorPoint PointX="1.5" PointY="21.220896809895834" />
+          <ConnectorPoint PointX="3" PointY="21.220896809895834" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN" >
           <ConnectorPoint PointX="4.5" PointY="20.915510195312503" />
@@ -2706,9 +2818,11 @@
           <ConnectorPoint PointX="12.75" PointY="15.25" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_FACTURA_FACTURACION" >
-          <ConnectorPoint PointX="9.40625" PointY="10.845683593749982" />
-          <ConnectorPoint PointX="9.40625" PointY="13.945432884114592" />
-          <ConnectorPoint PointX="10.5" PointY="13.945432884114592" />
+          <ConnectorPoint PointX="9.78125" PointY="11.037985026041666" />
+          <ConnectorPoint PointX="9.78125" PointY="15.116755675275032" />
+          <ConnectorPoint PointX="10.166666666666666" PointY="15.116755675275032" />
+          <ConnectorPoint PointX="10.333333333333334" PointY="15.116755675275032" />
+          <ConnectorPoint PointX="10.875" PointY="15.116755675275032" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" >
           <ConnectorPoint PointX="12" PointY="13.331492513020834" />
@@ -2737,20 +2851,22 @@
           <ConnectorPoint PointX="10.5" PointY="18.338824114583325" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO" >
-          <ConnectorPoint PointX="12" PointY="6.9901432291666623" />
-          <ConnectorPoint PointX="13.09375" PointY="6.9901432291666623" />
-          <ConnectorPoint PointX="13.09375" PointY="12.125" />
+          <ConnectorPoint PointX="12.21875" PointY="7.547587890625" />
+          <ConnectorPoint PointX="12.21875" PointY="12.40625" />
+          <ConnectorPoint PointX="12.75" PointY="12.40625" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PAGO_DETALLE_PAGO" >
-          <ConnectorPoint PointX="9" PointY="16.490143229166662" />
-          <ConnectorPoint PointX="10.25" PointY="16.490143229166662" />
+          <ConnectorPoint PointX="9.375" PointY="16.711039539062497" />
+          <ConnectorPoint PointX="10.25" PointY="16.711039539062497" />
           <ConnectorPoint PointX="10.25" PointY="16" />
-          <ConnectorPoint PointX="12.5" PointY="16" />
-          <ConnectorPoint PointX="12.5" PointY="14.75" />
-          <ConnectorPoint PointX="14.338541666666666" PointY="14.75" />
-          <ConnectorPoint PointX="14.505208333333334" PointY="14.75" />
-          <ConnectorPoint PointX="14.572916666666666" PointY="14.75" />
-          <ConnectorPoint PointX="14.739583333333334" PointY="14.75" />
+          <ConnectorPoint PointX="12.299761623431339" PointY="15.023923036461266" />
+          <ConnectorPoint PointX="12.450238376568661" PointY="14.952267439729209" />
+          <ConnectorPoint PointX="12.875" PointY="14.75" />
+          <ConnectorPoint PointX="12.875" PointY="14.75" />
+          <ConnectorPoint PointX="14.740885416666666" PointY="14.75" />
+          <ConnectorPoint PointX="14.907552083333334" PointY="14.75" />
+          <ConnectorPoint PointX="15.002604166666666" PointY="14.75" />
+          <ConnectorPoint PointX="15.169270833333334" PointY="14.75" />
           <ConnectorPoint PointX="18.75" PointY="14.75" />
           <ConnectorPoint PointX="18.75" PointY="15.5" />
         </AssociationConnector>
@@ -2784,13 +2900,19 @@
           <ConnectorPoint PointX="11.6562525" PointY="19.960999348958325" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" >
-          <ConnectorPoint PointX="1.9062525" PointY="15.797587890624982" />
-          <ConnectorPoint PointX="1.9062525" PointY="18.490143229166662" />
-          <ConnectorPoint PointX="6.9311335620993537" PointY="18.490143229166662" />
-          <ConnectorPoint PointX="7.09780022876602" PointY="18.490143229166662" />
-          <ConnectorPoint PointX="9.3229166666666661" PointY="18.490143229166662" />
-          <ConnectorPoint PointX="9.4895833333333339" PointY="18.490143229166662" />
-          <ConnectorPoint PointX="10.5" PointY="18.490143229166662" />
+          <ConnectorPoint PointX="2.25" PointY="14.107609252522792" />
+          <ConnectorPoint PointX="3.8697929166666665" PointY="14.107609252522792" />
+          <ConnectorPoint PointX="4.0364595833333334" PointY="14.107609252522792" />
+          <ConnectorPoint PointX="5" PointY="14.107609252522792" />
+          <ConnectorPoint PointX="5" PointY="15.884095052083332" />
+          <ConnectorPoint PointX="6.9789753589743588" PointY="15.884095052083332" />
+          <ConnectorPoint PointX="7.1456420256410249" PointY="15.884095052083332" />
+          <ConnectorPoint PointX="7.25" PointY="15.884095052083332" />
+          <ConnectorPoint PointX="7.25" PointY="15.25" />
+          <ConnectorPoint PointX="10.1875" PointY="15.25" />
+          <ConnectorPoint PointX="10.1875" PointY="15.8744921875" />
+          <ConnectorPoint PointX="10.843748" PointY="15.8744921875" />
+          <ConnectorPoint PointX="10.843748" PointY="16.25" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION" >
           <ConnectorPoint PointX="12" PointY="19.960999348958325" />
@@ -2808,7 +2930,7 @@
           <ConnectorPoint PointX="14.765625" PointY="15.125002499999994" />
           <ConnectorPoint PointX="15.75" PointY="15.125002499999994" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Width="1.5" PointX="16.375" PointY="6" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Width="1.5" PointX="16.375" PointY="6" Height="2.5571907552083335" />
         <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_DETALLE" Width="1.5" PointX="18.625" PointY="1.375" Height="5.2494108072916674" />
         <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN" Width="1.5" PointX="20.875" PointY="3" Height="1.9802864583333246" />
         <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Width="1.5" PointX="18.625" PointY="7.375" Height="5.63401367187501" />
@@ -2818,8 +2940,8 @@
           <ConnectorPoint PointX="18.625" PointY="6.3122054036458337" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" >
-          <ConnectorPoint PointX="17.875" PointY="7.8699446614583337" />
-          <ConnectorPoint PointX="18.625" PointY="7.8699446614583337" />
+          <ConnectorPoint PointX="17.875" PointY="7.9660953776041667" />
+          <ConnectorPoint PointX="18.625" PointY="7.9660953776041667" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" >
           <ConnectorPoint PointX="20.125" PointY="3.9901432291666623" />
@@ -2828,6 +2950,27 @@
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" >
           <ConnectorPoint PointX="20.125" PointY="10.240143229166662" />
           <ConnectorPoint PointX="20.875" PointY="10.240143229166662" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_ESTADO" Width="1.5" PointX="0.75" PointY="0.875" Height="1.7879850260416674" />
+        <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" >
+          <ConnectorPoint PointX="1.5" PointY="2.6629850260416674" />
+          <ConnectorPoint PointX="1.5" PointY="8.3624886067708335" />
+          <ConnectorPoint PointX="5.666666666666667" PointY="8.3624886067708335" />
+          <ConnectorPoint PointX="5.833333333333333" PointY="8.3624886067708335" />
+          <ConnectorPoint PointX="12.135416666666666" PointY="8.3624886067708335" />
+          <ConnectorPoint PointX="12.302083333333334" PointY="8.3624886067708335" />
+          <ConnectorPoint PointX="16.375" PointY="8.3624886067708335" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION" >
+          <ConnectorPoint PointX="1.5" PointY="13.625" />
+          <ConnectorPoint PointX="1.5" PointY="12.287985026041667" />
+          <ConnectorPoint PointX="5.75" PointY="12.287985026041667" />
+          <ConnectorPoint PointX="5.75" PointY="8.2302864583333335" />
+          <ConnectorPoint PointX="12.135416666666666" PointY="8.2302864583333335" />
+          <ConnectorPoint PointX="12.302083333333334" PointY="8.2302864583333335" />
+          <ConnectorPoint PointX="16" PointY="8.2302864583333335" />
+          <ConnectorPoint PointX="16" PointY="7.1499923033854174" />
+          <ConnectorPoint PointX="16.375" PointY="7.1499923033854174" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

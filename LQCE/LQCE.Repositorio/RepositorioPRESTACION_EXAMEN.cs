@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_EXAMEN.FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION_EXAMEN.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_EXAMEN.Include("EXAMEN").Include("PRESTACION").FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION_EXAMEN.Include("EXAMEN").Include("PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_EXAMEN select i;
+				var q = from i in _context.PRESTACION_EXAMEN  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_EXAMEN.Include("EXAMEN").Include("PRESTACION") select i;
+				var q = from i in _context.PRESTACION_EXAMEN.Include("EXAMEN").Include("PRESTACION") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_EXAMEN> GetByFilter(int? EXAMENId = null, int? PRESTACIONId = null, bool? ACTIVO = null, int? VALOR = null)
+		public IQueryable<PRESTACION_EXAMEN> GetByFilter(int? EXAMENId = null, int? PRESTACIONId = null, int? VALOR = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_EXAMEN select i;
+				var q = from i in _context.PRESTACION_EXAMEN  where i.ACTIVO  select i;
 
 				if (VALOR.HasValue)
 				{
 				  q = q.Where(i => i.VALOR == VALOR.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (EXAMENId.HasValue)
 				{
@@ -111,20 +107,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_EXAMEN> GetByFilterWithReferences(int? EXAMENId = null, int? PRESTACIONId = null, bool? ACTIVO = null, int? VALOR = null)
+		public IQueryable<PRESTACION_EXAMEN> GetByFilterWithReferences(int? EXAMENId = null, int? PRESTACIONId = null, int? VALOR = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_EXAMEN.Include("EXAMEN").Include("PRESTACION") select i;
+				var q = from i in _context.PRESTACION_EXAMEN.Include("EXAMEN").Include("PRESTACION")  where i.ACTIVO select i;
 
 				if (VALOR.HasValue)
 				{
 					q = q.Where(i => i.VALOR == VALOR.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (EXAMENId.HasValue)
 				{

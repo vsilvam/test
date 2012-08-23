@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", bool? ACTIVO = null)
+		public List<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCLIENTE repositorio = new RepositorioCLIENTE(context);
-                    return repositorio.GetByFilter(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", bool? ACTIVO = null)
+		public List<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCLIENTE repositorio = new RepositorioCLIENTE(context);
-                    return repositorio.GetByFilterWithReferences(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

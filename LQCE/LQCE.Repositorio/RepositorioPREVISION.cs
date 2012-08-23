@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PREVISION.FirstOrDefault(i => i.ID == id);
+				return _context.PREVISION.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PREVISION.Include("PRESTACION").FirstOrDefault(i => i.ID == id);
+				return _context.PREVISION.Include("PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PREVISION select i;
+				var q = from i in _context.PREVISION  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PREVISION.Include("PRESTACION") select i;
+				var q = from i in _context.PREVISION.Include("PRESTACION") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,21 +78,17 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PREVISION> GetByFilter(string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<PREVISION> GetByFilter(string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PREVISION select i;
+				var q = from i in _context.PREVISION  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
 				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
-				}
 				return q;
 			}
 			catch (Exception ex)
@@ -103,20 +99,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PREVISION> GetByFilterWithReferences(string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<PREVISION> GetByFilterWithReferences(string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PREVISION.Include("PRESTACION") select i;
+				var q = from i in _context.PREVISION.Include("PRESTACION")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				return q;
 			}

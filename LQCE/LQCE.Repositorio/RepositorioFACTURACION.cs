@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURACION.FirstOrDefault(i => i.ID == id);
+				return _context.FACTURACION.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURACION.Include("FACTURA").FirstOrDefault(i => i.ID == id);
+				return _context.FACTURACION.Include("FACTURA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION select i;
+				var q = from i in _context.FACTURACION  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION.Include("FACTURA") select i;
+				var q = from i in _context.FACTURACION.Include("FACTURA") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,21 +78,17 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURACION> GetByFilter(System.DateTime? FECHA_FACTURACION = null, bool? ACTIVO = null)
+		public IQueryable<FACTURACION> GetByFilter(System.DateTime? FECHA_FACTURACION = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION select i;
+				var q = from i in _context.FACTURACION  where i.ACTIVO  select i;
 
 				if (FECHA_FACTURACION.HasValue)
 				{
 				  q = q.Where(i => i.FECHA_FACTURACION == FECHA_FACTURACION.Value);
 				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
-				}
 				return q;
 			}
 			catch (Exception ex)
@@ -103,20 +99,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURACION> GetByFilterWithReferences(System.DateTime? FECHA_FACTURACION = null, bool? ACTIVO = null)
+		public IQueryable<FACTURACION> GetByFilterWithReferences(System.DateTime? FECHA_FACTURACION = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION.Include("FACTURA") select i;
+				var q = from i in _context.FACTURACION.Include("FACTURA")  where i.ACTIVO select i;
 
 				if (FECHA_FACTURACION.HasValue)
 				{
 					q = q.Where(i => i.FECHA_FACTURACION == FECHA_FACTURACION.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				return q;
 			}

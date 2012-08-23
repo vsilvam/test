@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, bool? ACTIVO = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN(context);
-                    return repositorio.GetByFilter(CARGA_PRESTACIONES_HUMANAS_DETALLEId, ACTIVO, NOMBRE_EXAMEN, VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CARGA_PRESTACIONES_HUMANAS_DETALLEId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, bool? ACTIVO = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN(context);
-                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_HUMANAS_DETALLEId, ACTIVO, NOMBRE_EXAMEN, VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_HUMANAS_DETALLEId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_HUMANAS_DETALLEId, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+        public int Add(int CARGA_PRESTACIONES_HUMANAS_DETALLEId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
         {
 		Init();
             try
@@ -164,6 +164,7 @@ namespace LQCE.Transaccion
 
                     _CARGA_PRESTACIONES_HUMANAS_EXAMEN.NOMBRE_EXAMEN = NOMBRE_EXAMEN;				
                     _CARGA_PRESTACIONES_HUMANAS_EXAMEN.VALOR_EXAMEN = VALOR_EXAMEN;				
+                    _CARGA_PRESTACIONES_HUMANAS_EXAMEN.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
                     _CARGA_PRESTACIONES_HUMANAS_EXAMEN.ACTIVO = true;				
 
 					//parents
@@ -184,7 +185,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CARGA_PRESTACIONES_HUMANAS_DETALLEId, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public void Update(int Id, int CARGA_PRESTACIONES_HUMANAS_DETALLEId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
 		{
 		Init();
 			try
@@ -215,6 +216,7 @@ namespace LQCE.Transaccion
 					{
 						_CARGA_PRESTACIONES_HUMANAS_EXAMEN.VALOR_EXAMEN = VALOR_EXAMEN;
 					}
+						_CARGA_PRESTACIONES_HUMANAS_EXAMEN.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
 	
 					//parents
 					 

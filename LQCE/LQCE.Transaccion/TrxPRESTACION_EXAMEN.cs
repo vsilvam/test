@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<PRESTACION_EXAMEN> GetByFilter(int? EXAMENId = null, int? PRESTACIONId = null, bool? ACTIVO = null, int? VALOR = null)
+		public List<PRESTACION_EXAMEN> GetByFilter(int? EXAMENId = null, int? PRESTACIONId = null, int? VALOR = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_EXAMEN repositorio = new RepositorioPRESTACION_EXAMEN(context);
-                    return repositorio.GetByFilter(EXAMENId, PRESTACIONId, ACTIVO, VALOR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(EXAMENId, PRESTACIONId, VALOR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<PRESTACION_EXAMEN> GetByFilterWithReferences(int? EXAMENId = null, int? PRESTACIONId = null, bool? ACTIVO = null, int? VALOR = null)
+		public List<PRESTACION_EXAMEN> GetByFilterWithReferences(int? EXAMENId = null, int? PRESTACIONId = null, int? VALOR = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_EXAMEN repositorio = new RepositorioPRESTACION_EXAMEN(context);
-                    return repositorio.GetByFilterWithReferences(EXAMENId, PRESTACIONId, ACTIVO, VALOR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(EXAMENId, PRESTACIONId, VALOR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

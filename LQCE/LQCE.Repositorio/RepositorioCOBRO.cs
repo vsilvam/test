@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.COBRO.FirstOrDefault(i => i.ID == id);
+				return _context.COBRO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO").FirstOrDefault(i => i.ID == id);
+				return _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO select i;
+				var q = from i in _context.COBRO  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO") select i;
+				var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<COBRO> GetByFilter(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null, bool? ACTIVO = null)
+		public IQueryable<COBRO> GetByFilter(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO select i;
+				var q = from i in _context.COBRO  where i.ACTIVO  select i;
 
 				if (FECHA_COBRO.HasValue)
 				{
 				  q = q.Where(i => i.FECHA_COBRO == FECHA_COBRO.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (TIPO_COBROId.HasValue)
 				{
@@ -107,20 +103,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<COBRO> GetByFilterWithReferences(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null, bool? ACTIVO = null)
+		public IQueryable<COBRO> GetByFilterWithReferences(int? TIPO_COBROId = null, System.DateTime? FECHA_COBRO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO") select i;
+				var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO")  where i.ACTIVO select i;
 
 				if (FECHA_COBRO.HasValue)
 				{
 					q = q.Where(i => i.FECHA_COBRO == FECHA_COBRO.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (TIPO_COBROId.HasValue)
 				{

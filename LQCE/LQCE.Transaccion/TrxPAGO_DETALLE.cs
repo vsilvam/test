@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<PAGO_DETALLE> GetByFilter(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null, bool? ACTIVO = null)
+		public List<PAGO_DETALLE> GetByFilter(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
-                    return repositorio.GetByFilter(FACTURA_DETALLEId, PAGOId, MONTO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(FACTURA_DETALLEId, PAGOId, MONTO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<PAGO_DETALLE> GetByFilterWithReferences(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null, bool? ACTIVO = null)
+		public List<PAGO_DETALLE> GetByFilterWithReferences(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPAGO_DETALLE repositorio = new RepositorioPAGO_DETALLE(context);
-                    return repositorio.GetByFilterWithReferences(FACTURA_DETALLEId, PAGOId, MONTO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(FACTURA_DETALLEId, PAGOId, MONTO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

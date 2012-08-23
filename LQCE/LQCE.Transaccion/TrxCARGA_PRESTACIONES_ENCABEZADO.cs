@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CARGA_PRESTACIONES_ENCABEZADO> GetByFilter(System.DateTime? FECHA_CARGA = null, int? ID_TIPO_PRESTACION = null, string ARCHIVO = "", bool? ACTIVO = null)
+		public List<CARGA_PRESTACIONES_ENCABEZADO> GetByFilter(int? CARGA_PRESTACIONES_ESTADOId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_CARGA = null, string ARCHIVO = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
-                    return repositorio.GetByFilter(FECHA_CARGA, ID_TIPO_PRESTACION, ARCHIVO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CARGA_PRESTACIONES_ESTADOId, TIPO_PRESTACIONId, FECHA_CARGA, ARCHIVO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CARGA_PRESTACIONES_ENCABEZADO> GetByFilterWithReferences(System.DateTime? FECHA_CARGA = null, int? ID_TIPO_PRESTACION = null, string ARCHIVO = "", bool? ACTIVO = null)
+		public List<CARGA_PRESTACIONES_ENCABEZADO> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ESTADOId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_CARGA = null, string ARCHIVO = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_ENCABEZADO repositorio = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
-                    return repositorio.GetByFilterWithReferences(FECHA_CARGA, ID_TIPO_PRESTACION, ARCHIVO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_ESTADOId, TIPO_PRESTACIONId, FECHA_CARGA, ARCHIVO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,24 +144,39 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(System.DateTime FECHA_CARGA, int ID_TIPO_PRESTACION, string ARCHIVO)
+        public int Add(int CARGA_PRESTACIONES_ESTADOId, int TIPO_PRESTACIONId, System.DateTime FECHA_CARGA, string ARCHIVO)
         {
 		Init();
             try
             {
 				 using (LQCEEntities context = new LQCEEntities())
 				{
+					RepositorioCARGA_PRESTACIONES_ESTADO _repositorioCARGA_PRESTACIONES_ESTADO = new RepositorioCARGA_PRESTACIONES_ESTADO(context);
+					CARGA_PRESTACIONES_ESTADO _objCARGA_PRESTACIONES_ESTADO = _repositorioCARGA_PRESTACIONES_ESTADO.GetById(CARGA_PRESTACIONES_ESTADOId);
+					if(Equals(_objCARGA_PRESTACIONES_ESTADO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_ESTADO con Id =",CARGA_PRESTACIONES_ESTADOId.ToString()));
+					}
+
+					RepositorioTIPO_PRESTACION _repositorioTIPO_PRESTACION = new RepositorioTIPO_PRESTACION(context);
+					TIPO_PRESTACION _objTIPO_PRESTACION = _repositorioTIPO_PRESTACION.GetById(TIPO_PRESTACIONId);
+					if(Equals(_objTIPO_PRESTACION,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado TIPO_PRESTACION con Id =",TIPO_PRESTACIONId.ToString()));
+					}
+
 					CARGA_PRESTACIONES_ENCABEZADO _CARGA_PRESTACIONES_ENCABEZADO = new CARGA_PRESTACIONES_ENCABEZADO();
 
 					//properties
 
                     _CARGA_PRESTACIONES_ENCABEZADO.FECHA_CARGA = FECHA_CARGA;
-                    _CARGA_PRESTACIONES_ENCABEZADO.ID_TIPO_PRESTACION = ID_TIPO_PRESTACION;
                     _CARGA_PRESTACIONES_ENCABEZADO.ARCHIVO = ARCHIVO;				
                     _CARGA_PRESTACIONES_ENCABEZADO.ACTIVO = true;				
 
 					//parents
 						 
+                    _CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO = _objCARGA_PRESTACIONES_ESTADO;
+                    _CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION = _objTIPO_PRESTACION;
                     
 					context.AddObject("CARGA_PRESTACIONES_ENCABEZADO",_CARGA_PRESTACIONES_ENCABEZADO);
                     context.SaveChanges();
@@ -177,7 +192,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, System.DateTime FECHA_CARGA, int ID_TIPO_PRESTACION, string ARCHIVO)
+		public void Update(int Id, int CARGA_PRESTACIONES_ESTADOId, int TIPO_PRESTACIONId, System.DateTime FECHA_CARGA, string ARCHIVO)
 		{
 		Init();
 			try
@@ -190,11 +205,24 @@ namespace LQCE.Transaccion
 					{
 						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_ENCABEZADO con Id =",Id.ToString()));
 					}
-
+					
+					RepositorioCARGA_PRESTACIONES_ESTADO _repositorioCARGA_PRESTACIONES_ESTADO = new RepositorioCARGA_PRESTACIONES_ESTADO(context);
+					CARGA_PRESTACIONES_ESTADO _objCARGA_PRESTACIONES_ESTADO = _repositorioCARGA_PRESTACIONES_ESTADO.GetById(CARGA_PRESTACIONES_ESTADOId);
+					if(Equals(_objCARGA_PRESTACIONES_ESTADO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_ESTADO con Id =",CARGA_PRESTACIONES_ESTADOId.ToString()));
+					}
+						
+					RepositorioTIPO_PRESTACION _repositorioTIPO_PRESTACION = new RepositorioTIPO_PRESTACION(context);
+					TIPO_PRESTACION _objTIPO_PRESTACION = _repositorioTIPO_PRESTACION.GetById(TIPO_PRESTACIONId);
+					if(Equals(_objTIPO_PRESTACION,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado TIPO_PRESTACION con Id =",TIPO_PRESTACIONId.ToString()));
+					}
+	
 					//properties
 
 						_CARGA_PRESTACIONES_ENCABEZADO.FECHA_CARGA = FECHA_CARGA;
-						_CARGA_PRESTACIONES_ENCABEZADO.ID_TIPO_PRESTACION = ID_TIPO_PRESTACION;
 					if (!string.IsNullOrEmpty(ARCHIVO))
 					{
 						_CARGA_PRESTACIONES_ENCABEZADO.ARCHIVO = ARCHIVO;
@@ -202,6 +230,8 @@ namespace LQCE.Transaccion
 	
 					//parents
 					 
+                    _CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO = _objCARGA_PRESTACIONES_ESTADO;
+                    _CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION = _objTIPO_PRESTACION;
 
 					context.SaveChanges();
 				}

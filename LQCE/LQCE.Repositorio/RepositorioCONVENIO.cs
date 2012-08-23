@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CONVENIO.FirstOrDefault(i => i.ID == id);
+				return _context.CONVENIO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION").FirstOrDefault(i => i.ID == id);
+				return _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO select i;
+				var q = from i in _context.CONVENIO  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION") select i;
+				var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CONVENIO> GetByFilter(int? TIPO_PRESTACIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<CONVENIO> GetByFilter(int? TIPO_PRESTACIONId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO select i;
+				var q = from i in _context.CONVENIO  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (TIPO_PRESTACIONId.HasValue)
 				{
@@ -107,20 +103,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CONVENIO> GetByFilterWithReferences(int? TIPO_PRESTACIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<CONVENIO> GetByFilterWithReferences(int? TIPO_PRESTACIONId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION") select i;
+				var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (TIPO_PRESTACIONId.HasValue)
 				{

@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+		public List<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_VETERINARIA repositorio = new RepositorioPRESTACION_VETERINARIA(context);
-                    return repositorio.GetByFilter(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+		public List<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_VETERINARIA repositorio = new RepositorioPRESTACION_VETERINARIA(context);
-                    return repositorio.GetByFilterWithReferences(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

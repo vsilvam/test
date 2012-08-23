@@ -45,6 +45,9 @@
     <Compile Include="RepositorioCARGA_PRESTACIONES_ENCABEZADO.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="RepositorioCARGA_PRESTACIONES_ESTADO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>

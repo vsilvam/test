@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.RAZA.FirstOrDefault(i => i.ID == id);
+				return _context.RAZA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.RAZA.Include("ESPECIE").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id);
+				return _context.RAZA.Include("ESPECIE").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.RAZA select i;
+				var q = from i in _context.RAZA  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.RAZA.Include("ESPECIE").Include("PRESTACION_VETERINARIA") select i;
+				var q = from i in _context.RAZA.Include("ESPECIE").Include("PRESTACION_VETERINARIA") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<RAZA> GetByFilter(int? ESPECIEId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<RAZA> GetByFilter(int? ESPECIEId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.RAZA select i;
+				var q = from i in _context.RAZA  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (ESPECIEId.HasValue)
 				{
@@ -107,20 +103,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<RAZA> GetByFilterWithReferences(int? ESPECIEId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public IQueryable<RAZA> GetByFilterWithReferences(int? ESPECIEId = null, string NOMBRE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.RAZA.Include("ESPECIE").Include("PRESTACION_VETERINARIA") select i;
+				var q = from i in _context.RAZA.Include("ESPECIE").Include("PRESTACION_VETERINARIA")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (ESPECIEId.HasValue)
 				{

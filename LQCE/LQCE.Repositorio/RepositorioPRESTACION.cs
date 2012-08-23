@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION.FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION select i;
+				var q = from i in _context.PRESTACION  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") select i;
+				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,12 +78,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, bool? ACTIVO = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public IQueryable<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION select i;
+				var q = from i in _context.PRESTACION  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(MEDICO))
 				{
@@ -100,10 +100,6 @@ namespace LQCE.Repositorio
 				if (FECHA_ENTREGA_RESULTADOS.HasValue)
 				{
 				  q = q.Where(i => i.FECHA_ENTREGA_RESULTADOS == FECHA_ENTREGA_RESULTADOS.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (CLIENTEId.HasValue)
 				{
@@ -131,12 +127,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, bool? ACTIVO = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public IQueryable<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") select i;
+				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(MEDICO))
 				{
@@ -153,10 +149,6 @@ namespace LQCE.Repositorio
 				if (FECHA_ENTREGA_RESULTADOS.HasValue)
 				{
 					q = q.Where(i => i.FECHA_ENTREGA_RESULTADOS == FECHA_ENTREGA_RESULTADOS.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (CLIENTEId.HasValue)
 				{

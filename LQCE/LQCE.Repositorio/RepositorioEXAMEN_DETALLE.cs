@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.EXAMEN_DETALLE.FirstOrDefault(i => i.ID == id);
+				return _context.EXAMEN_DETALLE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1").FirstOrDefault(i => i.ID == id);
+				return _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE select i;
+				var q = from i in _context.EXAMEN_DETALLE  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") select i;
+				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,17 +78,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<EXAMEN_DETALLE> GetByFilter(int? EXAMENId = null, int? EXAMEN1Id = null, bool? ACTIVO = null)
+		public IQueryable<EXAMEN_DETALLE> GetByFilter(int? EXAMENId = null, int? EXAMEN1Id = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE select i;
+				var q = from i in _context.EXAMEN_DETALLE  where i.ACTIVO  select i;
 
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
-				}
 				if (EXAMENId.HasValue)
 				{
 				  q = q.Where(i => i.EXAMEN.ID == EXAMENId.Value);
@@ -107,17 +103,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<EXAMEN_DETALLE> GetByFilterWithReferences(int? EXAMENId = null, int? EXAMEN1Id = null, bool? ACTIVO = null)
+		public IQueryable<EXAMEN_DETALLE> GetByFilterWithReferences(int? EXAMENId = null, int? EXAMEN1Id = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") select i;
+				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1")  where i.ACTIVO select i;
 
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
-				}
 				if (EXAMENId.HasValue)
 				{
 					q = q.Where(i => i.EXAMEN.ID == EXAMENId.Value);

@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURA_DETALLE.FirstOrDefault(i => i.ID == id);
+				return _context.FACTURA_DETALLE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE").FirstOrDefault(i => i.ID == id);
+				return _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE select i;
+				var q = from i in _context.FACTURA_DETALLE  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE") select i;
+				var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,12 +78,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURA_DETALLE> GetByFilter(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null, bool? ACTIVO = null)
+		public IQueryable<FACTURA_DETALLE> GetByFilter(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE select i;
+				var q = from i in _context.FACTURA_DETALLE  where i.ACTIVO  select i;
 
 				if (MONTO_TOTAL.HasValue)
 				{
@@ -92,10 +92,6 @@ namespace LQCE.Repositorio
 				if (MONTO_COBRADO.HasValue)
 				{
 				  q = q.Where(i => i.MONTO_COBRADO == MONTO_COBRADO.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (FACTURAId.HasValue)
 				{
@@ -115,12 +111,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURA_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null, bool? ACTIVO = null)
+		public IQueryable<FACTURA_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE") select i;
+				var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE")  where i.ACTIVO select i;
 
 				if (MONTO_TOTAL.HasValue)
 				{
@@ -129,10 +125,6 @@ namespace LQCE.Repositorio
 				if (MONTO_COBRADO.HasValue)
 				{
 					q = q.Where(i => i.MONTO_COBRADO == MONTO_COBRADO.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (FACTURAId.HasValue)
 				{

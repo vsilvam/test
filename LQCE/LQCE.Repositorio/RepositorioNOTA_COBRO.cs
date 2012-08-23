@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.NOTA_COBRO.FirstOrDefault(i => i.ID == id);
+				return _context.NOTA_COBRO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE").FirstOrDefault(i => i.ID == id);
+				return _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.NOTA_COBRO select i;
+				var q = from i in _context.NOTA_COBRO  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE") select i;
+				var q = from i in _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,12 +78,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<NOTA_COBRO> GetByFilter(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null, bool? ACTIVO = null)
+		public IQueryable<NOTA_COBRO> GetByFilter(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.NOTA_COBRO select i;
+				var q = from i in _context.NOTA_COBRO  where i.ACTIVO  select i;
 
 				if (CORRELATIVO.HasValue)
 				{
@@ -92,10 +92,6 @@ namespace LQCE.Repositorio
 				if (ID_CLIENTE.HasValue)
 				{
 				  q = q.Where(i => i.ID_CLIENTE == ID_CLIENTE.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (COBROId.HasValue)
 				{
@@ -111,12 +107,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<NOTA_COBRO> GetByFilterWithReferences(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null, bool? ACTIVO = null)
+		public IQueryable<NOTA_COBRO> GetByFilterWithReferences(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE") select i;
+				var q = from i in _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE")  where i.ACTIVO select i;
 
 				if (CORRELATIVO.HasValue)
 				{
@@ -125,10 +121,6 @@ namespace LQCE.Repositorio
 				if (ID_CLIENTE.HasValue)
 				{
 					q = q.Where(i => i.ID_CLIENTE == ID_CLIENTE.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (COBROId.HasValue)
 				{

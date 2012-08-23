@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", bool? ACTIVO = null, int? NUMERO_FACTURA = null)
+		public List<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA repositorio = new RepositorioFACTURA(context);
-                    return repositorio.GetByFilter(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, ACTIVO, NUMERO_FACTURA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, NUMERO_FACTURA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", bool? ACTIVO = null, int? NUMERO_FACTURA = null)
+		public List<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA repositorio = new RepositorioFACTURA(context);
-                    return repositorio.GetByFilterWithReferences(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, ACTIVO, NUMERO_FACTURA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, NUMERO_FACTURA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.FirstOrDefault(i => i.ID == id);
+				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id);
+				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN select i;
+				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,12 +78,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, bool? ACTIVO = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN select i;
+				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE_EXAMEN))
 				{
@@ -93,9 +93,9 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.VALOR_EXAMEN.Contains(VALOR_EXAMEN));
 				}
-				if (ACTIVO.HasValue)
+				if (FECHA_ACTUALIZACION.HasValue)
 				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+				  q = q.Where(i => i.FECHA_ACTUALIZACION == FECHA_ACTUALIZACION.Value);
 				}
 				if (CARGA_PRESTACIONES_VETERINARIAS_DETALLEId.HasValue)
 				{
@@ -111,12 +111,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, bool? ACTIVO = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE_EXAMEN))
 				{
@@ -126,9 +126,9 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.VALOR_EXAMEN.Contains(VALOR_EXAMEN));
 				}
-				if (ACTIVO.HasValue)
+				if (FECHA_ACTUALIZACION.HasValue)
 				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
+					q = q.Where(i => i.FECHA_ACTUALIZACION == FECHA_ACTUALIZACION.Value);
 				}
 				if (CARGA_PRESTACIONES_VETERINARIAS_DETALLEId.HasValue)
 				{

@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, bool? ACTIVO = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public List<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION repositorio = new RepositorioPRESTACION(context);
-                    return repositorio.GetByFilter(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, MEDICO, FECHA_RECEPCION, ACTIVO, FECHA_MUESTRA, FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, MEDICO, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, bool? ACTIVO = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public List<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION repositorio = new RepositorioPRESTACION(context);
-                    return repositorio.GetByFilterWithReferences(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, MEDICO, FECHA_RECEPCION, ACTIVO, FECHA_MUESTRA, FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, MEDICO, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

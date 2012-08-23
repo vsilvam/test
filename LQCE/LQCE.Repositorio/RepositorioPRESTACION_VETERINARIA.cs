@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_VETERINARIA.FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION_VETERINARIA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_VETERINARIA.Include("ESPECIE").Include("PRESTACION").Include("RAZA").FirstOrDefault(i => i.ID == id);
+				return _context.PRESTACION_VETERINARIA.Include("ESPECIE").Include("PRESTACION").Include("RAZA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_VETERINARIA select i;
+				var q = from i in _context.PRESTACION_VETERINARIA  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_VETERINARIA.Include("ESPECIE").Include("PRESTACION").Include("RAZA") select i;
+				var q = from i in _context.PRESTACION_VETERINARIA.Include("ESPECIE").Include("PRESTACION").Include("RAZA") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,12 +78,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+		public IQueryable<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_VETERINARIA select i;
+				var q = from i in _context.PRESTACION_VETERINARIA  where i.ACTIVO  select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
@@ -96,10 +96,6 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(TELEFONO))
 				{
 				   q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (ESPECIEId.HasValue)
 				{
@@ -119,12 +115,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", bool? ACTIVO = null)
+		public IQueryable<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_VETERINARIA.Include("ESPECIE").Include("PRESTACION").Include("RAZA") select i;
+				var q = from i in _context.PRESTACION_VETERINARIA.Include("ESPECIE").Include("PRESTACION").Include("RAZA")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
@@ -137,10 +133,6 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(TELEFONO))
 				{
 					q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (ESPECIEId.HasValue)
 				{

@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PAGO_DETALLE.FirstOrDefault(i => i.ID == id);
+				return _context.PAGO_DETALLE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PAGO_DETALLE.Include("FACTURA_DETALLE").Include("PAGO").FirstOrDefault(i => i.ID == id);
+				return _context.PAGO_DETALLE.Include("FACTURA_DETALLE").Include("PAGO").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PAGO_DETALLE select i;
+				var q = from i in _context.PAGO_DETALLE  where i.ACTIVO select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PAGO_DETALLE.Include("FACTURA_DETALLE").Include("PAGO") select i;
+				var q = from i in _context.PAGO_DETALLE.Include("FACTURA_DETALLE").Include("PAGO") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,20 +78,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PAGO_DETALLE> GetByFilter(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null, bool? ACTIVO = null)
+		public IQueryable<PAGO_DETALLE> GetByFilter(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PAGO_DETALLE select i;
+				var q = from i in _context.PAGO_DETALLE  where i.ACTIVO  select i;
 
 				if (MONTO.HasValue)
 				{
 				  q = q.Where(i => i.MONTO == MONTO.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-				  q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (FACTURA_DETALLEId.HasValue)
 				{
@@ -111,20 +107,16 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PAGO_DETALLE> GetByFilterWithReferences(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null, bool? ACTIVO = null)
+		public IQueryable<PAGO_DETALLE> GetByFilterWithReferences(int? FACTURA_DETALLEId = null, int? PAGOId = null, int? MONTO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PAGO_DETALLE.Include("FACTURA_DETALLE").Include("PAGO") select i;
+				var q = from i in _context.PAGO_DETALLE.Include("FACTURA_DETALLE").Include("PAGO")  where i.ACTIVO select i;
 
 				if (MONTO.HasValue)
 				{
 					q = q.Where(i => i.MONTO == MONTO.Value);
-				}
-				if (ACTIVO.HasValue)
-				{
-					q = q.Where(i => i.ACTIVO == ACTIVO.Value);
 				}
 				if (FACTURA_DETALLEId.HasValue)
 				{

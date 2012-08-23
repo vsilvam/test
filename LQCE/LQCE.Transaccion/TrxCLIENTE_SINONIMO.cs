@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CLIENTE_SINONIMO> GetByFilter(int? CLIENTEId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public List<CLIENTE_SINONIMO> GetByFilter(int? CLIENTEId = null, string NOMBRE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCLIENTE_SINONIMO repositorio = new RepositorioCLIENTE_SINONIMO(context);
-                    return repositorio.GetByFilter(CLIENTEId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CLIENTEId, NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CLIENTE_SINONIMO> GetByFilterWithReferences(int? CLIENTEId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public List<CLIENTE_SINONIMO> GetByFilterWithReferences(int? CLIENTEId = null, string NOMBRE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCLIENTE_SINONIMO repositorio = new RepositorioCLIENTE_SINONIMO(context);
-                    return repositorio.GetByFilterWithReferences(CLIENTEId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CLIENTEId, NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

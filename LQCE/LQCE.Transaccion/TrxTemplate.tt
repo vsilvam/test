@@ -172,7 +172,7 @@ foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n =
 
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable))
 {
-	if (!ef.IsKey(edmProperty))
+	if (!ef.IsKey(edmProperty)  && code.Escape(edmProperty) != "ACTIVO")
 	{ 
 		if(!primero)
 		{
@@ -212,7 +212,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && p.Nullable))
 {
-	if (!ef.IsKey(edmProperty))
+	if (!ef.IsKey(edmProperty)  && code.Escape(edmProperty) != "ACTIVO")
 	{ 
 		if(!primero)
 		{

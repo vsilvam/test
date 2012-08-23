@@ -42,8 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\DTO_CARGA_MASIVA_PRESTACION_HUMANA.cs" />
+    <Compile Include="DTO\DTO_RESUMEN_CARGA_PRESTACIONES.cs" />
+    <Compile Include="Enum\ENUM_CARGA_PRESTACIONES_ESTADO.cs" />
+    <Compile Include="Enum\ENUM_TIPO_PRESTACION.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="TrxCARGA_PRESTACIONES_ENCABEZADO.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrxCARGA_PRESTACIONES_ESTADO.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="TrxCARGA_PRESTACIONES_HUMANAS_DETALLE.cs">
@@ -153,6 +164,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="TrxTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TrxTemplate.cs</LastGenOutput>

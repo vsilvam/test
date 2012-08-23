@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CONVENIO> GetByFilter(int? TIPO_PRESTACIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public List<CONVENIO> GetByFilter(int? TIPO_PRESTACIONId = null, string NOMBRE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCONVENIO repositorio = new RepositorioCONVENIO(context);
-                    return repositorio.GetByFilter(TIPO_PRESTACIONId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(TIPO_PRESTACIONId, NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CONVENIO> GetByFilterWithReferences(int? TIPO_PRESTACIONId = null, string NOMBRE = "", bool? ACTIVO = null)
+		public List<CONVENIO> GetByFilterWithReferences(int? TIPO_PRESTACIONId = null, string NOMBRE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCONVENIO repositorio = new RepositorioCONVENIO(context);
-                    return repositorio.GetByFilterWithReferences(TIPO_PRESTACIONId, NOMBRE, ACTIVO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(TIPO_PRESTACIONId, NOMBRE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<SPDisposeCheckSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <AssembliesToAnalyze>
+    <ProjectAssemblyInfo>
+      <AssemblyPath>d:\Desarrollo\LQCE\LQCE\test\LQCE\LQCE.Modelo\obj\Debug\LQCE.Modelo.dll</AssemblyPath>
+      <ProjectUniqueName>LQCE.Modelo\LQCE.Modelo.csproj</ProjectUniqueName>
+    </ProjectAssemblyInfo>
+    <ProjectAssemblyInfo>
+      <AssemblyPath>d:\Desarrollo\LQCE\LQCE\test\LQCE\LQCE.Repositorio\obj\Debug\LQCE.Repositorio.dll</AssemblyPath>
+      <ProjectUniqueName>LQCE.Repositorio\LQCE.Repositorio.csproj</ProjectUniqueName>
+    </ProjectAssemblyInfo>
+    <ProjectAssemblyInfo>
+      <AssemblyPath>d:\Desarrollo\LQCE\LQCE\test\LQCE\App.Infrastructure\obj\Debug\App.Infrastructure.dll</AssemblyPath>
+      <ProjectUniqueName>App.Infrastructure\App.Infrastructure.csproj</ProjectUniqueName>
+    </ProjectAssemblyInfo>
+    <ProjectAssemblyInfo>
+      <AssemblyPath>d:\Desarrollo\LQCE\LQCE\test\LQCE\LQCE.Transaccion\obj\Debug\LQCE.Transaccion.dll</AssemblyPath>
+      <ProjectUniqueName>LQCE.Transaccion\LQCE.Transaccion.csproj</ProjectUniqueName>
+    </ProjectAssemblyInfo>
+    <ProjectAssemblyInfo>
+      <AssemblyPath>d:\Desarrollo\LQCE\LQCE\test\LQCE\LQCE.SharePoint\obj\Debug\LQCE.SharePoint.dll</AssemblyPath>
+      <ProjectUniqueName>LQCE.SharePoint\LQCE.SharePoint.csproj</ProjectUniqueName>
+    </ProjectAssemblyInfo>
+  </AssembliesToAnalyze>
+  <IsOn>false</IsOn>
+  <Debug>false</Debug>
+  <V1>false</V1>
+  <ShowUndocumented>false</ShowUndocumented>
+  <OnlyUndocumented>false</OnlyUndocumented>
+  <TreatProblemsAs>Errors</TreatProblemsAs>
+  <PathToSPDisposeCheck>C:\Program Files (x86)\Microsoft\Sharepoint Dispose Check\SPDisposeCheck.exe</PathToSPDisposeCheck>
+  <ExecuteAfterBuild>true</ExecuteAfterBuild>
+</SPDisposeCheckSettings>

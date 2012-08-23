@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="abfe2d8e-1869-42d9-ab67-67bd1d8a9d08" solutionId="abfe2d8e-1869-42d9-ab67-67bd1d8a9d08" resetWebServer="false" name="LQCE.SharePoint" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="LQCE.Modelo.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\LQCE.Modelo\LQCE.Modelo.csproj" />
+    <projectOutputAssembly location="LQCE.Repositorio.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\LQCE.Repositorio\LQCE.Repositorio.csproj" />
+    <projectOutputAssembly location="App.Infrastructure.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\App.Infrastructure\App.Infrastructure.csproj" />
+    <projectOutputAssembly location="LQCE.Transaccion.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\LQCE.Transaccion\LQCE.Transaccion.csproj" />
+  </assemblies>
   <projectItems>
     <projectItemReference itemId="b6d91426-a831-4786-a7a5-641fbd1110a9" />
     <projectItemReference itemId="4a0015b9-6396-4991-9be0-4fde3fbac792" />

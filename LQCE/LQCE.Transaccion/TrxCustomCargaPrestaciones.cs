@@ -213,5 +213,29 @@ namespace LQCE.Transaccion
                 return null;
             }
         }
+
+
+        public void ActualizarCargaPrestacionHumana(int IdCargaPrestacionHumanaDetalle, string Ficha, string Nombre, 
+            string Rut, string Medico, string Edad, string Telefono, string Procedencia, string FechaRecepcion,
+            string Muestra, string FechaResultados, string Prevision, string Garantia, string Pagado,
+            string Pendiente, bool MarcarValidado, bool MarcarConError, string MensajeError,
+            List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN> Examenes)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                   
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
     }
 }

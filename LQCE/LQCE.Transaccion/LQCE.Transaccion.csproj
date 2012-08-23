@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DTO_CARGA_MASIVA_PRESTACION_HUMANA.cs" />
+    <Compile Include="DTO\DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN.cs" />
     <Compile Include="DTO\DTO_RESUMEN_CARGA_PRESTACIONES.cs" />
     <Compile Include="Enum\ENUM_CARGA_PRESTACIONES_ESTADO.cs" />
     <Compile Include="Enum\ENUM_TIPO_PRESTACION.cs" />

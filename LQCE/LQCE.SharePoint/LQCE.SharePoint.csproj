@@ -53,6 +53,27 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlTemplates\Prestaciones\CargaArchivo.ascx.cs">
+      <DependentUpon>CargaArchivo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\CargaArchivo.ascx.designer.cs">
+      <DependentUpon>CargaArchivo.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx.cs">
+      <DependentUpon>EditarPrestacionesHumanas.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx.designer.cs">
+      <DependentUpon>EditarPrestacionesHumanas.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesVeterinarias.ascx.cs">
+      <DependentUpon>EditarPrestacionesVeterinarias.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesVeterinarias.ascx.designer.cs">
+      <DependentUpon>EditarPrestacionesVeterinarias.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx.cs">
       <DependentUpon>UCCargaMasivaPrestacionesHumanas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -107,6 +128,15 @@
     <Folder Include="Layouts\LQCE.SharePoint\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ControlTemplates\Prestaciones\CargaArchivo.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesVeterinarias.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -118,6 +148,9 @@
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx">
       <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Style\Imagenes\editar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

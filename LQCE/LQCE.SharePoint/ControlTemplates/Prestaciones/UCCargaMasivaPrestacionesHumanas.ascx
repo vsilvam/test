@@ -47,7 +47,7 @@
         <li><strong>RUT</strong>: RUT del paciente. Optativo</li>
         <li><strong>MEDICO</strong>: Nombre del médico. Optativo</li>
         <li><strong>EDAD</strong>: Edad del paciente. Optativo</li>
-        <li><strong>TELEFONO</strong>: Telefono del paciente. Optativo/li>
+        <li><strong>TELEFONO</strong>: Telefono del paciente. Optativo</li>
         <li><strong>PROCEDENCIA: Nombre del cliente. Obligatorio</strong></li>
         <li><strong>FECHA RECEPCION: Fecha de recepcion. Formato . Obligatorio</strong></li>
         <li><strong>MUESTRA: Descripción de la muestra. Optativo</strong></li>
@@ -72,7 +72,7 @@
         <asp:Label ID="lblCantidadRegistros" runat="server"></asp:Label>
         registros.</p>
     <asp:GridView ID="gridPrevia" runat="server" AutoGenerateColumns="False">
-        <Columns>
+        <Columns>            
             <asp:BoundField DataField="ORIGINAL_FECHA" HeaderText="FECHA" />
             <asp:BoundField DataField="ORIGINAL_SOLICITUD" HeaderText="SOLICITUD" />
             <asp:BoundField DataField="DENOMINACION" HeaderText="DENOMINACION" />
@@ -81,6 +81,15 @@
             <asp:BoundField DataField="SENTENCIA" HeaderText="SENTENCIA" />
             <asp:BoundField DataField="MATERIA" HeaderText="MATERIA" />
             <asp:BoundField DataField="MENSAJE" HeaderText="MENSAJE" />
+            <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:DropDownList ID="DropDownList1" runat="server">
+                                <asp:ListItem Value="1">Pendiente</asp:ListItem>
+                                <asp:ListItem Value="2">Aprobada</asp:ListItem>
+                                <asp:ListItem Value="3">Eliminada</asp:ListItem>
+                            </asp:DropDownList>
+                        </ItemTemplate>
+                    </asp:TemplateField>
         </Columns>
     </asp:GridView>
     <asp:Button ID="btnPaso2Aceptar" runat="server" Text="Actualizar" ValidationGroup="paso2"
@@ -99,7 +108,13 @@
             <asp:BoundField DataField="ROL_CS" HeaderText="ROL CS" />
             <asp:BoundField DataField="SENTENCIA" HeaderText="SENTENCIA" />
             <asp:BoundField DataField="MATERIA" HeaderText="MATERIA" />
+            <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg" CommandArgument='<%# Eval("Id") %>'
+                                Height="10px" ToolTip="Editar" OnClick="imgEditar_Click" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
         </Columns>
     </asp:GridView>
-    <asp:Button ID="btnPaso3Salir" Text="Salir" runat="server" PostBackUrl="~/AppAdministracion/AdmCargasMasivas.aspx" />
+    <asp:Button ID="btnPaso3Salir" Text="Salir" runat="server" onclick="btnPaso3Salir_Click" />
 </asp:Panel>

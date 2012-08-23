@@ -127,5 +127,25 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             panelPaso2.Visible = (NumeroPaso == 2);
             panelPaso3.Visible = (NumeroPaso == 3);
         }
+
+        protected void btnPaso2Aceptar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnPaso2Cancelar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnPaso3Salir_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void imgEditar_Click(object sender, ImageClickEventArgs e)
+        {
+
+        }
     }
 }

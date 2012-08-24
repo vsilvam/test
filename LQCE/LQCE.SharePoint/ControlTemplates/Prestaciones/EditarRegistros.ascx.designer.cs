@@ -7,18 +7,27 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace LQCE.SharePoint.Layouts.Prestaciones {
+namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
     
     
-    public partial class CargaMasicaPrestacionesHumanas {
+    public partial class EditarRegistros {
         
         /// <summary>
-        /// Control UCCargaMasivaPrestacionesHumanas1.
+        /// Control pnEditarRegistros.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UserControl UCCargaMasivaPrestacionesHumanas1;
+        protected global::System.Web.UI.WebControls.Panel pnEditarRegistros;
+        
+        /// <summary>
+        /// Control grid.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grid;
     }
 }

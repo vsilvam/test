@@ -10,15 +10,15 @@
 namespace LQCE.SharePoint.Layouts.Prestaciones {
     
     
-    public partial class CargaMasicaPrestacionesHumanas {
+    public partial class RegistroCargaArchivo {
         
         /// <summary>
-        /// Control UCCargaMasivaPrestacionesHumanas1.
+        /// Control RegistroCargaArchivo1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UserControl UCCargaMasivaPrestacionesHumanas1;
+        protected global::System.Web.UI.UserControl RegistroCargaArchivo1;
     }
 }

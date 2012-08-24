@@ -16,7 +16,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    MostrarPaso(1);
+                    MostrarPaso(1);                    
                 }
             }
             catch (Exception ex)
@@ -26,6 +26,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 return;
             }
         }
+       
 
         protected void btnPaso1Template_Click(object sender, EventArgs e)
         {

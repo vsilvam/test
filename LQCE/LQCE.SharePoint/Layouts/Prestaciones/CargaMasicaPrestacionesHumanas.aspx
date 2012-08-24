@@ -13,10 +13,11 @@
 
 <%@ Register Src="~/_controltemplates/Prestaciones/UCCargaMasivaPrestacionesHumanas.ascx"
     TagName="CargaMasivaPrestacionesHumanas" TagPrefix="uc1" %>
+
 <asp:Content ID="PageHead" ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
 </asp:Content>
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <uc1:CargaMasivaPrestacionesHumanas ID="UCCargaMasivaPrestacionesHumanas" runat="server" />
+    <uc1:CargaMasivaPrestacionesHumanas ID="UCCargaMasivaPrestacionesHumanas1" runat="server" />
 </asp:Content>
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
     Carga Masiva Prestaciones Humanas

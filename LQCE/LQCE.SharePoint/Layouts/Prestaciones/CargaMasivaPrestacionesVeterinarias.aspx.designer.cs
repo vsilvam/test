@@ -11,5 +11,14 @@ namespace LQCE.SharePoint.Layouts.Prestaciones {
     
     
     public partial class CargaMasivaPrestacionesVeterinarias {
+        
+        /// <summary>
+        /// Control UCCargaMasivaPrestacionesVeterinarias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UserControl UCCargaMasivaPrestacionesVeterinarias;
     }
 }

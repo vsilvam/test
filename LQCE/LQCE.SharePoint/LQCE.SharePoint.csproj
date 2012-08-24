@@ -74,6 +74,20 @@
     <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesVeterinarias.ascx.designer.cs">
       <DependentUpon>EditarPrestacionesVeterinarias.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EditarRegistros.ascx.cs">
+      <DependentUpon>EditarRegistros.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EditarRegistros.ascx.designer.cs">
+      <DependentUpon>EditarRegistros.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.cs">
+      <DependentUpon>RegistroCargaArchivo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.designer.cs">
+      <DependentUpon>RegistroCargaArchivo.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx.cs">
       <DependentUpon>UCCargaMasivaPrestacionesHumanas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -88,6 +102,13 @@
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx.designer.cs">
       <DependentUpon>UCCargaMasivaPrestacionesVeterinarias.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\CargaArchivo.aspx.cs">
+      <DependentUpon>CargaArchivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\CargaArchivo.aspx.designer.cs">
+      <DependentUpon>CargaArchivo.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx.cs">
       <DependentUpon>CargaMasicaPrestacionesHumanas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -101,6 +122,20 @@
     </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx.designer.cs">
       <DependentUpon>CargaMasivaPrestacionesVeterinarias.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EditarRegistros.aspx.cs">
+      <DependentUpon>EditarRegistros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EditarRegistros.aspx.designer.cs">
+      <DependentUpon>EditarRegistros.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx.cs">
+      <DependentUpon>RegistroCargaArchivo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx.designer.cs">
+      <DependentUpon>RegistroCargaArchivo.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Libreria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,16 +172,31 @@
     <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesVeterinarias.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\EditarRegistros.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Layouts\Prestaciones\CargaArchivo.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\EditarRegistros.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Style\Imagenes\editar.jpg">

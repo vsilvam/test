@@ -8,14 +8,14 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CargaMasivaPrestacionesVeterinarias.aspx.cs" Inherits="LQCE.SharePoint.Layouts.Prestaciones.CargaMasivaPrestacionesVeterinarias" DynamicMasterPageFile="~masterurl/default.master" %>
 
 <%@ Register Src="~/_controltemplates/Prestaciones/UCCargaMasivaPrestacionesVeterinarias.ascx"
-    TagName="CargaMasivaPrestacionesVeterinarias" TagPrefix="uc1" %>
+    TagName="UCCargaMasivaPrestacionesVeterinarias" TagPrefix="uc1" %>
 
 <asp:Content ID="PageHead" ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
 
 </asp:Content>
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
-
+    <uc1:UCCargaMasivaPrestacionesVeterinarias ID="UCCargaMasivaPrestacionesVeterinarias" runat="server" />
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">

@@ -196,6 +196,8 @@ namespace LQCE.Transaccion
                                     item.CARGA_PRESTACIONES_HUMANAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION) : item.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION),
                                 ID_ESTADO = item.CARGA_PRESTACIONES_ESTADO.ID,
                                 NOMBRE_ESTADO = item.CARGA_PRESTACIONES_ESTADO.NOMBRE,
+                                ID_TIPO_PRESTACION = item.TIPO_PRESTACION.ID,
+                                NOMBRE_TIPO_PRESTACION = item.TIPO_PRESTACION.NOMBRE,
                                 TOTAL_REGISTROS = item.CARGA_PRESTACIONES_HUMANAS_DETALLE.Count()
                                     + item.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Count(),
                                 REGISTROS_VALIDADOS = item.CARGA_PRESTACIONES_HUMANAS_DETALLE.Count(d => d.VALIDADO)
@@ -226,7 +228,133 @@ namespace LQCE.Transaccion
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                   
+                    RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
+
+                    var objDetalle = _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByIdWithReferences(IdCargaPrestacionHumanaDetalle);
+                    objDetalle.FICHA = Ficha;
+                    objDetalle.NOMBRE = Nombre;
+                    objDetalle.RUT = Rut;
+                    objDetalle.MEDICO = Medico;
+                    objDetalle.EDAD = Edad;
+                    objDetalle.TELEFONO = Telefono;
+                    objDetalle.PROCEDENCIA = Procedencia;
+                    objDetalle.FECHA_RECEPCION = FechaRecepcion;
+                    objDetalle.MUESTRA = Muestra;
+                    objDetalle.FECHA_RESULTADOS = FechaResultados;
+                    objDetalle.PREVISION = Prevision;
+                    objDetalle.GARANTIA = Garantia;
+                    objDetalle.PAGADO = Pagado;
+                    objDetalle.PENDIENTE = Pendiente;
+                    objDetalle.VALIDADO = MarcarValidado;
+                    objDetalle.ERROR = MarcarConError;
+                    objDetalle.MENSAJE_ERROR = MensajeError;
+                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_DETALLE", objDetalle);
+
+                    // Eliminar filas de examenes
+                    foreach (var objExamen in objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(obj => obj.ACTIVO && !Examenes.Any(dtoExamen => dtoExamen.ID == obj.ID)).ToList())
+                    {
+                        objExamen.ACTIVO = false;
+                        context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", objExamen);
+                    }
+
+                    // Actualizar filas de examenes
+                    foreach (var objExamen in objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(obj => obj.ACTIVO && Examenes.Any(dtoExamen => dtoExamen.ID == obj.ID)).ToList())
+                    {
+                        var dtoExamen = Examenes.First(d => d.ID == objExamen.ID);
+                        objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
+                        objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
+                        objExamen.ACTIVO = false;
+                        context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", objExamen);
+                    }
+
+                    // Nuevas filas de examenes
+                    foreach (var dtoExamen in Examenes.Where(dto => !objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Any(obj => obj.ID == dto.ID)).ToList())
+                    {
+                        CARGA_PRESTACIONES_HUMANAS_EXAMEN objExamen = new CARGA_PRESTACIONES_HUMANAS_EXAMEN();
+                        objExamen.CARGA_PRESTACIONES_HUMANAS_DETALLE = objDetalle;
+                        objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
+                        objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
+                        objExamen.ACTIVO = true;
+                        context.AddToCARGA_PRESTACIONES_HUMANAS_EXAMEN(objExamen);
+                    }
+
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+
+        public void ActualizarCargaPrestacionVeterinarias(int IdCargaPrestacionVeterinariaDetalle, string Ficha, string Nombre,
+               string Especie, string Raza, string Edad, string Sexo, string Solicita, string Telefono, string Medico,
+            string Procedencia, string FechaRecepcion, string FechaMuestra, string FechaResultados, string Pendiente, 
+            string Garantia, string Pagado, string Total,
+               bool MarcarValidado, bool MarcarConError, string MensajeError,
+               List<DTO_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> Examenes)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
+
+                    var objDetalle = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByIdWithReferences(IdCargaPrestacionVeterinariaDetalle);
+                    objDetalle.FICHA = Ficha;
+                    objDetalle.NOMBRE = Nombre;
+                    objDetalle.ESPECIE = Especie;
+                    objDetalle.RAZA = Raza;
+                    objDetalle.EDAD = Edad;
+                    objDetalle.SEXO = Sexo;
+                    objDetalle.SOLICITA = Solicita;
+                    objDetalle.TELEFONO = Telefono;
+                    objDetalle.MEDICO = Medico;
+                    objDetalle.PROCEDENCIA = Procedencia;
+                    objDetalle.FECHA_RECEPCION = FechaRecepcion;
+                    objDetalle.FECHA_MUESTRA = FechaMuestra;
+                    objDetalle.FECHA_RESULTADOS = FechaResultados;
+                    objDetalle.PENDIENTE = Pendiente;
+                    objDetalle.GARANTIA = Garantia;
+                    objDetalle.PAGADO = Pagado;
+                    objDetalle.TOTAL = Total;
+                    objDetalle.VALIDADO = MarcarValidado;
+                    objDetalle.ERROR = MarcarConError;
+                    objDetalle.MENSAJE_ERROR = MensajeError;
+                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
+
+                    // Eliminar filas de examenes
+                    foreach (var objExamen in objDetalle.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(obj => obj.ACTIVO && !Examenes.Any(dtoExamen => dtoExamen.ID == obj.ID)).ToList())
+                    {
+                        objExamen.ACTIVO = false;
+                        context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", objExamen);
+                    }
+
+                    // Actualizar filas de examenes
+                    foreach (var objExamen in objDetalle.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(obj => obj.ACTIVO && Examenes.Any(dtoExamen => dtoExamen.ID == obj.ID)).ToList())
+                    {
+                        var dtoExamen = Examenes.First(d => d.ID == objExamen.ID);
+                        objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
+                        objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
+                        objExamen.ACTIVO = false;
+                        context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", objExamen);
+                    }
+
+                    // Nuevas filas de examenes
+                    foreach (var dtoExamen in Examenes.Where(dto => !objDetalle.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Any(obj => obj.ID == dto.ID)).ToList())
+                    {
+                        CARGA_PRESTACIONES_VETERINARIAS_EXAMEN objExamen = new CARGA_PRESTACIONES_VETERINARIAS_EXAMEN();
+                        objExamen.CARGA_PRESTACIONES_VETERINARIAS_DETALLE = objDetalle;
+                        objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
+                        objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
+                        objExamen.ACTIVO = true;
+                        context.AddToCARGA_PRESTACIONES_VETERINARIAS_EXAMEN(objExamen);
+                    }
+
                     context.SaveChanges();
                 }
             }

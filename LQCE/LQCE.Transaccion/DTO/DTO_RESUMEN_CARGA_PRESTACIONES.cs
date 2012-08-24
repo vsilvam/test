@@ -10,6 +10,8 @@ namespace LQCE.Transaccion.DTO
         public DateTime FECHA_ACTUALIZACION { get; set; }
         public int ID_ESTADO { get; set; }
         public string NOMBRE_ESTADO { get; set; }
+        public int ID_TIPO_PRESTACION { get; set; }
+        public string NOMBRE_TIPO_PRESTACION { get; set; }
         public int TOTAL_REGISTROS { get; set; }
         public int REGISTROS_VALIDADOS { get; set; }
         public int REGISTROS_CON_ERRORES { get; set; }

@@ -20,15 +20,29 @@
             </td>
         </tr>
         <tr>
+        <td>Tipo de Prestacion</td>
             <td>
-                <asp:DropDownList ID="ddlEstado" runat="server">
+                <asp:DropDownList ID="ddlTipoPrestacion" runat="server" DataTextField="NOMBRE" 
+                    DataValueField="ID">
                     <asp:ListItem Value="">Todos</asp:ListItem>
                     <asp:ListItem Value="1">Pendiente</asp:ListItem>
                     <asp:ListItem Value="2">Aprobada</asp:ListItem>
                     <asp:ListItem Value="3">Eliminada</asp:ListItem>
                 </asp:DropDownList>
             </td>
-            <td>
+            </tr>
+            <tr>
+                <td>Estado</td>
+                <td><asp:DropDownList ID="ddlEstado" runat="server" DataTextField="NOMBRE" 
+                        DataValueField="ID">
+                    <asp:ListItem Value="">Todos</asp:ListItem>
+                    <asp:ListItem Value="1">Pendiente</asp:ListItem>
+                    <asp:ListItem Value="2">Completado</asp:ListItem>
+                    <asp:ListItem Value="3">Eliminado</asp:ListItem>
+                </asp:DropDownList></td>
+            </tr>
+            <tr>
+            <td colspan="2">
                 <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
             </td>
         </tr>
@@ -39,23 +53,24 @@
         tiene
         <asp:Label ID="lblCantidadRegistros" runat="server"></asp:Label>
         registros.</p>--%>
-    <asp:GridView ID="gridPrevia" runat="server" AutoGenerateColumns="False">
+    <asp:GridView ID="gridRegistroCargaArchivo" runat="server" 
+        AutoGenerateColumns="False" 
+        onrowdatabound="gridRegistroCargaArchivo_RowDataBound">
         <Columns>
-            <asp:BoundField DataField="NOMBRE" HeaderText="Nombre Archivo" />
-            <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha Carga" />
-            <asp:BoundField DataField=" " HeaderText="N° Total Filas" />
-            <asp:BoundField DataField=" " HeaderText="N° filas con Observaciones" />
-            <asp:BoundField DataField=" " HeaderText="Filas Validadas" />
-            <asp:BoundField DataField=" " HeaderText="Filas con errores" />
-            <asp:TemplateField HeaderText="Estado">
+            <asp:TemplateField HeaderText="Modificar Estado">
                 <ItemTemplate>
-                    <asp:DropDownList ID="DropDownList1" runat="server">
-                        <asp:ListItem Value="1">Pendiente</asp:ListItem>
-                        <asp:ListItem Value="2">Aprobada</asp:ListItem>
-                        <asp:ListItem Value="3">Eliminada</asp:ListItem>
-                    </asp:DropDownList>
+                    <asp:CheckBox ID="ChkEditar" runat="server"  />
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:BoundField DataField="ID" HeaderText="Id" />
+            <asp:BoundField DataField="NOMBRE" HeaderText="Nombre Archivo" />
+            <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha Carga" />
+            <asp:BoundField DataField="TOTAL_REGISTROS" HeaderText="N° Total Fichas" />            
+            <asp:BoundField DataField="REGISTROS_VALIDADOS" HeaderText="Fichas Validadas" />
+            <asp:BoundField DataField="REGISTROS_CON_ERRORES" HeaderText="Fichas con errores" />
+            <asp:BoundField DataField="NOMBRE_TIPO_PRESTACION" HeaderText="Tipo Prestacion" />
+            <asp:BoundField DataField="NOMBRE_ESTADO" HeaderText="Estado" />
+            
             <asp:TemplateField HeaderText="Editar">
                 <ItemTemplate>
                     <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
@@ -64,4 +79,8 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <asp:Button ID="btnEliminarCarga" runat="server" Text="Eliminar Carga" 
+        onclick="btnEliminarCarga_Click" />
+    <asp:Button ID="btnCompletarRevision" runat="server" Text="Completar Revision" 
+        onclick="btnCompletarRevision_Click"  />
 </asp:Panel>

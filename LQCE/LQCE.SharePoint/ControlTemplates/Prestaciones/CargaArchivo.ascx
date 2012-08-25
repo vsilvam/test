@@ -26,7 +26,8 @@
         <tr>
             <td>
                 <asp:DropDownList ID="ddlTipoPrestacion" runat="server" 
-                    onselectedindexchanged="ddlTipoPrestacion_SelectedIndexChanged">
+                    onselectedindexchanged="ddlTipoPrestacion_SelectedIndexChanged" 
+                    DataTextField="NOMBRE" DataValueField="ID">
                     <asp:ListItem Value="0">Seleccione Tipo Prestacion</asp:ListItem>
                     <asp:ListItem Value="1">Humano</asp:ListItem>
                     <asp:ListItem Value="2">Veterinario</asp:ListItem>

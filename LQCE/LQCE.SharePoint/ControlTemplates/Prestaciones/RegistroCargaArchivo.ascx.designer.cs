@@ -31,6 +31,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Label lblMensaje;
         
         /// <summary>
+        /// Control ddlTipoPrestacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoPrestacion;
+        
+        /// <summary>
         /// Control ddlEstado.
         /// </summary>
         /// <remarks>
@@ -49,12 +58,30 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Button btnBuscar;
         
         /// <summary>
-        /// Control gridPrevia.
+        /// Control gridRegistroCargaArchivo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridPrevia;
+        protected global::System.Web.UI.WebControls.GridView gridRegistroCargaArchivo;
+        
+        /// <summary>
+        /// Control btnEliminarCarga.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnEliminarCarga;
+        
+        /// <summary>
+        /// Control btnCompletarRevision.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCompletarRevision;
     }
 }

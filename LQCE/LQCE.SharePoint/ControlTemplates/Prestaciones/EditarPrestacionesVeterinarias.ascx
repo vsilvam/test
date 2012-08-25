@@ -171,4 +171,7 @@
             </td>
         </tr>        
     </table>
+    <!--Validar, marcar error,guarda temporal  "dejar con botones" 
+    En caso de error mostrar mensaje u observacions en la ficha
+    -->
 </asp:Panel>

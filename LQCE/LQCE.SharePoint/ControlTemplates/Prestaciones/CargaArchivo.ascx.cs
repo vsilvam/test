@@ -3,6 +3,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
+using LQCE.Transaccion;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -14,7 +15,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    //MostrarPaso(1);
+                    CargaPrestaciones();
                 }
             }
             catch (Exception ex)
@@ -25,12 +26,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        private void MostrarPaso(int p)
+        private void CargaPrestaciones()
         {
-            //panelPaso1.Visible = (NumeroPaso == 1);
-            //panelPaso2.Visible = (NumeroPaso == 2);
-            //panelPaso3.Visible = (NumeroPaso == 3);
-        }
+            TrxTIPO_PRESTACION prestacion = new TrxTIPO_PRESTACION();
+            ddlTipoPrestacion.DataSource = prestacion.GetAll();
+            ddlTipoPrestacion.DataBind();
+        }        
 
         protected void ddlTipoPrestacion_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -66,6 +67,34 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void btnPaso1Adjuntar_Click(object sender, EventArgs e)
         {
+            if (!fileExcel.HasFile) return;
+
+             //Leer archivo Excel            
+            string fileExt = (fileExcel.FileName).ToLower();
+            if ((fileExt == ".xls") || (fileExt == ".xlsx"))
+            {
+                int fileSize = fileExcel.PostedFile.ContentLength;
+
+                // Limite: 4MB
+                if (fileSize < 4194304)
+                {
+                    int TipoIngreso = ddlTipoPrestacion.SelectedIndex;
+                    string filename = DateTime.UtcNow.ToString("yyyyMMddhhmmssffff") + "_" + fileExcel.FileName;
+                    byte[] Size = fileExcel.FileBytes;
+                    TrxCARGA_PRESTACIONES_ENCABEZADO _TrxCARGA_PRESTACIONES_ENCABEZADO = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                    var ingreso = _TrxCARGA_PRESTACIONES_ENCABEZADO.UploadArchivoPrestaciones(TipoIngreso, filename, Size);
+                }
+                else
+                {
+                    lblMensaje.Text = "El archivo supera el tamaño máximo permitido: 4MB. ";
+                }
+            }
+            else
+            {
+                lblMensaje.Text = "Formato de archivo no permitido. ";
+            }
+
+            #region trash
             /*
             try
             {
@@ -134,6 +163,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 btnPaso1Adjuntar.Visible = true;
             }
              */
+            #endregion
         }
     }
 }

@@ -10,12 +10,63 @@
 <asp:Panel ID="pnEditarRegistros" runat="server">
     <h2>
         Registros Agregados</h2>
-        <asp:GridView ID="grid" runat="server" AutoGenerateColumns="False">
+        <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
+        <legend>Buscador de Prestaciones</legend>
+        <table>
+            <tr>
+                <td>Numero de Ficha</td>
+                <td>
+                    <asp:TextBox ID="txtNroFicha" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>Nombre </td>
+                <td>
+                    <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>Estado de Prestacion</td>
+                <td>
+                    <asp:DropDownList ID="ddlEstadoPrestacion" runat="server" Height="16px">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+            <tr>
+                <td>Procedencia</td>
+                <td>
+                    <asp:TextBox ID="txtProcedencia" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">Fecha Recepcion</td>
+            </tr>
+            <tr>
+                <td>Desde</td>
+                <td>
+                    <asp:TextBox ID="txtDesde" runat="server"></asp:TextBox>
+                </td>
+                <td>Hasta</td>
+                <td>
+                    <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" 
+                        onclick="btnBuscar_Click" />
+                </td>
+            </tr>
+        </table>
+        <asp:GridView ID="grdPrestaciones" runat="server" 
+        AutoGenerateColumns="False" Visible="false" 
+        onrowdatabound="grdPrestaciones_RowDataBound">
         <Columns>
+            <asp:BoundField DataField=" " HeaderText="N° Ficha" />
             <asp:BoundField DataField=" " HeaderText="Nombre" />
-            <asp:BoundField DataField=" " HeaderText="Tipo Prestacion" />
-            <asp:BoundField DataField=" " HeaderText="Examen" />
-            <asp:BoundField DataField=" " HeaderText="Valor" />
+            <asp:BoundField DataField=" " HeaderText="Estado" />
+            <asp:BoundField DataField=" " HeaderText="Procedencia" />
+            <asp:BoundField DataField=" " HeaderText="Fecha Recepcion" DataFormatString="{0:d}" />
             <asp:TemplateField HeaderText="Validar">
                         <ItemTemplate>
                             <asp:RadioButton ID="rbValidaSi" runat="server" Text="Si" />

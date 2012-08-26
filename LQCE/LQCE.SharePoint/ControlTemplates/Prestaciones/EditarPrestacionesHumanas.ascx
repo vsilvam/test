@@ -10,6 +10,8 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditarPrestacionesHumanas.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarPrestacionesHumanas" %>
 <asp:Panel ID="pnEditarPrestPersonas" runat="server">
+<h2>Edición de Fichas Personas</h2>
+<asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
     <table>
         <tr>
             <td colspan="4">
@@ -32,13 +34,13 @@
                 Nombre<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNombre" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 RUT<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtRut" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
             </td>
@@ -50,19 +52,19 @@
                 Medico<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtMedico" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 Edad<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtEdad" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 Telefono<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtTelefono" runat="server" Enabled="false"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -70,13 +72,13 @@
                 Fecha/Hora<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHora1" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 --
             </td>
             <td>
-                <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHora2" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 hr
@@ -86,11 +88,11 @@
         </tr>
         <tr>
             <td colspan="6">
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" Width="100%">
+                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="false" Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="EXAMEN" HeaderText="EXAMEN" />
-                        <asp:BoundField DataField="CODIGO" HeaderText="CODIGO" />
-                        <asp:BoundField DataField="VALOR" HeaderText="VALOR" />
+                        <asp:BoundField DataField="NOMBRE_EXAMEN" HeaderText="EXAMEN" />
+                        <asp:BoundField DataField="ID" HeaderText="CODIGO" />
+                        <asp:BoundField DataField="VALOR_EXAMEN" HeaderText="VALOR" />
                     </Columns>
                 </asp:GridView>
             </td>
@@ -100,13 +102,13 @@
                 Prevision<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPrevision" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 Pagado<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPagado" runat="server" Enabled="false"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -114,13 +116,13 @@
                 Garantia<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtGarantia" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 Pendiente<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPendiente" runat="server" Enabled="false"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -128,19 +130,19 @@
                 Fecha y Hora entrega de resultados
             </td>
             <td>
-                <asp:TextBox ID="TextBox12" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHoraEntrega1" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 --
             </td>
             <td>
-                <asp:TextBox ID="TextBox13" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHoraEntrega2" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 Total<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox14" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtTotal" runat="server" Enabled="false"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -148,32 +150,34 @@
                 Ficha<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox15" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFicha" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 -Servicio<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox16" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtServicio" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 -Diag<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox17" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDiagostico" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 Listo
             </td>
             <td>
-                <asp:TextBox ID="TextBox18" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtListo" runat="server" Enabled="false"></asp:TextBox>
             </td>
             <td>
                 Recepcion<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="TextBox19" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtRecepcion" runat="server" Enabled="false"></asp:TextBox>
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnValidado" runat="server" Text="Validado" 
+        onclick="btnValidado_Click" />
 </asp:Panel>

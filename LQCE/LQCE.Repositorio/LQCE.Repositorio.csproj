@@ -48,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="RepositorioCARGA_PRESTACIONES_ENCABEZADO.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>

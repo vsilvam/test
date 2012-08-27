@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_ENCABEZADOId = null, bool? VALIDADO = null, bool? ERROR = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
-                    return repositorio.GetByFilter(CARGA_PRESTACIONES_ENCABEZADOId, VALIDADO, ERROR, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CARGA_PRESTACIONES_ENCABEZADOId, CARGA_PRESTACIONES_DETALLE_ESTADOId, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ENCABEZADOId = null, bool? VALIDADO = null, bool? ERROR = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
-                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_ENCABEZADOId, VALIDADO, ERROR, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_ENCABEZADOId, CARGA_PRESTACIONES_DETALLE_ESTADOId, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, bool VALIDADO, bool ERROR, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
         {
 		Init();
             try
@@ -156,6 +156,13 @@ namespace LQCE.Transaccion
 					if(Equals(_objCARGA_PRESTACIONES_ENCABEZADO,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_ENCABEZADO con Id =",CARGA_PRESTACIONES_ENCABEZADOId.ToString()));
+					}
+
+					RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO _repositorioCARGA_PRESTACIONES_DETALLE_ESTADO = new RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO(context);
+					CARGA_PRESTACIONES_DETALLE_ESTADO _objCARGA_PRESTACIONES_DETALLE_ESTADO = _repositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById(CARGA_PRESTACIONES_DETALLE_ESTADOId);
+					if(Equals(_objCARGA_PRESTACIONES_DETALLE_ESTADO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_DETALLE_ESTADO con Id =",CARGA_PRESTACIONES_DETALLE_ESTADOId.ToString()));
 					}
 
 					CARGA_PRESTACIONES_HUMANAS_DETALLE _CARGA_PRESTACIONES_HUMANAS_DETALLE = new CARGA_PRESTACIONES_HUMANAS_DETALLE();
@@ -177,8 +184,6 @@ namespace LQCE.Transaccion
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.PAGADO = PAGADO;				
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.PENDIENTE = PENDIENTE;				
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.TOTAL = TOTAL;				
-                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALIDADO = VALIDADO;
-                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.ERROR = ERROR;
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.MENSAJE_ERROR = MENSAJE_ERROR;				
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.ACTIVO = true;				
@@ -186,6 +191,7 @@ namespace LQCE.Transaccion
 					//parents
 						 
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_ENCABEZADO = _objCARGA_PRESTACIONES_ENCABEZADO;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_DETALLE_ESTADO = _objCARGA_PRESTACIONES_DETALLE_ESTADO;
                     
 					context.AddObject("CARGA_PRESTACIONES_HUMANAS_DETALLE",_CARGA_PRESTACIONES_HUMANAS_DETALLE);
                     context.SaveChanges();
@@ -201,7 +207,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CARGA_PRESTACIONES_ENCABEZADOId, bool VALIDADO, bool ERROR, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public void Update(int Id, int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
 		{
 		Init();
 			try
@@ -220,6 +226,13 @@ namespace LQCE.Transaccion
 					if(Equals(_objCARGA_PRESTACIONES_ENCABEZADO,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_ENCABEZADO con Id =",CARGA_PRESTACIONES_ENCABEZADOId.ToString()));
+					}
+						
+					RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO _repositorioCARGA_PRESTACIONES_DETALLE_ESTADO = new RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO(context);
+					CARGA_PRESTACIONES_DETALLE_ESTADO _objCARGA_PRESTACIONES_DETALLE_ESTADO = _repositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById(CARGA_PRESTACIONES_DETALLE_ESTADOId);
+					if(Equals(_objCARGA_PRESTACIONES_DETALLE_ESTADO,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_DETALLE_ESTADO con Id =",CARGA_PRESTACIONES_DETALLE_ESTADOId.ToString()));
 					}
 	
 					//properties
@@ -284,8 +297,6 @@ namespace LQCE.Transaccion
 					{
 						_CARGA_PRESTACIONES_HUMANAS_DETALLE.TOTAL = TOTAL;
 					}
-						_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALIDADO = VALIDADO;
-						_CARGA_PRESTACIONES_HUMANAS_DETALLE.ERROR = ERROR;
 					if (!string.IsNullOrEmpty(MENSAJE_ERROR))
 					{
 						_CARGA_PRESTACIONES_HUMANAS_DETALLE.MENSAJE_ERROR = MENSAJE_ERROR;
@@ -295,6 +306,7 @@ namespace LQCE.Transaccion
 					//parents
 					 
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_ENCABEZADO = _objCARGA_PRESTACIONES_ENCABEZADO;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_DETALLE_ESTADO = _objCARGA_PRESTACIONES_DETALLE_ESTADO;
 
 					context.SaveChanges();
 				}

@@ -47,8 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DTO_DETALLE_CARGA_PRESTACIONES.cs" />
     <Compile Include="DTO\DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN.cs" />
+    <Compile Include="DTO\DTO_RESULTADO_ACTUALIZACION_FICHA.cs" />
     <Compile Include="DTO\DTO_RESUMEN_CARGA_PRESTACIONES.cs" />
+    <Compile Include="Enum\ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.cs" />
     <Compile Include="Enum\ENUM_CARGA_PRESTACIONES_ESTADO.cs" />
     <Compile Include="Enum\ENUM_TIPO_PRESTACION.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +59,9 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TrxCARGA_PRESTACIONES_DETALLE_ESTADO.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="TrxCARGA_PRESTACIONES_ENCABEZADO.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>

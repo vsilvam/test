@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, int? CLIENTEId = null, int? GARANTIA1Id = null, int? PREVISION1Id = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
-                    return repositorio.GetByFilter(CARGA_PRESTACIONES_ENCABEZADOId, CARGA_PRESTACIONES_DETALLE_ESTADOId, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CARGA_PRESTACIONES_ENCABEZADOId, CARGA_PRESTACIONES_DETALLE_ESTADOId, CLIENTEId, GARANTIA1Id, PREVISION1Id, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR, VALOR_FICHA, VALOR_FECHA_MUESTRA, VALOR_FECHA_RECEPCION, VALOR_FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public List<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, int? CLIENTEId = null, int? GARANTIA1Id = null, int? PREVISION1Id = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
-                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_ENCABEZADOId, CARGA_PRESTACIONES_DETALLE_ESTADOId, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_ENCABEZADOId, CARGA_PRESTACIONES_DETALLE_ESTADOId, CLIENTEId, GARANTIA1Id, PREVISION1Id, FECHA_ACTUALIZACION, FICHA, NOMBRE, RUT, MEDICO, EDAD, TELEFONO, PROCEDENCIA, FECHA_RECEPCION, MUESTRA, FECHA_RESULTADOS, PREVISION, GARANTIA, PAGADO, PENDIENTE, TOTAL, MENSAJE_ERROR, VALOR_FICHA, VALOR_FECHA_MUESTRA, VALOR_FECHA_RECEPCION, VALOR_FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, int CLIENTEId, int GARANTIA1Id, int PREVISION1Id, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
         {
 		Init();
             try
@@ -163,6 +163,27 @@ namespace LQCE.Transaccion
 					if(Equals(_objCARGA_PRESTACIONES_DETALLE_ESTADO,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_DETALLE_ESTADO con Id =",CARGA_PRESTACIONES_DETALLE_ESTADOId.ToString()));
+					}
+
+					RepositorioCLIENTE _repositorioCLIENTE = new RepositorioCLIENTE(context);
+					CLIENTE _objCLIENTE = _repositorioCLIENTE.GetById(CLIENTEId);
+					if(Equals(_objCLIENTE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CLIENTE con Id =",CLIENTEId.ToString()));
+					}
+
+					RepositorioGARANTIA _repositorioGARANTIA1 = new RepositorioGARANTIA(context);
+					GARANTIA _objGARANTIA1 = _repositorioGARANTIA1.GetById(GARANTIA1Id);
+					if(Equals(_objGARANTIA1,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado GARANTIA1 con Id =",GARANTIA1Id.ToString()));
+					}
+
+					RepositorioPREVISION _repositorioPREVISION1 = new RepositorioPREVISION(context);
+					PREVISION _objPREVISION1 = _repositorioPREVISION1.GetById(PREVISION1Id);
+					if(Equals(_objPREVISION1,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PREVISION1 con Id =",PREVISION1Id.ToString()));
 					}
 
 					CARGA_PRESTACIONES_HUMANAS_DETALLE _CARGA_PRESTACIONES_HUMANAS_DETALLE = new CARGA_PRESTACIONES_HUMANAS_DETALLE();
@@ -186,12 +207,19 @@ namespace LQCE.Transaccion
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.TOTAL = TOTAL;				
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.MENSAJE_ERROR = MENSAJE_ERROR;				
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FICHA = VALOR_FICHA;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_MUESTRA = VALOR_FECHA_MUESTRA;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION = VALOR_FECHA_RECEPCION;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_ENTREGA_RESULTADOS = VALOR_FECHA_ENTREGA_RESULTADOS;
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.ACTIVO = true;				
 
 					//parents
 						 
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_ENCABEZADO = _objCARGA_PRESTACIONES_ENCABEZADO;
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_DETALLE_ESTADO = _objCARGA_PRESTACIONES_DETALLE_ESTADO;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.CLIENTE = _objCLIENTE;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.GARANTIA1 = _objGARANTIA1;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.PREVISION1 = _objPREVISION1;
                     
 					context.AddObject("CARGA_PRESTACIONES_HUMANAS_DETALLE",_CARGA_PRESTACIONES_HUMANAS_DETALLE);
                     context.SaveChanges();
@@ -207,7 +235,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "")
+		public void Update(int Id, int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, int CLIENTEId, int GARANTIA1Id, int PREVISION1Id, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
 		{
 		Init();
 			try
@@ -233,6 +261,27 @@ namespace LQCE.Transaccion
 					if(Equals(_objCARGA_PRESTACIONES_DETALLE_ESTADO,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_DETALLE_ESTADO con Id =",CARGA_PRESTACIONES_DETALLE_ESTADOId.ToString()));
+					}
+						
+					RepositorioCLIENTE _repositorioCLIENTE = new RepositorioCLIENTE(context);
+					CLIENTE _objCLIENTE = _repositorioCLIENTE.GetById(CLIENTEId);
+					if(Equals(_objCLIENTE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CLIENTE con Id =",CLIENTEId.ToString()));
+					}
+						
+					RepositorioGARANTIA _repositorioGARANTIA1 = new RepositorioGARANTIA(context);
+					GARANTIA _objGARANTIA1 = _repositorioGARANTIA1.GetById(GARANTIA1Id);
+					if(Equals(_objGARANTIA1,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado GARANTIA1 con Id =",GARANTIA1Id.ToString()));
+					}
+						
+					RepositorioPREVISION _repositorioPREVISION1 = new RepositorioPREVISION(context);
+					PREVISION _objPREVISION1 = _repositorioPREVISION1.GetById(PREVISION1Id);
+					if(Equals(_objPREVISION1,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado PREVISION1 con Id =",PREVISION1Id.ToString()));
 					}
 	
 					//properties
@@ -302,11 +351,30 @@ namespace LQCE.Transaccion
 						_CARGA_PRESTACIONES_HUMANAS_DETALLE.MENSAJE_ERROR = MENSAJE_ERROR;
 					}
 						_CARGA_PRESTACIONES_HUMANAS_DETALLE.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
+					if (VALOR_FICHA.HasValue)
+					{
+						_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FICHA = VALOR_FICHA.Value;
+					}
+					if (VALOR_FECHA_MUESTRA.HasValue)
+					{
+						_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_MUESTRA = VALOR_FECHA_MUESTRA.Value;
+					}
+					if (VALOR_FECHA_RECEPCION.HasValue)
+					{
+						_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION = VALOR_FECHA_RECEPCION.Value;
+					}
+					if (VALOR_FECHA_ENTREGA_RESULTADOS.HasValue)
+					{
+						_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_ENTREGA_RESULTADOS = VALOR_FECHA_ENTREGA_RESULTADOS.Value;
+					}
 	
 					//parents
 					 
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_ENCABEZADO = _objCARGA_PRESTACIONES_ENCABEZADO;
                     _CARGA_PRESTACIONES_HUMANAS_DETALLE.CARGA_PRESTACIONES_DETALLE_ESTADO = _objCARGA_PRESTACIONES_DETALLE_ESTADO;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.CLIENTE = _objCLIENTE;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.GARANTIA1 = _objGARANTIA1;
+                    _CARGA_PRESTACIONES_HUMANAS_DETALLE.PREVISION1 = _objPREVISION1;
 
 					context.SaveChanges();
 				}

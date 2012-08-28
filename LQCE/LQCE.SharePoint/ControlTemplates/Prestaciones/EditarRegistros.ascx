@@ -38,7 +38,7 @@
                     <asp:TextBox ID="txtProcedencia" runat="server"></asp:TextBox>
                 </td>
             </tr>
-            <tr>
+            <%--<tr>
                 <td colspan="4">Fecha Recepcion</td>
             </tr>
             <tr>
@@ -50,7 +50,7 @@
                 <td>
                     <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
                 </td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td colspan="4">
                     <asp:Button ID="btnBuscar" runat="server" Text="Buscar" 
@@ -66,13 +66,13 @@
             <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
             <asp:BoundField DataField="NOMBRE_ESTADO_DETALLE" HeaderText="Estado" />
             <asp:BoundField DataField="PROCEDENCIA" HeaderText="Procedencia" />
-            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="Fecha Recepcion" DataFormatString="{0:d}" />
-            <asp:TemplateField HeaderText="Validar">
+            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="Fecha Recepcion" />
+            <%--<asp:TemplateField HeaderText="Validar">
                         <ItemTemplate>
                             <asp:RadioButton ID="rbValidaSi" runat="server" Text="Si" />
                             <asp:RadioButton ID="rbValidaNo" runat="server" Text="No" />
                         </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="Editar">
                         <ItemTemplate>
                             <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg" CommandArgument='<%# Eval("Id") %>'

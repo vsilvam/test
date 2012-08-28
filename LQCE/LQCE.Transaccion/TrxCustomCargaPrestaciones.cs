@@ -28,7 +28,7 @@ namespace LQCE.Transaccion
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    if (!string.IsNullOrEmpty(NombreArchivo))
+                    if (string.IsNullOrEmpty(NombreArchivo))
                         throw new Exception("No se ha señalado nombre de archivo Excel");
                     if (ContenidoArchivo == null)
                         throw new Exception("No se ha incluido contenido del archivo Excel");
@@ -52,7 +52,9 @@ namespace LQCE.Transaccion
                     string archivo = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + NombreArchivo;
                     File.WriteAllBytes(Properties.Settings.Default.DIR_CARGA_EXCEL + archivo, ContenidoArchivo);
 
-                    var datos = ISExcel.ReadExcelFile(archivo, true);
+                    var datos = ISExcel.ReadExcelFile(Properties.Settings.Default.DIR_CARGA_EXCEL + archivo, true);
+                    if (datos == null)
+                        throw new Exception("No se ha leido información en la planilla Excel");
 
                     CARGA_PRESTACIONES_ENCABEZADO objEncabezado = new CARGA_PRESTACIONES_ENCABEZADO();
                     objEncabezado.FECHA_CARGA = DateTime.Now;
@@ -85,6 +87,14 @@ namespace LQCE.Transaccion
                             objDetalle.ACTIVO = true;
                             objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
                             objDetalle.MENSAJE_ERROR = "";
+                            objDetalle.FECHA_ACTUALIZACION = DateTime.Now;
+                            objDetalle.CLIENTE = null;
+                            objDetalle.VALOR_FICHA = null;
+                            objDetalle.VALOR_FECHA_MUESTRA = null;
+                            objDetalle.VALOR_FECHA_RECEPCION = null;
+                            objDetalle.PREVISION1 = null;
+                            objDetalle.GARANTIA1 = null;
+                            objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
                             context.AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(objDetalle);
 
                             AgregarExamenHumano(context, objDetalle, item, "EXAMEN 1", "VALOR 1");
@@ -123,6 +133,16 @@ namespace LQCE.Transaccion
                             objDetalle.ACTIVO = true;
                             objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
                             objDetalle.MENSAJE_ERROR = "";
+                            objDetalle.FECHA_ACTUALIZACION = DateTime.Now;
+                            objDetalle.VALOR_FICHA = null;
+                            objDetalle.CLIENTE = null;
+                            objDetalle.VALOR_FECHA_MUESTRA = null;
+                            objDetalle.VALOR_FECHA_RECEPCION = null;
+                            objDetalle.PREVISION = null;
+                            objDetalle.GARANTIA1 = null;
+                            objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
+                            objDetalle.ESPECIE1 = null;
+                            objDetalle.RAZA1 = null;
                             context.AddToCARGA_PRESTACIONES_VETERINARIAS_DETALLE(objDetalle);
 
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 1", "VALOR 1");
@@ -159,6 +179,8 @@ namespace LQCE.Transaccion
                 objExamen.NOMBRE_EXAMEN = item[ColumnaExamen].ToString();
                 objExamen.VALOR_EXAMEN = item[ColumnaValor].ToString();
                 objExamen.ACTIVO = true;
+                objExamen.FECHA_ACTUALIZACION = DateTime.Now;
+                objExamen.EXAMEN = null;
                 context.AddToCARGA_PRESTACIONES_HUMANAS_EXAMEN(objExamen);
             }
         }
@@ -172,6 +194,8 @@ namespace LQCE.Transaccion
                 objExamen.NOMBRE_EXAMEN = item[ColumnaExamen].ToString();
                 objExamen.VALOR_EXAMEN = item[ColumnaValor].ToString();
                 objExamen.ACTIVO = true;
+                objExamen.FECHA_ACTUALIZACION = DateTime.Now;
+                objExamen.EXAMEN = null;
                 context.AddToCARGA_PRESTACIONES_VETERINARIAS_EXAMEN(objExamen);
             }
         }
@@ -200,8 +224,9 @@ namespace LQCE.Transaccion
                                 ID = item.ID,
                                 ARCHIVO = item.ARCHIVO,
                                 FECHA_CARGA = item.FECHA_CARGA,
-                                FECHA_ACTUALIZACION = item.CARGA_PRESTACIONES_HUMANAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION) > item.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION) ?
-                                    item.CARGA_PRESTACIONES_HUMANAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION) : item.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION),
+                                FECHA_ACTUALIZACION = item.FECHA_CARGA,
+                                //FECHA_ACTUALIZACION = (item.CARGA_PRESTACIONES_HUMANAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION) > item.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION) ?
+                                //    item.CARGA_PRESTACIONES_HUMANAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION) : item.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Max(d => d.FECHA_ACTUALIZACION),
                                 ID_ESTADO = item.CARGA_PRESTACIONES_ESTADO.ID,
                                 NOMBRE_ESTADO = item.CARGA_PRESTACIONES_ESTADO.NOMBRE,
                                 ID_TIPO_PRESTACION = item.TIPO_PRESTACION.ID,
@@ -242,8 +267,8 @@ namespace LQCE.Transaccion
                     if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
                     {
                         var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
-                                ID_ESTADO_DETALLE, null, NUMERO_FICHA, NOMBRE,
-                                "", "", "", "", PROCEDENCIA, "", "", "", "", "", "", "", "", "")
+                                ID_ESTADO_DETALLE, null, null, null, null, NUMERO_FICHA, NOMBRE,
+                                "", "", "", "", PROCEDENCIA, "", "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
                         var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)
@@ -264,8 +289,9 @@ namespace LQCE.Transaccion
                     else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
                     {
                         var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
-                                ID_ESTADO_DETALLE, null, NUMERO_FICHA, NOMBRE,
-                                "", "", "", "", "", "", "", PROCEDENCIA, "", "", "", "", "", "", "", "")
+                                ID_ESTADO_DETALLE, null, null, null, null, null, null,
+                                NUMERO_FICHA, NOMBRE, "", "", "", "", "", "", "", PROCEDENCIA,
+                                "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
                         var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using App.Infrastructure.Runtime;
 using System.IO;
-using System.Threading;
+using System.Web.UI;
+using App.Infrastructure.Runtime;
+using LQCE.Transaccion;
+using LQCE.Transaccion.Enum;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -16,7 +15,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    MostrarPaso(1);                    
+                    
                 }
             }
             catch (Exception ex)
@@ -50,7 +49,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void btnPaso1Adjuntar_Click(object sender, EventArgs e)
         {
-            /*
             try
             {
                 if (Page.IsValid)
@@ -67,44 +65,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         // Limite: 4MB
                         if (fileSize < 4194304)
                         {
-                            string filename = DateTime.UtcNow.ToString("yyyyMMddhhmmssffff") + "_" + fileExcel.FileName;
-                            string archivo = Variables.DirectorioCargaMasiva + @"\" + filename;
-
-                            if (!Directory.Exists(Variables.DirectorioCargaMasiva))
-                            {
-                                Directory.CreateDirectory(Variables.DirectorioCargaMasiva);
-                            }
-
-                            fileExcel.SaveAs(archivo);
-
-                            List<DTOCargaTribunal> lista = new List<DTOCargaTribunal>();
-                            if ((fileExt == ".txt") || (fileExt == ".csv"))
-                            {
-                                lista = ProcesarArchivoTexto(archivo);
-                            }
-                            else if ((fileExt == ".xls") || (fileExt == ".xlsx"))
-                            {
-                                varPathFile = archivo;
-
-                                Guid TaskID = Guid.NewGuid();
-                                this.hdnTaskId.Value = TaskID.ToString();
-
-                                Thread newThread = new Thread(ProcesarArchivoExcel);
-                                newThread.Start();
-
-                                Timer1.Enabled = true;
-                            }
+                            TrxCARGA_PRESTACIONES_ENCABEZADO _TrxCARGA_PRESTACIONES_ENCABEZADO = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                            int IdCargaPrestacionesEncabezado = _TrxCARGA_PRESTACIONES_ENCABEZADO.UploadArchivoPrestaciones((int)ENUM_TIPO_PRESTACION.Humanas, fileExcel.FileName, fileExcel.FileBytes);
+                            Response.Redirect("RegistroCargaArchivo.aspx", false);
                         }
                         else
                         {
-                            lblErrorArchivo.Text = "El archivo supera el tamaño máximo permitido: 4MB. ";
+                            lblMensaje.Text = "El archivo supera el tamaño máximo permitido: 4MB. ";
                         }
                     }
                     else
                     {
-                        lblErrorArchivo.Text = "Formato de archivo no permitido. ";
+                        lblMensaje.Text = "Formato de archivo no permitido. ";
                     }
-
                 }
             }
             catch (Exception ex)
@@ -117,36 +90,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 btnPaso1Adjuntar.Visible = true;
             }
-             */ 
-        }
-
-
-
-        private void MostrarPaso(int NumeroPaso)
-        {
-            panelPaso1.Visible = (NumeroPaso == 1);
-            panelPaso2.Visible = (NumeroPaso == 2);
-            panelPaso3.Visible = (NumeroPaso == 3);
-        }
-
-        protected void btnPaso2Aceptar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnPaso2Cancelar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnPaso3Salir_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void imgEditar_Click(object sender, ImageClickEventArgs e)
-        {
-
         }
     }
 }

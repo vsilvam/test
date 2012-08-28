@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.EXAMEN.Include("CONVENIO_EXAMEN").Include("EXAMEN_DETALLE").Include("EXAMEN_DETALLE1").Include("EXAMEN_SINONIMO").Include("TIPO_PRESTACION").Include("PRESTACION_EXAMEN").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				return _context.EXAMEN.Include("CONVENIO_EXAMEN").Include("EXAMEN_DETALLE").Include("EXAMEN_DETALLE1").Include("EXAMEN_SINONIMO").Include("TIPO_PRESTACION").Include("PRESTACION_EXAMEN").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN.Include("CONVENIO_EXAMEN").Include("EXAMEN_DETALLE").Include("EXAMEN_DETALLE1").Include("EXAMEN_SINONIMO").Include("TIPO_PRESTACION").Include("PRESTACION_EXAMEN") where i.ACTIVO  select i;
+				var q = from i in _context.EXAMEN.Include("CONVENIO_EXAMEN").Include("EXAMEN_DETALLE").Include("EXAMEN_DETALLE1").Include("EXAMEN_SINONIMO").Include("TIPO_PRESTACION").Include("PRESTACION_EXAMEN").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -112,7 +112,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN.Include("CONVENIO_EXAMEN").Include("EXAMEN_DETALLE").Include("EXAMEN_DETALLE1").Include("EXAMEN_SINONIMO").Include("TIPO_PRESTACION").Include("PRESTACION_EXAMEN")  where i.ACTIVO select i;
+				var q = from i in _context.EXAMEN.Include("CONVENIO_EXAMEN").Include("EXAMEN_DETALLE").Include("EXAMEN_DETALLE1").Include("EXAMEN_SINONIMO").Include("TIPO_PRESTACION").Include("PRESTACION_EXAMEN").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(CODIGO))
 				{

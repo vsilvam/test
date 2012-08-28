@@ -37,8 +37,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void CargaFicha(int Id)
         {
             TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
-            //var prestaciones = PrestacionesHumanas.GetByIdWithReferences(Id);
-            var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
+            var prestaciones = PrestacionesHumanas.GetByIdWithReferences2(Id);
+            //var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
 
             //cargar ficha
             lblNroPrestacion.Text = prestaciones.ID.ToString();
@@ -47,14 +47,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtMedico.Text = prestaciones.MEDICO;
             txtEdad.Text = prestaciones.EDAD;
             txtTelefono.Text = prestaciones.TELEFONO;
-            txtFechaHora1.Text = prestaciones.FECHA_RECEPCION.ToString();
-            txtFechaHora2.Text = prestaciones.FECHA_RECEPCION.ToString();
+            txtFechaHora1.Text = prestaciones.FECHA_RECEPCION;
+            txtFechaHora2.Text = prestaciones.FECHA_RECEPCION;
             txtPrevision.Text = prestaciones.PREVISION;
             txtPagado.Text = prestaciones.PAGADO;
             txtGarantia.Text = prestaciones.GARANTIA;
             txtPendiente.Text = prestaciones.PENDIENTE;
-            txtFechaHoraEntrega1.Text = prestaciones.FECHA_RESULTADOS.ToString();
-            txtFechaHoraEntrega2.Text = prestaciones.FECHA_RESULTADOS.ToString();
+            txtFechaHoraEntrega1.Text = prestaciones.FECHA_RESULTADOS;
+            txtFechaHoraEntrega2.Text = prestaciones.FECHA_RESULTADOS;
             txtTotal.Text = prestaciones.TOTAL;
             txtFicha.Text = prestaciones.FICHA;
             txtServicio.Text = prestaciones.MUESTRA;
@@ -67,8 +67,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             grdExamen.DataBind();
 
             //Habilitar Edicion de Ficha
-            string  estado = prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.NOMBRE;
-            if (estado  == ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente.ToString())
+            if (prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente)
                 EditarFicha();
 
         }

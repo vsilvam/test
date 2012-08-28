@@ -24,7 +24,7 @@
                 Tipo de Prestacion
             </td>
             <td>
-                <asp:DropDownList ID="ddlTipoPrestacion" runat="server" DataTextField="NOMBRE" DataValueField="ID">                    
+                <asp:DropDownList ID="ddlTipoPrestacion" runat="server" AppendDataBoundItems="true" DataTextField="NOMBRE" DataValueField="ID">                    
                 </asp:DropDownList>
             </td>
         </tr>
@@ -33,7 +33,7 @@
                 Estado
             </td>
             <td>
-                <asp:DropDownList ID="ddlEstado" runat="server" DataTextField="NOMBRE" DataValueField="ID">
+                <asp:DropDownList ID="ddlEstado" runat="server" AppendDataBoundItems="true" DataTextField="NOMBRE" DataValueField="ID">
                 </asp:DropDownList>
             </td>
         </tr>
@@ -52,7 +52,7 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="ID" HeaderText="Id" />
-            <asp:BoundField DataField="NOMBRE" HeaderText="Nombre Archivo" />
+            <asp:BoundField DataField="ARCHIVO" HeaderText="Nombre Archivo" />
             <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha Carga" />
             <asp:BoundField DataField="TOTAL_REGISTROS" HeaderText="N° Total Fichas" />
             <asp:BoundField DataField="REGISTROS_VALIDADOS" HeaderText="Fichas Validadas" />

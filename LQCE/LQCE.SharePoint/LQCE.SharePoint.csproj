@@ -54,13 +54,6 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlTemplates\Prestaciones\CargaArchivo.ascx.cs">
-      <DependentUpon>CargaArchivo.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlTemplates\Prestaciones\CargaArchivo.ascx.designer.cs">
-      <DependentUpon>CargaArchivo.ascx.cs</DependentUpon>
-    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx.cs">
       <DependentUpon>EditarPrestacionesHumanas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -102,13 +95,6 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx.designer.cs">
       <DependentUpon>UCCargaMasivaPrestacionesVeterinarias.ascx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Layouts\Prestaciones\CargaArchivo.aspx.cs">
-      <DependentUpon>CargaArchivo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Layouts\Prestaciones\CargaArchivo.aspx.designer.cs">
-      <DependentUpon>CargaArchivo.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx.cs">
       <DependentUpon>CargaMasicaPrestacionesHumanas.aspx</DependentUpon>
@@ -156,6 +142,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="ControlTemplates\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4a0015b9-6396-4991-9be0-4fde3fbac792}</SharePointProjectItemId>
     </None>
@@ -171,6 +158,7 @@
     <None Include="Package\Package.Template.xml">
       <DependentUpon>Package.package</DependentUpon>
     </None>
+    <None Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ControlTemplates\LQCE.SharePoint\" />
@@ -178,9 +166,6 @@
     <Folder Include="Layouts\LQCE.SharePoint\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControlTemplates\Prestaciones\CargaArchivo.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -197,9 +182,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="Layouts\Prestaciones\CargaArchivo.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx">

@@ -54,9 +54,19 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION", "TIPO_PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_PRESTACION), "CARGA_PRESTACIONES_ENCABEZADO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_ENCABEZADO))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_DETALLE_ESTADO", "CARGA_PRESTACIONES_DETALLE_ESTADO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_DETALLE_ESTADO), "CARGA_PRESTACIONES_HUMANAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_DETALLE))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_DETALLE_ESTADO", "CARGA_PRESTACIONES_DETALLE_ESTADO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_DETALLE_ESTADO), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.CLIENTE), "CARGA_PRESTACIONES_HUMANAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "GARANTIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.GARANTIA), "CARGA_PRESTACIONES_HUMANAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "PREVISION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PREVISION), "CARGA_PRESTACIONES_HUMANAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.EXAMEN), "CARGA_PRESTACIONES_HUMANAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_EXAMEN))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.CLIENTE), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "ESPECIE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.ESPECIE), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "GARANTIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.GARANTIA), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "PREVISION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PREVISION), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "RAZA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.RAZA), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.EXAMEN), "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN))]
 
 // Nombre de archivo original:
-// Fecha de generación: 2012/08/26 14:35:01
+// Fecha de generación: 2012/08/28 11:46:24
 namespace LQCE.Modelo
 {
     
@@ -1332,6 +1342,50 @@ namespace LQCE.Modelo
                 }
             }
         }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE> CARGA_PRESTACIONES_HUMANAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CARGA_PRESTACIONES_HUMANAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CARGA_PRESTACIONES_HUMANAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
+                }
+            }
+        }
     }
     /// <summary>
     /// No hay ningún comentario para LQCEModelo.CLIENTE_SINONIMO en el esquema.
@@ -2515,6 +2569,28 @@ namespace LQCE.Modelo
                 }
             }
         }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
+                }
+            }
+        }
     }
     /// <summary>
     /// No hay ningún comentario para LQCEModelo.EXAMEN en el esquema.
@@ -2798,6 +2874,50 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION_EXAMEN>("LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN", "PRESTACION_EXAMEN", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "CARGA_PRESTACIONES_HUMANAS_EXAMEN")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_HUMANAS_EXAMEN> CARGA_PRESTACIONES_HUMANAS_EXAMEN
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_HUMANAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "CARGA_PRESTACIONES_HUMANAS_EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_HUMANAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "CARGA_PRESTACIONES_HUMANAS_EXAMEN", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> CARGA_PRESTACIONES_VETERINARIAS_EXAMEN
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", value);
                 }
             }
         }
@@ -3885,6 +4005,50 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_GARANTIA", "PRESTACION", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE> CARGA_PRESTACIONES_HUMANAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_HUMANAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_HUMANAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
                 }
             }
         }
@@ -6125,6 +6289,50 @@ namespace LQCE.Modelo
                 }
             }
         }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE> CARGA_PRESTACIONES_HUMANAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_HUMANAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_HUMANAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
+                }
+            }
+        }
     }
     /// <summary>
     /// No hay ningún comentario para LQCEModelo.RAZA en el esquema.
@@ -6291,6 +6499,28 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA", "PRESTACION_VETERINARIA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CARGA_PRESTACIONES_VETERINARIAS_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE> CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
                 }
             }
         }
@@ -7574,6 +7804,114 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnFECHA_ACTUALIZACIONChanged();
         /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FICHA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<int> VALOR_FICHA
+        {
+            get
+            {
+                return this._VALOR_FICHA;
+            }
+            set
+            {
+                this.OnVALOR_FICHAChanging(value);
+                this.ReportPropertyChanging("VALOR_FICHA");
+                this._VALOR_FICHA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FICHA");
+                this.OnVALOR_FICHAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<int> _VALOR_FICHA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FICHAChanging(global::System.Nullable<int> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FICHAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FECHA_MUESTRA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> VALOR_FECHA_MUESTRA
+        {
+            get
+            {
+                return this._VALOR_FECHA_MUESTRA;
+            }
+            set
+            {
+                this.OnVALOR_FECHA_MUESTRAChanging(value);
+                this.ReportPropertyChanging("VALOR_FECHA_MUESTRA");
+                this._VALOR_FECHA_MUESTRA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FECHA_MUESTRA");
+                this.OnVALOR_FECHA_MUESTRAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _VALOR_FECHA_MUESTRA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_MUESTRAChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_MUESTRAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FECHA_RECEPCION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> VALOR_FECHA_RECEPCION
+        {
+            get
+            {
+                return this._VALOR_FECHA_RECEPCION;
+            }
+            set
+            {
+                this.OnVALOR_FECHA_RECEPCIONChanging(value);
+                this.ReportPropertyChanging("VALOR_FECHA_RECEPCION");
+                this._VALOR_FECHA_RECEPCION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FECHA_RECEPCION");
+                this.OnVALOR_FECHA_RECEPCIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _VALOR_FECHA_RECEPCION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_RECEPCIONChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_RECEPCIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FECHA_ENTREGA_RESULTADOS en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> VALOR_FECHA_ENTREGA_RESULTADOS
+        {
+            get
+            {
+                return this._VALOR_FECHA_ENTREGA_RESULTADOS;
+            }
+            set
+            {
+                this.OnVALOR_FECHA_ENTREGA_RESULTADOSChanging(value);
+                this.ReportPropertyChanging("VALOR_FECHA_ENTREGA_RESULTADOS");
+                this._VALOR_FECHA_ENTREGA_RESULTADOS = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FECHA_ENTREGA_RESULTADOS");
+                this.OnVALOR_FECHA_ENTREGA_RESULTADOSChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _VALOR_FECHA_ENTREGA_RESULTADOS;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_ENTREGA_RESULTADOSChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_ENTREGA_RESULTADOSChanged();
+        /// <summary>
         /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO")]
@@ -7676,6 +8014,123 @@ namespace LQCE.Modelo
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_DETALLE_ESTADO>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_DETALLE_ESTAD" +
                             "O", "CARGA_PRESTACIONES_DETALLE_ESTADO", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CLIENTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CLIENTE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public CLIENTE CLIENTE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CLIENTE").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CLIENTE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CLIENTE en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<CLIENTE> CLIENTEReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CLIENTE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CLIENTE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para GARANTIA1 en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "GARANTIA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public GARANTIA GARANTIA1
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "GARANTIA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "GARANTIA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para GARANTIA1 en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<GARANTIA> GARANTIA1Reference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "GARANTIA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "GARANTIA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PREVISION1 en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "PREVISION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PREVISION PREVISION1
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "PREVISION").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "PREVISION").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PREVISION1 en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PREVISION> PREVISION1Reference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "PREVISION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "PREVISION", value);
                 }
             }
         }
@@ -7881,6 +8336,45 @@ namespace LQCE.Modelo
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_HUMANAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALL" +
                             "E", "CARGA_PRESTACIONES_HUMANAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "EXAMEN")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public EXAMEN EXAMEN
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "EXAMEN").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "EXAMEN").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para EXAMEN en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<EXAMEN> EXAMENReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_EXAMEN", "EXAMEN", value);
                 }
             }
         }
@@ -8479,6 +8973,114 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnFECHA_ACTUALIZACIONChanged();
         /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FICHA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<int> VALOR_FICHA
+        {
+            get
+            {
+                return this._VALOR_FICHA;
+            }
+            set
+            {
+                this.OnVALOR_FICHAChanging(value);
+                this.ReportPropertyChanging("VALOR_FICHA");
+                this._VALOR_FICHA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FICHA");
+                this.OnVALOR_FICHAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<int> _VALOR_FICHA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FICHAChanging(global::System.Nullable<int> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FICHAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FECHA_MUESTRA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> VALOR_FECHA_MUESTRA
+        {
+            get
+            {
+                return this._VALOR_FECHA_MUESTRA;
+            }
+            set
+            {
+                this.OnVALOR_FECHA_MUESTRAChanging(value);
+                this.ReportPropertyChanging("VALOR_FECHA_MUESTRA");
+                this._VALOR_FECHA_MUESTRA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FECHA_MUESTRA");
+                this.OnVALOR_FECHA_MUESTRAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _VALOR_FECHA_MUESTRA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_MUESTRAChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_MUESTRAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FECHA_RECEPCION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> VALOR_FECHA_RECEPCION
+        {
+            get
+            {
+                return this._VALOR_FECHA_RECEPCION;
+            }
+            set
+            {
+                this.OnVALOR_FECHA_RECEPCIONChanging(value);
+                this.ReportPropertyChanging("VALOR_FECHA_RECEPCION");
+                this._VALOR_FECHA_RECEPCION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FECHA_RECEPCION");
+                this.OnVALOR_FECHA_RECEPCIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _VALOR_FECHA_RECEPCION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_RECEPCIONChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_RECEPCIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_FECHA_ENTREGA_RESULTADOS en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> VALOR_FECHA_ENTREGA_RESULTADOS
+        {
+            get
+            {
+                return this._VALOR_FECHA_ENTREGA_RESULTADOS;
+            }
+            set
+            {
+                this.OnVALOR_FECHA_ENTREGA_RESULTADOSChanging(value);
+                this.ReportPropertyChanging("VALOR_FECHA_ENTREGA_RESULTADOS");
+                this._VALOR_FECHA_ENTREGA_RESULTADOS = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_FECHA_ENTREGA_RESULTADOS");
+                this.OnVALOR_FECHA_ENTREGA_RESULTADOSChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _VALOR_FECHA_ENTREGA_RESULTADOS;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_ENTREGA_RESULTADOSChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_FECHA_ENTREGA_RESULTADOSChanged();
+        /// <summary>
         /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO")]
@@ -8586,6 +9188,201 @@ namespace LQCE.Modelo
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_DETALLE_ESTADO>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_DETALLE_" +
                             "ESTADO", "CARGA_PRESTACIONES_DETALLE_ESTADO", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CLIENTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CLIENTE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public CLIENTE CLIENTE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CLIENTE").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CLIENTE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CLIENTE en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<CLIENTE> CLIENTEReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CLIENTE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CLIENTE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CLIENTE", "CLIENTE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para ESPECIE1 en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "ESPECIE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public ESPECIE ESPECIE1
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ESPECIE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "ESPECIE").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ESPECIE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "ESPECIE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para ESPECIE1 en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<ESPECIE> ESPECIE1Reference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<ESPECIE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "ESPECIE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<ESPECIE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE", "ESPECIE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para GARANTIA1 en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "GARANTIA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public GARANTIA GARANTIA1
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "GARANTIA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "GARANTIA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para GARANTIA1 en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<GARANTIA> GARANTIA1Reference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "GARANTIA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<GARANTIA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "GARANTIA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PREVISION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "PREVISION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PREVISION PREVISION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "PREVISION").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "PREVISION").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PREVISION en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PREVISION> PREVISIONReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "PREVISION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PREVISION>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "PREVISION", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para RAZA1 en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "RAZA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public RAZA RAZA1
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<RAZA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "RAZA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<RAZA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "RAZA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para RAZA1 en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<RAZA> RAZA1Reference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<RAZA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "RAZA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<RAZA>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA", "RAZA", value);
                 }
             }
         }
@@ -8792,6 +9589,45 @@ namespace LQCE.Modelo
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINAR" +
                             "IAS_DETALLE", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public EXAMEN EXAMEN
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para EXAMEN en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<EXAMEN> EXAMENReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<EXAMEN>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN", value);
                 }
             }
         }

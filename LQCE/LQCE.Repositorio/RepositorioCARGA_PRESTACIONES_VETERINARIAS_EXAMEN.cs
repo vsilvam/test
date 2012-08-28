@@ -36,7 +36,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			}
 			catch (Exception ex)
             {
@@ -67,7 +67,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") where i.ACTIVO  select i;
+				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN") where i.ACTIVO  select i;
 				return q;
 			}
 			catch (Exception ex)
@@ -78,7 +78,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
 		{
 			Error = string.Empty;
 			try
@@ -101,6 +101,10 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.ID == CARGA_PRESTACIONES_VETERINARIAS_DETALLEId.Value);
 				}
+				if (EXAMENId.HasValue)
+				{
+				  q = q.Where(i => i.EXAMEN.ID == EXAMENId.Value);
+				}
 				return q;
 			}
 			catch (Exception ex)
@@ -111,12 +115,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE")  where i.ACTIVO select i;
+				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN")  where i.ACTIVO select i;
 
 				if (!string.IsNullOrEmpty(NOMBRE_EXAMEN))
 				{
@@ -133,6 +137,10 @@ namespace LQCE.Repositorio
 				if (CARGA_PRESTACIONES_VETERINARIAS_DETALLEId.HasValue)
 				{
 					q = q.Where(i => i.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.ID == CARGA_PRESTACIONES_VETERINARIAS_DETALLEId.Value);
+				}
+				if (EXAMENId.HasValue)
+				{
+					q = q.Where(i => i.EXAMEN.ID == EXAMENId.Value);
 				}
 				return q;
 			}

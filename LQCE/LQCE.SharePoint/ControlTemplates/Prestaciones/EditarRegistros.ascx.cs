@@ -46,7 +46,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 //Se muestra el contenido del archivo seleccionado
                 //if(tipo prestacion)
                 //{
-                    Response.Redirect("_layouts/Prestaciones/EditarPrestacionesHumanas.aspx?Id=" + Id);
+                    Response.Redirect("EditarPrestacionesHumanas.aspx?Id=" + Id, false);
                 //}
                 //else
                 //{
@@ -84,7 +84,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
             TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
             //grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(int.Parse(Id), numero, Nombre, Estado.Value, Procedencia, 10, 10);
-            grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(3, numero, Nombre, Estado.Value, Procedencia, 10, 10);
+            grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(int.Parse(Id), numero, Nombre, Estado, Procedencia, 1, 10);
             grdPrestaciones.DataBind();
         }
 

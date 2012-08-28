@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RepositorioCustomCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
@@ -90,6 +91,7 @@
     <Compile Include="RepositorioCONVENIO_TARIFARIO.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="RepositorioCustomCARGA_PRESTACIONES_HUMANAS_DETALLE.cs" />
     <Compile Include="RepositorioESPECIE.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>

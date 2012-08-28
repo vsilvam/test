@@ -33,6 +33,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void GetEstado()
         {
             TrxCARGA_PRESTACIONES_ESTADO estado = new TrxCARGA_PRESTACIONES_ESTADO();
+            ddlEstado.Items.Clear();
+            ddlEstado.Items.Add(new ListItem("(Todos)", ""));
             ddlEstado.DataSource = estado.GetAll();
             ddlEstado.DataBind();
         }
@@ -40,6 +42,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void GetTipoPrestacion()
         {
             TrxTIPO_PRESTACION prestacion = new TrxTIPO_PRESTACION();
+            ddlTipoPrestacion.Items.Clear();
+            ddlTipoPrestacion.Items.Add(new ListItem("(Todos)", ""));
             ddlTipoPrestacion.DataSource = prestacion.GetAll();
             ddlTipoPrestacion.DataBind();
         }
@@ -58,7 +62,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             if (Id.HasValue)
             {
                 //Se muestra el contenido del archivo seleccionado
-                Response.Redirect("_layouts/Prestaciones/EditarRegistros.aspx?Id=" + Id);
+                Response.Redirect("EditarRegistros.aspx?Id=" + Id, false);
                
             }
         }
@@ -72,7 +76,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             if (!string.IsNullOrEmpty(ddlTipoPrestacion.SelectedValue))
                 prestacion = int.Parse(ddlTipoPrestacion.SelectedValue);
 
-            CargaGrilla(estado.Value,prestacion.Value);
+            CargaGrilla(estado, prestacion);
         }
 
         protected void gridRegistroCargaArchivo_RowDataBound(object sender, GridViewRowEventArgs e)

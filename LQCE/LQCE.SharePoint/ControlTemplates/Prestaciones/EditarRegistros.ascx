@@ -28,7 +28,7 @@
             <tr>
                 <td>Estado de Prestacion</td>
                 <td>
-                    <asp:DropDownList ID="ddlEstadoPrestacion" runat="server" Height="16px">
+                    <asp:DropDownList ID="ddlEstadoPrestacion" runat="server" Height="16px" DataValueField="ID" DataTextField="NOMBRE">
                     </asp:DropDownList>
                 </td>
             </tr>
@@ -62,11 +62,11 @@
         AutoGenerateColumns="False" Visible="false" 
         onrowdatabound="grdPrestaciones_RowDataBound">
         <Columns>
-            <asp:BoundField DataField=" " HeaderText="N° Ficha" />
-            <asp:BoundField DataField=" " HeaderText="Nombre" />
-            <asp:BoundField DataField=" " HeaderText="Estado" />
-            <asp:BoundField DataField=" " HeaderText="Procedencia" />
-            <asp:BoundField DataField=" " HeaderText="Fecha Recepcion" DataFormatString="{0:d}" />
+            <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° Ficha" />
+            <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
+            <asp:BoundField DataField="NOMBRE_ESTADO_DETALLE" HeaderText="Estado" />
+            <asp:BoundField DataField="PROCEDENCIA" HeaderText="Procedencia" />
+            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="Fecha Recepcion" DataFormatString="{0:d}" />
             <asp:TemplateField HeaderText="Validar">
                         <ItemTemplate>
                             <asp:RadioButton ID="rbValidaSi" runat="server" Text="Si" />
@@ -80,5 +80,8 @@
                         </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+        <EmptyDataTemplate>
+            No se encontraron Solicitudes coincidentes.
+        </EmptyDataTemplate>
     </asp:GridView>
 </asp:Panel>

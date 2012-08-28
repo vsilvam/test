@@ -124,6 +124,20 @@
     <Compile Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx.designer.cs">
       <DependentUpon>CargaMasivaPrestacionesVeterinarias.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\EditarPrestacionesHumanas.aspx.cs">
+      <DependentUpon>EditarPrestacionesHumanas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EditarPrestacionesHumanas.aspx.designer.cs">
+      <DependentUpon>EditarPrestacionesHumanas.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EditarPrestacionesVeterinarias.aspx.cs">
+      <DependentUpon>EditarPrestacionesVeterinarias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EditarPrestacionesVeterinarias.aspx.designer.cs">
+      <DependentUpon>EditarPrestacionesVeterinarias.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\EditarRegistros.aspx.cs">
       <DependentUpon>EditarRegistros.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,6 +206,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\EditarPrestacionesHumanas.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\EditarPrestacionesVeterinarias.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\EditarRegistros.aspx">

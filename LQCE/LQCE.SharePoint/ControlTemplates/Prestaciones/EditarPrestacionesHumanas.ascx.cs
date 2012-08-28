@@ -6,6 +6,7 @@ using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Modelo;
 using LQCE.Transaccion.Enum;
+using LQCE.Transaccion.DTO;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -17,7 +18,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    CargaFicha();
+                    //Si toma Id desde url
+                    if (Request.QueryString["Id"] == null)
+                        throw new Exception("No se ha indicado identificador de la cuenta registrada");
+
+                    string Id = Request.QueryString["Id"].ToString();
+                    CargaFicha(int.Parse(Id));
                 }
             }
             catch (Exception ex)
@@ -28,9 +34,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        private void CargaFicha()
+        private void CargaFicha(int Id)
         {
             TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
+            //var prestaciones = PrestacionesHumanas.GetByIdWithReferences(Id);
             var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
 
             //cargar ficha
@@ -97,11 +104,16 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
             var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
 
-            if (prestaciones.ERROR)
+            if (string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
             {
                 lblMensaje.Text = prestaciones.MENSAJE_ERROR;
             }
-            
+            else
+            {
+                TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                //DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana();
+                
+            }
         }
     }
 }

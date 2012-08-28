@@ -16,10 +16,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
-                {
-                    CargaGrilla(null);
+                {                    
                     GetTipoPrestacion();
                     GetEstado();
+                    CargaGrilla(null, null);
                 }
             }
             catch (Exception ex)
@@ -44,10 +44,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             ddlTipoPrestacion.DataBind();
         }
 
-        private void CargaGrilla(int? IdEstado)
+        private void CargaGrilla(int? IdEstado,int? TipoPrestacion)
         {
             TrxCARGA_PRESTACIONES_ENCABEZADO CargaPrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            gridRegistroCargaArchivo.DataSource = CargaPrestacionesEncabezado.GetResumenCargaPrestaciones(IdEstado);
+            gridRegistroCargaArchivo.DataSource = CargaPrestacionesEncabezado.GetResumenCargaPrestaciones(IdEstado, TipoPrestacion);
             gridRegistroCargaArchivo.DataBind();
         }
 
@@ -58,16 +58,21 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             if (Id.HasValue)
             {
                 //Se muestra el contenido del archivo seleccionado
+                Response.Redirect("_layouts/Prestaciones/EditarRegistros.aspx?Id=" + Id);
+               
             }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             int? estado = null;
+            int? prestacion = null;
             if(!string.IsNullOrEmpty(ddlEstado.SelectedValue))
                 estado = int.Parse(ddlEstado.SelectedValue);
+            if (!string.IsNullOrEmpty(ddlTipoPrestacion.SelectedValue))
+                prestacion = int.Parse(ddlTipoPrestacion.SelectedValue);
 
-            CargaGrilla(estado.Value);
+            CargaGrilla(estado.Value,prestacion.Value);
         }
 
         protected void gridRegistroCargaArchivo_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -85,7 +90,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             //Obteber estado de la carga
             int Id = 1;
             TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null);
+            List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null,null);
             foreach (var lis in resumen)
             {
                 if (lis.ID_ESTADO != 1)
@@ -100,7 +105,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             int Id = 1;
             TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null);
+            List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null,null);
             foreach (var lis in resumen)
             {
                 if (lis.ID_ESTADO != 1)// && lis.REGISTROS_PENDIENTES == 0)

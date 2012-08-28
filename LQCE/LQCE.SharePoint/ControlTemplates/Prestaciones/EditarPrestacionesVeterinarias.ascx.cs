@@ -16,7 +16,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    CargaFicha();
+                    //Si toma Id desde url
+                    if (Request.QueryString["Id"] == null)
+                        throw new Exception("No se ha indicado identificador de la cuenta registrada");
+
+                    string Id = Request.QueryString["Id"].ToString();
+                    CargaFicha(int.Parse(Id));
                 }
             }
             catch (Exception ex)
@@ -27,9 +32,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        private void CargaFicha()
+        private void CargaFicha(int Id)
         {
             TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE veterinarias = new TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE();
+            //var prestaciones = veterinarias.GetByIdWithReferences(Id);
             var prestaciones = veterinarias.GetByIdWithReferences(1);
 
             //cargar ficha
@@ -98,7 +104,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE PrestacionesVeterinarias = new TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE();
             var prestaciones = PrestacionesVeterinarias.GetByIdWithReferences(1);
 
-            if (prestaciones.ERROR)
+            if (!string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
             {
                 lblMensaje.Text = prestaciones.MENSAJE_ERROR;
             }

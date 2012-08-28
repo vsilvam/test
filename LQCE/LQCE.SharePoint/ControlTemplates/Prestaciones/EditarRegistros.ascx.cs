@@ -14,8 +14,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
-                {   
+                {
                     GetEstado();
+                    //if (Request.QueryString["Id"] == null)
+                    //    throw new Exception("No se ha indicado identificador de la cuenta registrada");
+
+                    //string Id = Request.QueryString["Id"].ToString();
                 }
             }
             catch (Exception ex)
@@ -35,16 +39,53 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void imgEditar_Click(object sender, ImageClickEventArgs e)
         {
+            ImageButton _link = sender as ImageButton;
+            int? Id = int.Parse(_link.CommandArgument);
+            if (Id.HasValue)
+            {
+                //Se muestra el contenido del archivo seleccionado
+                //if(tipo prestacion)
+                //{
+                    Response.Redirect("_layouts/Prestaciones/EditarPrestacionesHumanas.aspx?Id=" + Id);
+                //}
+                //else
+                //{
+                //    Response.Redirect("_layouts/Prestaciones/EditarPrestacionesVeterinarias.aspx?Id=" + Id);
+                //}
+                
+            }
 
+
+            
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
+            if (Request.QueryString["Id"] == null)
+                throw new Exception("No se ha indicado identificador de la cuenta registrada");
+
+            string Id = Request.QueryString["Id"].ToString();
+
+            //Tomar valores de busqueda
+            string  numero = string.Empty;
+            string Nombre = string.Empty;
+            int? Estado = null;
+            string  Procedencia = string.Empty;
+            if (!string.IsNullOrEmpty(txtNroFicha.Text))
+                numero = txtNroFicha.Text;
+            if (!string.IsNullOrEmpty(txtNombre.Text))
+                Nombre = txtNombre.Text;
+            if (!string.IsNullOrEmpty(ddlEstadoPrestacion.SelectedValue))
+                Estado = int.Parse(ddlEstadoPrestacion.SelectedValue);
+            if (!string.IsNullOrEmpty(txtProcedencia.Text))
+                Procedencia = txtProcedencia.Text;
+
             grdPrestaciones.Visible = true;
 
             TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            //grdPrestaciones.DataSource = carga.GetDTODetalleCargaPrestaciones();
-            //grdPrestaciones.DataBind();
+            //grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(int.Parse(Id), numero, Nombre, Estado.Value, Procedencia, 10, 10);
+            grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(3, numero, Nombre, Estado.Value, Procedencia, 10, 10);
+            grdPrestaciones.DataBind();
         }
 
         protected void grdPrestaciones_RowDataBound(object sender, GridViewRowEventArgs e)

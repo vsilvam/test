@@ -88,7 +88,8 @@
         </tr>
         <tr>
             <td colspan="6">
-                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="false" Width="100%">
+                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="false" 
+                    Width="100%" onrowdatabound="grdExamen_RowDataBound">
                     <Columns>
                         <asp:BoundField DataField="NOMBRE_EXAMEN" HeaderText="EXAMEN" />
                         <asp:BoundField DataField="ID" HeaderText="CODIGO" />

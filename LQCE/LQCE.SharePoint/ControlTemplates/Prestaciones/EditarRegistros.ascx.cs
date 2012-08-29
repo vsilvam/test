@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
+using LQCE.Transaccion.Enum;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -16,10 +17,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     GetEstado();
-                    //if (Request.QueryString["Id"] == null)
-                    //    throw new Exception("No se ha indicado identificador de la cuenta registrada");
-
-                    //string Id = Request.QueryString["Id"].ToString();
                 }
             }
             catch (Exception ex)
@@ -41,17 +38,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             ImageButton _link = sender as ImageButton;
             int? Id = int.Parse(_link.CommandArgument);
+            int? IdTipoPrestacion = int.Parse(_link.CommandName);
             if (Id.HasValue)
             {
                 //Se muestra el contenido del archivo seleccionado
-                //if(tipo prestacion)
-                //{
+                if (IdTipoPrestacion == (int)ENUM_TIPO_PRESTACION.Humanas)
+                {
                     Response.Redirect("EditarPrestacionesHumanas.aspx?Id=" + Id, false);
-                //}
-                //else
-                //{
-                //    Response.Redirect("_layouts/Prestaciones/EditarPrestacionesVeterinarias.aspx?Id=" + Id);
-                //}
+                }
+                else
+                {
+                    Response.Redirect("_layouts/Prestaciones/EditarPrestacionesVeterinarias.aspx?Id=" + Id);
+                }
                 
             }
 
@@ -82,16 +80,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
             grdPrestaciones.Visible = true;
 
-            TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            //grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(int.Parse(Id), numero, Nombre, Estado.Value, Procedencia, 10, 10);
+            TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();            
             grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(int.Parse(Id), numero, Nombre, Estado, Procedencia, 1, 10);
             grdPrestaciones.DataBind();
-        }
-
-        protected void grdPrestaciones_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-
-        }
-
+        }      
     }
 }

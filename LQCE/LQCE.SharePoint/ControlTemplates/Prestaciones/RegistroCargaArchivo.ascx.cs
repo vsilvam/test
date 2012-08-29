@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
+using LQCE.SharePoint.ControlTemplates.App_Code;
+using LQCE.Transaccion.Enum;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -19,7 +21,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {                    
                     GetTipoPrestacion();
                     GetEstado();
-                    CargaGrilla(null, null);
+                    //CargaGrilla(null, null);
                 }
             }
             catch (Exception ex)
@@ -77,49 +79,63 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 prestacion = int.Parse(ddlTipoPrestacion.SelectedValue);
 
             CargaGrilla(estado, prestacion);
-        }
-
-        protected void gridRegistroCargaArchivo_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                DTO_RESUMEN_CARGA_PRESTACIONES carga = (DTO_RESUMEN_CARGA_PRESTACIONES)e.Row.DataItem;
-
-                //Evaluar si se necesita este metodo
-            }
-        }
+        }        
 
         protected void btnEliminarCarga_Click(object sender, EventArgs e)
         {
-            //Obteber estado de la carga
-            int Id = 1;
-            TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null,null);
-            foreach (var lis in resumen)
+            //verificar los registros selecionados
+            foreach (GridViewRow grilla in gridRegistroCargaArchivo.Rows)
             {
-                if (lis.ID_ESTADO != 1)
+                CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
+                if (ChkEditar.Checked)
                 {
-                    //se puede eliminar la carga
-                    //TrxCARGA_PRESTACIONES_ENCABEZADO.CambiarEstado();
+                    //Obteber estado de la carga
+                    TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                    List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null, null);
+                    foreach (var lis in resumen)
+                    {
+                        if (lis.ID_ESTADO != (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
+                        {
+                            //se puede eliminar la carga
+                            int IdCargaPrestacionesEncabezado = lis.ID;
+                            int IdCargaPrestacionesEstado = lis.ID_ESTADO;
+                            carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
+                        }
+                    }
                 }
             }
+            
         }
 
         protected void btnCompletarRevision_Click(object sender, EventArgs e)
         {
-            int Id = 1;
-            TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null,null);
-            foreach (var lis in resumen)
+            //verificar los registros selecionados
+            foreach (GridViewRow grilla in gridRegistroCargaArchivo.Rows)
             {
-                if (lis.ID_ESTADO != 1)// && lis.REGISTROS_PENDIENTES == 0)
+                CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
+                if (ChkEditar.Checked)
                 {
-                    //es posible cambiar al estado completado
-                    //TrxCARGA_PRESTACIONES_ENCABEZADO.CambiarEstado();
+                    TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                    List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null, null);
+                    foreach (var lis in resumen)
+                    {
+                        if (lis.ID_ESTADO != (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
+                        {
+                            //es posible cambiar al estado completado
+                            int IdCargaPrestacionesEncabezado = lis.ID;
+                            int IdCargaPrestacionesEstado = lis.ID_ESTADO;
+                            carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
+                        }
+                    }
                 }
             }
         }
 
-        
+        protected void Paginador1_PageChanged(object sender, CustomPageChangeArgs e)
+        {
+            gridRegistroCargaArchivo.PageSize = (e.CurrentPageSize == 0 ? 10 : e.CurrentPageSize);
+            gridRegistroCargaArchivo.PageIndex = e.CurrentPageNumber;
+            CargaGrilla(null, null);
+        }
     }
 }

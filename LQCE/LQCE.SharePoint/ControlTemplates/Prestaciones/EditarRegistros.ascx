@@ -59,24 +59,18 @@
             </tr>
         </table>
         <asp:GridView ID="grdPrestaciones" runat="server" 
-        AutoGenerateColumns="False" Visible="false" 
-        onrowdatabound="grdPrestaciones_RowDataBound">
+        AutoGenerateColumns="False" Visible="false">
         <Columns>
+            <asp:BoundField DataField="ID_TIPO_PRESTACION" HeaderText="Tipo Prestacion" Visible="false" />
             <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° Ficha" />
             <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
             <asp:BoundField DataField="NOMBRE_ESTADO_DETALLE" HeaderText="Estado" />
             <asp:BoundField DataField="PROCEDENCIA" HeaderText="Procedencia" />
-            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="Fecha Recepcion" />
-            <%--<asp:TemplateField HeaderText="Validar">
-                        <ItemTemplate>
-                            <asp:RadioButton ID="rbValidaSi" runat="server" Text="Si" />
-                            <asp:RadioButton ID="rbValidaNo" runat="server" Text="No" />
-                        </ItemTemplate>
-            </asp:TemplateField>--%>
+            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="Fecha Recepcion" />            
             <asp:TemplateField HeaderText="Editar">
                         <ItemTemplate>
                             <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg" CommandArgument='<%# Eval("Id") %>'
-                                Height="10px" ToolTip="Editar" OnClick="imgEditar_Click" />
+                                Height="20px" ToolTip="Editar" OnClick="imgEditar_Click" CommandName='<%# Eval("ID_TIPO_PRESTACION") %>' />
                         </ItemTemplate>
             </asp:TemplateField>
         </Columns>

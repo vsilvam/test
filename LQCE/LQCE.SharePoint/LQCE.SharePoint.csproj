@@ -54,6 +54,7 @@
     <Reference Include="Microsoft.SharePoint.Security" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlTemplates\App_Code\CustomPageChangeArgs.cs" />
     <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx.cs">
       <DependentUpon>EditarPrestacionesHumanas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -74,6 +75,13 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\EditarRegistros.ascx.designer.cs">
       <DependentUpon>EditarRegistros.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\Paginador.ascx.cs">
+      <DependentUpon>Paginador.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\Paginador.ascx.designer.cs">
+      <DependentUpon>Paginador.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.cs">
       <DependentUpon>RegistroCargaArchivo.ascx</DependentUpon>
@@ -173,6 +181,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\EditarRegistros.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\Paginador.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx">

@@ -114,5 +114,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 
             }
         }
+
+        protected void grdExamen_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+
+        }
     }
 }

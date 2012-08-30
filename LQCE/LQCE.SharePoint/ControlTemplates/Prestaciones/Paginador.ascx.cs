@@ -9,7 +9,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
     public delegate void PageChangedEventHandler(object sender, CustomPageChangeArgs e);
 
-    public partial class Paginador : UserControl
+    public partial class Paginador : System.Web.UI.UserControl
     {
         public event PageChangedEventHandler PageChanged;
 

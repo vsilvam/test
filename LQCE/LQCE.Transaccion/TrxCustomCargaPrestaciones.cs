@@ -249,8 +249,7 @@ namespace LQCE.Transaccion
             }
         }
 
-        public List<DTO_DETALLE_CARGA_PRESTACIONES> GetDetalleCargaPrestaciones(int IdCargaPrestacionesEncabezado,
-            string NUMERO_FICHA, string NOMBRE, int? ID_ESTADO_DETALLE, string PROCEDENCIA, int PAGINA, int REGISTROS)
+        public List<DTO_DETALLE_CARGA_PRESTACIONES> GetDetalleCargaPrestaciones(DTOFindPrestaciones dto)
         {
             try
             {
@@ -260,18 +259,18 @@ namespace LQCE.Transaccion
                     RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
                     RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
 
-                    CARGA_PRESTACIONES_ENCABEZADO objEncabezado = _RepositorioCARGA_PRESTACIONES_ENCABEZADO.GetByIdWithReferences(IdCargaPrestacionesEncabezado);
+                    CARGA_PRESTACIONES_ENCABEZADO objEncabezado = _RepositorioCARGA_PRESTACIONES_ENCABEZADO.GetByIdWithReferences(dto.id);
                     if (objEncabezado == null)
                         throw new Exception("No se encuentra informacion de carga de prestaciones");
 
                     if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
                     {
-                        var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
-                                ID_ESTADO_DETALLE, null, null, null, null, NUMERO_FICHA, NOMBRE,
-                                "", "", "", "", PROCEDENCIA, "", "", "", "", "", "", "", "", "", null, null, null, null)
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(dto.id,
+                                dto.estado, null, null, null, null, dto.numero, dto.nombre,
+                                "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -288,13 +287,13 @@ namespace LQCE.Transaccion
                     }
                     else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
                     {
-                        var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
-                                ID_ESTADO_DETALLE, null, null, null, null, null, null,
-                                NUMERO_FICHA, NOMBRE, "", "", "", "", "", "", "", PROCEDENCIA,
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(dto.id,
+                                dto.estado, null, null, null, null, null, null,
+                                dto.numero, dto.nombre, "", "", "", "", "", "", "", dto.prodedencia,
                                 "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -322,6 +321,227 @@ namespace LQCE.Transaccion
                 throw ex;
             }
         }
+
+        //public List<DTO_DETALLE_CARGA_PRESTACIONES> GetDetalleCargaPrestaciones(int IdCargaPrestacionesEncabezado,
+        //    string NUMERO_FICHA, string NOMBRE, int? ID_ESTADO_DETALLE, string PROCEDENCIA, int PAGINA, int REGISTROS)
+        //{
+        //    try
+        //    {
+        //        using (LQCEEntities context = new LQCEEntities())
+        //        {
+        //            RepositorioCARGA_PRESTACIONES_ENCABEZADO _RepositorioCARGA_PRESTACIONES_ENCABEZADO = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
+        //            RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
+        //            RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
+
+        //            CARGA_PRESTACIONES_ENCABEZADO objEncabezado = _RepositorioCARGA_PRESTACIONES_ENCABEZADO.GetByIdWithReferences(IdCargaPrestacionesEncabezado);
+        //            if (objEncabezado == null)
+        //                throw new Exception("No se encuentra informacion de carga de prestaciones");
+
+        //            if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
+        //            {
+        //                var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
+        //                        ID_ESTADO_DETALLE, null, null, null, null, NUMERO_FICHA, NOMBRE,
+        //                        "", "", "", "", PROCEDENCIA, "", "", "", "", "", "", "", "", "", null, null, null, null)
+        //                        select d;
+
+        //                var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)
+        //                        select new DTO_DETALLE_CARGA_PRESTACIONES
+        //                        {
+        //                            ID = item.ID,
+        //                            ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
+        //                            NUMERO_FICHA = item.FICHA,
+        //                            NOMBRE = item.NOMBRE,
+        //                            ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
+        //                            NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
+        //                            PROCEDENCIA = item.PROCEDENCIA,
+        //                            FECHA_RECEPCION = item.FECHA_RECEPCION
+        //                        };
+
+        //                return r.ToList();
+        //            }
+        //            else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
+        //            {
+        //                var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
+        //                        ID_ESTADO_DETALLE, null, null, null, null, null, null,
+        //                        NUMERO_FICHA, NOMBRE, "", "", "", "", "", "", "", PROCEDENCIA,
+        //                        "", "", "", "", "", "", "", "", null, null, null, null)
+        //                        select d;
+
+        //                var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)
+        //                        select new DTO_DETALLE_CARGA_PRESTACIONES
+        //                        {
+        //                            ID = item.ID,
+        //                            ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
+        //                            NUMERO_FICHA = item.FICHA,
+        //                            NOMBRE = item.NOMBRE,
+        //                            ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
+        //                            NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
+        //                            PROCEDENCIA = item.PROCEDENCIA,
+        //                            FECHA_RECEPCION = item.FECHA_RECEPCION
+        //                        };
+
+        //                return r.ToList();
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("Tipo de carga no identificada");
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ISException.RegisterExcepcion(ex);
+        //        Error = ex.Message;
+        //        throw ex;
+        //    }
+        //}
+                
+        public int GetDetalleCargaPrestacionesCount(DTOFindPrestaciones dto)
+        {
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCARGA_PRESTACIONES_ENCABEZADO _RepositorioCARGA_PRESTACIONES_ENCABEZADO = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
+                    RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
+                    RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
+
+                    CARGA_PRESTACIONES_ENCABEZADO objEncabezado = _RepositorioCARGA_PRESTACIONES_ENCABEZADO.GetByIdWithReferences(dto.id);
+                    if (objEncabezado == null)
+                        throw new Exception("No se encuentra informacion de carga de prestaciones");
+
+                    if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
+                    {
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(dto.id,
+                                dto.estado, null, null, null, null, dto.numero, dto.nombre,
+                                "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
+                                select d;
+
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
+                                select new DTO_DETALLE_CARGA_PRESTACIONES
+                                {
+                                    ID = item.ID,
+                                    ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
+                                    NUMERO_FICHA = item.FICHA,
+                                    NOMBRE = item.NOMBRE,
+                                    ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
+                                    NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
+                                    PROCEDENCIA = item.PROCEDENCIA,
+                                    FECHA_RECEPCION = item.FECHA_RECEPCION
+                                };
+
+                        return r.ToList().Count();
+                    }
+                    else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
+                    {
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(dto.id,
+                                dto.estado, null, null, null, null, null, null,
+                                dto.numero, dto.nombre, "", "", "", "", "", "", "", dto.prodedencia,
+                                "", "", "", "", "", "", "", "", null, null, null, null)
+                                select d;
+
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
+                                select new DTO_DETALLE_CARGA_PRESTACIONES
+                                {
+                                    ID = item.ID,
+                                    ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
+                                    NUMERO_FICHA = item.FICHA,
+                                    NOMBRE = item.NOMBRE,
+                                    ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
+                                    NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
+                                    PROCEDENCIA = item.PROCEDENCIA,
+                                    FECHA_RECEPCION = item.FECHA_RECEPCION
+                                };
+
+                        return r.ToList().Count();
+                    }
+                    else
+                    {
+                        throw new Exception("Tipo de carga no identificada");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        //public int GetDetalleCargaPrestacionesCount(int IdCargaPrestacionesEncabezado,
+        //    string NUMERO_FICHA, string NOMBRE, int? ID_ESTADO_DETALLE, string PROCEDENCIA, int PAGINA, int REGISTROS)
+        //{
+        //    try
+        //    {
+        //        using (LQCEEntities context = new LQCEEntities())
+        //        {
+        //            RepositorioCARGA_PRESTACIONES_ENCABEZADO _RepositorioCARGA_PRESTACIONES_ENCABEZADO = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
+        //            RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
+        //            RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
+
+        //            CARGA_PRESTACIONES_ENCABEZADO objEncabezado = _RepositorioCARGA_PRESTACIONES_ENCABEZADO.GetByIdWithReferences(IdCargaPrestacionesEncabezado);
+        //            if (objEncabezado == null)
+        //                throw new Exception("No se encuentra informacion de carga de prestaciones");
+
+        //            if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
+        //            {
+        //                var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
+        //                        ID_ESTADO_DETALLE, null, null, null, null, NUMERO_FICHA, NOMBRE,
+        //                        "", "", "", "", PROCEDENCIA, "", "", "", "", "", "", "", "", "", null, null, null, null)
+        //                        select d;
+
+        //                var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)
+        //                        select new DTO_DETALLE_CARGA_PRESTACIONES
+        //                        {
+        //                            ID = item.ID,
+        //                            ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
+        //                            NUMERO_FICHA = item.FICHA,
+        //                            NOMBRE = item.NOMBRE,
+        //                            ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
+        //                            NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
+        //                            PROCEDENCIA = item.PROCEDENCIA,
+        //                            FECHA_RECEPCION = item.FECHA_RECEPCION
+        //                        };
+
+        //                return r.ToList().Count();
+        //            }
+        //            else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
+        //            {
+        //                var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(IdCargaPrestacionesEncabezado,
+        //                        ID_ESTADO_DETALLE, null, null, null, null, null, null,
+        //                        NUMERO_FICHA, NOMBRE, "", "", "", "", "", "", "", PROCEDENCIA,
+        //                        "", "", "", "", "", "", "", "", null, null, null, null)
+        //                        select d;
+
+        //                var r = from item in q.OrderBy(d => d.ID).Skip((PAGINA - 1) * REGISTROS).Take(10)
+        //                        select new DTO_DETALLE_CARGA_PRESTACIONES
+        //                        {
+        //                            ID = item.ID,
+        //                            ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
+        //                            NUMERO_FICHA = item.FICHA,
+        //                            NOMBRE = item.NOMBRE,
+        //                            ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
+        //                            NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
+        //                            PROCEDENCIA = item.PROCEDENCIA,
+        //                            FECHA_RECEPCION = item.FECHA_RECEPCION
+        //                        };
+
+        //                return r.ToList().Count();
+        //            }
+        //            else
+        //            {
+        //                throw new Exception("Tipo de carga no identificada");
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ISException.RegisterExcepcion(ex);
+        //        Error = ex.Message;
+        //        throw ex;
+        //    }
+        //}
 
         public void CambiarEstadoCarga(int IdCargaPrestacionesEncabezado, int IdCargaPrestacionesEstado)
         {

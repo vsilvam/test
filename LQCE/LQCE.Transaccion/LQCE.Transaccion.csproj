@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DTOFindPrestaciones.cs" />
     <Compile Include="DTO\DTOPaginador.cs" />
     <Compile Include="TrxCustomCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs" />
     <Compile Include="DTO\DTO_DETALLE_CARGA_PRESTACIONES.cs" />

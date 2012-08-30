@@ -6,7 +6,7 @@
 <%@ Import Namespace="Microsoft.SharePoint" %>
 <%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RegistroCargaArchivo.ascx.cs" Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.RegistroCargaArchivo" %>
-<%@ TagPrefix="uc1" TagName="Paginador" Register Src="~/_controltemplates/Prestaciones/Paginador.ascx"   %>
+<%@ Register TagPrefix="uc1" TagName="Paginador" Register Src="~/_controltemplates/Prestaciones/Paginador.ascx"   %>
 
 
 <asp:Panel ID="pnRegistroCargaArchivo" runat="server">
@@ -71,7 +71,7 @@
             No se encontraron prestaciones coincidentes.
         </EmptyDataTemplate>
     </asp:GridView>
-    <%--<uc1:Paginador ID="Paginador1" runat="server" OnPageChanged="Paginador1_PageChanged"/>--%>
+    <uc1:Paginador ID="Paginador1" runat="server" OnPageChanged="Paginador1_PageChanged"/>
     <asp:Button ID="btnEliminarCarga" runat="server" Text="Eliminar Carga" OnClick="btnEliminarCarga_Click" />
     <asp:Button ID="btnCompletarRevision" runat="server" Text="Completar Revision" OnClick="btnCompletarRevision_Click" />
 </asp:Panel>

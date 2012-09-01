@@ -84,16 +84,30 @@
                 hr
             </td>
             <td>
+                <asp:TextBox ID="txtHora" runat="server" Enabled="false"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td colspan="6">
-                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="false" 
-                    Width="100%" onrowdatabound="grdExamen_RowDataBound">
+                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" 
+                    Width="100%" onrowdatabound="grdExamen_RowDataBound" 
+                    EnableModelValidation="True">
                     <Columns>
-                        <asp:BoundField DataField="NOMBRE_EXAMEN" HeaderText="EXAMEN" />
-                        <asp:BoundField DataField="ID" HeaderText="CODIGO" />
-                        <asp:BoundField DataField="VALOR_EXAMEN" HeaderText="VALOR" />
+                        <asp:TemplateField HeaderText="EXAMEN">
+                            <ItemTemplate>
+                                <asp:Label ID="lblExamen" runat="server" Text='<%# Bind("NOMBRE_EXAMEN") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="CODIGO">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCodigo" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="VALOR">
+                            <ItemTemplate>
+                                <asp:Label ID="lblValor" runat="server" Text='<%# Bind("VALOR_EXAMEN") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </td>
@@ -181,4 +195,13 @@
     </table>
     <asp:Button ID="btnValidado" runat="server" Text="Validado" 
         onclick="btnValidado_Click" />
+        <asp:GridView ID="grdErroresHumanos" runat="server" AutoGenerateColumns="false">
+        <Columns>
+            <asp:TemplateField HeaderText="MENSAJE ERROR">
+                <ItemTemplate>
+                    <asp:Label ID="lblError" runat="server" Text='<%# Bind("ERRORES_VALIDACION") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>            
+        </Columns>
+    </asp:GridView>
 </asp:Panel>

@@ -7,6 +7,7 @@ using LQCE.Transaccion;
 using LQCE.Modelo;
 using LQCE.Transaccion.Enum;
 using LQCE.Transaccion.DTO;
+using System.Collections.Generic;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -99,9 +100,54 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void btnValidado_Click(object sender, EventArgs e)
         {
+            //se obtienen los datos desde el formuario
+            int IdTipoPrestacion = 1;
+            int IdCargaPrestacionesDetalleEstado = 2;
+            string numero = lblNroPrestacion.Text;
+            string nombre = txtNombre.Text;
+            string rut = txtRut.Text;
+            string medico = txtMedico.Text;
+            string edad = txtEdad.Text;
+            string telefono = txtTelefono.Text;
+            string procedencia = string.Empty;
+            string fechaDesde = txtFechaHora1.Text;
+            string fechaHasta = txtFechaHora2.Text;
+            string fechaHora = txtHora.Text;
+            string prevision = txtPrevision.Text;
+            string pagado = txtPagado.Text;
+            string garantia = txtGarantia.Text;
+            string pendiente = txtPendiente.Text;
+            string entregaDesde = txtFechaHoraEntrega1.Text;
+            string entregaHasta = txtFechaHoraEntrega2.Text;
+            string total = txtTotal.Text;
+            string ficha = txtFicha.Text;
+            string servicio = txtServicio.Text;
+            string diagnostico = txtDiagostico.Text;
+            string listo = txtListo.Text;
+            string recepcion  = txtRecepcion.Text;
+            
+            //se recorren los examenes para guardar
+            List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN> lista = new List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN>();
+            DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN _examen;
+            foreach(GridViewRow grilla in grdExamen.Rows)
+            {
+                Label lblExamen = (Label)grilla.FindControl("lblExamen");
+                Label lblCodigo = (Label)grilla.FindControl("lblCodigo");
+                Label lblValor = (Label)grilla.FindControl("lblValor");
+
+                _examen = new DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN();
+                _examen.ID = int.Parse(lblCodigo.Text);
+                _examen.NOMBRE_EXAMEN = lblExamen.Text;
+                _examen.VALOR_EXAMEN = lblValor.Text;                
+                lista.Add(_examen);
+            }
+
+
+
             //Se retornan errores en caso de existir
             TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
             var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
+            string error = prestaciones.MENSAJE_ERROR;
 
             if (string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
             {
@@ -110,7 +156,16 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             else
             {
                 TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                //DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana();
+                DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(IdTipoPrestacion,ficha,nombre,rut,
+                    medico, edad, telefono, procedencia, fechaDesde, "", entregaDesde, prevision, garantia, pagado, pendiente, 
+                    IdCargaPrestacionesDetalleEstado, error, lista);
+
+                if (!resutado.RESULTADO)
+                {
+                    // mostrar errores en grilla
+                    grdErroresHumanos.DataSource = resutado;
+                    grdErroresHumanos.DataBind();
+                }
                 
             }
         }

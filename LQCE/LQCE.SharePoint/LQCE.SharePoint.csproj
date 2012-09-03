@@ -55,6 +55,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlTemplates\App_Code\CustomPageChangeArgs.cs" />
+    <Compile Include="ControlTemplates\Prestaciones\BuscarFactura.ascx.cs">
+      <DependentUpon>BuscarFactura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\BuscarFactura.ascx.designer.cs">
+      <DependentUpon>BuscarFactura.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\DetalleFactura.ascx.cs">
+      <DependentUpon>DetalleFactura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\DetalleFactura.ascx.designer.cs">
+      <DependentUpon>DetalleFactura.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx.cs">
       <DependentUpon>EditarPrestacionesHumanas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -75,6 +89,20 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\EditarRegistros.ascx.designer.cs">
       <DependentUpon>EditarRegistros.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EmitirFactura.ascx.cs">
+      <DependentUpon>EmitirFactura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EmitirFactura.ascx.designer.cs">
+      <DependentUpon>EmitirFactura.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx.cs">
+      <DependentUpon>EmitirNotaCobro.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx.designer.cs">
+      <DependentUpon>EmitirNotaCobro.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\Paginador.ascx.cs">
       <DependentUpon>Paginador.ascx</DependentUpon>
@@ -174,6 +202,12 @@
     <Folder Include="Layouts\LQCE.SharePoint\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ControlTemplates\Prestaciones\BuscarFactura.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\DetalleFactura.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -181,6 +215,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\EditarRegistros.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\EmitirFactura.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\Paginador.ascx">

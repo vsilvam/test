@@ -150,6 +150,8 @@ namespace LQCE.Transaccion
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 3", "VALOR 3");
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 4", "VALOR 4");
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 5", "VALOR 5");
+
+
                         }
                     }
                     else
@@ -771,6 +773,167 @@ namespace LQCE.Transaccion
                 Error = ex.Message;
                 throw ex;
             }
+        }
+
+
+        private List<string> ValidarPrestacionHumana(LQCEEntities context, CARGA_PRESTACIONES_HUMANAS_DETALLE objDetalle)
+        {
+            RepositorioPRESTACION_HUMANA _RepositorioPRESTACION_HUMANA = new RepositorioPRESTACION_HUMANA(context);
+            RepositorioCLIENTE _RepositorioCLIENTE = new RepositorioCLIENTE(context);
+            RepositorioCLIENTE_SINONIMO _RepositorioCLIENTE_SINONIMO = new RepositorioCLIENTE_SINONIMO(context);
+            RepositorioPREVISION _RepositorioPREVISION = new RepositorioPREVISION(context);
+            RepositorioGARANTIA _RepositorioGARANTIA = new RepositorioGARANTIA(context);
+            RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO = new RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO(context);
+            RepositorioEXAMEN _RepositorioEXAMEN = new RepositorioEXAMEN(context);
+            RepositorioEXAMEN_SINONIMO _RepositorioEXAMEN_SINONIMO = new RepositorioEXAMEN_SINONIMO(context);
+
+
+            var EstadoConError = _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById((int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.ConError);
+            if(EstadoConError == null)
+                throw new Exception("No se encuentra registro de error en la tabla Estado de Detalle Carga Prestaciones");
+
+            List<string> ListaValidaciones = new List<string>();
+
+            // Ficha
+            if (string.IsNullOrEmpty(objDetalle.FICHA))
+            {
+                ListaValidaciones.Add("No se ha señalado numero de ficha");
+            }
+            else
+            {
+                int? _ficha = ISConvert.ToNullableInteger(objDetalle.FICHA);
+                if (!_ficha.HasValue)
+                {
+                    ListaValidaciones.Add("FICHA debe ser numérico");
+                }
+                else
+                {
+                    objDetalle.VALOR_FICHA = _ficha.Value;
+
+                    var objPrestacionHumana = _RepositorioPRESTACION_HUMANA.GetById(_ficha.Value);
+                    if (objPrestacionHumana != null)
+                        ListaValidaciones.Add("Ya existe una prestación en el sistema con el mismo número de ficha");
+                }
+            }
+
+            // Cliente
+            if (string.IsNullOrEmpty(objDetalle.PROCEDENCIA))
+            {
+                ListaValidaciones.Add("No se ha señalado PROCEDENCIA en la ficha");
+            }
+            else
+            {
+                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, "", objDetalle.PROCEDENCIA).FirstOrDefault();
+                if (objCliente != null)
+                {
+                    objDetalle.CLIENTE = objCliente;
+                }
+                else
+                {
+                    var objClienteSinonimo = _RepositorioCLIENTE_SINONIMO.GetByFilterWithReferences(null, objDetalle.PROCEDENCIA).FirstOrDefault();
+                    if (objClienteSinonimo != null)
+                    {
+                        objClienteSinonimo.CLIENTE = objClienteSinonimo.CLIENTE;
+                    }
+                    else
+                    {
+                        ListaValidaciones.Add("No se ha podido identificar cliente de la prestación");
+                    }
+                }
+            }
+
+            // Fecha de Muestra
+
+
+            // Fecha de Recepcion
+            if (string.IsNullOrEmpty(objDetalle.FECHA_RECEPCION))
+            {
+                ListaValidaciones.Add("No se ha señalado FECHA DE RECEPCIÓN en la ficha");
+            }
+            else
+            {
+                DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
+                if (!_fechaRecepcion.HasValue)
+                {
+                    ListaValidaciones.Add("FECHA DE RECEPCIÓN no tiene el formato correcto");
+                }
+                else
+                {
+                    objDetalle.VALOR_FECHA_RECEPCION = _fechaRecepcion.Value;
+                }
+            }
+
+            // Prevision
+            if (string.IsNullOrEmpty(objDetalle.PREVISION))
+            {
+                ListaValidaciones.Add("No se ha señalado PREVISION en la ficha");
+            }
+            else
+            {
+                var objPrevision = _RepositorioPREVISION.GetByFilter(objDetalle.PREVISION).FirstOrDefault();
+                if (objPrevision != null)
+                {
+                    objDetalle.PREVISION1 = objPrevision;
+                }
+                else
+                {
+                    ListaValidaciones.Add("No se ha podido identificar la PREVISION en la ficha");
+                }
+            }
+
+            // Garantia
+            if (string.IsNullOrEmpty(objDetalle.GARANTIA))
+            {
+                ListaValidaciones.Add("No se ha señalado GARANTIA en la ficha");
+            }
+            else
+            {
+                var objGarantia = _RepositorioGARANTIA.GetByFilter(objDetalle.GARANTIA).FirstOrDefault();
+                if (objGarantia != null)
+                {
+                    objDetalle.GARANTIA1 = objGarantia;
+                }
+                else
+                {
+                    ListaValidaciones.Add("No se ha podido identificar la GARANTIA en la ficha");
+                }
+            }
+
+            // Fecha de Entrega de Resultados
+            if (string.IsNullOrEmpty(objDetalle.FECHA_RESULTADOS))
+            {
+                ListaValidaciones.Add("No se ha señalado FECHA DE ENTREGA DE RESULTADOS en la ficha");
+            }
+            else
+            {
+                DateTime? _fechaResultados = ISConvert.ToNullableDateTime(objDetalle.FECHA_RESULTADOS);
+                if (!_fechaResultados.HasValue)
+                {
+                    ListaValidaciones.Add("FECHA DE ENTREGA DE RESULTADOS no tiene el formato correcto");
+                }
+                else
+                {
+                    objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = _fechaResultados.Value;
+                }
+            }
+
+            // Examenes
+            foreach (var item in objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN)
+            {
+                // Examen
+            }
+
+            if (ListaValidaciones.Any())
+            {
+                objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = EstadoConError;
+                string errores = "";
+                foreach(var item in ListaValidaciones)
+                    errores += item + Environment.NewLine;
+                objDetalle.MENSAJE_ERROR = errores;
+            }
+            context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_DETALLE", objDetalle);
+
+            return ListaValidaciones;
         }
     }
 }

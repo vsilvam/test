@@ -66,7 +66,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.EXAMEN), "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN))]
 
 // Nombre de archivo original:
-// Fecha de generación: 2012/08/28 11:46:24
+// Fecha de generación: 2012/09/03 18:32:14
 namespace LQCE.Modelo
 {
     
@@ -8296,6 +8296,33 @@ namespace LQCE.Modelo
         partial void OnFECHA_ACTUALIZACIONChanging(global::System.DateTime value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnFECHA_ACTUALIZACIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad VALOR_VALOR_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<int> VALOR_VALOR_EXAMEN
+        {
+            get
+            {
+                return this._VALOR_VALOR_EXAMEN;
+            }
+            set
+            {
+                this.OnVALOR_VALOR_EXAMENChanging(value);
+                this.ReportPropertyChanging("VALOR_VALOR_EXAMEN");
+                this._VALOR_VALOR_EXAMEN = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("VALOR_VALOR_EXAMEN");
+                this.OnVALOR_VALOR_EXAMENChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<int> _VALOR_VALOR_EXAMEN;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_VALOR_EXAMENChanging(global::System.Nullable<int> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnVALOR_VALOR_EXAMENChanged();
         /// <summary>
         /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
         /// </summary>

@@ -14,6 +14,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             grdNotaCobro.Visible = true;
+
+            string desde = !string.IsNullOrEmpty(txtDesde.Text) ? txtDesde.Text : string.Empty;
+            string hasta = !string.IsNullOrEmpty(txtHasta.Text) ? txtDesde.Text : string.Empty;
+            string cliente = !string.IsNullOrEmpty(txtCliente.Text) ? txtCliente.Text : string.Empty;
         }
     }
 }

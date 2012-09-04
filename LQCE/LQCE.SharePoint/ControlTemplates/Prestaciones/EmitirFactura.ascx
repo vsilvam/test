@@ -18,6 +18,11 @@
         </tr>
         <tr>
             <td>
+                <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 Periodo
             </td>
         </tr>
@@ -40,16 +45,57 @@
                 Clientes
             </td>
             <td>
-                <asp:TextBox ID="txtCliente" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlClientes" runat="server" DataTextField="NOMBRE" DataValueField="ID">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
             <td>
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" 
+                <asp:Button ID="btnBuscar" runat="server" Text="Calcuar facturas" 
                     onclick="btnBuscar_Click" />
             </td>
         </tr>
     </table>
-    <asp:GridView ID="grdFacturas" runat="server" AutoGenerateColumns="false" Visible="false">
+    </asp:Panel>
+    <asp:Panel ID="pnFacturas" runat="server" Visible="false">
+    <asp:GridView ID="grdFacturas" runat="server" AutoGenerateColumns="false" 
+                    Width="100%" onrowdatabound="grdFacturas_RowDataBound">
+    <Columns>
+            <asp:TemplateField HeaderText="RUT">
+                <ItemTemplate>
+                    <asp:Label ID="lblRut" runat="server" Text='<%# Bind("Rut") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="NOMBRE">
+                <ItemTemplate>
+                    <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="CANTIDAD">
+                <ItemTemplate>
+                    <asp:Label ID="lblCantidad" runat="server" Text='<%# Bind("Cantidad") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="TOTAL A COBRAR">
+                <ItemTemplate>
+                    <asp:Label ID="lblTotal" runat="server" Text='<%# Bind("Total") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="% DESCUENTO">
+                <ItemTemplate>
+                    <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("Descuento") %>'></asp:TextBox>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+        </Columns>
+        <EmptyDataTemplate>
+            No se encontraron prestaciones coincidentes.
+        </EmptyDataTemplate>
     </asp:GridView>
+    <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" 
+        onclick="btnEmitir_Click" />
 </asp:Panel>

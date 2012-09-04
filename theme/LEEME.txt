@@ -1,0 +1,14 @@
+
+**El archivo COREV4 debe ser copiado y pegado en la siguiente ruta:
+
+C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\TEMPLATE\LAYOUTS\1033\STYLES\Themable
+
+**El archivo v4 debe ser copiado y pegado en la siguiente ruta:
+
+C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\TEMPLATE\LAYOUTS
+
+** Las imagenes contenidas en la carpeta IMAGES debes ser copiadas en la siguiente ruta:
+
+C:\Program Files\Common Files\Microsoft Shared\Web Server Extensions\14\TEMPLATE\IMAGES
+
+

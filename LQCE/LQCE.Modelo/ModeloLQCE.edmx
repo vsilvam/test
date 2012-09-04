@@ -380,6 +380,7 @@
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
           <Property Name="FECHA_ACTUALIZACION" Type="datetime" Nullable="false" />
           <Property Name="VALOR_ID_EXAMEN" Type="int" />
+          <Property Name="VALOR_VALOR_EXAMEN" Type="int" />
         </EntityType>
         <EntityType Name="CLIENTE">
           <Key>
@@ -2182,6 +2183,7 @@
           <NavigationProperty Name="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" FromRole="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" ToRole="CARGA_PRESTACIONES_VETERINARIAS_DETALLE" />
           <Property Type="DateTime" Name="FECHA_ACTUALIZACION" Nullable="false" />
           <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN" FromRole="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" ToRole="EXAMEN" />
+          <Property Type="Int32" Name="VALOR_VALOR_EXAMEN" />
         </EntityType>
         <Association Name="FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO">
           <End Type="LQCEModelo.CARGA_PRESTACIONES_ENCABEZADO" Role="CARGA_PRESTACIONES_ENCABEZADO" Multiplicity="1" />
@@ -2930,6 +2932,7 @@
           <EntitySetMapping Name="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
             <EntityTypeMapping TypeName="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
               <MappingFragment StoreEntitySet="CARGA_PRESTACIONES_VETERINARIAS_EXAMEN">
+                <ScalarProperty Name="VALOR_VALOR_EXAMEN" ColumnName="VALOR_VALOR_EXAMEN" />
                 <ScalarProperty Name="FECHA_ACTUALIZACION" ColumnName="FECHA_ACTUALIZACION" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="VALOR_EXAMEN" ColumnName="VALOR_EXAMEN" />

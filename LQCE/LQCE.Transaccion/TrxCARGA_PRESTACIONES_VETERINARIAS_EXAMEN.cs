@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public List<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_VETERINARIAS_EXAMEN repositorio = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_EXAMEN(context);
-                    return repositorio.GetByFilter(CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, EXAMENId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, EXAMENId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN, VALOR_VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public List<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_VETERINARIAS_EXAMEN repositorio = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_EXAMEN(context);
-                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, EXAMENId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, EXAMENId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN, VALOR_VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+        public int Add(int CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
         {
 		Init();
             try
@@ -172,6 +172,7 @@ namespace LQCE.Transaccion
                     _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.NOMBRE_EXAMEN = NOMBRE_EXAMEN;				
                     _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.VALOR_EXAMEN = VALOR_EXAMEN;				
                     _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
+                    _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.VALOR_VALOR_EXAMEN = VALOR_VALOR_EXAMEN;
                     _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.ACTIVO = true;				
 
 					//parents
@@ -193,7 +194,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public void Update(int Id, int CARGA_PRESTACIONES_VETERINARIAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
 		{
 		Init();
 			try
@@ -232,6 +233,10 @@ namespace LQCE.Transaccion
 						_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.VALOR_EXAMEN = VALOR_EXAMEN;
 					}
 						_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.FECHA_ACTUALIZACION = FECHA_ACTUALIZACION;
+					if (VALOR_VALOR_EXAMEN.HasValue)
+					{
+						_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.VALOR_VALOR_EXAMEN = VALOR_VALOR_EXAMEN.Value;
+					}
 	
 					//parents
 					 

@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="TrxCustomCargaPrestaciones.cs" />
     <Compile Include="TrxCustomCARGA_PRESTACIONES_HUMANAS_DETALLE.cs" />
+    <Compile Include="TrxCustomFacturacion.cs" />
     <Compile Include="TrxESPECIE.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>

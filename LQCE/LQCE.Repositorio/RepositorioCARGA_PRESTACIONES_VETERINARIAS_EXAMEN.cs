@@ -78,7 +78,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
 		{
 			Error = string.Empty;
 			try
@@ -96,6 +96,10 @@ namespace LQCE.Repositorio
 				if (FECHA_ACTUALIZACION.HasValue)
 				{
 				  q = q.Where(i => i.FECHA_ACTUALIZACION == FECHA_ACTUALIZACION.Value);
+				}
+				if (VALOR_VALOR_EXAMEN.HasValue)
+				{
+				  q = q.Where(i => i.VALOR_VALOR_EXAMEN == VALOR_VALOR_EXAMEN.Value);
 				}
 				if (CARGA_PRESTACIONES_VETERINARIAS_DETALLEId.HasValue)
 				{
@@ -115,7 +119,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "")
+		public IQueryable<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_VETERINARIAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
 		{
 			Error = string.Empty;
 			try
@@ -133,6 +137,10 @@ namespace LQCE.Repositorio
 				if (FECHA_ACTUALIZACION.HasValue)
 				{
 					q = q.Where(i => i.FECHA_ACTUALIZACION == FECHA_ACTUALIZACION.Value);
+				}
+				if (VALOR_VALOR_EXAMEN.HasValue)
+				{
+					q = q.Where(i => i.VALOR_VALOR_EXAMEN == VALOR_VALOR_EXAMEN.Value);
 				}
 				if (CARGA_PRESTACIONES_VETERINARIAS_DETALLEId.HasValue)
 				{

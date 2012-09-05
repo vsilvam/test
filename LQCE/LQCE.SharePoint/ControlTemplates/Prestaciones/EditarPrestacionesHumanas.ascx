@@ -22,12 +22,6 @@
             </td>
             <td>
             </td>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
         </tr>
         <tr>
             <td>
@@ -91,25 +85,51 @@
             <td colspan="6">
                 <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" 
                     Width="100%" onrowdatabound="grdExamen_RowDataBound" 
-                    EnableModelValidation="True">
+                    EnableModelValidation="True">                    
                     <Columns>
                         <asp:TemplateField HeaderText="EXAMEN">
                             <ItemTemplate>
-                                <asp:Label ID="lblExamen" runat="server" Text='<%# Bind("NOMBRE_EXAMEN") %>'></asp:Label>
+                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="CODIGO">
                             <ItemTemplate>
-                                <asp:Label ID="lblCodigo" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                                <asp:TextBox ID="txtCodigo" runat="server" Text='<%# Eval("ID") %>'></asp:TextBox>                                
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="VALOR">
                             <ItemTemplate>
-                                <asp:Label ID="lblValor" runat="server" Text='<%# Bind("VALOR_EXAMEN") %>'></asp:Label>
+                                <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                    </Columns>
+                    </Columns>                    
                 </asp:GridView>
+            </td>
+        </tr>
+        <tr>
+        <td colspan="6">
+            
+        </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <table>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" 
+                                onclick="btnAgrega_Click" />
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>

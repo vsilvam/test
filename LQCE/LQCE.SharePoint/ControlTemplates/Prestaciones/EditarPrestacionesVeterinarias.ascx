@@ -120,19 +120,19 @@
                     Width="100%" onrowdatabound="grdExamen_RowDataBound" 
                     EnableModelValidation="True">
                     <Columns>
-                        <asp:TemplateField HeaderText="EXAMEN">
+                        <asp:TemplateField HeaderText="ID">
                             <ItemTemplate>
-                                <asp:Label ID="lblId" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                                <asp:TextBox ID="txtId" runat="server" Text='<%# Eval("ID") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="EXAMEN">
                             <ItemTemplate>
-                                <asp:Label ID="lblExamen" runat="server" Text='<%# Bind("NOMBRE_EXAMEN") %>'></asp:Label>
+                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="VALOR">
                             <ItemTemplate>
-                                <asp:Label ID="lblValor" runat="server" Text='<%# Bind("VALOR_EXAMEN") %>'></asp:Label>
+                                <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

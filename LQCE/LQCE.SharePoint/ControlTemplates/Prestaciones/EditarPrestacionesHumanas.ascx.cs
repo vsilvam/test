@@ -131,16 +131,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN _examen;
             foreach(GridViewRow grilla in grdExamen.Rows)
             {
-                Label lblExamen = (Label)grilla.FindControl("lblExamen");
-                Label lblCodigo = (Label)grilla.FindControl("lblCodigo");
-                Label lblValor = (Label)grilla.FindControl("lblValor");
+                TextBox txtExamen = (TextBox)grilla.FindControl("lblExamen");
+                TextBox txtCodigo = (TextBox)grilla.FindControl("lblCodigo");
+                TextBox txtValor = (TextBox)grilla.FindControl("lblValor");
 
                 _examen = new DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN();
-                _examen.ID = int.Parse(lblCodigo.Text);
-                _examen.NOMBRE_EXAMEN = lblExamen.Text;
-                _examen.VALOR_EXAMEN = lblValor.Text;                
+                _examen.ID = int.Parse(txtExamen.Text);
+                _examen.NOMBRE_EXAMEN = txtCodigo.Text;
+                _examen.VALOR_EXAMEN = txtValor.Text;                
                 lista.Add(_examen);
             }
+
+            //se guardan las modificaciones de la grilla.
+
 
 
 
@@ -173,6 +176,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         protected void grdExamen_RowDataBound(object sender, GridViewRowEventArgs e)
         {
 
+        }
+
+        protected void btnAgrega_Click(object sender, EventArgs e)
+        {
+            string examen = txtExamen.Text;
+            string codigo = txtCodigo.Text;
+            string valor = txtValor.Text;
+
+            //guardar datos y cargar nuevamente la grilla
         }
     }
 }

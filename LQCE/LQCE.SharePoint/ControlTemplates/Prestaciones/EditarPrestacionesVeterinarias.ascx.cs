@@ -133,14 +133,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             DTO_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN _examen;
             foreach(GridViewRow grilla in grdExamen.Rows)
             {
-                Label lblId = (Label)grilla.FindControl("lblId");
-                Label lblExamen = (Label)grilla.FindControl("lblExamen");                
-                Label lblValor = (Label)grilla.FindControl("lblValor");
+                TextBox txtId = (TextBox)grilla.FindControl("lblId");
+                TextBox txtExamen = (TextBox)grilla.FindControl("lblExamen");
+                TextBox txtValor = (TextBox)grilla.FindControl("lblValor");
 
                 _examen = new DTO_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN();
-                _examen.ID = int.Parse(lblId.Text);
-                _examen.NOMBRE_EXAMEN = lblExamen.Text;
-                _examen.VALOR_EXAMEN = lblValor.Text;
+                _examen.ID = int.Parse(txtId.Text);
+                _examen.NOMBRE_EXAMEN = txtExamen.Text;
+                _examen.VALOR_EXAMEN = txtValor.Text;
                 lista.Add(_examen);
             }
 

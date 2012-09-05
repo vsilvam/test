@@ -173,5 +173,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
 
         }
+
+        protected void lnkAgregaFicha_Click(object sender, EventArgs e)
+        {
+            pnAgregaFila.Visible = true;
+        }
+
+        protected void btnAgrega_Click(object sender, EventArgs e)
+        {
+            string examen = txtExamen.Text;
+            string codigo = txtCodigo.Text;
+            string valor = txtValor.Text;
+
+            //guardar datos y cargar nuevamente la grilla
+        }
     }
 }

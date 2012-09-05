@@ -186,5 +186,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
             //guardar datos y cargar nuevamente la grilla
         }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            pnAgregaFila.Visible = true;
+        }
     }
 }

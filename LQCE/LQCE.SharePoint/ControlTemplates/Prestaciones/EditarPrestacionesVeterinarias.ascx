@@ -116,6 +116,7 @@
         </tr>
         <tr>
             <td colspan="9">
+            <asp:LinkButton ID="lnkAgregaFicha" runat="server" onclick="lnkAgregaFicha_Click" >Agrega Fichas</asp:LinkButton>
                 <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" 
                     Width="100%" onrowdatabound="grdExamen_RowDataBound" 
                     EnableModelValidation="True">
@@ -137,6 +138,29 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+            <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
+                <table>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" 
+                                onclick="btnAgrega_Click" />
+                        </td>
+                    </tr>
+                </table>
+                </asp:Panel>
             </td>
         </tr>
         <tr>

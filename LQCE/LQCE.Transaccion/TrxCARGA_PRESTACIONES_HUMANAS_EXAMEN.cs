@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_HUMANAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
+		        public int Add(int CARGA_PRESTACIONES_HUMANAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
         {
 		Init();
             try

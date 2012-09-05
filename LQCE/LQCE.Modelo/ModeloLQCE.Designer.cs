@@ -66,7 +66,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.EXAMEN), "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN))]
 
 // Nombre de archivo original:
-// Fecha de generación: 2012/09/04 17:50:07
+// Fecha de generación: 2012/09/05 16:00:21
 namespace LQCE.Modelo
 {
     
@@ -713,6 +713,40 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         private global::System.Data.Objects.ObjectQuery<CARGA_PRESTACIONES_DETALLE_ESTADO> _CARGA_PRESTACIONES_DETALLE_ESTADO;
         /// <summary>
+        /// No hay ningún comentario para VISTA_PRESTACIONES_POR_FACTURAR en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<VISTA_PRESTACIONES_POR_FACTURAR> VISTA_PRESTACIONES_POR_FACTURAR
+        {
+            get
+            {
+                if ((this._VISTA_PRESTACIONES_POR_FACTURAR == null))
+                {
+                    this._VISTA_PRESTACIONES_POR_FACTURAR = base.CreateQuery<VISTA_PRESTACIONES_POR_FACTURAR>("[VISTA_PRESTACIONES_POR_FACTURAR]");
+                }
+                return this._VISTA_PRESTACIONES_POR_FACTURAR;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<VISTA_PRESTACIONES_POR_FACTURAR> _VISTA_PRESTACIONES_POR_FACTURAR;
+        /// <summary>
+        /// No hay ningún comentario para VISTA_FACTURAS_POR_NOTIFICAR en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<VISTA_FACTURAS_POR_NOTIFICAR> VISTA_FACTURAS_POR_NOTIFICAR
+        {
+            get
+            {
+                if ((this._VISTA_FACTURAS_POR_NOTIFICAR == null))
+                {
+                    this._VISTA_FACTURAS_POR_NOTIFICAR = base.CreateQuery<VISTA_FACTURAS_POR_NOTIFICAR>("[VISTA_FACTURAS_POR_NOTIFICAR]");
+                }
+                return this._VISTA_FACTURAS_POR_NOTIFICAR;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<VISTA_FACTURAS_POR_NOTIFICAR> _VISTA_FACTURAS_POR_NOTIFICAR;
+        /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
@@ -1000,6 +1034,22 @@ namespace LQCE.Modelo
         {
             base.AddObject("CARGA_PRESTACIONES_DETALLE_ESTADO", cARGA_PRESTACIONES_DETALLE_ESTADO);
         }
+        /// <summary>
+        /// No hay ningún comentario para VISTA_PRESTACIONES_POR_FACTURAR en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToVISTA_PRESTACIONES_POR_FACTURAR(VISTA_PRESTACIONES_POR_FACTURAR vISTA_PRESTACIONES_POR_FACTURAR)
+        {
+            base.AddObject("VISTA_PRESTACIONES_POR_FACTURAR", vISTA_PRESTACIONES_POR_FACTURAR);
+        }
+        /// <summary>
+        /// No hay ningún comentario para VISTA_FACTURAS_POR_NOTIFICAR en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToVISTA_FACTURAS_POR_NOTIFICAR(VISTA_FACTURAS_POR_NOTIFICAR vISTA_FACTURAS_POR_NOTIFICAR)
+        {
+            base.AddObject("VISTA_FACTURAS_POR_NOTIFICAR", vISTA_FACTURAS_POR_NOTIFICAR);
+        }
     }
     /// <summary>
     /// No hay ningún comentario para LQCEModelo.CLIENTE en el esquema.
@@ -1137,6 +1187,33 @@ namespace LQCE.Modelo
         partial void OnACTIVOChanging(bool value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad DESCUENTO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<int> DESCUENTO
+        {
+            get
+            {
+                return this._DESCUENTO;
+            }
+            set
+            {
+                this.OnDESCUENTOChanging(value);
+                this.ReportPropertyChanging("DESCUENTO");
+                this._DESCUENTO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("DESCUENTO");
+                this.OnDESCUENTOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<int> _DESCUENTO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnDESCUENTOChanging(global::System.Nullable<int> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnDESCUENTOChanged();
         /// <summary>
         /// No hay ningún comentario para COMUNA en el esquema.
         /// </summary>
@@ -3389,6 +3466,33 @@ namespace LQCE.Modelo
         partial void OnACTIVOChanging(bool value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad DESCUENTO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<int> DESCUENTO
+        {
+            get
+            {
+                return this._DESCUENTO;
+            }
+            set
+            {
+                this.OnDESCUENTOChanging(value);
+                this.ReportPropertyChanging("DESCUENTO");
+                this._DESCUENTO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("DESCUENTO");
+                this.OnDESCUENTOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<int> _DESCUENTO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnDESCUENTOChanging(global::System.Nullable<int> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnDESCUENTOChanged();
         /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>
@@ -9971,5 +10075,451 @@ namespace LQCE.Modelo
                 }
             }
         }
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.VISTA_PRESTACIONES_POR_FACTURAR en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="VISTA_PRESTACIONES_POR_FACTURAR")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class VISTA_PRESTACIONES_POR_FACTURAR : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto VISTA_PRESTACIONES_POR_FACTURAR.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="iD_CLIENTE">Valor inicial de ID_CLIENTE.</param>
+        /// <param name="rUT">Valor inicial de RUT.</param>
+        /// <param name="nOMBRE">Valor inicial de NOMBRE.</param>
+        /// <param name="dESCUENTO">Valor inicial de DESCUENTO.</param>
+        /// <param name="fECHA_RECEPCION">Valor inicial de FECHA_RECEPCION.</param>
+        /// <param name="tOTAL">Valor inicial de TOTAL.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static VISTA_PRESTACIONES_POR_FACTURAR CreateVISTA_PRESTACIONES_POR_FACTURAR(int id, int iD_CLIENTE, string rUT, string nOMBRE, int dESCUENTO, global::System.DateTime fECHA_RECEPCION, int tOTAL)
+        {
+            VISTA_PRESTACIONES_POR_FACTURAR vISTA_PRESTACIONES_POR_FACTURAR = new VISTA_PRESTACIONES_POR_FACTURAR();
+            vISTA_PRESTACIONES_POR_FACTURAR.ID = id;
+            vISTA_PRESTACIONES_POR_FACTURAR.ID_CLIENTE = iD_CLIENTE;
+            vISTA_PRESTACIONES_POR_FACTURAR.RUT = rUT;
+            vISTA_PRESTACIONES_POR_FACTURAR.NOMBRE = nOMBRE;
+            vISTA_PRESTACIONES_POR_FACTURAR.DESCUENTO = dESCUENTO;
+            vISTA_PRESTACIONES_POR_FACTURAR.FECHA_RECEPCION = fECHA_RECEPCION;
+            vISTA_PRESTACIONES_POR_FACTURAR.TOTAL = tOTAL;
+            return vISTA_PRESTACIONES_POR_FACTURAR;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID_CLIENTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID_CLIENTE
+        {
+            get
+            {
+                return this._ID_CLIENTE;
+            }
+            set
+            {
+                this.OnID_CLIENTEChanging(value);
+                this.ReportPropertyChanging("ID_CLIENTE");
+                this._ID_CLIENTE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID_CLIENTE");
+                this.OnID_CLIENTEChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID_CLIENTE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_CLIENTEChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_CLIENTEChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad RUT en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string RUT
+        {
+            get
+            {
+                return this._RUT;
+            }
+            set
+            {
+                this.OnRUTChanging(value);
+                this.ReportPropertyChanging("RUT");
+                this._RUT = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("RUT");
+                this.OnRUTChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _RUT;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRUTChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRUTChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE
+        {
+            get
+            {
+                return this._NOMBRE;
+            }
+            set
+            {
+                this.OnNOMBREChanging(value);
+                this.ReportPropertyChanging("NOMBRE");
+                this._NOMBRE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("NOMBRE");
+                this.OnNOMBREChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad DESCUENTO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int DESCUENTO
+        {
+            get
+            {
+                return this._DESCUENTO;
+            }
+            set
+            {
+                this.OnDESCUENTOChanging(value);
+                this.ReportPropertyChanging("DESCUENTO");
+                this._DESCUENTO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("DESCUENTO");
+                this.OnDESCUENTOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _DESCUENTO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnDESCUENTOChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnDESCUENTOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_RECEPCION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime FECHA_RECEPCION
+        {
+            get
+            {
+                return this._FECHA_RECEPCION;
+            }
+            set
+            {
+                this.OnFECHA_RECEPCIONChanging(value);
+                this.ReportPropertyChanging("FECHA_RECEPCION");
+                this._FECHA_RECEPCION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("FECHA_RECEPCION");
+                this.OnFECHA_RECEPCIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _FECHA_RECEPCION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad TOTAL en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int TOTAL
+        {
+            get
+            {
+                return this._TOTAL;
+            }
+            set
+            {
+                this.OnTOTALChanging(value);
+                this.ReportPropertyChanging("TOTAL");
+                this._TOTAL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("TOTAL");
+                this.OnTOTALChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _TOTAL;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTOTALChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnTOTALChanged();
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.VISTA_FACTURAS_POR_NOTIFICAR en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="VISTA_FACTURAS_POR_NOTIFICAR")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class VISTA_FACTURAS_POR_NOTIFICAR : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto VISTA_FACTURAS_POR_NOTIFICAR.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="iD_CLIENTE">Valor inicial de ID_CLIENTE.</param>
+        /// <param name="rUT">Valor inicial de RUT.</param>
+        /// <param name="nOMBRE">Valor inicial de NOMBRE.</param>
+        /// <param name="fECHA_FACTURACION">Valor inicial de FECHA_FACTURACION.</param>
+        /// <param name="cONTADOR_NOTAS_COBRO">Valor inicial de CONTADOR_NOTAS_COBRO.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static VISTA_FACTURAS_POR_NOTIFICAR CreateVISTA_FACTURAS_POR_NOTIFICAR(int id, int iD_CLIENTE, string rUT, string nOMBRE, global::System.DateTime fECHA_FACTURACION, int cONTADOR_NOTAS_COBRO)
+        {
+            VISTA_FACTURAS_POR_NOTIFICAR vISTA_FACTURAS_POR_NOTIFICAR = new VISTA_FACTURAS_POR_NOTIFICAR();
+            vISTA_FACTURAS_POR_NOTIFICAR.ID = id;
+            vISTA_FACTURAS_POR_NOTIFICAR.ID_CLIENTE = iD_CLIENTE;
+            vISTA_FACTURAS_POR_NOTIFICAR.RUT = rUT;
+            vISTA_FACTURAS_POR_NOTIFICAR.NOMBRE = nOMBRE;
+            vISTA_FACTURAS_POR_NOTIFICAR.FECHA_FACTURACION = fECHA_FACTURACION;
+            vISTA_FACTURAS_POR_NOTIFICAR.CONTADOR_NOTAS_COBRO = cONTADOR_NOTAS_COBRO;
+            return vISTA_FACTURAS_POR_NOTIFICAR;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID_CLIENTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID_CLIENTE
+        {
+            get
+            {
+                return this._ID_CLIENTE;
+            }
+            set
+            {
+                this.OnID_CLIENTEChanging(value);
+                this.ReportPropertyChanging("ID_CLIENTE");
+                this._ID_CLIENTE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID_CLIENTE");
+                this.OnID_CLIENTEChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID_CLIENTE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_CLIENTEChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_CLIENTEChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad RUT en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string RUT
+        {
+            get
+            {
+                return this._RUT;
+            }
+            set
+            {
+                this.OnRUTChanging(value);
+                this.ReportPropertyChanging("RUT");
+                this._RUT = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("RUT");
+                this.OnRUTChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _RUT;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRUTChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnRUTChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE
+        {
+            get
+            {
+                return this._NOMBRE;
+            }
+            set
+            {
+                this.OnNOMBREChanging(value);
+                this.ReportPropertyChanging("NOMBRE");
+                this._NOMBRE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("NOMBRE");
+                this.OnNOMBREChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBREChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_FACTURACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime FECHA_FACTURACION
+        {
+            get
+            {
+                return this._FECHA_FACTURACION;
+            }
+            set
+            {
+                this.OnFECHA_FACTURACIONChanging(value);
+                this.ReportPropertyChanging("FECHA_FACTURACION");
+                this._FECHA_FACTURACION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("FECHA_FACTURACION");
+                this.OnFECHA_FACTURACIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _FECHA_FACTURACION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_FACTURACIONChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_FACTURACIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NUMERO_FACTURA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<int> NUMERO_FACTURA
+        {
+            get
+            {
+                return this._NUMERO_FACTURA;
+            }
+            set
+            {
+                this.OnNUMERO_FACTURAChanging(value);
+                this.ReportPropertyChanging("NUMERO_FACTURA");
+                this._NUMERO_FACTURA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("NUMERO_FACTURA");
+                this.OnNUMERO_FACTURAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<int> _NUMERO_FACTURA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNUMERO_FACTURAChanging(global::System.Nullable<int> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNUMERO_FACTURAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad CONTADOR_NOTAS_COBRO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int CONTADOR_NOTAS_COBRO
+        {
+            get
+            {
+                return this._CONTADOR_NOTAS_COBRO;
+            }
+            set
+            {
+                this.OnCONTADOR_NOTAS_COBROChanging(value);
+                this.ReportPropertyChanging("CONTADOR_NOTAS_COBRO");
+                this._CONTADOR_NOTAS_COBRO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("CONTADOR_NOTAS_COBRO");
+                this.OnCONTADOR_NOTAS_COBROChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _CONTADOR_NOTAS_COBRO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnCONTADOR_NOTAS_COBROChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnCONTADOR_NOTAS_COBROChanged();
     }
 }

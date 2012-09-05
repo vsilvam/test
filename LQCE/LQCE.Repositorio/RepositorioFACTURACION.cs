@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURACION.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.FACTURACION.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURACION.Include("FACTURA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.FACTURACION.Include("FACTURA").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.FACTURACION select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION.Include("FACTURA") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.FACTURACION.Include("FACTURA") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION  where i.ACTIVO  select i;
+							var q = from i in _context.FACTURACION  select i;
+			
+				
 
 				if (FECHA_FACTURACION.HasValue)
 				{
@@ -104,7 +110,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURACION.Include("FACTURA")  where i.ACTIVO select i;
+
+							var q = from i in _context.FACTURACION.Include("FACTURA") select i;
+			
+				
 
 				if (FECHA_FACTURACION.HasValue)
 				{

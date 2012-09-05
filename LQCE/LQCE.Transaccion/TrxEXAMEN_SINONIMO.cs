@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int EXAMENId, string NOMBRE)
+		        public int Add(int EXAMENId, string NOMBRE)
         {
 		Init();
             try

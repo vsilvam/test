@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_HUMANA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.PRESTACION_HUMANA.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION_HUMANA.Include("PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.PRESTACION_HUMANA.Include("PRESTACION").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.PRESTACION_HUMANA select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA  where i.ACTIVO  select i;
+							var q = from i in _context.PRESTACION_HUMANA  select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
@@ -116,7 +122,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION")  where i.ACTIVO select i;
+
+							var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION") select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{

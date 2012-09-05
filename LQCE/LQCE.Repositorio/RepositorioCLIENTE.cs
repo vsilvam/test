@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CLIENTE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.CLIENTE.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CLIENTE  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.CLIENTE select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -78,12 +82,14 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "")
+		public IQueryable<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CLIENTE  where i.ACTIVO  select i;
+							var q = from i in _context.CLIENTE  select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(RUT))
 				{
@@ -92,6 +98,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
+				}
+				if (DESCUENTO.HasValue)
+				{
+				  q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
 				if (COMUNAId.HasValue)
 				{
@@ -115,12 +125,15 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "")
+		public IQueryable<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE")  where i.ACTIVO select i;
+
+							var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(RUT))
 				{
@@ -129,6 +142,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
+				}
+				if (DESCUENTO.HasValue)
+				{
+					q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
 				if (COMUNAId.HasValue)
 				{

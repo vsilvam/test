@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("ESPECIE1").Include("GARANTIA1").Include("PREVISION").Include("RAZA1").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("ESPECIE1").Include("GARANTIA1").Include("PREVISION").Include("RAZA1").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("ESPECIE1").Include("GARANTIA1").Include("PREVISION").Include("RAZA1") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("ESPECIE1").Include("GARANTIA1").Include("PREVISION").Include("RAZA1") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE  where i.ACTIVO  select i;
+							var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE  select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(FICHA))
 				{
@@ -220,7 +226,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("ESPECIE1").Include("GARANTIA1").Include("PREVISION").Include("RAZA1")  where i.ACTIVO select i;
+
+							var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("ESPECIE1").Include("GARANTIA1").Include("PREVISION").Include("RAZA1") select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(FICHA))
 				{

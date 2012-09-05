@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, int CLIENTEId, int ESPECIE1Id, int GARANTIA1Id, int PREVISIONId, int RAZA1Id, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
+		        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, int CLIENTEId, int ESPECIE1Id, int GARANTIA1Id, int PREVISIONId, int RAZA1Id, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string ESPECIE = "", string RAZA = "", string EDAD = "", string SEXO = "", string SOLICITA = "", string TELEFONO = "", string MEDICO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string FECHA_MUESTRA = "", string FECHA_RESULTADOS = "", string PENDIENTE = "", string GARANTIA = "", string PAGADO = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
         {
 		Init();
             try

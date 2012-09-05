@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.FACTURA.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.FACTURA select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -78,12 +82,14 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null)
+		public IQueryable<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA  where i.ACTIVO  select i;
+							var q = from i in _context.FACTURA  select i;
+			
+				
 
 				if (CORRELATIVO.HasValue)
 				{
@@ -96,6 +102,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(RUT_LABORATORIO))
 				{
 				   q = q.Where(i => i.RUT_LABORATORIO.Contains(RUT_LABORATORIO));
+				}
+				if (DESCUENTO.HasValue)
+				{
+				  q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
 				if (CLIENTEId.HasValue)
 				{
@@ -115,12 +125,15 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null)
+		public IQueryable<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null)
 		{
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE")  where i.ACTIVO select i;
+
+							var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE") select i;
+			
+				
 
 				if (CORRELATIVO.HasValue)
 				{
@@ -133,6 +146,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(RUT_LABORATORIO))
 				{
 					q = q.Where(i => i.RUT_LABORATORIO.Contains(RUT_LABORATORIO));
+				}
+				if (DESCUENTO.HasValue)
+				{
+					q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
 				if (CLIENTEId.HasValue)
 				{

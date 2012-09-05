@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int COBROId, int CORRELATIVO, int ID_CLIENTE)
+		        public int Add(int COBROId, int CORRELATIVO, int ID_CLIENTE)
         {
 		Init();
             try

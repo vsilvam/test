@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "")
+		public List<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCLIENTE repositorio = new RepositorioCLIENTE(context);
-                    return repositorio.GetByFilter(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE, DESCUENTO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "")
+		public List<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCLIENTE repositorio = new RepositorioCLIENTE(context);
-                    return repositorio.GetByFilterWithReferences(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(COMUNAId, CONVENIOId, TIPO_PRESTACIONId, RUT, NOMBRE, DESCUENTO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int COMUNAId, int CONVENIOId, int TIPO_PRESTACIONId, string RUT, string NOMBRE)
+		        public int Add(int COMUNAId, int CONVENIOId, int TIPO_PRESTACIONId, string RUT, string NOMBRE, int? DESCUENTO = null)
         {
 		Init();
             try
@@ -178,6 +178,7 @@ namespace LQCE.Transaccion
 
                     _CLIENTE.RUT = RUT;				
                     _CLIENTE.NOMBRE = NOMBRE;				
+                    _CLIENTE.DESCUENTO = DESCUENTO;
                     _CLIENTE.ACTIVO = true;				
 
 					//parents
@@ -200,7 +201,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int COMUNAId, int CONVENIOId, int TIPO_PRESTACIONId, string RUT, string NOMBRE)
+		public void Update(int Id, int COMUNAId, int CONVENIOId, int TIPO_PRESTACIONId, string RUT, string NOMBRE, int? DESCUENTO = null)
 		{
 		Init();
 			try
@@ -244,6 +245,10 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(NOMBRE))
 					{
 						_CLIENTE.NOMBRE = NOMBRE;
+					}
+					if (DESCUENTO.HasValue)
+					{
+						_CLIENTE.DESCUENTO = DESCUENTO.Value;
 					}
 	
 					//parents

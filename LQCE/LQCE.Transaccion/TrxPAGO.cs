@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CLIENTEId, int FECHA_PAGO, int MONTO_PAGO)
+		        public int Add(int CLIENTEId, int FECHA_PAGO, int MONTO_PAGO)
         {
 		Init();
             try

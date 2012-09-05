@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CONVENIO_TARIFARIOId, int EXAMENId, int VALOR)
+		        public int Add(int CONVENIO_TARIFARIOId, int EXAMENId, int VALOR)
         {
 		Init();
             try

@@ -92,6 +92,7 @@
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="RepositorioCustomCARGA_PRESTACIONES_HUMANAS_DETALLE.cs" />
+    <Compile Include="RepositorioCustomFACTURACION.cs" />
     <Compile Include="RepositorioESPECIE.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
@@ -161,6 +162,12 @@
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="RepositorioTIPO_PRESTACION.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioVISTA_FACTURAS_POR_NOTIFICAR.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositorioVISTA_PRESTACIONES_POR_FACTURAR.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
   </ItemGroup>

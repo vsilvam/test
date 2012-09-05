@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN  where i.ACTIVO  select i;
+							var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN  select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(NOMBRE_EXAMEN))
 				{
@@ -124,7 +130,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN")  where i.ACTIVO select i;
+
+							var q = from i in _context.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("EXAMEN") select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(NOMBRE_EXAMEN))
 				{

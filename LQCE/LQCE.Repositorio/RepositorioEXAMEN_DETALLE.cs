@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.EXAMEN_DETALLE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.EXAMEN_DETALLE.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.EXAMEN_DETALLE select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE  where i.ACTIVO  select i;
+							var q = from i in _context.EXAMEN_DETALLE  select i;
+			
+				
 
 				if (EXAMENId.HasValue)
 				{
@@ -108,7 +114,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1")  where i.ACTIVO select i;
+
+							var q = from i in _context.EXAMEN_DETALLE.Include("EXAMEN").Include("EXAMEN1") select i;
+			
+				
 
 				if (EXAMENId.HasValue)
 				{

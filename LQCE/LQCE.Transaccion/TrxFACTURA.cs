@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null)
+		public List<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA repositorio = new RepositorioFACTURA(context);
-                    return repositorio.GetByFilter(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, NUMERO_FACTURA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, NUMERO_FACTURA, DESCUENTO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null)
+		public List<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA repositorio = new RepositorioFACTURA(context);
-                    return repositorio.GetByFilterWithReferences(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, NUMERO_FACTURA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CLIENTEId, FACTURACIONId, CORRELATIVO, RUT_LABORATORIO, NUMERO_FACTURA, DESCUENTO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CLIENTEId, int FACTURACIONId, int CORRELATIVO, string RUT_LABORATORIO, int? NUMERO_FACTURA = null)
+		        public int Add(int CLIENTEId, int FACTURACIONId, int CORRELATIVO, string RUT_LABORATORIO, int? NUMERO_FACTURA = null, int? DESCUENTO = null)
         {
 		Init();
             try
@@ -172,6 +172,7 @@ namespace LQCE.Transaccion
                     _FACTURA.CORRELATIVO = CORRELATIVO;
                     _FACTURA.NUMERO_FACTURA = NUMERO_FACTURA;
                     _FACTURA.RUT_LABORATORIO = RUT_LABORATORIO;				
+                    _FACTURA.DESCUENTO = DESCUENTO;
                     _FACTURA.ACTIVO = true;				
 
 					//parents
@@ -193,7 +194,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CLIENTEId, int FACTURACIONId, int CORRELATIVO, string RUT_LABORATORIO, int? NUMERO_FACTURA = null)
+		public void Update(int Id, int CLIENTEId, int FACTURACIONId, int CORRELATIVO, string RUT_LABORATORIO, int? NUMERO_FACTURA = null, int? DESCUENTO = null)
 		{
 		Init();
 			try
@@ -231,6 +232,10 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(RUT_LABORATORIO))
 					{
 						_FACTURA.RUT_LABORATORIO = RUT_LABORATORIO;
+					}
+					if (DESCUENTO.HasValue)
+					{
+						_FACTURA.DESCUENTO = DESCUENTO.Value;
 					}
 	
 					//parents

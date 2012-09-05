@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_ESTADOId, int TIPO_PRESTACIONId, System.DateTime FECHA_CARGA, string ARCHIVO)
+		        public int Add(int CARGA_PRESTACIONES_ESTADOId, int TIPO_PRESTACIONId, System.DateTime FECHA_CARGA, string ARCHIVO)
         {
 		Init();
             try

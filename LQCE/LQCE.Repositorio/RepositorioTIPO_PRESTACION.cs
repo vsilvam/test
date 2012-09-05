@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.TIPO_PRESTACION.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.TIPO_PRESTACION.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.TIPO_PRESTACION.Include("CLIENTE").Include("CONVENIO").Include("EXAMEN").Include("PRESTACION").Include("CARGA_PRESTACIONES_ENCABEZADO").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.TIPO_PRESTACION.Include("CLIENTE").Include("CONVENIO").Include("EXAMEN").Include("PRESTACION").Include("CARGA_PRESTACIONES_ENCABEZADO").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.TIPO_PRESTACION  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.TIPO_PRESTACION select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.TIPO_PRESTACION.Include("CLIENTE").Include("CONVENIO").Include("EXAMEN").Include("PRESTACION").Include("CARGA_PRESTACIONES_ENCABEZADO") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.TIPO_PRESTACION.Include("CLIENTE").Include("CONVENIO").Include("EXAMEN").Include("PRESTACION").Include("CARGA_PRESTACIONES_ENCABEZADO") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.TIPO_PRESTACION  where i.ACTIVO  select i;
+							var q = from i in _context.TIPO_PRESTACION  select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
@@ -104,7 +110,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.TIPO_PRESTACION.Include("CLIENTE").Include("CONVENIO").Include("EXAMEN").Include("PRESTACION").Include("CARGA_PRESTACIONES_ENCABEZADO")  where i.ACTIVO select i;
+
+							var q = from i in _context.TIPO_PRESTACION.Include("CLIENTE").Include("CONVENIO").Include("EXAMEN").Include("PRESTACION").Include("CARGA_PRESTACIONES_ENCABEZADO") select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{

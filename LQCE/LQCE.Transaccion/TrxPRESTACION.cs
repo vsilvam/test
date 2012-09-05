@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CLIENTEId, int GARANTIAId, int PREVISIONId, int TIPO_PRESTACIONId, string MEDICO, System.DateTime FECHA_RECEPCION, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		        public int Add(int CLIENTEId, int GARANTIAId, int PREVISIONId, int TIPO_PRESTACIONId, string MEDICO, System.DateTime FECHA_RECEPCION, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
         {
 		Init();
             try

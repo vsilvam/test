@@ -147,6 +147,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
 // Parametros GetByFilter
 
 bool primero = true;
+bool TieneActivo = false;
 string parametrosGetByFilter = "";
 string parametrosGetByFilterAll = "";
 
@@ -172,6 +173,10 @@ foreach (NavigationProperty navProperty in entity.NavigationProperties.Where(n =
 
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity && !p.Nullable))
 {
+	if(code.Escape(edmProperty) == "ACTIVO")
+	{
+		TieneActivo = true;
+	}
 	if (!ef.IsKey(edmProperty)  && code.Escape(edmProperty) != "ACTIVO")
 	{ 
 		if(!primero)
@@ -504,6 +509,10 @@ if(parametrosGetByFilterAll != "")
             }
         } 
 
+		<#
+		if(TieneActivo)
+		{
+#>
         public int Add(<#=parametrosAdd#>)
         {
 		Init();
@@ -698,6 +707,7 @@ if(parametrosGetByFilterAll != "")
 			}
 		}
 <#
+	}
 }
 #>
 	}

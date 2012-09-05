@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int TIPO_COBROId, System.DateTime FECHA_COBRO)
+		        public int Add(int TIPO_COBROId, System.DateTime FECHA_COBRO)
         {
 		Init();
             try

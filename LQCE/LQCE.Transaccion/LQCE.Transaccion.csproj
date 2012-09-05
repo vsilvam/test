@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="DTO\DTOFindPrestaciones.cs" />
     <Compile Include="DTO\DTOPaginador.cs" />
+    <Compile Include="DTO\DTO_EMISION_FACTURA.cs" />
+    <Compile Include="DTO\DTO_RESUMEN_PRESTACIONES_FACTURAR.cs" />
+    <Compile Include="Enum\ENUM_TIPO_COBRO.cs" />
     <Compile Include="TrxCustomCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs" />
     <Compile Include="DTO\DTO_DETALLE_CARGA_PRESTACIONES.cs" />
     <Compile Include="DTO\DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN.cs" />
@@ -177,6 +180,12 @@
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="TrxTIPO_PRESTACION.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrxVISTA_FACTURAS_POR_NOTIFICAR.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TrxVISTA_PRESTACIONES_POR_FACTURAR.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
   </ItemGroup>

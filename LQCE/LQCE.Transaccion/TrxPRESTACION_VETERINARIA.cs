@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int ESPECIEId, int RAZAId, string NOMBRE, string EDAD, string TELEFONO)
+		        public int Add(int ESPECIEId, int RAZAId, string NOMBRE, string EDAD, string TELEFONO)
         {
 		Init();
             try

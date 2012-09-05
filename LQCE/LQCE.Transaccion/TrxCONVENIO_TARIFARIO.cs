@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CONVENIOId, System.DateTime FECHA_VIGENCIA)
+		        public int Add(int CONVENIOId, System.DateTime FECHA_VIGENCIA)
         {
 		Init();
             try

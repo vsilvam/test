@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(string NOMBRE, string RUT, string EDAD, string TELEFONO)
+		        public int Add(string NOMBRE, string RUT, string EDAD, string TELEFONO)
         {
 		Init();
             try

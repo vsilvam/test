@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURA_DETALLE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.FACTURA_DETALLE.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.FACTURA_DETALLE select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE  where i.ACTIVO  select i;
+							var q = from i in _context.FACTURA_DETALLE  select i;
+			
+				
 
 				if (MONTO_TOTAL.HasValue)
 				{
@@ -116,7 +122,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE")  where i.ACTIVO select i;
+
+							var q = from i in _context.FACTURA_DETALLE.Include("FACTURA").Include("PRESTACION").Include("PAGO_DETALLE") select i;
+			
+				
 
 				if (MONTO_TOTAL.HasValue)
 				{

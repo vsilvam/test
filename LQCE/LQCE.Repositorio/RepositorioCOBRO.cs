@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.COBRO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.COBRO.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.COBRO select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO  where i.ACTIVO  select i;
+							var q = from i in _context.COBRO  select i;
+			
+				
 
 				if (FECHA_COBRO.HasValue)
 				{
@@ -108,7 +114,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO")  where i.ACTIVO select i;
+
+							var q = from i in _context.COBRO.Include("TIPO_COBRO").Include("NOTA_COBRO") select i;
+			
+				
 
 				if (FECHA_COBRO.HasValue)
 				{

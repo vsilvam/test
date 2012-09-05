@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(System.DateTime FECHA_FACTURACION)
+		        public int Add(System.DateTime FECHA_FACTURACION)
         {
 		Init();
             try

@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, int CLIENTEId, int GARANTIA1Id, int PREVISION1Id, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
+		        public int Add(int CARGA_PRESTACIONES_ENCABEZADOId, int CARGA_PRESTACIONES_DETALLE_ESTADOId, int CLIENTEId, int GARANTIA1Id, int PREVISION1Id, System.DateTime FECHA_ACTUALIZACION, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
         {
 		Init();
             try

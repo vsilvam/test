@@ -21,8 +21,8 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION.FirstOrDefault(i => i.ID == id && i.ACTIVO );
-			}
+							return _context.PRESTACION.FirstOrDefault(i => i.ID == id);
+						}
 			catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
@@ -36,7 +36,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				return _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+				
+							return _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id);
+			
 			}
 			catch (Exception ex)
             {
@@ -51,8 +53,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION  where i.ACTIVO select i;
-				return q;
+				
+							var q = from i in _context.PRESTACION select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -67,8 +70,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") where i.ACTIVO  select i;
-				return q;
+				
+								var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") select i;
+							return q;
 			}
 			catch (Exception ex)
             {
@@ -83,7 +87,9 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION  where i.ACTIVO  select i;
+							var q = from i in _context.PRESTACION  select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(MEDICO))
 				{
@@ -132,7 +138,10 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-				var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA")  where i.ACTIVO select i;
+
+							var q = from i in _context.PRESTACION.Include("CLIENTE").Include("FACTURA_DETALLE").Include("GARANTIA").Include("PRESTACION_EXAMEN").Include("PRESTACION_MUESTRA").Include("PRESTACION_HUMANA").Include("PREVISION").Include("TIPO_PRESTACION").Include("PRESTACION_VETERINARIA") select i;
+			
+				
 
 				if (!string.IsNullOrEmpty(MEDICO))
 				{

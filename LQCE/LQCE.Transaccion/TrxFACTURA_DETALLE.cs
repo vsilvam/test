@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-        public int Add(int FACTURAId, int PRESTACIONId, int MONTO_TOTAL, int MONTO_COBRADO)
+		        public int Add(int FACTURAId, int PRESTACIONId, int MONTO_TOTAL, int MONTO_COBRADO)
         {
 		Init();
             try

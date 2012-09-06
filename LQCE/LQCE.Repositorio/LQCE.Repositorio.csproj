@@ -161,6 +161,9 @@
     <Compile Include="RepositorioTIPO_COBRO.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="RepositorioTIPO_FACTURA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="RepositorioTIPO_PRESTACION.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>

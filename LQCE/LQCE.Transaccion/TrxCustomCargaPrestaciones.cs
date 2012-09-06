@@ -816,7 +816,7 @@ namespace LQCE.Transaccion
             }
             else
             {
-                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, "", objDetalle.PROCEDENCIA).FirstOrDefault();
+                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, null, "", objDetalle.PROCEDENCIA).FirstOrDefault();
                 if (objCliente != null)
                 {
                     objDetalle.CLIENTE = objCliente;
@@ -1064,7 +1064,7 @@ namespace LQCE.Transaccion
             }
             else
             {
-                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, "", objDetalle.PROCEDENCIA).FirstOrDefault();
+                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, null, "", objDetalle.PROCEDENCIA).FirstOrDefault();
                 if (objCliente != null)
                 {
                     objDetalle.CLIENTE = objCliente;

@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id);
+							return _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA").FirstOrDefault(i => i.ID == id);
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+								var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA") select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null)
+		public IQueryable<CLIENTE> GetByFilter(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, int? TIPO_FACTURAId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null, string DIRECCION = "", string FONO = "", string GIRO = "")
 		{
 			Error = string.Empty;
 			try
@@ -103,6 +103,18 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
+				if (!string.IsNullOrEmpty(DIRECCION))
+				{
+				   q = q.Where(i => i.DIRECCION.Contains(DIRECCION));
+				}
+				if (!string.IsNullOrEmpty(FONO))
+				{
+				   q = q.Where(i => i.FONO.Contains(FONO));
+				}
+				if (!string.IsNullOrEmpty(GIRO))
+				{
+				   q = q.Where(i => i.GIRO.Contains(GIRO));
+				}
 				if (COMUNAId.HasValue)
 				{
 				  q = q.Where(i => i.COMUNA.ID == COMUNAId.Value);
@@ -115,6 +127,10 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.TIPO_PRESTACION.ID == TIPO_PRESTACIONId.Value);
 				}
+				if (TIPO_FACTURAId.HasValue)
+				{
+				  q = q.Where(i => i.TIPO_FACTURA.ID == TIPO_FACTURAId.Value);
+				}
 				return q;
 			}
 			catch (Exception ex)
@@ -125,13 +141,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null)
+		public IQueryable<CLIENTE> GetByFilterWithReferences(int? COMUNAId = null, int? CONVENIOId = null, int? TIPO_PRESTACIONId = null, int? TIPO_FACTURAId = null, string RUT = "", string NOMBRE = "", int? DESCUENTO = null, string DIRECCION = "", string FONO = "", string GIRO = "")
 		{
 			Error = string.Empty;
 			try
 			{
 
-							var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") select i;
+							var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("PRESTACION").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA") select i;
 			
 				
 
@@ -147,6 +163,18 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
+				if (!string.IsNullOrEmpty(DIRECCION))
+				{
+					q = q.Where(i => i.DIRECCION.Contains(DIRECCION));
+				}
+				if (!string.IsNullOrEmpty(FONO))
+				{
+					q = q.Where(i => i.FONO.Contains(FONO));
+				}
+				if (!string.IsNullOrEmpty(GIRO))
+				{
+					q = q.Where(i => i.GIRO.Contains(GIRO));
+				}
 				if (COMUNAId.HasValue)
 				{
 					q = q.Where(i => i.COMUNA.ID == COMUNAId.Value);
@@ -158,6 +186,10 @@ namespace LQCE.Repositorio
 				if (TIPO_PRESTACIONId.HasValue)
 				{
 					q = q.Where(i => i.TIPO_PRESTACION.ID == TIPO_PRESTACIONId.Value);
+				}
+				if (TIPO_FACTURAId.HasValue)
+				{
+					q = q.Where(i => i.TIPO_FACTURA.ID == TIPO_FACTURAId.Value);
 				}
 				return q;
 			}

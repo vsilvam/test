@@ -63,7 +63,7 @@ namespace LQCE.Transaccion
                     int correlativo = 1;
                     foreach (var item in ListaClientesFacturar)
                     {
-                        CLIENTE _CLIENTE = _RepositorioCLIENTE.GetById(item.ID_CLIENTE);
+                        CLIENTE _CLIENTE = _RepositorioCLIENTE.GetByIdWithReferences(item.ID_CLIENTE);
                         if(_CLIENTE == null)
                             throw new Exception("No se encuentra información del cliente");
 
@@ -77,22 +77,51 @@ namespace LQCE.Transaccion
                         _FACTURA.RUT_LABORATORIO = ""; // PENDIENTE: Definir RUT de laboratorio con que facturar
                         _FACTURA.ACTIVO = true;
                         _FACTURA.DESCUENTO = item.DESCUENTO;
+                        _FACTURA.NOMBRE_CLIENTE = _CLIENTE.NOMBRE;
+                        _FACTURA.RUT_CLIENTE = _CLIENTE.RUT;
+                        _FACTURA.DIRECCION = _CLIENTE.DIRECCION;
+                        if (_CLIENTE.COMUNA != null)
+                        {
+                            _FACTURA.NOMBRE_COMUNA = _CLIENTE.COMUNA.NOMBRE;
+                        }
+                        _FACTURA.FONO = _CLIENTE.FONO;
+                        _FACTURA.GIRO = _CLIENTE.GIRO;
+                        _FACTURA.DETALLE = "Exámenes realizados del " + FechaDesde.ToString("dd MMMM yyyy") + " al " + FechaHasta.ToString("dd MMMM yyyy");
+                        _FACTURA.TIPO_FACTURA = _CLIENTE.TIPO_FACTURA;
+
                         context.AddToFACTURA(_FACTURA);
 
+                        int suma_total = 0;
                         foreach (var prestacion in prestaciones)
                         {
                             PRESTACION _PRESTACION = _RepositorioPRESTACION.GetById(prestacion.ID);
                             if(_PRESTACION == null)
                                 throw new Exception("No se encuentra información de la prestación");
 
+                            int total = (int)(prestacion.TOTAL * (1 - (double)item.DESCUENTO / 100.0));
+                            suma_total += total;
+
                             FACTURA_DETALLE _FACTURA_DETALLE = new FACTURA_DETALLE();
                             _FACTURA_DETALLE.FACTURA = _FACTURA;
                             _FACTURA_DETALLE.PRESTACION = _PRESTACION;
-                            _FACTURA_DETALLE.MONTO_TOTAL = prestacion.TOTAL;
-                            _FACTURA_DETALLE.MONTO_COBRADO = (int)(prestacion.TOTAL * (1 - (double)item.DESCUENTO / 100.0));
+                            _FACTURA_DETALLE.MONTO_TOTAL = total;
+                            _FACTURA_DETALLE.MONTO_COBRADO = 0;
                             _FACTURA_DETALLE.ACTIVO = true;
                             context.AddToFACTURA_DETALLE(_FACTURA_DETALLE);
                         }
+
+                        _FACTURA.NETO = suma_total;
+                        if (_CLIENTE.TIPO_FACTURA.AFECTO_IVA)
+                        {
+                            _FACTURA.IVA = (int)(suma_total * 0.19);
+                            _FACTURA.TOTAL = (int)(suma_total * 1.19);
+                        }
+                        else
+                        {
+                            _FACTURA.IVA = 0;
+                            _FACTURA.TOTAL = suma_total;
+                        }
+                        context.ApplyPropertyChanges("FACTURA", _FACTURA);
 
                         correlativo++;
                     }
@@ -100,6 +129,50 @@ namespace LQCE.Transaccion
                     context.SaveChanges();
 
                     // PENDIENTE: Generar PDFs
+
+                    // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        protected List<DTO_REPORTE_FACTURA> GetReporteFactura(int IdFacturacion)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+
+                    FACTURACION _FACTURACION = _RepositorioFACTURACION.GetByIdWithReferences(IdFacturacion);
+                    if (_FACTURACION == null)
+                        throw new Exception("No se encuentra información de la facturación");
+
+                    return (from f in _FACTURACION.FACTURA
+                            where f.ACTIVO
+                            select new DTO_REPORTE_FACTURA
+                            {
+                                DIA = f.FACTURACION.FECHA_FACTURACION.Day,
+                                MES = f.FACTURACION.FECHA_FACTURACION.ToString("MMMM"),
+                                AÑO = f.FACTURACION.FECHA_FACTURACION.Year,
+                                NOMBRE_CLIENTE = f.NOMBRE_CLIENTE,
+                                RUT_CLIENTE = f.RUT_CLIENTE,
+                                DIRECCION = f.DIRECCION,
+                                COMUNA = f.NOMBRE_COMUNA,
+                                FONO = f.FONO,
+                                GIRO = f.GIRO,
+                                DETALLE = f.DETALLE,
+                                NETO = f.NETO,
+                                IVA = f.IVA,
+                                TOTAL = f.TOTAL
+                            }).ToList();
                 }
             }
             catch (Exception ex)

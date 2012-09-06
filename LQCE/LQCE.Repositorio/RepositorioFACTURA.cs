@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").FirstOrDefault(i => i.ID == id);
+							return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA").FirstOrDefault(i => i.ID == id);
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE") select i;
+								var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA") select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null)
+		public IQueryable<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? TIPO_FACTURAId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, int? NUMERO_FACTURA = null, int? DESCUENTO = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", string FONO = "", string GIRO = "", string DETALLE = "")
 		{
 			Error = string.Empty;
 			try
@@ -107,6 +107,46 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
+				if (!string.IsNullOrEmpty(NOMBRE_CLIENTE))
+				{
+				   q = q.Where(i => i.NOMBRE_CLIENTE.Contains(NOMBRE_CLIENTE));
+				}
+				if (!string.IsNullOrEmpty(RUT_CLIENTE))
+				{
+				   q = q.Where(i => i.RUT_CLIENTE.Contains(RUT_CLIENTE));
+				}
+				if (!string.IsNullOrEmpty(DIRECCION))
+				{
+				   q = q.Where(i => i.DIRECCION.Contains(DIRECCION));
+				}
+				if (!string.IsNullOrEmpty(NOMBRE_COMUNA))
+				{
+				   q = q.Where(i => i.NOMBRE_COMUNA.Contains(NOMBRE_COMUNA));
+				}
+				if (!string.IsNullOrEmpty(FONO))
+				{
+				   q = q.Where(i => i.FONO.Contains(FONO));
+				}
+				if (!string.IsNullOrEmpty(GIRO))
+				{
+				   q = q.Where(i => i.GIRO.Contains(GIRO));
+				}
+				if (!string.IsNullOrEmpty(DETALLE))
+				{
+				   q = q.Where(i => i.DETALLE.Contains(DETALLE));
+				}
+				if (NETO.HasValue)
+				{
+				  q = q.Where(i => i.NETO == NETO.Value);
+				}
+				if (IVA.HasValue)
+				{
+				  q = q.Where(i => i.IVA == IVA.Value);
+				}
+				if (TOTAL.HasValue)
+				{
+				  q = q.Where(i => i.TOTAL == TOTAL.Value);
+				}
 				if (CLIENTEId.HasValue)
 				{
 				  q = q.Where(i => i.CLIENTE.ID == CLIENTEId.Value);
@@ -114,6 +154,10 @@ namespace LQCE.Repositorio
 				if (FACTURACIONId.HasValue)
 				{
 				  q = q.Where(i => i.FACTURACION.ID == FACTURACIONId.Value);
+				}
+				if (TIPO_FACTURAId.HasValue)
+				{
+				  q = q.Where(i => i.TIPO_FACTURA.ID == TIPO_FACTURAId.Value);
 				}
 				return q;
 			}
@@ -125,13 +169,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null)
+		public IQueryable<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? TIPO_FACTURAId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, int? NUMERO_FACTURA = null, int? DESCUENTO = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", string FONO = "", string GIRO = "", string DETALLE = "")
 		{
 			Error = string.Empty;
 			try
 			{
 
-							var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE") select i;
+							var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA") select i;
 			
 				
 
@@ -151,6 +195,46 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.DESCUENTO == DESCUENTO.Value);
 				}
+				if (!string.IsNullOrEmpty(NOMBRE_CLIENTE))
+				{
+					q = q.Where(i => i.NOMBRE_CLIENTE.Contains(NOMBRE_CLIENTE));
+				}
+				if (!string.IsNullOrEmpty(RUT_CLIENTE))
+				{
+					q = q.Where(i => i.RUT_CLIENTE.Contains(RUT_CLIENTE));
+				}
+				if (!string.IsNullOrEmpty(DIRECCION))
+				{
+					q = q.Where(i => i.DIRECCION.Contains(DIRECCION));
+				}
+				if (!string.IsNullOrEmpty(NOMBRE_COMUNA))
+				{
+					q = q.Where(i => i.NOMBRE_COMUNA.Contains(NOMBRE_COMUNA));
+				}
+				if (!string.IsNullOrEmpty(FONO))
+				{
+					q = q.Where(i => i.FONO.Contains(FONO));
+				}
+				if (!string.IsNullOrEmpty(GIRO))
+				{
+					q = q.Where(i => i.GIRO.Contains(GIRO));
+				}
+				if (!string.IsNullOrEmpty(DETALLE))
+				{
+					q = q.Where(i => i.DETALLE.Contains(DETALLE));
+				}
+				if (NETO.HasValue)
+				{
+					q = q.Where(i => i.NETO == NETO.Value);
+				}
+				if (IVA.HasValue)
+				{
+					q = q.Where(i => i.IVA == IVA.Value);
+				}
+				if (TOTAL.HasValue)
+				{
+					q = q.Where(i => i.TOTAL == TOTAL.Value);
+				}
 				if (CLIENTEId.HasValue)
 				{
 					q = q.Where(i => i.CLIENTE.ID == CLIENTEId.Value);
@@ -158,6 +242,10 @@ namespace LQCE.Repositorio
 				if (FACTURACIONId.HasValue)
 				{
 					q = q.Where(i => i.FACTURACION.ID == FACTURACIONId.Value);
+				}
+				if (TIPO_FACTURAId.HasValue)
+				{
+					q = q.Where(i => i.TIPO_FACTURA.ID == TIPO_FACTURAId.Value);
 				}
 				return q;
 			}

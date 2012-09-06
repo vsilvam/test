@@ -50,6 +50,7 @@
     <Compile Include="DTO\DTOFindPrestaciones.cs" />
     <Compile Include="DTO\DTOPaginador.cs" />
     <Compile Include="DTO\DTO_EMISION_FACTURA.cs" />
+    <Compile Include="DTO\DTO_REPORTE_FACTURA.cs" />
     <Compile Include="DTO\DTO_RESUMEN_PRESTACIONES_FACTURAR.cs" />
     <Compile Include="Enum\ENUM_TIPO_COBRO.cs" />
     <Compile Include="TrxCustomCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs" />
@@ -179,6 +180,9 @@
     <Compile Include="TrxTIPO_COBRO.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="TrxTIPO_FACTURA.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="TrxTIPO_PRESTACION.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
@@ -217,6 +221,15 @@
       <Project>{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}</Project>
       <Name>LQCE.Repositorio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_Exento.rdlc" />
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_IVA.rdlc" />
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_Exento.rdlc" />
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_IVA.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

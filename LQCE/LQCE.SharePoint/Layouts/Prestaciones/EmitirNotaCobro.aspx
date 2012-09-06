@@ -9,21 +9,19 @@
 <%@ Page Language="C#" 
     DynamicMasterPageFile="~masterurl/default.master" 
     AutoEventWireup="true" 
-    Inherits="LQCE.SharePoint.Layouts.Prestaciones.EditarRegistros" 
-    CodeBehind="EditarRegistros.aspx.cs" %>
+    Inherits="LQCE.SharePoint.Layouts.Prestaciones.EmitirNotaCobro" 
+    CodeBehind="EmitirNotaCobro.aspx.cs" %>
 
-<%@ Register Src="~/_controltemplates/Prestaciones/EditarRegistros.ascx" TagName="EditarRegistros" TagPrefix="uc1" %>
-<%@ Register Src="~/_controltemplates/Prestaciones/Paginador1.ascx" TagName="Paginador1" TagPrefix="uc2" %>
+<%@ Register Src="~/_controltemplates/Prestaciones/EmitirNotaCobro.ascx" TagName="EmitirNotaCobro" TagPrefix="uc1" %>
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
-     <uc1:EditarRegistros ID="EditarRegistros1" runat="server" />
-     <uc2:Paginador1 ID="Paginador" runat="server" />
+    <uc1:EmitirNotaCobro ID="EmitirNotaCobro1" runat="server" />
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
-    Formulario de Editar Registros
+    Formulario de Emision de Nota de Cobro
 </asp:Content>
 
 <asp:Content ID="PageTitleInTitleArea" runat="server" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea">
-    Formulario de Editar Registros
+    Formulario de Emision de Nota de Cobro
 </asp:Content>

@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class EditarPrestacionesHumanas : UserControl
+    public partial class EditarPrestacionesHumanas : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

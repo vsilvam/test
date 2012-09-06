@@ -91,6 +91,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UserControl Paginador1;
+        protected global::LQCE.SharePoint.ControlTemplates.UserControl.Paginador1 Paginador1;
+        
+        /// <summary>
+        /// Control pntest.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pntest;
     }
 }

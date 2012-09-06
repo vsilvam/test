@@ -5,7 +5,7 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class DetalleFactura : UserControl
+    public partial class DetalleFactura : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

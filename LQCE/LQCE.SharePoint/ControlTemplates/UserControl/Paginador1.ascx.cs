@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 using LQCE.SharePoint.ControlTemplates.App_Code;
 using LQCE.Transaccion.DTO;
 
-namespace LQCE.SharePoint.ControlTemplates.Prestaciones
+namespace LQCE.SharePoint.ControlTemplates.UserControl
 {
     public delegate void PageChangedEventHandler(object sender, CustomPageChangeArgs e);
 
-    public partial class Paginador : System.Web.UI.UserControl
+    public partial class Paginador1 : System.Web.UI.UserControl
     {
         public event PageChangedEventHandler PageChanged;
 
@@ -61,6 +63,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             ddlPageNumber.SelectedValue = PageIndex.ToString();
             lblShowRecords.Text = string.Format(" {0} ", this.TotalPages.ToString());
         }
+
 
         protected void ddlPageSize_SelectedIndexChanged(object sender, EventArgs e)
         {

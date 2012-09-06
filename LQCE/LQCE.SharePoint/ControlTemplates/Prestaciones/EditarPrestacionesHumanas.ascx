@@ -115,6 +115,11 @@
             <td colspan="6">
             <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
                 <table>
+                <tr>
+                    <td>EXAMEN</td>
+                    <td>CODIGO</td>
+                    <td>VALOR</td>
+                </tr>
                     <tr>
                         <td>
                             <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>

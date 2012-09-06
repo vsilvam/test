@@ -7,7 +7,7 @@ using LQCE.Transaccion.Enum;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class UCCargaMasivaPrestacionesHumanas : UserControl
+    public partial class UCCargaMasivaPrestacionesHumanas : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

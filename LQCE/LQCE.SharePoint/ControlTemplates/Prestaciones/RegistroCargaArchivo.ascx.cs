@@ -11,7 +11,7 @@ using LQCE.Transaccion.Enum;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class RegistroCargaArchivo : UserControl
+    public partial class RegistroCargaArchivo : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,7 +21,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {                    
                     GetTipoPrestacion();
                     GetEstado();
-                    //CargaGrilla(null, null);
+                    CargaGrilla(null, null);
                 }
             }
             catch (Exception ex)

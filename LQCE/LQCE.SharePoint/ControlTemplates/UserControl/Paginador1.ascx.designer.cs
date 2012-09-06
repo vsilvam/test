@@ -7,10 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
+namespace LQCE.SharePoint.ControlTemplates.UserControl {
     
     
-    public partial class Paginador {
+    public partial class Paginador1 {
         
         /// <summary>
         /// Control panelPaginador.

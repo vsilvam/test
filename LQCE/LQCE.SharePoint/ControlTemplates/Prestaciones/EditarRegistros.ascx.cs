@@ -10,7 +10,7 @@ using LQCE.Transaccion.DTO;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class EditarRegistros : UserControl
+    public partial class EditarRegistros : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -62,7 +62,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             grdPrestaciones.PageIndex = 1;
-            BuscarPrestaciones();
+            BuscarPrestaciones();            
             Paginador1.SetPage(1);
         }
 
@@ -116,6 +116,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             grdPrestaciones.PageSize = (e.CurrentPageSize == 0 ? 10 : e.CurrentPageSize);
             grdPrestaciones.PageIndex = e.CurrentPageNumber;
+            BuscarPrestaciones();
             //CargaGrilla(null, null);
         }
     }

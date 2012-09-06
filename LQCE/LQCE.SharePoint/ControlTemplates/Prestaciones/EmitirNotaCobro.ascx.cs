@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class EmitirNotaCobro : UserControl
+    public partial class EmitirNotaCobro : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

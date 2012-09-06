@@ -104,13 +104,6 @@
     <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx.designer.cs">
       <DependentUpon>EmitirNotaCobro.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlTemplates\Prestaciones\Paginador.ascx.cs">
-      <DependentUpon>Paginador.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlTemplates\Prestaciones\Paginador.ascx.designer.cs">
-      <DependentUpon>Paginador.ascx.cs</DependentUpon>
-    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.cs">
       <DependentUpon>RegistroCargaArchivo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -131,6 +124,13 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx.designer.cs">
       <DependentUpon>UCCargaMasivaPrestacionesVeterinarias.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\UserControl\Paginador1.ascx.cs">
+      <DependentUpon>Paginador1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\UserControl\Paginador1.ascx.designer.cs">
+      <DependentUpon>Paginador1.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx.cs">
       <DependentUpon>CargaMasicaPrestacionesHumanas.aspx</DependentUpon>
@@ -166,6 +166,20 @@
     </Compile>
     <Compile Include="Layouts\Prestaciones\EditarRegistros.aspx.designer.cs">
       <DependentUpon>EditarRegistros.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EmitirFactura.aspx.cs">
+      <DependentUpon>EmitirFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EmitirFactura.aspx.designer.cs">
+      <DependentUpon>EmitirFactura.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EmitirNotaCobro.aspx.cs">
+      <DependentUpon>EmitirNotaCobro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EmitirNotaCobro.aspx.designer.cs">
+      <DependentUpon>EmitirNotaCobro.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx.cs">
       <DependentUpon>RegistroCargaArchivo.aspx</DependentUpon>
@@ -223,9 +237,6 @@
     <Content Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\Prestaciones\Paginador.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -233,6 +244,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\UserControl\Paginador1.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx">
@@ -248,6 +262,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\EditarRegistros.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\EmitirFactura.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\EmitirNotaCobro.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx">

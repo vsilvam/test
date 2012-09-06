@@ -4,10 +4,11 @@ using System.Web.UI;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.Enum;
+//using System.Web.UI;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class UCCargaMasivaPrestacionesVeterinarias : UserControl
+    public partial class UCCargaMasivaPrestacionesVeterinarias : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -39,7 +39,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
             var prestaciones = PrestacionesHumanas.GetByIdWithReferences2(Id);
-            //var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
+            if (prestaciones == null)
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
+                
+                            
 
             //cargar ficha
             lblNroPrestacion.Text = prestaciones.ID.ToString();

@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td>
-                Tipo de Prestacion
+                Tipo de Prestacion</td><td><span>:</span>
             </td>
             <td>
                 <asp:DropDownList ID="ddlTipoPrestacion" runat="server" AppendDataBoundItems="true" DataTextField="NOMBRE" DataValueField="ID">                    
@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td>
-                Estado
+                Estado</td><td><span>:</span>
             </td>
             <td>
                 <asp:DropDownList ID="ddlEstado" runat="server" AppendDataBoundItems="true" DataTextField="NOMBRE" DataValueField="ID">
@@ -51,7 +51,11 @@
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:BoundField DataField="ID" HeaderText="Id" />
+            <asp:TemplateField HeaderText="Id">
+                <ItemTemplate>
+                    <asp:Label ID="lblId" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField DataField="ARCHIVO" HeaderText="Nombre Archivo" />
             <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha Carga" />
             <asp:BoundField DataField="TOTAL_REGISTROS" HeaderText="N° Total Fichas" />

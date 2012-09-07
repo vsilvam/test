@@ -19,6 +19,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     GetEstado();
+                    BuscarPrestaciones();
                 }
             }
             catch (Exception ex)
@@ -32,6 +33,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void GetEstado()
         {
             TrxCARGA_PRESTACIONES_ESTADO estado = new TrxCARGA_PRESTACIONES_ESTADO();
+            ddlEstadoPrestacion.Items.Clear();
+            ddlEstadoPrestacion.Items.Add(new ListItem("(Todos)", ""));
             ddlEstadoPrestacion.DataSource = estado.GetAll();
             ddlEstadoPrestacion.DataBind();
         }
@@ -50,7 +53,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 }
                 else
                 {
-                    Response.Redirect("_layouts/Prestaciones/EditarPrestacionesVeterinarias.aspx?Id=" + Id);
+                    Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + Id);
                 }
                 
             }
@@ -62,7 +65,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             grdPrestaciones.PageIndex = 1;
-            BuscarPrestaciones();            
+            BuscarPrestaciones();
             Paginador1.SetPage(1);
         }
 
@@ -87,24 +90,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 dto.prodedencia = txtProcedencia.Text;
             dto.id = int.Parse(Id);
 
-
-            //Tomar valores de busqueda
-            //string numero = string.Empty;
-            //string Nombre = string.Empty;
-            //int? Estado = null;
-            //string Procedencia = string.Empty;
-
-            //if (!string.IsNullOrEmpty(txtNroFicha.Text))
-            //    numero = txtNroFicha.Text;
-            //if (!string.IsNullOrEmpty(txtNombre.Text))
-            //    Nombre = txtNombre.Text;
-            //if (!string.IsNullOrEmpty(ddlEstadoPrestacion.SelectedValue))
-            //    Estado = int.Parse(ddlEstadoPrestacion.SelectedValue);
-            //if (!string.IsNullOrEmpty(txtProcedencia.Text))
-            //    Procedencia = txtProcedencia.Text;
-
             TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            int Total = carga.GetDetalleCargaPrestacionesCount(dto);
+            int Total = 50;// carga.GetDetalleCargaPrestacionesCount(dto);
             grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(dto);
             grdPrestaciones.DataBind();
 
@@ -114,7 +101,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void Paginador1_PageChanged(object sender, CustomPageChangeArgs e)
         {
-            grdPrestaciones.PageSize = (e.CurrentPageSize == 0 ? 10 : e.CurrentPageSize);
+            grdPrestaciones.PageSize = (e.CurrentPageSize == 0 ? 20 : e.CurrentPageSize);
             grdPrestaciones.PageIndex = e.CurrentPageNumber;
             BuscarPrestaciones();
             //CargaGrilla(null, null);

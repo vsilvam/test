@@ -274,7 +274,7 @@ namespace LQCE.Transaccion
                                 "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageSize - 1) * dto.PageIndex).Take(10)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -297,7 +297,7 @@ namespace LQCE.Transaccion
                                 "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageSize - 1) * dto.PageIndex).Take(10)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -434,7 +434,7 @@ namespace LQCE.Transaccion
                                     FECHA_RECEPCION = item.FECHA_RECEPCION
                                 };
 
-                        return r.ToList().Count();
+                        return r.Count();
                     }
                     else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
                     {
@@ -457,7 +457,7 @@ namespace LQCE.Transaccion
                                     FECHA_RECEPCION = item.FECHA_RECEPCION
                                 };
 
-                        return r.ToList().Count();
+                        return r.Count();
                     }
                     else
                     {

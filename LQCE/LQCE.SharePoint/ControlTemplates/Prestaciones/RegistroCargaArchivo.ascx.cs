@@ -8,6 +8,7 @@ using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
 using LQCE.SharePoint.ControlTemplates.App_Code;
 using LQCE.Transaccion.Enum;
+using LQCE.Modelo;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -89,19 +90,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
                 if (ChkEditar.Checked)
                 {
+                    var lblId = grilla.FindControl("lblId") as Label;
                     //Obteber estado de la carga
                     TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                    List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null, null);
-                    foreach (var lis in resumen)
-                    {
-                        if (lis.ID_ESTADO != (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
-                        {
-                            //se puede eliminar la carga
-                            int IdCargaPrestacionesEncabezado = lis.ID;
-                            int IdCargaPrestacionesEstado = lis.ID_ESTADO;
-                            carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
-                        }
-                    }
+                    //List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null, null);
+                    //foreach (var lis in resumen)
+                    //{
+                    //    if (lis.ID_ESTADO == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
+                    //    {
+                    //        //se puede eliminar la carga
+                    //        int IdCargaPrestacionesEncabezado = lis.ID;
+                    //        int IdCargaPrestacionesEstado = lis.ID_ESTADO;
+                    //        carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
+                    //    }
+                    //}
+                    CARGA_PRESTACIONES_ENCABEZADO nose = carga.GetByIdWithReferences(int.Parse(lblId.Text));
+                    int IdCargaPrestacionesEncabezado = nose.ID;
+                    int IdCargaPrestacionesEstado = int.Parse(nose.CARGA_PRESTACIONES_ESTADO.ID.ToString());
+                    carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
                 }
             }
             
@@ -114,18 +120,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
                 if (ChkEditar.Checked)
-                {
+                {                    
                     TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
                     List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null, null);
                     foreach (var lis in resumen)
-                    {
-                        if (lis.ID_ESTADO != (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
+                    {                       
+                        if (lis.ID_ESTADO == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
                         {
                             //es posible cambiar al estado completado
                             int IdCargaPrestacionesEncabezado = lis.ID;
                             int IdCargaPrestacionesEstado = lis.ID_ESTADO;
                             carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
-                        }
+                        }                        
                     }
                 }
             }

@@ -20,14 +20,5 @@ namespace LQCE.SharePoint.Layouts.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UserControl EditarRegistros1;
-        
-        /// <summary>
-        /// Control Paginador.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UserControl Paginador;
     }
 }

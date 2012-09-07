@@ -38,8 +38,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void CargaFicha(int Id)
         {
             TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE veterinarias = new TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE();
-            //var prestaciones = veterinarias.GetByIdWithReferences(Id);
-            var prestaciones = veterinarias.GetByIdWithReferences(1);
+            var prestaciones = veterinarias.GetByIdWithReferences(Id);
+            if (prestaciones == null)
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
+
 
             //cargar ficha
             txtFicha.Text = prestaciones.FICHA;

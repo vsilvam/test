@@ -12,5 +12,6 @@ namespace LQCE.Transaccion.DTO
         public string nombre { get; set; }
         public int estado { get; set; }
         public string prodedencia { get; set; }
+        public DateTime fechaRecepcion { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using LQCE.SharePoint.ControlTemplates.App_Code;
 using LQCE.Transaccion.DTO;
 
-namespace LQCE.SharePoint.ControlTemplates.UserControl
+namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
     public delegate void PageChangedEventHandler(object sender, CustomPageChangeArgs e);
 

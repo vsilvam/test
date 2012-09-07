@@ -125,11 +125,11 @@
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx.designer.cs">
       <DependentUpon>UCCargaMasivaPrestacionesVeterinarias.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlTemplates\UserControl\Paginador1.ascx.cs">
+    <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.cs">
       <DependentUpon>Paginador1.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ControlTemplates\UserControl\Paginador1.ascx.designer.cs">
+    <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.designer.cs">
       <DependentUpon>Paginador1.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx.cs">
@@ -212,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ControlTemplates\LQCE.SharePoint\" />
+    <Folder Include="ControlTemplates\UserControl\" />
     <Folder Include="Features\" />
     <Folder Include="Layouts\LQCE.SharePoint\" />
   </ItemGroup>
@@ -246,7 +247,7 @@
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\UserControl\Paginador1.ascx">
+    <Content Include="ControlTemplates\Prestaciones\Paginador1.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx">

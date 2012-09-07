@@ -716,7 +716,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
         </EntityType>

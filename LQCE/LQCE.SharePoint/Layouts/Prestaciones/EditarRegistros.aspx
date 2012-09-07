@@ -13,11 +13,10 @@
     CodeBehind="EditarRegistros.aspx.cs" %>
 
 <%@ Register Src="~/_controltemplates/Prestaciones/EditarRegistros.ascx" TagName="EditarRegistros" TagPrefix="uc1" %>
-<%@ Register Src="~/_controltemplates/Prestaciones/Paginador1.ascx" TagName="Paginador1" TagPrefix="uc2" %>
 
 <asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
      <uc1:EditarRegistros ID="EditarRegistros1" runat="server" />
-     <uc2:Paginador1 ID="Paginador" runat="server" />
+
 </asp:Content>
 
 <asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">

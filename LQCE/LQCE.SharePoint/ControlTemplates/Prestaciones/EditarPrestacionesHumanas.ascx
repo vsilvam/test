@@ -88,8 +88,8 @@
         </tr>
         <tr>
             <td colspan="6">
-                <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agrega Fichas</asp:LinkButton>
-                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%"
+                <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agrega Examen</asp:LinkButton>
+                <asp:GridView ID="grdExamen" GridLines="None" runat="server" AutoGenerateColumns="False" Width="100%"
                     OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
                     <Columns>
                         <asp:TemplateField HeaderText="EXAMEN">

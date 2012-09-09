@@ -131,7 +131,7 @@
         </tr>
         <tr>
             <td colspan="9">
-                <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Fichas</asp:LinkButton>
+                <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Examen</asp:LinkButton>
                 <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%"
                     OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
                     <Columns>

@@ -6,11 +6,14 @@ using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Enum;
+using LQCE.Modelo;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
     public partial class EditarPrestacionesVeterinarias : System.Web.UI.UserControl
     {
+        static List<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> lista = new List<CARGA_PRESTACIONES_VETERINARIAS_EXAMEN>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -72,8 +75,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             grdExamen.DataBind();
 
             //Habilitar Edicion de Ficha
-            string estado = prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.NOMBRE;
-            if (estado == ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente.ToString())
+            //string estado = prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.NOMBRE;
+            //if (estado == ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente.ToString())
                 EditarFicha();
 
         }
@@ -137,9 +140,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 DTO_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN _examen;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
-                    TextBox txtId = (TextBox)grilla.FindControl("lblId");
-                    TextBox txtExamen = (TextBox)grilla.FindControl("lblExamen");
-                    TextBox txtValor = (TextBox)grilla.FindControl("lblValor");
+                    TextBox txtId = (TextBox)grilla.FindControl("txtId");
+                    TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
+                    TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
 
                     _examen = new DTO_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN();
                     _examen.ID = int.Parse(txtId.Text);
@@ -214,9 +217,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                string examen = txtExamen.Text;
-                string codigo = txtCodigo.Text;
-                string valor = txtValor.Text;
+                CARGA_PRESTACIONES_VETERINARIAS_EXAMEN dto = new CARGA_PRESTACIONES_VETERINARIAS_EXAMEN();
+                dto.NOMBRE_EXAMEN = txtExamen.Text;
+                dto.ID = int.Parse(txtCodigo.Text);
+                dto.VALOR_EXAMEN = txtValor.Text;
+                lista.Add(dto);
+
+                grdExamen.DataSource = lista;
+                grdExamen.DataBind();
+
+                txtExamen.Text = string.Empty;
+                txtCodigo.Text = string.Empty;
+                txtValor.Text = string.Empty;
+                pnAgregaFila.Visible = false;
             }
             catch (Exception ex)
             {

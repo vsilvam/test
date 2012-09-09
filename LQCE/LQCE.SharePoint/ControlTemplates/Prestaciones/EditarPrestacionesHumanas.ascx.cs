@@ -6,11 +6,15 @@ using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Enum;
+using LQCE.Modelo;
+using System.Linq;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
     public partial class EditarPrestacionesHumanas : System.Web.UI.UserControl
     {
+        static List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> lista = new List<CARGA_PRESTACIONES_HUMANAS_EXAMEN>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -41,8 +45,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             var prestaciones = PrestacionesHumanas.GetByIdWithReferences2(Id);
             if (prestaciones == null)
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
-                
-                            
 
             //cargar ficha
             lblNroPrestacion.Text = prestaciones.ID.ToString();
@@ -67,13 +69,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             //txtRecepcion.Text = prestaciones;
 
             //se carga grilla
-            grdExamen.DataSource = prestaciones.CARGA_PRESTACIONES_HUMANAS_EXAMEN;
+            grdExamen.DataSource = prestaciones.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(e => e.ACTIVO);
             grdExamen.DataBind();
+            lista = prestaciones.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(e => e.ACTIVO).ToList();
 
             //Habilitar Edicion de Ficha
-            if (prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente)
-                EditarFicha();
-
+            //if (prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente) //o con errores 
+            EditarFicha();
         }
 
         private void EditarFicha()
@@ -204,11 +206,21 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                string examen = txtExamen.Text;
-                string codigo = txtCodigo.Text;
-                string valor = txtValor.Text;
+                CARGA_PRESTACIONES_HUMANAS_EXAMEN dto = new CARGA_PRESTACIONES_HUMANAS_EXAMEN();
+                dto.NOMBRE_EXAMEN = txtExamen.Text;
+                dto.ID = int.Parse(txtCodigo.Text);
+                dto.VALOR_EXAMEN = txtValor.Text;
+                lista.Add(dto);
 
-                //guardar datos y cargar nuevamente la grilla
+                grdExamen.DataSource = lista;
+                grdExamen.DataBind();
+
+                txtExamen.Text = string.Empty;
+                txtCodigo.Text = string.Empty;
+                txtValor.Text = string.Empty;
+                pnAgregaFila.Visible = false;
+
+
             }
             catch (Exception ex)
             {

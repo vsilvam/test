@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\DTOExamen.cs" />
     <Compile Include="DTO\DTOFindPrestaciones.cs" />
     <Compile Include="DTO\DTOPaginador.cs" />
     <Compile Include="DTO\DTO_EMISION_FACTURA.cs" />

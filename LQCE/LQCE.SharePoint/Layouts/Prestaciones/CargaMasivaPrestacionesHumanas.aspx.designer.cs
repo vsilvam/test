@@ -10,7 +10,7 @@
 namespace LQCE.SharePoint.Layouts.Prestaciones {
     
     
-    public partial class CargaMasicaPrestacionesHumanas {
+    public partial class CargaMasivaPrestacionesHumanas {
         
         /// <summary>
         /// Control UCCargaMasivaPrestacionesHumanas1.

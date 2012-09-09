@@ -13,6 +13,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                panelMensaje.Visible = false;
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     
@@ -21,11 +22,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.Visible = true;
                 lblMensaje.Text = ex.Message;
                 return;
             }
         }
-       
 
         protected void btnPaso1Template_Click(object sender, EventArgs e)
         {
@@ -42,6 +43,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.Visible = true;
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -83,6 +85,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.Visible = true;
                 lblMensaje.Text = ex.Message;
                 return;
             }

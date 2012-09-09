@@ -132,12 +132,12 @@
     <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.designer.cs">
       <DependentUpon>Paginador1.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx.cs">
-      <DependentUpon>CargaMasicaPrestacionesHumanas.aspx</DependentUpon>
+    <Compile Include="Layouts\Prestaciones\CargaMasivaPrestacionesHumanas.aspx.cs">
+      <DependentUpon>CargaMasivaPrestacionesHumanas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx.designer.cs">
-      <DependentUpon>CargaMasicaPrestacionesHumanas.aspx.cs</DependentUpon>
+    <Compile Include="Layouts\Prestaciones\CargaMasivaPrestacionesHumanas.aspx.designer.cs">
+      <DependentUpon>CargaMasivaPrestacionesHumanas.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx.cs">
       <DependentUpon>CargaMasivaPrestacionesVeterinarias.aspx</DependentUpon>
@@ -250,7 +250,7 @@
     <Content Include="ControlTemplates\Prestaciones\Paginador1.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Layouts\Prestaciones\CargaMasicaPrestacionesHumanas.aspx">
+    <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesHumanas.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx">

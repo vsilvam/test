@@ -100,7 +100,7 @@
                         <asp:TemplateField HeaderText="Editar">
                             <ItemTemplate>
                                 <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
-                                    CommandArgument='<%# Eval("NUMERO_FICHA") %>' Height="20px" ToolTip="Editar" OnClick="imgEditar_Click"
+                                    CommandArgument='<%# Eval("ID") %>' Height="20px" ToolTip="Editar" OnClick="imgEditar_Click"
                                     CommandName='<%# Eval("ID_TIPO_PRESTACION") %>' />
                             </ItemTemplate>
                         </asp:TemplateField>

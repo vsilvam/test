@@ -105,9 +105,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     //    }
                     //}
                     CARGA_PRESTACIONES_ENCABEZADO nose = carga.GetByIdWithReferences(int.Parse(lblId.Text));
-                    int IdCargaPrestacionesEncabezado = nose.ID;
-                    int IdCargaPrestacionesEstado = int.Parse(nose.CARGA_PRESTACIONES_ESTADO.ID.ToString());
-                    carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
+                    int IdCargaPrestacionesEncabezado = nose.ID;                    
+                    carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, (int)ENUM_CARGA_PRESTACIONES_ESTADO.Eliminado);
                 }
             }
             
@@ -130,7 +129,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                             //es posible cambiar al estado completado
                             int IdCargaPrestacionesEncabezado = lis.ID;
                             int IdCargaPrestacionesEstado = lis.ID_ESTADO;
-                            carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
+                            carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, (int)ENUM_CARGA_PRESTACIONES_ESTADO.Completado);
                         }                        
                     }
                 }

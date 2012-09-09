@@ -12,7 +12,7 @@ namespace LQCE.Repositorio
             Error = string.Empty;
             try
             {
-                return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+                return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE                    
                     .Include("CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO")
                     .Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN")
                     .Include("CARGA_PRESTACIONES_DETALLE_ESTADO")

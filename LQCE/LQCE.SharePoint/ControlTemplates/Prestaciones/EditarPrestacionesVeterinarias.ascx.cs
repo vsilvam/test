@@ -111,7 +111,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 //se obtienen los datos desde el formuario
-                int IdTipoPrestacion = 1;
+                int IdCargaPrestacionVeterinariaDetalle = int.Parse(lblNroPrestacion.Text);
                 int IdCargaPrestacionesDetalleEstado = 2;
                 string ficha = !string.IsNullOrEmpty(lblNroPrestacion.Text) ? lblNroPrestacion.Text : string.Empty;
                 string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
@@ -163,7 +163,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 else
                 {
                     TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(IdTipoPrestacion, ficha, nombre,
+                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(IdCargaPrestacionVeterinariaDetalle, ficha, nombre,
                         especie, raza, edad, sexo, solicita, telefono, medico, procedencia, fechaRecepcion, fechaMuestra, entregaDesde, pendiente, garantia,
                         pagado, total, IdCargaPrestacionesDetalleEstado, error, lista);
 

@@ -781,7 +781,7 @@ namespace LQCE.Transaccion
                     if (objEstadoDetalle == null)
                         throw new Exception("No se encuentra estado de detalle");
 
-                    var objDetalle = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByIdWithReferences2(IdCargaPrestacionVeterinariaDetalle);
+                    var objDetalle = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByIdWithReferences(IdCargaPrestacionVeterinariaDetalle);
                     if (objDetalle.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID != (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente)
                         throw new Exception("La carga seleccionada no se encuentra en proceso de Revisión Pendiente");
 
@@ -804,6 +804,7 @@ namespace LQCE.Transaccion
                     objDetalle.TOTAL = Total;
                     objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
                     objDetalle.MENSAJE_ERROR = MensajeError;
+                    objDetalle.FECHA_ACTUALIZACION = DateTime.Now;
                     context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
 
                     // Eliminar filas de examenes

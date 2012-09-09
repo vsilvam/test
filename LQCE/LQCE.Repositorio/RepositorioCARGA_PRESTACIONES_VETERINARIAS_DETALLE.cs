@@ -37,7 +37,14 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("ESPECIE1").Include("GARANTIA1").Include("PREVISION").Include("RAZA1").FirstOrDefault(i => i.ID == id);
+							return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO")
+                                .Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN")
+                                .Include("CARGA_PRESTACIONES_DETALLE_ESTADO")
+                                .Include("CLIENTE")
+                                .Include("ESPECIE1")
+                                .Include("GARANTIA1")
+                                .Include("PREVISION")
+                                .Include("RAZA1").FirstOrDefault(i => i.ID == id);
 			
 			}
 			catch (Exception ex)

@@ -13,6 +13,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                panelMensaje.CssClass = "MostrarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     
@@ -21,7 +22,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
-                panelMensaje.Visible = true;
+                panelMensaje.CssClass = "OcultarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -42,7 +43,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
-                panelMensaje.Visible = true;
+                panelMensaje.CssClass = "OcultarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -84,7 +85,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
-                panelMensaje.Visible = true;
+                panelMensaje.CssClass = "OcultarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }

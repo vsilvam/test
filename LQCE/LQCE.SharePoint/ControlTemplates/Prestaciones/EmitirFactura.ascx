@@ -66,31 +66,31 @@
         <Columns>
             <asp:TemplateField HeaderText="RUT">
                 <ItemTemplate>
-                    <asp:Label ID="lblRut" runat="server" Text='<%# Bind("Rut") %>'></asp:Label>
+                    <asp:Label ID="lblRut" runat="server" Text='<%# Bind("RUT_CLIENTE") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="NOMBRE">
                 <ItemTemplate>
-                    <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
+                    <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("NOMBRE_CLIENTE") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="CANTIDAD">
                 <ItemTemplate>
-                    <asp:Label ID="lblCantidad" runat="server" Text='<%# Bind("Cantidad") %>'></asp:Label>
+                    <asp:Label ID="lblCantidad" runat="server" Text='<%# Bind("CANTIDAD_PRESTACIONES") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="TOTAL A COBRAR">
                 <ItemTemplate>
-                    <asp:Label ID="lblTotal" runat="server" Text='<%# Bind("Total") %>'></asp:Label>
+                    <asp:Label ID="lblTotal" runat="server" Text='<%# Bind("TOTAL_PRESTACIONES") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
             <asp:TemplateField HeaderText="% DESCUENTO">
                 <ItemTemplate>
-                    <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("Descuento") %>'></asp:TextBox>
+                    <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("DESCUENTO") %>'></asp:TextBox>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>

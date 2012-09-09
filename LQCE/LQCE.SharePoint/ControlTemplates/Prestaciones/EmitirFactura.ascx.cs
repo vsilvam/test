@@ -44,12 +44,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 pnFacturas.Visible = true;
 
-                string desde = !string.IsNullOrEmpty(txtDesde.Text) ? txtDesde.Text : string.Empty;
-                string hasta = !string.IsNullOrEmpty(txtHasta.Text) ? txtDesde.Text : string.Empty;
-                string cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? ddlClientes.SelectedValue : string.Empty;
+                DateTime? desde = !string.IsNullOrEmpty(txtDesde.Text) ? DateTime.Parse(txtDesde.Text) : (DateTime?)null;
+                DateTime? hasta = !string.IsNullOrEmpty(txtHasta.Text) ? DateTime.Parse(txtHasta.Text) : (DateTime?)null;
+                int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
 
                 var facturacion = new TrxFACTURACION();
-                grdFacturas.DataSource = facturacion.GetByFilterWithReferences();
+                grdFacturas.DataSource = facturacion.GetClientesAFacturar(desde, hasta, cliente);
                 grdFacturas.DataBind();
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     var txtDescuento = row.FindControl("txtDescuento") as TextBox;
 
                     //se guardan las modificaciones cuando existen
-
+                   // PENDIENTE: Recorrer grillas, recuperar descuentos y generar facturas
                     //se generan los reportes
 
                 }
@@ -92,37 +92,37 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void grdFacturas_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            try
-            {
-                if (e.Row.RowType == DataControlRowType.DataRow)
-                {
-                    List<FACTURACION> _facturacion = (List<FACTURACION>)e.Row.DataItem;
-                    if (_facturacion != null)
-                    {
-                        foreach (var lis in _facturacion)
-                        {
-                            Label lblRut = (Label)e.Row.FindControl("lblRut");
-                            Label lblNombre = (Label)e.Row.FindControl("lblNombre");
-                            Label lblCantidad = (Label)e.Row.FindControl("lblCantidad");
-                            Label lblTotal = (Label)e.Row.FindControl("lblTotal");
-                            TextBox txtDescuento = (TextBox)e.Row.FindControl("txtDescuento");
+            //try
+            //{
+            //    if (e.Row.RowType == DataControlRowType.DataRow)
+            //    {
+            //        List<FACTURACION> _facturacion = (List<FACTURACION>)e.Row.DataItem;
+            //        if (_facturacion != null)
+            //        {
+            //            foreach (var lis in _facturacion)
+            //            {
+            //                Label lblRut = (Label)e.Row.FindControl("lblRut");
+            //                Label lblNombre = (Label)e.Row.FindControl("lblNombre");
+            //                Label lblCantidad = (Label)e.Row.FindControl("lblCantidad");
+            //                Label lblTotal = (Label)e.Row.FindControl("lblTotal");
+            //                TextBox txtDescuento = (TextBox)e.Row.FindControl("txtDescuento");
 
-                            //lblRut.Text = lis.Rut;
-                            //lblNombre.Text = lis;
-                            //lblCantidad.Text = lis;
-                            //lblTotal.Text = lis;
-                            //txtDescuento.Text = lis;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                panelMensaje.CssClass = "MostrarMensaje";
-                lblMensaje.Text = ex.Message;
-                return;
-            }
+            //                //lblRut.Text = lis.Rut;
+            //                //lblNombre.Text = lis;
+            //                //lblCantidad.Text = lis;
+            //                //lblTotal.Text = lis;
+            //                //txtDescuento.Text = lis;
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ISException.RegisterExcepcion(ex);
+            //    panelMensaje.CssClass = "MostrarMensaje";
+            //    lblMensaje.Text = ex.Message;
+            //    return;
+            //}
         }
     }
 }

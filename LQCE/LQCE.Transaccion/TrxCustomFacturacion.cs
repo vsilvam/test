@@ -34,8 +34,8 @@ namespace LQCE.Transaccion
             return stream2;
         }
 
-        public List<DTO_RESUMEN_PRESTACIONES_FACTURAR> GetClientesAFacturar(DateTime FechaDesde,
-            DateTime FechaHasta, int? IdCliente)
+        public List<DTO_RESUMEN_PRESTACIONES_FACTURAR> GetClientesAFacturar(DateTime? FechaDesde,
+            DateTime? FechaHasta, int? IdCliente)
         {
             Init();
             try
@@ -49,12 +49,12 @@ namespace LQCE.Transaccion
                             select new DTO_RESUMEN_PRESTACIONES_FACTURAR
                             {
                                 ID_CLIENTE = g.Key,
-                                RUT_CLIENTE = g.First().RUT,
-                                NOMBRE_CLIENTE = g.First().NOMBRE,
+                                RUT_CLIENTE = g.FirstOrDefault().RUT,
+                                NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE,
                                 CANTIDAD_PRESTACIONES = g.Count(),
                                 TOTAL_PRESTACIONES = g.Sum(p => p.TOTAL),
-                                DESCUENTO = g.First().DESCUENTO,
-                                TOTAL_FACTURA = g.Sum(p => (int)(p.TOTAL * (1 - (double)g.First().DESCUENTO / 100.0)))
+                                DESCUENTO = g.FirstOrDefault().DESCUENTO,
+                                TOTAL_FACTURA = g.Sum(p => (int)(p.TOTAL * (1 - (double)g.FirstOrDefault().DESCUENTO / 100.0)))
                             };
                     return q.ToList();
                 }

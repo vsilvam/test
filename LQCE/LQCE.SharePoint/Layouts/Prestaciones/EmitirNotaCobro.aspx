@@ -24,4 +24,6 @@
 
 <asp:Content ID="PageTitleInTitleArea" runat="server" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea">
     Formulario de Emision de Nota de Cobro
+</asp:Content><asp:Content ID="PageTitleInTitleArea2" runat="server" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea2">
+    Formulario de Emision de Nota de Cobro
 </asp:Content>

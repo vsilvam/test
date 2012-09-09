@@ -13,16 +13,19 @@
 
 <%@ Register Src="~/_controltemplates/Prestaciones/UCCargaMasivaPrestacionesHumanas.ascx"
     TagName="CargaMasivaPrestacionesHumanas" TagPrefix="uc1" %>
-
-<asp:Content ID="PageHead" ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
-</asp:Content>
-<asp:Content ID="Main" ContentPlaceHolderID="PlaceHolderMain" runat="server">
+<asp:content id="PageHead" contentplaceholderid="PlaceHolderAdditionalPageHead" runat="server">
+</asp:content>
+<asp:content id="Main" contentplaceholderid="PlaceHolderMain" runat="server">
     <uc1:CargaMasivaPrestacionesHumanas ID="UCCargaMasivaPrestacionesHumanas1" runat="server" />
-</asp:Content>
-<asp:Content ID="PageTitle" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
+</asp:content>
+<asp:content id="PageTitle" contentplaceholderid="PlaceHolderPageTitle" runat="server">
     Carga Masiva Prestaciones Humanas
-</asp:Content>
-<asp:Content ID="PageTitleInTitleArea" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea"
+</asp:content>
+<asp:content id="PageTitleInTitleArea" contentplaceholderid="PlaceHolderPageTitleInTitleArea"
     runat="server">
     Carga Masiva Prestaciones Humanas
-</asp:Content>
+</asp:content>
+<asp:content id="PageTitleInTitleArea2" contentplaceholderid="PlaceHolderPageTitleInTitleArea2"
+    runat="server">
+    Carga Masiva Prestaciones Humanas
+</asp:content>

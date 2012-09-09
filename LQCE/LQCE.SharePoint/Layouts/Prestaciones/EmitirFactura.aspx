@@ -23,4 +23,6 @@
 
 <asp:Content ID="PageTitleInTitleArea" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server" >
     Emitir Factura
+</asp:Content><asp:Content ID="PageTitleInTitleArea2" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea2" runat="server" >
+    Emitir Factura
 </asp:Content>

@@ -26,3 +26,6 @@
 <asp:Content ID="PageTitleInTitleArea" runat="server" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea">
     Formulario de Editar Registros
 </asp:Content>
+<asp:Content ID="PageTitleInTitleArea2" runat="server" ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea2">
+    Formulario de Editar Registros
+</asp:Content>

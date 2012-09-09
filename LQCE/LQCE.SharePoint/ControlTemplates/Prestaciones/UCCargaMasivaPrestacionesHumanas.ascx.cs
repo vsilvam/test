@@ -34,13 +34,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 //panelMensaje.CssClass = "OcultarMensaje";
 
-                string attachment = "attachment; filename=PrestacionesHumanas.xls";
+                string attachment = "attachment; filename=PrestacionesHumanas.xlsx";
                 Response.ClearContent();
                 Response.AddHeader("content-disposition", attachment);
-                Response.ContentType = "application/ms-excel";
+                Response.ContentType = "application/octet-stream";
                 string nombreArchivo = MapPath("~/_layouts/Prestaciones/PrestacionesHumanas.xlsx");
                 Response.WriteFile(nombreArchivo);
-                this.Context.ApplicationInstance.CompleteRequest();
+                Response.End();
+//                this.Context.ApplicationInstance.CompleteRequest();
             }
             catch (Exception ex)
             {

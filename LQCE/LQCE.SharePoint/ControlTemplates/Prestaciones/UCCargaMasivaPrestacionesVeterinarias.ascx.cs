@@ -33,13 +33,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                string attachment = "attachment; filename=PrestacionesVeterinarias.xls";
+                string attachment = "attachment; filename=PrestacionesVeterinarias.xlsx";
                 Response.ClearContent();
                 Response.AddHeader("content-disposition", attachment);
-                Response.ContentType = "application/ms-excel";
+                Response.ContentType = "application/octet-stream";
                 string nombreArchivo = MapPath("~/_layouts/Prestaciones/PrestacionesVeterinarias.xlsx");
                 Response.WriteFile(nombreArchivo);
-                this.Context.ApplicationInstance.CompleteRequest();
+                Response.End();
+                //this.Context.ApplicationInstance.CompleteRequest();
             }
             catch (Exception ex)
             {

@@ -41,11 +41,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
             ddlPageSize.SelectedValue = dto.PageSize.ToString();
 
-            CustomPageChangeArgs args = new CustomPageChangeArgs();
-            args.CurrentPageSize = dto.PageSize;
-            args.CurrentPageNumber = dto.PageIndex;
-            args.TotalPages = 0;
-            Pager_PageChanged(this, args);
+            //CustomPageChangeArgs args = new CustomPageChangeArgs();
+            //args.CurrentPageSize = dto.PageSize;
+            //args.CurrentPageNumber = dto.PageIndex;
+            //args.TotalPages = 0;
+            //Pager_PageChanged(this, args);
 
             ddlPageNumber.Items.Clear();
             for (int count = 1; count <= this.TotalPages; ++count)

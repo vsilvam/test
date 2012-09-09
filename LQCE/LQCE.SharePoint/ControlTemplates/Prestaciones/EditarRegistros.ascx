@@ -38,7 +38,7 @@
             </td>
             <td>
                 <asp:DropDownList ID="ddlEstadoPrestacion" runat="server" Height="16px" DataValueField="ID"
-                    DataTextField="NOMBRE">
+                    DataTextField="NOMBRE" AppendDataBoundItems="True">
                 </asp:DropDownList>
             </td>
         </tr>

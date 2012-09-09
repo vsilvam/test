@@ -18,8 +18,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
+                    grdPrestaciones.PageIndex = 1;
                     GetEstado();
                     BuscarPrestaciones();
+                    Paginador1.SetPage(1);
+                    
                 }
             }
             catch (Exception ex)
@@ -32,7 +35,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         private void GetEstado()
         {
-            TrxCARGA_PRESTACIONES_ESTADO estado = new TrxCARGA_PRESTACIONES_ESTADO();
+            TrxCARGA_PRESTACIONES_DETALLE_ESTADO estado = new TrxCARGA_PRESTACIONES_DETALLE_ESTADO();
             ddlEstadoPrestacion.Items.Clear();
             ddlEstadoPrestacion.Items.Add(new ListItem("(Todos)", ""));
             ddlEstadoPrestacion.DataSource = estado.GetAll();
@@ -91,12 +94,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             dto.id = int.Parse(Id);
 
             TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            int Total = 50;// carga.GetDetalleCargaPrestacionesCount(dto);
+            int Total = carga.GetDetalleCargaPrestacionesCount(dto);
             grdPrestaciones.DataSource = carga.GetDetalleCargaPrestaciones(dto);
             grdPrestaciones.DataBind();
 
             Paginador1.TotalPages = Total % grdPrestaciones.PageSize == 0 ? Total / grdPrestaciones.PageSize : Total / grdPrestaciones.PageSize + 1;
             Paginador1.Visible = (Total > 0);
+            Paginador1.Inicializar(dto);
         }
 
         protected void Paginador1_PageChanged(object sender, CustomPageChangeArgs e)

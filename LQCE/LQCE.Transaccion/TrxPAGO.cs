@@ -45,7 +45,7 @@ namespace LQCE.Transaccion
            {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 
@@ -64,7 +64,7 @@ namespace LQCE.Transaccion
            {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 
@@ -83,7 +83,7 @@ namespace LQCE.Transaccion
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 
@@ -102,7 +102,7 @@ namespace LQCE.Transaccion
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 	 	
@@ -121,7 +121,7 @@ namespace LQCE.Transaccion
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         } 
 
@@ -140,7 +140,7 @@ namespace LQCE.Transaccion
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         } 
 

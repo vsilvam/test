@@ -27,7 +27,7 @@ namespace LQCE.Repositorio
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
 		}
 
@@ -44,7 +44,7 @@ namespace LQCE.Repositorio
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
 		}
 
@@ -61,7 +61,7 @@ namespace LQCE.Repositorio
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
 		}
 
@@ -78,7 +78,7 @@ namespace LQCE.Repositorio
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
 		}
 
@@ -165,7 +165,7 @@ namespace LQCE.Repositorio
             {
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
 		}
 
@@ -253,7 +253,7 @@ namespace LQCE.Repositorio
 			{
 				ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
 			}
 		}
 	}

@@ -278,7 +278,7 @@ namespace LQCE.Transaccion
                                 "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageSize - 1) * dto.PageIndex).Take(10)
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -301,7 +301,7 @@ namespace LQCE.Transaccion
                                 "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageSize - 1) * dto.PageIndex).Take(10)
+                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -425,20 +425,8 @@ namespace LQCE.Transaccion
                                 "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
-                                select new DTO_DETALLE_CARGA_PRESTACIONES
-                                {
-                                    ID = item.ID,
-                                    ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
-                                    NUMERO_FICHA = item.FICHA,
-                                    NOMBRE = item.NOMBRE,
-                                    ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
-                                    NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
-                                    PROCEDENCIA = item.PROCEDENCIA,
-                                    FECHA_RECEPCION = item.FECHA_RECEPCION
-                                };
 
-                        return r.Count();
+                        return q.Count();
                     }
                     else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
                     {
@@ -448,20 +436,9 @@ namespace LQCE.Transaccion
                                 "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(10)
-                                select new DTO_DETALLE_CARGA_PRESTACIONES
-                                {
-                                    ID = item.ID,
-                                    ID_TIPO_PRESTACION = item.CARGA_PRESTACIONES_ENCABEZADO.TIPO_PRESTACION.ID,
-                                    NUMERO_FICHA = item.FICHA,
-                                    NOMBRE = item.NOMBRE,
-                                    ID_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.ID,
-                                    NOMBRE_ESTADO_DETALLE = item.CARGA_PRESTACIONES_DETALLE_ESTADO.NOMBRE,
-                                    PROCEDENCIA = item.PROCEDENCIA,
-                                    FECHA_RECEPCION = item.FECHA_RECEPCION
-                                };
+                        
 
-                        return r.Count();
+                        return q.Count();
                     }
                     else
                     {

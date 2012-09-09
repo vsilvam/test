@@ -79,7 +79,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
            {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 
@@ -98,7 +98,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
            {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 
@@ -117,7 +117,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 
@@ -136,7 +136,7 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         }
 <#
@@ -486,7 +486,7 @@ if(parametrosGetByFilterAll != "")
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         } 
 
@@ -505,7 +505,7 @@ if(parametrosGetByFilterAll != "")
             {
 				 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
-                return null;
+                throw ex;
             }
         } 
 

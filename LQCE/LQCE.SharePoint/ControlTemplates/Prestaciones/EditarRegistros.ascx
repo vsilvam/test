@@ -11,23 +11,19 @@
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarRegistros" %>
 <%@ Register TagPrefix="uc1" TagName="Paginador" Src="Paginador1.ascx" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
-        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+        <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-<h4 class="alert_warning">
-    <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+
 <article class="module width_full">
 
-<asp:Panel ID="pnEditarRegistros" runat="server">
-    
-    <header><h3>Registros Agregados</h3></header>
+ <header><h3>Buscador de Prestaciones</h3></header>
 
     <div class="module_content">
-
-        
-    <legend>Buscador de Prestaciones</legend>
-    <table width="100%">
+            
+      <table width="100%">
         <tr>
             <td width="20%">
                 Numero de Ficha
@@ -36,9 +32,7 @@
             <td>
                 <asp:TextBox ID="txtNroFicha" runat="server"></asp:TextBox>
             </td>
-        </tr>
-        <tr>
-            <td>
+             <td width="20%">
                 Nombre</td><td><span>:</span>
             </td>
             <td>
@@ -46,7 +40,7 @@
             </td>
         </tr>
         <tr>
-            <td>
+           <td width="20%">
                 Estado de Prestacion</td><td><span>:</span>
             </td>
             <td>
@@ -54,9 +48,8 @@
                     DataTextField="NOMBRE" AppendDataBoundItems="True">
                 </asp:DropDownList>
             </td>
-        </tr>
-        <tr>
-            <td>
+       
+            <td width="20%">
                 Procedencia</td><td><span>:</span>
             </td>
             <td>
@@ -76,14 +69,26 @@
                     <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
                 </td>
             </tr>--%>
-        <tr>
-            <td colspan="3">
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <asp:GridView ID="grdPrestaciones" runat="server" AutoGenerateColumns="False" Visible="false"
+              
+    </table>
+
+    </div>
+   
+   <footer>
+   <div class="submit_link">
+
+    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
+
+   </div>
+   </footer>
+
+ </article>
+
+ <article class="module width_full">
+ <header><h3>Prestaciones</h3></header>
+  
+  <div> 
+  <asp:GridView ID="grdPrestaciones" CssClass="tablesorter" runat="server" GridLines="None" AutoGenerateColumns="False" Visible="false"
                     Width="100%">
                     <Columns>
                         <asp:BoundField DataField="ID_TIPO_PRESTACION" HeaderText="Tipo Prestacion" Visible="false" />
@@ -103,18 +108,13 @@
                     <EmptyDataTemplate>
                         No se encontraron Solicitudes coincidentes.
                     </EmptyDataTemplate>
+                    <HeaderStyle CssClass="head" />
                 </asp:GridView>
-            </td>
-        </tr>
-    </table>
-</asp:Panel>
-<div>
+ </div>
+ 
+ <footer>
+  <div>
     <uc1:Paginador ID="Paginador1" runat="server" OnPageChanged="Paginador1_PageChanged" />
 </div>
-<asp:Panel ID="pntest" runat="server">
-</asp:Panel>
-    
-    <div class="clear"></div>
-    </div>
-
+ </footer>
  </article>

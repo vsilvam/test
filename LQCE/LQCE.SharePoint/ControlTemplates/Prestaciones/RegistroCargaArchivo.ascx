@@ -14,11 +14,12 @@
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-<asp:Panel ID="pnRegistroCargaArchivo" runat="server">
-    <h2>
-        Listado de Cargas Masivas
-    </h2>
-    <table>
+
+<article class="module width_full">
+
+<header><h3>Buscador</h3></header>
+
+ <table>
         <tr>
             <td>
                 Tipo de Prestacion
@@ -45,13 +46,21 @@
                 </asp:DropDownList>
             </td>
         </tr>
-        <tr>
-            <td colspan="2">
-                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
-            </td>
-        </tr>
-    </table>
-    <asp:GridView ID="gridRegistroCargaArchivo" runat="server" AutoGenerateColumns="False"
+     </table>
+    <footer>
+				<div class="submit_link">
+				
+                   <asp:Button ID="Button3" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
+                	
+				</div>
+			</footer>
+</article>    
+
+<article class="module width_full">
+
+<header><h3>Listado de Cargas Masivas</h3></header>
+<div>
+   <asp:GridView CssClass="tablesorter" ID="gridRegistroCargaArchivo"  GridLines="None" runat="server" AutoGenerateColumns="False"
         EnableModelValidation="True">
         <Columns>
             <asp:TemplateField HeaderText="Modificar Estado">
@@ -64,6 +73,7 @@
                 <ItemTemplate>
                     <asp:Label ID="lblId" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                 </ItemTemplate>
+                <ItemStyle Width="0px" />
             </asp:TemplateField>
             <asp:BoundField DataField="ARCHIVO" HeaderText="Nombre Archivo" />
             <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha Carga" />
@@ -83,8 +93,18 @@
         <EmptyDataTemplate>
             No se encontraron prestaciones coincidentes.
         </EmptyDataTemplate>
+        <HeaderStyle CssClass="head" />
+        <RowStyle CssClass="row" />
     </asp:GridView>
+   
     <%--<uc1:Paginador ID="Paginador1" runat="server" OnPageChanged="Paginador1_PageChanged"/>--%>
-    <asp:Button ID="btnEliminarCarga" runat="server" Text="Eliminar Carga" OnClick="btnEliminarCarga_Click" />
-    <asp:Button ID="btnCompletarRevision" runat="server" Text="Completar Revision" OnClick="btnCompletarRevision_Click" />
-</asp:Panel>
+     </div>
+            <footer>
+				<div class="submit_link">
+				
+                 <asp:Button ID="Button1" runat="server" Text="Eliminar Carga" OnClick="btnEliminarCarga_Click" />
+                 <asp:Button ID="Button2" runat="server" Text="Completar Revision" OnClick="btnCompletarRevision_Click" />
+                	
+				</div>
+			</footer>
+</article>

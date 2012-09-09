@@ -31,5 +31,23 @@ namespace LQCE.Transaccion.Properties {
                 return ((string)(this["DIR_CARGA_EXCEL"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8080/")]
+        public string SP_WEB {
+            get {
+                return ((string)(this["SP_WEB"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Facturas")]
+        public string SP_LIBRERIA_FACTURAS {
+            get {
+                return ((string)(this["SP_LIBRERIA_FACTURAS"]));
+            }
+        }
     }
 }

@@ -8,6 +8,8 @@ using System.Linq;
 using Microsoft.Reporting.WebForms;
 using System.IO;
 using System.Text;
+using Microsoft.SharePoint;
+using LQCE.Transaccion.Properties;
 
 namespace LQCE.Transaccion
 {
@@ -189,13 +191,14 @@ namespace LQCE.Transaccion
                         foreach (Stream stream in m_streams)
                             stream.Position = 0;
 
-                        using (Stream file = File.OpenWrite("Factura.pdf"))
+                        using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
                         {
-                            CopyStream(m_streams[0], file);
+                            SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
+                            //spWeb.Fields.Add("http://siteurl/doclib/file.docx", m_streams[0], true);
+                            string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + facturas.Key + ".pdf";
+                            spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams[0], true);
+                            spList.Update();
                         }
-                        
-                        //Attachment _Attachment = new Attachment(m_streams[0], "AlertaResumenEstudio.pdf");
-
                     }
                 }
             }

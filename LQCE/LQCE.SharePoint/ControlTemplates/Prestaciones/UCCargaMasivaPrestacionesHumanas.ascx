@@ -19,7 +19,6 @@
 
 <div class="module_content">
 
-
 <p>
     <b>Normas generales para subir archivos</b></p>
 <ol>
@@ -38,12 +37,25 @@
         </td>
     </tr>
 </table>
+</div>
+
+<footer>
+<div class="submit_link">
 <asp:Button ID="btnPaso1Template" runat="server" OnClick="btnPaso1Template_Click"
     Text="Descargar Plantilla" />
 <asp:Button ID="btnPaso1Adjuntar" runat="server" ValidationGroup="paso1" OnClick="btnPaso1Adjuntar_Click"
     Text="Adjuntar Archivo" />
-<h2>
-    Instrucciones para el llenado del archivo</h2>
+</div>
+</footer>
+<div class="clear"></div>
+</article>
+
+<article class="module width_full">
+
+<header><h3>Instrucciones para el llenado del archivo</h3></header>
+
+<div class="module_content">
+
 <ol>
     <li><strong>FICHA</strong>: Número de solicitud. Obligatorio</li>
     <li><strong>NOMBRE</strong>: Nombre del paciente. Optativo</li>

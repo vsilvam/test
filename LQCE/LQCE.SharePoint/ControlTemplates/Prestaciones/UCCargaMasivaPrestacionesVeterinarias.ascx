@@ -9,17 +9,19 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCCargaMasivaPrestacionesVeterinarias.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.UCCargaMasivaPrestacionesVeterinarias" %>
+
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
-        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+     <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>   
+     </h4>
 </asp:Panel>
+
 <article class="module width_full">
 
 <header><h3>Carga Masiva Prestaciones Veterinarias</h3></header>
 
 <div class="module_content">
 
-<asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
 <p>
     <b>Normas generales para subir archivos</b></p>
 <ol>
@@ -38,12 +40,25 @@
         </td>
     </tr>
 </table>
+</div>
+<footer>
+<div class="submit_link">
 <asp:Button ID="btnPaso1Template" runat="server" OnClick="btnPaso1Template_Click"
     Text="Descargar Plantilla" />
 <asp:Button ID="btnPaso1Adjuntar" runat="server" ValidationGroup="paso1" OnClick="btnPaso1Adjuntar_Click"
     Text="Adjuntar Archivo" />
-<h2>
-    Instrucciones para el llenado del archivo</h2>
+</div>
+
+</footer>
+
+</article>
+
+<article class="module width_full">
+
+<header><h3>Instrucciones para el llenado del archivo</h3></header>
+
+<div class="module_content">
+
 <ol>
     <li><strong>FICHA</strong>: Número de solicitud. Obligatorio</li>
     <li><strong>NOMBRE</strong>: Nombre del paciente. Optativo</li>
@@ -63,8 +78,6 @@
     <li><strong>PENDIENTE</strong>Numerico. Monto pendiente</li>
     <li><strong>TOTAL</strong>Numerico. Monto total</li>
 </ol>
-</asp:Panel> </asp:Panel>
-
 <div class="clear"></div>
 </div>
 </article>

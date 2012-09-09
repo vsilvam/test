@@ -9,8 +9,13 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCCargaMasivaPrestacionesVeterinarias.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.UCCargaMasivaPrestacionesVeterinarias" %>
-<h1>
-    Carga Masiva Prestaciones Veterinarias</h1>
+
+<article class="module width_full">
+
+<header><h3>Carga Masiva Prestaciones Veterinarias</h3></header>
+
+<div class="module_content">
+
 <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
 <p>
     <b>Normas generales para subir archivos</b></p>
@@ -56,3 +61,7 @@
     <li><strong>TOTAL</strong>Numerico. Monto total</li>
 </ol>
 </asp:Panel> </asp:Panel>
+
+<div class="clear"></div>
+</div>
+</article>

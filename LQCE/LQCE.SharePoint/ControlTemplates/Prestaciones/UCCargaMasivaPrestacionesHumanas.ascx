@@ -9,9 +9,16 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCCargaMasivaPrestacionesHumanas.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.UCCargaMasivaPrestacionesHumanas" %>
-<h1>
-    Carga Masiva Prestaciones Humanas</h1>
-<asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
+
+<h4 class="alert_warning"><asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+
+<article class="module width_full">
+
+<header><h3>Carga Masiva Prestaciones Humanas</h3></header>
+
+<div class="module_content">
+
+
 <p>
     <b>Normas generales para subir archivos</b></p>
 <ol>
@@ -56,3 +63,7 @@
     <li><strong>TOTAL</strong>Numerico. Monto total</li>
 </ol>
 </asp:Panel> 
+
+<div class="clear"></div>
+</div>
+</article>

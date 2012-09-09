@@ -9,10 +9,17 @@
 <%@ Register TagPrefix="uc1" TagName="Paginador" Src="Paginador1.ascx" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 
+<h4 class="alert_warning"><asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+
+<article class="module width_full">
+
 <asp:Panel ID="pnEditarRegistros" runat="server">
-    <h2>
-        Registros Agregados</h2>
-    <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
+    
+    <header><h3>Registros Agregados</h3></header>
+
+    <div class="module_content">
+
+        
     <legend>Buscador de Prestaciones</legend>
     <table width="100%">
         <tr>
@@ -100,3 +107,8 @@
 </div>
 <asp:Panel ID="pntest" runat="server">
 </asp:Panel>
+    
+    <div class="clear"></div>
+    </div>
+
+ </article>

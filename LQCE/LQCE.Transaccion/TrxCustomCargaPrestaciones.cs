@@ -560,8 +560,10 @@ namespace LQCE.Transaccion
                 {
                     RepositorioCARGA_PRESTACIONES_ENCABEZADO _RepositorioCARGA_PRESTACIONES_ENCABEZADO = new RepositorioCARGA_PRESTACIONES_ENCABEZADO(context);
                     RepositorioCARGA_PRESTACIONES_ESTADO _RepositorioCARGA_PRESTACIONES_ESTADO = new RepositorioCARGA_PRESTACIONES_ESTADO(context);
+                    RepositorioTIPO_PRESTACION _RepositorioTIPO_PRESTACION = new RepositorioTIPO_PRESTACION(context);
+                    RepositorioCLIENTE _RepositorioCLIENTE = new RepositorioCLIENTE(context);
 
-                    CARGA_PRESTACIONES_ENCABEZADO objEncabezado = _RepositorioCARGA_PRESTACIONES_ENCABEZADO.GetByIdWithReferences(IdCargaPrestacionesEncabezado);
+                    CARGA_PRESTACIONES_ENCABEZADO objEncabezado = _RepositorioCARGA_PRESTACIONES_ENCABEZADO.GetByIdWithReferencesFull(IdCargaPrestacionesEncabezado);
                     if (objEncabezado == null)
                         throw new Exception("No se encuentra informacion de la carga");
 
@@ -585,7 +587,106 @@ namespace LQCE.Transaccion
                     objEncabezado.CARGA_PRESTACIONES_ESTADO = objEstado;
                     context.ApplyPropertyChanges("CARGA_PRESTACIONES_ENCABEZADO", objEncabezado);
 
-                    // PENDIENTE: Mover prestaciones y examenes a tablas definitivas
+                    // Mover prestaciones y examenes a tablas definitivas
+                    if (objEstado.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Completado)
+                    {
+                        if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
+                        {
+                            TIPO_PRESTACION _TIPO_PRESTACION = _RepositorioTIPO_PRESTACION.GetById((int)ENUM_TIPO_PRESTACION.Humanas);
+                            if (_TIPO_PRESTACION == null)
+                                throw new Exception("No se encuentra informacion de tipo de prestación humana");
+
+                            foreach (CARGA_PRESTACIONES_HUMANAS_DETALLE _CARGA_PRESTACIONES_HUMANAS_DETALLE in objEncabezado.CARGA_PRESTACIONES_HUMANAS_DETALLE
+                                 .Where(d => d.ACTIVO && d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado))
+                            {
+                                PRESTACION _PRESTACION = new PRESTACION();
+                                _PRESTACION.TIPO_PRESTACION = _TIPO_PRESTACION;
+                                _PRESTACION.MEDICO = _CARGA_PRESTACIONES_HUMANAS_DETALLE.MEDICO;
+                                _PRESTACION.CLIENTE = _CARGA_PRESTACIONES_HUMANAS_DETALLE.CLIENTE;
+                                _PRESTACION.FECHA_MUESTRA = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_MUESTRA;
+                                if (!_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION.HasValue)
+                                    throw new Exception("Fecha de recepción debe tener valor");
+
+                                _PRESTACION.FECHA_RECEPCION = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION.Value;
+                                _PRESTACION.PREVISION = _CARGA_PRESTACIONES_HUMANAS_DETALLE.PREVISION1;
+                                _PRESTACION.GARANTIA = _CARGA_PRESTACIONES_HUMANAS_DETALLE.GARANTIA1;
+                                _PRESTACION.FECHA_ENTREGA_RESULTADOS = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_ENTREGA_RESULTADOS;
+                                _PRESTACION.ACTIVO = true;
+
+                                context.AddToPRESTACION(_PRESTACION);
+
+                                PRESTACION_HUMANA _PRESTACION_HUMANA = new PRESTACION_HUMANA();
+                                _PRESTACION_HUMANA.ID = _PRESTACION.ID;
+                                _PRESTACION_HUMANA.NOMBRE = _CARGA_PRESTACIONES_HUMANAS_DETALLE.NOMBRE;
+                                _PRESTACION_HUMANA.RUT = _CARGA_PRESTACIONES_HUMANAS_DETALLE.RUT;
+                                _PRESTACION_HUMANA.EDAD = _CARGA_PRESTACIONES_HUMANAS_DETALLE.EDAD;
+                                _PRESTACION_HUMANA.TELEFONO = _CARGA_PRESTACIONES_HUMANAS_DETALLE.TELEFONO;
+                                _PRESTACION_HUMANA.ACTIVO = true;
+
+                                context.AddToPRESTACION_HUMANA(_PRESTACION_HUMANA);
+
+                                foreach (CARGA_PRESTACIONES_HUMANAS_EXAMEN _CARGA_PRESTACIONES_HUMANAS_EXAMEN in _CARGA_PRESTACIONES_HUMANAS_DETALLE
+                                    .CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(d => d.ACTIVO))
+                                {
+                                    PRESTACION_EXAMEN _PRESTACION_EXAMEN = new PRESTACION_EXAMEN();
+                                    _PRESTACION_EXAMEN.PRESTACION = _PRESTACION;
+                                    _PRESTACION_EXAMEN.EXAMEN = _CARGA_PRESTACIONES_HUMANAS_EXAMEN.EXAMEN;
+                                    _PRESTACION_EXAMEN.VALOR = _CARGA_PRESTACIONES_HUMANAS_EXAMEN.VALOR_VALOR_EXAMEN;
+                                    _PRESTACION_EXAMEN.ACTIVO = true;
+                                    context.AddToPRESTACION_EXAMEN(_PRESTACION_EXAMEN);
+                                }
+                            }
+                        }
+                        else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
+                        {
+                            TIPO_PRESTACION _TIPO_PRESTACION = _RepositorioTIPO_PRESTACION.GetById((int)ENUM_TIPO_PRESTACION.Veterinarias);
+                            if (_TIPO_PRESTACION == null)
+                                throw new Exception("No se encuentra informacion de tipo de prestación veterinaria");
+
+                            foreach (CARGA_PRESTACIONES_VETERINARIAS_DETALLE _CARGA_PRESTACIONES_VETERINARIAS_DETALLE in objEncabezado.CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+                                 .Where(d => d.ACTIVO && d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado))
+                            {
+                                PRESTACION _PRESTACION = new PRESTACION();
+                                _PRESTACION.TIPO_PRESTACION = _TIPO_PRESTACION;
+                                _PRESTACION.MEDICO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.MEDICO;
+                                _PRESTACION.CLIENTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.CLIENTE;
+                                _PRESTACION.FECHA_MUESTRA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_MUESTRA;
+                                if (!_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_RECEPCION.HasValue)
+                                    throw new Exception("Fecha de recepción debe tener valor");
+
+                                _PRESTACION.FECHA_RECEPCION = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_RECEPCION.Value;
+                                _PRESTACION.PREVISION = null;
+                                _PRESTACION.GARANTIA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.GARANTIA1;
+                                _PRESTACION.FECHA_ENTREGA_RESULTADOS = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_ENTREGA_RESULTADOS;
+                                _PRESTACION.ACTIVO = true;
+
+                                context.AddToPRESTACION(_PRESTACION);
+
+                                PRESTACION_VETERINARIA _PRESTACION_VETERINARIA = new PRESTACION_VETERINARIA();
+                                _PRESTACION_VETERINARIA.ID = _PRESTACION.ID;
+                                _PRESTACION_VETERINARIA.NOMBRE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.NOMBRE;
+                                _PRESTACION_VETERINARIA.EDAD = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.EDAD;
+                                _PRESTACION_VETERINARIA.TELEFONO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.TELEFONO;
+                                _PRESTACION_VETERINARIA.ESPECIE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.ESPECIE1;
+                                _PRESTACION_VETERINARIA.RAZA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.RAZA1;
+                                _PRESTACION_VETERINARIA.ACTIVO = true;
+
+                                context.AddToPRESTACION_VETERINARIA(_PRESTACION_VETERINARIA);
+
+                                foreach (CARGA_PRESTACIONES_VETERINARIAS_EXAMEN _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN in _CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+                                    .CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(d => d.ACTIVO))
+                                {
+                                    PRESTACION_EXAMEN _PRESTACION_EXAMEN = new PRESTACION_EXAMEN();
+                                    _PRESTACION_EXAMEN.PRESTACION = _PRESTACION;
+                                    _PRESTACION_EXAMEN.EXAMEN = _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.EXAMEN;
+                                    _PRESTACION_EXAMEN.VALOR = _CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.VALOR_VALOR_EXAMEN;
+                                    _PRESTACION_EXAMEN.ACTIVO = true;
+                                    context.AddToPRESTACION_EXAMEN(_PRESTACION_EXAMEN);
+                                }
+                            }
+                        }
+                    }
+
 
                     context.SaveChanges();
                 }

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RepositorioCustomCARGA_PRESTACIONES_ENCABEZADO.cs" />
     <Compile Include="RepositorioCustomCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.cs">

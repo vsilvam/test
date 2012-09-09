@@ -13,10 +13,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";
+                //panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    
+                    panelMensaje.CssClass = "OcultarMensaje";
                 }
             }
             catch (Exception ex)
@@ -32,6 +32,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                panelMensaje.CssClass = "OcultarMensaje";
+
                 string attachment = "attachment; filename=PrestacionesHumanas.xls";
                 Response.ClearContent();
                 Response.AddHeader("content-disposition", attachment);
@@ -55,6 +57,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (Page.IsValid)
                 {
+                    panelMensaje.CssClass = "OcultarMensaje";
+
                     if (!fileExcel.HasFile) return;
                     btnPaso1Adjuntar.Visible = false;
 

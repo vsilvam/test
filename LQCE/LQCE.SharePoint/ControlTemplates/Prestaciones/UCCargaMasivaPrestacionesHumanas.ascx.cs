@@ -38,7 +38,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 Response.ClearContent();
                 Response.AddHeader("content-disposition", attachment);
                 Response.ContentType = "application/ms-excel";
-                string nombreArchivo = MapPath("~/_layouts/Prestaciones/PrestacionesHumanas.xls");
+                string nombreArchivo = MapPath("~/_layouts/Prestaciones/PrestacionesHumanas.xlsx");
                 Response.WriteFile(nombreArchivo);
                 this.Context.ApplicationInstance.CompleteRequest();
             }

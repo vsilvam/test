@@ -197,8 +197,8 @@
       <SharePointProjectItemId>{4a0015b9-6396-4991-9be0-4fde3fbac792}</SharePointProjectItemId>
     </None>
     <None Include="key.snk" />
-    <None Include="Layouts\Prestaciones\PrestacionesHumanas.xls" />
-    <None Include="Layouts\Prestaciones\PrestacionesVeterinarias.xls" />
+    <None Include="Layouts\Prestaciones\PrestacionesHumanas.xlsx" />
+    <None Include="Layouts\Prestaciones\PrestacionesVeterinarias.xlsx" />
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b6d91426-a831-4786-a7a5-641fbd1110a9}</SharePointProjectItemId>
     </None>

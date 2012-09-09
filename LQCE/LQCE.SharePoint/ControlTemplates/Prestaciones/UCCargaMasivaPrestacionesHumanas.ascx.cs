@@ -13,10 +13,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                //panelMensaje.CssClass = "OcultarMensaje";
+                panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    panelMensaje.CssClass = "OcultarMensaje";
+                    //panelMensaje.CssClass = "OcultarMensaje";
                 }
             }
             catch (Exception ex)
@@ -32,7 +32,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";
+                //panelMensaje.CssClass = "OcultarMensaje";
 
                 string attachment = "attachment; filename=PrestacionesHumanas.xls";
                 Response.ClearContent();
@@ -57,7 +57,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (Page.IsValid)
                 {
-                    panelMensaje.CssClass = "OcultarMensaje";
+                    //panelMensaje.CssClass = "OcultarMensaje";
 
                     if (!fileExcel.HasFile) return;
                     btnPaso1Adjuntar.Visible = false;
@@ -77,12 +77,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         }
                         else
                         {
-                            lblMensaje.Text = "El archivo supera el tamaño máximo permitido: 4MB. ";
+                            throw new Exception("El archivo supera el tamaño máximo permitido: 4MB. ");
                         }
                     }
                     else
                     {
-                        lblMensaje.Text = "Formato de archivo no permitido. ";
+                        throw new Exception("Formato de archivo no permitido. ");
                     }
                 }
             }

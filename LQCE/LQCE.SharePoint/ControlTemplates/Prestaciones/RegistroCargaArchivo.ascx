@@ -12,18 +12,13 @@
 <%--<%@ Register TagPrefix="uc1" TagName="Paginador" Src="~/ControlTemplates/UserControl/Paginador1.ascx" %>--%>
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
-        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+        <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
 <asp:Panel ID="pnRegistroCargaArchivo" runat="server">
     <h2>
         Listado de Cargas Masivas
     </h2>
     <table>
-        <tr>
-            <td>
-                <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
-            </td>
-        </tr>
         <tr>
             <td>
                 Tipo de Prestacion

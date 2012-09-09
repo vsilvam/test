@@ -1,4 +1,5 @@
 ﻿using System;
+using App.Infrastructure.Runtime;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {

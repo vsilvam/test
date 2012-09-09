@@ -16,11 +16,11 @@
      <uc1:RegistroCargaArchivo ID="RegistroCargaArchivo1" runat="server" />
 </asp:content>
 <asp:content id="PageTitle" contentplaceholderid="PlaceHolderPageTitle" runat="server">
-    Formulario de Registro Carga Archivo
+    Validación de Carga Masiva
 </asp:content>
 <asp:content id="PageTitleInTitleArea" runat="server" contentplaceholderid="PlaceHolderPageTitleInTitleArea">
-    Formulario de Registro Carga Archivo
+    Validación de Carga Masiva
 </asp:content>
 <asp:content id="PageTitleInTitleArea2" runat="server" contentplaceholderid="PlaceHolderPageTitleInTitleArea2">
-    Formulario de Registro Carga Archivo
+    Validación de Carga Masiva
 </asp:content>

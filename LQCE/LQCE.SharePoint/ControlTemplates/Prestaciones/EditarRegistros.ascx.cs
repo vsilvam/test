@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
-using LQCE.Transaccion;
-using LQCE.Transaccion.Enum;
 using LQCE.SharePoint.ControlTemplates.App_Code;
+using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
+using LQCE.Transaccion.Enum;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -16,6 +15,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     grdPrestaciones.PageIndex = 1;
@@ -28,6 +28,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -44,32 +45,50 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void imgEditar_Click(object sender, ImageClickEventArgs e)
         {
-            ImageButton _link = sender as ImageButton;
-            int? Id = int.Parse(_link.CommandArgument);
-            int? IdTipoPrestacion = int.Parse(_link.CommandName);
-            if (Id.HasValue)
+            try
             {
-                //Se muestra el contenido del archivo seleccionado
-                if (IdTipoPrestacion == (int)ENUM_TIPO_PRESTACION.Humanas)
+                ImageButton _link = sender as ImageButton;
+                int? Id = int.Parse(_link.CommandArgument);
+                int? IdTipoPrestacion = int.Parse(_link.CommandName);
+                if (Id.HasValue)
                 {
-                    Response.Redirect("EditarPrestacionesHumanas.aspx?Id=" + Id, false);
+                    //Se muestra el contenido del archivo seleccionado
+                    if (IdTipoPrestacion == (int)ENUM_TIPO_PRESTACION.Humanas)
+                    {
+                        Response.Redirect("EditarPrestacionesHumanas.aspx?Id=" + Id, false);
+                    }
+                    else
+                    {
+                        Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + Id);
+                    }
+
                 }
-                else
-                {
-                    Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + Id);
-                }
-                
+
             }
-
-
-            
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            grdPrestaciones.PageIndex = 1;
-            BuscarPrestaciones();
-            Paginador1.SetPage(1);
+            try
+            {
+                grdPrestaciones.PageIndex = 1;
+                BuscarPrestaciones();
+                Paginador1.SetPage(1);
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         private void BuscarPrestaciones()
@@ -105,10 +124,20 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void Paginador1_PageChanged(object sender, CustomPageChangeArgs e)
         {
-            grdPrestaciones.PageSize = (e.CurrentPageSize == 0 ? 20 : e.CurrentPageSize);
-            grdPrestaciones.PageIndex = e.CurrentPageNumber;
-            BuscarPrestaciones();
-            //CargaGrilla(null, null);
+            try
+            {
+                grdPrestaciones.PageSize = (e.CurrentPageSize == 0 ? 20 : e.CurrentPageSize);
+                grdPrestaciones.PageIndex = e.CurrentPageNumber;
+                BuscarPrestaciones();
+                //CargaGrilla(null, null);
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
     }
 }

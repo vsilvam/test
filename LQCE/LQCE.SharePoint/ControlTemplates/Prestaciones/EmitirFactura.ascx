@@ -9,6 +9,10 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmitirFactura.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EmitirFactura" %>
+<asp:Panel ID="panelMensaje" runat="server">
+    <h4 class="alert_warning">
+        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+</asp:Panel>
 <asp:Panel ID="pnEmitirFactura" runat="server">
     <table>
         <tr>
@@ -51,16 +55,15 @@
         </tr>
         <tr>
             <td>
-                <asp:Button ID="btnBuscar" runat="server" Text="Calcuar facturas" 
-                    onclick="btnBuscar_Click" />
+                <asp:Button ID="btnBuscar" runat="server" Text="Calcuar facturas" OnClick="btnBuscar_Click" />
             </td>
         </tr>
     </table>
-    </asp:Panel>
-    <asp:Panel ID="pnFacturas" runat="server" Visible="false">
-    <asp:GridView ID="grdFacturas" runat="server" AutoGenerateColumns="false" 
-                    Width="100%" onrowdatabound="grdFacturas_RowDataBound">
-    <Columns>
+</asp:Panel>
+<asp:Panel ID="pnFacturas" runat="server" Visible="false">
+    <asp:GridView ID="grdFacturas" runat="server" AutoGenerateColumns="false" Width="100%"
+        OnRowDataBound="grdFacturas_RowDataBound">
+        <Columns>
             <asp:TemplateField HeaderText="RUT">
                 <ItemTemplate>
                     <asp:Label ID="lblRut" runat="server" Text='<%# Bind("Rut") %>'></asp:Label>
@@ -96,6 +99,5 @@
             No se encontraron prestaciones coincidentes.
         </EmptyDataTemplate>
     </asp:GridView>
-    <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" 
-        onclick="btnEmitir_Click" />
+    <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" OnClick="btnEmitir_Click" />
 </asp:Panel>

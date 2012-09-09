@@ -10,7 +10,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="UCCargaMasivaPrestacionesHumanas.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.UCCargaMasivaPrestacionesHumanas" %>
 <asp:Panel ID="panelMensaje" runat="server">
-dryhftg
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>

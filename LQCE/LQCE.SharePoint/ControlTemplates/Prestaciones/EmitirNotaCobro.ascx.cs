@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
-using LQCE.Transaccion;
 using LQCE.Modelo;
-using System.Collections.Generic;
+using LQCE.Transaccion;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -15,6 +14,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     getClientes();
@@ -24,6 +24,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -40,18 +41,28 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-            pnNotas.Visible = true;
+            try
+            {
+                pnNotas.Visible = true;
 
-            string desde = !string.IsNullOrEmpty(txtDesde.Text) ? txtDesde.Text : string.Empty;
-            string hasta = !string.IsNullOrEmpty(txtHasta.Text) ? txtDesde.Text : string.Empty;
-            string cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? ddlClientes.SelectedValue : string.Empty;
-            string tipo = !string.IsNullOrEmpty(ddlNotaCobro.SelectedValue) ? ddlNotaCobro.SelectedValue : string.Empty ;
+                string desde = !string.IsNullOrEmpty(txtDesde.Text) ? txtDesde.Text : string.Empty;
+                string hasta = !string.IsNullOrEmpty(txtHasta.Text) ? txtDesde.Text : string.Empty;
+                string cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? ddlClientes.SelectedValue : string.Empty;
+                string tipo = !string.IsNullOrEmpty(ddlNotaCobro.SelectedValue) ? ddlNotaCobro.SelectedValue : string.Empty;
 
-            var notaCobro = new TrxNOTA_COBRO();
-            grdNotaCobro.DataSource = notaCobro.GetAllWithReferences();
-            grdNotaCobro.DataBind();
+                var notaCobro = new TrxNOTA_COBRO();
+                grdNotaCobro.DataSource = notaCobro.GetAllWithReferences();
+                grdNotaCobro.DataBind();
 
-            //se generan los archivos
+                //se generan los archivos
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         private void getClientes()
@@ -65,26 +76,36 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void grdNotaCobro_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            if (e.Row.RowType == DataControlRowType.DataRow)
+            try
             {
-                List<NOTA_COBRO> _nota = (List<NOTA_COBRO>)e.Row.DataItem;
-                if (_nota != null)
+                if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    foreach (var lis in _nota)
+                    List<NOTA_COBRO> _nota = (List<NOTA_COBRO>)e.Row.DataItem;
+                    if (_nota != null)
                     {
-                        Label lblRut = (Label)e.Row.FindControl("lblRut");
-                        Label lblNombre = (Label)e.Row.FindControl("lblNombre");
-                        Label lblCantidad = (Label)e.Row.FindControl("lblCantidad");
-                        Label lblTotal = (Label)e.Row.FindControl("lblTotal");
-                        TextBox txtDescuento = (TextBox)e.Row.FindControl("txtDescuento");
+                        foreach (var lis in _nota)
+                        {
+                            Label lblRut = (Label)e.Row.FindControl("lblRut");
+                            Label lblNombre = (Label)e.Row.FindControl("lblNombre");
+                            Label lblCantidad = (Label)e.Row.FindControl("lblCantidad");
+                            Label lblTotal = (Label)e.Row.FindControl("lblTotal");
+                            TextBox txtDescuento = (TextBox)e.Row.FindControl("txtDescuento");
 
-                        //lblRut.Text = lis.Rut;
-                        //lblNombre.Text = lis;
-                        //lblCantidad.Text = lis;
-                        //lblTotal.Text = lis;
-                        //txtDescuento.Text = lis;
+                            //lblRut.Text = lis.Rut;
+                            //lblNombre.Text = lis;
+                            //lblCantidad.Text = lis;
+                            //lblTotal.Text = lis;
+                            //txtDescuento.Text = lis;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
             }
         }
     }

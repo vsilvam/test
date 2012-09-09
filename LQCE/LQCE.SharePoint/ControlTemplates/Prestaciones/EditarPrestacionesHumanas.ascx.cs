@@ -1,13 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
-using LQCE.Modelo;
-using LQCE.Transaccion.Enum;
 using LQCE.Transaccion.DTO;
-using System.Collections.Generic;
+using LQCE.Transaccion.Enum;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -17,6 +15,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     //Si toma Id desde url
@@ -30,6 +29,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -103,96 +103,135 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void btnValidado_Click(object sender, EventArgs e)
         {
-            //se obtienen los datos desde el formuario
-            int IdTipoPrestacion = 1;
-            int IdCargaPrestacionesDetalleEstado = 2;
-            string numero = !string.IsNullOrEmpty(lblNroPrestacion.Text) ? lblNroPrestacion.Text : string.Empty;
-            string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
-            string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
-            string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
-            string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
-            string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
-            string procedencia = string.Empty;
-            string fechaDesde = !string.IsNullOrEmpty(txtFechaHora1.Text) ? txtFechaHora1.Text : string.Empty;
-            string fechaHasta = !string.IsNullOrEmpty(txtFechaHora2.Text) ? txtFechaHora2.Text : string.Empty;
-            string fechaHora = !string.IsNullOrEmpty(txtHora.Text) ? txtHora.Text : string.Empty;
-            string prevision = !string.IsNullOrEmpty(txtPrevision.Text) ? txtPrevision.Text : string.Empty;
-            string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
-            string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
-            string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
-            string entregaDesde = !string.IsNullOrEmpty(txtFechaHoraEntrega1.Text) ? txtFechaHoraEntrega1.Text : string.Empty;
-            string entregaHasta = !string.IsNullOrEmpty(txtFechaHoraEntrega2.Text) ? txtFechaHoraEntrega2.Text : string.Empty;
-            string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
-            string ficha = !string.IsNullOrEmpty (txtFicha.Text) ? txtFicha.Text : string.Empty;
-            string servicio = !string.IsNullOrEmpty(txtServicio.Text) ? txtServicio.Text : string.Empty;
-            string diagnostico = !string.IsNullOrEmpty(txtDiagostico.Text) ? txtDiagostico.Text : string.Empty;
-            string listo = !string.IsNullOrEmpty(txtListo.Text) ? txtListo.Text : string.Empty;
-            string recepcion  = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
-            
-            //se recorren los examenes para guardar
-            List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN> lista = new List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN>();
-            DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN _examen;
-            foreach(GridViewRow grilla in grdExamen.Rows)
+            try
             {
-                TextBox txtExamen = (TextBox)grilla.FindControl("lblExamen");
-                TextBox txtCodigo = (TextBox)grilla.FindControl("lblCodigo");
-                TextBox txtValor = (TextBox)grilla.FindControl("lblValor");
+                //se obtienen los datos desde el formuario
+                int IdTipoPrestacion = 1;
+                int IdCargaPrestacionesDetalleEstado = 2;
+                string numero = !string.IsNullOrEmpty(lblNroPrestacion.Text) ? lblNroPrestacion.Text : string.Empty;
+                string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
+                string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
+                string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
+                string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
+                string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
+                string procedencia = string.Empty;
+                string fechaDesde = !string.IsNullOrEmpty(txtFechaHora1.Text) ? txtFechaHora1.Text : string.Empty;
+                string fechaHasta = !string.IsNullOrEmpty(txtFechaHora2.Text) ? txtFechaHora2.Text : string.Empty;
+                string fechaHora = !string.IsNullOrEmpty(txtHora.Text) ? txtHora.Text : string.Empty;
+                string prevision = !string.IsNullOrEmpty(txtPrevision.Text) ? txtPrevision.Text : string.Empty;
+                string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
+                string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
+                string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
+                string entregaDesde = !string.IsNullOrEmpty(txtFechaHoraEntrega1.Text) ? txtFechaHoraEntrega1.Text : string.Empty;
+                string entregaHasta = !string.IsNullOrEmpty(txtFechaHoraEntrega2.Text) ? txtFechaHoraEntrega2.Text : string.Empty;
+                string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
+                string ficha = !string.IsNullOrEmpty(txtFicha.Text) ? txtFicha.Text : string.Empty;
+                string servicio = !string.IsNullOrEmpty(txtServicio.Text) ? txtServicio.Text : string.Empty;
+                string diagnostico = !string.IsNullOrEmpty(txtDiagostico.Text) ? txtDiagostico.Text : string.Empty;
+                string listo = !string.IsNullOrEmpty(txtListo.Text) ? txtListo.Text : string.Empty;
+                string recepcion = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
 
-                _examen = new DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN();
-                _examen.ID = int.Parse(txtExamen.Text);
-                _examen.NOMBRE_EXAMEN = txtCodigo.Text;
-                _examen.VALOR_EXAMEN = txtValor.Text;                
-                lista.Add(_examen);
-            }
-
-            //se guardan las modificaciones de la grilla.
-
-
-
-
-            //Se retornan errores en caso de existir
-            TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
-            var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
-            string error = prestaciones.MENSAJE_ERROR;
-
-            if (string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
-            {
-                lblMensaje.Text = prestaciones.MENSAJE_ERROR;
-            }
-            else
-            {
-                TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(IdTipoPrestacion,ficha,nombre,rut,
-                    medico, edad, telefono, procedencia, fechaDesde, "", entregaDesde, prevision, garantia, pagado, pendiente, 
-                    IdCargaPrestacionesDetalleEstado, error, lista);
-
-                if (!resutado.RESULTADO)
+                //se recorren los examenes para guardar
+                List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN> lista = new List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN>();
+                DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN _examen;
+                foreach (GridViewRow grilla in grdExamen.Rows)
                 {
-                    // mostrar errores en grilla
-                    grdErroresHumanos.DataSource = resutado;
-                    grdErroresHumanos.DataBind();
+                    TextBox txtExamen = (TextBox)grilla.FindControl("lblExamen");
+                    TextBox txtCodigo = (TextBox)grilla.FindControl("lblCodigo");
+                    TextBox txtValor = (TextBox)grilla.FindControl("lblValor");
+
+                    _examen = new DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN();
+                    _examen.ID = int.Parse(txtExamen.Text);
+                    _examen.NOMBRE_EXAMEN = txtCodigo.Text;
+                    _examen.VALOR_EXAMEN = txtValor.Text;
+                    lista.Add(_examen);
                 }
-                
+
+                //se guardan las modificaciones de la grilla.
+
+
+
+
+                //Se retornan errores en caso de existir
+                TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
+                var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
+                string error = prestaciones.MENSAJE_ERROR;
+
+                if (string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
+                {
+                    lblMensaje.Text = prestaciones.MENSAJE_ERROR;
+                }
+                else
+                {
+                    TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(IdTipoPrestacion, ficha, nombre, rut,
+                        medico, edad, telefono, procedencia, fechaDesde, "", entregaDesde, prevision, garantia, pagado, pendiente,
+                        IdCargaPrestacionesDetalleEstado, error, lista);
+
+                    if (!resutado.RESULTADO)
+                    {
+                        // mostrar errores en grilla
+                        grdErroresHumanos.DataSource = resutado;
+                        grdErroresHumanos.DataBind();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
             }
         }
 
         protected void grdExamen_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         protected void btnAgrega_Click(object sender, EventArgs e)
         {
-            string examen = txtExamen.Text;
-            string codigo = txtCodigo.Text;
-            string valor = txtValor.Text;
+            try
+            {
+                string examen = txtExamen.Text;
+                string codigo = txtCodigo.Text;
+                string valor = txtValor.Text;
 
-            //guardar datos y cargar nuevamente la grilla
+                //guardar datos y cargar nuevamente la grilla
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            pnAgregaFila.Visible = true;
+            try
+            {
+                pnAgregaFila.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
     }
 }

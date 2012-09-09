@@ -1,17 +1,22 @@
 ﻿<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls"
+    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Import Namespace="Microsoft.SharePoint" %>
-<%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RegistroCargaArchivo.ascx.cs" Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.RegistroCargaArchivo" %>
+<%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages"
+    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="RegistroCargaArchivo.ascx.cs"
+    Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.RegistroCargaArchivo" %>
 <%--<%@ Register TagPrefix="uc1" TagName="Paginador" Src="~/ControlTemplates/UserControl/Paginador1.ascx" %>--%>
-
-
+<asp:Panel ID="panelMensaje" runat="server">
+    <h4 class="alert_warning">
+        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+</asp:Panel>
 <asp:Panel ID="pnRegistroCargaArchivo" runat="server">
     <h2>
-        Despliegue de Archivos Ingresados
+        Listado de Cargas Masivas
     </h2>
     <table>
         <tr>
@@ -21,19 +26,27 @@
         </tr>
         <tr>
             <td>
-                Tipo de Prestacion</td><td><span>:</span>
+                Tipo de Prestacion
             </td>
             <td>
-                <asp:DropDownList ID="ddlTipoPrestacion" runat="server" AppendDataBoundItems="true" DataTextField="NOMBRE" DataValueField="ID">                    
+                <span>:</span>
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlTipoPrestacion" runat="server" AppendDataBoundItems="true"
+                    DataTextField="NOMBRE" DataValueField="ID">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
             <td>
-                Estado</td><td><span>:</span>
+                Estado
             </td>
             <td>
-                <asp:DropDownList ID="ddlEstado" runat="server" AppendDataBoundItems="true" DataTextField="NOMBRE" DataValueField="ID">
+                <span>:</span>
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlEstado" runat="server" AppendDataBoundItems="true" DataTextField="NOMBRE"
+                    DataValueField="ID">
                 </asp:DropDownList>
             </td>
         </tr>
@@ -43,7 +56,8 @@
             </td>
         </tr>
     </table>
-    <asp:GridView ID="gridRegistroCargaArchivo" runat="server" AutoGenerateColumns="False" EnableModelValidation="True">
+    <asp:GridView ID="gridRegistroCargaArchivo" runat="server" AutoGenerateColumns="False"
+        EnableModelValidation="True">
         <Columns>
             <asp:TemplateField HeaderText="Modificar Estado">
                 <ItemTemplate>

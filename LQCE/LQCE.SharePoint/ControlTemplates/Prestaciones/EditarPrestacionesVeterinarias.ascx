@@ -1,31 +1,36 @@
 ﻿<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register Tagprefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
-<%@ Import Namespace="Microsoft.SharePoint" %> 
-<%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditarPrestacionesVeterinarias.ascx.cs" Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarPrestacionesVeterinarias" %>
-
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls"
+    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages"
+    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditarPrestacionesVeterinarias.ascx.cs"
+    Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarPrestacionesVeterinarias" %>
+<asp:Panel ID="panelMensaje" runat="server">
+    <h4 class="alert_warning">
+        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+</asp:Panel>
 <asp:Panel ID="pnEditarPrestVeterinarias" runat="server">
-<h2>Edicion Fichas Veterinarias</h2>
-<asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
+    <h2>
+        Edicion Fichas Veterinarias</h2>
+    <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
     <table>
         <tr>
-            <td>Ficha
+            <td>
+                Ficha
             </td>
             <td>
                 <asp:TextBox ID="txtFicha" runat="server" Enabled="false"></asp:TextBox>
             </td>
-            
             <td colspan="4">
                 N° <span>:</span>
             </td>
             <td>
                 <asp:Label ID="lblNroPrestacion" runat="server" Text="147958"></asp:Label>
             </td>
-            
-            
             <td>
             </td>
         </tr>
@@ -79,7 +84,7 @@
             </td>
             <td>
                 <asp:TextBox ID="txtTelefono" runat="server" Enabled="false"></asp:TextBox>
-            </td>            
+            </td>
         </tr>
         <tr>
             <td>
@@ -93,7 +98,7 @@
             </td>
             <td>
                 <asp:TextBox ID="txtProcedencia" runat="server" Enabled="false"></asp:TextBox>
-            </td>            
+            </td>
         </tr>
         <tr>
             <td>
@@ -108,18 +113,27 @@
             <td style="margin-left: 40px">
                 <asp:TextBox ID="txtHoraRecepcion" runat="server" Enabled="false"></asp:TextBox>
             </td>
-            <td>hrs</td>
-            <td>Toma Muestra</td>
-            <td><asp:TextBox ID="txtMuestraFecha" runat="server" Enabled="false"></asp:TextBox></td>
-            <td>--</td>
-            <td><asp:TextBox ID="txtMuestraHora" runat="server" Enabled="false"></asp:TextBox></td>
+            <td>
+                hrs
+            </td>
+            <td>
+                Toma Muestra
+            </td>
+            <td>
+                <asp:TextBox ID="txtMuestraFecha" runat="server" Enabled="false"></asp:TextBox>
+            </td>
+            <td>
+                --
+            </td>
+            <td>
+                <asp:TextBox ID="txtMuestraHora" runat="server" Enabled="false"></asp:TextBox>
+            </td>
         </tr>
         <tr>
             <td colspan="9">
-            <asp:LinkButton ID="lnkAgregaFicha" runat="server" onclick="lnkAgregaFicha_Click" >Agrega Fichas</asp:LinkButton>
-                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" 
-                    Width="100%" onrowdatabound="grdExamen_RowDataBound" 
-                    EnableModelValidation="True">
+                <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Fichas</asp:LinkButton>
+                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%"
+                    OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
                     <Columns>
                         <asp:TemplateField HeaderText="ID">
                             <ItemTemplate>
@@ -142,29 +156,34 @@
         </tr>
         <tr>
             <td colspan="6">
-            <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
-                <table>
-                <tr>
-                    <td>EXAMEN</td>
-                    <td>CODIGO</td>
-                    <td>VALOR</td>
-                </tr>
-                    <tr>
-                        <td>
-                            <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
-                        </td>
-                        <td>
-                            <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" 
-                                onclick="btnAgrega_Click" />
-                        </td>
-                    </tr>
-                </table>
+                <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
+                    <table>
+                        <tr>
+                            <td>
+                                EXAMEN
+                            </td>
+                            <td>
+                                CODIGO
+                            </td>
+                            <td>
+                                VALOR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" OnClick="btnAgrega_Click" />
+                            </td>
+                        </tr>
+                    </table>
                 </asp:Panel>
             </td>
         </tr>
@@ -215,21 +234,19 @@
             <td>
                 <asp:TextBox ID="txtRecepcionEntrega" runat="server" Enabled="false"></asp:TextBox>
             </td>
-        </tr>        
+        </tr>
     </table>
     <!--Validar, marcar error,guarda temporal  "dejar con botones" 
     En caso de error mostrar mensaje u observacions en la ficha
     -->
-    <asp:Button ID="btnValidado" runat="server" Text="Validado" 
-        onclick="btnValidado_Click" />
-
+    <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" />
     <asp:GridView ID="grdErrores" runat="server" AutoGenerateColumns="false">
         <Columns>
             <asp:TemplateField HeaderText="MENSAJE ERROR">
                 <ItemTemplate>
                     <asp:Label ID="lblError" runat="server" Text='<%# Bind("ERRORES_VALIDACION") %>'></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>            
+            </asp:TemplateField>
         </Columns>
     </asp:GridView>
 </asp:Panel>

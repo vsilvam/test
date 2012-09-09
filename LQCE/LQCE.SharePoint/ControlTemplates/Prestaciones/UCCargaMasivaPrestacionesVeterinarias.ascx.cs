@@ -14,6 +14,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     
@@ -22,6 +23,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -42,6 +44,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }
@@ -71,18 +74,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         }
                         else
                         {
-                            lblMensaje.Text = "El archivo supera el tamaño máximo permitido: 4MB. ";
+                            throw new Exception("El archivo supera el tamaño máximo permitido: 4MB. ");
                         }
                     }
                     else
                     {
-                        lblMensaje.Text = "Formato de archivo no permitido. ";
+                        throw new Exception("Formato de archivo no permitido. ");
                     }
                 }
             }
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
             }

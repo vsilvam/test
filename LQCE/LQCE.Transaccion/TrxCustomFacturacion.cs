@@ -5,11 +5,33 @@ using LQCE.Modelo;
 using LQCE.Repositorio;
 using App.Infrastructure.Runtime;
 using System.Linq;
+using Microsoft.Reporting.WebForms;
+using System.IO;
+using System.Text;
 
 namespace LQCE.Transaccion
 {
     public partial class TrxFACTURACION
     {
+        private IList<Stream> m_streams;
+        private Stream CreateStream(string name, string fileNameExtension, Encoding encoding,
+            string mimeType, bool willSeek)
+        {
+            Stream stream = new MemoryStream();
+            m_streams.Add(stream);
+            return stream;
+        }
+
+
+        private IList<Stream> m_streams2;
+        private Stream CreateStream2(string name, string fileNameExtension, Encoding encoding,
+            string mimeType, bool willSeek)
+        {
+            Stream stream2 = new MemoryStream();
+            m_streams2.Add(stream2);
+            return stream2;
+        }
+
         public List<DTO_RESUMEN_PRESTACIONES_FACTURAR> GetClientesAFacturar(DateTime FechaDesde,
             DateTime FechaHasta, int? IdCliente)
         {
@@ -74,7 +96,7 @@ namespace LQCE.Transaccion
                         _FACTURA.CORRELATIVO = correlativo;
                         _FACTURA.CLIENTE = _CLIENTE;
                         _FACTURA.NUMERO_FACTURA = null;
-                        _FACTURA.RUT_LABORATORIO = ""; // PENDIENTE: Definir RUT de laboratorio con que facturar
+                        _FACTURA.RUT_LABORATORIO = _CLIENTE.TIPO_FACTURA.RUT_FACTURA;
                         _FACTURA.ACTIVO = true;
                         _FACTURA.DESCUENTO = item.DESCUENTO;
                         _FACTURA.NOMBRE_CLIENTE = _CLIENTE.NOMBRE;
@@ -129,9 +151,52 @@ namespace LQCE.Transaccion
                     context.SaveChanges();
 
                     // PENDIENTE: Generar PDFs
+                    var LISTA_DTO_REPORTE_FACTURA = GetReporteFactura(_FACTURACION.ID);
+
+                    string deviceInfo =
+                                  "<DeviceInfo>" +
+                                  "  <OutputFormat>PDF</OutputFormat>" +
+                                  "  <PageWidth>11in</PageWidth>" +
+                                  "  <PageHeight>8.5in</PageHeight>" +
+                                  "  <MarginTop>0.5in</MarginTop>" +
+                                  "  <MarginLeft>1in</MarginLeft>" +
+                                  "  <MarginRight>1in</MarginRight>" +
+                                  "  <MarginBottom>0.5in</MarginBottom>" +
+                                  "</DeviceInfo>";
+                    Warning[] warnings;
+                    m_streams = new List<Stream>();
+                    m_streams2 = new List<Stream>(); 
 
                     // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
+                    var tf = from f in LISTA_DTO_REPORTE_FACTURA
+                             group f by f.NOMBRE_REPORTE_FACTURA into g
+                             select g;
 
+                    foreach (var facturas in tf)
+                    {
+
+                        ReportViewer _ReportViewer = new ReportViewer();
+                        _ReportViewer.ProcessingMode = ProcessingMode.Local;
+                        _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
+                        _ReportViewer.LocalReport.DataSources.Clear();
+                        _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", facturas));
+                        // _ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteAlertasSubreportProcessingEventHandler);
+
+                        // PENDIENTE: Definir dinamicamente que factura se va a ocupar, dependiendo del cliente
+                        _ReportViewer.LocalReport.ReportEmbeddedResource = "Marcas.Transacciones.Reporte." + facturas.Key;
+
+                        _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStream, out warnings);
+                        foreach (Stream stream in m_streams)
+                            stream.Position = 0;
+
+                        using (Stream file = File.OpenWrite("Factura.pdf"))
+                        {
+                            CopyStream(m_streams[0], file);
+                        }
+                        
+                        //Attachment _Attachment = new Attachment(m_streams[0], "AlertaResumenEstudio.pdf");
+
+                    }
                 }
             }
             catch (Exception ex)
@@ -139,6 +204,19 @@ namespace LQCE.Transaccion
                 ISException.RegisterExcepcion(ex);
                 Error = ex.Message;
                 throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Copies the contents of input to output. Doesn't close either stream.
+        /// </summary>
+        public static void CopyStream(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[8 * 1024];
+            int len;
+            while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                output.Write(buffer, 0, len);
             }
         }
 
@@ -159,6 +237,7 @@ namespace LQCE.Transaccion
                             where f.ACTIVO
                             select new DTO_REPORTE_FACTURA
                             {
+                                NOMBRE_REPORTE_FACTURA = f.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA,
                                 DIA = f.FACTURACION.FECHA_FACTURACION.Day,
                                 MES = f.FACTURACION.FECHA_FACTURACION.ToString("MMMM"),
                                 AÑO = f.FACTURACION.FECHA_FACTURACION.Year,

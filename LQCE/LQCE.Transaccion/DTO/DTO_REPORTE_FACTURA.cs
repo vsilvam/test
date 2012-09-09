@@ -3,6 +3,7 @@ namespace LQCE.Transaccion.DTO
 {
     public class DTO_REPORTE_FACTURA
     {
+        public string NOMBRE_REPORTE_FACTURA { get; set; }
         public int DIA { get; set; }
         public string MES { get; set; }
         public int AÑO { get; set; }

@@ -710,13 +710,14 @@
           <Property Name="RUT_FACTURA" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="NOMBRE_FACTURA" Type="nvarchar(max)" Nullable="false" />
           <Property Name="AFECTO_IVA" Type="bit" Nullable="false" />
+          <Property Name="NOMBRE_REPORTE_FACTURA" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TIPO_PRESTACION">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ACTIVO" Type="bit" Nullable="false" />
         </EntityType>
@@ -2461,6 +2462,7 @@
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_CLIENTE_TIPO_FACTURA" FromRole="TIPO_FACTURA" ToRole="CLIENTE" />
           <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_TIPO_FACTURA" FromRole="TIPO_FACTURA" ToRole="FACTURA" />
+          <Property Type="String" Name="NOMBRE_REPORTE_FACTURA" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CLIENTE_TIPO_FACTURA">
           <End Type="LQCEModelo.TIPO_FACTURA" Role="TIPO_FACTURA" Multiplicity="1" />
@@ -3351,6 +3353,7 @@
           <EntitySetMapping Name="TIPO_FACTURA">
             <EntityTypeMapping TypeName="LQCEModelo.TIPO_FACTURA">
               <MappingFragment StoreEntitySet="TIPO_FACTURA">
+                <ScalarProperty Name="NOMBRE_REPORTE_FACTURA" ColumnName="NOMBRE_REPORTE_FACTURA" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="AFECTO_IVA" ColumnName="AFECTO_IVA" />
                 <ScalarProperty Name="NOMBRE_FACTURA" ColumnName="NOMBRE_FACTURA" />

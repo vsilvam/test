@@ -68,7 +68,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_TIPO_FACTURA", "TIPO_FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_FACTURA), "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 07-09-2012 1:39:32
+// Fecha de generación: 09-09-2012 17:29:56
 namespace LQCE.Modelo
 {
     
@@ -11003,8 +11003,9 @@ namespace LQCE.Modelo
         /// <param name="nOMBRE_FACTURA">Valor inicial de NOMBRE_FACTURA.</param>
         /// <param name="aFECTO_IVA">Valor inicial de AFECTO_IVA.</param>
         /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        /// <param name="nOMBRE_REPORTE_FACTURA">Valor inicial de NOMBRE_REPORTE_FACTURA.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static TIPO_FACTURA CreateTIPO_FACTURA(int id, string rUT_FACTURA, string nOMBRE_FACTURA, bool aFECTO_IVA, bool aCTIVO)
+        public static TIPO_FACTURA CreateTIPO_FACTURA(int id, string rUT_FACTURA, string nOMBRE_FACTURA, bool aFECTO_IVA, bool aCTIVO, string nOMBRE_REPORTE_FACTURA)
         {
             TIPO_FACTURA tIPO_FACTURA = new TIPO_FACTURA();
             tIPO_FACTURA.ID = id;
@@ -11012,6 +11013,7 @@ namespace LQCE.Modelo
             tIPO_FACTURA.NOMBRE_FACTURA = nOMBRE_FACTURA;
             tIPO_FACTURA.AFECTO_IVA = aFECTO_IVA;
             tIPO_FACTURA.ACTIVO = aCTIVO;
+            tIPO_FACTURA.NOMBRE_REPORTE_FACTURA = nOMBRE_REPORTE_FACTURA;
             return tIPO_FACTURA;
         }
         /// <summary>
@@ -11149,6 +11151,33 @@ namespace LQCE.Modelo
         partial void OnACTIVOChanging(bool value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE_REPORTE_FACTURA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE_REPORTE_FACTURA
+        {
+            get
+            {
+                return this._NOMBRE_REPORTE_FACTURA;
+            }
+            set
+            {
+                this.OnNOMBRE_REPORTE_FACTURAChanging(value);
+                this.ReportPropertyChanging("NOMBRE_REPORTE_FACTURA");
+                this._NOMBRE_REPORTE_FACTURA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("NOMBRE_REPORTE_FACTURA");
+                this.OnNOMBRE_REPORTE_FACTURAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE_REPORTE_FACTURA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_REPORTE_FACTURAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_REPORTE_FACTURAChanged();
         /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>

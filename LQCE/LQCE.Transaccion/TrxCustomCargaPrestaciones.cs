@@ -95,8 +95,7 @@ namespace LQCE.Transaccion
                             objDetalle.PREVISION1 = null;
                             objDetalle.GARANTIA1 = null;
                             objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
-                            context.AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(objDetalle);
-
+                            
                             AgregarExamenHumano(context, objDetalle, item, "EXAMEN 1", "VALOR 1");
                             AgregarExamenHumano(context, objDetalle, item, "EXAMEN 2", "VALOR 2");
                             AgregarExamenHumano(context, objDetalle, item, "EXAMEN 3", "VALOR 3");
@@ -107,6 +106,9 @@ namespace LQCE.Transaccion
                             AgregarExamenHumano(context, objDetalle, item, "EXAMEN 8", "VALOR 8");
 
                             ValidarPrestacionHumana(context, objDetalle);
+
+                            context.AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(objDetalle);
+
                         }
                     }
                     else if (IdTipoPrestacion == (int)ENUM_TIPO_PRESTACION.Veterinarias)
@@ -145,8 +147,7 @@ namespace LQCE.Transaccion
                             objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
                             objDetalle.ESPECIE1 = null;
                             objDetalle.RAZA1 = null;
-                            context.AddToCARGA_PRESTACIONES_VETERINARIAS_DETALLE(objDetalle);
-
+                            
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 1", "VALOR 1");
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 2", "VALOR 2");
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 3", "VALOR 3");
@@ -154,6 +155,9 @@ namespace LQCE.Transaccion
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 5", "VALOR 5");
 
                             ValidarPrestacionVeterinaria(context, objDetalle);
+
+                            context.AddToCARGA_PRESTACIONES_VETERINARIAS_DETALLE(objDetalle);
+
                         }
                     }
                     else
@@ -960,7 +964,7 @@ namespace LQCE.Transaccion
                     // PENDIENTE: Validar que el valor del examen sea igual al convenio
 
 
-                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", item);
+                    //context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", item);
                 }
                 contadorExamen++;
             }
@@ -973,7 +977,7 @@ namespace LQCE.Transaccion
                     errores += item + Environment.NewLine;
                 objDetalle.MENSAJE_ERROR = errores;
             }
-            context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_DETALLE", objDetalle);
+            //context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_DETALLE", objDetalle);
 
             return ListaValidaciones;
         }
@@ -1208,7 +1212,7 @@ namespace LQCE.Transaccion
                     // PENDIENTE: Validar que el valor del examen sea igual al convenio
 
 
-                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", item);
+                    //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", item);
                 }
                 contadorExamen++;
             }
@@ -1221,7 +1225,7 @@ namespace LQCE.Transaccion
                     errores += item + Environment.NewLine;
                 objDetalle.MENSAJE_ERROR = errores;
             }
-            context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
+            //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
 
             return ListaValidaciones;
         }

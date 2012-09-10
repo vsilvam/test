@@ -7,7 +7,7 @@ namespace LQCE.Repositorio
 {
     public partial class RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE
     {
-        public CARGA_PRESTACIONES_HUMANAS_DETALLE GetByIdWithReferences2(int id)
+        public CARGA_PRESTACIONES_HUMANAS_DETALLE GetByIdWithReferencesFull(int id)
         {
             Error = string.Empty;
             try

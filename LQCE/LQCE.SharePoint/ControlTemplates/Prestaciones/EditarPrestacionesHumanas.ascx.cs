@@ -42,7 +42,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void CargaFicha(int Id)
         {
             TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
-            var prestaciones = PrestacionesHumanas.GetByIdWithReferences2(Id);
+            var prestaciones = PrestacionesHumanas.GetByIdWithReferencesFull(Id);
             if (prestaciones == null)
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
 

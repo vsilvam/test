@@ -9,7 +9,7 @@ namespace LQCE.Transaccion
 {
     public partial class TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE
     {
-        public CARGA_PRESTACIONES_VETERINARIAS_DETALLE GetByIdWithReferences2(int ID)
+        public CARGA_PRESTACIONES_VETERINARIAS_DETALLE GetByIdWithReferencesFull(int ID)
         {
             Init();
             try
@@ -17,7 +17,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE repositorio = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
-                    return repositorio.GetByIdWithReferences2(ID);
+                    return repositorio.GetByIdWithReferencesFull(ID);
                 }
             }
             catch (Exception ex)

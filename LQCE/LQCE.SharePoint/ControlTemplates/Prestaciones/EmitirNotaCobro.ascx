@@ -9,27 +9,22 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmitirNotaCobro.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EmitirNotaCobro" %>
+
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
-        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+        <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-<asp:Panel ID="pnEmitirNota" runat="server">
+
+<article class="module width_full">
+
+<header><h3>Buscar Notas de Cobro</h3></header>
+
+ <div class="module_content">
+
+    <h4>Periodo</h4>
+
     <table>
-        <tr>
-            <td>
-                BUSCAR NOTAS DE COBRO
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Periodo
-            </td>
-        </tr>
+      
         <tr>
             <td>
                 Desde
@@ -62,15 +57,27 @@
                 </asp:DropDownList>
             </td>
         </tr>
-        <tr>
-            <td>
-                <asp:Button ID="btnBuscar" runat="server" Text="Emitir notas de cobro" OnClick="btnBuscar_Click" />
-            </td>
-        </tr>
+       
     </table>
-</asp:Panel>
+
+    </div>
+
+    <footer>
+    
+     <div class="submit_link">    
+       <asp:Button ID="btnBuscar" runat="server" Text="Emitir notas de cobro" OnClick="btnBuscar_Click" />
+     </div>
+
+    </footer>
+  </article>
+
 <asp:Panel ID='pnNotas' runat="server" Visible="false">
-    <asp:GridView ID="grdNotaCobro" runat="server" AutoGenerateColumns="false" Width="100%"
+
+<article class="module width_full">
+
+<header><h3>Notas de Cobro</h3></header>
+
+    <asp:GridView ID="grdNotaCobro" runat="server" CssClass="tablesorter" GridLines="None" AutoGenerateColumns="false" Width="100%"
         OnRowDataBound="grdNotaCobro_RowDataBound">
         <Columns>
             <asp:TemplateField HeaderText="RUT">
@@ -102,4 +109,15 @@
             No se encontraron prestaciones coincidentes.
         </EmptyDataTemplate>
     </asp:GridView>
+
+    <footer>
+
+    <div class="submit_link">  
+    <!--Falta Boton ?? -->  
+    </div>
+    
+    </footer>
+
+</article>
+
 </asp:Panel>

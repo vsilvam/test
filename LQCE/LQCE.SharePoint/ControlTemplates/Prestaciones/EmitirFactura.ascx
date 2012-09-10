@@ -9,27 +9,23 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmitirFactura.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EmitirFactura" %>
+
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
-        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-<asp:Panel ID="pnEmitirFactura" runat="server">
+
+
+<article class="module width_full">
+
+<header><h3>Buscar Facturas</h3></header>
+
+ <div class="module_content">
+    
+    <h4>Periodo</h4>
+
     <table>
-        <tr>
-            <td>
-                BUSCAR FACTURAS
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Periodo
-            </td>
-        </tr>
+       
         <tr>
             <td>
                 Desde
@@ -53,16 +49,26 @@
                 </asp:DropDownList>
             </td>
         </tr>
-        <tr>
-            <td>
-                <asp:Button ID="btnBuscar" runat="server" Text="Calcuar facturas" OnClick="btnBuscar_Click" />
-            </td>
-        </tr>
+        
     </table>
-</asp:Panel>
+    
+    </div>
+    <footer>
+
+    <div class="submit_link">    
+    <asp:Button ID="btnBuscar" runat="server" Text="Calcular facturas" OnClick="btnBuscar_Click" />
+    </div>
+
+    </footer>
+</article>
+
 <asp:Panel ID="pnFacturas" runat="server" Visible="false">
-    <asp:GridView ID="grdFacturas" runat="server" AutoGenerateColumns="false" Width="100%"
-        OnRowDataBound="grdFacturas_RowDataBound">
+
+<article class="module width_full">
+
+<header><h3>Facturas</h3></header>
+
+    <asp:GridView ID="grdFacturas"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="false" Width="100%" OnRowDataBound="grdFacturas_RowDataBound">
         <Columns>
             <asp:TemplateField HeaderText="RUT">
                 <ItemTemplate>
@@ -99,5 +105,15 @@
             No se encontraron prestaciones coincidentes.
         </EmptyDataTemplate>
     </asp:GridView>
-    <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" OnClick="btnEmitir_Click" />
+   
+    <footer>
+    
+    <div class="submit_link">
+        <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" OnClick="btnEmitir_Click" /> 
+    </div>
+
+    </footer>
+
+    </article>
+
 </asp:Panel>

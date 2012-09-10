@@ -73,7 +73,8 @@
                 <ItemTemplate>
                     <asp:Label ID="lblId" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                 </ItemTemplate>
-                <ItemStyle Width="0px" />
+                <HeaderStyle CssClass="campo_oculto" />
+                <ItemStyle CssClass="campo_oculto" />
             </asp:TemplateField>
             <asp:BoundField DataField="ARCHIVO" HeaderText="Nombre Archivo" />
             <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha Carga" />

@@ -185,8 +185,13 @@
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" />
-     </div>
+      </div>
+      <footer>
+      <div class="submit_link">
+      <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" />
+      </div>
+      </footer>
+
    </article>
 
   <article class="module width_full">
@@ -227,8 +232,7 @@
 
 <article class="module width_full">
   <header><h3>Exámenes</h3></header> 
-     <asp:GridView ID="grdExamen" GridLines="None" runat="server" AutoGenerateColumns="False" Width="100%"
-                    OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
+     <asp:GridView ID="grdExamen"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="False" Width="100%" OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
                     <Columns>
                         <asp:TemplateField HeaderText="EXAMEN">
                             <ItemTemplate>
@@ -246,5 +250,6 @@
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
+                    <HeaderStyle CssClass="head" />
                 </asp:GridView>
     </article>

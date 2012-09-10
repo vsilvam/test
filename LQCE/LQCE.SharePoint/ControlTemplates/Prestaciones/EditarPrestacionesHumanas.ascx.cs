@@ -73,6 +73,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             grdExamen.DataBind();
             lista = prestaciones.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(e => e.ACTIVO).ToList();
 
+            // validar
+            TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+            grdErroresHumanos.DataSource = PrestacionesEncabezado.ValidarPrestacionHumana(Id);
+            grdErroresHumanos.DataBind();
+
             //Habilitar Edicion de Ficha
             //if (prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente) //o con errores 
             EditarFicha();
@@ -107,9 +112,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                if (Request.QueryString["Id"] == null)
+                        throw new Exception("No se ha indicado identificador de la cuenta registrada");
+
+                    int Id = int.Parse(Request.QueryString["Id"].ToString());
+
                 //se obtienen los datos desde el formuario
-                int IdTipoPrestacion = 1;
-                int IdCargaPrestacionesDetalleEstado = 2;
+                int IdTipoPrestacion = (int)ENUM_TIPO_PRESTACION.Humanas;
+                int IdCargaPrestacionesDetalleEstado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
                 string numero = !string.IsNullOrEmpty(lblNroPrestacion.Text) ? lblNroPrestacion.Text : string.Empty;
                 string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
                 string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
@@ -138,13 +148,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN _examen;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
-                    TextBox txtExamen = (TextBox)grilla.FindControl("lblExamen");
-                    TextBox txtCodigo = (TextBox)grilla.FindControl("lblCodigo");
-                    TextBox txtValor = (TextBox)grilla.FindControl("lblValor");
+                    TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
+                    TextBox txtCodigo = (TextBox)grilla.FindControl("txtCodigo");
+                    TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
 
                     _examen = new DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN();
-                    _examen.ID = int.Parse(txtExamen.Text);
-                    _examen.NOMBRE_EXAMEN = txtCodigo.Text;
+                    _examen.ID = !string.IsNullOrEmpty(txtCodigo.Text) ? int.Parse(txtCodigo.Text) : 0;
+                    _examen.NOMBRE_EXAMEN = txtExamen.Text;
                     _examen.VALOR_EXAMEN = txtValor.Text;
                     lista.Add(_examen);
                 }
@@ -155,29 +165,29 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
 
                 //Se retornan errores en caso de existir
-                TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
-                var prestaciones = PrestacionesHumanas.GetByIdWithReferences(1);
-                string error = prestaciones.MENSAJE_ERROR;
+                //TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
+                //var prestaciones = PrestacionesHumanas.GetByIdWithReferences(Id);
+                //string error = prestaciones.MENSAJE_ERROR;
 
-                if (string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
-                {
-                    lblMensaje.Text = prestaciones.MENSAJE_ERROR;
-                }
-                else
-                {
+                //if (string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
+                //{
+                //    lblMensaje.Text = prestaciones.MENSAJE_ERROR;
+                //}
+                //else
+                //{
                     TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(IdTipoPrestacion, ficha, nombre, rut,
+                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(Id, ficha, nombre, rut,
                         medico, edad, telefono, procedencia, fechaDesde, "", entregaDesde, prevision, garantia, pagado, pendiente,
-                        IdCargaPrestacionesDetalleEstado, error, lista);
+                        IdCargaPrestacionesDetalleEstado, "", lista);
 
                     if (!resutado.RESULTADO)
                     {
                         // mostrar errores en grilla
-                        grdErroresHumanos.DataSource = resutado;
+                        grdErroresHumanos.DataSource = resutado.ERRORES_VALIDACION;
                         grdErroresHumanos.DataBind();
                     }
 
-                }
+                //}
             }
             catch (Exception ex)
             {

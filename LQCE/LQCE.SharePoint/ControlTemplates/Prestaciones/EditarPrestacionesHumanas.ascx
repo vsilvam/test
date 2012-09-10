@@ -9,26 +9,15 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditarPrestacionesHumanas.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarPrestacionesHumanas" %>
-
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-
- <article class="module width_full">
+<article class="module width_full">
    <header><h3>Errores Prestación</h3></header>
 
-       <asp:GridView ID="grdErroresHumanos" runat="server" AutoGenerateColumns="false">
-        <Columns>
-            <asp:TemplateField HeaderText="MENSAJE ERROR">
-                <ItemTemplate>
-                    <asp:Label ID="lblError" runat="server" Text='<%# Bind("ERRORES_VALIDACION") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-    </asp:GridView>
+   <asp:BulletedList ID="grdErroresHumanos" runat="server"></asp:BulletedList>
     </article>
-
 <article class="module width_full">
 
     <header><h3>Edición Prestación</h3></header>
@@ -193,8 +182,7 @@
       </footer>
 
    </article>
-
-  <article class="module width_full">
+<article class="module width_full">
 
   <header><h3>Agregar Nuevo Examen</h3></header>
 
@@ -229,7 +217,6 @@
                     </table>
                 </asp:Panel>
    </article>
-
 <article class="module width_full">
   <header><h3>Exámenes</h3></header> 
      <asp:GridView ID="grdExamen"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="False" Width="100%" OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">

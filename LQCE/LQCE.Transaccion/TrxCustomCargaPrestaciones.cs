@@ -876,6 +876,30 @@ namespace LQCE.Transaccion
             }
         }
 
+        public List<string> ValidarPrestacionVeterinaria(int ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
+
+                    var objCARGA_PRESTACIONES_VETERINARIAS_DETALLE = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetById(ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE);
+                    if (objCARGA_PRESTACIONES_VETERINARIAS_DETALLE == null)
+                        throw new Exception("No se encuentra detalle de prestación");
+
+                    return ValidarPrestacionVeterinaria(context, objCARGA_PRESTACIONES_VETERINARIAS_DETALLE);
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
         private List<string> ValidarPrestacionHumana(LQCEEntities context, CARGA_PRESTACIONES_HUMANAS_DETALLE objDetalle)
         {
             RepositorioPRESTACION_HUMANA _RepositorioPRESTACION_HUMANA = new RepositorioPRESTACION_HUMANA(context);

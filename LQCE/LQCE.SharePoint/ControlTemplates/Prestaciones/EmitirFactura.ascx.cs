@@ -67,18 +67,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 foreach (GridViewRow row in grdFacturas.Rows)
                 {
-                    if (row.RowType != DataControlRowType.DataRow) continue;
+                    if (row.RowType == DataControlRowType.DataRow)
+                    {
+                        var lblRut = row.FindControl("lblRut") as Label;
+                        var lblNombre = row.FindControl("lblNombre") as Label;
+                        var lblCantidad = row.FindControl("lblCantidad") as Label;
+                        var lblTotal = row.FindControl("lblTotal") as Label;
+                        var txtDescuento = row.FindControl("txtDescuento") as TextBox;
 
-                    var lblRut = row.FindControl("lblRut") as Label;
-                    var lblNombre = row.FindControl("lblNombre") as Label;
-                    var lblCantidad = row.FindControl("lblCantidad") as Label;
-                    var lblTotal = row.FindControl("lblTotal") as Label;
-                    var txtDescuento = row.FindControl("txtDescuento") as TextBox;
-
-                    //se guardan las modificaciones cuando existen
-                   // PENDIENTE: Recorrer grillas, recuperar descuentos y generar facturas
-                    //se generan los reportes
-
+                        //se guardan las modificaciones cuando existen
+                        // PENDIENTE: Recorrer grillas, recuperar descuentos y generar facturas
+                        //se generan los reportes
+                    }
                 }
             }
             catch (Exception ex)

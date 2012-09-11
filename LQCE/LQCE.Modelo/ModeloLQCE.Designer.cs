@@ -68,7 +68,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_TIPO_FACTURA", "TIPO_FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_FACTURA), "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 09-09-2012 17:29:56
+// Fecha de generación: 11-09-2012 0:44:08
 namespace LQCE.Modelo
 {
     

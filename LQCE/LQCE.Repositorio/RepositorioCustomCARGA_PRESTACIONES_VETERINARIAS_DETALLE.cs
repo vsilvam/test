@@ -14,11 +14,11 @@ namespace LQCE.Repositorio
             {
                 return _context.CARGA_PRESTACIONES_VETERINARIAS_DETALLE                    
                     .Include("CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO")
-                    .Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN")
+                    .Include("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN")
                     .Include("CARGA_PRESTACIONES_DETALLE_ESTADO")
                     .Include("CLIENTE")
                     .Include("GARANTIA1")
-                    .Include("PREVISION1")
+                    .Include("PREVISION")
                     .FirstOrDefault(i => i.ID == id && i.ACTIVO);
             }
             catch (Exception ex)

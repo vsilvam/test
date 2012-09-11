@@ -159,35 +159,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     lista.Add(_examen);
                 }
 
-                //se guardan las modificaciones de la grilla.
+                TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(Id, ficha, nombre, rut,
+                    medico, edad, telefono, procedencia, fechaDesde, "", entregaDesde, prevision, garantia, pagado, pendiente,
+                    IdCargaPrestacionesDetalleEstado, "", lista);
 
-
-
-
-                //Se retornan errores en caso de existir
-                //TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
-                //var prestaciones = PrestacionesHumanas.GetByIdWithReferences(Id);
-                //string error = prestaciones.MENSAJE_ERROR;
-
-                //if (string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
-                //{
-                //    lblMensaje.Text = prestaciones.MENSAJE_ERROR;
-                //}
-                //else
-                //{
-                    TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(Id, ficha, nombre, rut,
-                        medico, edad, telefono, procedencia, fechaDesde, "", entregaDesde, prevision, garantia, pagado, pendiente,
-                        IdCargaPrestacionesDetalleEstado, "", lista);
-
-                    if (!resutado.RESULTADO)
-                    {
-                        // mostrar errores en grilla
-                        grdErroresHumanos.DataSource = resutado.ERRORES_VALIDACION;
-                        grdErroresHumanos.DataBind();
-                    }
-
-                //}
+                if (!resutado.RESULTADO)
+                {
+                    // mostrar errores en grilla
+                    grdErroresHumanos.DataSource = resutado.ERRORES_VALIDACION;
+                    grdErroresHumanos.DataBind();
+                }
             }
             catch (Exception ex)
             {

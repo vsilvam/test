@@ -15,22 +15,22 @@ namespace LQCE.Transaccion
 {
     public partial class TrxFACTURACION
     {
-        private IList<Stream> m_streams;
+        private IList<Stream> m_streams_matriz;
         private Stream CreateStream(string name, string fileNameExtension, Encoding encoding,
             string mimeType, bool willSeek)
         {
             Stream stream = new MemoryStream();
-            m_streams.Add(stream);
+            m_streams_matriz.Add(stream);
             return stream;
         }
 
 
-        private IList<Stream> m_streams2;
+        private IList<Stream> m_streams_individual;
         private Stream CreateStream2(string name, string fileNameExtension, Encoding encoding,
             string mimeType, bool willSeek)
         {
             Stream stream2 = new MemoryStream();
-            m_streams2.Add(stream2);
+            m_streams_individual.Add(stream2);
             return stream2;
         }
 
@@ -168,8 +168,8 @@ namespace LQCE.Transaccion
                                       "  <MarginBottom>0.5in</MarginBottom>" +
                                       "</DeviceInfo>";
                         Warning[] warnings;
-                        m_streams = new List<Stream>();
-                        m_streams2 = new List<Stream>();
+                        m_streams_matriz = new List<Stream>();
+                        m_streams_individual = new List<Stream>();
 
                         // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
                         var tf = from f in LISTA_DTO_REPORTE_FACTURA
@@ -184,27 +184,25 @@ namespace LQCE.Transaccion
                             _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
                             _ReportViewer.LocalReport.DataSources.Clear();
                             _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", facturas));
-                            // _ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteAlertasSubreportProcessingEventHandler);
 
-                            // PENDIENTE: Definir dinamicamente que factura se va a ocupar, dependiendo del cliente
                             _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + facturas.Key;
 
                             _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStream, out warnings);
-                            foreach (Stream stream in m_streams)
+                            foreach (Stream stream in m_streams_matriz)
                                 stream.Position = 0;
 
                             using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
                             {
                                 SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
-                                //spWeb.Fields.Add("http://siteurl/doclib/file.docx", m_streams[0], true);
                                 string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + facturas.Key + ".pdf";
-                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams[0], true);
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_matriz[0], true);
                                 spList.Update();
                             }
                         }
                     }
                     catch (Exception ex)
                     {
+                        // En caso de error, al generar los PDF se eliminan los registros de las facturas
                         _FACTURACION.ACTIVO = false;
                         foreach (var _FACTURA in _FACTURACION.FACTURA)
                         {

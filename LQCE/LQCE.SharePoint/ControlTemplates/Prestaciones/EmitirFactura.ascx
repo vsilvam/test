@@ -43,7 +43,7 @@
                     Clientes
                 </td>
                 <td>
-                    <asp:DropDownList ID="ddlClientes" runat="server" DataTextField="NOMBRE" DataValueField="ID">
+                    <asp:DropDownList ID="ddlClientes" runat="server" DataTextField="NOMBRE" DataValueField="ID" AppendDataBoundItems="true">
                     </asp:DropDownList>
                 </td>
             </tr>
@@ -74,7 +74,7 @@
                 <asp:BoundField DataField="TOTAL_PRESTACIONES" HeaderText="TOTAL A COBRAR" />
                 <asp:TemplateField HeaderText="% DESCUENTO">
                     <ItemTemplate>
-                        <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ID") %>'></asp:HiddenField>
+                        <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ID_CLIENTE") %>'></asp:HiddenField>
                         <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("DESCUENTO") %>'></asp:TextBox>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center" />

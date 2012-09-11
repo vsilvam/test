@@ -230,12 +230,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_Exento.rdlc" />
-    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_IVA.rdlc" />
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_Exento.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_IVA.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_Exento.rdlc">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_IVA.rdlc" />
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_IVA.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

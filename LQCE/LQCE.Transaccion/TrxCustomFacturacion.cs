@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using LQCE.Transaccion.DTO;
+using System.IO;
+using System.Linq;
+using System.Text;
+using App.Infrastructure.Runtime;
 using LQCE.Modelo;
 using LQCE.Repositorio;
-using App.Infrastructure.Runtime;
-using System.Linq;
-using Microsoft.Reporting.WebForms;
-using System.IO;
-using System.Text;
-using Microsoft.SharePoint;
+using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Properties;
+using Microsoft.Reporting.WebForms;
+using Microsoft.SharePoint;
 
 namespace LQCE.Transaccion
 {
@@ -145,60 +145,80 @@ namespace LQCE.Transaccion
                             _FACTURA.IVA = 0;
                             _FACTURA.TOTAL = suma_total;
                         }
-                        context.ApplyPropertyChanges("FACTURA", _FACTURA);
+                        //context.ApplyPropertyChanges("FACTURA", _FACTURA);
 
                         correlativo++;
                     }
 
                     context.SaveChanges();
 
-                    // PENDIENTE: Generar PDFs
-                    var LISTA_DTO_REPORTE_FACTURA = GetReporteFactura(_FACTURACION.ID);
-
-                    string deviceInfo =
-                                  "<DeviceInfo>" +
-                                  "  <OutputFormat>PDF</OutputFormat>" +
-                                  "  <PageWidth>11in</PageWidth>" +
-                                  "  <PageHeight>8.5in</PageHeight>" +
-                                  "  <MarginTop>0.5in</MarginTop>" +
-                                  "  <MarginLeft>1in</MarginLeft>" +
-                                  "  <MarginRight>1in</MarginRight>" +
-                                  "  <MarginBottom>0.5in</MarginBottom>" +
-                                  "</DeviceInfo>";
-                    Warning[] warnings;
-                    m_streams = new List<Stream>();
-                    m_streams2 = new List<Stream>(); 
-
-                    // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
-                    var tf = from f in LISTA_DTO_REPORTE_FACTURA
-                             group f by f.NOMBRE_REPORTE_FACTURA into g
-                             select g;
-
-                    foreach (var facturas in tf)
+                    try
                     {
+                        // PENDIENTE: Generar PDFs
+                        var LISTA_DTO_REPORTE_FACTURA = GetReporteFactura(_FACTURACION.ID);
 
-                        ReportViewer _ReportViewer = new ReportViewer();
-                        _ReportViewer.ProcessingMode = ProcessingMode.Local;
-                        _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
-                        _ReportViewer.LocalReport.DataSources.Clear();
-                        _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", facturas));
-                        // _ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteAlertasSubreportProcessingEventHandler);
+                        string deviceInfo =
+                                      "<DeviceInfo>" +
+                                      "  <OutputFormat>PDF</OutputFormat>" +
+                                      "  <PageWidth>11in</PageWidth>" +
+                                      "  <PageHeight>8.5in</PageHeight>" +
+                                      "  <MarginTop>0.5in</MarginTop>" +
+                                      "  <MarginLeft>1in</MarginLeft>" +
+                                      "  <MarginRight>1in</MarginRight>" +
+                                      "  <MarginBottom>0.5in</MarginBottom>" +
+                                      "</DeviceInfo>";
+                        Warning[] warnings;
+                        m_streams = new List<Stream>();
+                        m_streams2 = new List<Stream>();
 
-                        // PENDIENTE: Definir dinamicamente que factura se va a ocupar, dependiendo del cliente
-                        _ReportViewer.LocalReport.ReportEmbeddedResource = "Marcas.Transacciones.Reporte." + facturas.Key;
+                        // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
+                        var tf = from f in LISTA_DTO_REPORTE_FACTURA
+                                 group f by f.NOMBRE_REPORTE_FACTURA into g
+                                 select g;
 
-                        _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStream, out warnings);
-                        foreach (Stream stream in m_streams)
-                            stream.Position = 0;
-
-                        using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
+                        foreach (var facturas in tf)
                         {
-                            SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
-                            //spWeb.Fields.Add("http://siteurl/doclib/file.docx", m_streams[0], true);
-                            string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + facturas.Key + ".pdf";
-                            spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams[0], true);
-                            spList.Update();
+
+                            ReportViewer _ReportViewer = new ReportViewer();
+                            _ReportViewer.ProcessingMode = ProcessingMode.Local;
+                            _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
+                            _ReportViewer.LocalReport.DataSources.Clear();
+                            _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", facturas));
+                            // _ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteAlertasSubreportProcessingEventHandler);
+
+                            // PENDIENTE: Definir dinamicamente que factura se va a ocupar, dependiendo del cliente
+                            _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + facturas.Key;
+
+                            _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStream, out warnings);
+                            foreach (Stream stream in m_streams)
+                                stream.Position = 0;
+
+                            using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
+                            {
+                                SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
+                                //spWeb.Fields.Add("http://siteurl/doclib/file.docx", m_streams[0], true);
+                                string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + facturas.Key + ".pdf";
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams[0], true);
+                                spList.Update();
+                            }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        _FACTURACION.ACTIVO = false;
+                        foreach (var _FACTURA in _FACTURACION.FACTURA)
+                        {
+                            _FACTURA.ACTIVO = false;
+                            foreach (var _FACTURA_DETALLE in _FACTURA.FACTURA_DETALLE)
+                            {
+                                _FACTURA_DETALLE.ACTIVO = false;
+                                context.ApplyPropertyChanges("FACTURA_DETALLE", _FACTURA_DETALLE);
+                            }
+                            context.ApplyPropertyChanges("FACTURA", _FACTURA);
+                        }
+                        context.ApplyPropertyChanges("FACTURACION", _FACTURACION);
+                        context.SaveChanges();
+                        throw ex;
                     }
                 }
             }
@@ -232,7 +252,7 @@ namespace LQCE.Transaccion
                 {
                     RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
 
-                    FACTURACION _FACTURACION = _RepositorioFACTURACION.GetByIdWithReferences(IdFacturacion);
+                    FACTURACION _FACTURACION = _RepositorioFACTURACION.GetByIdWithReferencesFull(IdFacturacion);
                     if (_FACTURACION == null)
                         throw new Exception("No se encuentra información de la facturación");
 

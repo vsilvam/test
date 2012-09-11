@@ -1,14 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using LQCE.Modelo;
 using App.Infrastructure.Runtime;
+using LQCE.Modelo;
 
 namespace LQCE.Repositorio
 {
     public partial class RepositorioFACTURACION
     {
+        public FACTURACION GetByIdWithReferencesFull(int ID)
+        {
+            Error = string.Empty;
+            try
+            {
+                return _context.FACTURACION
+                    .Include("FACTURA.TIPO_FACTURA")
+                    .FirstOrDefault(i => i.ID == ID);
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
         public IQueryable<VISTA_PRESTACIONES_POR_FACTURAR> GetPrestacionesPorFacturar(DateTime FechaDesde,
             DateTime FechaHasta, int? IdCliente)
         {
@@ -39,7 +54,7 @@ namespace LQCE.Repositorio
             }
         }
 
-        public IQueryable<VISTA_FACTURAS_POR_NOTIFICAR> GetFacturasPorNotificar(DateTime FechaFacturacionDesde, 
+        public IQueryable<VISTA_FACTURAS_POR_NOTIFICAR> GetFacturasPorNotificar(DateTime FechaFacturacionDesde,
             DateTime FechaFacturacionHasta, int IdTipoCobro, int? IdCliente)
         {
             Error = string.Empty;

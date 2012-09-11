@@ -1,14 +1,12 @@
 ﻿<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls"
-    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register TagPrefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
-<%@ Import Namespace="Microsoft.SharePoint" %>
-<%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages"
-    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmitirFactura.ascx.cs"
-    Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EmitirFactura" %>
+<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Import Namespace="Microsoft.SharePoint" %> 
+<%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="NumerarFactura.ascx.cs" Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.NumerarFactura" %>
+
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
@@ -51,7 +49,8 @@
     </div>
     <footer>
         <div class="submit_link">
-            <asp:Button ID="btnBuscar" runat="server" Text="Calcular facturas" OnClick="btnBuscar_Click" ValidationGroup="buscar" />
+            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" 
+                ValidationGroup="buscar" onclick="btnBuscar_Click" />
         </div>
     </footer>
 </article>
@@ -68,14 +67,12 @@
             AutoGenerateColumns="False" Width="100%" OnRowDataBound="grdFacturas_RowDataBound"
             EnableModelValidation="True">
             <Columns>
-                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT" />
-                <asp:BoundField DataField="NOMBRE_CLIENTE" HeaderText="NOMBRE" />
-                <asp:BoundField DataField="CANTIDAD_PRESTACIONES" HeaderText="CANTIDAD" />
-                <asp:BoundField DataField="TOTAL_PRESTACIONES" HeaderText="TOTAL A COBRAR" />
-                <asp:TemplateField HeaderText="% DESCUENTO">
+                <asp:BoundField DataField="fecha_facturacion" HeaderText="FECHA FACTURACION" />
+                <asp:BoundField DataField="total_facturas" HeaderText="TOTAL FACTURAS" />
+                <asp:BoundField DataField="fac_numerar" HeaderText="FACTURAS POR NUMERAR" />
+                <asp:TemplateField HeaderText="NUMERAR">
                     <ItemTemplate>
-                        <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ID_CLIENTE") %>'></asp:HiddenField>
-                        <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("DESCUENTO") %>'></asp:TextBox>
+                        <asp:LinkButton id="lnkNumerar" runat="server" onclick="lnkNumerar_Click" >Numerar</asp:LinkButton>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
@@ -86,8 +83,46 @@
         </asp:GridView>
         <footer>
             <div class="submit_link">
-                <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" OnClick="btnEmitir_Click" />                
+                
             </div>
         </footer>
     </article>
+</asp:Panel>
+<asp:Panel ID="pnNumerar" runat="server" Visible="false">
+    <table>
+        <tr>
+            <td>
+                <asp:RadioButtonList ID="rblNumerar" runat="server" 
+                    RepeatDirection="Horizontal" AutoPostBack="True" 
+                    onselectedindexchanged="rblNumerar_SelectedIndexChanged" >
+                    <asp:ListItem Value="1">Todos</asp:ListItem>
+                    <asp:ListItem Value="2">Desde-Hasta</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+        <tr>
+            <td>Desde
+            </td>
+            <td>
+                <asp:TextBox ID="txtDesdeN" runat="server"></asp:TextBox>
+            </td>
+            <td>Hasta
+            </td>
+            <td>
+                <asp:TextBox ID="txtHastaN" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Numero factura inicial</td>
+            <td>
+                <asp:TextBox ID="txtNroFactura" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Button ID="btnNumerar" runat="server" Text="Numerar Facturas" 
+                    onclick="btnNumerar_Click" />
+            </td>
+        </tr>
+    </table>
 </asp:Panel>

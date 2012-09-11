@@ -53,7 +53,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                     var facturacion = new TrxFACTURACION();
                     hdnFechaDesde.Value = desde.ToString();
-                    hdnFechaHasta.Value = hasta.ToString();
+                    hdnFechaHasta.Value = hasta.ToString();                    
                     grdFacturas.DataSource = facturacion.GetClientesAFacturar(desde, hasta, cliente);
                     grdFacturas.DataBind();
                 }
@@ -143,6 +143,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             //    lblMensaje.Text = ex.Message;
             //    return;
             //}
+
+         
         }
     }
 }

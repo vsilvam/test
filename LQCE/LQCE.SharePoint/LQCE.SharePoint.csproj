@@ -104,6 +104,20 @@
     <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx.designer.cs">
       <DependentUpon>EmitirNotaCobro.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\MensajeExito.ascx.cs">
+      <DependentUpon>MensajeExito.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\MensajeExito.ascx.designer.cs">
+      <DependentUpon>MensajeExito.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\NumerarFactura.ascx.cs">
+      <DependentUpon>NumerarFactura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\NumerarFactura.ascx.designer.cs">
+      <DependentUpon>NumerarFactura.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.cs">
       <DependentUpon>RegistroCargaArchivo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -236,6 +250,12 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\MensajeExito.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\NumerarFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx">

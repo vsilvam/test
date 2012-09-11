@@ -34,8 +34,8 @@ namespace LQCE.Transaccion
             return stream2;
         }
 
-        public List<DTO_RESUMEN_PRESTACIONES_FACTURAR> GetClientesAFacturar(DateTime? FechaDesde,
-            DateTime? FechaHasta, int? IdCliente)
+        public List<DTO_RESUMEN_PRESTACIONES_FACTURAR> GetClientesAFacturar(DateTime FechaDesde,
+            DateTime FechaHasta, int? IdCliente)
         {
             Init();
             try

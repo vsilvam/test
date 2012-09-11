@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using App.Infrastructure.Runtime;
-using LQCE.Modelo;
 using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
 
@@ -43,15 +43,20 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                pnFacturas.Visible = true;
+                if (Page.IsValid)
+                {
+                    pnFacturas.Visible = true;
 
-                DateTime? desde = !string.IsNullOrEmpty(txtDesde.Text) ? DateTime.Parse(txtDesde.Text) : (DateTime?)null;
-                DateTime? hasta = !string.IsNullOrEmpty(txtHasta.Text) ? DateTime.Parse(txtHasta.Text) : (DateTime?)null;
-                int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
+                    DateTime desde = DateTime.Parse(txtDesde.Text);
+                    DateTime hasta = DateTime.Parse(txtHasta.Text);
+                    int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
 
-                var facturacion = new TrxFACTURACION();
-                grdFacturas.DataSource = facturacion.GetClientesAFacturar(desde, hasta, cliente);
-                grdFacturas.DataBind();
+                    var facturacion = new TrxFACTURACION();
+                    hdnFechaDesde.Value = desde.ToString();
+                    hdnFechaHasta.Value = hasta.ToString();
+                    grdFacturas.DataSource = facturacion.GetClientesAFacturar(desde, hasta, cliente);
+                    grdFacturas.DataBind();
+                }
             }
             catch (Exception ex)
             {
@@ -66,26 +71,35 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                if (string.IsNullOrEmpty(hdnFechaDesde.Value) || string.IsNullOrEmpty(hdnFechaHasta.Value))
+                    throw new Exception("Debe realizar busqueda primero");
+
                 List<DTO_EMISION_FACTURA> lista = new List<DTO_EMISION_FACTURA>();
                 foreach (GridViewRow row in grdFacturas.Rows)
                 {
                     if (row.RowType == DataControlRowType.DataRow)
                     {
                         var hdnId = row.FindControl("hdnId") as HiddenField;
-                         var txtDescuento = row.FindControl("txtDescuento") as TextBox;
+                        var txtDescuento = row.FindControl("txtDescuento") as TextBox;
 
                         //se guardan las modificaciones cuando existen
                         // PENDIENTE: Recorrer grillas, recuperar descuentos y generar facturas
                         //se generan los reportes
-                         DTO_EMISION_FACTURA dto = new DTO_EMISION_FACTURA();
+                        DTO_EMISION_FACTURA dto = new DTO_EMISION_FACTURA();
                         dto.ID_CLIENTE = int.Parse(hdnId.Value);
                         dto.DESCUENTO = int.Parse(txtDescuento.Text);
                         lista.Add(dto);
                     }
                 }
 
+                if (!lista.Any())
+                    throw new Exception("No hay prestaciones por facturar");
+
+                DateTime FechaDesde = DateTime.Parse(hdnFechaDesde.Value);
+                DateTime FechaHasta = DateTime.Parse(hdnFechaHasta.Value);
+
                 TrxFACTURACION _TrxFACTURACION = new TrxFACTURACION();
-                _TrxFACTURACION.EmitirFacturas(lista, 
+                _TrxFACTURACION.EmitirFacturas(lista, FechaDesde, FechaHasta);
             }
             catch (Exception ex)
             {

@@ -9,26 +9,22 @@ namespace LQCE.Repositorio
 {
     public partial class RepositorioFACTURACION
     {
-        public IQueryable<VISTA_PRESTACIONES_POR_FACTURAR> GetPrestacionesPorFacturar(DateTime? FechaDesde,
-            DateTime? FechaHasta, int? IdCliente)
+        public IQueryable<VISTA_PRESTACIONES_POR_FACTURAR> GetPrestacionesPorFacturar(DateTime FechaDesde,
+            DateTime FechaHasta, int? IdCliente)
         {
             Error = string.Empty;
             try
             {
-                
+
                 var q = from i in _context.VISTA_PRESTACIONES_POR_FACTURAR
                         select i;
 
-                if (FechaDesde.HasValue)
-                {
-                    FechaDesde = FechaDesde.Value.Date;
-                    q = q.Where(i => i.FECHA_RECEPCION >= FechaDesde.Value);
-                }
-                if (FechaHasta.HasValue)
-                {
-                    FechaHasta = FechaHasta.Value.Date.AddDays(1).AddTicks(-1);
-                    q = q.Where(i => i.FECHA_RECEPCION <= FechaHasta.Value);
-                }
+                FechaDesde = FechaDesde.Date;
+                q = q.Where(i => i.FECHA_RECEPCION >= FechaDesde);
+
+                FechaHasta = FechaHasta.Date.AddDays(1).AddTicks(-1);
+                q = q.Where(i => i.FECHA_RECEPCION <= FechaHasta);
+
                 if (IdCliente.HasValue)
                 {
                     q = q.Where(i => i.ID_CLIENTE == IdCliente.Value);

@@ -14,85 +14,80 @@
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
 <article class="module width_full">
-
-<header><h3>Buscar Facturas</h3></header>
-
- <div class="module_content">
-    
-    <h4>Periodo</h4>
-
-    <table>
-       
-        <tr>
-            <td>
-                Desde
-            </td>
-            <td>
-                <asp:TextBox ID="txtDesde" runat="server"></asp:TextBox>
-            </td>
-            <td>
-                Hasta
-            </td>
-            <td>
-                <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Clientes
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlClientes" runat="server" DataTextField="NOMBRE" DataValueField="ID">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        
-    </table>
-    
+    <header>
+        <h3>
+            Buscar Facturas</h3>
+    </header>
+    <div class="module_content">
+        <h4>
+            Periodo</h4>
+        <table>
+            <tr>
+                <td>
+                    Desde
+                </td>
+                <td>
+                    <asp:TextBox ID="txtDesde" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="requiredDesde" runat="server" ValidationGroup="buscar" ControlToValidate="txtDesde" Text="Requerido" ErrorMessage="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+                <td>
+                    Hasta
+                </td>
+                <td>
+                    <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredtxtHasta" runat="server" ValidationGroup="buscar" ControlToValidate="txtHasta" Text="Requerido" ErrorMessage="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Clientes
+                </td>
+                <td>
+                    <asp:DropDownList ID="ddlClientes" runat="server" DataTextField="NOMBRE" DataValueField="ID">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+        </table>
     </div>
     <footer>
-
-    <div class="submit_link">    
-    <asp:Button ID="btnBuscar" runat="server" Text="Calcular facturas" OnClick="btnBuscar_Click" />
-    </div>
-
+        <div class="submit_link">
+            <asp:Button ID="btnBuscar" runat="server" Text="Calcular facturas" OnClick="btnBuscar_Click" ValidationGroup="buscar" />
+        </div>
     </footer>
 </article>
 <asp:Panel ID="pnFacturas" runat="server" Visible="false">
     <article class="module width_full">
+        <header>
+            <h3>
+                Facturas</h3>
+        </header>
+        <asp:HiddenField ID="hdnFechaDesde" runat="server" />
+        <asp:HiddenField ID="hdnFechaHasta" runat="server" />
 
-<header><h3>Facturas</h3></header>
-
-    <asp:GridView ID="grdFacturas"  CssClass="tablesorter" GridLines="None" 
-            runat="server" AutoGenerateColumns="False" Width="100%" 
-            OnRowDataBound="grdFacturas_RowDataBound" EnableModelValidation="True">
-        <Columns>
-        
-            <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT" />
-            <asp:BoundField DataField="NOMBRE_CLIENTE" HeaderText="NOMBRE" />
-            <asp:BoundField DataField="CANTIDAD_PRESTACIONES" HeaderText="CANTIDAD" />
-            <asp:BoundField DataField="TOTAL_PRESTACIONES" HeaderText="TOTAL A COBRAR" />
-            <asp:TemplateField HeaderText="% DESCUENTO">
-                <ItemTemplate>
-                <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ID") %>'></asp:HiddenField>
-
-                    <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("DESCUENTO") %>'></asp:TextBox>
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-        </Columns>
-        <EmptyDataTemplate>
-            No se encontraron prestaciones coincidentes.
-        </EmptyDataTemplate>
-    </asp:GridView>
-   
-    <footer>
-    
-    <div class="submit_link">
-        <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" OnClick="btnEmitir_Click" /> 
-    </div>
-
-    </footer>
-
+        <asp:GridView ID="grdFacturas" CssClass="tablesorter" GridLines="None" runat="server"
+            AutoGenerateColumns="False" Width="100%" OnRowDataBound="grdFacturas_RowDataBound"
+            EnableModelValidation="True">
+            <Columns>
+                <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT" />
+                <asp:BoundField DataField="NOMBRE_CLIENTE" HeaderText="NOMBRE" />
+                <asp:BoundField DataField="CANTIDAD_PRESTACIONES" HeaderText="CANTIDAD" />
+                <asp:BoundField DataField="TOTAL_PRESTACIONES" HeaderText="TOTAL A COBRAR" />
+                <asp:TemplateField HeaderText="% DESCUENTO">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ID") %>'></asp:HiddenField>
+                        <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("DESCUENTO") %>'></asp:TextBox>
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+            <EmptyDataTemplate>
+                No se encontraron prestaciones coincidentes.
+            </EmptyDataTemplate>
+        </asp:GridView>
+        <footer>
+            <div class="submit_link">
+                <asp:Button ID="btnEmitir" runat="server" Text="Emitir Facturas" OnClick="btnEmitir_Click" />
+            </div>
+        </footer>
     </article>
 </asp:Panel>

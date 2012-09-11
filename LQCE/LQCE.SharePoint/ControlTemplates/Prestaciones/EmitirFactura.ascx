@@ -63,34 +63,19 @@
 
 <header><h3>Facturas</h3></header>
 
-    <asp:GridView ID="grdFacturas"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="false" Width="100%" OnRowDataBound="grdFacturas_RowDataBound">
+    <asp:GridView ID="grdFacturas"  CssClass="tablesorter" GridLines="None" 
+            runat="server" AutoGenerateColumns="False" Width="100%" 
+            OnRowDataBound="grdFacturas_RowDataBound" EnableModelValidation="True">
         <Columns>
-            <asp:TemplateField HeaderText="RUT">
-                <ItemTemplate>
-                    <asp:Label ID="lblRut" runat="server" Text='<%# Bind("RUT_CLIENTE") %>'></asp:Label>
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="NOMBRE">
-                <ItemTemplate>
-                    <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("NOMBRE_CLIENTE") %>'></asp:Label>
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="CANTIDAD">
-                <ItemTemplate>
-                    <asp:Label ID="lblCantidad" runat="server" Text='<%# Bind("CANTIDAD_PRESTACIONES") %>'></asp:Label>
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="TOTAL A COBRAR">
-                <ItemTemplate>
-                    <asp:Label ID="lblTotal" runat="server" Text='<%# Bind("TOTAL_PRESTACIONES") %>'></asp:Label>
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
+        
+            <asp:BoundField DataField="RUT_CLIENTE" HeaderText="RUT" />
+            <asp:BoundField DataField="NOMBRE_CLIENTE" HeaderText="NOMBRE" />
+            <asp:BoundField DataField="CANTIDAD_PRESTACIONES" HeaderText="CANTIDAD" />
+            <asp:BoundField DataField="TOTAL_PRESTACIONES" HeaderText="TOTAL A COBRAR" />
             <asp:TemplateField HeaderText="% DESCUENTO">
                 <ItemTemplate>
+                <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ID") %>'></asp:HiddenField>
+
                     <asp:TextBox ID="txtDescuento" runat="server" Text='<%# Eval("DESCUENTO") %>'></asp:TextBox>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />

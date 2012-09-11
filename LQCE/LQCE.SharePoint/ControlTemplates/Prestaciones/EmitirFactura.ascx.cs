@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using App.Infrastructure.Runtime;
 using LQCE.Modelo;
 using LQCE.Transaccion;
+using LQCE.Transaccion.DTO;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -65,21 +66,26 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                List<DTO_EMISION_FACTURA> lista = new List<DTO_EMISION_FACTURA>();
                 foreach (GridViewRow row in grdFacturas.Rows)
                 {
                     if (row.RowType == DataControlRowType.DataRow)
                     {
-                        var lblRut = row.FindControl("lblRut") as Label;
-                        var lblNombre = row.FindControl("lblNombre") as Label;
-                        var lblCantidad = row.FindControl("lblCantidad") as Label;
-                        var lblTotal = row.FindControl("lblTotal") as Label;
-                        var txtDescuento = row.FindControl("txtDescuento") as TextBox;
+                        var hdnId = row.FindControl("hdnId") as HiddenField;
+                         var txtDescuento = row.FindControl("txtDescuento") as TextBox;
 
                         //se guardan las modificaciones cuando existen
                         // PENDIENTE: Recorrer grillas, recuperar descuentos y generar facturas
                         //se generan los reportes
+                         DTO_EMISION_FACTURA dto = new DTO_EMISION_FACTURA();
+                        dto.ID_CLIENTE = int.Parse(hdnId.Value);
+                        dto.DESCUENTO = int.Parse(txtDescuento.Text);
+                        lista.Add(dto);
                     }
                 }
+
+                TrxFACTURACION _TrxFACTURACION = new TrxFACTURACION();
+                _TrxFACTURACION.EmitirFacturas(lista, 
             }
             catch (Exception ex)
             {

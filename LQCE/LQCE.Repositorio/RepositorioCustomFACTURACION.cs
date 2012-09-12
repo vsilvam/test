@@ -133,5 +133,32 @@ namespace LQCE.Repositorio
                 return null;
             }
         }
+
+
+        public IQueryable<NOTA_COBRO_DETALLE> GetNotaCobroDetalleByIdCobro(int ID_COBRO)
+        {
+            Error = string.Empty;
+            try
+            {
+
+                var q = from i in _context.NOTA_COBRO_DETALLE
+                        .Include("FACTURA")
+                        .Include("NOTA_COBRO.COBRO.TIPO_COBRO")
+                        .Include("NOTA_COBRO.CLIENTE")
+                        where i.ACTIVO
+                        && i.NOTA_COBRO.ACTIVO
+                        && i.NOTA_COBRO.COBRO.ACTIVO
+                        && i.NOTA_COBRO.COBRO.ID == ID_COBRO
+                        select i;
+                return q;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
     }
 }

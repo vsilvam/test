@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<NOTA_COBRO> GetByFilter(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
+		public List<NOTA_COBRO> GetByFilter(int? CLIENTEId = null, int? COBROId = null, int? CORRELATIVO = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
-                    return repositorio.GetByFilter(COBROId, CORRELATIVO, ID_CLIENTE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CLIENTEId, COBROId, CORRELATIVO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<NOTA_COBRO> GetByFilterWithReferences(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
+		public List<NOTA_COBRO> GetByFilterWithReferences(int? CLIENTEId = null, int? COBROId = null, int? CORRELATIVO = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioNOTA_COBRO repositorio = new RepositorioNOTA_COBRO(context);
-                    return repositorio.GetByFilterWithReferences(COBROId, CORRELATIVO, ID_CLIENTE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CLIENTEId, COBROId, CORRELATIVO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,13 +144,20 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(int COBROId, int CORRELATIVO, int ID_CLIENTE)
+		        public int Add(int CLIENTEId, int COBROId, int CORRELATIVO)
         {
 		Init();
             try
             {
 				 using (LQCEEntities context = new LQCEEntities())
 				{
+					RepositorioCLIENTE _repositorioCLIENTE = new RepositorioCLIENTE(context);
+					CLIENTE _objCLIENTE = _repositorioCLIENTE.GetById(CLIENTEId);
+					if(Equals(_objCLIENTE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CLIENTE con Id =",CLIENTEId.ToString()));
+					}
+
 					RepositorioCOBRO _repositorioCOBRO = new RepositorioCOBRO(context);
 					COBRO _objCOBRO = _repositorioCOBRO.GetById(COBROId);
 					if(Equals(_objCOBRO,null))
@@ -163,11 +170,11 @@ namespace LQCE.Transaccion
 					//properties
 
                     _NOTA_COBRO.CORRELATIVO = CORRELATIVO;
-                    _NOTA_COBRO.ID_CLIENTE = ID_CLIENTE;
                     _NOTA_COBRO.ACTIVO = true;				
 
 					//parents
 						 
+                    _NOTA_COBRO.CLIENTE = _objCLIENTE;
                     _NOTA_COBRO.COBRO = _objCOBRO;
                     
 					context.AddObject("NOTA_COBRO",_NOTA_COBRO);
@@ -184,7 +191,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int COBROId, int CORRELATIVO, int ID_CLIENTE)
+		public void Update(int Id, int CLIENTEId, int COBROId, int CORRELATIVO)
 		{
 		Init();
 			try
@@ -198,6 +205,13 @@ namespace LQCE.Transaccion
 						throw new Exception(String.Concat("No se ha encontrado NOTA_COBRO con Id =",Id.ToString()));
 					}
 					
+					RepositorioCLIENTE _repositorioCLIENTE = new RepositorioCLIENTE(context);
+					CLIENTE _objCLIENTE = _repositorioCLIENTE.GetById(CLIENTEId);
+					if(Equals(_objCLIENTE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CLIENTE con Id =",CLIENTEId.ToString()));
+					}
+						
 					RepositorioCOBRO _repositorioCOBRO = new RepositorioCOBRO(context);
 					COBRO _objCOBRO = _repositorioCOBRO.GetById(COBROId);
 					if(Equals(_objCOBRO,null))
@@ -208,10 +222,10 @@ namespace LQCE.Transaccion
 					//properties
 
 						_NOTA_COBRO.CORRELATIVO = CORRELATIVO;
-						_NOTA_COBRO.ID_CLIENTE = ID_CLIENTE;
 	
 					//parents
 					 
+                    _NOTA_COBRO.CLIENTE = _objCLIENTE;
                     _NOTA_COBRO.COBRO = _objCOBRO;
 
 					context.SaveChanges();

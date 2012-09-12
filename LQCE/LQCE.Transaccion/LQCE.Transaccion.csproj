@@ -59,8 +59,8 @@
     <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_FACTURA.cs" />
     <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_PRESTACION.cs" />
     <Compile Include="DTO\DTO_REPORTE_FACTURA.cs" />
-    <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO_CLIENTE.cs" />
-    <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO_FACTURA.cs" />
+    <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO_DETALLE.cs" />
+    <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO.cs" />
     <Compile Include="DTO\DTO_RESUMEN_FACTURACION.cs" />
     <Compile Include="DTO\DTO_RESUMEN_PRESTACIONES_FACTURAR.cs" />
     <Compile Include="Enum\ENUM_TIPO_COBRO.cs" />
@@ -212,8 +212,8 @@
     <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_FACTURA.datasource">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_NOTA_COBRO_CLIENTE.datasource" />
-    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_NOTA_COBRO_FACTURA.datasource" />
+    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_NOTA_COBRO.datasource" />
+    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_NOTA_COBRO_DETALLE.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -241,9 +241,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reporte\DetalleFactura.rdlc" />
+    <EmbeddedResource Include="Reporte\DetalleFactura.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte\DetalleFacturaSubreporte.rdlc">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\Factura_LQCE_Exento.rdlc">
       <SubType>Designer</SubType>
@@ -271,7 +274,14 @@
     <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_IVA.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reporte\NotaCobro1.rdlc" />
+    <EmbeddedResource Include="Reporte\NotaCobro1.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\NotaCobro1Subreporte.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+							return _context.NOTA_COBRO.Include("CLIENTE").Include("COBRO").Include("NOTA_COBRO_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE") where i.ACTIVO  select i;
+								var q = from i in _context.NOTA_COBRO.Include("CLIENTE").Include("COBRO").Include("NOTA_COBRO_DETALLE") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<NOTA_COBRO> GetByFilter(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
+		public IQueryable<NOTA_COBRO> GetByFilter(int? CLIENTEId = null, int? COBROId = null, int? CORRELATIVO = null)
 		{
 			Error = string.Empty;
 			try
@@ -95,9 +95,9 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.CORRELATIVO == CORRELATIVO.Value);
 				}
-				if (ID_CLIENTE.HasValue)
+				if (CLIENTEId.HasValue)
 				{
-				  q = q.Where(i => i.ID_CLIENTE == ID_CLIENTE.Value);
+				  q = q.Where(i => i.CLIENTE.ID == CLIENTEId.Value);
 				}
 				if (COBROId.HasValue)
 				{
@@ -113,13 +113,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<NOTA_COBRO> GetByFilterWithReferences(int? COBROId = null, int? CORRELATIVO = null, int? ID_CLIENTE = null)
+		public IQueryable<NOTA_COBRO> GetByFilterWithReferences(int? CLIENTEId = null, int? COBROId = null, int? CORRELATIVO = null)
 		{
 			Error = string.Empty;
 			try
 			{
 
-							var q = from i in _context.NOTA_COBRO.Include("COBRO").Include("NOTA_COBRO_DETALLE")  where i.ACTIVO select i;
+							var q = from i in _context.NOTA_COBRO.Include("CLIENTE").Include("COBRO").Include("NOTA_COBRO_DETALLE")  where i.ACTIVO select i;
 			
 				
 
@@ -127,9 +127,9 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.CORRELATIVO == CORRELATIVO.Value);
 				}
-				if (ID_CLIENTE.HasValue)
+				if (CLIENTEId.HasValue)
 				{
-					q = q.Where(i => i.ID_CLIENTE == ID_CLIENTE.Value);
+					q = q.Where(i => i.CLIENTE.ID == CLIENTEId.Value);
 				}
 				if (COBROId.HasValue)
 				{

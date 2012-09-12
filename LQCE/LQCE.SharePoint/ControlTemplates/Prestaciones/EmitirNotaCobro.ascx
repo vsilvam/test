@@ -10,6 +10,17 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmitirNotaCobro.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EmitirNotaCobro" %>
 <%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=1.0.10920.32082, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/ui.datepicker-es.js")%>"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#<%=txtDesde.ClientID %>').datepicker({});
+        $('#<%=txtHasta.ClientID %>').datepicker({});
+    });
+</script>
 
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
@@ -32,18 +43,12 @@
             </td>
             <td>
                 <asp:TextBox ID="txtDesde" runat="server"></asp:TextBox>
-                <ajaxToolkit:CalendarExtender ID="calDesde" runat="server" CssClass="cssCalendario"
-                    Format="dd/MM/yyyy" TargetControlID="txtDesde">
-                </ajaxToolkit:CalendarExtender>
             </td>
             <td>
                 Hasta
             </td>
             <td>
                 <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
-                <ajaxToolkit:CalendarExtender ID="calHasta" runat="server" CssClass="cssCalendario"
-                    Format="dd/MM/yyyy" TargetControlID="txtHasta">
-                </ajaxToolkit:CalendarExtender>
             </td>
         </tr>
         <tr>

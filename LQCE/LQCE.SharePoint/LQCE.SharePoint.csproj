@@ -281,6 +281,8 @@
     <Content Include="ControlTemplates\Prestaciones\Paginador1.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Layouts\JScript\jquery-1.4.1.min.js" />
+    <Content Include="Layouts\JScript\ui.datepicker-es.js" />
     <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesHumanas.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

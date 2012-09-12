@@ -337,14 +337,20 @@
 		<header id="header">
 		<hgroup>
 			<h1 class="site_title"><a href="index.html"></a></h1>
-			<h2 class="section_title">Escritorio</h2><div class="btn_view_site"><!--<a href="http://www.medialoot.com">View Site</a>--></div>
+			<h2 class="section_title"> 
+			
+			<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" Visible="true" />
+			
+
+    </asp:ContentPlaceHolder>
+	</h2><div class="btn_view_site"><!--<a href="http://www.medialoot.com">View Site</a>--></div>
 		</hgroup>
 		</header>
 		
 		<section id="secondary_bar">
 		<div class="user">
 			<p>
-			Pablo Espinoza Monari (<a href="#">3 Messages</a>)
+			Pablo Espinoza Monari <!--(<a href="#">3 Messages</a>)-->
 			</p>
 			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
 		</div>
@@ -363,7 +369,7 @@
 			</asp:ContentPlaceHolder>
 			<div class="breadcrumb_divider"></div> 
 			
-			<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" />
+			<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea2" runat="server" />
 
 			<!--<div class="breadcrumb_divider"></div> -->
 					
@@ -375,64 +381,32 @@
 		</section>
 		
 		<aside id="sidebar" class="column" style="height: 1716px; ">
-		<form class="quick_search">
+		<div class="quick_search">
 			<!--<input type="text" value="Consulta Express" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">-->
 			<asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
 			<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" Version="4" />
 			</asp:ContentPlaceHolder>
-		</form>
-		<span class="s4-help">
+		</div>
+		<!--<span class="s4-help">
 		<span style="height:17px;width:17px;position:relative;display:inline-block;overflow:hidden;" class="s4-clust"><a href="#" style="height:17px;width:17px;display:inline-block;" onclick="TopHelpButtonClick('HelpHome');return false" accesskey="<%$Resources:wss,multipages_helplink_accesskey%>" id="TopHelpLink" title="<%$Resources:wss,multipages_helplinkalt_text%>" runat="server"><img src="/_layouts/images/fgimg.png" alt="<%$Resources:wss,multipages_helplinkalt_text%>" style="left:-0px !important;top:-309px !important;position:absolute;" align="absmiddle" border="0" runat="server" /></a></span>
 		</span>
-		
-			<div class="s4-lp s4-toplinks">
-						<asp:ContentPlaceHolder id="PlaceHolderTopNavBar" runat="server">
-						<h2 class="ms-hidden"><SharePoint:EncodedLiteral runat="server" text="<%$Resources:wss,topnav_pagetitle%>" EncodeMethod="HtmlEncode"/></h2>
-							<asp:ContentPlaceHolder id="PlaceHolderHorizontalNav" runat="server">
-							<SharePoint:AspMenu
-							  ID="TopNavigationMenuV4"
-							  Runat="server"
-							  EnableViewState="false"
-							  DataSourceID="topSiteMap"
-							  AccessKey="<%$Resources:wss,navigation_accesskey%>"
-							  UseSimpleRendering="true"
-							  UseSeparateCss="false"
-							  Orientation="Horizontal"
-							  StaticDisplayLevels="2"
-							  MaximumDynamicDisplayLevels="1"
-							  SkipLinkText=""
-							  CssClass="s4-tn" />
-							<SharePoint:DelegateControl runat="server" ControlId="TopNavigationDataSource" Id="topNavigationDelegate">
-								<Template_Controls>
-									<asp:SiteMapDataSource
-									  ShowStartingNode="False"
-									  SiteMapProvider="SPNavigationProvider"
-									  id="topSiteMap"
-									  runat="server"
-									  StartingNodeUrl="sid:1002"/>
-								</Template_Controls>
-							</SharePoint:DelegateControl>
-							</asp:ContentPlaceHolder>
-							</asp:ContentPlaceHolder>
-					</div>
-		
+		-->
+				
 		<hr>
 		
-		<h3>Clientes</h3>
+		<h3>Carga Masiva</h3>
 		<ul class="toggle" style="display: none; ">
-			<li class="icn_new_article"><a href="agregar_cliente.html">Nuevo Cliente</a></li>
-			<li class="icn_edit_article"><a href="#">Editar Cliente</a></li>
-			<li class="icn_categories"><a href="#">Búsqueda Clientes</a></li>
+			<li class="carga_masiva"><a href="/_layouts/prestaciones/CargaMasivaPrestacionesHumanas.aspx">Carga Prestaciones Humana</a></li>
+			<li class="carga_masiva"><a href="/_layouts/prestaciones/CargaMasivaPrestacionesVeterinarias.aspx">Carga Prestaciones Veterinaria</a></li>
+			<li class="icn_edit_article"><a href="/_layouts/prestaciones/RegistroCargaArchivo.aspx">Validación Carga</a></li>
 		</ul>
 		
-		<h3>Prestaciones</h3>
+		<h3>Facturación</h3>
 		<ul class="toggle" style="display: none; ">
-			<li class="icn_new_article"><a href="agregar_prestacion.html">Nueva Prestación</a></li>
-			<li class="icn_edit_article"><a href="#">Editar Prestación</a></li>
-			<li class="icn_categories"><a href="#">Listar Prestaciones</a></li>
-			<li class="icn_tags"><a href="#">Tags</a></li>
+			<li class="icn_new_article"><a href="/_layouts/prestaciones/EmitirFactura.aspx">Emitir Facturas</a></li>
+			<li class="icn_new_article"><a href="/_layouts/prestaciones/EmitirNotaCobro.aspx">Emitir Nota de Cobro</a></li>
 		</ul>
-		
+		<!---
 		<h3>Convenios</h3>
 		<ul class="toggle" style="display: none; ">
 			<li class="icn_folder"><a href="#">Agregar Convenio</a></li>
@@ -465,13 +439,13 @@
 			<li class="icn_add_user"><a href="#">Agregar Nuevo Usuario</a></li>
 			<li class="icn_view_users"><a href="#">Ver Usuarios</a></li>
 			<li class="icn_profile"><a href="#">Tu Perfil</a></li>
-		</ul>
+		</ul>-->
 		
 		<div id="s4-statusbarcontainer">
 				<div id="pageStatusBar" class="s4-status-s1"></div>
 			</div>
 				<SharePoint:VisualUpgradePreviewStatus runat="server" />
-			<div id="s4-mainarea" class="s4-pr s4-widecontentarea">
+			<div id="s4-mainarea" class="s4-pr s4-widecontentarea" style="display:none;">
 				<div id="s4-leftpanel" class="s4-notdlg">
 					<div id="s4-leftpanel-content">
 						<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarDataSource" runat="server" />
@@ -723,7 +697,7 @@
 		
 		
 		<footer>
-			<hr>
+			<!--<hr>-->
 			<p><strong>Copyright © 2011 Website Admin</strong></p>
 			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
 		</footer>
@@ -734,7 +708,7 @@
 		
 		
 		
-			<div class="s4-ca s4-ca-dlgNoRibbon" id="MSO_ContentTable">
+		<div class="s4-ca s4-ca-dlgNoRibbon" id="MSO_ContentTable">
 					<div class="s4-die">
 						<asp:ContentPlaceHolder id="PlaceHolderPageImage" runat="server" Visible="false"/>
 						<asp:ContentPlaceHolder id="PlaceHolderTitleLeftBorder" runat="server" Visible="false">
@@ -766,8 +740,7 @@
 						<asp:ContentPlaceHolder id="PlaceHolderBodyRightMargin" runat="server">
 						</asp:ContentPlaceHolder>
 					</div>
-				</div>
-		
+				</div>		
 		
 		<!--<h4 class="alert_info">Welcome to the free MediaLoot admin panel template, this could be an informative message.</h4>
 		

@@ -27,12 +27,13 @@
 </asp:Panel>
 <article class="module width_full">
    <header><h3>Errores Prestación</h3></header>
-
    <asp:BulletedList ID="grdErroresHumanos" runat="server"></asp:BulletedList>
-    </article>
-<asp:Panel ID="pnEditarPrestVeterinarias" runat="server">
-    <h2>
-        Edicion Fichas Veterinarias</h2>
+</article>
+
+<article class="module width_full">
+
+    <header><h3>Edición Prestación Veterinarias</h3></header>
+
     <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
     <table>
         <tr>
@@ -147,64 +148,6 @@
             </td>
         </tr>
         <tr>
-            <td colspan="9">
-                <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Examen</asp:LinkButton>
-                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%"
-                    OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
-                    <Columns>
-                        <asp:TemplateField HeaderText="ID">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtId" runat="server" Text='<%# Eval("ID") %>'></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="EXAMEN">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>'></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="VALOR">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>'></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="6">
-                <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
-                    <table>
-                        <tr>
-                            <td>
-                                EXAMEN
-                            </td>
-                            <td>
-                                CODIGO
-                            </td>
-                            <td>
-                                VALOR
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
-                            </td>
-                            <td>
-                                <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" OnClick="btnAgrega_Click" />
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
-            </td>
-        </tr>
-        <tr>
             <td>
                 Pendiente<span>:</span>
             </td>
@@ -253,10 +196,72 @@
             </td>
         </tr>
     </table>
+
+    <footer>
+      <div class="submit_link">
+      <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" />
+      </div>
+    </footer>    
+    </article>
+
+    <article>
+     <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Examen</asp:LinkButton>
+                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%"
+                    OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
+                    <Columns>
+                        <asp:TemplateField HeaderText="ID">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtId" runat="server" Text='<%# Eval("ID") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="EXAMEN">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="VALOR">
+                            <ItemTemplate>
+                                <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>'></asp:TextBox>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+               </asp:GridView>
+    </article>
+
+    <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
+                    <table>
+                        <tr>
+                            <td>
+                                EXAMEN
+                            </td>
+                            <td>
+                                CODIGO
+                            </td>
+                            <td>
+                                VALOR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" OnClick="btnAgrega_Click" />
+                            </td>
+                        </tr>
+                    </table>
+    </asp:Panel>
+
+
     <!--Validar, marcar error,guarda temporal  "dejar con botones" 
     En caso de error mostrar mensaje u observacions en la ficha
     -->
-    <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" />
     <asp:GridView ID="grdErrores" runat="server" AutoGenerateColumns="false">
         <Columns>
             <asp:TemplateField HeaderText="MENSAJE ERROR">
@@ -266,4 +271,4 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-</asp:Panel>
+

@@ -223,6 +223,10 @@ min-height: 600px;
 margin-top: -4px;
 }
 
+.ms-searchimage{
+display:none;
+}
+
 #sidebar hr {
 border: none;
 outline: none;
@@ -277,6 +281,25 @@ float: left;
 width: 90%;
 }
 
+
+#sidebar  ul.root li.static {
+margin: 10px 0 10px 0%;
+}
+
+
+#sidebar  ul.root li.static a.menu-item{
+color: #1F1F20;
+text-transform: uppercase;
+text-shadow: 0 1px 0 #fff;
+font-size: 13px;
+font-weight:bold;
+margin: 0;
+display: block;
+float: left;
+padding-left: 15px;
+width: 90%;
+}
+
 .toggleLink {
 color: #999999;
 font-size: 10px;
@@ -317,6 +340,10 @@ color: #444444;
 }
 
 /* Sidebar Icons */
+
+#sidebar li.carga_masiva a {
+background: url("/_layouts/images/carga_masiva.png") no-repeat center left;
+}
 
 #sidebar li.icn_new_article a {
 background: url("/_layouts/images/icn_new_article.png") no-repeat center left;
@@ -524,7 +551,11 @@ padding: 0;
 border-bottom: 1px dotted #ccc;
 }
 
-.tablesorter thead tr {
+.tablesorter .campo_oculto{
+display:none;
+}
+
+.tablesorter tbody tr.head{
 height: 34px;
 background: url("/_layouts/images/table_sorter_header.png") repeat-x;
 text-align: left;
@@ -857,6 +888,9 @@ color: #082B33;
 padding: 10px 0;
 text-indent: 40px;
 font-size: 14px;}
+
+.MostrarMensaje{}
+.OcultarMensaje{display:none;}
 
 #main h4.alert_warning {
 display: block;
@@ -3855,17 +3889,17 @@ float:left;
 clear:both;
 }
 body #s4-leftpanel{
-width:155px;
+/*width:155px;*/
 float:left;
 }
 body #s4-leftpanel-content{
-padding:0px 0px 5px;
-/* [ReplaceColor(themeColor:"Light2")] */ background-color:#fcfcfc;
-/* [ReplaceColor(themeColor:"Light2-Lightest")] */ border:1px solid #dbddde;
-border-top-width:0px;
+/*padding:0px 0px 5px;*/
+/* [ReplaceColor(themeColor:"Light2")] */ /*background-color:#fcfcfc;*/
+/* [ReplaceColor(themeColor:"Light2-Lightest")] */ /*border:1px solid #dbddde;*/
+/*border-top-width:0px;
 border-right-width:1px;
 border-bottom-width:1px;
-border-left-width:0px;
+border-left-width:0px;*/
 }
 .ms-quicklaunchouter{
 margin:0px;
@@ -3966,7 +4000,7 @@ min-height:19px;
 padding-top:10px;
 }
 .s4-ca{
-/* [ReplaceColor(themeColor:"Light1")] */ background:#fff;
+/* [ReplaceColor(themeColor:"Light1")] */ /*background:#fff;*/
 margin-left:10px;
 margin-right:0px;
 min-height:324px;

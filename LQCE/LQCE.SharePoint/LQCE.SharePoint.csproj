@@ -237,9 +237,7 @@
     <Content Include="ControlTemplates\Prestaciones\DetalleFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesHumanas.ascx" />
     <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesVeterinarias.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

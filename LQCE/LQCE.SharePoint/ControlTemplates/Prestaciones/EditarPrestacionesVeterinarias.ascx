@@ -13,6 +13,11 @@
     <h4 class="alert_warning">
         <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
+<article class="module width_full">
+   <header><h3>Errores Prestación</h3></header>
+
+   <asp:BulletedList ID="grdErroresHumanos" runat="server"></asp:BulletedList>
+    </article>
 <asp:Panel ID="pnEditarPrestVeterinarias" runat="server">
     <h2>
         Edicion Fichas Veterinarias</h2>

@@ -7,6 +7,7 @@ using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Enum;
 using LQCE.Modelo;
+using System.Linq;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -40,8 +41,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         private void CargaFicha(int Id)
         {
-            TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE veterinarias = new TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE();
-            var prestaciones = veterinarias.GetByIdWithReferences(Id);
+            TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE PrestacionesVeterinarias = new TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE();
+            var prestaciones = PrestacionesVeterinarias.GetByIdWithReferencesFull(Id);
             if (prestaciones == null)
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
 
@@ -71,8 +72,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtRecepcionEntrega.Text = prestaciones.FECHA_RECEPCION;
             
             //carga grilla
-            grdExamen.DataSource = prestaciones.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN;
+            grdExamen.DataSource = prestaciones.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(e => e.ACTIVO);
             grdExamen.DataBind();
+            lista = prestaciones.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(e => e.ACTIVO).ToList();
+
+            //validar
+            TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+            grdErroresHumanos.DataSource = PrestacionesEncabezado.ValidarPrestacionVeterinaria(Id);
+            grdErroresHumanos.DataBind();
 
             //Habilitar Edicion de Ficha
             //string estado = prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.NOMBRE;

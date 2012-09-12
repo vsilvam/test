@@ -75,8 +75,7 @@
         <asp:HiddenField ID="hdnFechaHasta" runat="server" />
 
         <asp:GridView ID="grdFacturas" CssClass="tablesorter" GridLines="None" runat="server"
-            AutoGenerateColumns="False" Width="100%" OnRowDataBound="grdFacturas_RowDataBound"
-            EnableModelValidation="True">
+            AutoGenerateColumns="False" Width="100%" EnableModelValidation="True">
             <Columns>
                 <asp:BoundField DataField="fecha_facturacion" HeaderText="FECHA FACTURACION" />
                 <asp:BoundField DataField="total_facturas" HeaderText="TOTAL FACTURAS" />

@@ -107,6 +107,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 txtDesdeN.Enabled = false;
                 txtHastaN.Enabled = false;
             }
-        }        
+        }     
     }
 }

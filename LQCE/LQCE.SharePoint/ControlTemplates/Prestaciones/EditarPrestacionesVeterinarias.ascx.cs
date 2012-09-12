@@ -117,9 +117,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                if (Request.QueryString["Id"] == null)
+                    throw new Exception("No se ha indicado identificador de la cuenta registrada");
+
+                int Id = int.Parse(Request.QueryString["Id"].ToString());
+
+
                 //se obtienen los datos desde el formuario
                 int IdCargaPrestacionVeterinariaDetalle = int.Parse(lblNroPrestacion.Text);
-                int IdCargaPrestacionesDetalleEstado = 2;
+                int IdCargaPrestacionesDetalleEstado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
                 string ficha = !string.IsNullOrEmpty(lblNroPrestacion.Text) ? lblNroPrestacion.Text : string.Empty;
                 string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
                 string especie = !string.IsNullOrEmpty(txtEspecie.Text) ? txtEspecie.Text : string.Empty;
@@ -170,15 +176,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 else
                 {
                     TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(IdCargaPrestacionVeterinariaDetalle, ficha, nombre,
+                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(Id, ficha, nombre,
                         especie, raza, edad, sexo, solicita, telefono, medico, procedencia, fechaRecepcion, fechaMuestra, entregaDesde, pendiente, garantia,
                         pagado, total, IdCargaPrestacionesDetalleEstado, error, lista);
 
                     if (!resutado.RESULTADO)
                     {
                         // mostrar errores en grilla
-                        grdErrores.DataSource = resutado;
-                        grdErrores.DataBind();
+                        grdErroresHumanos.DataSource = resutado.ERRORES_VALIDACION;
+                        grdErroresHumanos.DataBind();
                     }
                 }
             }

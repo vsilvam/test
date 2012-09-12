@@ -56,6 +56,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 grdNotaCobro.DataBind();
 
                 //se generan los archivos
+
+
+
+
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EmitirNotaCobro.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EmitirNotaCobro" %>
+<%@ Register TagPrefix="ajaxToolkit" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit, Version=1.0.10920.32082, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e" %>
 
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
@@ -31,12 +32,18 @@
             </td>
             <td>
                 <asp:TextBox ID="txtDesde" runat="server"></asp:TextBox>
+                <ajaxToolkit:CalendarExtender ID="calDesde" runat="server" CssClass="cssCalendario"
+                    Format="dd/MM/yyyy" TargetControlID="txtDesde">
+                </ajaxToolkit:CalendarExtender>
             </td>
             <td>
                 Hasta
             </td>
             <td>
                 <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
+                <ajaxToolkit:CalendarExtender ID="calHasta" runat="server" CssClass="cssCalendario"
+                    Format="dd/MM/yyyy" TargetControlID="txtHasta">
+                </ajaxToolkit:CalendarExtender>
             </td>
         </tr>
         <tr>
@@ -80,27 +87,39 @@
     <asp:GridView ID="grdNotaCobro" runat="server" CssClass="tablesorter" GridLines="None" AutoGenerateColumns="false" Width="100%"
         OnRowDataBound="grdNotaCobro_RowDataBound">
         <Columns>
-            <asp:TemplateField HeaderText="RUT">
+            <asp:TemplateField HeaderText="FECHA EMISION">
+                <ItemTemplate>
+                    <asp:Label ID="lblFechaEmision" runat="server" Text='<%# Bind("FechaEmision") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="FECHA FACTURA">
+                <ItemTemplate>
+                    <asp:Label ID="lblFechaFactura" runat="server" Text='<%# Bind("FechaFactura") %>'></asp:Label>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="RUT CLIENTE">
                 <ItemTemplate>
                     <asp:Label ID="lblRut" runat="server" Text='<%# Bind("Rut") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="NOMBRE">
+            <asp:TemplateField HeaderText="NOMBRE CLIENTE">
                 <ItemTemplate>
                     <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="CANTIDAD">
+            <asp:TemplateField HeaderText="TIPO NOTA">
                 <ItemTemplate>
-                    <asp:Label ID="lblCantidad" runat="server" Text='<%# Bind("Cantidad") %>'></asp:Label>
+                    <asp:Label ID="lblTipoNota" runat="server" Text='<%# Bind("TipoNota") %>'></asp:Label>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="TOTAL A COBRAR">
+            <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Label ID="lblTotal" runat="server" Text='<%# Bind("Total") %>'></asp:Label>
+                    <asp:LinkButton id="lnkVer" runat="server" CommandArgument='<%# Eval("ID") %>' >Ver</asp:LinkButton>
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>

@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							return _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.FirstOrDefault(i => i.ID == id);
+							return _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 						}
 			catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1").FirstOrDefault(i => i.ID == id);
+							return _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -54,7 +54,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE select i;
+							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE where i.ACTIVO select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1") select i;
+								var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -87,7 +87,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE  select i;
+							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE  where i.ACTIVO  select i;
 			
 				
 
@@ -211,7 +211,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1") select i;
+							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1")  where i.ACTIVO select i;
 			
 				
 

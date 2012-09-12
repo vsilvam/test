@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<TIPO_COBRO> GetByFilter(string NOMBRE = "")
+		public List<TIPO_COBRO> GetByFilter(string NOMBRE = "", string REPORTE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_COBRO repositorio = new RepositorioTIPO_COBRO(context);
-                    return repositorio.GetByFilter(NOMBRE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(NOMBRE, REPORTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<TIPO_COBRO> GetByFilterWithReferences(string NOMBRE = "")
+		public List<TIPO_COBRO> GetByFilterWithReferences(string NOMBRE = "", string REPORTE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_COBRO repositorio = new RepositorioTIPO_COBRO(context);
-                    return repositorio.GetByFilterWithReferences(NOMBRE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(NOMBRE, REPORTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(string NOMBRE)
+		        public int Add(string NOMBRE, string REPORTE = "")
         {
 		Init();
             try
@@ -156,6 +156,7 @@ namespace LQCE.Transaccion
 					//properties
 
                     _TIPO_COBRO.NOMBRE = NOMBRE;				
+                    _TIPO_COBRO.REPORTE = REPORTE;				
                     _TIPO_COBRO.ACTIVO = true;				
 
 					//parents
@@ -175,7 +176,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, string NOMBRE)
+		public void Update(int Id, string NOMBRE, string REPORTE = "")
 		{
 		Init();
 			try
@@ -194,6 +195,10 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(NOMBRE))
 					{
 						_TIPO_COBRO.NOMBRE = NOMBRE;
+					}
+					if (!string.IsNullOrEmpty(REPORTE))
+					{
+						_TIPO_COBRO.REPORTE = REPORTE;
 					}
 	
 					//parents

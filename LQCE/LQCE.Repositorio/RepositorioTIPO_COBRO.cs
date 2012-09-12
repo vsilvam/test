@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							return _context.TIPO_COBRO.FirstOrDefault(i => i.ID == id);
+							return _context.TIPO_COBRO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 						}
 			catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.TIPO_COBRO.Include("COBRO").FirstOrDefault(i => i.ID == id);
+							return _context.TIPO_COBRO.Include("COBRO").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -54,7 +54,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							var q = from i in _context.TIPO_COBRO select i;
+							var q = from i in _context.TIPO_COBRO where i.ACTIVO select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.TIPO_COBRO.Include("COBRO") select i;
+								var q = from i in _context.TIPO_COBRO.Include("COBRO") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -82,18 +82,22 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<TIPO_COBRO> GetByFilter(string NOMBRE = "")
+		public IQueryable<TIPO_COBRO> GetByFilter(string NOMBRE = "", string REPORTE = "")
 		{
 			Error = string.Empty;
 			try
 			{
-							var q = from i in _context.TIPO_COBRO  select i;
+							var q = from i in _context.TIPO_COBRO  where i.ACTIVO  select i;
 			
 				
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
+				}
+				if (!string.IsNullOrEmpty(REPORTE))
+				{
+				   q = q.Where(i => i.REPORTE.Contains(REPORTE));
 				}
 				return q;
 			}
@@ -105,19 +109,23 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<TIPO_COBRO> GetByFilterWithReferences(string NOMBRE = "")
+		public IQueryable<TIPO_COBRO> GetByFilterWithReferences(string NOMBRE = "", string REPORTE = "")
 		{
 			Error = string.Empty;
 			try
 			{
 
-							var q = from i in _context.TIPO_COBRO.Include("COBRO") select i;
+							var q = from i in _context.TIPO_COBRO.Include("COBRO")  where i.ACTIVO select i;
 			
 				
 
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
+				}
+				if (!string.IsNullOrEmpty(REPORTE))
+				{
+					q = q.Where(i => i.REPORTE.Contains(REPORTE));
 				}
 				return q;
 			}

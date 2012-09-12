@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							return _context.REGION.FirstOrDefault(i => i.ID == id);
+							return _context.REGION.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 						}
 			catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.REGION.Include("COMUNA").FirstOrDefault(i => i.ID == id);
+							return _context.REGION.Include("COMUNA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -54,7 +54,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							var q = from i in _context.REGION select i;
+							var q = from i in _context.REGION where i.ACTIVO select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.REGION.Include("COMUNA") select i;
+								var q = from i in _context.REGION.Include("COMUNA") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -87,7 +87,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							var q = from i in _context.REGION  select i;
+							var q = from i in _context.REGION  where i.ACTIVO  select i;
 			
 				
 
@@ -111,7 +111,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.REGION.Include("COMUNA") select i;
+							var q = from i in _context.REGION.Include("COMUNA")  where i.ACTIVO select i;
 			
 				
 

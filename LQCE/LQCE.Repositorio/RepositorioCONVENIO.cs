@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							return _context.CONVENIO.FirstOrDefault(i => i.ID == id);
+							return _context.CONVENIO.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 						}
 			catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION").FirstOrDefault(i => i.ID == id);
+							return _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -54,7 +54,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							var q = from i in _context.CONVENIO select i;
+							var q = from i in _context.CONVENIO where i.ACTIVO select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION") select i;
+								var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -87,7 +87,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							var q = from i in _context.CONVENIO  select i;
+							var q = from i in _context.CONVENIO  where i.ACTIVO  select i;
 			
 				
 
@@ -115,7 +115,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION") select i;
+							var q = from i in _context.CONVENIO.Include("CLIENTE").Include("CONVENIO_TARIFARIO").Include("TIPO_PRESTACION")  where i.ACTIVO select i;
 			
 				
 

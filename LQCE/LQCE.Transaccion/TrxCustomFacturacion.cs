@@ -166,9 +166,9 @@ namespace LQCE.Transaccion
                     try
                     {
                         // PENDIENTE: Generar PDFs
-                        var LISTA_DTO_REPORTE_FACTURA = GetReporteFactura(_FACTURACION.ID);
+                        var LISTA_DTO_REPORTE_FACTURA = GetReporteFacturaByID_FACTURACION(_FACTURACION.ID);
                        
-                        ListaDetalleFactura = GetReporteDetalleFactura(_FACTURACION.ID);
+                        ListaDetalleFactura = GetReporteDetalleFacturaByID_FACTURACION(_FACTURACION.ID);
 
                         string deviceInfo =
                                       "<DeviceInfo>" +
@@ -307,7 +307,7 @@ namespace LQCE.Transaccion
             }
         }
 
-        protected List<DTO_REPORTE_FACTURA> GetReporteFactura(int IdFacturacion)
+        protected List<DTO_REPORTE_FACTURA> GetReporteFacturaByID_FACTURACION(int IdFacturacion)
         {
             Init();
             try
@@ -325,6 +325,7 @@ namespace LQCE.Transaccion
                             select new DTO_REPORTE_FACTURA
                             {
                                 NOMBRE_REPORTE_FACTURA = f.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA,
+                                NOMBRE_REPORTE_FACTURA_INDIVIDUAL = f.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL,
                                 DIA = f.FACTURACION.FECHA_FACTURACION.Day,
                                 MES = f.FACTURACION.FECHA_FACTURACION.ToString("MMMM"),
                                 AÑO = f.FACTURACION.FECHA_FACTURACION.Year,
@@ -337,7 +338,8 @@ namespace LQCE.Transaccion
                                 DETALLE = f.DETALLE,
                                 NETO = f.NETO,
                                 IVA = f.IVA,
-                                TOTAL = f.TOTAL
+                                TOTAL = f.TOTAL,
+                                NUMERO_FACTURA = f.NUMERO_FACTURA
                             }).ToList();
                 }
             }
@@ -349,7 +351,52 @@ namespace LQCE.Transaccion
             }
         }
 
-        protected List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> GetReporteDetalleFactura(int IdFacturacion)
+        protected List<DTO_REPORTE_FACTURA> GetReporteFacturaByID_FACTURA(int IdFactura)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    FACTURA _FACTURA = _RepositorioFACTURA.GetByIdWithReferences(IdFactura);
+                    if (_FACTURA == null)
+                        throw new Exception("No se encuentra información de la factura");
+
+                    DTO_REPORTE_FACTURA _DTO_REPORTE_FACTURA = new DTO_REPORTE_FACTURA();
+                    
+                    _DTO_REPORTE_FACTURA.NOMBRE_REPORTE_FACTURA = _FACTURA.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA;
+                    _DTO_REPORTE_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL = _FACTURA.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL;
+                    _DTO_REPORTE_FACTURA.DIA = _FACTURA.FACTURACION.FECHA_FACTURACION.Day;
+                    _DTO_REPORTE_FACTURA.MES = _FACTURA.FACTURACION.FECHA_FACTURACION.ToString("MMMM");
+                    _DTO_REPORTE_FACTURA.AÑO = _FACTURA.FACTURACION.FECHA_FACTURACION.Year;
+                    _DTO_REPORTE_FACTURA.NOMBRE_CLIENTE = _FACTURA.NOMBRE_CLIENTE;
+                    _DTO_REPORTE_FACTURA.RUT_CLIENTE = _FACTURA.RUT_CLIENTE;
+                    _DTO_REPORTE_FACTURA.DIRECCION = _FACTURA.DIRECCION;
+                    _DTO_REPORTE_FACTURA.COMUNA = _FACTURA.NOMBRE_COMUNA;
+                    _DTO_REPORTE_FACTURA.FONO = _FACTURA.FONO;
+                    _DTO_REPORTE_FACTURA.GIRO = _FACTURA.GIRO;
+                    _DTO_REPORTE_FACTURA.DETALLE = _FACTURA.DETALLE;
+                    _DTO_REPORTE_FACTURA.NETO = _FACTURA.NETO;
+                    _DTO_REPORTE_FACTURA.IVA = _FACTURA.IVA;
+                    _DTO_REPORTE_FACTURA.TOTAL = _FACTURA.TOTAL;
+                    _DTO_REPORTE_FACTURA.NUMERO_FACTURA = _FACTURA.NUMERO_FACTURA;
+                    
+                    List<DTO_REPORTE_FACTURA> lista = new List<DTO_REPORTE_FACTURA>();
+                    lista.Add(_DTO_REPORTE_FACTURA);
+                    return lista;
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        protected List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> GetReporteDetalleFacturaByID_FACTURACION(int IdFacturacion)
         {
             Init();
             try
@@ -383,9 +430,234 @@ namespace LQCE.Transaccion
             }
         }
 
-        public void NumerarFacturas()
+        protected List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> GetReporteDetalleFacturaByID_FACTURA(int IdFactura)
         {
-            // PENDIENTE IMPLEMENTACION
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+
+                    var q = _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(IdFactura);
+
+                    return (from fd in q
+                             select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
+                             {
+                                 ID_FACTURA = fd.FACTURA.ID,
+                                 ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
+                                 NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
+                                 RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
+                                 ID_FACTURA_DETALLE = fd.ID,
+                                 NUMERO_FICHA = fd.PRESTACION.ID,
+                                 MONTO_TOTAL = fd.MONTO_TOTAL,
+                                 FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
+                                 NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
+                             }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Retorna todas las facturaciones realizadas y que tienen facturas por numerar
+        /// </summary>
+        /// <returns></returns>
+        public List<DTO_RESUMEN_FACTURACION> GetResumenFacturacionPorNumerar()
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    return (from f in _RepositorioFACTURA.GetAllWithReferences()
+                            where f.ACTIVO && f.FACTURACION.ACTIVO
+                             group f by new { ID_FACTURACION = f.FACTURACION.ID, ID_TIPO_FACTURA = f.TIPO_FACTURA.ID } into g
+                             select new DTO_RESUMEN_FACTURACION
+                             {
+                                 ID_FACTURACION = g.Key.ID_FACTURACION,
+                                 ID_TIPO_FACTURA = g.Key.ID_TIPO_FACTURA,
+                                 NOMBRE_TIPO_FACTURA = g.First().TIPO_FACTURA.NOMBRE_FACTURA,
+                                 FECHA_FACTURACION = g.First().FACTURACION.FECHA_FACTURACION,
+                                 TOTAL_FACTURAS = g.Count(),
+                                 TOTAL_FACTURAS_POR_NUMERAR = g.Count(fa => fa.NUMERO_FACTURA == null)
+                             }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        public void NumerarFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, bool NUMERAR_TODAS, 
+            int? CORRELATIVO_DESDE, int? CORRELATIVO_HASTA, int NUMERO_FACTURA_INICIAL)
+        {
+            Init();
+            ListaDetalleFactura = new List<DTO_REPORTE_DETALLEFACTURA_PRESTACION>();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    var q = _RepositorioFACTURA.GetByFilterWithReferences(null, ID_FACTURACION, ID_TIPO_FACTURA,
+                        null, "", null, null, null, null, null, "", "", "", "", "", "", "");
+
+                    if (!NUMERAR_TODAS)
+                    {
+                        if (!CORRELATIVO_DESDE.HasValue)
+                            throw new Exception("Debe señalar factura inicial a facturar");
+                        if (!CORRELATIVO_HASTA.HasValue)
+                            throw new Exception("Debe señalar factura final a facturar");
+                        if (CORRELATIVO_DESDE.Value > CORRELATIVO_HASTA.Value)
+                            throw new Exception("El rango de facturas está mal definido, el valor inicial es mayor al valor final");
+
+                        q = q.Where(f => f.CORRELATIVO >= CORRELATIVO_DESDE.Value && f.CORRELATIVO <= CORRELATIVO_HASTA.Value);
+                    }
+
+                    if (q.Any(f => f.NUMERO_FACTURA.HasValue))
+                        throw new Exception("Ya existen facturas numeradas en el rango seleccionado");
+
+                    int NUMERO_FACTURA_FINAL = NUMERO_FACTURA_INICIAL + q.Count() - 1;
+
+
+                    var q2 = _RepositorioFACTURA.GetByFilterWithReferences(null, null, ID_TIPO_FACTURA,
+                        null, "", null, null, null, null, null, "", "", "", "", "", "", "");
+                    if (q2.Any(f => f.NUMERO_FACTURA.HasValue
+                        && f.NUMERO_FACTURA >= NUMERO_FACTURA_INICIAL
+                        && f.NUMERO_FACTURA <= NUMERO_FACTURA_FINAL))
+                        throw new Exception("Ya existen facturas numeradas con los numeros de facturas indicados");
+
+                    int NUEVO_NUMERO_FACTURA = NUMERO_FACTURA_INICIAL;
+                    foreach (var _FACTURA in q.OrderBy(f => f.CORRELATIVO).ToList())
+                    {
+                        if (_FACTURA.NUMERO_FACTURA.HasValue)
+                            throw new Exception("Factura ya está numerada");
+
+                        _FACTURA.NUMERO_FACTURA = NUEVO_NUMERO_FACTURA;
+                        context.ApplyPropertyChanges("FACTURA", _FACTURA);
+
+                        NUEVO_NUMERO_FACTURA++;
+                    }
+                    context.SaveChanges();
+
+                    try
+                    {
+                        foreach (var _FACTURA in q.OrderBy(f => f.CORRELATIVO).ToList())
+                        {
+                            // PENDIENTE: Generar PDFs
+                            var LISTA_DTO_REPORTE_FACTURA = GetReporteFacturaByID_FACTURA(_FACTURA.ID);
+
+                            ListaDetalleFactura = GetReporteDetalleFacturaByID_FACTURACION(_FACTURA.ID);
+
+                            string deviceInfo =
+                                          "<DeviceInfo>" +
+                                          "  <OutputFormat>PDF</OutputFormat>" +
+                                          "  <PageWidth>11in</PageWidth>" +
+                                          "  <PageHeight>8.5in</PageHeight>" +
+                                          "  <MarginTop>0.5in</MarginTop>" +
+                                          "  <MarginLeft>1in</MarginLeft>" +
+                                          "  <MarginRight>1in</MarginRight>" +
+                                          "  <MarginBottom>0.5in</MarginBottom>" +
+                                          "</DeviceInfo>";
+                            Warning[] warnings;
+                            m_streams_matriz = new List<Stream>();
+                            m_streams_DetalleFactura = new List<Stream>();
+
+                            // m_streams_individual = new List<Stream>();
+
+                            // Documento 1: Un archivo por factura con fondo
+                            var tf = from f in LISTA_DTO_REPORTE_FACTURA
+                                     group f by f.NOMBRE_REPORTE_FACTURA_INDIVIDUAL into g
+                                     select g;
+
+                            foreach (var facturas in tf)
+                            {
+
+                                ReportViewer _ReportViewer = new ReportViewer();
+                                _ReportViewer.ProcessingMode = ProcessingMode.Local;
+                                _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
+                                _ReportViewer.LocalReport.DataSources.Clear();
+                                _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", facturas));
+
+                                _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + facturas.Key;
+
+                                _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStream, out warnings);
+                                foreach (Stream stream in m_streams_matriz)
+                                    stream.Position = 0;
+
+                                using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
+                                {
+                                    SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
+                                    string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + _FACTURA.NUMERO_FACTURA.Value.ToString() + "_" + facturas.Key + ".pdf";
+                                    spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_matriz[0], true);
+                                    spList.Update();
+                                }
+                            }
+
+                            // Documento 2: Un archivo por cada detalles de facturas
+                            List<DTO_REPORTE_DETALLEFACTURA_FACTURA> LISTA_DTO_REPORTE_DETALLEFACTURA_FACTURA =
+                                (from df in ListaDetalleFactura
+                                 group df by df.ID_FACTURA into g
+                                 select new DTO_REPORTE_DETALLEFACTURA_FACTURA
+                                 {
+                                     ID_FACTURA = g.Key,
+                                     ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
+                                     NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
+                                     RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE
+                                 }).ToList();
+
+                            ReportViewer _ReportViewerDetalle = new ReportViewer();
+                            _ReportViewerDetalle.ProcessingMode = ProcessingMode.Local;
+                            _ReportViewerDetalle.LocalReport.ShowDetailedSubreportMessages = true;
+                            _ReportViewerDetalle.LocalReport.DataSources.Clear();
+                            _ReportViewerDetalle.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", LISTA_DTO_REPORTE_DETALLEFACTURA_FACTURA));
+                            _ReportViewerDetalle.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteDetalleFactura_SubreportProcessingEventHandler);
+                            _ReportViewerDetalle.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte.DetalleFactura.rdlc";
+
+                            _ReportViewerDetalle.LocalReport.Render("PDF", deviceInfo, CreateStreamDetalleFactura, out warnings);
+                            foreach (Stream stream in m_streams_DetalleFactura)
+                                stream.Position = 0;
+
+                            using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
+                            {
+                                SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
+                                string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + _FACTURA.NUMERO_FACTURA.Value.ToString() + "_DetalleFactura.pdf";
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_DetalleFactura[0], true);
+                                spList.Update();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // En caso de error, al generar los PDF se eliminan los registros de las facturas
+                        foreach (var _FACTURA in q.OrderBy(f => f.CORRELATIVO).ToList())
+                        {
+
+                            _FACTURA.NUMERO_FACTURA = null;
+                            context.ApplyPropertyChanges("FACTURA", _FACTURA);
+                        }
+                        context.SaveChanges();
+                        throw ex;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
         }
 
         public void AnularFacturas()

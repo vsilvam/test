@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<TIPO_FACTURA> GetByFilter(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "")
+		public List<TIPO_FACTURA> GetByFilter(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "", string NOMBRE_REPORTE_FACTURA_INDIVIDUAL = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_FACTURA repositorio = new RepositorioTIPO_FACTURA(context);
-                    return repositorio.GetByFilter(RUT_FACTURA, NOMBRE_FACTURA, AFECTO_IVA, NOMBRE_REPORTE_FACTURA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(RUT_FACTURA, NOMBRE_FACTURA, AFECTO_IVA, NOMBRE_REPORTE_FACTURA, NOMBRE_REPORTE_FACTURA_INDIVIDUAL).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<TIPO_FACTURA> GetByFilterWithReferences(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "")
+		public List<TIPO_FACTURA> GetByFilterWithReferences(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "", string NOMBRE_REPORTE_FACTURA_INDIVIDUAL = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_FACTURA repositorio = new RepositorioTIPO_FACTURA(context);
-                    return repositorio.GetByFilterWithReferences(RUT_FACTURA, NOMBRE_FACTURA, AFECTO_IVA, NOMBRE_REPORTE_FACTURA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(RUT_FACTURA, NOMBRE_FACTURA, AFECTO_IVA, NOMBRE_REPORTE_FACTURA, NOMBRE_REPORTE_FACTURA_INDIVIDUAL).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(string RUT_FACTURA, string NOMBRE_FACTURA, bool AFECTO_IVA, string NOMBRE_REPORTE_FACTURA)
+		        public int Add(string RUT_FACTURA, string NOMBRE_FACTURA, bool AFECTO_IVA, string NOMBRE_REPORTE_FACTURA, string NOMBRE_REPORTE_FACTURA_INDIVIDUAL = "")
         {
 		Init();
             try
@@ -159,6 +159,7 @@ namespace LQCE.Transaccion
                     _TIPO_FACTURA.NOMBRE_FACTURA = NOMBRE_FACTURA;				
                     _TIPO_FACTURA.AFECTO_IVA = AFECTO_IVA;
                     _TIPO_FACTURA.NOMBRE_REPORTE_FACTURA = NOMBRE_REPORTE_FACTURA;				
+                    _TIPO_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL = NOMBRE_REPORTE_FACTURA_INDIVIDUAL;				
                     _TIPO_FACTURA.ACTIVO = true;				
 
 					//parents
@@ -178,7 +179,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, string RUT_FACTURA, string NOMBRE_FACTURA, bool AFECTO_IVA, string NOMBRE_REPORTE_FACTURA)
+		public void Update(int Id, string RUT_FACTURA, string NOMBRE_FACTURA, bool AFECTO_IVA, string NOMBRE_REPORTE_FACTURA, string NOMBRE_REPORTE_FACTURA_INDIVIDUAL = "")
 		{
 		Init();
 			try
@@ -206,6 +207,10 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(NOMBRE_REPORTE_FACTURA))
 					{
 						_TIPO_FACTURA.NOMBRE_REPORTE_FACTURA = NOMBRE_REPORTE_FACTURA;
+					}
+					if (!string.IsNullOrEmpty(NOMBRE_REPORTE_FACTURA_INDIVIDUAL))
+					{
+						_TIPO_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL = NOMBRE_REPORTE_FACTURA_INDIVIDUAL;
 					}
 	
 					//parents

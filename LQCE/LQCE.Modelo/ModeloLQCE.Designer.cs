@@ -66,9 +66,10 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.EXAMEN), "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CLIENTE_TIPO_FACTURA", "TIPO_FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_FACTURA), "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CLIENTE))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_TIPO_FACTURA", "TIPO_FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_FACTURA), "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_HUMANA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_HUMANA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 11-09-2012 0:44:08
+// Fecha de generación: 2012/09/12 13:02:10
 namespace LQCE.Modelo
 {
     
@@ -5877,6 +5878,45 @@ namespace LQCE.Modelo
                 }
             }
         }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_HUMANA_1 en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PRESTACION_HUMANA PRESTACION_HUMANA_1
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_HUMANA_1 en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION_HUMANA> PRESTACION_HUMANA_1Reference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA", value);
+                }
+            }
+        }
     }
     /// <summary>
     /// No hay ningún comentario para LQCEModelo.PRESTACION_EXAMEN en el esquema.
@@ -6292,6 +6332,45 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_1 en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PRESTACION PRESTACION_1
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_1 en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION> PRESTACION_1Reference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION", value);
                 }
             }
         }
@@ -7328,6 +7407,33 @@ namespace LQCE.Modelo
         partial void OnACTIVOChanging(bool value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad REPORTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string REPORTE
+        {
+            get
+            {
+                return this._REPORTE;
+            }
+            set
+            {
+                this.OnREPORTEChanging(value);
+                this.ReportPropertyChanging("REPORTE");
+                this._REPORTE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("REPORTE");
+                this.OnREPORTEChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _REPORTE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnREPORTEChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnREPORTEChanged();
         /// <summary>
         /// No hay ningún comentario para COBRO en el esquema.
         /// </summary>
@@ -11178,6 +11284,33 @@ namespace LQCE.Modelo
         partial void OnNOMBRE_REPORTE_FACTURAChanging(string value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnNOMBRE_REPORTE_FACTURAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE_REPORTE_FACTURA_INDIVIDUAL en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE_REPORTE_FACTURA_INDIVIDUAL
+        {
+            get
+            {
+                return this._NOMBRE_REPORTE_FACTURA_INDIVIDUAL;
+            }
+            set
+            {
+                this.OnNOMBRE_REPORTE_FACTURA_INDIVIDUALChanging(value);
+                this.ReportPropertyChanging("NOMBRE_REPORTE_FACTURA_INDIVIDUAL");
+                this._NOMBRE_REPORTE_FACTURA_INDIVIDUAL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("NOMBRE_REPORTE_FACTURA_INDIVIDUAL");
+                this.OnNOMBRE_REPORTE_FACTURA_INDIVIDUALChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE_REPORTE_FACTURA_INDIVIDUAL;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_REPORTE_FACTURA_INDIVIDUALChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_REPORTE_FACTURA_INDIVIDUALChanged();
         /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>

@@ -59,6 +59,9 @@
     <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_FACTURA.cs" />
     <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_PRESTACION.cs" />
     <Compile Include="DTO\DTO_REPORTE_FACTURA.cs" />
+    <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO_CLIENTE.cs" />
+    <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO_FACTURA.cs" />
+    <Compile Include="DTO\DTO_RESUMEN_FACTURACION.cs" />
     <Compile Include="DTO\DTO_RESUMEN_PRESTACIONES_FACTURAR.cs" />
     <Compile Include="Enum\ENUM_TIPO_COBRO.cs" />
     <Compile Include="TrxCustomCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs" />
@@ -209,6 +212,8 @@
     <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_FACTURA.datasource">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_NOTA_COBRO_CLIENTE.datasource" />
+    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_NOTA_COBRO_FACTURA.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -266,6 +271,7 @@
     <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_IVA.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\NotaCobro1.rdlc" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

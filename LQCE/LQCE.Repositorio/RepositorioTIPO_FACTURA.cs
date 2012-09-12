@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							return _context.TIPO_FACTURA.FirstOrDefault(i => i.ID == id);
+							return _context.TIPO_FACTURA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 						}
 			catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.TIPO_FACTURA.Include("CLIENTE").Include("FACTURA").FirstOrDefault(i => i.ID == id);
+							return _context.TIPO_FACTURA.Include("CLIENTE").Include("FACTURA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -54,7 +54,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							var q = from i in _context.TIPO_FACTURA select i;
+							var q = from i in _context.TIPO_FACTURA where i.ACTIVO select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.TIPO_FACTURA.Include("CLIENTE").Include("FACTURA") select i;
+								var q = from i in _context.TIPO_FACTURA.Include("CLIENTE").Include("FACTURA") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -82,12 +82,12 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<TIPO_FACTURA> GetByFilter(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "")
+		public IQueryable<TIPO_FACTURA> GetByFilter(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "", string NOMBRE_REPORTE_FACTURA_INDIVIDUAL = "")
 		{
 			Error = string.Empty;
 			try
 			{
-							var q = from i in _context.TIPO_FACTURA  select i;
+							var q = from i in _context.TIPO_FACTURA  where i.ACTIVO  select i;
 			
 				
 
@@ -107,6 +107,10 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.NOMBRE_REPORTE_FACTURA.Contains(NOMBRE_REPORTE_FACTURA));
 				}
+				if (!string.IsNullOrEmpty(NOMBRE_REPORTE_FACTURA_INDIVIDUAL))
+				{
+				   q = q.Where(i => i.NOMBRE_REPORTE_FACTURA_INDIVIDUAL.Contains(NOMBRE_REPORTE_FACTURA_INDIVIDUAL));
+				}
 				return q;
 			}
 			catch (Exception ex)
@@ -117,13 +121,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<TIPO_FACTURA> GetByFilterWithReferences(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "")
+		public IQueryable<TIPO_FACTURA> GetByFilterWithReferences(string RUT_FACTURA = "", string NOMBRE_FACTURA = "", bool? AFECTO_IVA = null, string NOMBRE_REPORTE_FACTURA = "", string NOMBRE_REPORTE_FACTURA_INDIVIDUAL = "")
 		{
 			Error = string.Empty;
 			try
 			{
 
-							var q = from i in _context.TIPO_FACTURA.Include("CLIENTE").Include("FACTURA") select i;
+							var q = from i in _context.TIPO_FACTURA.Include("CLIENTE").Include("FACTURA")  where i.ACTIVO select i;
 			
 				
 
@@ -142,6 +146,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(NOMBRE_REPORTE_FACTURA))
 				{
 					q = q.Where(i => i.NOMBRE_REPORTE_FACTURA.Contains(NOMBRE_REPORTE_FACTURA));
+				}
+				if (!string.IsNullOrEmpty(NOMBRE_REPORTE_FACTURA_INDIVIDUAL))
+				{
+					q = q.Where(i => i.NOMBRE_REPORTE_FACTURA_INDIVIDUAL.Contains(NOMBRE_REPORTE_FACTURA_INDIVIDUAL));
 				}
 				return q;
 			}

@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							return _context.FACTURA.FirstOrDefault(i => i.ID == id);
+							return _context.FACTURA.FirstOrDefault(i => i.ID == id && i.ACTIVO );
 						}
 			catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA").FirstOrDefault(i => i.ID == id);
+							return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -54,7 +54,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							var q = from i in _context.FACTURA select i;
+							var q = from i in _context.FACTURA where i.ACTIVO select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA") select i;
+								var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -87,7 +87,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							var q = from i in _context.FACTURA  select i;
+							var q = from i in _context.FACTURA  where i.ACTIVO  select i;
 			
 				
 
@@ -175,7 +175,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA") select i;
+							var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA")  where i.ACTIVO select i;
 			
 				
 

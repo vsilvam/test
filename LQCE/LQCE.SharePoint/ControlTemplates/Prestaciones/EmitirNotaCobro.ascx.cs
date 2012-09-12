@@ -50,6 +50,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? ddlClientes.SelectedValue : string.Empty;
                 string tipo = !string.IsNullOrEmpty(ddlNotaCobro.SelectedValue) ? ddlNotaCobro.SelectedValue : string.Empty;
 
+                //se llama trx que genera nota de cobro
                 var notaCobro = new TrxNOTA_COBRO();
                 grdNotaCobro.DataSource = notaCobro.GetAllWithReferences();
                 grdNotaCobro.DataBind();

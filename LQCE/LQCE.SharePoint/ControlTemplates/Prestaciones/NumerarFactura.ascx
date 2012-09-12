@@ -72,7 +72,7 @@
                 <asp:BoundField DataField="fac_numerar" HeaderText="FACTURAS POR NUMERAR" />
                 <asp:TemplateField HeaderText="NUMERAR">
                     <ItemTemplate>
-                        <asp:LinkButton id="lnkNumerar" runat="server" onclick="lnkNumerar_Click" >Numerar</asp:LinkButton>
+                        <asp:LinkButton id="lnkNumerar" runat="server" CommandArgument='<%# Eval("ID") %>' onclick="lnkNumerar_Click" >Numerar</asp:LinkButton>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>

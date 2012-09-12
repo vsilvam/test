@@ -73,17 +73,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (string.IsNullOrEmpty(hdnFechaDesde.Value) || string.IsNullOrEmpty(hdnFechaHasta.Value))
                     throw new Exception("Debe realizar busqueda primero");
 
-                //grilla  fecha facturacion,total facturas periodo,total fact x numerar
-
                 //ID fcaturacion , bool numerar todos, si es falso debe pedir desde hasta, nuemro fact inicial.
 
                 //tomar valores
+                LinkButton _link = sender as LinkButton;
+                int? IdFacturacion = int.Parse(_link.CommandArgument);
                 string desde = txtDesdeN.Text;
                 string hasta = txtHastaN.Text;
                 string nroFactura = txtNroFactura.Text;
                 bool todos = Convert.ToBoolean(rblNumerar.SelectedValue);
-                int IdFacturacion = 1;
 
+                //llama la trx que genera la numeracion
                 
             }
             catch (Exception ex)

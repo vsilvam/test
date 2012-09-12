@@ -23,18 +23,20 @@
 </script>
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
-        <asp:Label ID="Label1" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+    <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
+
 <article class="module width_full">
    <header><h3>Errores Prestación</h3></header>
    <asp:BulletedList ID="grdErroresHumanos" runat="server"></asp:BulletedList>
 </article>
 
 <article class="module width_full">
-
+    
     <header><h3>Edición Prestación Veterinarias</h3></header>
+    
+    <div class="module_content">
 
-    <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
     <table>
         <tr>
             <td>
@@ -196,6 +198,7 @@
             </td>
         </tr>
     </table>
+    </div>
 
     <footer>
       <div class="submit_link">
@@ -204,7 +207,7 @@
     </footer>    
     </article>
 
-    <article>
+   <article class="module width_full">
      <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Examen</asp:LinkButton>
                 <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%"
                     OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
@@ -228,6 +231,7 @@
                </asp:GridView>
     </article>
 
+   <article class="module width_full">
     <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
                     <table>
                         <tr>
@@ -257,11 +261,12 @@
                         </tr>
                     </table>
     </asp:Panel>
-
+    </article>
 
     <!--Validar, marcar error,guarda temporal  "dejar con botones" 
     En caso de error mostrar mensaje u observacions en la ficha
     -->
+    <article class="module width_full">
     <asp:GridView ID="grdErrores" runat="server" AutoGenerateColumns="false">
         <Columns>
             <asp:TemplateField HeaderText="MENSAJE ERROR">
@@ -271,4 +276,5 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    </article>
 

@@ -56,6 +56,8 @@
     <Compile Include="DTO\DTOFindPrestaciones.cs" />
     <Compile Include="DTO\DTOPaginador.cs" />
     <Compile Include="DTO\DTO_EMISION_FACTURA.cs" />
+    <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_FACTURA.cs" />
+    <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_PRESTACION.cs" />
     <Compile Include="DTO\DTO_REPORTE_FACTURA.cs" />
     <Compile Include="DTO\DTO_RESUMEN_PRESTACIONES_FACTURAR.cs" />
     <Compile Include="Enum\ENUM_TIPO_COBRO.cs" />
@@ -202,7 +204,11 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="LQCE.Transaccion.snk" />
-    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_FACTURA.datasource" />
+    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_DETALLEFACTURA_FACTURA.datasource" />
+    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_DETALLEFACTURA_PRESTACION.datasource" />
+    <None Include="Properties\DataSources\LQCE.Transaccion.DTO.DTO_REPORTE_FACTURA.datasource">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -230,6 +236,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reporte\DetalleFactura.rdlc" />
+    <EmbeddedResource Include="Reporte\DetalleFacturaSubreporte.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte\Factura_LQCE_Exento.rdlc">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

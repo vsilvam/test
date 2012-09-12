@@ -15,6 +15,8 @@ namespace LQCE.Transaccion
 {
     public partial class TrxFACTURACION
     {
+         List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> ListaDetalleFactura;
+
         private IList<Stream> m_streams_matriz;
         private Stream CreateStream(string name, string fileNameExtension, Encoding encoding,
             string mimeType, bool willSeek)
@@ -24,14 +26,22 @@ namespace LQCE.Transaccion
             return stream;
         }
 
+        //private IList<Stream> m_streams_individual;
+        //private Stream CreateStream2(string name, string fileNameExtension, Encoding encoding,
+        //    string mimeType, bool willSeek)
+        //{
+        //    Stream stream2 = new MemoryStream();
+        //    m_streams_individual.Add(stream2);
+        //    return stream2;
+        //}
 
-        private IList<Stream> m_streams_individual;
-        private Stream CreateStream2(string name, string fileNameExtension, Encoding encoding,
+        private IList<Stream> m_streams_DetalleFactura;
+        private Stream CreateStreamDetalleFactura(string name, string fileNameExtension, Encoding encoding,
             string mimeType, bool willSeek)
         {
-            Stream stream2 = new MemoryStream();
-            m_streams_individual.Add(stream2);
-            return stream2;
+            Stream streamDetalleFactura = new MemoryStream();
+            m_streams_DetalleFactura.Add(streamDetalleFactura);
+            return streamDetalleFactura;
         }
 
         public List<DTO_RESUMEN_PRESTACIONES_FACTURAR> GetClientesAFacturar(DateTime FechaDesde,
@@ -71,6 +81,7 @@ namespace LQCE.Transaccion
             DateTime FechaHasta)
         {
             Init();
+            ListaDetalleFactura = new List<DTO_REPORTE_DETALLEFACTURA_PRESTACION>();
             try
             {
                 using (LQCEEntities context = new LQCEEntities())
@@ -156,6 +167,8 @@ namespace LQCE.Transaccion
                     {
                         // PENDIENTE: Generar PDFs
                         var LISTA_DTO_REPORTE_FACTURA = GetReporteFactura(_FACTURACION.ID);
+                       
+                        ListaDetalleFactura = GetReporteDetalleFactura(_FACTURACION.ID);
 
                         string deviceInfo =
                                       "<DeviceInfo>" +
@@ -169,7 +182,9 @@ namespace LQCE.Transaccion
                                       "</DeviceInfo>";
                         Warning[] warnings;
                         m_streams_matriz = new List<Stream>();
-                        m_streams_individual = new List<Stream>();
+                        m_streams_DetalleFactura = new List<Stream>(); 
+
+                       // m_streams_individual = new List<Stream>();
 
                         // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
                         var tf = from f in LISTA_DTO_REPORTE_FACTURA
@@ -199,6 +214,38 @@ namespace LQCE.Transaccion
                                 spList.Update();
                             }
                         }
+
+                        // Documento 2: Un archivo con todos los detalles de facturas
+                        List<DTO_REPORTE_DETALLEFACTURA_FACTURA> LISTA_DTO_REPORTE_DETALLEFACTURA_FACTURA =
+                            (from df in ListaDetalleFactura
+                             group df by df.ID_FACTURA into g
+                             select new DTO_REPORTE_DETALLEFACTURA_FACTURA
+                             {
+                                 ID_FACTURA = g.Key,
+                                 ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
+                                 NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
+                                 RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE
+                             }).ToList();
+
+                        ReportViewer _ReportViewerDetalle = new ReportViewer();
+                        _ReportViewerDetalle.ProcessingMode = ProcessingMode.Local;
+                        _ReportViewerDetalle.LocalReport.ShowDetailedSubreportMessages = true;
+                        _ReportViewerDetalle.LocalReport.DataSources.Clear();
+                        _ReportViewerDetalle.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", LISTA_DTO_REPORTE_DETALLEFACTURA_FACTURA));
+                        _ReportViewerDetalle.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteDetalleFactura_SubreportProcessingEventHandler);
+                        _ReportViewerDetalle.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte.DetalleFactura.rdlc";
+
+                        _ReportViewerDetalle.LocalReport.Render("PDF", deviceInfo, CreateStreamDetalleFactura, out warnings);
+                        foreach (Stream stream in m_streams_DetalleFactura)
+                            stream.Position = 0;
+
+                        using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
+                        {
+                            SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
+                            string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_DetalleFactura.pdf";
+                            spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_DetalleFactura[0], true);
+                            spList.Update();
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -218,6 +265,25 @@ namespace LQCE.Transaccion
                         context.SaveChanges();
                         throw ex;
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        public void ReporteDetalleFactura_SubreportProcessingEventHandler(object sender, SubreportProcessingEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(e.Parameters[0].Values[0]))
+                {
+                    int FacturaId = Convert.ToInt32(e.Parameters[0].Values[0].ToString());
+                    e.DataSources.Add(new ReportDataSource("DataSet1",
+                        ListaDetalleFactura.Where(l => l.ID_FACTURA == FacturaId)));
                 }
             }
             catch (Exception ex)
@@ -273,6 +339,40 @@ namespace LQCE.Transaccion
                                 IVA = f.IVA,
                                 TOTAL = f.TOTAL
                             }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        protected List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> GetReporteDetalleFactura(int IdFacturacion)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+
+                    var q = _RepositorioFACTURACION.GetFacturaDetalleByIdFacturacion(IdFacturacion);
+
+                    return (from fd in q
+                             select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
+                             {
+                                 ID_FACTURA = fd.FACTURA.ID,
+                                 ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
+                                 NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
+                                 RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
+                                 ID_FACTURA_DETALLE = fd.ID,
+                                 NUMERO_FICHA = fd.PRESTACION.ID,
+                                 MONTO_TOTAL = fd.MONTO_TOTAL,
+                                 FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
+                                 NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
+                             }).ToList();
                 }
             }
             catch (Exception ex)

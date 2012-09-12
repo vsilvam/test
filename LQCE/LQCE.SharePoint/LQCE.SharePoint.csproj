@@ -199,6 +199,13 @@
     <Compile Include="Layouts\Prestaciones\EmitirNotaCobro.aspx.designer.cs">
       <DependentUpon>EmitirNotaCobro.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\MensajeExito.aspx.cs">
+      <DependentUpon>MensajeExito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\MensajeExito.aspx.designer.cs">
+      <DependentUpon>MensajeExito.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx.cs">
       <DependentUpon>RegistroCargaArchivo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -293,6 +300,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\EmitirNotaCobro.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\MensajeExito.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx">

@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="DTO_REPORTE_FACTURA" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-  <TypeInfo>LQCE.Transaccion.DTO.DTO_REPORTE_FACTURA, LQCE.Transaccion, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e8616c68d579ae6f</TypeInfo>
+<GenericObjectDataSource DisplayName="DTO_REPORTE_DETALLEFACTURA_FACTURA" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>LQCE.Transaccion.DTO.DTO_REPORTE_DETALLEFACTURA_FACTURA, LQCE.Transaccion, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e8616c68d579ae6f</TypeInfo>
 </GenericObjectDataSource>

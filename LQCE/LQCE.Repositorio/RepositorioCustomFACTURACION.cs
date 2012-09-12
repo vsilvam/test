@@ -24,6 +24,32 @@ namespace LQCE.Repositorio
             }
         }
 
+        public IQueryable<FACTURA_DETALLE> GetFacturaDetalleByIdFacturacion(int ID_FACTURACION)
+        {
+            Error = string.Empty;
+            try
+            {
+
+                var q = from i in _context.FACTURA_DETALLE
+                            .Include("FACTURA.FACTURACION")
+                            .Include("FACTURA.CLIENTE")
+                            .Include("PRESTACION.PRESTACION_HUMANA")
+                            .Include("PRESTACION.PRESTACION_VETERINARIA")
+                        where i.ACTIVO
+                        && i.FACTURA.ACTIVO
+                        && i.FACTURA.FACTURACION.ACTIVO 
+                        && i.FACTURA.FACTURACION.ID == ID_FACTURACION
+                        select i;
+                return q;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
         public IQueryable<VISTA_PRESTACIONES_POR_FACTURAR> GetPrestacionesPorFacturar(DateTime FechaDesde,
             DateTime FechaHasta, int? IdCliente)
         {

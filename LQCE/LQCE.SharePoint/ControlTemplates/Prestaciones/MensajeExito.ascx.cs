@@ -11,9 +11,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             if (!Page.IsPostBack && !Page.IsCallback)
             {
-                if (Request.QueryString["Id"] == null)
-                    throw new Exception("No se ha indicado identificador de la cuenta registrada");
-                string msg = Request.QueryString["Id"].ToString();
+                lblTitulo.Text  = Request.QueryString["t"].ToString();
+                lblMensaje.Text = Request.QueryString["m"].ToString();
             }
         }
     }

@@ -100,6 +100,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 TrxFACTURACION _TrxFACTURACION = new TrxFACTURACION();
                 _TrxFACTURACION.EmitirFacturas(lista, FechaDesde, FechaHasta);
+
+                Response.Redirect("MensajeExito.aspx?t=Emisión de Facturas&m=Se han emitidos los documentos correspondientes", false);
             }
             catch (Exception ex)
             {

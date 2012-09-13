@@ -56,7 +56,7 @@
                 Clientes
             </td>
             <td>
-                <asp:DropDownList ID="ddlClientes" runat="server">
+                <asp:DropDownList ID="ddlClientes" runat="server" AppendDataBoundItems="True">
                 </asp:DropDownList>
             </td>
         </tr>

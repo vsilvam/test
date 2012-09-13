@@ -219,15 +219,28 @@
                         <tr>
                             <td>
                                 <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ControlToValidate='txtExamen'
+                                Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Examen'></asp:RequiredFieldValidator>
+                                
                             </td>
                             <td>
                                 <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidator1' runat='server' ControlToValidate='txtCodigo'
+                                Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Codigo'></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorCorreo" runat="server"
+                            ControlToValidate="txtCodigo" ErrorMessage="solo se admiten numeros."
+                            ToolTip="debe ingresar un valor numerico." ValidationExpression="\d+">*</asp:RegularExpressionValidator>
                             </td>
                             <td>
                                 <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidator2' runat='server' ControlToValidate='txtValor'
+                                Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Valor'></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                                ControlToValidate="txtValor" ErrorMessage="solo se admiten numeros." ValidationGroup='btnAgrega'
+                                ToolTip="debe ingresar un valor numerico." ValidationExpression="\d+">*</asp:RegularExpressionValidator>
                             </td>
                             <td>
-                                <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" OnClick="btnAgrega_Click" />
+                                <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" OnClick="btnAgrega_Click" ValidationGroup='btnAgrega' />
                             </td>
                         </tr>
                     </table>

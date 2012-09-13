@@ -14,6 +14,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/ui.datepicker-es.js")%>"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#<%=txtDesde.ClientID %>').datepicker({});

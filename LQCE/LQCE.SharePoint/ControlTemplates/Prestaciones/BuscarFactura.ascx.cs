@@ -73,12 +73,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if(!string.IsNullOrEmpty(txtNroFactura.Text))
                     dto.numero = int.Parse(txtNroFactura.Text);
                 if(!string.IsNullOrEmpty(ddlEstadoPago.SelectedValue))
-                    dto.estado = int.Parse(ddlEstadoPago.SelectedValue);
+                    dto.estado = true;
 
 
-                TrxFACTURA _trx = new TrxFACTURA();
-                int Total = _trx.GetByFilter().Count();
-                grdFacturas.DataSource = _trx.GetByFilter().Count();
+                TrxFACTURACION _trx = new TrxFACTURACION();
+                int Total = _trx.GetResumenFacturasByFilterCount(dto.rut, dto.nombre, dto.fecha, dto.numero, dto.estado);
+                grdFacturas.DataSource = _trx.GetResumenFacturasByFilter(dto.rut,dto.nombre,dto.fecha,dto.numero,dto.estado);
                 grdFacturas.DataBind();
 
                 Paginador1.TotalPages = Total % grdFacturas.PageSize == 0 ? Total / grdFacturas.PageSize : Total / grdFacturas.PageSize + 1;

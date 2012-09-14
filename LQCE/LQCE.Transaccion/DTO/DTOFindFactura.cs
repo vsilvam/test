@@ -11,6 +11,6 @@ namespace LQCE.Transaccion.DTO
         public string nombre { get; set; }
         public DateTime fecha { get; set; }
         public int? numero { get; set; }
-        public int? estado { get; set; }
+        public bool estado { get; set; }
     }
 }

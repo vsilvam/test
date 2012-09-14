@@ -73,47 +73,47 @@
         <Columns>
             <asp:TemplateField HeaderText="RUT">
                 <ItemTemplate>
-                    <asp:Label ID="lblRut" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblRut" runat="server" Text='<%# Eval("RUT_CLIENTE") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="CLIENTE">
                 <ItemTemplate>
-                    <asp:Label ID="lblCliente" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblCliente" runat="server" Text='<%# Eval("NOMBRE_CLIENTE") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="FECHA EMISION">
                 <ItemTemplate>
-                    <asp:Label ID="lblFechaEmision" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblFechaEmision" runat="server" Text='<%# Eval("FECHA_EMISION") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="VALOR TOTAL">
                 <ItemTemplate>
-                    <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblTotal" runat="server" Text='<%# Eval("VALOR_TOTAL") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="VALOR PAGADO">
                 <ItemTemplate>
-                    <asp:Label ID="lblPagado" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblPagado" runat="server" Text='<%# Eval("VALOR_PAGADO") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="PAGOS REGISTRADOS">
                 <ItemTemplate>
-                    <asp:Label ID="lblPagsoRegistrados" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblPagsoRegistrados" runat="server" Text='<%# Eval("PAGOS_REGISTRADOS") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="TOTAL PAGOS">
                 <ItemTemplate>
-                    <asp:Label ID="lblTotalPagos" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblTotalPagos" runat="server" Text='<%# Eval("PAGOS_REGISTRADOS") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="SALDO DEUDOR">
                 <ItemTemplate>
-                    <asp:Label ID="lblSaldoDeudor" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                    <asp:Label ID="lblSaldoDeudor" runat="server" Text='<%# Eval("SALDO_DEUDOR") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:LinkButton ID="lnkVer" runat="server" CommandArgument='<%# Eval("") %>' onclick="lnkVer_Click">Ver Detalles</asp:LinkButton>
+                    <asp:LinkButton ID="lnkVer" runat="server" CommandArgument='<%# Eval("ID_FACTURA") %>' onclick="lnkVer_Click">Ver Detalles</asp:LinkButton>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

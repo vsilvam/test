@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.PRESTACION_HUMANA.Include("PRESTACION").Include("PRESTACION_1").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+							return _context.PRESTACION_HUMANA.Include("PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION").Include("PRESTACION_1") where i.ACTIVO  select i;
+								var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -123,7 +123,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION").Include("PRESTACION_1")  where i.ACTIVO select i;
+							var q = from i in _context.PRESTACION_HUMANA.Include("PRESTACION")  where i.ACTIVO select i;
 			
 				
 

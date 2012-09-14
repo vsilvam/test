@@ -16,9 +16,9 @@ namespace LQCE.Transaccion
 {
     public partial class TrxFACTURACION
     {
-         List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> ListaDetalleFactura;
+        List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> ListaDetalleFactura;
 
-         List<DTO_REPORTE_NOTA_COBRO_DETALLE> ListaNotaCobro;
+        List<DTO_REPORTE_NOTA_COBRO_DETALLE> ListaNotaCobro;
 
         private IList<Stream> m_streams_matriz;
         private Stream CreateStream(string name, string fileNameExtension, Encoding encoding,
@@ -120,11 +120,11 @@ namespace LQCE.Transaccion
                     foreach (var item in ListaClientesFacturar)
                     {
                         CLIENTE _CLIENTE = _RepositorioCLIENTE.GetByIdWithReferences(item.ID_CLIENTE);
-                        if(_CLIENTE == null)
+                        if (_CLIENTE == null)
                             throw new Exception("No se encuentra información del cliente");
 
                         var prestaciones = _RepositorioFACTURACION.GetPrestacionesPorFacturar(FechaDesde, FechaHasta, item.ID_CLIENTE).ToList();
-                        
+
                         FACTURA _FACTURA = new FACTURA();
                         _FACTURA.FACTURACION = _FACTURACION;
                         _FACTURA.CORRELATIVO = correlativo;
@@ -151,7 +151,7 @@ namespace LQCE.Transaccion
                         foreach (var prestacion in prestaciones)
                         {
                             PRESTACION _PRESTACION = _RepositorioPRESTACION.GetById(prestacion.ID);
-                            if(_PRESTACION == null)
+                            if (_PRESTACION == null)
                                 throw new Exception("No se encuentra información de la prestación");
 
                             int total = (int)(prestacion.TOTAL * (1 - (double)item.DESCUENTO / 100.0));
@@ -188,7 +188,7 @@ namespace LQCE.Transaccion
                     {
                         // PENDIENTE: Generar PDFs
                         var LISTA_DTO_REPORTE_FACTURA = GetReporteFacturaByID_FACTURACION(_FACTURACION.ID);
-                       
+
                         ListaDetalleFactura = GetReporteDetalleFacturaByID_FACTURACION(_FACTURACION.ID);
 
                         string deviceInfo =
@@ -203,9 +203,9 @@ namespace LQCE.Transaccion
                                       "</DeviceInfo>";
                         Warning[] warnings;
                         m_streams_matriz = new List<Stream>();
-                        m_streams_DetalleFactura = new List<Stream>(); 
+                        m_streams_DetalleFactura = new List<Stream>();
 
-                       // m_streams_individual = new List<Stream>();
+                        // m_streams_individual = new List<Stream>();
 
                         // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
                         var tf = from f in LISTA_DTO_REPORTE_FACTURA
@@ -417,7 +417,7 @@ namespace LQCE.Transaccion
                         throw new Exception("No se encuentra información de la factura");
 
                     DTO_REPORTE_FACTURA _DTO_REPORTE_FACTURA = new DTO_REPORTE_FACTURA();
-                    
+
                     _DTO_REPORTE_FACTURA.NOMBRE_REPORTE_FACTURA = _FACTURA.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA;
                     _DTO_REPORTE_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL = _FACTURA.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL;
                     _DTO_REPORTE_FACTURA.DIA = _FACTURA.FACTURACION.FECHA_FACTURACION.Day;
@@ -435,7 +435,7 @@ namespace LQCE.Transaccion
                     _DTO_REPORTE_FACTURA.TOTAL = _FACTURA.TOTAL;
                     _DTO_REPORTE_FACTURA.NUMERO_FACTURA = _FACTURA.NUMERO_FACTURA;
                     _DTO_REPORTE_FACTURA.NOMBRE_TIPO_FACTURA = _FACTURA.TIPO_FACTURA.NOMBRE_FACTURA;
-                    
+
                     List<DTO_REPORTE_FACTURA> lista = new List<DTO_REPORTE_FACTURA>();
                     lista.Add(_DTO_REPORTE_FACTURA);
                     return lista;
@@ -496,18 +496,18 @@ namespace LQCE.Transaccion
                     var q = _RepositorioFACTURACION.GetFacturaDetalleByIdFacturacion(IdFacturacion);
 
                     return (from fd in q
-                             select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
-                             {
-                                 ID_FACTURA = fd.FACTURA.ID,
-                                 ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
-                                 NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
-                                 RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
-                                 ID_FACTURA_DETALLE = fd.ID,
-                                 NUMERO_FICHA = fd.PRESTACION.ID,
-                                 MONTO_TOTAL = fd.MONTO_TOTAL,
-                                 FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
-                                 NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
-                             }).ToList();
+                            select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
+                            {
+                                ID_FACTURA = fd.FACTURA.ID,
+                                ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
+                                NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
+                                RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
+                                ID_FACTURA_DETALLE = fd.ID,
+                                NUMERO_FICHA = fd.PRESTACION.ID,
+                                MONTO_TOTAL = fd.MONTO_TOTAL,
+                                FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
+                                NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
+                            }).ToList();
                 }
             }
             catch (Exception ex)
@@ -530,18 +530,18 @@ namespace LQCE.Transaccion
                     var q = _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(IdFactura);
 
                     return (from fd in q
-                             select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
-                             {
-                                 ID_FACTURA = fd.FACTURA.ID,
-                                 ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
-                                 NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
-                                 RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
-                                 ID_FACTURA_DETALLE = fd.ID,
-                                 NUMERO_FICHA = fd.PRESTACION.ID,
-                                 MONTO_TOTAL = fd.MONTO_TOTAL,
-                                 FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
-                                 NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
-                             }).ToList();
+                            select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
+                            {
+                                ID_FACTURA = fd.FACTURA.ID,
+                                ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
+                                NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
+                                RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
+                                ID_FACTURA_DETALLE = fd.ID,
+                                NUMERO_FICHA = fd.PRESTACION.ID,
+                                MONTO_TOTAL = fd.MONTO_TOTAL,
+                                FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
+                                NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
+                            }).ToList();
                 }
             }
             catch (Exception ex)
@@ -567,16 +567,16 @@ namespace LQCE.Transaccion
 
                     return (from f in _RepositorioFACTURA.GetAllWithReferences()
                             where f.ACTIVO && f.FACTURACION.ACTIVO
-                             group f by new { ID_FACTURACION = f.FACTURACION.ID, ID_TIPO_FACTURA = f.TIPO_FACTURA.ID } into g
-                             select new DTO_RESUMEN_FACTURACION
-                             {
-                                 ID_FACTURACION = g.Key.ID_FACTURACION,
-                                 ID_TIPO_FACTURA = g.Key.ID_TIPO_FACTURA,
-                                 NOMBRE_TIPO_FACTURA = g.First().TIPO_FACTURA.NOMBRE_FACTURA,
-                                 FECHA_FACTURACION = g.First().FACTURACION.FECHA_FACTURACION,
-                                 TOTAL_FACTURAS = g.Count(),
-                                 TOTAL_FACTURAS_POR_NUMERAR = g.Count(fa => fa.NUMERO_FACTURA == null)
-                             }).ToList();
+                            group f by new { ID_FACTURACION = f.FACTURACION.ID, ID_TIPO_FACTURA = f.TIPO_FACTURA.ID } into g
+                            select new DTO_RESUMEN_FACTURACION
+                            {
+                                ID_FACTURACION = g.Key.ID_FACTURACION,
+                                ID_TIPO_FACTURA = g.Key.ID_TIPO_FACTURA,
+                                NOMBRE_TIPO_FACTURA = g.First().TIPO_FACTURA.NOMBRE_FACTURA,
+                                FECHA_FACTURACION = g.First().FACTURACION.FECHA_FACTURACION,
+                                TOTAL_FACTURAS = g.Count(),
+                                TOTAL_FACTURAS_POR_NUMERAR = g.Count(fa => fa.NUMERO_FACTURA == null)
+                            }).ToList();
                 }
             }
             catch (Exception ex)
@@ -587,7 +587,7 @@ namespace LQCE.Transaccion
             }
         }
 
-        public void NumerarFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, bool NUMERAR_TODAS, 
+        public void NumerarFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, bool NUMERAR_TODAS,
             int? CORRELATIVO_DESDE, int? CORRELATIVO_HASTA, int NUMERO_FACTURA_INICIAL)
         {
             Init();
@@ -787,8 +787,8 @@ namespace LQCE.Transaccion
                         q = q.Where(f => f.CORRELATIVO >= CORRELATIVO_DESDE.Value && f.CORRELATIVO <= CORRELATIVO_HASTA.Value);
                     }
 
-               if(q.Any(f => f.NOTA_COBRO_DETALLE.Any(n => n.ACTIVO)))
-    throw new Exception("Ya existen facturas cobradas al cliente en el rango señalado");
+                    if (q.Any(f => f.NOTA_COBRO_DETALLE.Any(n => n.ACTIVO)))
+                        throw new Exception("Ya existen facturas cobradas al cliente en el rango señalado");
 
                     foreach (var _FACTURA in q.OrderBy(f => f.CORRELATIVO).ToList())
                     {
@@ -809,7 +809,6 @@ namespace LQCE.Transaccion
                 throw ex;
             }
         }
-
 
         public void AnularFacturas(List<int> LISTA_ID_FACTURA)
         {
@@ -852,7 +851,6 @@ namespace LQCE.Transaccion
             }
         }
 
-
         public void EmitirNotaCredito()
         {
             // PENDIENTE IMPLEMENTACION
@@ -873,7 +871,7 @@ namespace LQCE.Transaccion
 
                     TIPO_COBRO _TIPO_COBRO = _RepositorioTIPO_COBRO.GetById(IdTipoCobro);
                     if (_TIPO_COBRO == null)
-                        throw new Exception("No se encuentra información del tipo de cobro");                        
+                        throw new Exception("No se encuentra información del tipo de cobro");
 
                     COBRO _COBRO = new COBRO();
                     _COBRO.FECHA_COBRO = DateTime.Now;
@@ -883,12 +881,12 @@ namespace LQCE.Transaccion
 
                     var cliente_facturas = (from f in _RepositorioFACTURACION.GetFacturasPorNotificar(FechaFacturacionDesde,
                         FechaFacturacionHasta, IdTipoCobro, IdCliente)
-                                   group f by f.ID_CLIENTE into g
-                                   select new
-                                   {
-                                       IdCliente = g.Key,
-                                       Facturas = g.ToList<VISTA_FACTURAS_POR_NOTIFICAR>()
-                                   }).ToList();
+                                            group f by f.ID_CLIENTE into g
+                                            select new
+                                            {
+                                                IdCliente = g.Key,
+                                                Facturas = g.ToList<VISTA_FACTURAS_POR_NOTIFICAR>()
+                                            }).ToList();
 
                     int correlativo = 1;
                     foreach (var cf in cliente_facturas)
@@ -907,7 +905,7 @@ namespace LQCE.Transaccion
                         foreach (var f in cf.Facturas)
                         {
                             FACTURA _FACTURA = _RepositorioFACTURA.GetById(f.ID);
-                            if(_FACTURA == null)
+                            if (_FACTURA == null)
                                 throw new Exception("No se encuentra información de la factura ");
 
                             NOTA_COBRO_DETALLE _NOTA_COBRO_DETALLE = new NOTA_COBRO_DETALLE();
@@ -922,7 +920,7 @@ namespace LQCE.Transaccion
                     }
 
                     context.SaveChanges();
-                    
+
                     // PENDIENTE: Generar PDFs
                     try
                     {
@@ -943,16 +941,16 @@ namespace LQCE.Transaccion
                         m_streams_NotaCobro = new List<Stream>();
 
                         List<DTO_REPORTE_NOTA_COBRO> ListaNotaCobroEncabezado = (from nc in ListaNotaCobro
-                                                        group nc by nc.CORRELATIVO into g
-                                                        select new DTO_REPORTE_NOTA_COBRO
-                                                        {
-                                                            ID_COBRO = g.FirstOrDefault().ID_COBRO,
-                                                            ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
-                                                            CORRELATIVO = g.Key,
-                                                            NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
-                                                            RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
-                                                            NOMBRE_REPORTE = g.FirstOrDefault().NOMBRE_REPORTE,
-                                                        }).ToList();
+                                                                                 group nc by nc.CORRELATIVO into g
+                                                                                 select new DTO_REPORTE_NOTA_COBRO
+                                                                                 {
+                                                                                     ID_COBRO = g.FirstOrDefault().ID_COBRO,
+                                                                                     ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
+                                                                                     CORRELATIVO = g.Key,
+                                                                                     NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
+                                                                                     RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
+                                                                                     NOMBRE_REPORTE = g.FirstOrDefault().NOMBRE_REPORTE,
+                                                                                 }).ToList();
 
 
                         // Documento 1: Un archivo con todas las notas de cobro emitidas
@@ -960,61 +958,61 @@ namespace LQCE.Transaccion
                         propiedades.Add("Fecha de Documento", _COBRO.FECHA_COBRO);
                         propiedades.Add("Tipo de Documento", "Nota de Cobro " + ListaNotaCobroEncabezado.FirstOrDefault().NOMBRE_REPORTE);
                         propiedades.Add("Formato", "Consolidado");
-                      
-                            ReportViewer _ReportViewer = new ReportViewer();
-                            _ReportViewer.ProcessingMode = ProcessingMode.Local;
-                            _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
-                            _ReportViewer.LocalReport.DataSources.Clear();
-                            _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ListaNotaCobroEncabezado));
-                            _ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteNotaCobro_SubreportProcessingEventHandler);
-                            _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + ListaNotaCobroEncabezado.FirstOrDefault().NOMBRE_REPORTE;
 
-                            _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStreamNotaCobro, out warnings);
-                            foreach (Stream stream in m_streams_NotaCobro)
+                        ReportViewer _ReportViewer = new ReportViewer();
+                        _ReportViewer.ProcessingMode = ProcessingMode.Local;
+                        _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
+                        _ReportViewer.LocalReport.DataSources.Clear();
+                        _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", ListaNotaCobroEncabezado));
+                        _ReportViewer.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteNotaCobro_SubreportProcessingEventHandler);
+                        _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + ListaNotaCobroEncabezado.FirstOrDefault().NOMBRE_REPORTE;
+
+                        _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStreamNotaCobro, out warnings);
+                        foreach (Stream stream in m_streams_NotaCobro)
+                            stream.Position = 0;
+
+                        using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
+                        {
+                            SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
+                            string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobro_" + _COBRO.ID.ToString() + ".pdf";
+                            spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobro[0], propiedades, true);
+                            spList.Update();
+                        }
+
+                        foreach (var item in ListaNotaCobroEncabezado)
+                        {
+                            m_streams_NotaCobroIndividual = new List<Stream>();
+                            // Documento 2: Un archivo por cada detalles de facturas
+                            List<DTO_REPORTE_NOTA_COBRO> LISTA_DTO_REPORTE_NOTA_COBRO2 = new List<DTO_REPORTE_NOTA_COBRO>();
+                            LISTA_DTO_REPORTE_NOTA_COBRO2.Add(item);
+
+                            Hashtable propiedadesDetalle = new Hashtable();
+                            propiedadesDetalle.Add("Fecha de Documento", _COBRO.FECHA_COBRO);
+                            propiedadesDetalle.Add("Tipo de Documento", "Nota de Cobro " + item.NOMBRE_REPORTE);
+                            propiedadesDetalle.Add("Formato", "Individual");
+                            propiedadesDetalle.Add("RUT Cliente", item.RUT_CLIENTE);
+                            propiedadesDetalle.Add("Nombre Cliente", item.NOMBRE_CLIENTE);
+
+                            ReportViewer _ReportViewerDetalle = new ReportViewer();
+                            _ReportViewerDetalle.ProcessingMode = ProcessingMode.Local;
+                            _ReportViewerDetalle.LocalReport.ShowDetailedSubreportMessages = true;
+                            _ReportViewerDetalle.LocalReport.DataSources.Clear();
+                            _ReportViewerDetalle.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", LISTA_DTO_REPORTE_NOTA_COBRO2));
+                            _ReportViewerDetalle.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteDetalleFactura_SubreportProcessingEventHandler);
+                            _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + LISTA_DTO_REPORTE_NOTA_COBRO2.FirstOrDefault().NOMBRE_REPORTE;
+
+                            _ReportViewerDetalle.LocalReport.Render("PDF", deviceInfo, CreateStreamNotaCobroIndividual, out warnings);
+                            foreach (Stream stream in m_streams_NotaCobroIndividual)
                                 stream.Position = 0;
 
                             using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
                             {
                                 SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
-                                string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobro_" + _COBRO.ID.ToString() + ".pdf";
-                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobro[0], propiedades, true);
+                                string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobroIndividual_" + _COBRO.ID.ToString() + "_" + item.NOMBRE_CLIENTE + ".pdf";
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobroIndividual[0], propiedadesDetalle, true);
                                 spList.Update();
                             }
-
-                            foreach (var item in ListaNotaCobroEncabezado)
-                            {
-                                m_streams_NotaCobroIndividual = new List<Stream>();
-                                // Documento 2: Un archivo por cada detalles de facturas
-                                List<DTO_REPORTE_NOTA_COBRO> LISTA_DTO_REPORTE_NOTA_COBRO2 = new List<DTO_REPORTE_NOTA_COBRO>();
-                                LISTA_DTO_REPORTE_NOTA_COBRO2.Add(item);
-
-                                Hashtable propiedadesDetalle = new Hashtable();
-                                propiedadesDetalle.Add("Fecha de Documento", _COBRO.FECHA_COBRO);
-                                propiedadesDetalle.Add("Tipo de Documento", "Nota de Cobro " + item.NOMBRE_REPORTE);
-                                propiedadesDetalle.Add("Formato", "Individual");
-                                propiedadesDetalle.Add("RUT Cliente", item.RUT_CLIENTE);
-                                propiedadesDetalle.Add("Nombre Cliente", item.NOMBRE_CLIENTE);
-
-                                ReportViewer _ReportViewerDetalle = new ReportViewer();
-                                _ReportViewerDetalle.ProcessingMode = ProcessingMode.Local;
-                                _ReportViewerDetalle.LocalReport.ShowDetailedSubreportMessages = true;
-                                _ReportViewerDetalle.LocalReport.DataSources.Clear();
-                                _ReportViewerDetalle.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", LISTA_DTO_REPORTE_NOTA_COBRO2));
-                                _ReportViewerDetalle.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteDetalleFactura_SubreportProcessingEventHandler);
-                                _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + LISTA_DTO_REPORTE_NOTA_COBRO2.FirstOrDefault().NOMBRE_REPORTE;
-
-                                _ReportViewerDetalle.LocalReport.Render("PDF", deviceInfo, CreateStreamNotaCobroIndividual, out warnings);
-                                foreach (Stream stream in m_streams_NotaCobroIndividual)
-                                    stream.Position = 0;
-
-                                using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
-                                {
-                                    SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
-                                    string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobroIndividual_" + _COBRO.ID.ToString() + "_" + item.NOMBRE_CLIENTE + ".pdf";
-                                    spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobroIndividual[0], propiedadesDetalle, true);
-                                    spList.Update();
-                                }
-                            }
+                        }
 
                     }
                     catch (Exception ex)
@@ -1047,9 +1045,7 @@ namespace LQCE.Transaccion
             }
         }
 
-
-
-        public List<DTO_RESUMEN_FACTURA> GetResumenFacturasByFilter(string RUT, string NOMBRE_CLIENTE, 
+        public List<DTO_RESUMEN_FACTURA> GetResumenFacturasByFilter(string RUT, string NOMBRE_CLIENTE,
             DateTime? FECHA_EMISION, int? NUMERO_FACTURA, bool? PAGADO)
         {
             try
@@ -1069,10 +1065,9 @@ namespace LQCE.Transaccion
                                 FECHA_EMISION = f.FACTURACION.FECHA_FACTURACION,
                                 VALOR_TOTAL = f.TOTAL,
                                 VALOR_PAGADO = f.FACTURA_DETALLE
-                                        .Where(fd => fd.ACTIVO).Sum(fd => fd.PAGO_DETALLE
-                                            .Where(pd => pd.ACTIVO).Sum(pd => pd.MONTO)),
+                                        .Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO),
                                 PAGOS_REGISTRADOS = p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
-                                SALDO_DEUDOR = 0
+                                SALDO_DEUDOR = f.TOTAL - f.FACTURA_DETALLE.Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO)
                             }).ToList();
                 }
             }
@@ -1119,5 +1114,76 @@ namespace LQCE.Transaccion
             }
         }
 
+        public DTO_DETALLE_FACTURA GetDetalleFacturaById(int ID_FACTURA)
+        {
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+
+                    DTO_DETALLE_FACTURA _DTO_FACTURA = (from f in _RepositorioFACTURACION.GetFacturasWithReferencesFull()
+                                                        let p = _RepositorioFACTURACION.GetPagosWithReferencesFull()
+                                                        where f.ACTIVO && f.FACTURACION.ACTIVO && f.ID == ID_FACTURA
+                                                        select new DTO_DETALLE_FACTURA
+                                                        {
+                                                            ID_FACTURA = f.ID,
+                                                            RUT_CLIENTE = f.RUT_CLIENTE,
+                                                            NOMBRE_CLIENTE = f.NOMBRE_CLIENTE,
+                                                            FECHA_EMISION = f.FACTURACION.FECHA_FACTURACION,
+                                                            VALOR_TOTAL = f.TOTAL,
+                                                            VALOR_PAGADO = f.FACTURA_DETALLE
+                                                                    .Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO),
+                                                            PAGOS_REGISTRADOS = p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
+                                                            SALDO_DEUDOR = f.TOTAL - f.FACTURA_DETALLE
+                                                                    .Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO)
+                                                        }).FirstOrDefault();
+
+                    _DTO_FACTURA.LISTA_PRESTACIONES = (from df in _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(ID_FACTURA)
+                                                       where df.ACTIVO && df.PRESTACION.ACTIVO
+                                                       select new DTO_DETALLE_FACTURA_PRESTACION
+                                                       {
+                                                           ID_FACTURA_DETALLE = df.ID,
+                                                           NUMERO_FICHA = df.PRESTACION.ID,
+                                                           MONTO_TOTAL = df.MONTO_TOTAL,
+                                                           MONTO_COBRADO = df.MONTO_COBRADO,
+                                                           FECHA_RECEPCION = df.PRESTACION.FECHA_RECEPCION,
+                                                           NOMBRE_PACIENTE = df.PRESTACION.PRESTACION_HUMANA != null ? df.PRESTACION.PRESTACION_HUMANA.NOMBRE : df.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
+                                                       }).ToList();
+
+                    _DTO_FACTURA.LISTA_COBROS = (from c in _RepositorioFACTURACION.GetNotasCobrosByIdFacturaWithReferencesFull(ID_FACTURA)
+                                                 select new DTO_DETALLE_FACTURA_COBRO
+                                                 {
+                                                     ID_NOTA_COBRO = c.ID,
+                                                     FECHA_COBRO = c.COBRO.FECHA_COBRO,
+                                                     NOMBRE_TIPO_COBRO = c.COBRO.TIPO_COBRO.NOMBRE,
+                                                     MONTO_PENDIENTE_TOTAL = c.NOTA_COBRO_DETALLE.Where(ncd => ncd.ACTIVO).Sum(ncd => ncd.MONTO_PENDIENTE),
+                                                     MONTO_PENDIENTE_FACTURA = c.NOTA_COBRO_DETALLE.Where(ncd => ncd.ACTIVO && ncd.FACTURA.ID == ID_FACTURA).Sum(ncd => ncd.MONTO_PENDIENTE)
+                                                 }).ToList();
+
+                    _DTO_FACTURA.LISTA_PAGOS = (from p in _RepositorioFACTURACION.GetPagosWithReferencesFull()
+                                                where p.ACTIVO && p.PAGO_DETALLE.Any(pd => pd.ACTIVO
+                                                    && pd.FACTURA_DETALLE.ACTIVO
+                                                    && pd.FACTURA_DETALLE.FACTURA.ID == ID_FACTURA)
+                                                select new DTO_DETALLE_FACTURA_PAGO
+                                                {
+                                                    ID_PAGO = p.ID,
+                                                    FECHA_PAGO = p.FECHA_PAGO,
+                                                    MONTO_PAGO_TOTAL = p.MONTO_PAGO,
+                                                    MONTO_PAGO_FACTURA = p.PAGO_DETALLE.Where(pd => pd.ACTIVO
+                                                    && pd.FACTURA_DETALLE.ACTIVO
+                                                    && pd.FACTURA_DETALLE.FACTURA.ID == ID_FACTURA).Sum(pd => pd.MONTO)
+                                                }).ToList();
+
+                    return _DTO_FACTURA;
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
     }
 }

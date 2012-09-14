@@ -15,7 +15,6 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CLIENTE_TIPO_PRESTACION", "TIPO_PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_PRESTACION), "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CLIENTE))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_CLIENTE", "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CLIENTE), "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PAGO_CLIENTE", "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CLIENTE), "PAGO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PAGO))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_CLIENTE", "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CLIENTE), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_COBRO_TIPO_COBRO", "TIPO_COBRO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_COBRO), "COBRO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.COBRO))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_COMUNA_REGION", "REGION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.REGION), "COMUNA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.COMUNA))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CONVENIO_TARIFARIO_CONVENIO", "CONVENIO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CONVENIO), "CONVENIO_TARIFARIO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CONVENIO_TARIFARIO))]
@@ -32,16 +31,8 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_DETALLE_FACTURA", "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.FACTURA), "FACTURA_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA_DETALLE))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_FACTURACION", "FACTURACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.FACTURACION), "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_NOTA_COBRO_DETALLE_FACTURA", "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.FACTURA), "NOTA_COBRO_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.NOTA_COBRO_DETALLE))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_DETALLE_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "FACTURA_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA_DETALLE))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PAGO_DETALLE_FACTURA_DETALLE", "FACTURA_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.FACTURA_DETALLE), "PAGO_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PAGO_DETALLE))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_GARANTIA", "GARANTIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.GARANTIA), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PAGO_DETALLE_PAGO", "PAGO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PAGO), "PAGO_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PAGO_DETALLE))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_EXAMEN))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_MUESTRA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_MUESTRA))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION_HUMANA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION_HUMANA), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_PREVISION", "PREVISION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PREVISION), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_PRESTACION), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_RAZA", "RAZA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.RAZA), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_ENCABEZADO), "CARGA_PRESTACIONES_HUMANAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_HUMANAS_DETALLE))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO", "CARGA_PRESTACIONES_ENCABEZADO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CARGA_PRESTACIONES_ENCABEZADO), "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE))]
@@ -64,13 +55,21 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_EXAMEN", "EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.EXAMEN), "CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_CLIENTE_TIPO_FACTURA", "TIPO_FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_FACTURA), "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.CLIENTE))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_TIPO_FACTURA", "TIPO_FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_FACTURA), "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_HUMANA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_HUMANA))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_NOTA_COBRO_CLIENTE", "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CLIENTE), "NOTA_COBRO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.NOTA_COBRO))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_NOTA_COBRO_COBRO", "COBRO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.COBRO), "NOTA_COBRO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.NOTA_COBRO))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_NOTA_COBRO_DETALLE_NOTA_COBRO", "NOTA_COBRO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.NOTA_COBRO), "NOTA_COBRO_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.NOTA_COBRO_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_CLIENTE", "CLIENTE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.CLIENTE), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_FACTURA_DETALLE_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "FACTURA_DETALLE", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.FACTURA_DETALLE))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_GARANTIA", "GARANTIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.GARANTIA), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_EXAMEN", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_EXAMEN))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_HUMANA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_HUMANA))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_MUESTRA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_MUESTRA))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_PREVISION", "PREVISION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PREVISION), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_PRESTACION), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 2012/09/12 15:45:52
+// Fecha de generación: 2012/09/14 12:35:58
 namespace LQCE.Modelo
 {
     
@@ -410,23 +409,6 @@ namespace LQCE.Modelo
         }
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         private global::System.Data.Objects.ObjectQuery<PAGO_DETALLE> _PAGO_DETALLE;
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<PRESTACION> PRESTACION
-        {
-            get
-            {
-                if ((this._PRESTACION == null))
-                {
-                    this._PRESTACION = base.CreateQuery<PRESTACION>("[PRESTACION]");
-                }
-                return this._PRESTACION;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<PRESTACION> _PRESTACION;
         /// <summary>
         /// No hay ningún comentario para PRESTACION_EXAMEN en el esquema.
         /// </summary>
@@ -768,6 +750,23 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         private global::System.Data.Objects.ObjectQuery<NOTA_COBRO> _NOTA_COBRO;
         /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<PRESTACION> PRESTACION
+        {
+            get
+            {
+                if ((this._PRESTACION == null))
+                {
+                    this._PRESTACION = base.CreateQuery<PRESTACION>("[PRESTACION]");
+                }
+                return this._PRESTACION;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<PRESTACION> _PRESTACION;
+        /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
@@ -910,14 +909,6 @@ namespace LQCE.Modelo
         public void AddToPAGO_DETALLE(PAGO_DETALLE pAGO_DETALLE)
         {
             base.AddObject("PAGO_DETALLE", pAGO_DETALLE);
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToPRESTACION(PRESTACION pRESTACION)
-        {
-            base.AddObject("PRESTACION", pRESTACION);
         }
         /// <summary>
         /// No hay ningún comentario para PRESTACION_EXAMEN en el esquema.
@@ -1078,6 +1069,14 @@ namespace LQCE.Modelo
         public void AddToNOTA_COBRO(NOTA_COBRO nOTA_COBRO)
         {
             base.AddObject("NOTA_COBRO", nOTA_COBRO);
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToPRESTACION(PRESTACION pRESTACION)
+        {
+            base.AddObject("PRESTACION", pRESTACION);
         }
     }
     /// <summary>
@@ -1508,28 +1507,6 @@ namespace LQCE.Modelo
             }
         }
         /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_CLIENTE", "PRESTACION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_CLIENTE", "PRESTACION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_CLIENTE", "PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
         /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
@@ -1631,6 +1608,28 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<NOTA_COBRO>("LQCEModelo.FK_NOTA_COBRO_CLIENTE", "NOTA_COBRO", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_CLIENTE", "PRESTACION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_CLIENTE", "PRESTACION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_CLIENTE", "PRESTACION", value);
                 }
             }
         }
@@ -4278,6 +4277,28 @@ namespace LQCE.Modelo
             }
         }
         /// <summary>
+        /// No hay ningún comentario para PAGO_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PAGO_DETALLE_FACTURA_DETALLE", "PAGO_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<PAGO_DETALLE> PAGO_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PAGO_DETALLE>("LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE", "PAGO_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PAGO_DETALLE>("LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE", "PAGO_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
         /// No hay ningún comentario para PRESTACION en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_FACTURA_DETALLE_PRESTACION", "PRESTACION")]
@@ -4313,28 +4334,6 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION>("LQCEModelo.FK_FACTURA_DETALLE_PRESTACION", "PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PAGO_DETALLE en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PAGO_DETALLE_FACTURA_DETALLE", "PAGO_DETALLE")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<PAGO_DETALLE> PAGO_DETALLE
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PAGO_DETALLE>("LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE", "PAGO_DETALLE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PAGO_DETALLE>("LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE", "PAGO_DETALLE", value);
                 }
             }
         }
@@ -4577,28 +4576,6 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnACTIVOChanged();
         /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_GARANTIA", "PRESTACION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_GARANTIA", "PRESTACION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_GARANTIA", "PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
         /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
@@ -4639,6 +4616,28 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_GARANTIA", "PRESTACION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_GARANTIA", "PRESTACION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_GARANTIA", "PRESTACION", value);
                 }
             }
         }
@@ -5214,536 +5213,6 @@ namespace LQCE.Modelo
         }
     }
     /// <summary>
-    /// No hay ningún comentario para LQCEModelo.PRESTACION en el esquema.
-    /// </summary>
-    /// <KeyProperties>
-    /// ID
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="PRESTACION")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class PRESTACION : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Crear un nuevo objeto PRESTACION.
-        /// </summary>
-        /// <param name="id">Valor inicial de ID.</param>
-        /// <param name="mEDICO">Valor inicial de MEDICO.</param>
-        /// <param name="fECHA_RECEPCION">Valor inicial de FECHA_RECEPCION.</param>
-        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static PRESTACION CreatePRESTACION(int id, string mEDICO, global::System.DateTime fECHA_RECEPCION, bool aCTIVO)
-        {
-            PRESTACION pRESTACION = new PRESTACION();
-            pRESTACION.ID = id;
-            pRESTACION.MEDICO = mEDICO;
-            pRESTACION.FECHA_RECEPCION = fECHA_RECEPCION;
-            pRESTACION.ACTIVO = aCTIVO;
-            return pRESTACION;
-        }
-        /// <summary>
-        /// No hay ningún comentario para la propiedad ID en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int ID
-        {
-            get
-            {
-                return this._ID;
-            }
-            set
-            {
-                this.OnIDChanging(value);
-                this.ReportPropertyChanging("ID");
-                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("ID");
-                this.OnIDChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _ID;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIDChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIDChanged();
-        /// <summary>
-        /// No hay ningún comentario para la propiedad MEDICO en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string MEDICO
-        {
-            get
-            {
-                return this._MEDICO;
-            }
-            set
-            {
-                this.OnMEDICOChanging(value);
-                this.ReportPropertyChanging("MEDICO");
-                this._MEDICO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("MEDICO");
-                this.OnMEDICOChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _MEDICO;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnMEDICOChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnMEDICOChanged();
-        /// <summary>
-        /// No hay ningún comentario para la propiedad FECHA_MUESTRA en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Nullable<global::System.DateTime> FECHA_MUESTRA
-        {
-            get
-            {
-                return this._FECHA_MUESTRA;
-            }
-            set
-            {
-                this.OnFECHA_MUESTRAChanging(value);
-                this.ReportPropertyChanging("FECHA_MUESTRA");
-                this._FECHA_MUESTRA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("FECHA_MUESTRA");
-                this.OnFECHA_MUESTRAChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Nullable<global::System.DateTime> _FECHA_MUESTRA;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFECHA_MUESTRAChanging(global::System.Nullable<global::System.DateTime> value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFECHA_MUESTRAChanged();
-        /// <summary>
-        /// No hay ningún comentario para la propiedad FECHA_RECEPCION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.DateTime FECHA_RECEPCION
-        {
-            get
-            {
-                return this._FECHA_RECEPCION;
-            }
-            set
-            {
-                this.OnFECHA_RECEPCIONChanging(value);
-                this.ReportPropertyChanging("FECHA_RECEPCION");
-                this._FECHA_RECEPCION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("FECHA_RECEPCION");
-                this.OnFECHA_RECEPCIONChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.DateTime _FECHA_RECEPCION;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFECHA_RECEPCIONChanging(global::System.DateTime value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFECHA_RECEPCIONChanged();
-        /// <summary>
-        /// No hay ningún comentario para la propiedad FECHA_ENTREGA_RESULTADOS en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Nullable<global::System.DateTime> FECHA_ENTREGA_RESULTADOS
-        {
-            get
-            {
-                return this._FECHA_ENTREGA_RESULTADOS;
-            }
-            set
-            {
-                this.OnFECHA_ENTREGA_RESULTADOSChanging(value);
-                this.ReportPropertyChanging("FECHA_ENTREGA_RESULTADOS");
-                this._FECHA_ENTREGA_RESULTADOS = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("FECHA_ENTREGA_RESULTADOS");
-                this.OnFECHA_ENTREGA_RESULTADOSChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Nullable<global::System.DateTime> _FECHA_ENTREGA_RESULTADOS;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFECHA_ENTREGA_RESULTADOSChanging(global::System.Nullable<global::System.DateTime> value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFECHA_ENTREGA_RESULTADOSChanged();
-        /// <summary>
-        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public bool ACTIVO
-        {
-            get
-            {
-                return this._ACTIVO;
-            }
-            set
-            {
-                this.OnACTIVOChanging(value);
-                this.ReportPropertyChanging("ACTIVO");
-                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("ACTIVO");
-                this.OnACTIVOChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private bool _ACTIVO;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnACTIVOChanging(bool value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnACTIVOChanged();
-        /// <summary>
-        /// No hay ningún comentario para CLIENTE en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_CLIENTE", "CLIENTE")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public CLIENTE CLIENTE
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para CLIENTE en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<CLIENTE> CLIENTEReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para FACTURA_DETALLE en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_FACTURA_DETALLE_PRESTACION", "FACTURA_DETALLE")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<FACTURA_DETALLE> FACTURA_DETALLE
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<FACTURA_DETALLE>("LQCEModelo.FK_FACTURA_DETALLE_PRESTACION", "FACTURA_DETALLE");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<FACTURA_DETALLE>("LQCEModelo.FK_FACTURA_DETALLE_PRESTACION", "FACTURA_DETALLE", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para GARANTIA en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_GARANTIA", "GARANTIA")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public GARANTIA GARANTIA
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para GARANTIA en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<GARANTIA> GARANTIAReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_EXAMEN en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION_EXAMEN")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION_EXAMEN> PRESTACION_EXAMEN
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION_EXAMEN>("LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION_EXAMEN");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION_EXAMEN>("LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION_EXAMEN", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_MUESTRA en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION_MUESTRA")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION_MUESTRA> PRESTACION_MUESTRA
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION_MUESTRA>("LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION_MUESTRA");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION_MUESTRA>("LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION_MUESTRA", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_HUMANA en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION_HUMANA")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public PRESTACION_HUMANA PRESTACION_HUMANA
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION_HUMANA").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION_HUMANA").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_HUMANA en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION_HUMANA> PRESTACION_HUMANAReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION_HUMANA");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION_HUMANA", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PREVISION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_PREVISION", "PREVISION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public PREVISION PREVISION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PREVISION en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<PREVISION> PREVISIONReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para TIPO_PRESTACION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public TIPO_PRESTACION TIPO_PRESTACION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para TIPO_PRESTACION en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<TIPO_PRESTACION> TIPO_PRESTACIONReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_VETERINARIA en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public PRESTACION_VETERINARIA PRESTACION_VETERINARIA
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_VETERINARIA en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION_VETERINARIA> PRESTACION_VETERINARIAReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_HUMANA_1 en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public PRESTACION_HUMANA PRESTACION_HUMANA_1
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_HUMANA_1 en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION_HUMANA> PRESTACION_HUMANA_1Reference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA", value);
-                }
-            }
-        }
-    }
-    /// <summary>
     /// No hay ningún comentario para LQCEModelo.PRESTACION_EXAMEN en el esquema.
     /// </summary>
     /// <KeyProperties>
@@ -6124,51 +5593,12 @@ namespace LQCE.Modelo
         /// <summary>
         /// No hay ningún comentario para PRESTACION en el esquema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public PRESTACION PRESTACION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION> PRESTACIONReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_PRESTACION_HUMANA", "PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION_1 en el esquema.
-        /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public PRESTACION PRESTACION_1
+        public PRESTACION PRESTACION
         {
             get
             {
@@ -6180,12 +5610,12 @@ namespace LQCE.Modelo
             }
         }
         /// <summary>
-        /// No hay ningún comentario para PRESTACION_1 en el esquema.
+        /// No hay ningún comentario para PRESTACION en el esquema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION> PRESTACION_1Reference
+        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION> PRESTACIONReference
         {
             get
             {
@@ -6552,45 +5982,6 @@ namespace LQCE.Modelo
             }
         }
         /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public PRESTACION PRESTACION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION").Value = value;
-            }
-        }
-        /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION> PRESTACIONReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
         /// No hay ningún comentario para RAZA en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_RAZA", "RAZA")]
@@ -6626,6 +6017,45 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<RAZA>("LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA", "RAZA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PRESTACION PRESTACION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION> PRESTACIONReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", value);
                 }
             }
         }
@@ -6738,28 +6168,6 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnACTIVOChanged();
         /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_PREVISION", "PRESTACION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_PREVISION", "PRESTACION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_PREVISION", "PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
         /// No hay ningún comentario para CARGA_PRESTACIONES_HUMANAS_DETALLE en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_HUMANAS_DETALLE")]
@@ -6800,6 +6208,28 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_VETERINARIAS_DETALLE>("LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION", "CARGA_PRESTACIONES_VETERINARIAS_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_PREVISION", "PRESTACION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_PREVISION", "PRESTACION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_PREVISION", "PRESTACION", value);
                 }
             }
         }
@@ -7456,28 +6886,6 @@ namespace LQCE.Modelo
             }
         }
         /// <summary>
-        /// No hay ningún comentario para PRESTACION en el esquema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "PRESTACION")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "PRESTACION");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "PRESTACION", value);
-                }
-            }
-        }
-        /// <summary>
         /// No hay ningún comentario para CARGA_PRESTACIONES_ENCABEZADO en el esquema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION", "CARGA_PRESTACIONES_ENCABEZADO")]
@@ -7496,6 +6904,28 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<CARGA_PRESTACIONES_ENCABEZADO>("LQCEModelo.FK_CARGA_PRESTACIONES_ENCABEZADO_TIPO_PRESTACION", "CARGA_PRESTACIONES_ENCABEZADO", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "PRESTACION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION> PRESTACION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "PRESTACION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "PRESTACION", value);
                 }
             }
         }
@@ -11385,6 +10815,497 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<NOTA_COBRO_DETALLE>("LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO", "NOTA_COBRO_DETALLE", value);
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.PRESTACION en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="PRESTACION")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class PRESTACION : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto PRESTACION.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="mEDICO">Valor inicial de MEDICO.</param>
+        /// <param name="fECHA_RECEPCION">Valor inicial de FECHA_RECEPCION.</param>
+        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static PRESTACION CreatePRESTACION(int id, string mEDICO, global::System.DateTime fECHA_RECEPCION, bool aCTIVO)
+        {
+            PRESTACION pRESTACION = new PRESTACION();
+            pRESTACION.ID = id;
+            pRESTACION.MEDICO = mEDICO;
+            pRESTACION.FECHA_RECEPCION = fECHA_RECEPCION;
+            pRESTACION.ACTIVO = aCTIVO;
+            return pRESTACION;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad MEDICO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string MEDICO
+        {
+            get
+            {
+                return this._MEDICO;
+            }
+            set
+            {
+                this.OnMEDICOChanging(value);
+                this.ReportPropertyChanging("MEDICO");
+                this._MEDICO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("MEDICO");
+                this.OnMEDICOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _MEDICO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMEDICOChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnMEDICOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_MUESTRA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> FECHA_MUESTRA
+        {
+            get
+            {
+                return this._FECHA_MUESTRA;
+            }
+            set
+            {
+                this.OnFECHA_MUESTRAChanging(value);
+                this.ReportPropertyChanging("FECHA_MUESTRA");
+                this._FECHA_MUESTRA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("FECHA_MUESTRA");
+                this.OnFECHA_MUESTRAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _FECHA_MUESTRA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_MUESTRAChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_MUESTRAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_RECEPCION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime FECHA_RECEPCION
+        {
+            get
+            {
+                return this._FECHA_RECEPCION;
+            }
+            set
+            {
+                this.OnFECHA_RECEPCIONChanging(value);
+                this.ReportPropertyChanging("FECHA_RECEPCION");
+                this._FECHA_RECEPCION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("FECHA_RECEPCION");
+                this.OnFECHA_RECEPCIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _FECHA_RECEPCION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_RECEPCIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_ENTREGA_RESULTADOS en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Nullable<global::System.DateTime> FECHA_ENTREGA_RESULTADOS
+        {
+            get
+            {
+                return this._FECHA_ENTREGA_RESULTADOS;
+            }
+            set
+            {
+                this.OnFECHA_ENTREGA_RESULTADOSChanging(value);
+                this.ReportPropertyChanging("FECHA_ENTREGA_RESULTADOS");
+                this._FECHA_ENTREGA_RESULTADOS = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("FECHA_ENTREGA_RESULTADOS");
+                this.OnFECHA_ENTREGA_RESULTADOSChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Nullable<global::System.DateTime> _FECHA_ENTREGA_RESULTADOS;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_ENTREGA_RESULTADOSChanging(global::System.Nullable<global::System.DateTime> value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_ENTREGA_RESULTADOSChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ACTIVO
+        {
+            get
+            {
+                return this._ACTIVO;
+            }
+            set
+            {
+                this.OnACTIVOChanging(value);
+                this.ReportPropertyChanging("ACTIVO");
+                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ACTIVO");
+                this.OnACTIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ACTIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para CLIENTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_CLIENTE", "CLIENTE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public CLIENTE CLIENTE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para CLIENTE en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<CLIENTE> CLIENTEReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<CLIENTE>("LQCEModelo.FK_PRESTACION_CLIENTE", "CLIENTE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para FACTURA_DETALLE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_FACTURA_DETALLE_PRESTACION", "FACTURA_DETALLE")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<FACTURA_DETALLE> FACTURA_DETALLE
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<FACTURA_DETALLE>("LQCEModelo.FK_FACTURA_DETALLE_PRESTACION", "FACTURA_DETALLE");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<FACTURA_DETALLE>("LQCEModelo.FK_FACTURA_DETALLE_PRESTACION", "FACTURA_DETALLE", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para GARANTIA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_GARANTIA", "GARANTIA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public GARANTIA GARANTIA
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para GARANTIA en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<GARANTIA> GARANTIAReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<GARANTIA>("LQCEModelo.FK_PRESTACION_GARANTIA", "GARANTIA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_EXAMEN en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION_EXAMEN")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION_EXAMEN> PRESTACION_EXAMEN
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION_EXAMEN>("LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION_EXAMEN");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION_EXAMEN>("LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION", "PRESTACION_EXAMEN", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_HUMANA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PRESTACION_HUMANA PRESTACION_HUMANA
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_HUMANA en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION_HUMANA> PRESTACION_HUMANAReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION_HUMANA>("LQCEModelo.FK_PRESTACION_HUMANA_PRESTACION", "PRESTACION_HUMANA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_MUESTRA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION_MUESTRA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<PRESTACION_MUESTRA> PRESTACION_MUESTRA
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<PRESTACION_MUESTRA>("LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION_MUESTRA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<PRESTACION_MUESTRA>("LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION", "PRESTACION_MUESTRA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PREVISION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_PREVISION", "PREVISION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PREVISION PREVISION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PREVISION en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PREVISION> PREVISIONReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PREVISION>("LQCEModelo.FK_PRESTACION_PREVISION", "PREVISION", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para TIPO_PRESTACION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public TIPO_PRESTACION TIPO_PRESTACION
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para TIPO_PRESTACION en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<TIPO_PRESTACION> TIPO_PRESTACIONReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<TIPO_PRESTACION>("LQCEModelo.FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_VETERINARIA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public PRESTACION_VETERINARIA PRESTACION_VETERINARIA
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para PRESTACION_VETERINARIA en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<PRESTACION_VETERINARIA> PRESTACION_VETERINARIAReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<PRESTACION_VETERINARIA>("LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION_VETERINARIA", value);
                 }
             }
         }

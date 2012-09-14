@@ -150,6 +150,13 @@
     <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.designer.cs">
       <DependentUpon>Paginador1.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\BuscarFactura.aspx.cs">
+      <DependentUpon>BuscarFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\BuscarFactura.aspx.designer.cs">
+      <DependentUpon>BuscarFactura.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasivaPrestacionesHumanas.aspx.cs">
       <DependentUpon>CargaMasivaPrestacionesHumanas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -163,6 +170,13 @@
     </Compile>
     <Compile Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx.designer.cs">
       <DependentUpon>CargaMasivaPrestacionesVeterinarias.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\DetalleFactura.aspx.cs">
+      <DependentUpon>DetalleFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\DetalleFactura.aspx.designer.cs">
+      <DependentUpon>DetalleFactura.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\EditarPrestacionesHumanas.aspx.cs">
       <DependentUpon>EditarPrestacionesHumanas.aspx</DependentUpon>
@@ -290,10 +304,16 @@
     </Content>
     <Content Include="Layouts\JScript\jquery-1.4.1.min.js" />
     <Content Include="Layouts\JScript\ui.datepicker-es.js" />
+    <Content Include="Layouts\Prestaciones\BuscarFactura.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesHumanas.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\CargaMasivaPrestacionesVeterinarias.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\DetalleFactura.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\EditarPrestacionesHumanas.aspx">

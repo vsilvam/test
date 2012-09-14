@@ -13,3 +13,47 @@
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
+
+<asp:panel ID='pnDetalleFacturas' runat='server'>
+<h1>Ficha de Factura</h1>
+    <table>
+        <tr>
+            <td>Nombre Cliente</td>
+            <td>
+                <asp:Label ID="lblNombreCliente" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>Rut Cliente</td>
+            <td>
+                <asp:Label ID="lblRutCliente" runat="server" ></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>Fecha Emision</td>
+            <td>
+                <asp:Label ID="lblFechaEmision" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>Numero Factura</td>
+            <td>
+                <asp:Label ID="lblNroFactura" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>Estado de Pago</td>
+            <td>
+                <asp:Label ID="lblEstadoPago" runat="server"></asp:Label>
+            </td>
+        </tr>
+    </table>    
+</asp:panel>
+<asp:Panel ID='pnDetalles' runat="server">
+    <asp:GridView ID="grdDetalleFactura" runat="server" AutoGenerateColumns='false' Width="100%">
+    </asp:GridView>
+    <asp:GridView ID="grdPagos" runat="server" AutoGenerateColumns='false' Width="100%">
+    </asp:GridView>
+    <asp:GridView ID="grdNotasCobro" runat="server" AutoGenerateColumns='false' Width="100%">
+    </asp:GridView>
+</asp:Panel>

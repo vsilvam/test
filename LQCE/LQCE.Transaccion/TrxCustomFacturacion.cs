@@ -734,10 +734,97 @@ namespace LQCE.Transaccion
             }
         }
 
-        public void AnularFacturas()
+        public void BorrarNumeracionFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, bool BORRAR_NUMERACION_TODAS,
+      int? CORRELATIVO_DESDE, int? CORRELATIVO_HASTA)
         {
-            // PENDIENTE IMPLEMENTACION
+            Init();
+            //ListaDetalleFactura = new List<DTO_REPORTE_DETALLEFACTURA_PRESTACION>();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    var q = _RepositorioFACTURA.GetByFilterWithReferences(null, ID_FACTURACION, ID_TIPO_FACTURA,
+                        null, "", null, null, null, null, null, "", "", "", "", "", "", "");
+
+                    if (!BORRAR_NUMERACION_TODAS)
+                    {
+                        if (!CORRELATIVO_DESDE.HasValue)
+                            throw new Exception("Debe señalar factura inicial a borrar numeracion");
+                        if (!CORRELATIVO_HASTA.HasValue)
+                            throw new Exception("Debe señalar factura final a borrar numeracion");
+                        if (CORRELATIVO_DESDE.Value > CORRELATIVO_HASTA.Value)
+                            throw new Exception("El rango de facturas está mal definido, el valor inicial es mayor al valor final");
+
+                        q = q.Where(f => f.CORRELATIVO >= CORRELATIVO_DESDE.Value && f.CORRELATIVO <= CORRELATIVO_HASTA.Value);
+                    }
+
+               if(q.Any(f => f.NOTA_COBRO_DETALLE.Any(n => n.ACTIVO)))
+    throw new Exception("Ya existen facturas cobradas al cliente en el rango señalado");
+
+                    foreach (var _FACTURA in q.OrderBy(f => f.CORRELATIVO).ToList())
+                    {
+                        if (!_FACTURA.NUMERO_FACTURA.HasValue)
+                        {
+                            _FACTURA.NUMERO_FACTURA = null;
+                            context.ApplyPropertyChanges("FACTURA", _FACTURA);
+                        }
+                    }
+                    context.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
         }
+
+
+        public void AnularFacturas(List<int> LISTA_ID_FACTURA)
+        {
+            Init();
+            //ListaDetalleFactura = new List<DTO_REPORTE_DETALLEFACTURA_PRESTACION>();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    foreach (int ID_FACTURA in LISTA_ID_FACTURA)
+                    {
+                        FACTURA _FACTURA = _RepositorioFACTURA.GetByIdWithReferences(ID_FACTURA);
+                        if (_FACTURA == null)
+                            throw new Exception("No se encuentra informacion de la factura");
+
+                        if (_FACTURA.NOTA_COBRO_DETALLE.Any(n => n.ACTIVO))
+                            throw new Exception("La factura ya ha sido cobrada al cliente");
+
+                        _FACTURA.ACTIVO = false;
+                        foreach (FACTURA_DETALLE _FACTURA_DETALLE in _FACTURA.FACTURA_DETALLE.Where(fd => fd.ACTIVO))
+                        {
+                            _FACTURA_DETALLE.ACTIVO = false;
+                            context.ApplyPropertyChanges("FACTURA_DETALLE", _FACTURA_DETALLE);
+                        }
+                        context.ApplyPropertyChanges("FACTURA", _FACTURA);
+
+                        context.SaveChanges();
+
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
 
         public void EmitirNotaCredito()
         {

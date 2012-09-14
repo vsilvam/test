@@ -303,6 +303,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\JScript\jquery-1.4.1.min.js" />
+    <Content Include="Layouts\JScript\ui.accordion.js" />
     <Content Include="Layouts\JScript\ui.datepicker-es.js" />
     <Content Include="Layouts\Prestaciones\BuscarFactura.aspx">
       <SubType>ASPXCodeBehind</SubType>

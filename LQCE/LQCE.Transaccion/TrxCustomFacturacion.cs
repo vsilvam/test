@@ -215,9 +215,9 @@ namespace LQCE.Transaccion
                         foreach (var facturas in tf)
                         {
                             Hashtable propiedades = new Hashtable();
-                            propiedades.Add("Fecha de Facturación", _FACTURACION.FECHA_FACTURACION);
-propiedades.Add("Tipo de Factura", tf);
-propiedades.Add("Formato", "Matriz de punto");
+                            propiedades.Add("Fecha de Documento", _FACTURACION.FECHA_FACTURACION);
+                            propiedades.Add("Tipo de Documento", "Factura " + facturas.FirstOrDefault().NOMBRE_TIPO_FACTURA);
+                            propiedades.Add("Formato", "Consolidado");
 
                             ReportViewer _ReportViewer = new ReportViewer();
                             _ReportViewer.ProcessingMode = ProcessingMode.Local;
@@ -252,6 +252,12 @@ propiedades.Add("Formato", "Matriz de punto");
                                  RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE
                              }).ToList();
 
+
+                        Hashtable propiedadesDetalle = new Hashtable();
+                        propiedadesDetalle.Add("Fecha de Documento", _FACTURACION.FECHA_FACTURACION);
+                        propiedadesDetalle.Add("Tipo de Documento", "Detalle de Factura");
+                        propiedadesDetalle.Add("Formato", "Consolidado");
+
                         ReportViewer _ReportViewerDetalle = new ReportViewer();
                         _ReportViewerDetalle.ProcessingMode = ProcessingMode.Local;
                         _ReportViewerDetalle.LocalReport.ShowDetailedSubreportMessages = true;
@@ -268,7 +274,7 @@ propiedades.Add("Formato", "Matriz de punto");
                         {
                             SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
                             string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_DetalleFactura.pdf";
-                            spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_DetalleFactura[0], true);
+                            spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_DetalleFactura[0], propiedadesDetalle, true);
                             spList.Update();
                         }
                     }
@@ -384,7 +390,8 @@ propiedades.Add("Formato", "Matriz de punto");
                                 NETO = f.NETO,
                                 IVA = f.IVA,
                                 TOTAL = f.TOTAL,
-                                NUMERO_FACTURA = f.NUMERO_FACTURA
+                                NUMERO_FACTURA = f.NUMERO_FACTURA,
+                                NOMBRE_TIPO_FACTURA = f.TIPO_FACTURA.NOMBRE_FACTURA
                             }).ToList();
                 }
             }
@@ -427,6 +434,7 @@ propiedades.Add("Formato", "Matriz de punto");
                     _DTO_REPORTE_FACTURA.IVA = _FACTURA.IVA;
                     _DTO_REPORTE_FACTURA.TOTAL = _FACTURA.TOTAL;
                     _DTO_REPORTE_FACTURA.NUMERO_FACTURA = _FACTURA.NUMERO_FACTURA;
+                    _DTO_REPORTE_FACTURA.NOMBRE_TIPO_FACTURA = _FACTURA.TIPO_FACTURA.NOMBRE_FACTURA;
                     
                     List<DTO_REPORTE_FACTURA> lista = new List<DTO_REPORTE_FACTURA>();
                     lista.Add(_DTO_REPORTE_FACTURA);
@@ -662,6 +670,12 @@ propiedades.Add("Formato", "Matriz de punto");
 
                             foreach (var facturas in tf)
                             {
+                                Hashtable propiedades = new Hashtable();
+                                propiedades.Add("Fecha de Documento", _FACTURA.FACTURACION.FECHA_FACTURACION);
+                                propiedades.Add("Tipo de Documento", "Factura " + facturas.FirstOrDefault().NOMBRE_TIPO_FACTURA);
+                                propiedades.Add("Formato", "Individual");
+                                propiedades.Add("RUT Cliente", facturas.FirstOrDefault().RUT_CLIENTE);
+                                propiedades.Add("Nombre Cliente", facturas.FirstOrDefault().NOMBRE_CLIENTE);
 
                                 ReportViewer _ReportViewer = new ReportViewer();
                                 _ReportViewer.ProcessingMode = ProcessingMode.Local;
@@ -679,7 +693,7 @@ propiedades.Add("Formato", "Matriz de punto");
                                 {
                                     SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
                                     string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + _FACTURA.NUMERO_FACTURA.Value.ToString() + "_" + facturas.Key + ".pdf";
-                                    spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_matriz[0], true);
+                                    spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_matriz[0], propiedades, true);
                                     spList.Update();
                                 }
                             }
@@ -695,6 +709,14 @@ propiedades.Add("Formato", "Matriz de punto");
                                      NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
                                      RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE
                                  }).ToList();
+
+
+                            Hashtable propiedadesDetalle = new Hashtable();
+                            propiedadesDetalle.Add("Fecha de Documento", _FACTURA.FACTURACION.FECHA_FACTURACION);
+                            propiedadesDetalle.Add("Tipo de Documento", "Detalle de Factura");
+                            propiedadesDetalle.Add("Formato", "Individual");
+                            propiedadesDetalle.Add("RUT Cliente", _FACTURA.RUT_CLIENTE);
+                            propiedadesDetalle.Add("Nombre Cliente", _FACTURA.NOMBRE_CLIENTE);
 
                             ReportViewer _ReportViewerDetalle = new ReportViewer();
                             _ReportViewerDetalle.ProcessingMode = ProcessingMode.Local;
@@ -712,7 +734,7 @@ propiedades.Add("Formato", "Matriz de punto");
                             {
                                 SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
                                 string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + _FACTURA.NUMERO_FACTURA.Value.ToString() + "_DetalleFactura.pdf";
-                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_DetalleFactura[0], true);
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_DetalleFactura[0], propiedadesDetalle, true);
                                 spList.Update();
                             }
                         }
@@ -934,6 +956,11 @@ propiedades.Add("Formato", "Matriz de punto");
 
 
                         // Documento 1: Un archivo con todas las notas de cobro emitidas
+                        Hashtable propiedades = new Hashtable();
+                        propiedades.Add("Fecha de Documento", _COBRO.FECHA_COBRO);
+                        propiedades.Add("Tipo de Documento", "Nota de Cobro " + ListaNotaCobroEncabezado.FirstOrDefault().NOMBRE_REPORTE);
+                        propiedades.Add("Formato", "Consolidado");
+                      
                             ReportViewer _ReportViewer = new ReportViewer();
                             _ReportViewer.ProcessingMode = ProcessingMode.Local;
                             _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
@@ -950,7 +977,7 @@ propiedades.Add("Formato", "Matriz de punto");
                             {
                                 SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
                                 string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobro_" + _COBRO.ID.ToString() + ".pdf";
-                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobro[0], true);
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobro[0], propiedades, true);
                                 spList.Update();
                             }
 
@@ -960,6 +987,13 @@ propiedades.Add("Formato", "Matriz de punto");
                                 // Documento 2: Un archivo por cada detalles de facturas
                                 List<DTO_REPORTE_NOTA_COBRO> LISTA_DTO_REPORTE_NOTA_COBRO2 = new List<DTO_REPORTE_NOTA_COBRO>();
                                 LISTA_DTO_REPORTE_NOTA_COBRO2.Add(item);
+
+                                Hashtable propiedadesDetalle = new Hashtable();
+                                propiedadesDetalle.Add("Fecha de Documento", _COBRO.FECHA_COBRO);
+                                propiedadesDetalle.Add("Tipo de Documento", "Nota de Cobro " + item.NOMBRE_REPORTE);
+                                propiedadesDetalle.Add("Formato", "Individual");
+                                propiedadesDetalle.Add("RUT Cliente", item.RUT_CLIENTE);
+                                propiedadesDetalle.Add("Nombre Cliente", item.NOMBRE_CLIENTE);
 
                                 ReportViewer _ReportViewerDetalle = new ReportViewer();
                                 _ReportViewerDetalle.ProcessingMode = ProcessingMode.Local;
@@ -977,7 +1011,7 @@ propiedades.Add("Formato", "Matriz de punto");
                                 {
                                     SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
                                     string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobroIndividual_" + _COBRO.ID.ToString() + "_" + item.NOMBRE_CLIENTE + ".pdf";
-                                    spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobroIndividual[0], true);
+                                    spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobroIndividual[0], propiedadesDetalle, true);
                                     spList.Update();
                                 }
                             }

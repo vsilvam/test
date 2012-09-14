@@ -1,7 +1,8 @@
 ﻿Libraria: Facturas
 Columnas:
-Fecha de Facturación fecha, obligatorio
-Tipo de Factura texto, obligatorio
-Formato texto, obligatorio
-RUT Cliente texto, optativo
-Nombre Cliente texto, optativo
+Fecha de Documento - fecha, obligatorio
+Tipo de Documento - texto, obligatorio
+Formato - texto, obligatorio
+RUT Cliente - texto, optativo
+Nombre Cliente - texto, optativo
+

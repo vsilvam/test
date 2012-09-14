@@ -6,6 +6,7 @@ using System.Web.UI.WebControls;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
+using System.Globalization;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -47,8 +48,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {
                     pnFacturas.Visible = true;
 
-                    DateTime desde = DateTime.Parse(txtDesde.Text);
-                    DateTime hasta = DateTime.Parse(txtHasta.Text);
+                    IFormatProvider culture = new CultureInfo("es-CL", true);
+
+                    DateTime desde = DateTime.Parse(txtDesde.Text, culture);
+                    DateTime hasta = DateTime.Parse(txtHasta.Text, culture);
                     int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
 
                     var facturacion = new TrxFACTURACION();

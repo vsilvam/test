@@ -19,5 +19,6 @@ namespace LQCE.Transaccion.DTO
         public int IVA { get; set; }
         public int TOTAL {get; set; }
         public int? NUMERO_FACTURA { get; set; }
+        public string NOMBRE_TIPO_FACTURA { get; set; }
     }
 }

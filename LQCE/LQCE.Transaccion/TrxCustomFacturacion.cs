@@ -1046,5 +1046,43 @@ namespace LQCE.Transaccion
                 throw ex;
             }
         }
+
+
+
+        public List<DTO_RESUMEN_FACTURA> GetResumenFacturasByFilter(string RUT, string NOMBRE_CLIENTE, 
+            DateTime? FECHA_EMISION, int? NUMERO_FACTURA, bool? PAGADO)
+        {
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+
+                    return (from f in _RepositorioFACTURACION.GetFacturasWithReferencesFull()
+                            let p = _RepositorioFACTURACION.GetPagosWithReferencesFull()
+                            where f.ACTIVO && f.FACTURACION.ACTIVO
+                            select new DTO_RESUMEN_FACTURA
+                            {
+                                ID_FACTURA = f.ID,
+                                RUT_CLIENTE = f.RUT_CLIENTE,
+                                NOMBRE_CLIENTE = f.NOMBRE_CLIENTE,
+                                FECHA_EMISION = f.FACTURACION.FECHA_FACTURACION,
+                                VALOR_TOTAL = f.TOTAL,
+                                VALOR_PAGADO = f.FACTURA_DETALLE
+                                        .Where(fd => fd.ACTIVO).Sum(fd => fd.PAGO_DETALLE
+                                            .Where(pd => pd.ACTIVO).Sum(pd => pd.MONTO)),
+                                PAGOS_REGISTRADOS = p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
+                                SALDO_DEUDOR = 0
+                            }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
     }
 }

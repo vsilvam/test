@@ -134,7 +134,6 @@ namespace LQCE.Repositorio
             }
         }
 
-
         public IQueryable<NOTA_COBRO_DETALLE> GetNotaCobroDetalleByIdCobro(int ID_COBRO)
         {
             Error = string.Empty;
@@ -160,5 +159,47 @@ namespace LQCE.Repositorio
             }
         }
 
+        public IQueryable<FACTURA> GetFacturasWithReferencesFull()
+        {
+            Error = string.Empty;
+            try
+            {
+
+                var q = from i in _context.FACTURA
+                            .Include("CLIENTE")
+                            .Include("FACTURA_DETALLE.PAGO_DETALLE.PAGO")
+                            .Include("FACTURACION")
+                            .Include("NOTA_COBRO_DETALLE")
+                            .Include("TIPO_FACTURA") where i.ACTIVO select i;
+                return q;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        public IQueryable<PAGO> GetPagosWithReferencesFull()
+        {
+            Error = string.Empty;
+            try
+            {
+
+                var q = from i in _context.PAGO
+                            .Include("CLIENTE")
+                            .Include("PAGO_DETALLE.FACTURA_DETALLE.FACTURA")
+                        where i.ACTIVO
+                        select i;
+                return q;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
     }
 }

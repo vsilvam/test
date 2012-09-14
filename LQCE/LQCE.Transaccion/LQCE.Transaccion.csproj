@@ -62,6 +62,7 @@
     <Compile Include="DTO\DTO_REPORTE_FACTURA.cs" />
     <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO_DETALLE.cs" />
     <Compile Include="DTO\DTO_REPORTE_NOTA_COBRO.cs" />
+    <Compile Include="DTO\DTO_RESUMEN_FACTURA.cs" />
     <Compile Include="DTO\DTO_RESUMEN_FACTURACION.cs" />
     <Compile Include="DTO\DTO_RESUMEN_PRESTACIONES_FACTURAR.cs" />
     <Compile Include="Enum\ENUM_TIPO_COBRO.cs" />

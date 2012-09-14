@@ -15,7 +15,7 @@
 </asp:Panel>
 
 <asp:panel ID='pnDetalleFacturas' runat='server'>
-<h1>Ficha de Factura</h1>
+<h3>Ficha de Factura</h3>
     <table>
         <tr>
             <td>Nombre Cliente</td>

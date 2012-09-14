@@ -6,6 +6,7 @@
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="BuscarFactura.ascx.cs" Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.BuscarFactura" %>
+<%@ Register TagPrefix="uc1" TagName="Paginador" Src="Paginador1.ascx" %>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -118,3 +119,8 @@
         </Columns>
     </asp:GridView>
 </asp:Panel>
+<footer>
+  <div>
+    <uc1:Paginador ID="Paginador1" runat="server" OnPageChanged="Paginador1_PageChanged" />
+</div>
+ </footer>

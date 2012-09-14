@@ -10,6 +10,7 @@ using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Properties;
 using Microsoft.Reporting.WebForms;
 using Microsoft.SharePoint;
+using System.Collections;
 
 namespace LQCE.Transaccion
 {
@@ -213,6 +214,10 @@ namespace LQCE.Transaccion
 
                         foreach (var facturas in tf)
                         {
+                            Hashtable propiedades = new Hashtable();
+                            propiedades.Add("Fecha de Facturación", _FACTURACION.FECHA_FACTURACION);
+propiedades.Add("Tipo de Factura", tf);
+propiedades.Add("Formato", "Matriz de punto");
 
                             ReportViewer _ReportViewer = new ReportViewer();
                             _ReportViewer.ProcessingMode = ProcessingMode.Local;
@@ -230,7 +235,7 @@ namespace LQCE.Transaccion
                             {
                                 SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
                                 string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + facturas.Key + ".pdf";
-                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_matriz[0], true);
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_matriz[0], propiedades, true);
                                 spList.Update();
                             }
                         }

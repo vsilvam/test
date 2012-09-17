@@ -1055,7 +1055,7 @@ namespace LQCE.Transaccion
                     RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
 
                     return (from f in _RepositorioFACTURACION.GetFacturasWithReferencesFull()
-                            let p = _RepositorioFACTURACION.GetPagosWithReferencesFull()
+                            //join p in _RepositorioFACTURACION.GetPagosWithReferencesFull()
                             where f.ACTIVO && f.FACTURACION.ACTIVO
                             select new DTO_RESUMEN_FACTURA
                             {
@@ -1066,7 +1066,7 @@ namespace LQCE.Transaccion
                                 VALOR_TOTAL = f.TOTAL,
                                 VALOR_PAGADO = f.FACTURA_DETALLE
                                         .Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO),
-                                PAGOS_REGISTRADOS = p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
+                                PAGOS_REGISTRADOS = 0, // p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
                                 SALDO_DEUDOR = f.TOTAL - f.FACTURA_DETALLE.Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO)
                             }).ToList();
                 }
@@ -1089,7 +1089,7 @@ namespace LQCE.Transaccion
                     RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
 
                     return (from f in _RepositorioFACTURACION.GetFacturasWithReferencesFull()
-                            let p = _RepositorioFACTURACION.GetPagosWithReferencesFull()
+                            //let p = _RepositorioFACTURACION.GetPagosWithReferencesFull().AsEnumerable()
                             where f.ACTIVO && f.FACTURACION.ACTIVO
                             select new DTO_RESUMEN_FACTURA
                             {
@@ -1101,7 +1101,7 @@ namespace LQCE.Transaccion
                                 VALOR_PAGADO = f.FACTURA_DETALLE
                                         .Where(fd => fd.ACTIVO).Sum(fd => fd.PAGO_DETALLE
                                             .Where(pd => pd.ACTIVO).Sum(pd => pd.MONTO)),
-                                PAGOS_REGISTRADOS = p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
+                                PAGOS_REGISTRADOS = 0,//p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
                                 SALDO_DEUDOR = 0
                             }).Count();
                 }

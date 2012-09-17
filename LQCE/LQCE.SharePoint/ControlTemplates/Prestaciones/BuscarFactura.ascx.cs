@@ -4,6 +4,7 @@ using LQCE.Transaccion;
 using System.Web.UI.WebControls;
 using LQCE.SharePoint.ControlTemplates.App_Code;
 using LQCE.Transaccion.DTO;
+using System.Globalization;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -60,6 +61,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 pnFacturas.Visible = true;
 
+                IFormatProvider culture = new CultureInfo("es-CL", true);
                 DTOFindFactura dto = new DTOFindFactura();
                 dto.PageIndex = grdFacturas.PageIndex;
                 dto.PageSize = grdFacturas.PageSize;
@@ -69,7 +71,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if(!string.IsNullOrEmpty(txtNombreCliente.Text))
                     dto.nombre = txtNombreCliente.Text;
                 if(!string.IsNullOrEmpty(txtFechaEmision.Text))
-                    dto.fecha = Convert.ToDateTime(txtFechaEmision.Text);
+                    dto.fecha = DateTime.Parse(txtFechaEmision.Text,culture);
                 if(!string.IsNullOrEmpty(txtNroFactura.Text))
                     dto.numero = int.Parse(txtNroFactura.Text);
                 if(!string.IsNullOrEmpty(ddlEstadoPago.SelectedValue))

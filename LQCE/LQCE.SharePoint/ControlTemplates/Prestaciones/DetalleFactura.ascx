@@ -63,17 +63,48 @@
 <div id="accordion">
 	<h3><a href="#">Detalle Factura</a></h3>
 	<div>
-		<asp:GridView ID="grdDetalleFactura" runat="server" AutoGenerateColumns='false' Width="100%">
-    </asp:GridView>
+        <asp:GridView ID="grdDetalleFactura" runat="server" AutoGenerateColumns='false' Width="100%">
+            <Columns>
+                <asp:BoundField DataField="ID_FACTURA_DETALLE" HeaderText="N° FACTURA" Visible="false" />
+                <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° FICHA" />
+                <asp:BoundField DataField="MONTO_TOTAL" HeaderText="MONTO TOTAL" />
+                <asp:BoundField DataField="MONTO_COBRADO" HeaderText="MONTO COBRADO" />
+                <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA RECEPCION" />
+                <asp:BoundField DataField="NOMBRE_PACIENTE" HeaderText="NOMBRE PACIENTE" />
+            </Columns>
+            <EmptyDataTemplate>
+                No se encontro información relacionada.
+            </EmptyDataTemplate>
+            <HeaderStyle CssClass="head" />
+        </asp:GridView>
 	</div>
 	<h3><a href="#">Pagos</a></h3>
 	<div>
 		<asp:GridView ID="grdPagos" runat="server" AutoGenerateColumns='false' Width="100%">
+            <Columns>
+                <asp:BoundField DataField="ID_PAGO" HeaderText="N° PAGO" Visible="false" />
+                <asp:BoundField DataField="FECHA_PAGO" HeaderText="FECHA_PAGO" />
+                <asp:BoundField DataField="MONTO_PAGO_TOTAL" HeaderText="MONTO PAGO TOTAL" />
+                <asp:BoundField DataField="MONTO_PAGO_FACTURA" HeaderText="MONTO PAGO FACTURA" />
+            </Columns>
+            <EmptyDataTemplate>
+                No se encontro información relacionada.
+            </EmptyDataTemplate>
     </asp:GridView>
 	</div>
 	<h3><a href="#">Notas de Cobro</a></h3>
 	<div>
 		<asp:GridView ID="grdNotasCobro" runat="server" AutoGenerateColumns='false' Width="100%">
+            <Columns>
+                <asp:BoundField DataField="ID_NOTA_COBRO" HeaderText="N° NOTA PAGO" Visible="false" />
+                <asp:BoundField DataField="FECHA_COBRO" HeaderText="FECHA COBRO" />
+                <asp:BoundField DataField="NOMBRE_TIPO_COBRO" HeaderText="NOMBRE TIPO COBRO" />
+                <asp:BoundField DataField="MONTO_PENDIENTE_TOTAL" HeaderText="MONTO PENDIENTE TOTAL" />
+                <asp:BoundField DataField="MONTO_PENDIENTE_FACTURA" HeaderText="MONTO PENDIENTE FACTURA" />
+            </Columns>
+            <EmptyDataTemplate>
+                No se encontro información relacionada.
+            </EmptyDataTemplate>
     </asp:GridView>
 	</div>	
 </div>

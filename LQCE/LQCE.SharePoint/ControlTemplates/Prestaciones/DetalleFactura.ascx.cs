@@ -18,23 +18,26 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 int IdFactura = int.Parse(Request.QueryString["Id"].ToString());
 
-                TrxFACTURA trxFactura = new TrxFACTURA();
-                var detalle = trxFactura.GetById(IdFactura);
+                TrxFACTURACION trxFacturacion = new TrxFACTURACION();
+                var detalle = trxFacturacion.GetDetalleFacturaById(IdFactura);
 
                 lblNombreCliente.Text = detalle.NOMBRE_CLIENTE;
                 lblRutCliente.Text = detalle.RUT_CLIENTE;
-                //lblFechaEmision.Text = detalle.fec;
-                lblNroFactura.Text = detalle.NUMERO_FACTURA.ToString();
-                //lblEstadoPago.Text = detalle.esta;
-
-
+                lblFechaEmision.Text = detalle.FECHA_EMISION.ToString();
+                lblNroFactura.Text = detalle.ID_FACTURA.ToString();
+                lblEstadoPago.Text = "pagado";
+                
                 //carga grilla detalle factura
-
+                grdDetalleFactura.DataSource = detalle.LISTA_PRESTACIONES;
+                grdDetalleFactura.DataBind();
 
                 //carga grilla Pagos
-
+                grdPagos.DataSource = detalle.LISTA_PAGOS;
+                grdPagos.DataBind();
 
                 //carga grilla Notas de Cobro
+                grdNotasCobro.DataSource = detalle.LISTA_COBROS;
+                grdNotasCobro.DataBind();
 
             }
             catch (Exception ex)

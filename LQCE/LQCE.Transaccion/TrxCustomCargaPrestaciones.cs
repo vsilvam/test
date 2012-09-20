@@ -1352,7 +1352,7 @@ namespace LQCE.Transaccion
                     errores += item + Environment.NewLine;
                 objDetalle.MENSAJE_ERROR = errores;
             }
-            //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
+            context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
 
             return ListaValidaciones;
         }

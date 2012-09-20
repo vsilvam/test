@@ -341,6 +341,7 @@
     <Content Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Layouts\Style\CSS\accordion.css" />
     <Content Include="Layouts\Style\Imagenes\editar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

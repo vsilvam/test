@@ -86,8 +86,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         var txtDescuento = row.FindControl("txtDescuento") as TextBox;
 
                         //se guardan las modificaciones cuando existen
-                        // PENDIENTE: Recorrer grillas, recuperar descuentos y generar facturas
-                        //se generan los reportes
                         DTO_EMISION_FACTURA dto = new DTO_EMISION_FACTURA();
                         dto.ID_CLIENTE = int.Parse(hdnId.Value);
                         dto.DESCUENTO = int.Parse(txtDescuento.Text);

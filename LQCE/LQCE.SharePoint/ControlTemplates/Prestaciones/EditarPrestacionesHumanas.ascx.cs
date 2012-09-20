@@ -8,6 +8,7 @@ using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Enum;
 using LQCE.Modelo;
 using System.Linq;
+using System.Globalization;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -118,6 +119,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     int Id = int.Parse(Request.QueryString["Id"].ToString());
 
                 //se obtienen los datos desde el formuario
+                    IFormatProvider culture = new CultureInfo("es-CL", true);
                 int IdTipoPrestacion = (int)ENUM_TIPO_PRESTACION.Humanas;
                 int IdCargaPrestacionesDetalleEstado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
                 string numero = !string.IsNullOrEmpty(lblNroPrestacion.Text) ? lblNroPrestacion.Text : string.Empty;
@@ -127,15 +129,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
                 string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
                 string procedencia = string.Empty;
-                string fechaDesde = !string.IsNullOrEmpty(txtFechaHora1.Text) ? txtFechaHora1.Text : string.Empty;
-                string fechaHasta = !string.IsNullOrEmpty(txtFechaHora2.Text) ? txtFechaHora2.Text : string.Empty;
+                DateTime fechaDesde = DateTime.Parse(txtFechaHora1.Text, culture);
+                DateTime fechaHasta = DateTime.Parse(txtFechaHora2.Text, culture);
                 string fechaHora = !string.IsNullOrEmpty(txtHora.Text) ? txtHora.Text : string.Empty;
                 string prevision = !string.IsNullOrEmpty(txtPrevision.Text) ? txtPrevision.Text : string.Empty;
                 string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
                 string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
                 string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
-                string entregaDesde = !string.IsNullOrEmpty(txtFechaHoraEntrega1.Text) ? txtFechaHoraEntrega1.Text : string.Empty;
-                string entregaHasta = !string.IsNullOrEmpty(txtFechaHoraEntrega2.Text) ? txtFechaHoraEntrega2.Text : string.Empty;
+                DateTime entregaDesde = DateTime.Parse(txtFechaHoraEntrega1.Text, culture);
+                DateTime entregaHasta = DateTime.Parse(txtFechaHoraEntrega2.Text, culture);
                 string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
                 string ficha = !string.IsNullOrEmpty(txtFicha.Text) ? txtFicha.Text : string.Empty;
                 string servicio = !string.IsNullOrEmpty(txtServicio.Text) ? txtServicio.Text : string.Empty;
@@ -161,7 +163,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
                 DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(Id, ficha, nombre, rut,
-                    medico, edad, telefono, procedencia, fechaDesde, "", entregaDesde, prevision, garantia, pagado, pendiente,
+                    medico, edad, telefono, procedencia, fechaDesde.ToString(), "", entregaDesde.ToString(), prevision, garantia, pagado, pendiente,
                     IdCargaPrestacionesDetalleEstado, "", lista);
 
                 if (!resutado.RESULTADO)

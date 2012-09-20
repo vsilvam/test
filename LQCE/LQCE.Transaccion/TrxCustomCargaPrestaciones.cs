@@ -1088,10 +1088,10 @@ namespace LQCE.Transaccion
                             item.VALOR_VALOR_EXAMEN = _valorExamen;
                         }
                     }
-                    // PENDIENTE: Validar que el valor del examen sea igual al convenio
+                     //PENDIENTE: Validar que el valor del examen sea igual al convenio
 
 
-                    //context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", item);
+                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", item);
                 }
                 contadorExamen++;
             }
@@ -1339,7 +1339,7 @@ namespace LQCE.Transaccion
                     // PENDIENTE: Validar que el valor del examen sea igual al convenio
 
 
-                    //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", item);
+                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", item);
                 }
                 contadorExamen++;
             }

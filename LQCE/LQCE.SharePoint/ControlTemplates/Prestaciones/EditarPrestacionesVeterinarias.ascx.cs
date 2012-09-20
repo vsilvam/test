@@ -8,6 +8,7 @@ using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Enum;
 using LQCE.Modelo;
 using System.Linq;
+using System.Globalization;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -124,6 +125,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
 
                 //se obtienen los datos desde el formuario
+                IFormatProvider culture = new CultureInfo("es-CL", true);
                 int IdCargaPrestacionVeterinariaDetalle = int.Parse(lblNroPrestacion.Text);
                 int IdCargaPrestacionesDetalleEstado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
                 string ficha = !string.IsNullOrEmpty(lblNroPrestacion.Text) ? lblNroPrestacion.Text : string.Empty;
@@ -136,16 +138,16 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
                 string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
                 string procedencia = !string.IsNullOrEmpty(txtProcedencia.Text) ? txtProcedencia.Text : string.Empty;
-                string fechaRecepcion = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
+                DateTime fechaRecepcion = DateTime.Parse(txtRecepcion.Text, culture);
                 string horaRecepcion = !string.IsNullOrEmpty(txtHoraRecepcion.Text) ? txtHoraRecepcion.Text : string.Empty;
-                string fechaMuestra = !string.IsNullOrEmpty(txtMuestraFecha.Text) ? txtMuestraFecha.Text : string.Empty;
+                DateTime fechaMuestra = DateTime.Parse(txtMuestraFecha.Text, culture);
                 string horaMuestra = !string.IsNullOrEmpty(txtMuestraHora.Text) ? txtMuestraHora.Text : string.Empty;
                 string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
                 string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
                 string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
                 string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
-                string entregaDesde = !string.IsNullOrEmpty(txtFechaEntrega.Text) ? txtFechaEntrega.Text : string.Empty;
-                string entregaHasta = !string.IsNullOrEmpty(txtFechaEntrega.Text) ? txtFechaEntrega.Text : string.Empty;
+                DateTime entregaDesde = DateTime.Parse(txtFechaEntrega.Text, culture);
+                DateTime entregaHasta = DateTime.Parse(txtFechaEntrega.Text, culture);
                 string recepcion = !string.IsNullOrEmpty(txtRecepcionEntrega.Text) ? txtRecepcionEntrega.Text : string.Empty;
 
                 //se recorren los examenes para guardar
@@ -177,7 +179,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {
                     TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
                     DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(Id, ficha, nombre,
-                        especie, raza, edad, sexo, solicita, telefono, medico, procedencia, fechaRecepcion, fechaMuestra, entregaDesde, pendiente, garantia,
+                        especie, raza, edad, sexo, solicita, telefono, medico, procedencia, fechaRecepcion.ToString(), fechaMuestra.ToString(), entregaDesde.ToString(), pendiente, garantia,
                         pagado, total, IdCargaPrestacionesDetalleEstado, error, lista);
 
                     if (!resutado.RESULTADO)

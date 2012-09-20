@@ -5,6 +5,7 @@ using System.Web.UI.WebControls;
 using App.Infrastructure.Runtime;
 using LQCE.Modelo;
 using LQCE.Transaccion;
+using System.Globalization;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -45,8 +46,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 pnNotas.Visible = true;
 
-                string desde = !string.IsNullOrEmpty(txtDesde.Text) ? txtDesde.Text : string.Empty;
-                string hasta = !string.IsNullOrEmpty(txtHasta.Text) ? txtDesde.Text : string.Empty;
+                IFormatProvider culture = new CultureInfo("es-CL", true);
+                DateTime desde = DateTime.Parse(txtDesde.Text, culture);
+                DateTime hasta = DateTime.Parse(txtDesde.Text, culture);
                 string cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? ddlClientes.SelectedValue : string.Empty;
                 string tipo = !string.IsNullOrEmpty(ddlNotaCobro.SelectedValue) ? ddlNotaCobro.SelectedValue : string.Empty;
 

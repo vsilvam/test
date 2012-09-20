@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using LQCE.Transaccion;
 using App.Infrastructure.Runtime;
+using System.Globalization;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -44,9 +45,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (Page.IsValid)
                 {
                     pnFacturas.Visible = true;
-
-                    DateTime desde = DateTime.Parse(txtDesde.Text);
-                    DateTime hasta = DateTime.Parse(txtHasta.Text);
+                    IFormatProvider culture = new CultureInfo("es-CL", true);
+                    DateTime desde = DateTime.Parse(txtDesde.Text,culture);
+                    DateTime hasta = DateTime.Parse(txtHasta.Text,culture);
                     int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
 
                     var facturacion = new TrxFACTURACION();
@@ -76,10 +77,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 //ID fcaturacion , bool numerar todos, si es falso debe pedir desde hasta, nuemro fact inicial.
 
                 //tomar valores
+                IFormatProvider culture = new CultureInfo("es-CL", true);
                 LinkButton _link = sender as LinkButton;
                 int? IdFacturacion = int.Parse(_link.CommandArgument);
-                string desde = txtDesdeN.Text;
-                string hasta = txtHastaN.Text;
+                DateTime desde = DateTime.Parse(txtDesdeN.Text,culture);
+                DateTime hasta = DateTime.Parse(txtHastaN.Text,culture);
                 string nroFactura = txtNroFactura.Text;
                 bool todos = Convert.ToBoolean(rblNumerar.SelectedValue);
 

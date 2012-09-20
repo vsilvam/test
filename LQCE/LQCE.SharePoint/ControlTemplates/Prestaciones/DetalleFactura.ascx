@@ -9,16 +9,26 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DetalleFactura.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.DetalleFactura" %>
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="~/_layouts/Style/CSS/accordion.css" />
+<link rel="stylesheet" href="../../themes/base/jquery.ui.all.css" />
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="../../jquery-1.8.0.js"></script>
+<script type="text/javascript" src="../../ui/jquery.ui.core.js"></script>
+<script type="text/javascript" src="../../ui/jquery.ui.widget.js"></script>
+<!--<script type="text/javascript" src="../../ui/jquery.ui.accordion.js"></script>-->
+
+
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/ui.accordion.js")%>"></script>
-	<script type="text/javascript">
-	    $(function () {
-	        $("#accordion").accordion();
-	    });
-	</script>
+<script type="text/javascript">
+    $(function () {
+        $("#accordion").accordion();
+    });
+</script>
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
@@ -60,8 +70,9 @@
     </table>    
 </asp:panel>
 
+<div class="demo">
 <div id="accordion">
-	<h3><a href="#">Detalle Factura</a></h3>
+	<h3><a href="#">Detalle Factura</a></h3>    
 	<div>
         <asp:GridView ID="grdDetalleFactura" runat="server" AutoGenerateColumns='false' Width="100%">
             <Columns>
@@ -94,6 +105,7 @@
 	</div>
 	<h3><a href="#">Notas de Cobro</a></h3>
 	<div>
+    sadasdas
 		<asp:GridView ID="grdNotasCobro" runat="server" AutoGenerateColumns='false' Width="100%">
             <Columns>
                 <asp:BoundField DataField="ID_NOTA_COBRO" HeaderText="N° NOTA PAGO" Visible="false" />
@@ -108,4 +120,4 @@
     </asp:GridView>
 	</div>	
 </div>
-
+</div>

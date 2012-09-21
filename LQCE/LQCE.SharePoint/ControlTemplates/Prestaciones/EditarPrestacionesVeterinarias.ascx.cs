@@ -138,16 +138,16 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
                 string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
                 string procedencia = !string.IsNullOrEmpty(txtProcedencia.Text) ? txtProcedencia.Text : string.Empty;
-                DateTime fechaRecepcion = DateTime.Parse(txtRecepcion.Text, culture);
+                string fechaRecepcion = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
                 string horaRecepcion = !string.IsNullOrEmpty(txtHoraRecepcion.Text) ? txtHoraRecepcion.Text : string.Empty;
-                DateTime fechaMuestra = DateTime.Parse(txtMuestraFecha.Text, culture);
+                string fechaMuestra = !string.IsNullOrEmpty(txtMuestraFecha.Text) ? txtMuestraFecha.Text : string.Empty;
                 string horaMuestra = !string.IsNullOrEmpty(txtMuestraHora.Text) ? txtMuestraHora.Text : string.Empty;
                 string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
                 string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
                 string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
                 string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
-                DateTime entregaDesde = DateTime.Parse(txtFechaEntrega.Text, culture);
-                DateTime entregaHasta = DateTime.Parse(txtFechaEntrega.Text, culture);
+                string entregaDesde = !string.IsNullOrEmpty(txtFechaEntrega.Text) ? txtFechaEntrega.Text : string.Empty;
+                string entregaHasta = !string.IsNullOrEmpty(txtFechaEntrega.Text) ? txtFechaEntrega.Text : string.Empty;
                 string recepcion = !string.IsNullOrEmpty(txtRecepcionEntrega.Text) ? txtRecepcionEntrega.Text : string.Empty;
 
                 //se recorren los examenes para guardar
@@ -166,29 +166,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     lista.Add(_examen);
                 }
 
-                //Se retornan errores en caso de existir
-                TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE PrestacionesVeterinarias = new TrxCARGA_PRESTACIONES_VETERINARIAS_DETALLE();
-                var prestaciones = PrestacionesVeterinarias.GetByIdWithReferences(1);
-                string error = prestaciones.MENSAJE_ERROR;
+                TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(Id, ficha, nombre,
+                    especie, raza, edad, sexo, solicita, telefono, medico, procedencia, fechaRecepcion.ToString(), fechaMuestra.ToString(), entregaDesde.ToString(), pendiente, garantia,
+                    pagado, total, IdCargaPrestacionesDetalleEstado, "", lista);
 
-                if (!string.IsNullOrEmpty(prestaciones.MENSAJE_ERROR))
+                if (!resutado.RESULTADO)
                 {
-                    lblMensaje.Text = prestaciones.MENSAJE_ERROR;
+                    // mostrar errores en grilla
+                    grdErroresHumanos.DataSource = resutado.ERRORES_VALIDACION;
+                    grdErroresHumanos.DataBind();
                 }
                 else
                 {
-                    TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                    DTO_RESULTADO_ACTUALIZACION_FICHA resutado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(Id, ficha, nombre,
-                        especie, raza, edad, sexo, solicita, telefono, medico, procedencia, fechaRecepcion.ToString(), fechaMuestra.ToString(), entregaDesde.ToString(), pendiente, garantia,
-                        pagado, total, IdCargaPrestacionesDetalleEstado, error, lista);
-
-                    if (!resutado.RESULTADO)
-                    {
-                        // mostrar errores en grilla
-                        grdErroresHumanos.DataSource = resutado.ERRORES_VALIDACION;
-                        grdErroresHumanos.DataBind();
-                    }
+                    //si no existio errores pasa al regsitro siguiente
+                    string id = Request.QueryString["Id"].ToString();
+                    CargaFicha(int.Parse(id)+1);
                 }
+                
             }
             catch (Exception ex)
             {

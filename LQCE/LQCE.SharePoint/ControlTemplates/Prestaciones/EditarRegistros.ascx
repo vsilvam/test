@@ -91,12 +91,19 @@
   <asp:GridView ID="grdPrestaciones" CssClass="tablesorter" runat="server" GridLines="None" AutoGenerateColumns="False" Visible="false"
                     Width="100%">
                     <Columns>
-                        <asp:BoundField DataField="ID_FACTURA_DETALLE" HeaderText="FACTURA" />
-                        <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° FICHA" />
-                        <asp:BoundField DataField="MONTO_TOTAL" HeaderText="MONTO TOTAL" />
-                        <asp:BoundField DataField="MONTO_COBRADO" HeaderText="MONTO COBRADO" />
-                        <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA RECEPCION" />
-                        <asp:BoundField DataField="NOMBRE_PACIENTE" HeaderText="NOMBRE PACIENTE" />                        
+                        <asp:BoundField DataField="ID_TIPO_PRESTACION" HeaderText="Tipo Prestacion" Visible="false" />
+                        <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° Ficha" />
+                        <asp:BoundField DataField="NOMBRE" HeaderText="Nombre" />
+                        <asp:BoundField DataField="NOMBRE_ESTADO_DETALLE" HeaderText="Estado" />
+                        <asp:BoundField DataField="PROCEDENCIA" HeaderText="Procedencia" />
+                        <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="Fecha Recepcion" />
+                        <asp:TemplateField HeaderText="Editar">
+                            <ItemTemplate>
+                                <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                                    CommandArgument='<%# Eval("ID") %>' Height="20px" ToolTip="Editar" OnClick="imgEditar_Click"
+                                    CommandName='<%# Eval("ID_TIPO_PRESTACION") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                     <EmptyDataTemplate>
                         No se encontraron Solicitudes coincidentes.

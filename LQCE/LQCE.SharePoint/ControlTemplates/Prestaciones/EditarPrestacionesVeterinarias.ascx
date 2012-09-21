@@ -209,7 +209,7 @@
 
    <article class="module width_full">
      <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Examen</asp:LinkButton>
-                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%"
+                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="100%" GridLines="None"
                     OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
                     <Columns>
                         <asp:TemplateField HeaderText="ID">

@@ -105,7 +105,7 @@ namespace LQCE.Transaccion
                             AgregarExamenHumano(context, objDetalle, item, "EXAMEN 7", "VALOR 7");
                             AgregarExamenHumano(context, objDetalle, item, "EXAMEN 8", "VALOR 8");
 
-                            ValidarPrestacionHumana(context, objDetalle);
+                            //ValidarPrestacionHumana(context, objDetalle);
 
                             context.AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(objDetalle);
 
@@ -154,7 +154,7 @@ namespace LQCE.Transaccion
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 4", "VALOR 4");
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 5", "VALOR 5");
 
-                            ValidarPrestacionVeterinaria(context, objDetalle);
+                            //ValidarPrestacionVeterinaria(context, objDetalle);
 
                             context.AddToCARGA_PRESTACIONES_VETERINARIAS_DETALLE(objDetalle);
 
@@ -1091,7 +1091,7 @@ namespace LQCE.Transaccion
                      //PENDIENTE: Validar que el valor del examen sea igual al convenio
 
 
-                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", item);
+                    //context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", item);
                 }
                 contadorExamen++;
             }
@@ -1339,7 +1339,7 @@ namespace LQCE.Transaccion
                     // PENDIENTE: Validar que el valor del examen sea igual al convenio
 
 
-                    context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", item);
+                    //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", item);
                 }
                 contadorExamen++;
             }

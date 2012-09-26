@@ -54,6 +54,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 //se llama trx que genera nota de cobro
                 var notaCobro = new TrxNOTA_COBRO();
+                var facturacion = new TrxFACTURACION();
                 grdNotaCobro.DataSource = notaCobro.GetAllWithReferences();
                 grdNotaCobro.DataBind();
 

@@ -59,6 +59,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlTemplates\App_Code\CustomPageChangeArgs.cs" />
+    <Compile Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx.cs">
+      <DependentUpon>ActualizarClientes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx.designer.cs">
+      <DependentUpon>ActualizarClientes.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\BuscarFactura.ascx.cs">
       <DependentUpon>BuscarFactura.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -108,12 +115,26 @@
     <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx.designer.cs">
       <DependentUpon>EmitirNotaCobro.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\IngresarClientes.ascx.cs">
+      <DependentUpon>IngresarClientes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\IngresarClientes.ascx.designer.cs">
+      <DependentUpon>IngresarClientes.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\MensajeExito.ascx.cs">
       <DependentUpon>MensajeExito.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\MensajeExito.ascx.designer.cs">
       <DependentUpon>MensajeExito.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\ModificarCliente.ascx.cs">
+      <DependentUpon>ModificarCliente.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\ModificarCliente.ascx.designer.cs">
+      <DependentUpon>ModificarCliente.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\NumerarFactura.ascx.cs">
       <DependentUpon>NumerarFactura.ascx</DependentUpon>
@@ -149,6 +170,13 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.designer.cs">
       <DependentUpon>Paginador1.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\ActualizarClientes.aspx.cs">
+      <DependentUpon>ActualizarClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\ActualizarClientes.aspx.designer.cs">
+      <DependentUpon>ActualizarClientes.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\BuscarFactura.aspx.cs">
       <DependentUpon>BuscarFactura.aspx</DependentUpon>
@@ -213,12 +241,26 @@
     <Compile Include="Layouts\Prestaciones\EmitirNotaCobro.aspx.designer.cs">
       <DependentUpon>EmitirNotaCobro.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\IngresarClientes.aspx.cs">
+      <DependentUpon>IngresarClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\IngresarClientes.aspx.designer.cs">
+      <DependentUpon>IngresarClientes.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\MensajeExito.aspx.cs">
       <DependentUpon>MensajeExito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Layouts\Prestaciones\MensajeExito.aspx.designer.cs">
       <DependentUpon>MensajeExito.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\ModificarCliente.aspx.cs">
+      <DependentUpon>ModificarCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\ModificarCliente.aspx.designer.cs">
+      <DependentUpon>ModificarCliente.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\NumerarFactura.aspx.cs">
       <DependentUpon>NumerarFactura.aspx</DependentUpon>
@@ -263,6 +305,9 @@
     <Folder Include="Layouts\LQCE.SharePoint\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\BuscarFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -284,7 +329,13 @@
     <Content Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\IngresarClientes.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\MensajeExito.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\ModificarCliente.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\NumerarFactura.ascx">
@@ -305,6 +356,9 @@
     <Content Include="Layouts\JScript\jquery-1.4.1.min.js" />
     <Content Include="Layouts\JScript\ui.accordion.js" />
     <Content Include="Layouts\JScript\ui.datepicker-es.js" />
+    <Content Include="Layouts\Prestaciones\ActualizarClientes.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Layouts\Prestaciones\BuscarFactura.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -332,7 +386,13 @@
     <Content Include="Layouts\Prestaciones\EmitirNotaCobro.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Layouts\Prestaciones\IngresarClientes.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Layouts\Prestaciones\MensajeExito.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\ModificarCliente.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\NumerarFactura.aspx">

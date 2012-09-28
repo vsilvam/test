@@ -136,6 +136,20 @@
     <Compile Include="ControlTemplates\Prestaciones\ModificarCliente.ascx.designer.cs">
       <DependentUpon>ModificarCliente.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\ModificarConvenioPrecio.ascx.cs">
+      <DependentUpon>ModificarConvenioPrecio.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\ModificarConvenioPrecio.ascx.designer.cs">
+      <DependentUpon>ModificarConvenioPrecio.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\NuevoConvenioPrecio.ascx.cs">
+      <DependentUpon>NuevoConvenioPrecio.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\NuevoConvenioPrecio.ascx.designer.cs">
+      <DependentUpon>NuevoConvenioPrecio.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\NumerarFactura.ascx.cs">
       <DependentUpon>NumerarFactura.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -149,6 +163,13 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.designer.cs">
       <DependentUpon>RegistroCargaArchivo.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroConvenioPrecios.ascx.cs">
+      <DependentUpon>RegistroConvenioPrecios.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroConvenioPrecios.ascx.designer.cs">
+      <DependentUpon>RegistroConvenioPrecios.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx.cs">
       <DependentUpon>UCCargaMasivaPrestacionesHumanas.ascx</DependentUpon>
@@ -338,10 +359,19 @@
     <Content Include="ControlTemplates\Prestaciones\ModificarCliente.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\ModificarConvenioPrecio.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\NuevoConvenioPrecio.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\NumerarFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\RegistroConvenioPrecios.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx">

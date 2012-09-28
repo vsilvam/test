@@ -43,23 +43,23 @@
     <asp:Button ID="btnBuscar" runat="server" Text="Buscar" />
 </asp:Panel>
 <asp:Panel ID="pnClientes" runat="server" Visible="false">
-    <asp:GridView ID="grdClientes" runat="server" GridLines="None" AutoGenerateColumns='false' 
-    Width='100%' CssClass="tablesorter">
-    <Columns>
-                <asp:BoundField DataField="" HeaderText="RUT" />
-                <asp:BoundField DataField="" HeaderText="NOMBRE" />
-                <asp:BoundField DataField="" HeaderText="COMUNA" />
-                <asp:BoundField DataField="" HeaderText="CONVENIO" />
-                <asp:TemplateField HeaderText="ACTUALIZAR">
+    <asp:GridView ID="grdClientes" runat="server" GridLines="None" AutoGenerateColumns='false'
+        Width='100%' CssClass="tablesorter">
+        <Columns>
+            <asp:BoundField DataField="" HeaderText="RUT" />
+            <asp:BoundField DataField="" HeaderText="NOMBRE" />
+            <asp:BoundField DataField="" HeaderText="COMUNA" />
+            <asp:BoundField DataField="" HeaderText="CONVENIO" />
+            <asp:TemplateField HeaderText="ACTUALIZAR">
                 <ItemTemplate>
                     <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
                         CommandArgument='<%# Eval("Id") %>' Height="10px" ToolTip="Actualizar" />
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            </Columns>
-            <EmptyDataTemplate>
-                No se encontraron clientes.
-            </EmptyDataTemplate>
+        </Columns>
+        <EmptyDataTemplate>
+            No se encontraron clientes.
+        </EmptyDataTemplate>
     </asp:GridView>
 </asp:Panel>

@@ -9,195 +9,161 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditarPrestacionesHumanas.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarPrestacionesHumanas" %>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+    type="text/css" media="all" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/ui-lightness/jquery-ui.css"
+    type="text/css" media="all" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/ui.datepicker-es.js")%>"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#<%=txtFechaHora1.ClientID %>').datepicker({});
-        $('#<%=txtFechaHora2.ClientID %>').datepicker({});
 
         $('#<%=txtFechaHoraEntrega1.ClientID %>').datepicker({});
-        $('#<%=txtFechaHoraEntrega2.ClientID %>').datepicker({});
     });
 </script>
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-
-<article class="module width_full">
+<asp:Panel ID="panelErrores" runat="server" Visible="false">
+    <article class="module width_full">
    <header><h3>Errores Prestación</h3></header>
    <asp:BulletedList ID="grdErroresHumanos" runat="server"></asp:BulletedList>
 </article>
-
+</asp:Panel>
 <article class="module width_full">
 
     <header><h3>Edición Prestación</h3></header>
+
+    <asp:HiddenField ID="hdnListaExamen" runat="server" />
 
     <div class="module_content">
         
     <table>
         <tr>
-            <td colspan="4">
-                N° <span>:</span>
+        <td colspan="4"></td>
+            <td>
+                Numero de Ficha
             </td>
             <td>
-                <asp:Label ID="lblNroPrestacion" runat="server" Text="147958"></asp:Label>
-            </td>
-            <td>
+                <asp:TextBox ID="txtNumeroFicha" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Nombre<span>:</span>
+            <td>Nombre
+            </td>
+            <td colspan="3">
+                <asp:TextBox ID="txtNombre" runat="server" Enabled="false" Columns="90"></asp:TextBox>
             </td>
             <td>
-                <asp:TextBox ID="txtNombre" runat="server" Enabled="false"></asp:TextBox>
+                RUT
             </td>
             <td>
-                RUT<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtRut" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-            <td>
-            </td>
-            <td>
+                <asp:TextBox ID="txtRut" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>
-                Médico<span>:</span>
+                Médico
             </td>
             <td>
-                <asp:TextBox ID="txtMedico" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtMedico" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
-                Edad<span>:</span>
+                Edad
             </td>
             <td>
-                <asp:TextBox ID="txtEdad" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtEdad" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
-                Teléfono<span>:</span>
+                Teléfono
             </td>
             <td>
-                <asp:TextBox ID="txtTelefono" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtTelefono" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
         </tr>
         <tr>
+        <td>Procedencia</td>
+        <td>
+        <asp:TextBox ID="txtProcedencia" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+        </td>
             <td>
                 Fecha/Hora<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHora1" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHora1" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
                 --
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHora2" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-            <td>
-                hr
-            </td>
-            <td>
-                <asp:TextBox ID="txtHora" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-        </tr>
-              
-        <tr>
-            <td>
-                Prevision<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtPrevision" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-            <td>
-                Pagado<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtPagado" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHora2" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>
-                Garantia<span>:</span>
+                Prevision
+            </td>
+            <td colspan="3">
+                <asp:TextBox ID="txtPrevision" runat="server" Enabled="false" Columns="90"></asp:TextBox>
             </td>
             <td>
-                <asp:TextBox ID="txtGarantia" runat="server" Enabled="false"></asp:TextBox>
+                Pagado
             </td>
             <td>
-                Pendiente<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtPendiente" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtPagado" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>
-                Fecha y Hora entrega de resultados
+                Garantia
+            </td>
+            <td colspan="3">
+                <asp:TextBox ID="txtGarantia" runat="server" Enabled="false" Columns="90"></asp:TextBox>
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHoraEntrega1" runat="server" Enabled="false"></asp:TextBox>
+                Pendiente
+            </td>
+            <td>
+                <asp:TextBox ID="txtPendiente" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fecha y Hora Entrega de Resultados
+            </td>
+            <td>
+                <asp:TextBox ID="txtFechaHoraEntrega1" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
                 --
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHoraEntrega2" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHoraEntrega2" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
-                Total<span>:</span>
+                Total
             </td>
             <td>
-                <asp:TextBox ID="txtTotal" runat="server" Enabled="false"></asp:TextBox>
+                <asp:TextBox ID="txtTotal" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>
-                Ficha<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtFicha" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-            <td>
-                -Servicio<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtServicio" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-            <td>
-                -Diag<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtDiagostico" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-            <td>
-                Listo
-            </td>
-            <td>
-                <asp:TextBox ID="txtListo" runat="server" Enabled="false"></asp:TextBox>
-            </td>
-            <td>
-                Recepcion<span>:</span>
-            </td>
-            <td>
-                <asp:TextBox ID="txtRecepcion" runat="server" Enabled="false"></asp:TextBox>
-            </td>
+        <td>Muestra</td>
+        <td colspan="5">
+        <asp:TextBox ID="txtMuestra" runat="server" Enabled="false" Columns="150"></asp:TextBox>
+        </td>
         </tr>
     </table>
+     
+     
+     
       </div>
-      <footer>
-      <div class="submit_link">
-      <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" />
-      </div>
-      </footer>
+      
 
    </article>
-
 <article class="module width_full">
 
   <header><h3>Agregar Nuevo Examen</h3></header>
@@ -210,9 +176,6 @@
                                 EXAMEN
                             </td>
                             <td>
-                                CODIGO
-                            </td>
-                            <td>
                                 VALOR
                             </td>
                         </tr>
@@ -222,14 +185,6 @@
                                 <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ControlToValidate='txtExamen'
                                 Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Examen'></asp:RequiredFieldValidator>
                                 
-                            </td>
-                            <td>
-                                <asp:TextBox ID="txtCodigo" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID='RequiredFieldValidator1' runat='server' ControlToValidate='txtCodigo'
-                                Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Codigo'></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidatorCorreo" runat="server"
-                            ControlToValidate="txtCodigo" ErrorMessage="solo se admiten numeros."
-                            ToolTip="debe ingresar un valor numerico." ValidationExpression="\d+">*</asp:RegularExpressionValidator>
                             </td>
                             <td>
                                 <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
@@ -248,16 +203,11 @@
    </article>
 <article class="module width_full">
   <header><h3>Exámenes</h3></header> 
-     <asp:GridView ID="grdExamen"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="False" Width="100%" OnRowDataBound="grdExamen_RowDataBound" EnableModelValidation="True">
+     <asp:GridView ID="grdExamen"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="False" Width="100%" EnableModelValidation="True">
                     <Columns>
                         <asp:TemplateField HeaderText="EXAMEN">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>'></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="CODIGO">
-                            <ItemTemplate>
-                                <asp:TextBox ID="txtCodigo" runat="server" Text='<%# Eval("ID") %>'></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="VALOR">
@@ -269,3 +219,10 @@
                     <HeaderStyle CssClass="head" />
                 </asp:GridView>
     </article>
+<footer>
+      <div class="submit_link">
+      <asp:Button ID="btnValidado" runat="server" Text="Validado" CausesValidation="false" OnClick="btnValidado_Click" />
+      <asp:Button ID="btnCancelar" runat="server" Text="Cancelar Revisión" CausesValidation="false"
+              onclick="btnCancelar_Click" />
+      </div>
+      </footer>

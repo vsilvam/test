@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Globalization;
 
 namespace App.Infrastructure.Base
 {
@@ -109,8 +110,9 @@ namespace App.Infrastructure.Base
 
         public static DateTime ToDateTime(object obj)
         {
+            CultureInfo ci = new CultureInfo("es-CL");
             DateTime dtHelper = DateTime.MinValue;
-            if (obj != null && DateTime.TryParse(obj.ToString(), out dtHelper))
+            if (obj != null && DateTime.TryParse(obj.ToString(), ci, DateTimeStyles.None, out dtHelper))
             {
                 return dtHelper;
             }
@@ -294,8 +296,9 @@ namespace App.Infrastructure.Base
 
         public static DateTime? ToNullableDateTime(object obj)
         {
+            CultureInfo ci = new CultureInfo("es-CL");
             DateTime dtHelper = DateTime.MinValue;
-            if (obj != null && DateTime.TryParse(obj.ToString(), out dtHelper))
+            if (obj != null && DateTime.TryParse(obj.ToString(), ci, DateTimeStyles.None, out dtHelper))
             {
                 return dtHelper;
             }
@@ -305,8 +308,9 @@ namespace App.Infrastructure.Base
 
         public static DateTime? ToNullableDateTimeEnd(object obj)
         {
+            CultureInfo ci = new CultureInfo("es-CL");
             DateTime dtHelper = DateTime.MinValue;
-            if (obj != null && !obj.ToString().Trim().Equals(string.Empty) && DateTime.TryParse(obj.ToString() + " 23:59:59", out dtHelper))
+            if (obj != null && !obj.ToString().Trim().Equals(string.Empty) && DateTime.TryParse(obj.ToString() + " 23:59:59", ci, DateTimeStyles.None, out dtHelper))
             {
                 return dtHelper;
             }

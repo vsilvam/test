@@ -49,7 +49,7 @@ namespace LQCE.Transaccion
                     if (objEstadoDetalle == null)
                         throw new Exception("No se ha encontrado información del Estado de Detalle de Carga de Prestaciones");
 
-                    string archivo = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + NombreArchivo;
+                    string archivo = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + NombreArchivo;
                     File.WriteAllBytes(Properties.Settings.Default.DIR_CARGA_EXCEL + archivo, ContenidoArchivo);
 
                     var datos = ISExcel.ReadExcelFile(Properties.Settings.Default.DIR_CARGA_EXCEL + archivo, true);
@@ -680,11 +680,14 @@ namespace LQCE.Transaccion
             string Rut, string Medico, string Edad, string Telefono, string Procedencia, string FechaRecepcion,
             string Muestra, string FechaResultados, string Prevision, string Garantia, string Pagado,
             string Pendiente, int IdCargaPrestacionesDetalleEstado, string MensajeError,
-            List<DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN> Examenes)
+            List<DTOExamen> Examenes)
         {
             Init();
             try
             {
+                //ISException.RegisterExcepcion("FechaRecepcion " + FechaRecepcion);
+                //ISException.RegisterExcepcion("FechaResultados " + FechaResultados);
+
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
@@ -729,7 +732,7 @@ namespace LQCE.Transaccion
                         var dtoExamen = Examenes.First(d => d.ID == objExamen.ID);
                         objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
                         objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
-                        objExamen.ACTIVO = false;
+                        objExamen.ACTIVO = true;
                         context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", objExamen);
                     }
 
@@ -910,7 +913,6 @@ namespace LQCE.Transaccion
             RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO = new RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO(context);
             RepositorioEXAMEN _RepositorioEXAMEN = new RepositorioEXAMEN(context);
             RepositorioEXAMEN_SINONIMO _RepositorioEXAMEN_SINONIMO = new RepositorioEXAMEN_SINONIMO(context);
-
 
             var EstadoConError = _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById((int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.ConError);
             if(EstadoConError == null)

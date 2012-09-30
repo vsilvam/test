@@ -14,7 +14,6 @@
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-
 <article class="module width_full">
 
 <header><h3>Buscador</h3></header>
@@ -54,13 +53,12 @@
                 	
 				</div>
 			</footer>
-</article>    
-
+</article>
 <article class="module width_full">
 
 <header><h3>Listado de Cargas Masivas</h3></header>
 <div>
-   <asp:GridView CssClass="tablesorter" ID="gridRegistroCargaArchivo"  GridLines="None" runat="server" AutoGenerateColumns="False"
+   <asp:GridView CssClass="tablesorter" ID="gridRegistroCargaArchivo"  GridLines="Both" runat="server" AutoGenerateColumns="False"
         EnableModelValidation="True">
         <Columns>
             <asp:TemplateField HeaderText="Modificar Estado">
@@ -69,16 +67,9 @@
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Id">
-                <ItemTemplate>
-                    <asp:Label ID="lblId" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
-                </ItemTemplate>
-                <HeaderStyle CssClass="campo_oculto" />
-                <ItemStyle CssClass="campo_oculto" />
-            </asp:TemplateField>
-            <asp:BoundField DataField="ARCHIVO" HeaderText="Nombre Archivo" />
-            <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha Carga" />
-            <asp:BoundField DataField="TOTAL_REGISTROS" HeaderText="N° Total Fichas" />
+            <asp:BoundField DataField="ARCHIVO" HeaderText="Archivo" />
+            <asp:BoundField DataField="FECHA_CARGA" HeaderText="Fecha de Carga" />
+            <asp:BoundField DataField="TOTAL_REGISTROS" HeaderText="Total Fichas" />
             <asp:BoundField DataField="REGISTROS_VALIDADOS" HeaderText="Fichas Validadas" />
             <asp:BoundField DataField="REGISTROS_CON_ERRORES" HeaderText="Fichas con errores" />
             <asp:BoundField DataField="NOMBRE_TIPO_PRESTACION" HeaderText="Tipo Prestacion" />

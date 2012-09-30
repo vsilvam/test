@@ -88,7 +88,7 @@
  <header><h3>Prestaciones</h3></header>
   
   <div> 
-  <asp:GridView ID="grdPrestaciones" CssClass="tablesorter" runat="server" GridLines="None" AutoGenerateColumns="False" Visible="false"
+  <asp:GridView ID="grdPrestaciones" CssClass="tablesorter" runat="server" GridLines="Both" AutoGenerateColumns="False" Visible="false"
                     Width="100%">
                     <Columns>
                         <asp:BoundField DataField="ID_TIPO_PRESTACION" HeaderText="Tipo Prestacion" Visible="false" />

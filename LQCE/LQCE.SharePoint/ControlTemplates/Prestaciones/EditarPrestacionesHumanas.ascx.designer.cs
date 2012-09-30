@@ -130,15 +130,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtFechaHora1;
         
         /// <summary>
-        /// Control txtFechaHora2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaHora2;
-        
-        /// <summary>
         /// Control txtPrevision.
         /// </summary>
         /// <remarks>
@@ -182,15 +173,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaHoraEntrega1;
-        
-        /// <summary>
-        /// Control txtFechaHoraEntrega2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaHoraEntrega2;
         
         /// <summary>
         /// Control txtTotal.

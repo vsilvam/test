@@ -22,5 +22,12 @@ namespace LQCE.Transaccion.DTO
             ID = objExamen.ID;
             VALOR_EXAMEN = objExamen.VALOR_EXAMEN;
         }
+
+        public DTOExamen(CARGA_PRESTACIONES_VETERINARIAS_EXAMEN objExamen)
+        {
+            NOMBRE_EXAMEN = objExamen.NOMBRE_EXAMEN;
+            ID = objExamen.ID;
+            VALOR_EXAMEN = objExamen.VALOR_EXAMEN;
+        }
     }
 }

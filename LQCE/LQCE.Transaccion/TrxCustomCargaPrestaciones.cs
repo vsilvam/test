@@ -68,47 +68,55 @@ namespace LQCE.Transaccion
                     {
                         foreach (DataRow item in datos.Rows)
                         {
-                            CARGA_PRESTACIONES_HUMANAS_DETALLE objDetalle = new CARGA_PRESTACIONES_HUMANAS_DETALLE();
-                            objDetalle.CARGA_PRESTACIONES_ENCABEZADO = objEncabezado;
-                            objDetalle.FICHA = item["FICHA"].ToString();
-                            objDetalle.NOMBRE = item["NOMBRE"].ToString();
-                            objDetalle.RUT = item["RUT"].ToString();
-                            objDetalle.MEDICO = item["MEDICO"].ToString();
-                            objDetalle.EDAD = item["EDAD"].ToString();
-                            objDetalle.TELEFONO = item["TELEFONO"].ToString();
-                            objDetalle.PROCEDENCIA = item["PROCEDENCIA"].ToString();
-                            objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString();
-                            objDetalle.MUESTRA = item["MUESTRA"].ToString();
-                            objDetalle.FECHA_RESULTADOS = item["FECHA RESULTADOS"].ToString();
-                            objDetalle.PREVISION = item["PREVISION"].ToString();
-                            objDetalle.GARANTIA = item["GARANTIA"].ToString();
-                            objDetalle.PAGADO = item["PAGADO"].ToString();
-                            objDetalle.PENDIENTE = item["PENDIENTE"].ToString();
-                            objDetalle.ACTIVO = true;
-                            objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
-                            objDetalle.MENSAJE_ERROR = "";
-                            objDetalle.FECHA_ACTUALIZACION = DateTime.Now;
-                            objDetalle.CLIENTE = null;
-                            objDetalle.VALOR_FICHA = null;
-                            objDetalle.VALOR_FECHA_MUESTRA = null;
-                            objDetalle.VALOR_FECHA_RECEPCION = null;
-                            objDetalle.PREVISION1 = null;
-                            objDetalle.GARANTIA1 = null;
-                            objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
-                            
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 1", "VALOR 1");
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 2", "VALOR 2");
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 3", "VALOR 3");
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 4", "VALOR 4");
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 5", "VALOR 5");
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 6", "VALOR 6");
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 7", "VALOR 7");
-                            AgregarExamenHumano(context, objDetalle, item, "EXAMEN 8", "VALOR 8");
+                            bool TieneDatos = false;
+                            foreach (var col in item.ItemArray)
+                            {
+                                if (!string.IsNullOrEmpty(col.ToString()))
+                                    TieneDatos = true;
+                            }
+                            if (TieneDatos)
+                            {
+                                CARGA_PRESTACIONES_HUMANAS_DETALLE objDetalle = new CARGA_PRESTACIONES_HUMANAS_DETALLE();
+                                objDetalle.CARGA_PRESTACIONES_ENCABEZADO = objEncabezado;
+                                objDetalle.FICHA = item["FICHA"].ToString();
+                                objDetalle.NOMBRE = item["NOMBRE"].ToString();
+                                objDetalle.RUT = item["RUT"].ToString();
+                                objDetalle.MEDICO = item["MEDICO"].ToString();
+                                objDetalle.EDAD = item["EDAD"].ToString();
+                                objDetalle.TELEFONO = item["TELEFONO"].ToString();
+                                objDetalle.PROCEDENCIA = item["PROCEDENCIA"].ToString();
+                                objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString();
+                                objDetalle.MUESTRA = item["MUESTRA"].ToString();
+                                objDetalle.FECHA_RESULTADOS = item["FECHA RESULTADOS"].ToString();
+                                objDetalle.PREVISION = item["PREVISION"].ToString();
+                                objDetalle.GARANTIA = item["GARANTIA"].ToString();
+                                objDetalle.PAGADO = item["PAGADO"].ToString();
+                                objDetalle.PENDIENTE = item["PENDIENTE"].ToString();
+                                objDetalle.ACTIVO = true;
+                                objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
+                                objDetalle.MENSAJE_ERROR = "";
+                                objDetalle.FECHA_ACTUALIZACION = DateTime.Now;
+                                objDetalle.CLIENTE = null;
+                                objDetalle.VALOR_FICHA = null;
+                                objDetalle.VALOR_FECHA_MUESTRA = null;
+                                objDetalle.VALOR_FECHA_RECEPCION = null;
+                                objDetalle.PREVISION1 = null;
+                                objDetalle.GARANTIA1 = null;
+                                objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
 
-                            //ValidarPrestacionHumana(context, objDetalle);
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 1", "VALOR 1");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 2", "VALOR 2");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 3", "VALOR 3");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 4", "VALOR 4");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 5", "VALOR 5");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 6", "VALOR 6");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 7", "VALOR 7");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 8", "VALOR 8");
 
-                            context.AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(objDetalle);
+                                //ValidarPrestacionHumana(context, objDetalle);
 
+                                context.AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(objDetalle);
+                            }
                         }
                     }
                     else if (IdTipoPrestacion == (int)ENUM_TIPO_PRESTACION.Veterinarias)
@@ -555,11 +563,24 @@ namespace LQCE.Transaccion
                     int IdCargaDetalleEstadoPendiente = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente;
 
                     if (objEstado.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Completado)
-                        if (objEncabezado.CARGA_PRESTACIONES_HUMANAS_DETALLE
-                            .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == IdCargaDetalleEstadoPendiente)
-                            || objEncabezado.CARGA_PRESTACIONES_VETERINARIAS_DETALLE
-                            .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == IdCargaDetalleEstadoPendiente))
-                            throw new Exception("La carga no se puede completar mientras tenga fichas pendientes");
+                    {
+                        if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
+                        {
+                            if (objEncabezado.CARGA_PRESTACIONES_HUMANAS_DETALLE
+                           .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == IdCargaDetalleEstadoPendiente))
+                            {
+                                throw new Exception("La carga no se puede completar mientras tenga fichas pendientes");
+                            }
+                        }
+                        else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
+                        {
+                            if (objEncabezado.CARGA_PRESTACIONES_VETERINARIAS_DETALLE
+                           .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == IdCargaDetalleEstadoPendiente))
+                            {
+                                throw new Exception("La carga no se puede completar mientras tenga fichas pendientes");
+                            }
+                        }
+                    }
 
                     objEncabezado.CARGA_PRESTACIONES_ESTADO = objEstado;
                     context.ApplyPropertyChanges("CARGA_PRESTACIONES_ENCABEZADO", objEncabezado);
@@ -769,7 +790,7 @@ namespace LQCE.Transaccion
             string Procedencia, string FechaRecepcion, string FechaMuestra, string FechaResultados, string Pendiente,
             string Garantia, string Pagado, string Total,
                int IdCargaPrestacionesDetalleEstado, string MensajeError,
-               List<DTO_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN> Examenes)
+               List<DTOExamen> Examenes)
         {
             Init();
             try
@@ -823,7 +844,7 @@ namespace LQCE.Transaccion
                         var dtoExamen = Examenes.First(d => d.ID == objExamen.ID);
                         objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
                         objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
-                        objExamen.ACTIVO = false;
+                        objExamen.ACTIVO = true;
                         context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", objExamen);
                     }
 

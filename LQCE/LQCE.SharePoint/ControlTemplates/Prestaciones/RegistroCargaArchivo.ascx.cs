@@ -113,25 +113,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
                     if (ChkEditar.Checked)
                     {
-                        var lblId = grilla.FindControl("lblId") as Label;
-                        //Obteber estado de la carga
+                        var hdnId = grilla.FindControl("hdnId") as HiddenField;
+                        int IdCargaPrestacionesEncabezado = int.Parse(hdnId.Value);
+                        
                         TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                        //List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null, null);
-                        //foreach (var lis in resumen)
-                        //{
-                        //    if (lis.ID_ESTADO == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
-                        //    {
-                        //        //se puede eliminar la carga
-                        //        int IdCargaPrestacionesEncabezado = lis.ID;
-                        //        int IdCargaPrestacionesEstado = lis.ID_ESTADO;
-                        //        carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, IdCargaPrestacionesEstado);
-                        //    }
-                        //}
-                        CARGA_PRESTACIONES_ENCABEZADO nose = carga.GetByIdWithReferences(int.Parse(lblId.Text));
-                        int IdCargaPrestacionesEncabezado = nose.ID;
                         carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, (int)ENUM_CARGA_PRESTACIONES_ESTADO.Eliminado);
                     }
                 }
+                btnBuscar_Click(null, null);
             }
             catch (Exception ex)
             {
@@ -150,23 +139,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 //verificar los registros selecionados
                 foreach (GridViewRow grilla in gridRegistroCargaArchivo.Rows)
                 {
-                    CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
+                     CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
                     if (ChkEditar.Checked)
                     {
+                        var hdnId = grilla.FindControl("hdnId") as HiddenField;
+                        int IdCargaPrestacionesEncabezado = int.Parse(hdnId.Value);
+
                         TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                        List<DTO_RESUMEN_CARGA_PRESTACIONES> resumen = carga.GetResumenCargaPrestaciones(null, null);
-                        foreach (var lis in resumen)
-                        {
-                            if (lis.ID_ESTADO == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente)
-                            {
-                                //es posible cambiar al estado completado
-                                int IdCargaPrestacionesEncabezado = lis.ID;
-                                int IdCargaPrestacionesEstado = lis.ID_ESTADO;
-                                carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, (int)ENUM_CARGA_PRESTACIONES_ESTADO.Completado);
-                            }
-                        }
+                        carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, (int)ENUM_CARGA_PRESTACIONES_ESTADO.Completado);
                     }
                 }
+                btnBuscar_Click(null, null);
             }
             catch (Exception ex)
             {

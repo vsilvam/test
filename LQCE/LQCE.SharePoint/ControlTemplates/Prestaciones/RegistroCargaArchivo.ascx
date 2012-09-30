@@ -76,8 +76,9 @@
             <asp:BoundField DataField="NOMBRE_ESTADO" HeaderText="Estado" />
             <asp:TemplateField HeaderText="Editar">
                 <ItemTemplate>
+                <asp:HiddenField ID="hdnId" runat="server" Value='<%# Eval("ID") %>' />
                     <asp:ImageButton ID="imgEditar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
-                        CommandArgument='<%# Eval("Id") %>' Height="10px" ToolTip="Editar" OnClick="imgEditar_Click" />
+                        CommandArgument='<%# Eval("ID") %>' Height="10px" ToolTip="Editar" OnClick="imgEditar_Click" />
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>

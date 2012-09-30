@@ -31,31 +31,40 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Label lblMensaje;
         
         /// <summary>
-        /// Control grdErroresHumanos.
+        /// Control panelErrores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.BulletedList grdErroresHumanos;
+        protected global::System.Web.UI.WebControls.Panel panelErrores;
         
         /// <summary>
-        /// Control txtFicha.
+        /// Control grdErroresVeterinarios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFicha;
+        protected global::System.Web.UI.WebControls.BulletedList grdErroresVeterinarios;
         
         /// <summary>
-        /// Control lblNroPrestacion.
+        /// Control hdnListaExamen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNroPrestacion;
+        protected global::System.Web.UI.WebControls.HiddenField hdnListaExamen;
+        
+        /// <summary>
+        /// Control txtNumeroFicha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNumeroFicha;
         
         /// <summary>
         /// Control txtNombre.
@@ -148,15 +157,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtRecepcion;
         
         /// <summary>
-        /// Control txtHoraRecepcion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHoraRecepcion;
-        
-        /// <summary>
         /// Control txtMuestraFecha.
         /// </summary>
         /// <remarks>
@@ -166,13 +166,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtMuestraFecha;
         
         /// <summary>
-        /// Control txtMuestraHora.
+        /// Control txtFechaEntrega.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMuestraHora;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaEntrega;
         
         /// <summary>
         /// Control txtPendiente.
@@ -211,42 +211,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtTotal;
         
         /// <summary>
-        /// Control txtFechaEntrega.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaEntrega;
-        
-        /// <summary>
-        /// Control txtHoraEntrega.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHoraEntrega;
-        
-        /// <summary>
-        /// Control txtRecepcionEntrega.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRecepcionEntrega;
-        
-        /// <summary>
-        /// Control btnValidado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnValidado;
-        
-        /// <summary>
         /// Control lnkAgregaFicha.
         /// </summary>
         /// <remarks>
@@ -283,24 +247,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtExamen;
         
         /// <summary>
-        /// Control txtCodigo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
-        
-        /// <summary>
-        /// Control RegularExpressionValidator1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
-        
-        /// <summary>
         /// Control txtValor.
         /// </summary>
         /// <remarks>
@@ -328,12 +274,21 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Button btnAgrega;
         
         /// <summary>
-        /// Control grdErrores.
+        /// Control btnValidado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdErrores;
+        protected global::System.Web.UI.WebControls.Button btnValidado;
+        
+        /// <summary>
+        /// Control btnCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

@@ -11,16 +11,22 @@
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarPrestacionesHumanas" %>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
     type="text/css" media="all" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/ui-lightness/jquery-ui.css"
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/smoothness/jquery-ui.css"
     type="text/css" media="all" />
-<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="<%= ResolveUrl("~/_layouts/Style/css/lqce.css")%>"
+    type="text/css" media="all" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/ui.datepicker-es.js")%>"></script>
+<script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/jquery-ui-timepicker-addon.js")%>"></script>
+<script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/jquery-ui-sliderAccess.js")%>"></script>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#<%=txtFechaHora1.ClientID %>').datepicker({});
+        $('#<%=txtFechaHora1.ClientID %>').datetimepicker();
 
-        $('#<%=txtFechaHoraEntrega1.ClientID %>').datepicker({});
+        $('#<%=txtFechaHoraEntrega1.ClientID %>').datetimepicker();
     });
 </script>
 <asp:Panel ID="panelMensaje" runat="server">
@@ -93,13 +99,13 @@
                 Fecha/Hora<span>:</span>
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHora1" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHora1" runat="server" Enabled="true" Columns="30" CssClass="hasDatePicker"></asp:TextBox>
             </td>
             <td>
-                --
+                
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHora2" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                
             </td>
         </tr>
         <tr>
@@ -135,13 +141,13 @@
                 Fecha y Hora Entrega de Resultados
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHoraEntrega1" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                <asp:TextBox ID="txtFechaHoraEntrega1" runat="server" Enabled="true" Columns="30" CssClass="hasDatePicker"></asp:TextBox>
             </td>
             <td>
-                --
+                
             </td>
             <td>
-                <asp:TextBox ID="txtFechaHoraEntrega2" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                
             </td>
             <td>
                 Total
@@ -181,13 +187,13 @@
                         </tr>
                         <tr>
                             <td>
-                                <asp:TextBox ID="txtExamen" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtExamen" runat="server" Columns="30"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ControlToValidate='txtExamen'
                                 Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Examen'></asp:RequiredFieldValidator>
                                 
                             </td>
                             <td>
-                                <asp:TextBox ID="txtValor" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="txtValor" runat="server" Columns="30"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID='RequiredFieldValidator2' runat='server' ControlToValidate='txtValor'
                                 Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Valor'></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
@@ -207,12 +213,12 @@
                     <Columns>
                         <asp:TemplateField HeaderText="EXAMEN">
                             <ItemTemplate>
-                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>'></asp:TextBox>
+                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="VALOR">
                             <ItemTemplate>
-                                <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>'></asp:TextBox>
+                                <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>' Columns="30"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -222,7 +228,7 @@
 <footer>
       <div class="submit_link">
       <asp:Button ID="btnValidado" runat="server" Text="Validado" CausesValidation="false" OnClick="btnValidado_Click" />
-      <asp:Button ID="btnCancelar" runat="server" Text="Cancelar Revisión" CausesValidation="false"
+      <asp:Button ID="btnCancelar" runat="server" Text="Cerrar Revisión" CausesValidation="false"
               onclick="btnCancelar_Click" />
       </div>
       </footer>

@@ -386,6 +386,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\JScript\jquery-1.4.1.min.js" />
+    <Content Include="Layouts\JScript\jquery-ui-sliderAccess.js" />
+    <Content Include="Layouts\JScript\jquery-ui-timepicker-addon.js" />
     <Content Include="Layouts\JScript\ui.accordion.js" />
     <Content Include="Layouts\JScript\ui.datepicker-es.js" />
     <Content Include="Layouts\Prestaciones\ActualizarClientes.aspx">
@@ -434,6 +436,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Style\CSS\accordion.css" />
+    <Content Include="Layouts\Style\CSS\lqce.css" />
     <Content Include="Layouts\Style\Imagenes\editar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

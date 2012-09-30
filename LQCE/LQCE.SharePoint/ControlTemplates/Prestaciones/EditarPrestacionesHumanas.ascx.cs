@@ -73,22 +73,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtEdad.Text = prestaciones.EDAD;
             txtTelefono.Text = prestaciones.TELEFONO;
             txtProcedencia.Text = prestaciones.PROCEDENCIA;
-            if (!string.IsNullOrEmpty(prestaciones.FECHA_RECEPCION))
-            {
-                string[] fechaRecepcion = prestaciones.FECHA_RECEPCION.Split(' ');
-                txtFechaHora1.Text = fechaRecepcion[0];
-                txtFechaHora2.Text = (fechaRecepcion.Count() > 1) ? fechaRecepcion[1] : "";
-            }
+            txtFechaHora1.Text = prestaciones.FECHA_RECEPCION;
             txtPrevision.Text = prestaciones.PREVISION;
             txtPagado.Text = prestaciones.PAGADO;
             txtGarantia.Text = prestaciones.GARANTIA;
             txtPendiente.Text = prestaciones.PENDIENTE;
-            if (!string.IsNullOrEmpty(prestaciones.FECHA_RESULTADOS))
-            {
-                string[] fechaResultados = prestaciones.FECHA_RESULTADOS.Split(' ');
-                txtFechaHoraEntrega1.Text = fechaResultados[0];
-                txtFechaHoraEntrega2.Text = (fechaResultados.Count() > 1) ? fechaResultados[1] : "";
-            }
+            txtFechaHoraEntrega1.Text = prestaciones.FECHA_RESULTADOS;
             txtTotal.Text = prestaciones.TOTAL;
             txtMuestra.Text = prestaciones.MUESTRA;
 
@@ -119,7 +109,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void EditarFicha()
         {
             //Se habilita la ficha para edicion   
-            txtNumeroFicha.Enabled = true;
+            txtNumeroFicha.Enabled = false;
             txtNombre.Enabled = true;
             txtRut.Enabled = true;
             txtMedico.Enabled = true;
@@ -127,13 +117,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtTelefono.Enabled = true;
             txtProcedencia.Enabled = true;
             txtFechaHora1.Enabled = true;
-            txtFechaHora2.Enabled = true;
             txtPrevision.Enabled = true;
             txtPagado.Enabled = true;
             txtGarantia.Enabled = true;
             txtPendiente.Enabled = true;
             txtFechaHoraEntrega1.Enabled = true;
-            txtFechaHoraEntrega2.Enabled = true;
             txtTotal.Enabled = true;
             txtMuestra.Enabled = true;
 
@@ -159,38 +147,42 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
                 string procedencia = txtProcedencia.Text.Trim();
                 string fechaRecepcion = !string.IsNullOrEmpty(txtFechaHora1.Text) ? txtFechaHora1.Text : string.Empty;
-                string horaRecepcion = !string.IsNullOrEmpty(txtFechaHora2.Text) ? txtFechaHora2.Text : string.Empty;
                 string prevision = !string.IsNullOrEmpty(txtPrevision.Text) ? txtPrevision.Text : string.Empty;
                 string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
                 string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
                 string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
                 string fechaResultado = !string.IsNullOrEmpty(txtFechaHoraEntrega1.Text) ? txtFechaHoraEntrega1.Text : string.Empty;
-                string horaResultado = !string.IsNullOrEmpty(txtFechaHoraEntrega2.Text) ? txtFechaHoraEntrega2.Text : string.Empty;
                 string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
                 string muestra = txtMuestra.Text.Trim();
 
                 //se recorren los examenes para guardar
+                List<DTOExamen> listaDTO = this.ListaExamen;
                 int numeroFila = 0;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
                     TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
                     TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
 
-                    this.ListaExamen[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
-                    this.ListaExamen[numeroFila].VALOR_EXAMEN = txtValor.Text;
+                    listaDTO[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
+                    listaDTO[numeroFila].VALOR_EXAMEN = txtValor.Text;
+
+                    numeroFila++;
                 }
+                this.ListaExamen = listaDTO;
 
                 TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
                 DTO_RESULTADO_ACTUALIZACION_FICHA resultado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(Id, ficha, nombre, rut,
-                    medico, edad, telefono, procedencia, (fechaRecepcion + " " + horaRecepcion).Trim(), muestra,
-                    (fechaResultado + " " + horaResultado).Trim(), prevision, garantia, pagado, pendiente,
+                    medico, edad, telefono, procedencia, fechaRecepcion, muestra,
+                    fechaResultado, prevision, garantia, pagado, pendiente,
                     IdCargaPrestacionesDetalleEstado, "", this.ListaExamen);
 
                 if (!resultado.RESULTADO)
                 {
                     // mostrar errores en grilla
-                    grdErroresHumanos.DataSource = resultado.ERRORES_VALIDACION;
+                    var listaErrores = resultado.ERRORES_VALIDACION;
+                    grdErroresHumanos.DataSource = listaErrores;
                     grdErroresHumanos.DataBind();
+                    panelErrores.Visible = listaErrores.Any();
                 }
                 else
                 {

@@ -76,13 +76,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtTelefono.Text = prestaciones.TELEFONO;
             txtMedico.Text = prestaciones.MEDICO;
             txtProcedencia.Text = prestaciones.PROCEDENCIA;
-            txtRecepcion.Text = prestaciones.FECHA_RECEPCION;
-            txtMuestraFecha.Text = prestaciones.FECHA_MUESTRA;
+            txtRecepcion.Text = prestaciones.FECHA_RECEPCION.Replace("/", "-");
+            txtMuestraFecha.Text = prestaciones.FECHA_MUESTRA.Replace("/", "-");
             txtPendiente.Text = prestaciones.PENDIENTE;
             txtPagado.Text = prestaciones.PAGADO;
             txtGarantia.Text = prestaciones.GARANTIA;
             txtTotal.Text = prestaciones.TOTAL;
-            txtFechaEntrega.Text = prestaciones.FECHA_RESULTADOS;
+            txtFechaEntrega.Text = prestaciones.FECHA_RESULTADOS.Replace("/", "-");
             
             //carga grilla
             var lista = prestaciones.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(e => e.ACTIVO);
@@ -195,9 +195,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {
                     //si no existio errores pasa al regsitro siguiente
                     string id = Request.QueryString["Id"].ToString();
-                    Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + (id + 1).ToString());
+                    int? IdSiguiente = PrestacionesEncabezado.GetIdSiguienteFichaVeterinaria(int.Parse(id));
+                    if (IdSiguiente.HasValue)
+                        Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + (IdSiguiente.Value).ToString(), false);
+                    else
+                        btnCancelar_Click(null, null);
                 }
-                
             }
             catch (Exception ex)
             {

@@ -3436,7 +3436,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ModeloLQCE" ZoomLevel="76">
+      <Diagram Name="ModeloLQCE" ZoomLevel="65">
         <EntityTypeShape EntityType="LQCEModelo.CLIENTE" Width="1.5" PointX="5.25" PointY="26.25" Height="3.7109993489583388" />
         <EntityTypeShape EntityType="LQCEModelo.CLIENTE_SINONIMO" Width="1.5" PointX="7.5" PointY="49.5" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LQCEModelo.COBRO" Width="1.5" PointX="8.25" PointY="17.125" Height="1.9802864583333388" />

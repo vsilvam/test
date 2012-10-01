@@ -69,7 +69,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 2012/09/14 12:35:58
+// Fecha de generación: 30-09-2012 23:10:28
 namespace LQCE.Modelo
 {
     

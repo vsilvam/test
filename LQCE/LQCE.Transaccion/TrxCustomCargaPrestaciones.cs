@@ -113,7 +113,7 @@ namespace LQCE.Transaccion
                                 AgregarExamenHumano(context, objDetalle, item, "EXAMEN 7", "VALOR 7");
                                 AgregarExamenHumano(context, objDetalle, item, "EXAMEN 8", "VALOR 8");
 
-                                //ValidarPrestacionHumana(context, objDetalle);
+                                ValidarPrestacionHumana(context, objDetalle);
 
                                 context.AddToCARGA_PRESTACIONES_HUMANAS_DETALLE(objDetalle);
                             }
@@ -162,7 +162,7 @@ namespace LQCE.Transaccion
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 4", "VALOR 4");
                             AgregarExamenVeterinario(context, objDetalle, item, "EXAMEN 5", "VALOR 5");
 
-                            //ValidarPrestacionVeterinaria(context, objDetalle);
+                           ValidarPrestacionVeterinaria(context, objDetalle);
 
                             context.AddToCARGA_PRESTACIONES_VETERINARIAS_DETALLE(objDetalle);
 
@@ -286,7 +286,7 @@ namespace LQCE.Transaccion
                                 "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
+                        var r = from item in q.OrderBy(d => d.VALOR_FICHA).ThenBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -309,7 +309,7 @@ namespace LQCE.Transaccion
                                 "", "", "", "", "", "", "", "", null, null, null, null)
                                 select d;
 
-                        var r = from item in q.OrderBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
+                        var r = from item in q.OrderBy(d => d.VALOR_FICHA).ThenBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
                                 select new DTO_DETALLE_CARGA_PRESTACIONES
                                 {
                                     ID = item.ID,
@@ -614,7 +614,8 @@ namespace LQCE.Transaccion
                                 context.AddToPRESTACION(_PRESTACION);
 
                                 PRESTACION_HUMANA _PRESTACION_HUMANA = new PRESTACION_HUMANA();
-                                _PRESTACION_HUMANA.ID = _PRESTACION.ID;
+                                _PRESTACION_HUMANA.PRESTACION = _PRESTACION;
+                                //_PRESTACION_HUMANA.ID = _PRESTACION.ID;
                                 _PRESTACION_HUMANA.NOMBRE = _CARGA_PRESTACIONES_HUMANAS_DETALLE.NOMBRE;
                                 _PRESTACION_HUMANA.RUT = _CARGA_PRESTACIONES_HUMANAS_DETALLE.RUT;
                                 _PRESTACION_HUMANA.EDAD = _CARGA_PRESTACIONES_HUMANAS_DETALLE.EDAD;
@@ -661,7 +662,8 @@ namespace LQCE.Transaccion
                                 context.AddToPRESTACION(_PRESTACION);
 
                                 PRESTACION_VETERINARIA _PRESTACION_VETERINARIA = new PRESTACION_VETERINARIA();
-                                _PRESTACION_VETERINARIA.ID = _PRESTACION.ID;
+                                _PRESTACION_VETERINARIA.PRESTACION = _PRESTACION;
+                                //_PRESTACION_VETERINARIA.ID = _PRESTACION.ID;
                                 _PRESTACION_VETERINARIA.NOMBRE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.NOMBRE;
                                 _PRESTACION_VETERINARIA.EDAD = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.EDAD;
                                 _PRESTACION_VETERINARIA.TELEFONO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.TELEFONO;
@@ -980,7 +982,7 @@ namespace LQCE.Transaccion
                     var objClienteSinonimo = _RepositorioCLIENTE_SINONIMO.GetByFilterWithReferences(null, objDetalle.PROCEDENCIA).FirstOrDefault();
                     if (objClienteSinonimo != null)
                     {
-                        objClienteSinonimo.CLIENTE = objClienteSinonimo.CLIENTE;
+                        objDetalle.CLIENTE = objClienteSinonimo.CLIENTE;
                     }
                     else
                     {
@@ -1380,5 +1382,68 @@ namespace LQCE.Transaccion
             return ListaValidaciones;
         }
 
+        public int? GetIdSiguienteFichaHumana(int CARGA_PRESTACIONES_HUMANAS_DETALLE_ID)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
+                    CARGA_PRESTACIONES_HUMANAS_DETALLE _FICHA_ACTUAL = _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByIdWithReferences(CARGA_PRESTACIONES_HUMANAS_DETALLE_ID);
+                    if (_FICHA_ACTUAL == null)
+                    {
+                        throw new Exception("No se encuentra información de la ficha actual");
+                    }
+
+                    var q = _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetAllWithReferences();
+                    q = q.Where(d => d.CARGA_PRESTACIONES_ENCABEZADO.ID == _FICHA_ACTUAL.CARGA_PRESTACIONES_ENCABEZADO.ID);
+                    q = q.Where(d => d.VALOR_FICHA > _FICHA_ACTUAL.VALOR_FICHA);
+                    var _FICHA_SIGUIENTE = q.OrderBy(d => d.VALOR_FICHA).FirstOrDefault();
+                    if (_FICHA_SIGUIENTE == null)
+                        return (int?)null;
+                    else
+                        return _FICHA_SIGUIENTE.ID;
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+        public int? GetIdSiguienteFichaVeterinaria(int CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ID)
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
+                    CARGA_PRESTACIONES_VETERINARIAS_DETALLE _FICHA_ACTUAL = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByIdWithReferences(CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ID);
+                    if (_FICHA_ACTUAL == null)
+                    {
+                        throw new Exception("No se encuentra información de la ficha actual");
+                    }
+
+                    var q = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetAllWithReferences();
+                    q = q.Where(d => d.CARGA_PRESTACIONES_ENCABEZADO.ID == _FICHA_ACTUAL.CARGA_PRESTACIONES_ENCABEZADO.ID);
+                    q = q.Where(d => d.VALOR_FICHA > _FICHA_ACTUAL.VALOR_FICHA);
+                    var _FICHA_SIGUIENTE = q.OrderBy(d => d.VALOR_FICHA).FirstOrDefault();
+                    if (_FICHA_SIGUIENTE == null)
+                        return (int?)null;
+                    else
+                        return _FICHA_SIGUIENTE.ID;
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
     }
 }

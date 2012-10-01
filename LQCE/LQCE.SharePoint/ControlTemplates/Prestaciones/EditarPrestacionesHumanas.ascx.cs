@@ -73,12 +73,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtEdad.Text = prestaciones.EDAD;
             txtTelefono.Text = prestaciones.TELEFONO;
             txtProcedencia.Text = prestaciones.PROCEDENCIA;
-            txtFechaHora1.Text = prestaciones.FECHA_RECEPCION;
+            txtFechaHora1.Text = prestaciones.FECHA_RECEPCION.Replace("/","-");
             txtPrevision.Text = prestaciones.PREVISION;
             txtPagado.Text = prestaciones.PAGADO;
             txtGarantia.Text = prestaciones.GARANTIA;
             txtPendiente.Text = prestaciones.PENDIENTE;
-            txtFechaHoraEntrega1.Text = prestaciones.FECHA_RESULTADOS;
+            txtFechaHoraEntrega1.Text = prestaciones.FECHA_RESULTADOS.Replace("/", "-"); 
             txtTotal.Text = prestaciones.TOTAL;
             txtMuestra.Text = prestaciones.MUESTRA;
 
@@ -188,7 +188,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {
                     //si no existio errores pasa al regsitro siguiente
                     string id = Request.QueryString["Id"].ToString();
-                    Response.Redirect("EditarPrestacionesHumanas.aspx?Id=" + (id + 1).ToString());
+                    int? IdSiguiente = PrestacionesEncabezado.GetIdSiguienteFichaHumana(int.Parse(id));
+                    if (IdSiguiente.HasValue)
+                        Response.Redirect("EditarPrestacionesHumanas.aspx?Id=" + (IdSiguiente.Value).ToString(), false);
+                    else
+                        btnCancelar_Click(null, null);
                 }
             }
             catch (Exception ex)

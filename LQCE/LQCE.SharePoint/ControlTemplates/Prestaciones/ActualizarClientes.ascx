@@ -12,54 +12,68 @@
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
 
-<asp:Panel ID="pnActualizaClientes" runat="server">
-    <h3>Buscar Clientes</h3>
+<asp:Panel ID="pnActualiza" runat="server" Visible="false">
     <table>
         <tr>
             <td>Rut</td>
             <td>
-                <asp:TextBox ID="txtRut" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Nombre</td>
             <td>
-                <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Direccion</td>
+            <td>
+                <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Fono</td>
+            <td>
+                <asp:TextBox ID="txtFono" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Giro</td>
+            <td>
+                <asp:TextBox ID="txtGiro" runat="server"></asp:TextBox>
+            </td>
+        </tr>        
+        <tr>
+            <td>Convenio</td>
+            <td>
+                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Comuna</td>
             <td>
-                <asp:TextBox ID="txtComuna" runat="server"></asp:TextBox>
+                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
             </td>
-        </tr>  
+        </tr>
         <tr>
-            <td>Convenio</td>
+            <td>Descuento</td>
             <td>
-                <asp:TextBox ID="txtConvenio" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtDescuento" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Datos de Contacto</td>
+            <td>
+                <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Convenio de Precios</td>
+            <td>
+                <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" />
-</asp:Panel>
-<asp:Panel ID="pnClientes" runat="server" Visible="false">
-    <asp:GridView ID="grdClientes" runat="server" GridLines="None" AutoGenerateColumns='false'
-        Width='100%' CssClass="tablesorter">
-        <Columns>
-            <asp:BoundField DataField="" HeaderText="RUT" />
-            <asp:BoundField DataField="" HeaderText="NOMBRE" />
-            <asp:BoundField DataField="" HeaderText="COMUNA" />
-            <asp:BoundField DataField="" HeaderText="CONVENIO" />
-            <asp:TemplateField HeaderText="ACTUALIZAR">
-                <ItemTemplate>
-                    <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
-                        CommandArgument='<%# Eval("Id") %>' Height="10px" ToolTip="Actualizar" />
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-        </Columns>
-        <EmptyDataTemplate>
-            No se encontraron clientes.
-        </EmptyDataTemplate>
-    </asp:GridView>
+    <asp:Button ID="btnActualizar" runat="server" Text="Guardar" />
 </asp:Panel>

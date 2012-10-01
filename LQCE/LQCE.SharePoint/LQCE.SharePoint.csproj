@@ -129,13 +129,6 @@
     <Compile Include="ControlTemplates\Prestaciones\MensajeExito.ascx.designer.cs">
       <DependentUpon>MensajeExito.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlTemplates\Prestaciones\ModificarCliente.ascx.cs">
-      <DependentUpon>ModificarCliente.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlTemplates\Prestaciones\ModificarCliente.ascx.designer.cs">
-      <DependentUpon>ModificarCliente.ascx.cs</DependentUpon>
-    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\ModificarConvenioPrecio.ascx.cs">
       <DependentUpon>ModificarConvenioPrecio.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -163,6 +156,13 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.designer.cs">
       <DependentUpon>RegistroCargaArchivo.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroClientes.ascx.cs">
+      <DependentUpon>RegistroClientes.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroClientes.ascx.designer.cs">
+      <DependentUpon>RegistroClientes.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\RegistroConvenioPrecios.ascx.cs">
       <DependentUpon>RegistroConvenioPrecios.ascx</DependentUpon>
@@ -297,6 +297,13 @@
     <Compile Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx.designer.cs">
       <DependentUpon>RegistroCargaArchivo.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroClientes.aspx.cs">
+      <DependentUpon>RegistroClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroClientes.aspx.designer.cs">
+      <DependentUpon>RegistroClientes.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Libreria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -358,9 +365,6 @@
     <Content Include="ControlTemplates\Prestaciones\MensajeExito.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\Prestaciones\ModificarCliente.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="ControlTemplates\Prestaciones\ModificarConvenioPrecio.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -371,6 +375,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\RegistroClientes.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\RegistroConvenioPrecios.ascx">
@@ -433,6 +440,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\RegistroCargaArchivo.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\RegistroClientes.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Style\CSS\accordion.css" />

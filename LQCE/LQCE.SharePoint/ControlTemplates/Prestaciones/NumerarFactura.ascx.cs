@@ -82,15 +82,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 //    throw new Exception("Debe realizar busqueda primero");
 
                 //ID fcaturacion , bool numerar todos, si es falso debe pedir desde hasta, nuemro fact inicial.
-
                 
-
-                //tomar valores
-                IFormatProvider culture = new CultureInfo("es-CL", true);
+                //tomar valores                
                 LinkButton _link = sender as LinkButton;
                 int? IdFacturacion = int.Parse(_link.CommandArgument);
-                int? desde = DateTime.Parse(txtDesdeN.Text,culture);
-                int? hasta = DateTime.Parse(txtHastaN.Text,culture);
+                int? desde = int.Parse(txtDesdeN.Text);
+                int? hasta = int.Parse(txtHastaN.Text);
                 int nroFactura = int.Parse(txtNroFactura.Text);
                 bool todos = Convert.ToBoolean(rblNumerar.SelectedValue);
 

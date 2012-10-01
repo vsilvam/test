@@ -30,6 +30,7 @@
                 <asp:BoundField DataField="fecha_facturacion" HeaderText="FECHA FACTURACION" />
                 <asp:BoundField DataField="total_facturas" HeaderText="TOTAL FACTURAS" />
                 <asp:BoundField DataField="TOTAL_FACTURAS_POR_NUMERAR" HeaderText="FACTURAS POR NUMERAR" />
+                <asp:BoundField DataField="" HeaderText="TIPO FACTURA" />
                 <asp:TemplateField HeaderText="NUMERAR">
                     <ItemTemplate>
                         <asp:LinkButton id="lnkNumerar" runat="server" CommandArgument='<%# Eval("ID_FACTURACION") %>' onclick="lnkNumerar_Click" >Numerar</asp:LinkButton>

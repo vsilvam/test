@@ -83,16 +83,20 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 //ID fcaturacion , bool numerar todos, si es falso debe pedir desde hasta, nuemro fact inicial.
 
+                
+
                 //tomar valores
                 IFormatProvider culture = new CultureInfo("es-CL", true);
                 LinkButton _link = sender as LinkButton;
                 int? IdFacturacion = int.Parse(_link.CommandArgument);
-                DateTime desde = DateTime.Parse(txtDesdeN.Text,culture);
-                DateTime hasta = DateTime.Parse(txtHastaN.Text,culture);
-                string nroFactura = txtNroFactura.Text;
+                int? desde = DateTime.Parse(txtDesdeN.Text,culture);
+                int? hasta = DateTime.Parse(txtHastaN.Text,culture);
+                int nroFactura = int.Parse(txtNroFactura.Text);
                 bool todos = Convert.ToBoolean(rblNumerar.SelectedValue);
 
                 //llama la trx que genera la numeracion
+                TrxFACTURACION trx = new TrxFACTURACION();
+                trx.NumerarFacturas(IdFacturacion,,todos,desde,hasta,nroFactura);
                 
             }
             catch (Exception ex)

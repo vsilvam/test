@@ -572,8 +572,8 @@ namespace LQCE.Transaccion
                             {
                                 ID_FACTURACION = g.Key.ID_FACTURACION,
                                 ID_TIPO_FACTURA = g.Key.ID_TIPO_FACTURA,
-                                NOMBRE_TIPO_FACTURA = g.First().TIPO_FACTURA.NOMBRE_FACTURA,
-                                FECHA_FACTURACION = g.First().FACTURACION.FECHA_FACTURACION,
+                                NOMBRE_TIPO_FACTURA = g.FirstOrDefault().TIPO_FACTURA.NOMBRE_FACTURA,
+                                FECHA_FACTURACION = g.FirstOrDefault().FACTURACION.FECHA_FACTURACION,
                                 TOTAL_FACTURAS = g.Count(),
                                 TOTAL_FACTURAS_POR_NUMERAR = g.Count(fa => fa.NUMERO_FACTURA == null)
                             }).ToList();

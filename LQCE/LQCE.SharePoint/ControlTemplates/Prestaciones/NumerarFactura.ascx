@@ -11,78 +11,28 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/ui.datepicker-es.js")%>"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#<%=txtDesde.ClientID %>').datepicker({});
-        $('#<%=txtHasta.ClientID %>').datepicker({});
-    });
-</script>
+
 
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-<article class="module width_full">
-    <header>
-        <h3>
-            Buscar Facturas</h3>
-    </header>
-    <div class="module_content">
-        <h4>
-            Periodo</h4>
-        <table>
-            <tr>
-                <td>
-                    Desde
-                </td>
-                <td>
-                    <asp:TextBox ID="txtDesde" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="requiredDesde" runat="server" ValidationGroup="buscar" ControlToValidate="txtDesde" Text="Requerido" ErrorMessage="Requerido">Requerido</asp:RequiredFieldValidator>
-                </td>
-                <td>
-                    Hasta
-                </td>
-                <td>
-                    <asp:TextBox ID="txtHasta" runat="server"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="RequiredtxtHasta" runat="server" ValidationGroup="buscar" ControlToValidate="txtHasta" Text="Requerido" ErrorMessage="Requerido">Requerido</asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Clientes
-                </td>
-                <td>
-                    <asp:DropDownList ID="ddlClientes" runat="server" DataTextField="NOMBRE" DataValueField="ID" AppendDataBoundItems="true">
-                    </asp:DropDownList>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <footer>
-        <div class="submit_link">
-            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" 
-                ValidationGroup="buscar" onclick="btnBuscar_Click" />
-        </div>
-    </footer>
-</article>
-<asp:Panel ID="pnFacturas" runat="server" Visible="false">
     <article class="module width_full">
         <header>
             <h3>
-                Facturas</h3>
+                Numerar Facturas</h3>
         </header>
-        <asp:HiddenField ID="hdnFechaDesde" runat="server" />
-        <asp:HiddenField ID="hdnFechaHasta" runat="server" />
+       
 
-        <asp:GridView ID="grdFacturas" CssClass="tablesorter" GridLines="None" runat="server"
+        <asp:GridView ID="grdFacturas" CssClass="tablesorter" GridLines="Both" runat="server"
             AutoGenerateColumns="False" Width="100%" EnableModelValidation="True">
             <Columns>
                 <asp:BoundField DataField="fecha_facturacion" HeaderText="FECHA FACTURACION" />
                 <asp:BoundField DataField="total_facturas" HeaderText="TOTAL FACTURAS" />
-                <asp:BoundField DataField="fac_numerar" HeaderText="FACTURAS POR NUMERAR" />
+                <asp:BoundField DataField="TOTAL_FACTURAS_POR_NUMERAR" HeaderText="FACTURAS POR NUMERAR" />
                 <asp:TemplateField HeaderText="NUMERAR">
                     <ItemTemplate>
-                        <asp:LinkButton id="lnkNumerar" runat="server" CommandArgument='<%# Eval("ID") %>' onclick="lnkNumerar_Click" >Numerar</asp:LinkButton>
+                        <asp:LinkButton id="lnkNumerar" runat="server" CommandArgument='<%# Eval("ID_FACTURACION") %>' onclick="lnkNumerar_Click" >Numerar</asp:LinkButton>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
@@ -97,7 +47,7 @@
             </div>
         </footer>
     </article>
-</asp:Panel>
+
 <asp:Panel ID="pnNumerar" runat="server" Visible="false">
     <table>
         <tr>

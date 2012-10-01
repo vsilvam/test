@@ -35,11 +35,16 @@ namespace LQCE.Transaccion
 	{
 <#
 string keyName = "";
+bool TieneNombre = false;
 foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.EdmType is PrimitiveType && p.DeclaringType == entity))
 {
 	if (ef.IsKey(edmProperty))
 	{ 
 		keyName = code.Escape(edmProperty);
+	}
+	if (code.Escape(edmProperty) == "NOMBRE")
+	{ 
+		TieneNombre = true;
 	}
 }
 #>
@@ -72,7 +77,11 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
-                    return repositorio.GetAll().OrderBy(i => i.<#=keyName#>).ToList();
+					<# if(TieneNombre) { #>
+                    return repositorio.GetAll().OrderBy(i => i.NOMBRE).ToList();
+					<# } else { #>
+					return repositorio.GetAll().OrderBy(i => i.<#=keyName#>).ToList();
+					<# } #>
                 }
             }
             catch (Exception ex)
@@ -91,7 +100,11 @@ foreach (EdmProperty edmProperty in entity.Properties.Where(p => p.TypeUsage.Edm
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     Repositorio<#=code.Escape(entity)#> repositorio = new Repositorio<#=code.Escape(entity)#>(context);
-                    return repositorio.GetAllWithReferences().OrderBy(i => i.<#=keyName#>).ToList();
+                    <# if(TieneNombre) { #>
+                    return repositorio.GetAllWithReferences().OrderBy(i => i.NOMBRE).ToList();
+					<# } else { #>
+					return repositorio.GetAllWithReferences().OrderBy(i => i.<#=keyName#>).ToList();
+					<# } #>
                 }
             }
             catch (Exception ex)

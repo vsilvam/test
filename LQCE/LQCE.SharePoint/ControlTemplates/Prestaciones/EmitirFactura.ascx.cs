@@ -7,6 +7,7 @@ using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
 using System.Globalization;
+using LQCE.Modelo;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -46,7 +47,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 if (Page.IsValid)
                 {
-                    pnFacturas.Visible = true;
 
                     IFormatProvider culture = new CultureInfo("es-CL", true);
 
@@ -56,9 +56,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                     var facturacion = new TrxFACTURACION();
                     hdnFechaDesde.Value = desde.ToString();
-                    hdnFechaHasta.Value = hasta.ToString();                    
-                    grdFacturas.DataSource = facturacion.GetClientesAFacturar(desde, hasta, cliente);
+                    hdnFechaHasta.Value = hasta.ToString();
+                    var lista = facturacion.GetClientesAFacturar(desde, hasta, cliente);
+                    grdFacturas.DataSource = lista;
                     grdFacturas.DataBind();
+                    pnFacturas.Visible = true;
+                    btnEmitir.Visible = lista.Any();
                 }
             }
             catch (Exception ex)

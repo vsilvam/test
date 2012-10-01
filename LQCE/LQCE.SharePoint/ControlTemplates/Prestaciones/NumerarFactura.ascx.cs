@@ -17,7 +17,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    getClientes();
+                    getFacturas();
                 }
             }
             catch (Exception ex)
@@ -29,50 +29,57 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }       
 
-        private void getClientes()
+        //private void getClientes()
+        //{
+        //    TrxCLIENTE estado = new TrxCLIENTE();
+        //    ddlClientes.Items.Clear();
+        //    ddlClientes.Items.Add(new ListItem("(Todos)", ""));
+        //    ddlClientes.DataSource = estado.GetAll();
+        //    ddlClientes.DataBind();
+        //}
+
+        private void getFacturas()
         {
-            TrxCLIENTE estado = new TrxCLIENTE();
-            ddlClientes.Items.Clear();
-            ddlClientes.Items.Add(new ListItem("(Todos)", ""));
-            ddlClientes.DataSource = estado.GetAll();
-            ddlClientes.DataBind();
+            var facturacion = new TrxFACTURACION();
+            grdFacturas.DataSource = facturacion.GetResumenFacturacionPorNumerar();
+            grdFacturas.DataBind();
         }
 
-        protected void btnBuscar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Page.IsValid)
-                {
-                    pnFacturas.Visible = true;
-                    IFormatProvider culture = new CultureInfo("es-CL", true);
-                    DateTime desde = DateTime.Parse(txtDesde.Text,culture);
-                    DateTime hasta = DateTime.Parse(txtHasta.Text,culture);
-                    int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
+        //protected void btnBuscar_Click(object sender, EventArgs e)
+        //{
+            //try
+            //{
+            //    if (Page.IsValid)
+            //    {
+            //        pnFacturas.Visible = true;
+            //        IFormatProvider culture = new CultureInfo("es-CL", true);
+            //        DateTime desde = DateTime.Parse(txtDesde.Text,culture);
+            //        DateTime hasta = DateTime.Parse(txtHasta.Text,culture);
+            //        int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
 
-                    var facturacion = new TrxFACTURACION();
-                    hdnFechaDesde.Value = desde.ToString();
-                    hdnFechaHasta.Value = hasta.ToString();
-                    //cambiar metodo que buscas las facturas faltantes de numerar
-                    grdFacturas.DataSource = facturacion.GetClientesAFacturar(desde, hasta, cliente);
-                    grdFacturas.DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                panelMensaje.CssClass = "MostrarMensaje";
-                lblMensaje.Text = ex.Message;
-                return;
-            }
-        }
+            //        var facturacion = new TrxFACTURACION();
+            //        hdnFechaDesde.Value = desde.ToString();
+            //        hdnFechaHasta.Value = hasta.ToString();
+            //        cambiar metodo que buscas las facturas faltantes de numerar
+            //        grdFacturas.DataSource = facturacion.GetResumenFacturacionPorNumerar();
+            //        grdFacturas.DataBind();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    ISException.RegisterExcepcion(ex);
+            //    panelMensaje.CssClass = "MostrarMensaje";
+            //    lblMensaje.Text = ex.Message;
+            //    return;
+            //}
+        //}
 
         protected void btnNumerar_Click(object sender, EventArgs e)
         {
             try 
             {
-                if (string.IsNullOrEmpty(hdnFechaDesde.Value) || string.IsNullOrEmpty(hdnFechaHasta.Value))
-                    throw new Exception("Debe realizar busqueda primero");
+                //if (string.IsNullOrEmpty(hdnFechaDesde.Value) || string.IsNullOrEmpty(hdnFechaHasta.Value))
+                //    throw new Exception("Debe realizar busqueda primero");
 
                 //ID fcaturacion , bool numerar todos, si es falso debe pedir desde hasta, nuemro fact inicial.
 

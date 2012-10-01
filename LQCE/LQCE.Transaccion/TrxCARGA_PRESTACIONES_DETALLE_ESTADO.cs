@@ -38,8 +38,8 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO repositorio = new RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO(context);
-                    return repositorio.GetAll().OrderBy(i => i.ID).ToList();
-                }
+					                    return repositorio.GetAll().OrderBy(i => i.NOMBRE).ToList();
+					                }
             }
             catch (Exception ex)
            {
@@ -57,8 +57,8 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO repositorio = new RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO(context);
-                    return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
-                }
+                                        return repositorio.GetAllWithReferences().OrderBy(i => i.NOMBRE).ToList();
+					                }
             }
             catch (Exception ex)
            {

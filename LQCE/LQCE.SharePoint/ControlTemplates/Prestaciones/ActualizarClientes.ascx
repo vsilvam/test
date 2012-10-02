@@ -47,14 +47,14 @@
         <tr>
             <td>Convenio</td>
             <td>
-                <asp:DropDownList ID="ddlConvenio" runat="server">
+                <asp:DropDownList ID="ddlConvenio" runat="server" DataTextField="NOMBRE" DataValueField="ID">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
             <td>Comuna</td>
             <td>
-                <asp:DropDownList ID="ddlComuna" runat="server">
+                <asp:DropDownList ID="ddlComuna" runat="server" DataTextField="NOMBRE" DataValueField="ID">
                 </asp:DropDownList>
             </td>
         </tr>

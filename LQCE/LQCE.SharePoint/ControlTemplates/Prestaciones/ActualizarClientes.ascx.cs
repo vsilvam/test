@@ -17,6 +17,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
+                    getComuna();
+                    getConvenio();
+
                     if (Request.QueryString["Id"] == null)
                         throw new Exception("No se ha indicado identificador de la cuenta registrada");
 
@@ -51,9 +54,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
-                {
-                    getComuna();
-                    getConvenio();
+                {                   
 
                     if (Request.QueryString["Id"] == null)
                         throw new Exception("No se ha indicado identificador de la cuenta registrada");

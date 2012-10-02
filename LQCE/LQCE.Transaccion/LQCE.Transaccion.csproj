@@ -67,6 +67,7 @@
     <Compile Include="DTO\DTO_RESUMEN_FACTURACION.cs" />
     <Compile Include="DTO\DTO_RESUMEN_PRESTACIONES_FACTURAR.cs" />
     <Compile Include="Enum\ENUM_TIPO_COBRO.cs" />
+    <Compile Include="Enum\ENUM_TIPO_FACTURA.cs" />
     <Compile Include="TrxCustomCARGA_PRESTACIONES_VETERINARIAS_DETALLE.cs" />
     <Compile Include="DTO\DTO_DETALLE_CARGA_PRESTACIONES.cs" />
     <Compile Include="DTO\DTO_CARGA_PRESTACIONES_HUMANAS_EXAMEN.cs" />

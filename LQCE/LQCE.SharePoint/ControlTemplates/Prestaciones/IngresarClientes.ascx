@@ -48,13 +48,15 @@
         <tr>
             <td>Convenio</td>
             <td>
-                <asp:TextBox ID="txtConvenio" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlConvenio" runat="server">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
             <td>Comuna</td>
             <td>
-                <asp:TextBox ID="txtComuna" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlComuna" runat="server">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
@@ -66,6 +68,7 @@
     </table>
     <asp:Button ID="btnIngreso" runat="server" Text="Ingresar" 
         onclick="btnIngreso_Click" />
-    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" />
+    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" 
+        onclick="btnLimpiar_Click" />
 </asp:panel>
 

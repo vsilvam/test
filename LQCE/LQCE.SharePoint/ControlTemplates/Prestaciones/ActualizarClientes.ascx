@@ -12,18 +12,18 @@
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
 
-<asp:Panel ID="pnActualiza" runat="server" Visible="false">
+<asp:Panel ID="pnActualiza" runat="server">
     <table>
         <tr>
             <td>Rut</td>
             <td>
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtRut" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Nombre</td>
             <td>
-                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -47,13 +47,15 @@
         <tr>
             <td>Convenio</td>
             <td>
-                <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlConvenio" runat="server">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
             <td>Comuna</td>
             <td>
-                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlComuna" runat="server">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
@@ -65,15 +67,17 @@
         <tr>
             <td>Datos de Contacto</td>
             <td>
-                <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtContacto" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Convenio de Precios</td>
             <td>
-                <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtConvenioPrecios" runat="server"></asp:TextBox>
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnActualizar" runat="server" Text="Guardar" />
+    <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" onclick="btnActualizar_Click" />
+    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" 
+        onclick="btnLimpiar_Click" />
 </asp:Panel>

@@ -93,7 +93,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 //llama la trx que genera la numeracion
                 TrxFACTURACION trx = new TrxFACTURACION();
-                trx.NumerarFacturas(IdFacturacion,,todos,desde,hasta,nroFactura);
+                //trx.NumerarFacturas(IdFacturacion,,todos,desde,hasta,nroFactura);
                 
             }
             catch (Exception ex)

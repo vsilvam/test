@@ -46,7 +46,10 @@
     </table>
     <asp:Button ID="btnBuscar" runat="server" Text="Buscar" 
         onclick="btnBuscar_Click" />
-    <input type="reset" name="borrar" value="Limpiar" />
+    <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" 
+        onclick="btnLimpiar_Click" />
+        <asp:Button ID="btnAgregaCliente" runat="server" Text="Agregar Cliente" PostBackUrl="~/_layouts/Prestaciones/IngresarClientes.aspx"/>
+
 </asp:panel>
 <asp:Panel ID="pnClientes" runat="server" Visible="false">
     <asp:GridView ID="grdClientes" runat="server" GridLines="None" AutoGenerateColumns='false'

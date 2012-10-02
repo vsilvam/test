@@ -85,22 +85,22 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtGiro;
         
         /// <summary>
-        /// Control txtConvenio.
+        /// Control ddlConvenio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConvenio;
+        protected global::System.Web.UI.WebControls.DropDownList ddlConvenio;
         
         /// <summary>
-        /// Control txtComuna.
+        /// Control ddlComuna.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtComuna;
+        protected global::System.Web.UI.WebControls.DropDownList ddlComuna;
         
         /// <summary>
         /// Control txtDescuento.

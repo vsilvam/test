@@ -89,20 +89,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";
-                if (!Page.IsPostBack && !Page.IsCallback)
-                {
-                    txtRut.Text = string.Empty;
-                    txtNombre.Text = string.Empty;
-                    txtDireccion.Text = string.Empty;
-                    txtFono.Text = string.Empty;
-                    txtGiro.Text = string.Empty;
-                    ddlConvenio.ClearSelection();
-                    ddlComuna.ClearSelection();
-                    txtDescuento.Text = string.Empty;
-                    //txtContacto.Text = string.Empty;
-                    txtConvenioPrecios.Text = string.Empty;
-                }
+                panelMensaje.CssClass = "OcultarMensaje";                
+                txtRut.Text = string.Empty;
+                txtNombre.Text = string.Empty;
+                txtDireccion.Text = string.Empty;
+                txtFono.Text = string.Empty;
+                txtGiro.Text = string.Empty;
+                ddlConvenio.ClearSelection();
+                ddlComuna.ClearSelection();
+                txtDescuento.Text = string.Empty;
+                //txtContacto.Text = string.Empty;
+                txtConvenioPrecios.Text = string.Empty;               
             }
             catch (Exception ex)
             {

@@ -31,7 +31,7 @@
         </EmptyDataTemplate>
     </asp:GridView>
     <br />
-    <asp:Button ID="btnAgrega" runat="server" Text="Agrega" PostBackUrl="~/_controltemplates/Prestaciones/NuevoConvenioPrecio.ascx" />
+    <asp:Button ID="btnAgrega" runat="server" Text="Agrega" PostBackUrl="~/_layouts/Prestaciones/NuevoConvenioPrecio.aspx" />
     <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" 
         onclick="btnActualizar_Click" />
 </asp:Panel>

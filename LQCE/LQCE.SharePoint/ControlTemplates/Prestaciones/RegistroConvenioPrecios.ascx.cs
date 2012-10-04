@@ -22,7 +22,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     if (ChkEditar.Checked)
                     {
                         var lblId = grilla.FindControl("lblId") as Label;
-                        Response.Redirect("ModificarConvenioPrecio.ascx?Id=" + lblId.Text, false);
+                        Response.Redirect("ModificarConvenioPrecio.aspx?Id=" + lblId.Text, false);
                     }
                 }                
             }

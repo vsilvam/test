@@ -101,13 +101,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 panelMensaje.CssClass = "OcultarMensaje";
-                if (!Page.IsPostBack && !Page.IsCallback)
-                {
-                    txtRutCliente.Text = string.Empty;
-                    txtNombreCliente.Text = string.Empty;
-                    ddlComuna.ClearSelection();
-                    ddlConvenio.ClearSelection();
-                }
+                txtRutCliente.Text = string.Empty;
+                txtNombreCliente.Text = string.Empty;
+                ddlComuna.ClearSelection();
+                ddlConvenio.ClearSelection();
+                
             }
             catch (Exception ex)
             {

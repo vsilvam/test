@@ -283,6 +283,20 @@
     <Compile Include="Layouts\Prestaciones\ModificarCliente.aspx.designer.cs">
       <DependentUpon>ModificarCliente.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\ModificarConvenioPrecio.aspx.cs">
+      <DependentUpon>ModificarConvenioPrecio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\ModificarConvenioPrecio.aspx.designer.cs">
+      <DependentUpon>ModificarConvenioPrecio.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\NuevoConvenioPrecio.aspx.cs">
+      <DependentUpon>NuevoConvenioPrecio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\NuevoConvenioPrecio.aspx.designer.cs">
+      <DependentUpon>NuevoConvenioPrecio.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\NumerarFactura.aspx.cs">
       <DependentUpon>NumerarFactura.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -303,6 +317,13 @@
     </Compile>
     <Compile Include="Layouts\Prestaciones\RegistroClientes.aspx.designer.cs">
       <DependentUpon>RegistroClientes.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroConvenioPrecios.aspx.cs">
+      <DependentUpon>RegistroConvenioPrecios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroConvenioPrecios.aspx.designer.cs">
+      <DependentUpon>RegistroConvenioPrecios.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Libreria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -436,6 +457,12 @@
     <Content Include="Layouts\Prestaciones\ModificarCliente.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Layouts\Prestaciones\ModificarConvenioPrecio.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\NuevoConvenioPrecio.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Layouts\Prestaciones\NumerarFactura.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -443,6 +470,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\RegistroClientes.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\RegistroConvenioPrecios.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Style\CSS\accordion.css" />

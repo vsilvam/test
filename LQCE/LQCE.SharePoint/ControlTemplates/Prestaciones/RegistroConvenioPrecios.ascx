@@ -13,8 +13,8 @@
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
 <asp:Panel ID="pnRegistroConvenioPrecio" runat="server">
-    <asp:GridView ID="grdRegistroConvenioPrecio" runat="server" GridLines="None" AutoGenerateColumns='false'
-        Width='100%' CssClass="tablesorter">
+    <asp:GridView ID="grdRegistroConvenioPrecio" runat="server" GridLines="None" AutoGenerateColumns='False'
+        Width='100%' CssClass="tablesorter" EnableModelValidation="True">
         <Columns>
             <asp:TemplateField HeaderText="Actualizar">
                 <ItemTemplate>
@@ -22,16 +22,26 @@
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
-            <asp:BoundField DataField="" HeaderText="RUT" />
-            <asp:BoundField DataField="" HeaderText="NOMBRE" />            
-            <asp:BoundField DataField="" HeaderText="CONVENIO" />            
+            <asp:TemplateField HeaderText="ID">
+                <ItemTemplate>
+                    <asp:Label ID="lblId" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:BoundField DataField="NOMBRE" HeaderText="NOMBRE" />            
+            <asp:TemplateField HeaderText="PRESTACION">
+                <ItemTemplate>
+                    <asp:Label ID="lblPrestacion" runat="server" 
+                        Text='<%# Bind("TIPO_PRESTACION.NOMBRE") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
         <EmptyDataTemplate>
             No se encontraron clientes.
         </EmptyDataTemplate>
     </asp:GridView>
     <br />
-    <asp:Button ID="btnAgrega" runat="server" Text="Agrega" PostBackUrl="~/_layouts/Prestaciones/NuevoConvenioPrecio.aspx" />
+    <asp:Button ID="btnAgrega" runat="server" Text="Agrega" 
+        PostBackUrl="~/_layouts/Prestaciones/NuevoConvenioPrecio.aspx" />
     <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" 
         onclick="btnActualizar_Click" />
 </asp:Panel>

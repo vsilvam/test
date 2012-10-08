@@ -171,6 +171,13 @@
     <Compile Include="ControlTemplates\Prestaciones\RegistroConvenioPrecios.ascx.designer.cs">
       <DependentUpon>RegistroConvenioPrecios.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroPago.ascx.cs">
+      <DependentUpon>RegistroPago.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\RegistroPago.ascx.designer.cs">
+      <DependentUpon>RegistroPago.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx.cs">
       <DependentUpon>UCCargaMasivaPrestacionesHumanas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -325,6 +332,13 @@
     <Compile Include="Layouts\Prestaciones\RegistroConvenioPrecios.aspx.designer.cs">
       <DependentUpon>RegistroConvenioPrecios.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroPago.aspx.cs">
+      <DependentUpon>RegistroPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\RegistroPago.aspx.designer.cs">
+      <DependentUpon>RegistroPago.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Libreria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -404,6 +418,9 @@
     <Content Include="ControlTemplates\Prestaciones\RegistroConvenioPrecios.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\RegistroPago.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesHumanas.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -473,6 +490,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\RegistroConvenioPrecios.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\RegistroPago.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Style\CSS\accordion.css" />

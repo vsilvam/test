@@ -25,15 +25,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                     int Id = int.Parse(Request.QueryString["Id"]);
                     var trxCliente = new TrxCLIENTE();
-                    var objCliente = trxCliente.GetById(Id);
+                    var objCliente = trxCliente.GetByIdWithReferences(Id);
 
                     txtRut.Text = objCliente.RUT;
                     txtNombre.Text = objCliente.NOMBRE;
                     txtDireccion.Text = objCliente.DIRECCION;
                     txtFono.Text = objCliente.FONO;
                     txtGiro.Text = objCliente.GIRO;
-                    ddlConvenio.SelectedIndex = int.Parse(objCliente.CONVENIO.ToString());
-                    ddlComuna.SelectedIndex = int.Parse(objCliente.COMUNA.ToString());
+                    ddlConvenio.SelectedIndex = int.Parse(objCliente.CONVENIO.ID.ToString());
+                    ddlComuna.SelectedIndex = int.Parse(objCliente.COMUNA.ID.ToString());
                     txtDescuento.Text = objCliente.DESCUENTO.ToString();
                     //txtContacto.Text = objCliente;
                     txtConvenioPrecios.Text = objCliente.CONVENIO.ToString();
@@ -53,28 +53,27 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 panelMensaje.CssClass = "OcultarMensaje";
-                if (!Page.IsPostBack && !Page.IsCallback)
-                {                   
 
-                    if (Request.QueryString["Id"] == null)
-                        throw new Exception("No se ha indicado identificador de la cuenta registrada");
+                if (Request.QueryString["Id"] == null)
+                    throw new Exception("No se ha indicado identificador de la cuenta registrada");
 
-                    int Id = int.Parse(Request.QueryString["Id"]);
-                    var trxCliente = new TrxCLIENTE();
-                    string rut = txtRut.Text;
-                    string nombre =txtNombre.Text;
-                    string direccion = txtDireccion.Text;
-                    string fono = txtFono.Text;
-                    string giro = txtGiro.Text;
-                    int? convenio = int.Parse(ddlConvenio.SelectedValue);
-                    int? comuna = int.Parse(ddlConvenio.SelectedValue);
-                    int descuento = int.Parse(txtDescuento.Text);
-                    string contacto = txtContacto.Text;
-                    string convenioPrecios = txtConvenioPrecios.Text;
-                    int tipoPrestacion = (int)ENUM_TIPO_PRESTACION.Humanas;
-                    int tipoFactura = (int)ENUM_TIPO_FACTURA.Monari_con_IVA;
-                    trxCliente.Update(Id, comuna.Value, convenio.Value, tipoPrestacion, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
-                }
+                int Id = int.Parse(Request.QueryString["Id"]);
+                var trxCliente = new TrxCLIENTE();
+                string rut = txtRut.Text;
+                string nombre =txtNombre.Text;
+                string direccion = txtDireccion.Text;
+                string fono = txtFono.Text;
+                string giro = txtGiro.Text;
+                int? convenio = int.Parse(ddlConvenio.SelectedValue);
+                int? comuna = int.Parse(ddlConvenio.SelectedValue);
+                int descuento = int.Parse(txtDescuento.Text);
+                string contacto = txtContacto.Text;
+                string convenioPrecios = txtConvenioPrecios.Text;
+                int tipoPrestacion = (int)ENUM_TIPO_PRESTACION.Humanas;
+                int tipoFactura = (int)ENUM_TIPO_FACTURA.Monari_con_IVA;
+                trxCliente.Update(Id, comuna.Value, convenio.Value, tipoPrestacion, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
+                Response.Redirect("MensajeExito.aspx?t=Actualizar Clientes&m=Se ha modificado la informacion del cliente " + nombre, false);
+                
             }
             catch (Exception ex)
             {

@@ -51,19 +51,22 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";
-                if (!Page.IsPostBack && !Page.IsCallback)
-                {
-                    string Rut = txtRutCliente.Text;
-                    string Nombre = txtNombreCliente.Text;
-                    int? Comuna = int.Parse(ddlComuna.SelectedValue);
-                    int? Convenio = int.Parse(ddlConvenio.SelectedValue);
+                int? Comuna = null;
+                int? Convenio = null;
 
-                    pnClientes.Visible = true;
-                    var trx = new TrxCLIENTE();
-                    grdClientes.DataSource = trx.GetByFilterWithReferences(Comuna.Value,Convenio.Value,null,null,Rut,Nombre,null,"","","");
-                    grdClientes.DataBind();
-                }
+                panelMensaje.CssClass = "OcultarMensaje";
+                string Rut = txtRutCliente.Text;
+                string Nombre = txtNombreCliente.Text;
+                if(!string.IsNullOrEmpty(ddlComuna.SelectedValue))
+                    Comuna = int.Parse(ddlComuna.SelectedValue);
+                if(!string.IsNullOrEmpty(ddlConvenio.SelectedValue))
+                    Convenio = int.Parse(ddlConvenio.SelectedValue);
+
+                pnClientes.Visible = true;
+                var trx = new TrxCLIENTE();                
+                grdClientes.DataSource = trx.GetByFilterWithReferences(Comuna, Convenio, null, null, Rut, Nombre, null, "", "", "");
+                grdClientes.DataBind();
+                
             }
             catch (Exception ex)
             {
@@ -79,13 +82,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 panelMensaje.CssClass = "OcultarMensaje";
-                if (!Page.IsPostBack && !Page.IsCallback)
-                {
-                    LinkButton _link = sender as LinkButton;
-                    int? Id = int.Parse(_link.CommandArgument);
-                    if (Id.HasValue)
-                        Response.Redirect("ActualizarClientes.aspx?Id=" + Id, false);
-                }
+                ImageButton _link = sender as ImageButton;
+                int? Id = int.Parse(_link.CommandArgument);
+                if (Id.HasValue)
+                    Response.Redirect("ActualizarClientes.aspx?Id=" + Id, false);
+                
             }
             catch (Exception ex)
             {

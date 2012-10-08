@@ -48,21 +48,31 @@
         onclick="btnBuscar_Click" />
     <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" 
         onclick="btnLimpiar_Click" />
-        <asp:Button ID="btnAgregaCliente" runat="server" Text="Agregar Cliente" PostBackUrl="~/_layouts/Prestaciones/IngresarClientes.aspx"/>
+        <asp:Button ID="btnAgregaCliente" runat="server" Text="Agregar Cliente" 
+        PostBackUrl="~/_layouts/Prestaciones/IngresarClientes.aspx" />
 
 </asp:panel>
 <asp:Panel ID="pnClientes" runat="server" Visible="false">
-    <asp:GridView ID="grdClientes" runat="server" GridLines="None" AutoGenerateColumns='false'
-        Width='100%' CssClass="tablesorter">
+    <asp:GridView ID="grdClientes" runat="server" GridLines="None" AutoGenerateColumns='False'
+        Width='100%' CssClass="tablesorter" EnableModelValidation="True">
         <Columns>
-            <asp:BoundField DataField="" HeaderText="RUT" />
-            <asp:BoundField DataField="" HeaderText="NOMBRE" />
-            <asp:BoundField DataField="" HeaderText="COMUNA" />
-            <asp:BoundField DataField="" HeaderText="CONVENIO" />
+            <asp:BoundField DataField="ID" HeaderText="ID" />
+            <asp:BoundField DataField="RUT" HeaderText="RUT" />
+            <asp:BoundField DataField="NOMBRE" HeaderText="NOMBRE" />
+            <asp:TemplateField HeaderText="COMUNA">
+                <ItemTemplate>
+                    <asp:Label ID="lblComuna" runat="server" Text='<%# Bind("COMUNA.NOMBRE") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="CONVENIO">
+                <ItemTemplate>
+                    <asp:Label ID="lblConvenio" runat="server" Text='<%# Bind("CONVENIO.NOMBRE") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="ACTUALIZAR">
                 <ItemTemplate>
                     <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
-                        CommandArgument='<%# Eval("Id") %>' Height="10px" ToolTip="Actualizar" 
+                        CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Actualizar" 
                         onclick="imgActualizar_Click" />
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />

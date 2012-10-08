@@ -15,30 +15,23 @@
 <asp:Panel ID="pnNuevoConvenio" runat="server">
     <table>
         <tr>
-            <td>
+            <td>Tipo Prestacion
             </td>
             <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
+                <asp:DropDownList ID="ddlTipoPrestacion" runat="server" DataTextField="NOMBRE" 
+                    DataValueField="ID" AppendDataBoundItems="True">
+                </asp:DropDownList>
             </td>
         </tr>
         <tr>
-            <td>
+            <td>Nombre
             </td>
             <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
+                <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" />
+    <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" 
+        onclick="btnAceptar_Click" />
     <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" />
 </asp:Panel>

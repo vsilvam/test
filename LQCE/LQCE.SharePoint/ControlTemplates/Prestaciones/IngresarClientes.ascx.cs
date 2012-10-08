@@ -52,23 +52,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";
-                if (!Page.IsPostBack && !Page.IsCallback)
-                {
-                    string rut = txtRut.Text;
-                    string nombre = txtNombre.Text;
-                    string direccion = txtDireccion.Text;
-                    string fono = txtFono.Text;
-                    string giro = txtGiro.Text;
-                    int convenio = int.Parse(ddlConvenio.SelectedValue);
-                    int comuna = int.Parse(ddlComuna.SelectedValue);
-                    int descuento = int.Parse(txtDescuento.Text);
-                    int tipoPrestacio = (int)ENUM_TIPO_PRESTACION.Humanas;
-                    int tipoFactura = (int)ENUM_TIPO_FACTURA.Monari_con_IVA;
+                panelMensaje.CssClass = "OcultarMensaje";                
+                string rut = txtRut.Text;
+                string nombre = txtNombre.Text;
+                string direccion = txtDireccion.Text;
+                string fono = txtFono.Text;
+                string giro = txtGiro.Text;
+                int convenio = int.Parse(ddlConvenio.SelectedValue);
+                int comuna = int.Parse(ddlComuna.SelectedValue);
+                int descuento = int.Parse(txtDescuento.Text);
+                int tipoPrestacio = (int)ENUM_TIPO_PRESTACION.Humanas;
+                int tipoFactura = (int)ENUM_TIPO_FACTURA.Monari_con_IVA;
 
-                    var cliente = new TrxCLIENTE();
-                    var ingreso = cliente.Add(comuna, convenio, tipoPrestacio, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
-                }
+                var cliente = new TrxCLIENTE();
+                var ingreso = cliente.Add(comuna, convenio, tipoPrestacio, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
+                //se despliega mensaje de exito
+                if(ingreso > 0)
+                    Response.Redirect("MensajeExito.aspx?t=Ingreso Clientes&m=Se ha registrado un nuevo cliente", false);
+                
             }
             catch (Exception ex)
             {

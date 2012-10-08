@@ -25,18 +25,22 @@
 
 <asp:Panel ID="pnRegistroPagos" runat="server">
     <table width="100%">
-    <tr>
-        <td>
-            Buscar Facturas
-        </td>
-        <td>
-            <asp:DropDownList ID="ddlFacturas" runat="server" AppendDataBoundItems="True">
-            </asp:DropDownList>
-        </td>
-    </tr>
         <tr>
-        <td>Prestaciones a Pagar</td>
-        </tr><tr>
+            <td>
+                Buscar Facturas Pendientes
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlFacturas" runat="server" AppendDataBoundItems="True" 
+                    AutoPostBack="True" onselectedindexchanged="ddlFacturas_SelectedIndexChanged">
+                </asp:DropDownList>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Prestaciones a Pagar
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <asp:GridView ID="grdPrestacionesPendientes" runat="server" GridLines="None" AutoGenerateColumns='False'
                     Width='100%' CssClass="tablesorter" EnableModelValidation="True">
@@ -51,7 +55,7 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblIdPrestacion" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>                        
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="PRESTACION">
                             <ItemTemplate>
                                 <asp:Label ID="lblPrestacion" runat="server" Text='<%# Bind("TIPO_PRESTACION.NOMBRE") %>'></asp:Label>
@@ -65,19 +69,25 @@
             </td>
         </tr>
         <tr>
-            <td>Fecha de Pago</td>
+            <td>
+                Fecha de Pago
+            </td>
             <td>
                 <asp:TextBox ID="txtFechaPago" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Medio de Pago</td>
+            <td>
+                Medio de Pago
+            </td>
             <td>
                 <asp:TextBox ID="txtMedioPago" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Observaciones</td>
+            <td>
+                Observaciones
+            </td>
             <td>
                 <asp:TextBox ID="txtObservaciones" runat="server" Width='500px' Height='80px' TextMode='MultiLine'></asp:TextBox>
             </td>

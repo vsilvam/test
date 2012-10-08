@@ -122,6 +122,13 @@
     <Compile Include="ControlTemplates\Prestaciones\IngresarClientes.ascx.designer.cs">
       <DependentUpon>IngresarClientes.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\MantencionTablas.ascx.cs">
+      <DependentUpon>MantencionTablas.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\MantencionTablas.ascx.designer.cs">
+      <DependentUpon>MantencionTablas.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\MensajeExito.ascx.cs">
       <DependentUpon>MensajeExito.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -276,6 +283,13 @@
     <Compile Include="Layouts\Prestaciones\IngresarClientes.aspx.designer.cs">
       <DependentUpon>IngresarClientes.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\MantencionTablas.aspx.cs">
+      <DependentUpon>MantencionTablas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\MantencionTablas.aspx.designer.cs">
+      <DependentUpon>MantencionTablas.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\MensajeExito.aspx.cs">
       <DependentUpon>MensajeExito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -397,6 +411,9 @@
     <Content Include="ControlTemplates\Prestaciones\IngresarClientes.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\MantencionTablas.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\MensajeExito.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -468,6 +485,9 @@
     <Content Include="Layouts\Prestaciones\IngresarClientes.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Layouts\Prestaciones\MantencionTablas.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Layouts\Prestaciones\MensajeExito.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -497,6 +517,7 @@
     </Content>
     <Content Include="Layouts\Style\CSS\accordion.css" />
     <Content Include="Layouts\Style\CSS\lqce.css" />
+    <Content Include="Layouts\Style\Imagenes\agregar.jpg" />
     <Content Include="Layouts\Style\Imagenes\editar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

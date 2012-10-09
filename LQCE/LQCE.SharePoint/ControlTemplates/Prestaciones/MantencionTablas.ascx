@@ -103,8 +103,15 @@
     <asp:Button ID="btnModificarComuna" runat="server" Text="Modificar" 
         onclick="btnModificarComuna_Click" />
 </asp:Panel>
+
 <asp:Panel ID="pnClienteSinonimo" runat="server" Visible="false">
     <table>
+        <tr>
+            <td>Id</td>
+            <td>
+                <asp:TextBox ID="txtIdClienteSinonimo" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
         <tr>
             <td>Nombre - Sinonimo</td>
             <td>
@@ -128,8 +135,15 @@
         </tr>
     </table>
 </asp:Panel>
+
 <asp:Panel ID="pnEspecie" runat="server" Visible="false">
     <table>
+        <tr>
+            <td>Id</td>
+            <td>
+                <asp:TextBox ID="txtIdEspecie" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
         <tr>
             <td>Nombre</td>
             <td>
@@ -147,8 +161,15 @@
         </tr>
     </table>
 </asp:Panel>
+
 <asp:Panel ID="pnExamen" runat="server" Visible="false">
     <table>
+        <tr>
+            <td>Id</td>
+            <td>
+                <asp:TextBox ID="txtIdExamen" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
         <tr>
             <td>Tipo Prestacion</td>
             <td>
@@ -180,8 +201,15 @@
         </tr>
     </table>
 </asp:Panel>
+
 <asp:Panel ID="pnExamenDetalle" runat="server" Visible="false">
     <table>
+        <tr>
+            <td>Id</td>
+            <td>
+                <asp:TextBox ID="txtIdExamenDetalle" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
         <tr>
             <td>
                 Examen
@@ -200,6 +228,264 @@
             <td>Activo</td>
             <td>
                 <asp:RadioButtonList ID="rblActivoExamenDetalle" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel ID="pnExamenSinonimo" runat="server" Visible="false">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdES" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Examen
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlExamenES" runat="server" AppendDataBoundItems="True" DataTextField="NOMBRE"
+                    DataValueField="ID">
+                </asp:DropDownList>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nombre Sinonimo
+            </td>
+            <td>
+                <asp:TextBox ID="txtSinonimoES" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Activo
+            </td>
+            <td>
+                <asp:RadioButtonList ID="rblActivoES" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel ID="pnGarantia" runat="server" Visible="false">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdG" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <asp:TextBox ID="txtNombreG" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+            <td>
+                <asp:RadioButtonList ID="rblActivoG" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel id="pnPrevision" Visible="false" runat="server">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdP" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <asp:TextBox ID="txtNombreP" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+            <td>
+                <asp:RadioButtonList ID="rblActivoP" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel id="pnRaza" Visible="false" runat="server">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdR" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <asp:TextBox ID="txtNombreR" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Especie</td>
+            <td>
+                <asp:DropDownList ID="ddlEspecieR" runat="server" AppendDataBoundItems="True" DataTextField="NOMBRE"
+                    DataValueField="ID">
+                </asp:DropDownList>
+            </td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+            <td>
+                <asp:RadioButtonList ID="rdbActivoR" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel id="pnRegion" Visible="false" runat="server">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdRegion" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <asp:TextBox ID="txtNombreRegion" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+            <td>
+                <asp:RadioButtonList ID="rblActivoRegion" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel id="pnTipoCobro" Visible="false" runat="server">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdTC" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <asp:TextBox ID="txtNombreTC" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Reporte</td>
+            <td>
+                <asp:TextBox ID="txtReporteTC" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+            <td>
+                <asp:RadioButtonList ID="rblActivoTC" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel id="pntipoFactura" Visible="false" runat="server">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdTF" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <asp:TextBox ID="txtNombreTF" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Reporte</td>
+            <td>
+                <asp:TextBox ID="TextBox3" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+            <td>
+                <asp:RadioButtonList ID="RadioButtonList1" runat="server">
+                    <asp:ListItem Value="1">Si</asp:ListItem>
+                    <asp:ListItem Value="2">No</asp:ListItem>
+                </asp:RadioButtonList>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
+
+<asp:Panel id="pnTipoPrestacion" Visible="false" runat="server">
+    <table>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                <asp:TextBox ID="txtIdTP" runat="server" ReadOnly="true"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>
+                <asp:TextBox ID="txtNombreTP" runat="server" ></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td>Activo</td>
+            <td>
+                <asp:RadioButtonList ID="rblActivoTP" runat="server">
                     <asp:ListItem Value="1">Si</asp:ListItem>
                     <asp:ListItem Value="2">No</asp:ListItem>
                 </asp:RadioButtonList>

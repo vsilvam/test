@@ -165,31 +165,103 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         break;
                     case 2: Limpiar();
                         pnClienteSinonimo.Visible = true;
+                        var clienteSinonimo = new TrxCLIENTE_SINONIMO();
+                        var objClienteSinonimo = clienteSinonimo.GetByIdWithReferences(Id.Value);
+                        txtIdClienteSinonimo.Text  = objClienteSinonimo.ID.ToString();
+                        txtNombreSinonimo.Text = objClienteSinonimo.NOMBRE;
+                        txtClienteSinonimo.Text = objClienteSinonimo.CLIENTE.NOMBRE;
+                        rblEstadoClienteSinonimo.SelectedValue = objClienteSinonimo.ACTIVO == true ? "1" : "2";
                         break;
                     case 3: Limpiar();
                         pnEspecie.Visible = true;
+                        var especie = new TrxESPECIE();
+                        var objEspecie = especie.GetByIdWithReferences(Id.Value);
+                        txtIdEspecie.Text = objEspecie.ID.ToString();
+                        txtNombreEspecie.Text = objEspecie.NOMBRE;
+                        rblEstadoEspecie.SelectedValue = objEspecie.ACTIVO == true ? "1" : "2";
                         break;
                     case 4: Limpiar();
                         pnExamen.Visible = true;
+                        var examen = new TrxEXAMEN();
+                        var objExamen = examen.GetByIdWithReferences(Id.Value);
+                        txtIdExamen.Text = objExamen.ID.ToString();
+                        ddlTipoPrestacionExamen.SelectedValue = objExamen.TIPO_PRESTACION.ID.ToString();
+                        txtCodigoExamen.Text = objExamen.CODIGO;
+                        txtNombreExamen.Text = objExamen.NOMBRE;
+                        rblEstadoExamen.SelectedValue = objExamen.ACTIVO == true ? "1" : "2" ;
                         break;
                     case 5: Limpiar();
                         pnExamenDetalle.Visible = true;
+                        var examenDetalle = new TrxEXAMEN_DETALLE();
+                        var objExmenDetalle = examenDetalle.GetByIdWithReferences(Id.Value);
+                        txtIdExamenDetalle.Text = objExmenDetalle.ID.ToString();
+                        txtExameExamenDetalle.Text = objExmenDetalle.EXAMEN.NOMBRE;
+                        txtSubExamenExamenDetalle.Text = objExmenDetalle.EXAMEN1.NOMBRE;
+                        rblActivoExamenDetalle.SelectedValue = objExmenDetalle.ACTIVO == true ? "1" : "2" ;
                         break;
                     case 6: Limpiar();
+                        pnExamenSinonimo.Visible = true;
+                        getExamen();
+                        var examenSinonimo = new TrxEXAMEN_SINONIMO();
+                        var objExamenSinonimo = examenSinonimo.GetByIdWithReferences(Id.Value);
+                        txtIdES.Text = objExamenSinonimo.ID.ToString();
+                        ddlExamenES.SelectedValue = objExamenSinonimo.EXAMEN.ID.ToString();
+                        txtSinonimoES.Text = objExamenSinonimo.NOMBRE;
+                        rblActivoES.SelectedValue = objExamenSinonimo.ACTIVO == true ? "1": "2";
                         break;
                     case 7: Limpiar();
+                        pnGarantia.Visible = true;
+                        var garantia = new TrxGARANTIA();
+                        var objGarantia = garantia.GetByIdWithReferences(Id.Value);
+                        txtIdG.Text = objGarantia.ID.ToString();
+                        txtNombreG.Text = objGarantia.NOMBRE;
+                        rblActivoG.Text = objGarantia.ACTIVO == true ? "1" : "2";
                         break;
                     case 8: Limpiar();
+                        pnPrevision.Visible = true;
+                        var prevision = new TrxPREVISION();
+                        var objPrevision = prevision.GetByIdWithReferences(Id.Value);
+                        txtIdP.Text = objPrevision.ID.ToString();
+                        txtNombreP.Text = objPrevision.NOMBRE;
+                        rblActivoP.SelectedValue = objPrevision.ACTIVO = true ? "1" : "2";
                         break;
                     case 9: Limpiar();
+                        pnRaza.Visible = true;
+                        getEspecie();
+                        var raza = new TrxRAZA();
+                        var objRaza = raza.GetByIdWithReferences(Id.Value);
+                        txtIdR.Text = objRaza.ID.ToString();
+                        txtNombreR.Text = objRaza.NOMBRE;
+                        ddlEspecieR.SelectedValue = objRaza.ESPECIE.ID.ToString();
+                        rdbActivoR.SelectedValue = objRaza.ACTIVO == true ? "1" : "2";
                         break;
                     case 10: Limpiar();
+                        pnRegion.Visible = true;
+                        var region = new TrxREGION();
+                        var objRegion = region.GetByIdWithReferences(Id.Value);
+                        txtIdRegion.Text = objRegion.ID.ToString();
+                        txtNombreRegion.Text  = objRegion.NOMBRE;
+                        rblActivoRegion.SelectedValue = objRegion.ACTIVO == true ? "1" : "2";
                         break;
                     case 11: Limpiar();
+                        pnTipoCobro.Visible = true;
+                        var tipoCobro = new TrxTIPO_COBRO();
+                        var objTipoCobro = tipoCobro.GetByIdWithReferences(Id.Value);
+                        txtIdTC.Text = objTipoCobro.ID.ToString();
+                        txtNombreTC.Text = objTipoCobro.NOMBRE;
+                        txtReporteTC.Text = objTipoCobro.REPORTE;
+                        rblActivoTC.SelectedValue = objTipoCobro.ACTIVO == true ? "1" : "2";
                         break;
                     case 12: Limpiar();
+                        pntipoFactura.Visible = true;
                         break;
                     case 13: Limpiar();
+                        pnTipoPrestacion.Visible = true;
+                        var tipoPrestacion = new TrxTIPO_PRESTACION();
+                        var objTipoPrestacion = tipoCobro.GetByIdWithReferences(Id.Value);
+                        txtIdTP.Text = objTipoPrestacion.ID.ToString();
+                        txtNombreTP.Text = objTipoPrestacion.NOMBRE;
+                        rblActivoTP.SelectedValue = objTipoPrestacion.ACTIVO == true ? "1" : "2";
                         break;
                 }
             }
@@ -200,6 +272,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
+        }
+
+        private void getEspecie()
+        {
+            TrxESPECIE _trx = new TrxESPECIE();
+            ddlEspecieR.Items.Clear();
+            ddlEspecieR.Items.Add(new ListItem("(Todos)", ""));
+            ddlEspecieR.DataSource = _trx.GetAll();
+            ddlEspecieR.DataBind();
+        }
+
+        private void getExamen()
+        {
+            TrxEXAMEN _trx = new TrxEXAMEN();
+            ddlExamenES.Items.Clear();
+            ddlExamenES.Items.Add(new ListItem("(Todos)", ""));
+            ddlExamenES.DataSource = _trx.GetAll();
+            ddlExamenES.DataBind();
         }
 
         protected void btnModificarComuna_Click(object sender, EventArgs e)

@@ -113,8 +113,21 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         }
 
         private void Limpiar()
-        {            
+        {
+            pnGrilla.Visible = false;
             pnComuna.Visible = false;
+            pnClienteSinonimo.Visible = false;
+            pnEspecie.Visible = false;
+            pnExamen.Visible = false;
+            pnExamenDetalle.Visible = false;
+            pnExamenSinonimo.Visible = false;
+            pnGarantia.Visible = false;
+            pnPrevision.Visible = false;
+            pnRaza.Visible = false;
+            pnRegion.Visible = false;
+            pnTipoCobro.Visible = false;
+            pntipoFactura.Visible = false;
+            pnTipoPrestacion.Visible = false;
         }
 
         private void getRegion()
@@ -124,6 +137,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             ddlRegionComuna.Items.Add(new ListItem("(Todos)", ""));
             ddlRegionComuna.DataSource = _trx.GetAll();
             ddlRegionComuna.DataBind();
+        }
+
+        private void getEspecie()
+        {
+            TrxESPECIE _trx = new TrxESPECIE();
+            ddlEspecieR.Items.Clear();
+            ddlEspecieR.Items.Add(new ListItem("(Todos)", ""));
+            ddlEspecieR.DataSource = _trx.GetAll();
+            ddlEspecieR.DataBind();
+        }
+
+        private void getExamen()
+        {
+            TrxEXAMEN _trx = new TrxEXAMEN();
+            ddlExamenES.Items.Clear();
+            ddlExamenES.Items.Add(new ListItem("(Todos)", ""));
+            ddlExamenES.DataSource = _trx.GetAll();
+            ddlExamenES.DataBind();
         }
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
@@ -169,7 +200,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         var objClienteSinonimo = clienteSinonimo.GetByIdWithReferences(Id.Value);
                         txtIdClienteSinonimo.Text  = objClienteSinonimo.ID.ToString();
                         txtNombreSinonimo.Text = objClienteSinonimo.NOMBRE;
-                        txtClienteSinonimo.Text = objClienteSinonimo.CLIENTE.NOMBRE;
+                        ddlClienteSinonimo.SelectedValue = objClienteSinonimo.CLIENTE.ID.ToString();
                         rblEstadoClienteSinonimo.SelectedValue = objClienteSinonimo.ACTIVO == true ? "1" : "2";
                         break;
                     case 3: Limpiar();
@@ -223,7 +254,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         var objPrevision = prevision.GetByIdWithReferences(Id.Value);
                         txtIdP.Text = objPrevision.ID.ToString();
                         txtNombreP.Text = objPrevision.NOMBRE;
-                        rblActivoP.SelectedValue = objPrevision.ACTIVO = true ? "1" : "2";
+                        rblActivoP.SelectedValue = objPrevision.ACTIVO == true ? "1" : "2";
                         break;
                     case 9: Limpiar();
                         pnRaza.Visible = true;
@@ -258,7 +289,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     case 13: Limpiar();
                         pnTipoPrestacion.Visible = true;
                         var tipoPrestacion = new TrxTIPO_PRESTACION();
-                        var objTipoPrestacion = tipoCobro.GetByIdWithReferences(Id.Value);
+                        var objTipoPrestacion = tipoPrestacion.GetByIdWithReferences(Id.Value);
                         txtIdTP.Text = objTipoPrestacion.ID.ToString();
                         txtNombreTP.Text = objTipoPrestacion.NOMBRE;
                         rblActivoTP.SelectedValue = objTipoPrestacion.ACTIVO == true ? "1" : "2";
@@ -272,58 +303,40 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
-        }
+        }        
 
-        private void getEspecie()
-        {
-            TrxESPECIE _trx = new TrxESPECIE();
-            ddlEspecieR.Items.Clear();
-            ddlEspecieR.Items.Add(new ListItem("(Todos)", ""));
-            ddlEspecieR.DataSource = _trx.GetAll();
-            ddlEspecieR.DataBind();
-        }
+        //protected void btnModificarComuna_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        int? Id = null;
+        //        int? Region = null;
+        //        if(!string.IsNullOrEmpty(txtIdComuna.Text))
+        //            Id = int.Parse(txtIdComuna.Text);
+        //        string Nombre = txtNombreComuna.Text;
+        //        if(!string.IsNullOrEmpty(ddlRegionComuna.SelectedValue))
+        //            Region = int.Parse(ddlRegionComuna.SelectedValue);
+        //        bool Activo = rblEstadoComuna.SelectedValue == "1" ? true : false;
+        //        var Comuna = new TrxCOMUNA();
 
-        private void getExamen()
-        {
-            TrxEXAMEN _trx = new TrxEXAMEN();
-            ddlExamenES.Items.Clear();
-            ddlExamenES.Items.Add(new ListItem("(Todos)", ""));
-            ddlExamenES.DataSource = _trx.GetAll();
-            ddlExamenES.DataBind();
-        }
-
-        protected void btnModificarComuna_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int? Id = null;
-                int? Region = null;
-                if(!string.IsNullOrEmpty(txtIdComuna.Text))
-                    Id = int.Parse(txtIdComuna.Text);
-                string Nombre = txtNombreComuna.Text;
-                if(!string.IsNullOrEmpty(ddlRegionComuna.SelectedValue))
-                    Region = int.Parse(ddlRegionComuna.SelectedValue);
-                bool Activo = rblEstadoComuna.SelectedValue == "1" ? true : false;
-                var Comuna = new TrxCOMUNA();
-
-                if (Id != null)
-                {
-                    Comuna.Update(Id.Value,Region.Value,Nombre);
-                }
-                else
-                {
-                    Comuna.Add(Region.Value,Nombre);
-                }
+        //        if (Id != null)
+        //        {
+        //            Comuna.Update(Id.Value,Region.Value,Nombre);
+        //        }
+        //        else
+        //        {
+        //            Comuna.Add(Region.Value,Nombre);
+        //        }
                 
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                panelMensaje.CssClass = "MostrarMensaje";
-                lblMensaje.Text = ex.Message;
-                return;
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ISException.RegisterExcepcion(ex);
+        //        panelMensaje.CssClass = "MostrarMensaje";
+        //        lblMensaje.Text = ex.Message;
+        //        return;
+        //    }
+        //}
 
         protected void imgAgregar_Click(object sender, ImageClickEventArgs e)
         {
@@ -338,34 +351,234 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         break;
                     case 2: Limpiar();
                         pnClienteSinonimo.Visible = true;
+                        btnClienteSinonimo.Text = "Agregar";
                         break;
                     case 3: Limpiar();
                         pnEspecie.Visible = true;
+                        btnEspecie.Text = "Agregar";
                         break;
                     case 4: Limpiar();
                         pnExamen.Visible = true;
+                        btnExamen.Text = "Agregar";
                         break;
                     case 5: Limpiar();
                         pnExamenDetalle.Visible = true;
+                        btnExamenDetalle.Text = "Agregar";
                         break;
                     case 6: Limpiar();
+                        pnExamenSinonimo.Visible = true;
+                        btnExamenSinonimo.Text = "Agregar";
                         break;
                     case 7: Limpiar();
+                        pnGarantia.Visible = true;
+                        btnGarantia.Text = "Agregar";
                         break;
                     case 8: Limpiar();
+                        pnPrevision.Visible = true;
+                        btnPrevision.Text = "Agregar";
                         break;
                     case 9: Limpiar();
+                        pnRaza.Visible = true;
+                        btnRaza.Text = "Agregar";
                         break;
                     case 10: Limpiar();
+                        pnRegion.Visible = true;
+                        btnRegion.Text = "Agregar";
                         break;
                     case 11: Limpiar();
+                        pnTipoCobro.Visible = true;
+                        btnTipoCobro.Text = "Agregar";
                         break;
                     case 12: Limpiar();
+                        pntipoFactura.Visible = true;
+                        btntipoFactura.Text = "Agregar";
                         break;
                     case 13: Limpiar();
+                        pnTipoPrestacion.Visible = true;
+                        btnTipoPrestacion.Text = "Agregar";
                         break;
                 }
 
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnCommand_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var btnCommand = (Button)sender;
+                var accionPagina = Convert.ToInt16(btnCommand.CommandName);
+                int? Id = null;
+                bool Activo;
+
+                switch (accionPagina)
+                {
+                    case 1: int? Region = null;
+                            if (!string.IsNullOrEmpty(txtIdComuna.Text))
+                                Id = int.Parse(txtIdComuna.Text);
+                            string Nombre = txtNombreComuna.Text;
+                            if (!string.IsNullOrEmpty(ddlRegionComuna.SelectedValue))
+                                Region = int.Parse(ddlRegionComuna.SelectedValue);
+                            Activo = rblEstadoComuna.SelectedValue == "1" ? true : false;
+                            var Comuna = new TrxCOMUNA();
+
+                            if (Id != null)
+                            {
+                                Comuna.Update(Id.Value, Region.Value, Nombre);
+                            }
+                            else
+                            {
+                                Comuna.Add(Region.Value, Nombre);
+                            }
+                        break;
+                    case 2:
+                        if (!string.IsNullOrEmpty(txtIdClienteSinonimo.Text))
+                            Id = int.Parse(txtIdClienteSinonimo.Text);
+                        string sinonimo = txtNombreSinonimo.Text;
+                        int cliente = int.Parse(ddlClienteSinonimo.SelectedValue);
+                        Activo = rblEstadoClienteSinonimo.SelectedValue == "1" ? true: false;
+                        var clienteSinonimo = new TrxCLIENTE_SINONIMO();
+                        if (Id != null)
+                            clienteSinonimo.Update(Id.Value,cliente,sinonimo);
+                        else
+                            clienteSinonimo.Add(cliente,sinonimo);                        
+
+                        break;
+                    case 3:
+                        if (!string.IsNullOrEmpty(txtIdEspecie.Text))
+                            Id = int.Parse(txtIdEspecie.Text);
+                        string nombre = txtNombreEspecie.Text;
+                        Activo = rblEstadoEspecie.SelectedValue == "1" ? true : false;
+                        var especie = new TrxESPECIE();
+                        if(Id != null)
+                            especie.Update(Id.Value,nombre);
+                        else
+                            especie.Add(nombre);
+                        
+                        break;
+                    case 4:
+                        if (!string.IsNullOrEmpty(txtIdExamen.Text))
+                            Id = int.Parse(txtIdExamen.Text);
+                        int tipoPrestacionEX = int.Parse(ddlTipoPrestacionExamen.SelectedValue);
+                        string codigo = txtCodigoExamen.Text;
+                        string nombreExamen = txtNombreExamen.Text;
+                        Activo = rblEstadoExamen.SelectedValue == "1" ? true : false;
+                        var examen = new TrxEXAMEN();
+                        if (Id != null)
+                            examen.Update(Id.Value,tipoPrestacionEX,codigo,nombreExamen);
+                        else
+                            examen.Add(tipoPrestacionEX, codigo, nombreExamen);
+                        
+                        break;
+                    case 5:
+                        if (!string.IsNullOrEmpty(txtIdExamenDetalle.Text))
+                            Id = int.Parse(txtIdExamenDetalle.Text);
+                        string nomExamen = txtExameExamenDetalle.Text;
+                        string SubExamen = txtSubExamenExamenDetalle.Text;
+                        Activo = rblActivoExamenDetalle.SelectedValue == "1" ? true : false;
+                        var examenDetalle = new TrxEXAMEN_DETALLE();
+                        //if (Id != null)
+                        //    examenDetalle.Update(Id.Value, nomExamen, SubExamen);
+                        //else
+                        //    examenDetalle.Add(nomExamen, SubExamen);
+
+                        break;
+                    case 6:
+                        if (!string.IsNullOrEmpty(txtIdES.Text))
+                            Id = int.Parse(txtIdES.Text);
+                        int nomExamenSin = int.Parse(ddlExamenES.SelectedValue);
+                        string ExSinonimo = txtSinonimoES.Text;
+                        Activo = rblActivoES.SelectedValue == "1" ? true : false;
+                        var examenSinonimo = new TrxEXAMEN_SINONIMO();
+                        if (Id != null)
+                            examenSinonimo.Update(Id.Value,nomExamenSin,ExSinonimo);
+                        else
+                            examenSinonimo.Add(nomExamenSin, ExSinonimo);
+
+                        break;
+                    case 7:
+                        if (!string.IsNullOrEmpty(txtIdG.Text))
+                            Id = int.Parse(txtIdG.Text);
+                        string nomGarantia = txtNombreG.Text;
+                        Activo = rblActivoG.SelectedValue == "1" ? true : false;
+                        var garantia = new TrxGARANTIA();
+                        if (Id != null)
+                            garantia.Update(Id.Value,nomGarantia);
+                        else
+                            garantia.Add(nomGarantia);
+
+                        break;
+                    case 8:
+                        if (!string.IsNullOrEmpty(txtIdP.Text))
+                            Id = int.Parse(txtIdP.Text);
+                        string nomPrevision = txtNombreP.Text;
+                        Activo = rblActivoP.SelectedValue == "1" ? true : false;
+                        var prevision = new TrxPREVISION();
+                        if (Id != null)
+                            prevision.Update(Id.Value,nomPrevision);
+                        else
+                            prevision.Add(nomPrevision);
+                        break;
+                    case 9:
+                        if (!string.IsNullOrEmpty(txtIdR.Text))
+                            Id = int.Parse(txtIdR.Text);
+                        string nomRaza = txtNombreR.Text;
+                        int especieRaza = int.Parse(ddlEspecieR.SelectedValue);
+                        Activo = rdbActivoR.SelectedValue == "1" ? true : false;
+                        var raza = new TrxRAZA();
+                        if (Id != null)
+                            raza.Update(Id.Value,especieRaza,nomRaza);
+                        else
+                            raza.Add(especieRaza, nomRaza);
+                        break;
+                    case 10:
+                        if (!string.IsNullOrEmpty(txtIdRegion.Text))
+                            Id = int.Parse(txtIdRegion.Text);
+                        string nomRegion = txtNombreRegion.Text;
+                        Activo = rblActivoRegion.SelectedValue == "1" ? true : false;
+                        var region = new TrxREGION();
+                        if (Id != null)
+                            region.Update(Id.Value,nomRegion);
+                        else
+                            region.Add(nomRegion);
+                        
+                        break;
+                    case 11:
+                        if (!string.IsNullOrEmpty(txtIdTC.Text))
+                            Id = int.Parse(txtIdTC.Text);
+                        string nomTipoCobro = txtNombreTC.Text;
+                        string reporte = txtReporteTC.Text;
+                        Activo = rblActivoTC.SelectedValue == "1" ? true : false;
+                        var tipoCobro = new TrxTIPO_COBRO();
+                        if (Id != null)
+                            tipoCobro.Update(Id.Value,nomTipoCobro,reporte);
+                        else
+                            tipoCobro.Add(nomTipoCobro, reporte);
+                        break;
+                    case 12://pendiente
+                        //if (!string.IsNullOrEmpty(txtIdTF.Text))
+                        //    Id = int.Parse(txtIdTF.Text);
+
+                        break;
+                    case 13:
+                        if (!string.IsNullOrEmpty(txtIdTP.Text))
+                            Id = int.Parse(txtIdTP.Text);
+                        string nomTipoPrestacion = txtNombreTP.Text;
+                        Activo = rblActivoTP.SelectedValue == "1" ? true : false;
+                        var tipoPrestacion = new TrxTIPO_PRESTACION();
+                        if (Id != null)
+                            tipoPrestacion.Update(Id.Value,nomTipoPrestacion);
+                        else
+                            tipoPrestacion.Add(nomTipoPrestacion);
+                        break;
+                }
             }
             catch (Exception ex)
             {

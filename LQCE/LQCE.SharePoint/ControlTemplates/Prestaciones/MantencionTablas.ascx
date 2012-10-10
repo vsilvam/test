@@ -49,7 +49,7 @@
 <asp:Panel ID="pnGrilla" runat="server" Visible= "false">
     <asp:GridView ID="grdTablas" runat="server" Width="100%">
         <Columns>
-            <asp:TemplateField HeaderText="EDITAR">
+            <asp:TemplateField HeaderText="AGREGAR">
                 <ItemTemplate>
                     <asp:ImageButton ID="imgAgregar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/agregar.jpg"
                         CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" 
@@ -72,26 +72,35 @@
 <asp:Panel ID="pnComuna" runat="server" Visible="false">
     <table>
         <tr id="IdComuna">
-            <td>Id</td>
+            <td>
+                Id
+            </td>
             <td>
                 <asp:TextBox ID="txtIdComuna" runat="server" ReadOnly="true"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Nombre</td>
+            <td>
+                Nombre
+            </td>
             <td>
                 <asp:TextBox ID="txtNombreComuna" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Region</td>
             <td>
-                <asp:DropDownList ID="ddlRegionComuna" runat="server" AppendDataBoundItems="True" DataTextField="NOMBRE" DataValueField="ID">
+                Region
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlRegionComuna" runat="server" AppendDataBoundItems="True"
+                    DataTextField="NOMBRE" DataValueField="ID">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
-            <td>Activo</td>
+            <td>
+                Activo
+            </td>
             <td>
                 <asp:RadioButtonList ID="rblEstadoComuna" runat="server">
                     <asp:ListItem Value="1">Si</asp:ListItem>
@@ -100,8 +109,8 @@
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnModificarComuna" runat="server" Text="Modificar" 
-        onclick="btnModificarComuna_Click" />
+    <asp:Button ID="btnModificarComuna" runat="server" Text="Modificar"
+    CommandName='1' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel ID="pnClienteSinonimo" runat="server" Visible="false">
@@ -121,7 +130,9 @@
         <tr>
             <td>Cliente</td>
             <td>
-                <asp:TextBox ID="txtClienteSinonimo" runat="server"></asp:TextBox>
+                <asp:DropDownList ID="ddlClienteSinonimo" runat="server" 
+                    AppendDataBoundItems="True" DataTextField="NOMBRE" DataValueField="ID">
+                </asp:DropDownList>                
             </td>
         </tr>
         <tr>
@@ -134,6 +145,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnClienteSinonimo" runat="server" Text="Modificar"
+    CommandName='2' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel ID="pnEspecie" runat="server" Visible="false">
@@ -160,6 +173,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnEspecie" runat="server" Text="Modificar"
+    CommandName='3' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel ID="pnExamen" runat="server" Visible="false">
@@ -200,6 +215,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnExamen" runat="server" Text="Modificar"
+    CommandName='4' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel ID="pnExamenDetalle" runat="server" Visible="false">
@@ -234,6 +251,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnExamenDetalle" runat="server" Text="Modificar"
+    CommandName='5' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel ID="pnExamenSinonimo" runat="server" Visible="false">
@@ -276,6 +295,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnExamenSinonimo" runat="server" Text="Modificar"
+    CommandName='6' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel ID="pnGarantia" runat="server" Visible="false">
@@ -304,6 +325,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnGarantia" runat="server" Text="Modificar"
+    CommandName='7' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel id="pnPrevision" Visible="false" runat="server">
@@ -332,6 +355,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnPrevision" runat="server" Text="Modificar"
+    CommandName='8' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel id="pnRaza" Visible="false" runat="server">
@@ -368,6 +393,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnRaza" runat="server" Text="Modificar"
+    CommandName='9' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel id="pnRegion" Visible="false" runat="server">
@@ -396,6 +423,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnRegion" runat="server" Text="Modificar"
+    CommandName='10' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel id="pnTipoCobro" Visible="false" runat="server">
@@ -430,6 +459,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnTipoCobro" runat="server" Text="Modificar"
+    CommandName='11' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel id="pntipoFactura" Visible="false" runat="server">
@@ -464,6 +495,8 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btntipoFactura" runat="server" Text="Modificar"
+    CommandName='12' OnClick='btnCommand_Click' />
 </asp:Panel>
 
 <asp:Panel id="pnTipoPrestacion" Visible="false" runat="server">
@@ -492,4 +525,6 @@
             </td>
         </tr>
     </table>
+    <asp:Button ID="btnTipoPrestacion" runat="server" Text="Modificar"
+    CommandName='13' OnClick='btnCommand_Click' />
 </asp:Panel>

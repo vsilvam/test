@@ -13,15 +13,13 @@
     type="text/css" media="all" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/smoothness/jquery-ui.css"
     type="text/css" media="all" />
-<link rel="stylesheet" href="<%= ResolveUrl("~/_layouts/Style/css/lqce.css")%>"
-    type="text/css" media="all" />
+<link rel="stylesheet" href="<%= ResolveUrl("~/_layouts/Style/css/lqce.css")%>" type="text/css"
+    media="all" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.8.23/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/ui.datepicker-es.js")%>"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/jquery-ui-timepicker-addon.js")%>"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/jquery-ui-sliderAccess.js")%>"></script>
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('#<%=txtFechaHora1.ClientID %>').datetimepicker();

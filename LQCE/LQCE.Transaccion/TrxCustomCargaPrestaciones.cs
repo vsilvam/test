@@ -887,7 +887,7 @@ namespace LQCE.Transaccion
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
 
-                    var objCARGA_PRESTACIONES_HUMANAS_DETALLE = _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetById(ID_CARGA_PRESTACIONES_HUMANAS_DETALLE);
+                    var objCARGA_PRESTACIONES_HUMANAS_DETALLE = _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByIdWithReferencesFull(ID_CARGA_PRESTACIONES_HUMANAS_DETALLE);
                     if (objCARGA_PRESTACIONES_HUMANAS_DETALLE == null)
                         throw new Exception("No se encuentra detalle de prestación");
 
@@ -911,7 +911,7 @@ namespace LQCE.Transaccion
                 {
                     RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE = new RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE(context);
 
-                    var objCARGA_PRESTACIONES_VETERINARIAS_DETALLE = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetById(ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE);
+                    var objCARGA_PRESTACIONES_VETERINARIAS_DETALLE = _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByIdWithReferencesFull(ID_CARGA_PRESTACIONES_VETERINARIAS_DETALLE);
                     if (objCARGA_PRESTACIONES_VETERINARIAS_DETALLE == null)
                         throw new Exception("No se encuentra detalle de prestación");
 
@@ -1015,7 +1015,7 @@ namespace LQCE.Transaccion
             // Prevision
             if (string.IsNullOrEmpty(objDetalle.PREVISION))
             {
-                ListaValidaciones.Add("No se ha señalado PREVISION en la ficha");
+                //ListaValidaciones.Add("No se ha señalado PREVISION en la ficha");
             }
             else
             {
@@ -1033,7 +1033,7 @@ namespace LQCE.Transaccion
             // Garantia
             if (string.IsNullOrEmpty(objDetalle.GARANTIA))
             {
-                ListaValidaciones.Add("No se ha señalado GARANTIA en la ficha");
+                //ListaValidaciones.Add("No se ha señalado GARANTIA en la ficha");
             }
             else
             {
@@ -1051,7 +1051,7 @@ namespace LQCE.Transaccion
             // Fecha de Entrega de Resultados
             if (string.IsNullOrEmpty(objDetalle.FECHA_RESULTADOS))
             {
-                ListaValidaciones.Add("No se ha señalado FECHA DE ENTREGA DE RESULTADOS en la ficha");
+                //ListaValidaciones.Add("No se ha señalado FECHA DE ENTREGA DE RESULTADOS en la ficha");
             }
             else
             {
@@ -1068,11 +1068,14 @@ namespace LQCE.Transaccion
 
             // Examenes
             int contadorExamen = 1;
+            int contadorExamenesRegistrados = 0;
+            int contadorValorExamen = 0;
             foreach (var item in objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN)
             {
                 // PENDIENTE: Validar Examen
                 if (!string.IsNullOrEmpty(item.VALOR_EXAMEN) || !string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                 {
+                    contadorExamenesRegistrados++;
                     if (string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                     {
                         ListaValidaciones.Add("No ha señalado nombre de examen [" + contadorExamen.ToString() + "]");
@@ -1099,10 +1102,11 @@ namespace LQCE.Transaccion
                     }
                     if (string.IsNullOrEmpty(item.VALOR_EXAMEN))
                     {
-                        ListaValidaciones.Add("No se ha señalado valor de examen [" + contadorExamen.ToString() + "]");
+                        //ListaValidaciones.Add("No se ha señalado valor de examen [" + contadorExamen.ToString() + "]");
                     }
                     else
                     {
+                        contadorValorExamen++;
                         int? _valorExamen = ISConvert.ToNullableInteger(item.VALOR_EXAMEN);
                         if (!_valorExamen.HasValue)
                         {
@@ -1120,6 +1124,11 @@ namespace LQCE.Transaccion
                 }
                 contadorExamen++;
             }
+
+            if (contadorExamenesRegistrados == 0)
+                ListaValidaciones.Add("La ficha debe registrar al menos 1 examen. ");
+            if (contadorValorExamen == 0)
+                ListaValidaciones.Add("La ficha debe registrar al menos 1 examen con valor. ");
 
             if (ListaValidaciones.Any())
             {
@@ -1178,7 +1187,7 @@ namespace LQCE.Transaccion
             // Especie
             if (string.IsNullOrEmpty(objDetalle.ESPECIE))
             {
-                ListaValidaciones.Add("No se ha señalado ESPECIE en la ficha");
+                //ListaValidaciones.Add("No se ha señalado ESPECIE en la ficha");
             }
             else
             {
@@ -1242,7 +1251,7 @@ namespace LQCE.Transaccion
             // Fecha de Muestra
             if (string.IsNullOrEmpty(objDetalle.FECHA_MUESTRA))
             {
-                ListaValidaciones.Add("No se ha señalado FECHA DE MUESTRA en la ficha");
+                //ListaValidaciones.Add("No se ha señalado FECHA DE MUESTRA en la ficha");
             }
             else
             {
@@ -1281,7 +1290,7 @@ namespace LQCE.Transaccion
             // Garantia
             if (string.IsNullOrEmpty(objDetalle.GARANTIA))
             {
-                ListaValidaciones.Add("No se ha señalado GARANTIA en la ficha");
+                //ListaValidaciones.Add("No se ha señalado GARANTIA en la ficha");
             }
             else
             {
@@ -1299,7 +1308,7 @@ namespace LQCE.Transaccion
             // Fecha de Entrega de Resultados
             if (string.IsNullOrEmpty(objDetalle.FECHA_RESULTADOS))
             {
-                ListaValidaciones.Add("No se ha señalado FECHA DE ENTREGA DE RESULTADOS en la ficha");
+                //ListaValidaciones.Add("No se ha señalado FECHA DE ENTREGA DE RESULTADOS en la ficha");
             }
             else
             {
@@ -1316,11 +1325,14 @@ namespace LQCE.Transaccion
 
             // Examenes
             int contadorExamen = 1;
+            int contadorExamenesRegistrados = 0;
+            int contadorValorExamen = 0;
             foreach (var item in objDetalle.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN)
             {
                 // PENDIENTE: Validar Examen
                 if (!string.IsNullOrEmpty(item.VALOR_EXAMEN) || !string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                 {
+                    contadorExamenesRegistrados++;
                     if (string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                     {
                         ListaValidaciones.Add("No ha señalado nombre de examen [" + contadorExamen.ToString() + "]");
@@ -1347,10 +1359,11 @@ namespace LQCE.Transaccion
                     }
                     if (string.IsNullOrEmpty(item.VALOR_EXAMEN))
                     {
-                        ListaValidaciones.Add("No se ha señalado valor de examen [" + contadorExamen.ToString() + "]");
+                        //ListaValidaciones.Add("No se ha señalado valor de examen [" + contadorExamen.ToString() + "]");
                     }
                     else
                     {
+                        contadorValorExamen++;
                         int? _valorExamen = ISConvert.ToNullableInteger(item.VALOR_EXAMEN);
                         if (!_valorExamen.HasValue)
                         {
@@ -1368,6 +1381,11 @@ namespace LQCE.Transaccion
                 }
                 contadorExamen++;
             }
+
+            if(contadorExamenesRegistrados == 0)
+                ListaValidaciones.Add("La ficha debe registrar al menos 1 examen. ");
+            if (contadorValorExamen == 0)
+                ListaValidaciones.Add("La ficha debe registrar al menos 1 examen con valor. ");
 
             if (ListaValidaciones.Any())
             {

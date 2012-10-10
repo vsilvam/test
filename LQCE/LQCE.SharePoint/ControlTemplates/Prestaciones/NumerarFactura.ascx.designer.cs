@@ -49,6 +49,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Panel pnNumerar;
         
         /// <summary>
+        /// Control hdnID_FACTURACION.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnID_FACTURACION;
+        
+        /// <summary>
+        /// Control hdnID_TIPO_FACTURA.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnID_TIPO_FACTURA;
+        
+        /// <summary>
         /// Control rblNumerar.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtDesdeN;
         
         /// <summary>
+        /// Control RequiredFieldValidator_txtDesdeN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_txtDesdeN;
+        
+        /// <summary>
         /// Control txtHastaN.
         /// </summary>
         /// <remarks>
@@ -76,6 +103,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtHastaN;
         
         /// <summary>
+        /// Control RequiredFieldValidator_txtHastaN.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_txtHastaN;
+        
+        /// <summary>
         /// Control txtNroFactura.
         /// </summary>
         /// <remarks>
@@ -83,6 +119,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNroFactura;
+        
+        /// <summary>
+        /// Control RequiredFieldValidator_txtNroFactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_txtNroFactura;
         
         /// <summary>
         /// Control btnNumerar.

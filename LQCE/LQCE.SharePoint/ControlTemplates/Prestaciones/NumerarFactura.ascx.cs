@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using LQCE.Transaccion;
 using App.Infrastructure.Runtime;
-using System.Globalization;
+using LQCE.Transaccion;
+using System.Web.UI.WebControls;
+using LQCE.Transaccion.DTO;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -29,15 +28,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }       
 
-        //private void getClientes()
-        //{
-        //    TrxCLIENTE estado = new TrxCLIENTE();
-        //    ddlClientes.Items.Clear();
-        //    ddlClientes.Items.Add(new ListItem("(Todos)", ""));
-        //    ddlClientes.DataSource = estado.GetAll();
-        //    ddlClientes.DataBind();
-        //}
-
         private void getFacturas()
         {
             var facturacion = new TrxFACTURACION();
@@ -45,56 +35,29 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             grdFacturas.DataBind();
         }
 
-        //protected void btnBuscar_Click(object sender, EventArgs e)
-        //{
-            //try
-            //{
-            //    if (Page.IsValid)
-            //    {
-            //        pnFacturas.Visible = true;
-            //        IFormatProvider culture = new CultureInfo("es-CL", true);
-            //        DateTime desde = DateTime.Parse(txtDesde.Text,culture);
-            //        DateTime hasta = DateTime.Parse(txtHasta.Text,culture);
-            //        int? cliente = !string.IsNullOrEmpty(ddlClientes.SelectedValue) ? int.Parse(ddlClientes.SelectedValue) : (int?)null;
-
-            //        var facturacion = new TrxFACTURACION();
-            //        hdnFechaDesde.Value = desde.ToString();
-            //        hdnFechaHasta.Value = hasta.ToString();
-            //        cambiar metodo que buscas las facturas faltantes de numerar
-            //        grdFacturas.DataSource = facturacion.GetResumenFacturacionPorNumerar();
-            //        grdFacturas.DataBind();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    ISException.RegisterExcepcion(ex);
-            //    panelMensaje.CssClass = "MostrarMensaje";
-            //    lblMensaje.Text = ex.Message;
-            //    return;
-            //}
-        //}
-
         protected void btnNumerar_Click(object sender, EventArgs e)
         {
             try 
             {
-                //if (string.IsNullOrEmpty(hdnFechaDesde.Value) || string.IsNullOrEmpty(hdnFechaHasta.Value))
-                //    throw new Exception("Debe realizar busqueda primero");
-
-                //ID fcaturacion , bool numerar todos, si es falso debe pedir desde hasta, nuemro fact inicial.
-                
-                //tomar valores                
-                LinkButton _link = sender as LinkButton;
-                int? IdFacturacion = int.Parse(_link.CommandArgument);
-                int? desde = int.Parse(txtDesdeN.Text);
-                int? hasta = int.Parse(txtHastaN.Text);
-                int nroFactura = int.Parse(txtNroFactura.Text);
-                bool todos = Convert.ToBoolean(rblNumerar.SelectedValue);
-
-                //llama la trx que genera la numeracion
-                TrxFACTURACION trx = new TrxFACTURACION();
-                //trx.NumerarFacturas(IdFacturacion,,todos,desde,hasta,nroFactura);
-                
+                if (Page.IsValid)
+                {
+                    int IdFacturacion = int.Parse(hdnID_FACTURACION.Value);
+                    int IdTipoFactura = int.Parse(hdnID_TIPO_FACTURA.Value); 
+                    bool todos = (rblNumerar.SelectedValue == "1");
+                    int nroFactura = int.Parse(txtNroFactura.Text);
+                    int? desde = null;
+                    int? hasta = null;
+                    if (!todos)
+                    {
+                        desde = int.Parse(txtDesdeN.Text);
+                        hasta = int.Parse(txtHastaN.Text);
+                    }
+                    
+                    //llama la trx que genera la numeracion
+                    TrxFACTURACION trx = new TrxFACTURACION();
+                    trx.NumerarFacturas(IdFacturacion, IdTipoFactura, todos,desde,hasta,nroFactura);
+                    Response.Redirect("MensajeExito.aspx?t=Numerar Facturas&m=Se han numerado las facturas", false);
+                }
             }
             catch (Exception ex)
             {
@@ -105,18 +68,75 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        protected void lnkNumerar_Click(object sender, EventArgs e)
-        {
-            pnNumerar.Visible = true;
-        }
-
         protected void rblNumerar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (rblNumerar.SelectedValue == "1")
+            try
             {
-                txtDesdeN.Enabled = false;
-                txtHastaN.Enabled = false;
+                bool EsRango = (rblNumerar.SelectedValue != "1");
+                txtDesdeN.Enabled = EsRango;
+                txtHastaN.Enabled = EsRango;
+                txtDesdeN.Text = "";
+                txtHastaN.Text = "";
+                RequiredFieldValidator_txtDesdeN.Enabled = EsRango;
+                RequiredFieldValidator_txtHastaN.Enabled = EsRango;
             }
-        }     
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void grdFacturas_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "Numerar")
+                {
+                    pnNumerar.Visible = true;
+                    txtDesdeN.Text = "";
+                    txtHastaN.Text = "";
+                    txtNroFactura.Text = "";
+                    rblNumerar.SelectedValue = "1";
+
+                    int index = int.Parse(e.CommandArgument.ToString());
+                    HiddenField hdnIdFacturacion = (HiddenField)grdFacturas.Rows[index].FindControl("hdnIdFacturacion");
+                    HiddenField hdnIdTipoFactura = (HiddenField)grdFacturas.Rows[index].FindControl("hdnIdTipoFactura");
+                    hdnID_FACTURACION.Value = hdnIdFacturacion.Value;
+                    hdnID_TIPO_FACTURA.Value = hdnIdTipoFactura.Value;
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void grdFacturas_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    DTO_RESUMEN_FACTURACION dto = (DTO_RESUMEN_FACTURACION)e.Row.DataItem;
+                    HiddenField hdnIdFacturacion = (HiddenField)e.Row.FindControl("hdnIdFacturacion");
+                    HiddenField hdnIdTipoFactura = (HiddenField)e.Row.FindControl("hdnIdTipoFactura");
+                    hdnIdFacturacion.Value = dto.ID_FACTURACION.ToString();
+                    hdnIdTipoFactura.Value = dto.ID_TIPO_FACTURA.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
     }
 }

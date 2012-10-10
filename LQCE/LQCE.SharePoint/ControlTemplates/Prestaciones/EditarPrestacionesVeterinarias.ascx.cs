@@ -234,9 +234,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 dto.NOMBRE_EXAMEN = txtExamen.Text;
                 dto.ID = 0;
                 dto.VALOR_EXAMEN = txtValor.Text;
-                this.ListaExamen.Add(dto);
+                var lista = this.ListaExamen;
+                lista.Add(dto);
+                this.ListaExamen = lista;
 
-                grdExamen.DataSource = this.ListaExamen;
+                grdExamen.DataSource = lista;
                 grdExamen.DataBind();
 
                 txtExamen.Text = string.Empty;

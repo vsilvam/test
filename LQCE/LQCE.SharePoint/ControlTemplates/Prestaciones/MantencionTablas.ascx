@@ -10,16 +10,19 @@
 
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
-        <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
+        <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
+    </h4>
 </asp:Panel>
 
 <asp:Panel ID="pnTablas" runat="server">
     <table>
         <tr>
-            <td>Seleccione Tabla</td>
             <td>
-                <asp:DropDownList ID="ddlTablas" runat="server" 
-                    onselectedindexchanged="ddlTablas_SelectedIndexChanged" AutoPostBack="True">
+                Seleccione Tabla
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlTablas" runat="server" OnSelectedIndexChanged="ddlTablas_SelectedIndexChanged"
+                    AutoPostBack="True">
                     <asp:ListItem Value="">Seleccione</asp:ListItem>
                     <asp:ListItem Value="1">Comuna</asp:ListItem>
                     <asp:ListItem Value="2">Cliente Sinonimo</asp:ListItem>
@@ -37,26 +40,20 @@
                 </asp:DropDownList>
             </td>
             <td>
-                <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" 
-                    onclick="btnLimpiar_Click" />
+                <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" OnClick="btnLimpiar_Click" />
             </td>
             <td>
                 <input type="button" value="Volver" onclick="javascript:history.back(1)" />
             </td>
+            <td>
+                <asp:Button ID="btnAgregar" runat="server" Text="Agregar" OnClick="btnAgregar_Click" />
+            </td>
         </tr>
     </table>
 </asp:Panel>
-<asp:Panel ID="pnGrilla" runat="server" Visible= "false">
+<asp:Panel ID="pnGrilla" runat="server" Visible= "true">
     <asp:GridView ID="grdTablas" runat="server" Width="100%">
         <Columns>
-            <asp:TemplateField HeaderText="AGREGAR">
-                <ItemTemplate>
-                    <asp:ImageButton ID="imgAgregar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/agregar.jpg"
-                        CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" 
-                        onclick="imgAgregar_Click" />
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
             <asp:TemplateField HeaderText="EDITAR">
                 <ItemTemplate>
                     <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"

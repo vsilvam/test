@@ -134,6 +134,34 @@ namespace LQCE.Repositorio
             }
         }
 
+        public IQueryable<VISTA_FACTURAS_POR_NOTIFICAR> GetReporteFactura(DateTime FechaFacturacionDesde,
+            DateTime FechaFacturacionHasta, int IdTipoCobro, int? IdCliente)
+        {
+            Error = string.Empty;
+            try
+            {
+                FechaFacturacionDesde = FechaFacturacionDesde.Date;
+                FechaFacturacionHasta = FechaFacturacionHasta.Date.AddDays(1).AddTicks(-1);
+                var q = from i in _context.VISTA_FACTURAS_POR_NOTIFICAR
+                        where i.FECHA_FACTURACION >= FechaFacturacionDesde
+                            && i.FECHA_FACTURACION <= FechaFacturacionHasta
+                            && i.CONTADOR_NOTAS_COBRO < IdTipoCobro
+                        select i;
+
+                if (IdCliente.HasValue)
+                {
+                    q = q.Where(i => i.ID_CLIENTE == IdCliente.Value);
+                }
+                return q;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                return null;
+            }
+        }
+
         public IQueryable<NOTA_COBRO_DETALLE> GetNotaCobroDetalleByIdCobro(int ID_COBRO)
         {
             Error = string.Empty;
@@ -158,30 +186,31 @@ namespace LQCE.Repositorio
                 throw ex;
             }
         }
+      
+        //public FACTURA GetFacturaByIdWithReferencesFull(int ID_FACTURA)
+        //{
+        //    Error = string.Empty;
+        //    try
+        //    {
 
-        public IQueryable<FACTURA> GetFacturasWithReferencesFull()
-        {
-            Error = string.Empty;
-            try
-            {
+        //        return _context.FACTURA
+        //            .Include("CLIENTE")
+        //            .Include("FACTURA_DETALLE.PAGO_DETALLE.PAGO")
+        //            .Include("FACTURACION")
+        //            .Include("NOTA_COBRO_DETALLE")
+        //            .Include("TIPO_FACTURA")
+        //            .FirstOrDefault(i => i.ID == ID_FACTURA && i.ACTIVO);
 
-                var q = from i in _context.FACTURA
-                            .Include("CLIENTE")
-                            .Include("FACTURA_DETALLE.PAGO_DETALLE.PAGO")
-                            .Include("FACTURACION")
-                            .Include("NOTA_COBRO_DETALLE")
-                            .Include("TIPO_FACTURA") where i.ACTIVO select i;
-                return q;
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                throw ex;
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ISException.RegisterExcepcion(ex);
+        //        Error = ex.Message;
+        //        throw ex;
+        //    }
+        //}
 
-        public IQueryable<PAGO> GetPagosWithReferencesFull()
+        public IQueryable<PAGO> GetPagosByIdFacturaWithReferencesFull(int ID_FACTURA)
         {
             Error = string.Empty;
             try
@@ -190,7 +219,7 @@ namespace LQCE.Repositorio
                 var q = from i in _context.PAGO
                             .Include("CLIENTE")
                             .Include("PAGO_DETALLE.FACTURA_DETALLE.FACTURA")
-                        where i.ACTIVO
+                        where i.ACTIVO && i.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == ID_FACTURA)
                         select i;
                 return q;
             }

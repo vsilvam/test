@@ -5,6 +5,7 @@ namespace LQCE.Transaccion.DTO
 {
     public class DTO_DETALLE_FACTURA
     {
+        public int? NUMERO_FACTURA { get; set; }
         public int ID_FACTURA { get; set; }
         public string RUT_CLIENTE { get; set; }
         public string NOMBRE_CLIENTE { get; set; }
@@ -13,6 +14,7 @@ namespace LQCE.Transaccion.DTO
         public int VALOR_PAGADO { get; set; }
         public int PAGOS_REGISTRADOS { get; set; }
         public int SALDO_DEUDOR { get; set; }
+        public bool PAGADA { get; set; }
         public List<DTO_DETALLE_FACTURA_PRESTACION> LISTA_PRESTACIONES { get; set; }
         public List<DTO_DETALLE_FACTURA_COBRO> LISTA_COBROS { get; set; }
         public List<DTO_DETALLE_FACTURA_PAGO> LISTA_PAGOS { get; set; }

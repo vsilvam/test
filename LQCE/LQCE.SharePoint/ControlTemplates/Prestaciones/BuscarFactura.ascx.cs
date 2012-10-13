@@ -31,11 +31,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         private void getEstadoPago()
         {
-            TrxPAGO _trx = new TrxPAGO();
             ddlEstadoPago.Items.Clear();
             ddlEstadoPago.Items.Add(new ListItem("(Todos)", ""));
-            ddlEstadoPago.DataSource = _trx.GetAll();
-            ddlEstadoPago.DataBind();
+            ddlEstadoPago.Items.Add(new ListItem("Pagada", "1"));
+            ddlEstadoPago.Items.Add(new ListItem("Pendiente", "0"));
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -74,13 +73,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     dto.fecha = DateTime.Parse(txtFechaEmision.Text,culture);
                 if(!string.IsNullOrEmpty(txtNroFactura.Text))
                     dto.numero = int.Parse(txtNroFactura.Text);
-                if(!string.IsNullOrEmpty(ddlEstadoPago.SelectedValue))
-                    dto.estado = true;
-
+                if (!string.IsNullOrEmpty(ddlEstadoPago.SelectedValue))
+                    dto.estado = (ddlEstadoPago.SelectedValue == "1");
 
                 TrxFACTURACION _trx = new TrxFACTURACION();
                 int Total = _trx.GetResumenFacturasByFilterCount(dto.rut, dto.nombre, dto.fecha, dto.numero, dto.estado);
-                grdFacturas.DataSource = _trx.GetResumenFacturasByFilter(dto.rut,dto.nombre,dto.fecha,dto.numero,dto.estado);
+                grdFacturas.DataSource = _trx.GetResumenFacturasByFilter(dto.rut,dto.nombre,dto.fecha,dto.numero,dto.estado,dto.PageIndex, dto.PageSize);
                 grdFacturas.DataBind();
 
                 Paginador1.TotalPages = Total % grdFacturas.PageSize == 0 ? Total / grdFacturas.PageSize : Total / grdFacturas.PageSize + 1;
@@ -96,12 +94,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        protected void lnkVer_Click(object sender, EventArgs e)
+        protected void grdFacturas_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
-            LinkButton _link = sender as LinkButton;
-            int? Id = int.Parse(_link.CommandArgument);
-            if (Id.HasValue)
-                Response.Redirect("DetalleFactura.aspx?Id=" + Id, false);
+            try
+            {
+                if (e.CommandName == "Detalles")
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+                    string val = this.grdFacturas.DataKeys[index]["ID_FACTURA"].ToString();
+                    Response.Redirect("DetalleFactura.aspx?Id=" + val, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         protected void Paginador1_PageChanged(object sender, CustomPageChangeArgs e)

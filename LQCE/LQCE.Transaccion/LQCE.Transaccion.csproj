@@ -207,6 +207,9 @@
     <Compile Include="TrxVISTA_PRESTACIONES_POR_FACTURAR.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="TrxVISTA_REPORTE_FACTURA.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1045,29 +1045,31 @@ namespace LQCE.Transaccion
             }
         }
 
-        public List<DTO_RESUMEN_FACTURA> GetResumenFacturasByFilter(string RUT, string NOMBRE_CLIENTE,
-            DateTime? FECHA_EMISION, int? NUMERO_FACTURA, bool? PAGADO)
+        public List<DTO_RESUMEN_FACTURA> GetResumenFacturasByFilter(string RUT_CLIENTE, string NOMBRE_CLIENTE,
+            DateTime? FECHA_EMISION, int? NUMERO_FACTURA, bool? PAGADA, int PageIndex, int PageSize)
         {
             try
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+                    RepositorioVISTA_REPORTE_FACTURA _RepositorioVISTA_REPORTE_FACTURA = new RepositorioVISTA_REPORTE_FACTURA(context);
 
-                    return (from f in _RepositorioFACTURACION.GetFacturasWithReferencesFull()
-                            //join p in _RepositorioFACTURACION.GetPagosWithReferencesFull()
-                            where f.ACTIVO && f.FACTURACION.ACTIVO
+                    return (from f in _RepositorioVISTA_REPORTE_FACTURA.GetByFilter(null,FECHA_EMISION, "",null,null, null,
+                            PAGADA,  NOMBRE_CLIENTE, RUT_CLIENTE, "", "", NUMERO_FACTURA, null, "", "", "", null, null, null)
+                            .OrderBy(f => f.FECHA_FACTURACION).ThenBy(f => f.NUMERO_FACTURA)
+                            .Skip((PageIndex - 1) * PageSize).Take(PageSize)
                             select new DTO_RESUMEN_FACTURA
                             {
                                 ID_FACTURA = f.ID,
+                                NUMERO_FACTURA = f.NUMERO_FACTURA,
                                 RUT_CLIENTE = f.RUT_CLIENTE,
                                 NOMBRE_CLIENTE = f.NOMBRE_CLIENTE,
-                                FECHA_EMISION = f.FACTURACION.FECHA_FACTURACION,
+                                FECHA_EMISION = f.FECHA_FACTURACION,
                                 VALOR_TOTAL = f.TOTAL,
-                                VALOR_PAGADO = f.FACTURA_DETALLE
-                                        .Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO),
-                                PAGOS_REGISTRADOS = 0, // p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
-                                SALDO_DEUDOR = f.TOTAL - f.FACTURA_DETALLE.Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO)
+                                VALOR_PAGADO = f.VALOR_PAGADO ?? 0,
+                                PAGOS_REGISTRADOS = f.PAGOS_REGISTRADOS ?? 0,
+                                SALDO_DEUDOR = f.SALDO_DEUDOR ?? 0,
+                                PAGADA = f.PAGADA
                             }).ToList();
                 }
             }
@@ -1079,31 +1081,18 @@ namespace LQCE.Transaccion
             }
         }
 
-        public int GetResumenFacturasByFilterCount(string RUT, string NOMBRE_CLIENTE,
-            DateTime? FECHA_EMISION, int? NUMERO_FACTURA, bool? PAGADO)
+        public int GetResumenFacturasByFilterCount(string RUT_CLIENTE, string NOMBRE_CLIENTE,
+            DateTime? FECHA_EMISION, int? NUMERO_FACTURA, bool? PAGADA)
         {
             try
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+                    RepositorioVISTA_REPORTE_FACTURA _RepositorioVISTA_REPORTE_FACTURA = new RepositorioVISTA_REPORTE_FACTURA(context);
 
-                    return (from f in _RepositorioFACTURACION.GetFacturasWithReferencesFull()
-                            //let p = _RepositorioFACTURACION.GetPagosWithReferencesFull().AsEnumerable()
-                            where f.ACTIVO && f.FACTURACION.ACTIVO
-                            select new DTO_RESUMEN_FACTURA
-                            {
-                                ID_FACTURA = f.ID,
-                                RUT_CLIENTE = f.RUT_CLIENTE,
-                                NOMBRE_CLIENTE = f.NOMBRE_CLIENTE,
-                                FECHA_EMISION = f.FACTURACION.FECHA_FACTURACION,
-                                VALOR_TOTAL = f.TOTAL,
-                                VALOR_PAGADO = f.FACTURA_DETALLE
-                                        .Where(fd => fd.ACTIVO).Sum(fd => fd.PAGO_DETALLE
-                                            .Where(pd => pd.ACTIVO).Sum(pd => pd.MONTO)),
-                                PAGOS_REGISTRADOS = 0,//p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
-                                SALDO_DEUDOR = 0
-                            }).Count();
+                     return (from f in _RepositorioVISTA_REPORTE_FACTURA.GetByFilter(null,FECHA_EMISION, "",null,null, null,
+                            PAGADA, NOMBRE_CLIENTE, RUT_CLIENTE, "", "", NUMERO_FACTURA, null, "", "", "", null, null, null)
+                            select f).Count();
                 }
             }
             catch (Exception ex)
@@ -1120,26 +1109,29 @@ namespace LQCE.Transaccion
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
+                    RepositorioVISTA_REPORTE_FACTURA _RepositorioVISTA_REPORTE_FACTURA = new RepositorioVISTA_REPORTE_FACTURA(context);
                     RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
 
-                    DTO_DETALLE_FACTURA _DTO_FACTURA = (from f in _RepositorioFACTURACION.GetFacturasWithReferencesFull()
-                                                        let p = _RepositorioFACTURACION.GetPagosWithReferencesFull()
-                                                        where f.ACTIVO && f.FACTURACION.ACTIVO && f.ID == ID_FACTURA
-                                                        select new DTO_DETALLE_FACTURA
-                                                        {
-                                                            ID_FACTURA = f.ID,
-                                                            RUT_CLIENTE = f.RUT_CLIENTE,
-                                                            NOMBRE_CLIENTE = f.NOMBRE_CLIENTE,
-                                                            FECHA_EMISION = f.FACTURACION.FECHA_FACTURACION,
-                                                            VALOR_TOTAL = f.TOTAL,
-                                                            VALOR_PAGADO = f.FACTURA_DETALLE
-                                                                    .Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO),
-                                                            PAGOS_REGISTRADOS = p.Count(pg => pg.ACTIVO && pg.PAGO_DETALLE.Any(pd => pd.ACTIVO && pd.FACTURA_DETALLE.FACTURA.ID == f.ID)),
-                                                            SALDO_DEUDOR = f.TOTAL - f.FACTURA_DETALLE
-                                                                    .Where(fd => fd.ACTIVO).Sum(fd => fd.MONTO_COBRADO)
-                                                        }).FirstOrDefault();
+                    var f = _RepositorioVISTA_REPORTE_FACTURA.GetById(ID_FACTURA);
+                    if (f == null)
+                        throw new Exception("No se encuentra información de la factura");
+                    var pagos = _RepositorioFACTURACION.GetPagosByIdFacturaWithReferencesFull(ID_FACTURA);
+                    var detalle_factura = _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(ID_FACTURA);
+                    var notas_cobro = _RepositorioFACTURACION.GetNotasCobrosByIdFacturaWithReferencesFull(ID_FACTURA);
 
-                    _DTO_FACTURA.LISTA_PRESTACIONES = (from df in _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(ID_FACTURA)
+                    DTO_DETALLE_FACTURA _DTO_FACTURA = new DTO_DETALLE_FACTURA();
+                    _DTO_FACTURA.ID_FACTURA = f.ID;
+                    _DTO_FACTURA.NUMERO_FACTURA = f.NUMERO_FACTURA;
+                    _DTO_FACTURA.RUT_CLIENTE = f.RUT_CLIENTE;
+                    _DTO_FACTURA.NOMBRE_CLIENTE = f.NOMBRE_CLIENTE;
+                    _DTO_FACTURA.FECHA_EMISION = f.FECHA_FACTURACION;
+                    _DTO_FACTURA.VALOR_TOTAL = f.TOTAL;
+                    _DTO_FACTURA.VALOR_PAGADO = f.VALOR_PAGADO ?? 0;
+                    _DTO_FACTURA.PAGOS_REGISTRADOS = f.PAGOS_REGISTRADOS ?? 0;
+                    _DTO_FACTURA.SALDO_DEUDOR = f.SALDO_DEUDOR ?? 0;
+                    _DTO_FACTURA.PAGADA = f.PAGADA;
+
+                    _DTO_FACTURA.LISTA_PRESTACIONES = (from df in detalle_factura
                                                        where df.ACTIVO && df.PRESTACION.ACTIVO
                                                        select new DTO_DETALLE_FACTURA_PRESTACION
                                                        {
@@ -1151,7 +1143,7 @@ namespace LQCE.Transaccion
                                                            NOMBRE_PACIENTE = df.PRESTACION.PRESTACION_HUMANA != null ? df.PRESTACION.PRESTACION_HUMANA.NOMBRE : df.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
                                                        }).ToList();
 
-                    _DTO_FACTURA.LISTA_COBROS = (from c in _RepositorioFACTURACION.GetNotasCobrosByIdFacturaWithReferencesFull(ID_FACTURA)
+                    _DTO_FACTURA.LISTA_COBROS = (from c in notas_cobro
                                                  select new DTO_DETALLE_FACTURA_COBRO
                                                  {
                                                      ID_NOTA_COBRO = c.ID,
@@ -1161,10 +1153,7 @@ namespace LQCE.Transaccion
                                                      MONTO_PENDIENTE_FACTURA = c.NOTA_COBRO_DETALLE.Where(ncd => ncd.ACTIVO && ncd.FACTURA.ID == ID_FACTURA).Sum(ncd => ncd.MONTO_PENDIENTE)
                                                  }).ToList();
 
-                    _DTO_FACTURA.LISTA_PAGOS = (from p in _RepositorioFACTURACION.GetPagosWithReferencesFull()
-                                                where p.ACTIVO && p.PAGO_DETALLE.Any(pd => pd.ACTIVO
-                                                    && pd.FACTURA_DETALLE.ACTIVO
-                                                    && pd.FACTURA_DETALLE.FACTURA.ID == ID_FACTURA)
+                    _DTO_FACTURA.LISTA_PAGOS = (from p in pagos
                                                 select new DTO_DETALLE_FACTURA_PAGO
                                                 {
                                                     ID_PAGO = p.ID,

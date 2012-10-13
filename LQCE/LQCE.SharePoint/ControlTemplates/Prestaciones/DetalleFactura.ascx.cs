@@ -25,7 +25,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblRutCliente.Text = detalle.RUT_CLIENTE;
                 lblFechaEmision.Text = detalle.FECHA_EMISION.ToString();
                 lblNroFactura.Text = detalle.ID_FACTURA.ToString();
-                lblEstadoPago.Text = "pagado";
+                lblEstadoPago.Text = detalle.PAGADA ? "PAGADA" : "PENDIENTE";
                 
                 //carga grilla detalle factura
                 grdDetalleFactura.DataSource = detalle.LISTA_PRESTACIONES;

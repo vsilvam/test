@@ -174,6 +174,9 @@
     <Compile Include="RepositorioVISTA_PRESTACIONES_POR_FACTURAR.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="RepositorioVISTA_REPORTE_FACTURA.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LQCE.Repositorio.snk" />

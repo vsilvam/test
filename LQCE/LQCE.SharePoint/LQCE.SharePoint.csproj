@@ -378,10 +378,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ControlTemplates\LQCE.SharePoint\" />
     <Folder Include="ControlTemplates\UserControl\" />
     <Folder Include="Features\" />
-    <Folder Include="Layouts\LQCE.SharePoint\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx">

@@ -598,6 +598,7 @@ namespace LQCE.Transaccion
                                  .Where(d => d.ACTIVO && d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado))
                             {
                                 PRESTACION _PRESTACION = new PRESTACION();
+                                _PRESTACION.ID = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FICHA.Value;
                                 _PRESTACION.TIPO_PRESTACION = _TIPO_PRESTACION;
                                 _PRESTACION.MEDICO = _CARGA_PRESTACIONES_HUMANAS_DETALLE.MEDICO;
                                 _PRESTACION.CLIENTE = _CARGA_PRESTACIONES_HUMANAS_DETALLE.CLIENTE;
@@ -646,6 +647,7 @@ namespace LQCE.Transaccion
                                  .Where(d => d.ACTIVO && d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado))
                             {
                                 PRESTACION _PRESTACION = new PRESTACION();
+                                _PRESTACION.ID = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FICHA.Value;
                                 _PRESTACION.TIPO_PRESTACION = _TIPO_PRESTACION;
                                 _PRESTACION.MEDICO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.MEDICO;
                                 _PRESTACION.CLIENTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.CLIENTE;

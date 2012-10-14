@@ -7,10 +7,12 @@ namespace LQCE.Transaccion.DTO
 {
     public class DTOFindFactura : DTOPaginador
     {
-        public string rut { get; set; }
-        public string nombre { get; set; }
-        public DateTime? fecha { get; set; }
-        public int? numero { get; set; }
-        public bool? estado { get; set; }
+        public int? ID_FACTURACION { get; set; }
+        public int? ID_TIPO_FACTURA { get; set; }
+        public string RUT_CLIENTE { get; set; }
+        public string NOMBRE_CLIENTE { get; set; }
+        public DateTime? FECHA_FACTURACION { get; set; }
+        public int? NUMERO_FACTURA { get; set; }
+        public bool? ESTADO_FACTURA { get; set; }
     }
 }

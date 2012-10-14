@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<VISTA_REPORTE_FACTURA> GetByFilter(int? ID_FACTURACION = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
+		public IQueryable<VISTA_REPORTE_FACTURA> GetByFilter(int? ID_FACTURACION = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, int? ID_TIPO_FACTURA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
 		{
 			Error = string.Empty;
 			try
@@ -167,6 +167,10 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.PAGADA == PAGADA.Value);
 				}
+				if (ID_TIPO_FACTURA.HasValue)
+				{
+				  q = q.Where(i => i.ID_TIPO_FACTURA == ID_TIPO_FACTURA.Value);
+				}
 				return q;
 			}
 			catch (Exception ex)
@@ -177,7 +181,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<VISTA_REPORTE_FACTURA> GetByFilterWithReferences(int? ID_FACTURACION = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
+		public IQueryable<VISTA_REPORTE_FACTURA> GetByFilterWithReferences(int? ID_FACTURACION = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, int? ID_TIPO_FACTURA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
 		{
 			Error = string.Empty;
 			try
@@ -262,6 +266,10 @@ namespace LQCE.Repositorio
 				if (PAGADA.HasValue)
 				{
 					q = q.Where(i => i.PAGADA == PAGADA.Value);
+				}
+				if (ID_TIPO_FACTURA.HasValue)
+				{
+					q = q.Where(i => i.ID_TIPO_FACTURA == ID_TIPO_FACTURA.Value);
 				}
 				return q;
 			}

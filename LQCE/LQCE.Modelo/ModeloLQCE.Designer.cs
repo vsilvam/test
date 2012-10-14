@@ -69,7 +69,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 13-10-2012 17:54:19
+// Fecha de generación: 14-10-2012 2:47:48
 namespace LQCE.Modelo
 {
     
@@ -11384,8 +11384,9 @@ namespace LQCE.Modelo
         /// <param name="iVA">Valor inicial de IVA.</param>
         /// <param name="tOTAL">Valor inicial de TOTAL.</param>
         /// <param name="pAGADA">Valor inicial de PAGADA.</param>
+        /// <param name="iD_TIPO_FACTURA">Valor inicial de ID_TIPO_FACTURA.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static VISTA_REPORTE_FACTURA CreateVISTA_REPORTE_FACTURA(int iD_FACTURACION, int id, global::System.DateTime fECHA_FACTURACION, string rUT_LABORATORIO, int nETO, int iVA, int tOTAL, bool pAGADA)
+        public static VISTA_REPORTE_FACTURA CreateVISTA_REPORTE_FACTURA(int iD_FACTURACION, int id, global::System.DateTime fECHA_FACTURACION, string rUT_LABORATORIO, int nETO, int iVA, int tOTAL, bool pAGADA, int iD_TIPO_FACTURA)
         {
             VISTA_REPORTE_FACTURA vISTA_REPORTE_FACTURA = new VISTA_REPORTE_FACTURA();
             vISTA_REPORTE_FACTURA.ID_FACTURACION = iD_FACTURACION;
@@ -11396,6 +11397,7 @@ namespace LQCE.Modelo
             vISTA_REPORTE_FACTURA.IVA = iVA;
             vISTA_REPORTE_FACTURA.TOTAL = tOTAL;
             vISTA_REPORTE_FACTURA.PAGADA = pAGADA;
+            vISTA_REPORTE_FACTURA.ID_TIPO_FACTURA = iD_TIPO_FACTURA;
             return vISTA_REPORTE_FACTURA;
         }
         /// <summary>
@@ -11938,5 +11940,32 @@ namespace LQCE.Modelo
         partial void OnPAGADAChanging(bool value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnPAGADAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID_TIPO_FACTURA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID_TIPO_FACTURA
+        {
+            get
+            {
+                return this._ID_TIPO_FACTURA;
+            }
+            set
+            {
+                this.OnID_TIPO_FACTURAChanging(value);
+                this.ReportPropertyChanging("ID_TIPO_FACTURA");
+                this._ID_TIPO_FACTURA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID_TIPO_FACTURA");
+                this.OnID_TIPO_FACTURAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID_TIPO_FACTURA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_TIPO_FACTURAChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_TIPO_FACTURAChanged();
     }
 }

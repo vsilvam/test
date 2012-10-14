@@ -66,19 +66,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 dto.PageSize = grdFacturas.PageSize;
 
                 if(!string.IsNullOrEmpty(txtRutCliente.Text))
-                    dto.rut = txtRutCliente.Text;
+                    dto.RUT_CLIENTE = txtRutCliente.Text;
                 if(!string.IsNullOrEmpty(txtNombreCliente.Text))
-                    dto.nombre = txtNombreCliente.Text;
+                    dto.NOMBRE_CLIENTE = txtNombreCliente.Text;
                 if(!string.IsNullOrEmpty(txtFechaEmision.Text))
-                    dto.fecha = DateTime.Parse(txtFechaEmision.Text,culture);
+                    dto.FECHA_FACTURACION = DateTime.Parse(txtFechaEmision.Text,culture);
                 if(!string.IsNullOrEmpty(txtNroFactura.Text))
-                    dto.numero = int.Parse(txtNroFactura.Text);
+                    dto.NUMERO_FACTURA = int.Parse(txtNroFactura.Text);
                 if (!string.IsNullOrEmpty(ddlEstadoPago.SelectedValue))
-                    dto.estado = (ddlEstadoPago.SelectedValue == "1");
+                    dto.ESTADO_FACTURA = (ddlEstadoPago.SelectedValue == "1");
 
                 TrxFACTURACION _trx = new TrxFACTURACION();
-                int Total = _trx.GetResumenFacturasByFilterCount(dto.rut, dto.nombre, dto.fecha, dto.numero, dto.estado);
-                grdFacturas.DataSource = _trx.GetResumenFacturasByFilter(dto.rut,dto.nombre,dto.fecha,dto.numero,dto.estado,dto.PageIndex, dto.PageSize);
+                int Total = _trx.GetResumenFacturasByFilterCount(null, null, dto.RUT_CLIENTE, dto.NOMBRE_CLIENTE, dto.FECHA_FACTURACION, dto.NUMERO_FACTURA, dto.ESTADO_FACTURA);
+                grdFacturas.DataSource = _trx.GetResumenFacturasByFilter(null, null, dto.RUT_CLIENTE,dto.NOMBRE_CLIENTE,dto.FECHA_FACTURACION,dto.NUMERO_FACTURA,dto.ESTADO_FACTURA,dto.PageIndex, dto.PageSize);
                 grdFacturas.DataBind();
 
                 Paginador1.TotalPages = Total % grdFacturas.PageSize == 0 ? Total / grdFacturas.PageSize : Total / grdFacturas.PageSize + 1;

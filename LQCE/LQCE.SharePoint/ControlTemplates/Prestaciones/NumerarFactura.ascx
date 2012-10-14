@@ -25,35 +25,23 @@
             <h3>
                 Numerar Facturas</h3>
         </header>
-       
-
+       <b>Procesos de Facturación</b>
         <asp:GridView ID="grdFacturas" CssClass="tablesorter" runat="server"
             AutoGenerateColumns="False" Width="100%" 
-    EnableModelValidation="True" DataKeyNames="ID_FACTURACION" 
-    onrowcommand="grdFacturas_RowCommand" 
-    onrowdatabound="grdFacturas_RowDataBound">
+    EnableModelValidation="True" DataKeyNames="ID_FACTURACION, ID_TIPO_FACTURA" 
+    onrowcommand="grdFacturas_RowCommand" >
             <Columns>
                 <asp:BoundField DataField="FECHA_FACTURACION" HeaderText="FECHA FACTURACION" />
                 <asp:BoundField DataField="TOTAL_FACTURAS" HeaderText="TOTAL FACTURAS" />
                 <asp:BoundField DataField="TOTAL_FACTURAS_POR_NUMERAR" HeaderText="FACTURAS POR NUMERAR" />
-                <asp:TemplateField HeaderText="TIPO FACTURA">
-                    <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("NOMBRE_TIPO_FACTURA") %>'></asp:Label>
-                    <asp:HiddenField ID="hdnIdFacturacion" runat="server" Value="" />
-                    <asp:HiddenField ID="hdnIdTipoFactura" runat="server" Value="" />
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="NOMBRE_TIPO_FACTURA" HeaderText="TIPO FACTURA" />
                 <asp:ButtonField CommandName="Numerar" Text="Numerar" />
             </Columns>
             <EmptyDataTemplate>
-                No se encontraron prestaciones coincidentes.
+               No hay procesos de facturación pendientes.
             </EmptyDataTemplate>
         </asp:GridView>
-        <footer>
-            <div class="submit_link">
-                
-            </div>
-        </footer>
+        
     </article>
 <asp:Panel ID="pnNumerar" runat="server" Visible="false">
     <asp:HiddenField ID="hdnID_FACTURACION" runat="server" />

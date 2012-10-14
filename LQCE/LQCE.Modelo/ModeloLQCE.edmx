@@ -68,6 +68,7 @@
           <EntitySet Name="VISTA_REPORTE_FACTURA" EntityType="LQCEModelo.Store.VISTA_REPORTE_FACTURA" store:Type="Views" store:Schema="dbo" store:Name="VISTA_REPORTE_FACTURA">
             <DefiningQuery>SELECT 
       [VISTA_REPORTE_FACTURA].[ID_FACTURACION] AS [ID_FACTURACION], 
+      [VISTA_REPORTE_FACTURA].[ID_TIPO_FACTURA] AS [ID_TIPO_FACTURA], 
       [VISTA_REPORTE_FACTURA].[ID] AS [ID], 
       [VISTA_REPORTE_FACTURA].[FECHA_FACTURACION] AS [FECHA_FACTURACION], 
       [VISTA_REPORTE_FACTURA].[NOMBRE_CLIENTE] AS [NOMBRE_CLIENTE], 
@@ -797,7 +798,6 @@
       -->
         <EntityType Name="VISTA_REPORTE_FACTURA">
           <Key>
-            
             <PropertyRef Name="ID" />
             
             
@@ -807,6 +807,7 @@
             
           </Key>
           <Property Name="ID_FACTURACION" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_FACTURA" Type="int" Nullable="false" />
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="FECHA_FACTURACION" Type="datetime" Nullable="false" />
           <Property Name="NOMBRE_CLIENTE" Type="nvarchar" MaxLength="50" />
@@ -2587,6 +2588,7 @@
           <Property Type="Int32" Name="PAGOS_REGISTRADOS" />
           <Property Type="Int32" Name="SALDO_DEUDOR" />
           <Property Type="Boolean" Name="PAGADA" Nullable="false" />
+          <Property Type="Int32" Name="ID_TIPO_FACTURA" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3507,6 +3509,7 @@
           <EntitySetMapping Name="VISTA_REPORTE_FACTURA">
             <EntityTypeMapping TypeName="LQCEModelo.VISTA_REPORTE_FACTURA">
               <MappingFragment StoreEntitySet="VISTA_REPORTE_FACTURA">
+                <ScalarProperty Name="ID_TIPO_FACTURA" ColumnName="ID_TIPO_FACTURA" />
                 <ScalarProperty Name="PAGADA" ColumnName="PAGADA" />
                 <ScalarProperty Name="SALDO_DEUDOR" ColumnName="SALDO_DEUDOR" />
                 <ScalarProperty Name="PAGOS_REGISTRADOS" ColumnName="PAGOS_REGISTRADOS" />

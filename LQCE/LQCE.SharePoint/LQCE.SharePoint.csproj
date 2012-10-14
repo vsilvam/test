@@ -66,6 +66,13 @@
     <Compile Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx.designer.cs">
       <DependentUpon>ActualizarClientes.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\AnularFactura.ascx.cs">
+      <DependentUpon>AnularFactura.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\AnularFactura.ascx.designer.cs">
+      <DependentUpon>AnularFactura.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\BuscarFactura.ascx.cs">
       <DependentUpon>BuscarFactura.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -212,6 +219,13 @@
     </Compile>
     <Compile Include="Layouts\Prestaciones\ActualizarClientes.aspx.designer.cs">
       <DependentUpon>ActualizarClientes.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\AnularFactura.aspx.cs">
+      <DependentUpon>AnularFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\AnularFactura.aspx.designer.cs">
+      <DependentUpon>AnularFactura.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\BuscarFactura.aspx.cs">
       <DependentUpon>BuscarFactura.aspx</DependentUpon>
@@ -385,6 +399,9 @@
     <Content Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\AnularFactura.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\BuscarFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -451,6 +468,9 @@
     <Content Include="Layouts\JScript\ui.accordion.js" />
     <Content Include="Layouts\JScript\ui.datepicker-es.js" />
     <Content Include="Layouts\Prestaciones\ActualizarClientes.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\AnularFactura.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\BuscarFactura.aspx">

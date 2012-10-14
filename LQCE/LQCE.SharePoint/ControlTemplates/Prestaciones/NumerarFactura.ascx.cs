@@ -102,10 +102,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     rblNumerar.SelectedValue = "1";
 
                     int index = int.Parse(e.CommandArgument.ToString());
-                    HiddenField hdnIdFacturacion = (HiddenField)grdFacturas.Rows[index].FindControl("hdnIdFacturacion");
-                    HiddenField hdnIdTipoFactura = (HiddenField)grdFacturas.Rows[index].FindControl("hdnIdTipoFactura");
-                    hdnID_FACTURACION.Value = hdnIdFacturacion.Value;
-                    hdnID_TIPO_FACTURA.Value = hdnIdTipoFactura.Value;
+                    hdnID_FACTURACION.Value = this.grdFacturas.DataKeys[index]["ID_FACTURACION"].ToString();
+                    hdnID_TIPO_FACTURA.Value = this.grdFacturas.DataKeys[index]["ID_TIPO_FACTURA"].ToString();
                 }
             }
             catch (Exception ex)
@@ -117,26 +115,26 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        protected void grdFacturas_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            try
-            {
-                if (e.Row.RowType == DataControlRowType.DataRow)
-                {
-                    DTO_RESUMEN_FACTURACION dto = (DTO_RESUMEN_FACTURACION)e.Row.DataItem;
-                    HiddenField hdnIdFacturacion = (HiddenField)e.Row.FindControl("hdnIdFacturacion");
-                    HiddenField hdnIdTipoFactura = (HiddenField)e.Row.FindControl("hdnIdTipoFactura");
-                    hdnIdFacturacion.Value = dto.ID_FACTURACION.ToString();
-                    hdnIdTipoFactura.Value = dto.ID_TIPO_FACTURA.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                panelMensaje.CssClass = "MostrarMensaje";
-                lblMensaje.Text = ex.Message;
-                return;
-            }
-        }
+        //protected void grdFacturas_RowDataBound(object sender, GridViewRowEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.Row.RowType == DataControlRowType.DataRow)
+        //        {
+        //            DTO_RESUMEN_FACTURACION dto = (DTO_RESUMEN_FACTURACION)e.Row.DataItem;
+        //            HiddenField hdnIdFacturacion = (HiddenField)e.Row.FindControl("hdnIdFacturacion");
+        //            HiddenField hdnIdTipoFactura = (HiddenField)e.Row.FindControl("hdnIdTipoFactura");
+        //            hdnIdFacturacion.Value = dto.ID_FACTURACION.ToString();
+        //            hdnIdTipoFactura.Value = dto.ID_TIPO_FACTURA.ToString();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ISException.RegisterExcepcion(ex);
+        //        panelMensaje.CssClass = "MostrarMensaje";
+        //        lblMensaje.Text = ex.Message;
+        //        return;
+        //    }
+        //}
     }
 }

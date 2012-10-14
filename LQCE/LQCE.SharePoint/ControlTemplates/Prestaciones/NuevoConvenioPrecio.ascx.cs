@@ -17,7 +17,25 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
                     getTipoPrestacion();
+                    MostrarConvenios();
                 }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        private void MostrarConvenios()
+        {
+            try 
+            {
+                TrxCONVENIO convenio = new TrxCONVENIO();
+                grdConvenios.DataSource = convenio.GetAllWithReferences();
+                grdConvenios.DataBind();
             }
             catch (Exception ex)
             {
@@ -52,11 +70,90 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 var Trx = new TrxCONVENIO();
-                int TipoPrestacion = int.Parse(ddlTipoPrestacion.SelectedValue);
-                string Nombre = txtNombre.Text;
-                Trx.Add(TipoPrestacion,Nombre);
+                int? TipoPrestacion = null;
+                string Nombre = string.Empty;
+                if (!string.IsNullOrEmpty(ddlTipoPrestacion.SelectedValue))
+                {
+                    lblMensaje.Text = "debe seleccionar un tipo de prestacion para la creacion del convenio";
+                    return;
+                }
+                else
+                    TipoPrestacion = int.Parse(ddlTipoPrestacion.SelectedValue);
+
+                if (!string.IsNullOrEmpty(txtNombre.Text))
+                {
+                    lblMensaje.Text = "debe indicar un nombre al convenio";
+                    return;
+                }
+                else
+                    Nombre = txtNombre.Text;
+
+                Trx.Add(TipoPrestacion.Value,Nombre);
                 Response.Redirect("MensajeExito.aspx?t=Nuevo Convenio de Precios&m=Se ha registrado un nuevo convenio", false);
 
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        //protected void ChkEditar_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    try 
+        //    {
+        //        foreach (GridViewRow grilla in grdConvenios.Rows)
+        //        {
+        //            CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
+        //            if (ChkEditar.Checked)
+        //            {
+        //                var lblId = grilla.FindControl("lblId") as Label;
+        //                var lblTipoPrestacion = grilla.FindControl("lblTipoPrestacion") as Label;
+        //                var lblNombre = grilla.FindControl("lblNombre") as Label;
+
+        //                ddlTipoPrestacion.SelectedValue = lblTipoPrestacion.Text;
+        //                txtNombre.Text = lblNombre.Text;
+
+        //                pnNuevoConvenio.Visible = true;
+        //                pnConvenios.Visible = false;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ISException.RegisterExcepcion(ex);
+        //        panelMensaje.CssClass = "MostrarMensaje";
+        //        lblMensaje.Text = ex.Message;
+        //        return;
+        //    }
+        //}
+
+        protected void lnkSeleccionar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (GridViewRow grilla in grdConvenios.Rows)
+                {
+                    LinkButton link = sender as LinkButton;
+                    int? Id = int.Parse(link.CommandArgument);
+                    var lblId = grilla.FindControl("lblId") as Label;
+                    if (Id.Value == int.Parse(lblId.Text))
+                    {
+                        var lblIdTipoPrestacion = grilla.FindControl("lblIdTipoPrestacion") as Label;
+                        var lblTipoPrestacion = grilla.FindControl("lblTipoPrestacion") as Label;
+                        var lblNombre = grilla.FindControl("lblNombre") as Label;
+
+                        ddlTipoPrestacion.SelectedValue = lblIdTipoPrestacion.Text;
+                        txtNombre.Text = lblNombre.Text;
+
+                        pnNuevoConvenio.Visible = true;
+                        pnConvenios.Visible = false;
+                    }
+                    
+                }
             }
             catch (Exception ex)
             {

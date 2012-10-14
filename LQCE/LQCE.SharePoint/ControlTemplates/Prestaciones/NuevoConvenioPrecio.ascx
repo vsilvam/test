@@ -12,7 +12,47 @@
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label></h4>
 </asp:Panel>
-<asp:Panel ID="pnNuevoConvenio" runat="server">
+<asp:Panel ID="pnConvenios" runat="server">
+    <asp:GridView ID="grdConvenios" runat="server" AutoGenerateColumns='False'
+        Width='100%' EnableModelValidation="True">
+        <Columns>
+        <asp:TemplateField HeaderText="Seleccionar">
+                <ItemTemplate>
+                    <%--<asp:CheckBox ID="ChkEditar" runat="server" 
+                        oncheckedchanged="ChkEditar_CheckedChanged" />--%>
+
+                    <asp:LinkButton ID="lnkSeleccionar" runat="server" CommandArgument='<%# Eval("ID") %>'
+                        onclick="lnkSeleccionar_Click">Seleccionar</asp:LinkButton>
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField Visible="false">
+                <ItemTemplate>
+                    <asp:Label ID="lblId" runat="server" Text='<%# Bind("ID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField Visible="false">
+                <ItemTemplate>
+                    <asp:Label ID="lblIdTipoPrestacion" runat="server" Text='<%# Bind("TIPO_PRESTACION.ID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Tipo Prestacion">
+                <ItemTemplate>
+                    <asp:Label ID="lblTipoPrestacion" runat="server" Text='<%# Bind("TIPO_PRESTACION.NOMBRE") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Nombre">
+                <ItemTemplate>
+                    <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+        <EmptyDataTemplate>
+            No se han encontrado convenios.
+        </EmptyDataTemplate>
+    </asp:GridView>
+</asp:Panel>
+<asp:Panel ID="pnNuevoConvenio" runat="server" visible="false">
     <table>
         <tr>
             <td>Tipo Prestacion

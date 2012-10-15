@@ -72,7 +72,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 var Trx = new TrxCONVENIO();
                 int? TipoPrestacion = null;
                 string Nombre = string.Empty;
-                if (!string.IsNullOrEmpty(ddlTipoPrestacion.SelectedValue))
+                if (string.IsNullOrEmpty(ddlTipoPrestacion.SelectedValue))
                 {
                     lblMensaje.Text = "debe seleccionar un tipo de prestacion para la creacion del convenio";
                     return;
@@ -80,7 +80,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 else
                     TipoPrestacion = int.Parse(ddlTipoPrestacion.SelectedValue);
 
-                if (!string.IsNullOrEmpty(txtNombre.Text))
+                if (string.IsNullOrEmpty(txtNombre.Text))
                 {
                     lblMensaje.Text = "debe indicar un nombre al convenio";
                     return;
@@ -99,37 +99,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
-        }
-
-        //protected void ChkEditar_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    try 
-        //    {
-        //        foreach (GridViewRow grilla in grdConvenios.Rows)
-        //        {
-        //            CheckBox ChkEditar = (CheckBox)grilla.FindControl("ChkEditar");
-        //            if (ChkEditar.Checked)
-        //            {
-        //                var lblId = grilla.FindControl("lblId") as Label;
-        //                var lblTipoPrestacion = grilla.FindControl("lblTipoPrestacion") as Label;
-        //                var lblNombre = grilla.FindControl("lblNombre") as Label;
-
-        //                ddlTipoPrestacion.SelectedValue = lblTipoPrestacion.Text;
-        //                txtNombre.Text = lblNombre.Text;
-
-        //                pnNuevoConvenio.Visible = true;
-        //                pnConvenios.Visible = false;
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ISException.RegisterExcepcion(ex);
-        //        panelMensaje.CssClass = "MostrarMensaje";
-        //        lblMensaje.Text = ex.Message;
-        //        return;
-        //    }
-        //}
+        }        
 
         protected void lnkSeleccionar_Click(object sender, EventArgs e)
         {
@@ -151,8 +121,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                         pnNuevoConvenio.Visible = true;
                         pnConvenios.Visible = false;
-                    }
-                    
+                    }                    
                 }
             }
             catch (Exception ex)

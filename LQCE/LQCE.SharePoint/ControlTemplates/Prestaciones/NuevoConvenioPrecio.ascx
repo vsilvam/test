@@ -18,9 +18,6 @@
         <Columns>
         <asp:TemplateField HeaderText="Seleccionar">
                 <ItemTemplate>
-                    <%--<asp:CheckBox ID="ChkEditar" runat="server" 
-                        oncheckedchanged="ChkEditar_CheckedChanged" />--%>
-
                     <asp:LinkButton ID="lnkSeleccionar" runat="server" CommandArgument='<%# Eval("ID") %>'
                         onclick="lnkSeleccionar_Click">Seleccionar</asp:LinkButton>
                 </ItemTemplate>

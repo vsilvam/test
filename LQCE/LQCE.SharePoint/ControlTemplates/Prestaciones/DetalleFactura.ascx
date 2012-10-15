@@ -115,7 +115,6 @@
         <h3>
             <a href="#">Notas de Cobro</a></h3>
         <div>
-            sadasdas
             <asp:GridView ID="grdNotasCobro" runat="server" AutoGenerateColumns='false' Width="100%">
                 <Columns>
                     <asp:BoundField DataField="ID_NOTA_COBRO" HeaderText="N° NOTA PAGO" Visible="false" />

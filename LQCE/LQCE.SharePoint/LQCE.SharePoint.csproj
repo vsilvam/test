@@ -122,6 +122,13 @@
     <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx.designer.cs">
       <DependentUpon>EmitirNotaCobro.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCredito.ascx.cs">
+      <DependentUpon>EmitirNotaCredito.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\EmitirNotaCredito.ascx.designer.cs">
+      <DependentUpon>EmitirNotaCredito.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\IngresarClientes.ascx.cs">
       <DependentUpon>IngresarClientes.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -290,6 +297,13 @@
     <Compile Include="Layouts\Prestaciones\EmitirNotaCobro.aspx.designer.cs">
       <DependentUpon>EmitirNotaCobro.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Layouts\Prestaciones\EmitirNotaCredito.aspx.cs">
+      <DependentUpon>EmitirNotaCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\EmitirNotaCredito.aspx.designer.cs">
+      <DependentUpon>EmitirNotaCredito.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Prestaciones\IngresarClientes.aspx.cs">
       <DependentUpon>IngresarClientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -423,6 +437,9 @@
     <Content Include="ControlTemplates\Prestaciones\EmitirNotaCobro.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\EmitirNotaCredito.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\IngresarClientes.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -470,9 +487,7 @@
     <Content Include="Layouts\Prestaciones\ActualizarClientes.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="Layouts\Prestaciones\AnularFactura.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="Layouts\Prestaciones\AnularFactura.aspx" />
     <Content Include="Layouts\Prestaciones\BuscarFactura.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -498,6 +513,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\EmitirNotaCobro.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="Layouts\Prestaciones\EmitirNotaCredito.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\IngresarClientes.aspx">

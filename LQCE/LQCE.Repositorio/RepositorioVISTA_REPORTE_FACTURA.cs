@@ -21,7 +21,7 @@ namespace LQCE.Repositorio
 			Error = string.Empty;
 			try
 			{
-							return _context.VISTA_REPORTE_FACTURA.FirstOrDefault(i => i.ID == id);
+							return _context.VISTA_REPORTE_FACTURA.FirstOrDefault(i => i.ID_FACTURA == id);
 						}
 			catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.VISTA_REPORTE_FACTURA.FirstOrDefault(i => i.ID == id);
+							return _context.VISTA_REPORTE_FACTURA.FirstOrDefault(i => i.ID_FACTURA == id);
 			
 			}
 			catch (Exception ex)

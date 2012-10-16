@@ -157,6 +157,9 @@
     <Compile Include="TrxNOTA_COBRO_DETALLE.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="TrxNOTA_CREDITO.cs">
+      <DependentUpon>TrxTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="TrxPAGO.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>

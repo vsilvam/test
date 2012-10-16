@@ -124,6 +124,9 @@
     <Compile Include="RepositorioNOTA_COBRO_DETALLE.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
+    <Compile Include="RepositorioNOTA_CREDITO.cs">
+      <DependentUpon>RepositorioTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="RepositorioPAGO.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>

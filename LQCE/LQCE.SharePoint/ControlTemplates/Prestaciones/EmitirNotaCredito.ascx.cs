@@ -10,7 +10,7 @@ using LQCE.Transaccion.DTO;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
-    public partial class AnularFactura : UserControl
+    public partial class EmitirNotaCredito : UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,7 +34,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void getFacturas()
         {
             var facturacion = new TrxFACTURACION();
-            gridFacturacion.DataSource = facturacion.GetResumenFacturacionPorNumerar();
+            gridFacturacion.DataSource = facturacion.GetResumenFacturacion();
             gridFacturacion.DataBind();
         }
 
@@ -70,7 +70,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     grdFacturas.PageSize = 10;
 
                     int index = int.Parse(e.CommandArgument.ToString());
-                    panelAnular.Visible = true;
+                    panelEmitir.Visible = true;
                     hdnID_FACTURACION.Value = this.gridFacturacion.DataKeys[index]["ID_FACTURACION"].ToString();
                     hdnID_TIPO_FACTURA.Value = this.gridFacturacion.DataKeys[index]["ID_TIPO_FACTURA"].ToString();
 
@@ -140,7 +140,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {
                     DTO_RESUMEN_FACTURA dto = (DTO_RESUMEN_FACTURA)e.Row.DataItem;
                     CheckBox chkSeleccionar = (CheckBox)e.Row.FindControl("chkSeleccionar");
-                    chkSeleccionar.Visible = !dto.NUMERO_FACTURA.HasValue;
+                    chkSeleccionar.Visible = dto.NUMERO_FACTURA.HasValue;
                 }
             }
             catch (Exception ex)
@@ -152,32 +152,33 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        protected void btnAnular_Click(object sender, EventArgs e)
+        protected void btnEmitir_Click(object sender, EventArgs e)
         {
             try
             {
-                List<int> ListaFacturas = new List<int>();
-                foreach (GridViewRow fila in grdFacturas.Rows)
-                {
-                    if (fila.RowType == DataControlRowType.DataRow)
-                    {
-                        CheckBox chkSeleccionar = (CheckBox)fila.FindControl("chkSeleccionar");
-                        if (chkSeleccionar.Checked)
-                        {
-                            int IdFactura = int.Parse(this.grdFacturas.DataKeys[fila.RowIndex]["ID_FACTURA"].ToString());
-                            ListaFacturas.Add(IdFactura);
-                        }
-                    }
-                }
+                throw new Exception("No implementado");
+                //List<int> ListaFacturas = new List<int>();
+                //foreach (GridViewRow fila in grdFacturas.Rows)
+                //{
+                //    if (fila.RowType == DataControlRowType.DataRow)
+                //    {
+                //        CheckBox chkSeleccionar = (CheckBox)fila.FindControl("chkSeleccionar");
+                //        if (chkSeleccionar.Checked)
+                //        {
+                //            int IdFactura = int.Parse(this.grdFacturas.DataKeys[fila.RowIndex]["ID_FACTURA"].ToString());
+                //            ListaFacturas.Add(IdFactura);
+                //        }
+                //    }
+                //}
 
-                if (ListaFacturas.Count == 0)
-                    throw new Exception("Debe seleccionar factura");
-                else
-                {
-                    TrxFACTURACION _TrxFACTURACION = new TrxFACTURACION();
-                    _TrxFACTURACION.AnularFacturas(ListaFacturas);
-                    Response.Redirect("MensajeExito.aspx?t=Anular Factura&m=Se han anulado las facturas seleccionadas", false);
-                }
+                //if (ListaFacturas.Count == 0)
+                //    throw new Exception("Debe seleccionar factura");
+                //else
+                //{
+                //    TrxFACTURACION _TrxFACTURACION = new TrxFACTURACION();
+                //    _TrxFACTURACION.AnularFacturas(ListaFacturas);
+                //    Response.Redirect("MensajeExito.aspx?t=Anular Factura&m=Se han anulado las facturas seleccionadas", false);
+                //}
             }
             catch (Exception ex)
             {
@@ -187,7 +188,5 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 return;
             }
         }
-
-
     }
 }

@@ -110,7 +110,7 @@ namespace App.Infrastructure.Base
 
         public static DateTime ToDateTime(object obj)
         {
-            CultureInfo ci = new CultureInfo("es-CL");
+            CultureInfo ci = new CultureInfo("es-es");
             DateTime dtHelper = DateTime.MinValue;
             if (obj != null && DateTime.TryParse(obj.ToString(), ci, DateTimeStyles.None, out dtHelper))
             {
@@ -296,7 +296,7 @@ namespace App.Infrastructure.Base
 
         public static DateTime? ToNullableDateTime(object obj)
         {
-            CultureInfo ci = new CultureInfo("es-CL");
+            CultureInfo ci = new CultureInfo("es-es");
             DateTime dtHelper = DateTime.MinValue;
             if (obj != null && DateTime.TryParse(obj.ToString(), ci, DateTimeStyles.None, out dtHelper))
             {
@@ -308,7 +308,7 @@ namespace App.Infrastructure.Base
 
         public static DateTime? ToNullableDateTimeEnd(object obj)
         {
-            CultureInfo ci = new CultureInfo("es-CL");
+            CultureInfo ci = new CultureInfo("es-es");
             DateTime dtHelper = DateTime.MinValue;
             if (obj != null && !obj.ToString().Trim().Equals(string.Empty) && DateTime.TryParse(obj.ToString() + " 23:59:59", ci, DateTimeStyles.None, out dtHelper))
             {

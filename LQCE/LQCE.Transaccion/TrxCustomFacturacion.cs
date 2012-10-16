@@ -588,6 +588,42 @@ namespace LQCE.Transaccion
             }
         }
 
+        /// <summary>
+        /// Retorna todas las facturaciones realizadas
+        /// </summary>
+        /// <returns></returns>
+        public List<DTO_RESUMEN_FACTURACION> GetResumenFacturacion()
+        {
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    return (from f in _RepositorioFACTURA.GetAllWithReferences()
+                            where f.ACTIVO && f.FACTURACION.ACTIVO
+                            && f.FACTURACION.FACTURA.Any(fd => fd.ACTIVO)
+                            group f by new { ID_FACTURACION = f.FACTURACION.ID, ID_TIPO_FACTURA = f.TIPO_FACTURA.ID } into g
+                            select new DTO_RESUMEN_FACTURACION
+                            {
+                                ID_FACTURACION = g.Key.ID_FACTURACION,
+                                ID_TIPO_FACTURA = g.Key.ID_TIPO_FACTURA,
+                                NOMBRE_TIPO_FACTURA = g.FirstOrDefault().TIPO_FACTURA.NOMBRE_FACTURA,
+                                FECHA_FACTURACION = g.FirstOrDefault().FACTURACION.FECHA_FACTURACION,
+                                TOTAL_FACTURAS = g.Count(),
+                                TOTAL_FACTURAS_POR_NUMERAR = g.Count(fa => fa.NUMERO_FACTURA == null)
+                            }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
         public void NumerarFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, bool NUMERAR_TODAS,
             int? CORRELATIVO_DESDE, int? CORRELATIVO_HASTA, int NUMERO_FACTURA_INICIAL)
         {

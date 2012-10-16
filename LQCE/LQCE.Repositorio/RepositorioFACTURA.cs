@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+							return _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA").Include("NOTA_CREDITO").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA") where i.ACTIVO  select i;
+								var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA").Include("NOTA_CREDITO") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -179,7 +179,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA")  where i.ACTIVO select i;
+							var q = from i in _context.FACTURA.Include("CLIENTE").Include("FACTURA_DETALLE").Include("FACTURACION").Include("NOTA_COBRO_DETALLE").Include("TIPO_FACTURA").Include("NOTA_CREDITO")  where i.ACTIVO select i;
 			
 				
 

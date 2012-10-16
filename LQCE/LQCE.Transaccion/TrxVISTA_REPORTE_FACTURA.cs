@@ -38,7 +38,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-										return repositorio.GetAll().OrderBy(i => i.ID).ToList();
+										return repositorio.GetAll().OrderBy(i => i.ID_FACTURA).ToList();
 					                }
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    					return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
+                    					return repositorio.GetAllWithReferences().OrderBy(i => i.ID_FACTURA).ToList();
 					                }
             }
             catch (Exception ex)
@@ -68,7 +68,7 @@ namespace LQCE.Transaccion
             }
         }
 
-		public VISTA_REPORTE_FACTURA GetById(int ID)
+		public VISTA_REPORTE_FACTURA GetById(int ID_FACTURA)
         {
 			Init();
 			try
@@ -76,7 +76,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetById(ID);
+                    return repositorio.GetById(ID_FACTURA);
                 }
             }
             catch (Exception ex)
@@ -87,7 +87,7 @@ namespace LQCE.Transaccion
             }
         }
 
-		public VISTA_REPORTE_FACTURA GetByIdWithReferences(int ID)
+		public VISTA_REPORTE_FACTURA GetByIdWithReferences(int ID_FACTURA)
         {
 			Init();
 			try
@@ -95,7 +95,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetByIdWithReferences(ID);
+                    return repositorio.GetByIdWithReferences(ID_FACTURA);
                 }
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetByFilter(ID_FACTURACION, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(ID_FACTURACION, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID_FACTURA).ToList();
                 }
             }
             catch (Exception ex)
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetByFilterWithReferences(ID_FACTURACION, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(ID_FACTURACION, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID_FACTURA).ToList();
                 }
             }
             catch (Exception ex)

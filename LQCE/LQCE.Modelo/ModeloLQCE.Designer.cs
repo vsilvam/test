@@ -67,9 +67,10 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_PREVISION", "PREVISION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PREVISION), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_TIPO_PRESTACION", "TIPO_PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.TIPO_PRESTACION), "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_PRESTACION", "PRESTACION", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.PRESTACION), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_NOTA_CREDITO_FACTURA", "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.FACTURA), "NOTA_CREDITO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.NOTA_CREDITO))]
 
 // Nombre de archivo original:
-// Fecha de generación: 14-10-2012 2:47:48
+// Fecha de generación: 2012/10/16 13:33:29
 namespace LQCE.Modelo
 {
     
@@ -784,6 +785,23 @@ namespace LQCE.Modelo
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         private global::System.Data.Objects.ObjectQuery<VISTA_REPORTE_FACTURA> _VISTA_REPORTE_FACTURA;
         /// <summary>
+        /// No hay ningún comentario para NOTA_CREDITO en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.Data.Objects.ObjectQuery<NOTA_CREDITO> NOTA_CREDITO
+        {
+            get
+            {
+                if ((this._NOTA_CREDITO == null))
+                {
+                    this._NOTA_CREDITO = base.CreateQuery<NOTA_CREDITO>("[NOTA_CREDITO]");
+                }
+                return this._NOTA_CREDITO;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.Data.Objects.ObjectQuery<NOTA_CREDITO> _NOTA_CREDITO;
+        /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
@@ -1102,6 +1120,14 @@ namespace LQCE.Modelo
         public void AddToVISTA_REPORTE_FACTURA(VISTA_REPORTE_FACTURA vISTA_REPORTE_FACTURA)
         {
             base.AddObject("VISTA_REPORTE_FACTURA", vISTA_REPORTE_FACTURA);
+        }
+        /// <summary>
+        /// No hay ningún comentario para NOTA_CREDITO en el esquema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public void AddToNOTA_CREDITO(NOTA_CREDITO nOTA_CREDITO)
+        {
+            base.AddObject("NOTA_CREDITO", nOTA_CREDITO);
         }
     }
     /// <summary>
@@ -4149,6 +4175,28 @@ namespace LQCE.Modelo
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<TIPO_FACTURA>("LQCEModelo.FK_FACTURA_TIPO_FACTURA", "TIPO_FACTURA", value);
+                }
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para NOTA_CREDITO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_NOTA_CREDITO_FACTURA", "NOTA_CREDITO")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityCollection<NOTA_CREDITO> NOTA_CREDITO
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<NOTA_CREDITO>("LQCEModelo.FK_NOTA_CREDITO_FACTURA", "NOTA_CREDITO");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<NOTA_CREDITO>("LQCEModelo.FK_NOTA_CREDITO_FACTURA", "NOTA_CREDITO", value);
                 }
             }
         }
@@ -11367,6 +11415,7 @@ namespace LQCE.Modelo
     /// </summary>
     /// <KeyProperties>
     /// ID
+    /// ID_FACTURA
     /// </KeyProperties>
     [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="VISTA_REPORTE_FACTURA")]
     [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
@@ -11385,8 +11434,9 @@ namespace LQCE.Modelo
         /// <param name="tOTAL">Valor inicial de TOTAL.</param>
         /// <param name="pAGADA">Valor inicial de PAGADA.</param>
         /// <param name="iD_TIPO_FACTURA">Valor inicial de ID_TIPO_FACTURA.</param>
+        /// <param name="iD_FACTURA">Valor inicial de ID_FACTURA.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static VISTA_REPORTE_FACTURA CreateVISTA_REPORTE_FACTURA(int iD_FACTURACION, int id, global::System.DateTime fECHA_FACTURACION, string rUT_LABORATORIO, int nETO, int iVA, int tOTAL, bool pAGADA, int iD_TIPO_FACTURA)
+        public static VISTA_REPORTE_FACTURA CreateVISTA_REPORTE_FACTURA(int iD_FACTURACION, int id, global::System.DateTime fECHA_FACTURACION, string rUT_LABORATORIO, int nETO, int iVA, int tOTAL, bool pAGADA, int iD_TIPO_FACTURA, int iD_FACTURA)
         {
             VISTA_REPORTE_FACTURA vISTA_REPORTE_FACTURA = new VISTA_REPORTE_FACTURA();
             vISTA_REPORTE_FACTURA.ID_FACTURACION = iD_FACTURACION;
@@ -11398,6 +11448,7 @@ namespace LQCE.Modelo
             vISTA_REPORTE_FACTURA.TOTAL = tOTAL;
             vISTA_REPORTE_FACTURA.PAGADA = pAGADA;
             vISTA_REPORTE_FACTURA.ID_TIPO_FACTURA = iD_TIPO_FACTURA;
+            vISTA_REPORTE_FACTURA.ID_FACTURA = iD_FACTURA;
             return vISTA_REPORTE_FACTURA;
         }
         /// <summary>
@@ -11967,5 +12018,237 @@ namespace LQCE.Modelo
         partial void OnID_TIPO_FACTURAChanging(int value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnID_TIPO_FACTURAChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID_FACTURA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID_FACTURA
+        {
+            get
+            {
+                return this._ID_FACTURA;
+            }
+            set
+            {
+                this.OnID_FACTURAChanging(value);
+                this.ReportPropertyChanging("ID_FACTURA");
+                this._ID_FACTURA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID_FACTURA");
+                this.OnID_FACTURAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID_FACTURA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_FACTURAChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnID_FACTURAChanged();
+    }
+    /// <summary>
+    /// No hay ningún comentario para LQCEModelo.NOTA_CREDITO en el esquema.
+    /// </summary>
+    /// <KeyProperties>
+    /// ID
+    /// </KeyProperties>
+    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="LQCEModelo", Name="NOTA_CREDITO")]
+    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
+    [global::System.Serializable()]
+    public partial class NOTA_CREDITO : global::System.Data.Objects.DataClasses.EntityObject
+    {
+        /// <summary>
+        /// Crear un nuevo objeto NOTA_CREDITO.
+        /// </summary>
+        /// <param name="id">Valor inicial de ID.</param>
+        /// <param name="fECHA_EMISION">Valor inicial de FECHA_EMISION.</param>
+        /// <param name="nUMERO_NOTA_CREDITO">Valor inicial de NUMERO_NOTA_CREDITO.</param>
+        /// <param name="cORRECCION_TOTAL_PARCIAL">Valor inicial de CORRECCION_TOTAL_PARCIAL.</param>
+        /// <param name="aCTIVO">Valor inicial de ACTIVO.</param>
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public static NOTA_CREDITO CreateNOTA_CREDITO(int id, global::System.DateTime fECHA_EMISION, int nUMERO_NOTA_CREDITO, bool cORRECCION_TOTAL_PARCIAL, bool aCTIVO)
+        {
+            NOTA_CREDITO nOTA_CREDITO = new NOTA_CREDITO();
+            nOTA_CREDITO.ID = id;
+            nOTA_CREDITO.FECHA_EMISION = fECHA_EMISION;
+            nOTA_CREDITO.NUMERO_NOTA_CREDITO = nUMERO_NOTA_CREDITO;
+            nOTA_CREDITO.CORRECCION_TOTAL_PARCIAL = cORRECCION_TOTAL_PARCIAL;
+            nOTA_CREDITO.ACTIVO = aCTIVO;
+            return nOTA_CREDITO;
+        }
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ID en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int ID
+        {
+            get
+            {
+                return this._ID;
+            }
+            set
+            {
+                this.OnIDChanging(value);
+                this.ReportPropertyChanging("ID");
+                this._ID = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ID");
+                this.OnIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _ID;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnIDChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad FECHA_EMISION en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime FECHA_EMISION
+        {
+            get
+            {
+                return this._FECHA_EMISION;
+            }
+            set
+            {
+                this.OnFECHA_EMISIONChanging(value);
+                this.ReportPropertyChanging("FECHA_EMISION");
+                this._FECHA_EMISION = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("FECHA_EMISION");
+                this.OnFECHA_EMISIONChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private global::System.DateTime _FECHA_EMISION;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_EMISIONChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnFECHA_EMISIONChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NUMERO_NOTA_CREDITO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public int NUMERO_NOTA_CREDITO
+        {
+            get
+            {
+                return this._NUMERO_NOTA_CREDITO;
+            }
+            set
+            {
+                this.OnNUMERO_NOTA_CREDITOChanging(value);
+                this.ReportPropertyChanging("NUMERO_NOTA_CREDITO");
+                this._NUMERO_NOTA_CREDITO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("NUMERO_NOTA_CREDITO");
+                this.OnNUMERO_NOTA_CREDITOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private int _NUMERO_NOTA_CREDITO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNUMERO_NOTA_CREDITOChanging(int value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNUMERO_NOTA_CREDITOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad CORRECCION_TOTAL_PARCIAL en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool CORRECCION_TOTAL_PARCIAL
+        {
+            get
+            {
+                return this._CORRECCION_TOTAL_PARCIAL;
+            }
+            set
+            {
+                this.OnCORRECCION_TOTAL_PARCIALChanging(value);
+                this.ReportPropertyChanging("CORRECCION_TOTAL_PARCIAL");
+                this._CORRECCION_TOTAL_PARCIAL = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("CORRECCION_TOTAL_PARCIAL");
+                this.OnCORRECCION_TOTAL_PARCIALChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _CORRECCION_TOTAL_PARCIAL;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnCORRECCION_TOTAL_PARCIALChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnCORRECCION_TOTAL_PARCIALChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad ACTIVO en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool ACTIVO
+        {
+            get
+            {
+                return this._ACTIVO;
+            }
+            set
+            {
+                this.OnACTIVOChanging(value);
+                this.ReportPropertyChanging("ACTIVO");
+                this._ACTIVO = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("ACTIVO");
+                this.OnACTIVOChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _ACTIVO;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para FACTURA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("LQCEModelo", "FK_NOTA_CREDITO_FACTURA", "FACTURA")]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
+        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public FACTURA FACTURA
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<FACTURA>("LQCEModelo.FK_NOTA_CREDITO_FACTURA", "FACTURA").Value;
+            }
+            set
+            {
+                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<FACTURA>("LQCEModelo.FK_NOTA_CREDITO_FACTURA", "FACTURA").Value = value;
+            }
+        }
+        /// <summary>
+        /// No hay ningún comentario para FACTURA en el esquema.
+        /// </summary>
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        public global::System.Data.Objects.DataClasses.EntityReference<FACTURA> FACTURAReference
+        {
+            get
+            {
+                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<FACTURA>("LQCEModelo.FK_NOTA_CREDITO_FACTURA", "FACTURA");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<FACTURA>("LQCEModelo.FK_NOTA_CREDITO_FACTURA", "FACTURA", value);
+                }
+            }
+        }
     }
 }

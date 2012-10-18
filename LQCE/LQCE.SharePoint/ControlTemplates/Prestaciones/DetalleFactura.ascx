@@ -90,6 +90,13 @@
                     <asp:BoundField DataField="MONTO_COBRADO" HeaderText="MONTO COBRADO" />
                     <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA RECEPCION" />
                     <asp:BoundField DataField="NOMBRE_PACIENTE" HeaderText="NOMBRE PACIENTE" />
+                    <asp:TemplateField HeaderText="PAGAR">
+                        <ItemTemplate>
+                            <asp:ImageButton ID="imgPagar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/pagar.jpeg"
+                                CommandArgument='<%# Eval("ID_FACTURA_DETALLE") %>' Height="15px" ToolTip="Pagar" OnClick="imgPagar_Click" />
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Center" />
+                    </asp:TemplateField>
                 </Columns>
                 <EmptyDataTemplate>
                     No se encontro información relacionada.
@@ -105,15 +112,7 @@
                     <asp:BoundField DataField="ID_PAGO" HeaderText="N° PAGO" Visible="false" />
                     <asp:BoundField DataField="FECHA_PAGO" HeaderText="FECHA_PAGO" />
                     <asp:BoundField DataField="MONTO_PAGO_TOTAL" HeaderText="MONTO PAGO TOTAL" />
-                    <asp:BoundField DataField="MONTO_PAGO_FACTURA" HeaderText="MONTO PAGO FACTURA" />
-                    <asp:TemplateField HeaderText="PAGAR">
-                <ItemTemplate>
-                    <asp:ImageButton ID="imgPagar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/pagar.jpeg"
-                        CommandArgument='<%# Eval("ID_PAGO") %>' Height="15px" ToolTip="Pagar" 
-                        onclick="imgPagar_Click" />
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
+                    <asp:BoundField DataField="MONTO_PAGO_FACTURA" HeaderText="MONTO PAGO FACTURA" />                   
                 </Columns>
                 <EmptyDataTemplate>
                     No se encontro información relacionada.

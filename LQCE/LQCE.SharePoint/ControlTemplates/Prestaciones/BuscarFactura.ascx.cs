@@ -74,7 +74,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if(!string.IsNullOrEmpty(txtNroFactura.Text))
                     dto.NUMERO_FACTURA = int.Parse(txtNroFactura.Text);
                 if (!string.IsNullOrEmpty(ddlEstadoPago.SelectedValue))
-                    dto.ESTADO_FACTURA = (ddlEstadoPago.SelectedValue == "1");
+                    dto.ESTADO_FACTURA = ddlEstadoPago.SelectedValue == "1" ? true : false;
 
                 TrxFACTURACION _trx = new TrxFACTURACION();
                 int Total = _trx.GetResumenFacturasByFilterCount(null, null, dto.RUT_CLIENTE, dto.NOMBRE_CLIENTE, dto.FECHA_FACTURACION, dto.NUMERO_FACTURA, dto.ESTADO_FACTURA);

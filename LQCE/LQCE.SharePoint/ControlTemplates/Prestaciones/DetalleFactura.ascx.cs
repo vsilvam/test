@@ -55,10 +55,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try 
             {
                 ImageButton image = sender as ImageButton;
-                int? Id_pago = int.Parse(image.CommandArgument);
-                if (Id_pago.HasValue)
+                int? Id = int.Parse(image.CommandArgument);
+                if (Id.HasValue)
                 {
-                    Response.Redirect("RegistroPago.aspx?Id=" + Id_pago, false);
+                    Response.Redirect("RegistroPago.aspx?Id=" + Id, false);
                 }
             }
             catch (Exception ex)

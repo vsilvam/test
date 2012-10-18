@@ -2,6 +2,7 @@
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Modelo;
+using System.Web.UI.WebControls;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -39,6 +40,26 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 grdNotasCobro.DataSource = detalle.LISTA_COBROS;
                 grdNotasCobro.DataBind();
 
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgPagar_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
+            try 
+            {
+                ImageButton image = sender as ImageButton;
+                int? Id_pago = int.Parse(image.CommandArgument);
+                if (Id_pago.HasValue)
+                {
+                    Response.Redirect("RegistroPago.aspx?Id=" + Id_pago, false);
+                }
             }
             catch (Exception ex)
             {

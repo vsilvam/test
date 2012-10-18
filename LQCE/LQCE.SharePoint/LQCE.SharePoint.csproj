@@ -557,6 +557,7 @@
     <Content Include="Layouts\Style\Imagenes\editar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Layouts\Style\Imagenes\pagar.jpeg" />
     <Content Include="LEEME.txt" />
   </ItemGroup>
   <ItemGroup>

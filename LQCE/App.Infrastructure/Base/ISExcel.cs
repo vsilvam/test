@@ -69,7 +69,7 @@ namespace App.Infrastructure.Base
                 catch (Exception ex)
                 {
                     ISException.RegisterExcepcion(ex);
-                    return null;
+                    throw ex;
                 }
 
             }
@@ -109,6 +109,7 @@ namespace App.Infrastructure.Base
             catch (Exception ex)
             {
                 ISException.RegisterExcepcion(ex);
+                throw ex;
             }
         }
     }

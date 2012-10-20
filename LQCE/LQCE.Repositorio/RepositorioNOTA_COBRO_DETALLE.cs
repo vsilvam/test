@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.NOTA_COBRO_DETALLE.Include("FACTURA").Include("NOTA_COBRO").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+							return _context.NOTA_COBRO_DETALLE.Include("NOTA_COBRO").Include("FACTURA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.NOTA_COBRO_DETALLE.Include("FACTURA").Include("NOTA_COBRO") where i.ACTIVO  select i;
+								var q = from i in _context.NOTA_COBRO_DETALLE.Include("NOTA_COBRO").Include("FACTURA") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<NOTA_COBRO_DETALLE> GetByFilter(int? FACTURAId = null, int? NOTA_COBROId = null, int? MONTO_PENDIENTE = null)
+		public IQueryable<NOTA_COBRO_DETALLE> GetByFilter(int? NOTA_COBROId = null, int? FACTURAId = null, int? MONTO_PENDIENTE = null)
 		{
 			Error = string.Empty;
 			try
@@ -95,13 +95,13 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.MONTO_PENDIENTE == MONTO_PENDIENTE.Value);
 				}
-				if (FACTURAId.HasValue)
-				{
-				  q = q.Where(i => i.FACTURA.ID == FACTURAId.Value);
-				}
 				if (NOTA_COBROId.HasValue)
 				{
 				  q = q.Where(i => i.NOTA_COBRO.ID == NOTA_COBROId.Value);
+				}
+				if (FACTURAId.HasValue)
+				{
+				  q = q.Where(i => i.FACTURA.ID == FACTURAId.Value);
 				}
 				return q;
 			}
@@ -113,13 +113,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<NOTA_COBRO_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? NOTA_COBROId = null, int? MONTO_PENDIENTE = null)
+		public IQueryable<NOTA_COBRO_DETALLE> GetByFilterWithReferences(int? NOTA_COBROId = null, int? FACTURAId = null, int? MONTO_PENDIENTE = null)
 		{
 			Error = string.Empty;
 			try
 			{
 
-							var q = from i in _context.NOTA_COBRO_DETALLE.Include("FACTURA").Include("NOTA_COBRO")  where i.ACTIVO select i;
+							var q = from i in _context.NOTA_COBRO_DETALLE.Include("NOTA_COBRO").Include("FACTURA")  where i.ACTIVO select i;
 			
 				
 
@@ -127,13 +127,13 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.MONTO_PENDIENTE == MONTO_PENDIENTE.Value);
 				}
-				if (FACTURAId.HasValue)
-				{
-					q = q.Where(i => i.FACTURA.ID == FACTURAId.Value);
-				}
 				if (NOTA_COBROId.HasValue)
 				{
 					q = q.Where(i => i.NOTA_COBRO.ID == NOTA_COBROId.Value);
+				}
+				if (FACTURAId.HasValue)
+				{
+					q = q.Where(i => i.FACTURA.ID == FACTURAId.Value);
 				}
 				return q;
 			}

@@ -636,7 +636,7 @@ namespace LQCE.Transaccion
                     RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
 
                     var q = _RepositorioFACTURA.GetByFilterWithReferences(null, ID_FACTURACION, ID_TIPO_FACTURA,
-                        null, "", null, null, null, null, null, "", "", "", "", "", "", "");
+                        null, "", null, null, null, "", "", "", "", null, null, "", "", "", null);
 
                     if (!NUMERAR_TODAS)
                     {
@@ -656,7 +656,7 @@ namespace LQCE.Transaccion
                     int NUMERO_FACTURA_FINAL = NUMERO_FACTURA_INICIAL + q.Count() - 1;
 
                     var q2 = _RepositorioFACTURA.GetByFilterWithReferences(null, null, ID_TIPO_FACTURA,
-                        null, "", null, null, null, null, null, "", "", "", "", "", "", "");
+                        null, "", null, null, null, null, null, "", "", null, null, "", "", "", null);
                     if (q2.Any(f => f.NUMERO_FACTURA.HasValue
                         && f.NUMERO_FACTURA >= NUMERO_FACTURA_INICIAL
                         && f.NUMERO_FACTURA <= NUMERO_FACTURA_FINAL))
@@ -810,7 +810,7 @@ namespace LQCE.Transaccion
                     RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
 
                     var q = _RepositorioFACTURA.GetByFilterWithReferences(null, ID_FACTURACION, ID_TIPO_FACTURA,
-                        null, "", null, null, null, null, null, "", "", "", "", "", "", "");
+                        null, "", null, null, null, null, null, "", "", null, null, "", "", "", null);
 
                     if (!BORRAR_NUMERACION_TODAS)
                     {
@@ -1091,8 +1091,8 @@ namespace LQCE.Transaccion
                 {
                     RepositorioVISTA_REPORTE_FACTURA _RepositorioVISTA_REPORTE_FACTURA = new RepositorioVISTA_REPORTE_FACTURA(context);
 
-                    return (from f in _RepositorioVISTA_REPORTE_FACTURA.GetByFilter(ID_FACTURACION, FECHA_EMISION, "", null, null, null,
-                            PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, "", "", NUMERO_FACTURA, null, "", "", "", null, null, null)
+                    return (from f in _RepositorioVISTA_REPORTE_FACTURA.GetByFilter(ID_FACTURACION, ID_TIPO_FACTURA, FECHA_EMISION, "", null, null, null,
+                            PAGADA, NOMBRE_CLIENTE, RUT_CLIENTE, "", "", NUMERO_FACTURA, null, "", "", "", null, null, null)
                             .OrderBy(f => f.FECHA_FACTURACION).ThenBy(f => f.NUMERO_FACTURA)
                             .Skip((PageIndex - 1) * PageSize).Take(PageSize)
                             select new DTO_RESUMEN_FACTURA
@@ -1127,8 +1127,8 @@ namespace LQCE.Transaccion
                 {
                     RepositorioVISTA_REPORTE_FACTURA _RepositorioVISTA_REPORTE_FACTURA = new RepositorioVISTA_REPORTE_FACTURA(context);
 
-                    return (from f in _RepositorioVISTA_REPORTE_FACTURA.GetByFilter(ID_FACTURACION, FECHA_EMISION, "", null, null, null,
-                            PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, "", "", NUMERO_FACTURA, null, "", "", "", null, null, null)
+                    return (from f in _RepositorioVISTA_REPORTE_FACTURA.GetByFilter(ID_FACTURACION, ID_TIPO_FACTURA, FECHA_EMISION, "", null, null, null,
+                            PAGADA, NOMBRE_CLIENTE, RUT_CLIENTE, "", "", NUMERO_FACTURA, null, "", "", "", null, null, null)
                             select f).Count();
                 }
             }

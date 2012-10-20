@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<FACTURA_DETALLE> GetByFilter(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
+		public List<FACTURA_DETALLE> GetByFilter(int? PRESTACIONId = null, int? FACTURAId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA_DETALLE repositorio = new RepositorioFACTURA_DETALLE(context);
-                    return repositorio.GetByFilter(FACTURAId, PRESTACIONId, MONTO_TOTAL, MONTO_COBRADO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(PRESTACIONId, FACTURAId, MONTO_TOTAL, MONTO_COBRADO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<FACTURA_DETALLE> GetByFilterWithReferences(int? FACTURAId = null, int? PRESTACIONId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
+		public List<FACTURA_DETALLE> GetByFilterWithReferences(int? PRESTACIONId = null, int? FACTURAId = null, int? MONTO_TOTAL = null, int? MONTO_COBRADO = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA_DETALLE repositorio = new RepositorioFACTURA_DETALLE(context);
-                    return repositorio.GetByFilterWithReferences(FACTURAId, PRESTACIONId, MONTO_TOTAL, MONTO_COBRADO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(PRESTACIONId, FACTURAId, MONTO_TOTAL, MONTO_COBRADO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,25 +144,25 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(int FACTURAId, int PRESTACIONId, int MONTO_TOTAL, int MONTO_COBRADO)
+		        public int Add(int PRESTACIONId, int FACTURAId, int MONTO_TOTAL, int MONTO_COBRADO)
         {
 		Init();
             try
             {
 				 using (LQCEEntities context = new LQCEEntities())
 				{
-					RepositorioFACTURA _repositorioFACTURA = new RepositorioFACTURA(context);
-					FACTURA _objFACTURA = _repositorioFACTURA.GetById(FACTURAId);
-					if(Equals(_objFACTURA,null))
-					{
-						throw new Exception(String.Concat("No se ha encontrado FACTURA con Id =",FACTURAId.ToString()));
-					}
-
 					RepositorioPRESTACION _repositorioPRESTACION = new RepositorioPRESTACION(context);
 					PRESTACION _objPRESTACION = _repositorioPRESTACION.GetById(PRESTACIONId);
 					if(Equals(_objPRESTACION,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado PRESTACION con Id =",PRESTACIONId.ToString()));
+					}
+
+					RepositorioFACTURA _repositorioFACTURA = new RepositorioFACTURA(context);
+					FACTURA _objFACTURA = _repositorioFACTURA.GetById(FACTURAId);
+					if(Equals(_objFACTURA,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado FACTURA con Id =",FACTURAId.ToString()));
 					}
 
 					FACTURA_DETALLE _FACTURA_DETALLE = new FACTURA_DETALLE();
@@ -175,8 +175,8 @@ namespace LQCE.Transaccion
 
 					//parents
 						 
-                    _FACTURA_DETALLE.FACTURA = _objFACTURA;
                     _FACTURA_DETALLE.PRESTACION = _objPRESTACION;
+                    _FACTURA_DETALLE.FACTURA = _objFACTURA;
                     
 					context.AddObject("FACTURA_DETALLE",_FACTURA_DETALLE);
                     context.SaveChanges();
@@ -192,7 +192,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int FACTURAId, int PRESTACIONId, int MONTO_TOTAL, int MONTO_COBRADO)
+		public void Update(int Id, int PRESTACIONId, int FACTURAId, int MONTO_TOTAL, int MONTO_COBRADO)
 		{
 		Init();
 			try
@@ -206,18 +206,18 @@ namespace LQCE.Transaccion
 						throw new Exception(String.Concat("No se ha encontrado FACTURA_DETALLE con Id =",Id.ToString()));
 					}
 					
-					RepositorioFACTURA _repositorioFACTURA = new RepositorioFACTURA(context);
-					FACTURA _objFACTURA = _repositorioFACTURA.GetById(FACTURAId);
-					if(Equals(_objFACTURA,null))
-					{
-						throw new Exception(String.Concat("No se ha encontrado FACTURA con Id =",FACTURAId.ToString()));
-					}
-						
 					RepositorioPRESTACION _repositorioPRESTACION = new RepositorioPRESTACION(context);
 					PRESTACION _objPRESTACION = _repositorioPRESTACION.GetById(PRESTACIONId);
 					if(Equals(_objPRESTACION,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado PRESTACION con Id =",PRESTACIONId.ToString()));
+					}
+						
+					RepositorioFACTURA _repositorioFACTURA = new RepositorioFACTURA(context);
+					FACTURA _objFACTURA = _repositorioFACTURA.GetById(FACTURAId);
+					if(Equals(_objFACTURA,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado FACTURA con Id =",FACTURAId.ToString()));
 					}
 	
 					//properties
@@ -227,8 +227,8 @@ namespace LQCE.Transaccion
 	
 					//parents
 					 
-                    _FACTURA_DETALLE.FACTURA = _objFACTURA;
                     _FACTURA_DETALLE.PRESTACION = _objPRESTACION;
+                    _FACTURA_DETALLE.FACTURA = _objFACTURA;
 
 					context.SaveChanges();
 				}

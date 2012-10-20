@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA").Include("NOTA_COBRO").Include("PRESTACION").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+							return _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("PAGO").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA").Include("NOTA_COBRO").Include("PRESTACION").Include("FACTURA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA").Include("NOTA_COBRO").Include("PRESTACION") where i.ACTIVO  select i;
+								var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("PAGO").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA").Include("NOTA_COBRO").Include("PRESTACION").Include("FACTURA") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -147,7 +147,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("FACTURA").Include("PAGO").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA").Include("NOTA_COBRO").Include("PRESTACION")  where i.ACTIVO select i;
+							var q = from i in _context.CLIENTE.Include("COMUNA").Include("CONVENIO").Include("CLIENTE_SINONIMO").Include("TIPO_PRESTACION").Include("PAGO").Include("CARGA_PRESTACIONES_HUMANAS_DETALLE").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("TIPO_FACTURA").Include("NOTA_COBRO").Include("PRESTACION").Include("FACTURA")  where i.ACTIVO select i;
 			
 				
 

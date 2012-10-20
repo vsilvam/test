@@ -38,7 +38,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-										return repositorio.GetAll().OrderBy(i => i.ID_FACTURA).ToList();
+										return repositorio.GetAll().OrderBy(i => i.ID).ToList();
 					                }
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    					return repositorio.GetAllWithReferences().OrderBy(i => i.ID_FACTURA).ToList();
+                    					return repositorio.GetAllWithReferences().OrderBy(i => i.ID).ToList();
 					                }
             }
             catch (Exception ex)
@@ -68,7 +68,7 @@ namespace LQCE.Transaccion
             }
         }
 
-		public VISTA_REPORTE_FACTURA GetById(int ID_FACTURA)
+		public VISTA_REPORTE_FACTURA GetById(int ID)
         {
 			Init();
 			try
@@ -76,7 +76,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetById(ID_FACTURA);
+                    return repositorio.GetById(ID);
                 }
             }
             catch (Exception ex)
@@ -87,7 +87,7 @@ namespace LQCE.Transaccion
             }
         }
 
-		public VISTA_REPORTE_FACTURA GetByIdWithReferences(int ID_FACTURA)
+		public VISTA_REPORTE_FACTURA GetByIdWithReferences(int ID)
         {
 			Init();
 			try
@@ -95,7 +95,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetByIdWithReferences(ID_FACTURA);
+                    return repositorio.GetByIdWithReferences(ID);
                 }
             }
             catch (Exception ex)
@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<VISTA_REPORTE_FACTURA> GetByFilter(int? ID_FACTURACION = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, int? ID_TIPO_FACTURA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
+		public List<VISTA_REPORTE_FACTURA> GetByFilter(int? ID_FACTURACION = null, int? ID_TIPO_FACTURA = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetByFilter(ID_FACTURACION, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID_FACTURA).ToList();
+                    return repositorio.GetByFilter(ID_FACTURACION, ID_TIPO_FACTURA, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<VISTA_REPORTE_FACTURA> GetByFilterWithReferences(int? ID_FACTURACION = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, int? ID_TIPO_FACTURA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
+		public List<VISTA_REPORTE_FACTURA> GetByFilterWithReferences(int? ID_FACTURACION = null, int? ID_TIPO_FACTURA = null, System.DateTime? FECHA_FACTURACION = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, bool? PAGADA = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", int? VALOR_PAGADO = null, int? PAGOS_REGISTRADOS = null, int? SALDO_DEUDOR = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioVISTA_REPORTE_FACTURA repositorio = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    return repositorio.GetByFilterWithReferences(ID_FACTURACION, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, ID_TIPO_FACTURA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID_FACTURA).ToList();
+                    return repositorio.GetByFilterWithReferences(ID_FACTURACION, ID_TIPO_FACTURA, FECHA_FACTURACION, RUT_LABORATORIO, NETO, IVA, TOTAL, PAGADA, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, VALOR_PAGADO, PAGOS_REGISTRADOS, SALDO_DEUDOR).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)

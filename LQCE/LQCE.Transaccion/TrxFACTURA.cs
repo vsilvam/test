@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? TIPO_FACTURAId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, int? NUMERO_FACTURA = null, int? DESCUENTO = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
+		public List<FACTURA> GetByFilter(int? CLIENTEId = null, int? FACTURACIONId = null, int? TIPO_FACTURAId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA repositorio = new RepositorioFACTURA(context);
-                    return repositorio.GetByFilter(CLIENTEId, FACTURACIONId, TIPO_FACTURAId, CORRELATIVO, RUT_LABORATORIO, NETO, IVA, TOTAL, NUMERO_FACTURA, DESCUENTO, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, FONO, GIRO, DETALLE, PAGADA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CLIENTEId, FACTURACIONId, TIPO_FACTURAId, CORRELATIVO, RUT_LABORATORIO, NETO, IVA, TOTAL, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, PAGADA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? TIPO_FACTURAId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, int? NUMERO_FACTURA = null, int? DESCUENTO = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
+		public List<FACTURA> GetByFilterWithReferences(int? CLIENTEId = null, int? FACTURACIONId = null, int? TIPO_FACTURAId = null, int? CORRELATIVO = null, string RUT_LABORATORIO = "", int? NETO = null, int? IVA = null, int? TOTAL = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioFACTURA repositorio = new RepositorioFACTURA(context);
-                    return repositorio.GetByFilterWithReferences(CLIENTEId, FACTURACIONId, TIPO_FACTURAId, CORRELATIVO, RUT_LABORATORIO, NETO, IVA, TOTAL, NUMERO_FACTURA, DESCUENTO, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, FONO, GIRO, DETALLE, PAGADA).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CLIENTEId, FACTURACIONId, TIPO_FACTURAId, CORRELATIVO, RUT_LABORATORIO, NETO, IVA, TOTAL, NOMBRE_CLIENTE, RUT_CLIENTE, DIRECCION, NOMBRE_COMUNA, NUMERO_FACTURA, DESCUENTO, FONO, GIRO, DETALLE, PAGADA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(int CLIENTEId, int FACTURACIONId, int TIPO_FACTURAId, int CORRELATIVO, string RUT_LABORATORIO, int NETO, int IVA, int TOTAL, int? NUMERO_FACTURA = null, int? DESCUENTO = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
+		        public int Add(int CLIENTEId, int FACTURACIONId, int TIPO_FACTURAId, int CORRELATIVO, string RUT_LABORATORIO, int NETO, int IVA, int TOTAL, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
         {
 		Init();
             try
@@ -177,13 +177,13 @@ namespace LQCE.Transaccion
 					//properties
 
                     _FACTURA.CORRELATIVO = CORRELATIVO;
-                    _FACTURA.NUMERO_FACTURA = NUMERO_FACTURA;
-                    _FACTURA.RUT_LABORATORIO = RUT_LABORATORIO;				
-                    _FACTURA.DESCUENTO = DESCUENTO;
                     _FACTURA.NOMBRE_CLIENTE = NOMBRE_CLIENTE;				
                     _FACTURA.RUT_CLIENTE = RUT_CLIENTE;				
                     _FACTURA.DIRECCION = DIRECCION;				
                     _FACTURA.NOMBRE_COMUNA = NOMBRE_COMUNA;				
+                    _FACTURA.NUMERO_FACTURA = NUMERO_FACTURA;
+                    _FACTURA.RUT_LABORATORIO = RUT_LABORATORIO;				
+                    _FACTURA.DESCUENTO = DESCUENTO;
                     _FACTURA.FONO = FONO;				
                     _FACTURA.GIRO = GIRO;				
                     _FACTURA.DETALLE = DETALLE;				
@@ -213,7 +213,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CLIENTEId, int FACTURACIONId, int TIPO_FACTURAId, int CORRELATIVO, string RUT_LABORATORIO, int NETO, int IVA, int TOTAL, int? NUMERO_FACTURA = null, int? DESCUENTO = null, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
+		public void Update(int Id, int CLIENTEId, int FACTURACIONId, int TIPO_FACTURAId, int CORRELATIVO, string RUT_LABORATORIO, int NETO, int IVA, int TOTAL, string NOMBRE_CLIENTE = "", string RUT_CLIENTE = "", string DIRECCION = "", string NOMBRE_COMUNA = "", int? NUMERO_FACTURA = null, int? DESCUENTO = null, string FONO = "", string GIRO = "", string DETALLE = "", bool? PAGADA = null)
 		{
 		Init();
 			try
@@ -251,18 +251,6 @@ namespace LQCE.Transaccion
 					//properties
 
 						_FACTURA.CORRELATIVO = CORRELATIVO;
-					if (NUMERO_FACTURA.HasValue)
-					{
-						_FACTURA.NUMERO_FACTURA = NUMERO_FACTURA.Value;
-					}
-					if (!string.IsNullOrEmpty(RUT_LABORATORIO))
-					{
-						_FACTURA.RUT_LABORATORIO = RUT_LABORATORIO;
-					}
-					if (DESCUENTO.HasValue)
-					{
-						_FACTURA.DESCUENTO = DESCUENTO.Value;
-					}
 					if (!string.IsNullOrEmpty(NOMBRE_CLIENTE))
 					{
 						_FACTURA.NOMBRE_CLIENTE = NOMBRE_CLIENTE;
@@ -278,6 +266,18 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(NOMBRE_COMUNA))
 					{
 						_FACTURA.NOMBRE_COMUNA = NOMBRE_COMUNA;
+					}
+					if (NUMERO_FACTURA.HasValue)
+					{
+						_FACTURA.NUMERO_FACTURA = NUMERO_FACTURA.Value;
+					}
+					if (!string.IsNullOrEmpty(RUT_LABORATORIO))
+					{
+						_FACTURA.RUT_LABORATORIO = RUT_LABORATORIO;
+					}
+					if (DESCUENTO.HasValue)
+					{
+						_FACTURA.DESCUENTO = DESCUENTO.Value;
 					}
 					if (!string.IsNullOrEmpty(FONO))
 					{

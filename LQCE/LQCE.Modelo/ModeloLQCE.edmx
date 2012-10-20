@@ -69,7 +69,8 @@
           <EntitySet Name="VISTA_REPORTE_FACTURA" EntityType="LQCEModelo.Store.VISTA_REPORTE_FACTURA" store:Type="Views" store:Schema="dbo" store:Name="VISTA_REPORTE_FACTURA">
             <DefiningQuery>SELECT 
       [VISTA_REPORTE_FACTURA].[ID_FACTURACION] AS [ID_FACTURACION], 
-      [VISTA_REPORTE_FACTURA].[ID_FACTURA] AS [ID_FACTURA], 
+      [VISTA_REPORTE_FACTURA].[ID_TIPO_FACTURA] AS [ID_TIPO_FACTURA], 
+      [VISTA_REPORTE_FACTURA].[ID] AS [ID], 
       [VISTA_REPORTE_FACTURA].[FECHA_FACTURACION] AS [FECHA_FACTURACION], 
       [VISTA_REPORTE_FACTURA].[NOMBRE_CLIENTE] AS [NOMBRE_CLIENTE], 
       [VISTA_REPORTE_FACTURA].[RUT_CLIENTE] AS [RUT_CLIENTE], 
@@ -83,7 +84,11 @@
       [VISTA_REPORTE_FACTURA].[DETALLE] AS [DETALLE], 
       [VISTA_REPORTE_FACTURA].[NETO] AS [NETO], 
       [VISTA_REPORTE_FACTURA].[IVA] AS [IVA], 
-      [VISTA_REPORTE_FACTURA].[TOTAL] AS [TOTAL]
+      [VISTA_REPORTE_FACTURA].[TOTAL] AS [TOTAL], 
+      [VISTA_REPORTE_FACTURA].[VALOR_PAGADO] AS [VALOR_PAGADO], 
+      [VISTA_REPORTE_FACTURA].[PAGOS_REGISTRADOS] AS [PAGOS_REGISTRADOS], 
+      [VISTA_REPORTE_FACTURA].[SALDO_DEUDOR] AS [SALDO_DEUDOR], 
+      [VISTA_REPORTE_FACTURA].[PAGADA] AS [PAGADA]
       FROM [dbo].[VISTA_REPORTE_FACTURA] AS [VISTA_REPORTE_FACTURA]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO" Association="LQCEModelo.Store.FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO">
@@ -573,6 +578,7 @@
           <Property Name="NETO" Type="int" Nullable="false" />
           <Property Name="IVA" Type="int" Nullable="false" />
           <Property Name="TOTAL" Type="int" Nullable="false" />
+          <Property Name="PAGADA" Type="bit" />
         </EntityType>
         <EntityType Name="FACTURA_DETALLE">
           <Key>
@@ -656,7 +662,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="ID_TIPO_PRESTACION" Type="int" Nullable="false" />
           <Property Name="MEDICO" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
@@ -809,7 +815,9 @@
         <EntityType Name="VISTA_REPORTE_FACTURA">
           <Key>
             
-            <PropertyRef Name="ID_FACTURA" />
+            
+            <PropertyRef Name="ID" />
+            
             
             
             
@@ -817,7 +825,8 @@
             
           </Key>
           <Property Name="ID_FACTURACION" Type="int" Nullable="false" />
-          <Property Name="ID_FACTURA" Type="int" Nullable="false" />
+          <Property Name="ID_TIPO_FACTURA" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="FECHA_FACTURACION" Type="datetime" Nullable="false" />
           <Property Name="NOMBRE_CLIENTE" Type="nvarchar" MaxLength="50" />
           <Property Name="RUT_CLIENTE" Type="nvarchar" MaxLength="50" />
@@ -832,6 +841,10 @@
           <Property Name="NETO" Type="int" Nullable="false" />
           <Property Name="IVA" Type="int" Nullable="false" />
           <Property Name="TOTAL" Type="int" Nullable="false" />
+          <Property Name="VALOR_PAGADO" Type="int" />
+          <Property Name="PAGOS_REGISTRADOS" Type="int" />
+          <Property Name="SALDO_DEUDOR" Type="int" />
+          <Property Name="PAGADA" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_CARGA_PRESTACIONES_ENCABEZADO_CARGA_PRESTACIONES_ESTADO">
           <End Role="CARGA_PRESTACIONES_ESTADO" Type="LQCEModelo.Store.CARGA_PRESTACIONES_ESTADO" Multiplicity="1" />
@@ -1560,7 +1573,6 @@
           <EntitySet Name="EXAMEN" EntityType="LQCEModelo.EXAMEN" />
           <EntitySet Name="EXAMEN_DETALLE" EntityType="LQCEModelo.EXAMEN_DETALLE" />
           <EntitySet Name="EXAMEN_SINONIMO" EntityType="LQCEModelo.EXAMEN_SINONIMO" />
-          <EntitySet Name="FACTURA" EntityType="LQCEModelo.FACTURA" />
           <EntitySet Name="FACTURA_DETALLE" EntityType="LQCEModelo.FACTURA_DETALLE" />
           <EntitySet Name="FACTURACION" EntityType="LQCEModelo.FACTURACION" />
           <EntitySet Name="GARANTIA" EntityType="LQCEModelo.GARANTIA" />
@@ -1591,10 +1603,6 @@
           <AssociationSet Name="FK_CLIENTE_TIPO_PRESTACION" Association="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION">
             <End Role="TIPO_PRESTACION" EntitySet="TIPO_PRESTACION" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FACTURA_CLIENTE" Association="LQCEModelo.FK_FACTURA_CLIENTE">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="FACTURA" EntitySet="FACTURA" />
           </AssociationSet>
           <AssociationSet Name="FK_PAGO_CLIENTE" Association="LQCEModelo.FK_PAGO_CLIENTE">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
@@ -1651,18 +1659,6 @@
           <AssociationSet Name="FK_PRESTACION_EXAMEN_EXAMEN" Association="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN">
             <End Role="EXAMEN" EntitySet="EXAMEN" />
             <End Role="PRESTACION_EXAMEN" EntitySet="PRESTACION_EXAMEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FACTURA_DETALLE_FACTURA" Association="LQCEModelo.FK_FACTURA_DETALLE_FACTURA">
-            <End Role="FACTURA" EntitySet="FACTURA" />
-            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FACTURA_FACTURACION" Association="LQCEModelo.FK_FACTURA_FACTURACION">
-            <End Role="FACTURACION" EntitySet="FACTURACION" />
-            <End Role="FACTURA" EntitySet="FACTURA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NOTA_COBRO_DETALLE_FACTURA" Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA">
-            <End Role="FACTURA" EntitySet="FACTURA" />
-            <End Role="NOTA_COBRO_DETALLE" EntitySet="NOTA_COBRO_DETALLE" />
           </AssociationSet>
           <AssociationSet Name="FK_PAGO_DETALLE_FACTURA_DETALLE" Association="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE">
             <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
@@ -1762,10 +1758,6 @@
             <End Role="TIPO_FACTURA" EntitySet="TIPO_FACTURA" />
             <End Role="CLIENTE" EntitySet="CLIENTE" />
           </AssociationSet>
-          <AssociationSet Name="FK_FACTURA_TIPO_FACTURA" Association="LQCEModelo.FK_FACTURA_TIPO_FACTURA">
-            <End Role="TIPO_FACTURA" EntitySet="TIPO_FACTURA" />
-            <End Role="FACTURA" EntitySet="FACTURA" />
-          </AssociationSet>
           <EntitySet Name="NOTA_COBRO" EntityType="LQCEModelo.NOTA_COBRO" />
           <AssociationSet Name="FK_NOTA_COBRO_CLIENTE" Association="LQCEModelo.FK_NOTA_COBRO_CLIENTE">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
@@ -1817,6 +1809,27 @@
             <End Role="PRESTACION_VETERINARIA" EntitySet="PRESTACION_VETERINARIA" />
           </AssociationSet>
           <EntitySet Name="VISTA_REPORTE_FACTURA" EntityType="LQCEModelo.VISTA_REPORTE_FACTURA" />
+          <EntitySet Name="FACTURA" EntityType="LQCEModelo.FACTURA" />
+          <AssociationSet Name="FK_FACTURA_CLIENTE" Association="LQCEModelo.FK_FACTURA_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_DETALLE_FACTURA" Association="LQCEModelo.FK_FACTURA_DETALLE_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="FACTURA_DETALLE" EntitySet="FACTURA_DETALLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_FACTURACION" Association="LQCEModelo.FK_FACTURA_FACTURACION">
+            <End Role="FACTURACION" EntitySet="FACTURACION" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FACTURA_TIPO_FACTURA" Association="LQCEModelo.FK_FACTURA_TIPO_FACTURA">
+            <End Role="TIPO_FACTURA" EntitySet="TIPO_FACTURA" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NOTA_COBRO_DETALLE_FACTURA" Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA">
+            <End Role="FACTURA" EntitySet="FACTURA" />
+            <End Role="NOTA_COBRO_DETALLE" EntitySet="NOTA_COBRO_DETALLE" />
+          </AssociationSet>
           <EntitySet Name="NOTA_CREDITO" EntityType="LQCEModelo.NOTA_CREDITO" />
           <AssociationSet Name="FK_NOTA_CREDITO_FACTURA" Association="LQCEModelo.FK_NOTA_CREDITO_FACTURA">
             <End Role="FACTURA" EntitySet="FACTURA" />
@@ -1834,7 +1847,6 @@
           <NavigationProperty Name="CONVENIO" Relationship="LQCEModelo.FK_CLIENTE_CONVENIO" FromRole="CLIENTE" ToRole="CONVENIO" />
           <NavigationProperty Name="CLIENTE_SINONIMO" Relationship="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" FromRole="CLIENTE" ToRole="CLIENTE_SINONIMO" />
           <NavigationProperty Name="TIPO_PRESTACION" Relationship="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" FromRole="CLIENTE" ToRole="TIPO_PRESTACION" />
-          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_CLIENTE" FromRole="CLIENTE" ToRole="FACTURA" />
           <NavigationProperty Name="PAGO" Relationship="LQCEModelo.FK_PAGO_CLIENTE" FromRole="CLIENTE" ToRole="PAGO" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="CARGA_PRESTACIONES_HUMANAS_DETALLE" Relationship="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE" FromRole="CLIENTE" ToRole="CARGA_PRESTACIONES_HUMANAS_DETALLE" />
@@ -1846,6 +1858,7 @@
           <NavigationProperty Name="TIPO_FACTURA" Relationship="LQCEModelo.FK_CLIENTE_TIPO_FACTURA" FromRole="CLIENTE" ToRole="TIPO_FACTURA" />
           <NavigationProperty Name="NOTA_COBRO" Relationship="LQCEModelo.FK_NOTA_COBRO_CLIENTE" FromRole="CLIENTE" ToRole="NOTA_COBRO" />
           <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_PRESTACION_CLIENTE" FromRole="CLIENTE" ToRole="PRESTACION" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_CLIENTE" FromRole="CLIENTE" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="CLIENTE_SINONIMO">
           <Key>
@@ -1953,34 +1966,6 @@
           <NavigationProperty Name="EXAMEN" Relationship="LQCEModelo.FK_EXAMEN_SINONIMO_EXAMEN" FromRole="EXAMEN_SINONIMO" ToRole="EXAMEN" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
         </EntityType>
-        <EntityType Name="FACTURA">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="CORRELATIVO" Nullable="false" />
-          <Property Type="Int32" Name="NUMERO_FACTURA" />
-          <Property Type="String" Name="RUT_LABORATORIO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_FACTURA_CLIENTE" FromRole="FACTURA" ToRole="CLIENTE" />
-          <NavigationProperty Name="FACTURA_DETALLE" Relationship="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" FromRole="FACTURA" ToRole="FACTURA_DETALLE" />
-          <NavigationProperty Name="FACTURACION" Relationship="LQCEModelo.FK_FACTURA_FACTURACION" FromRole="FACTURA" ToRole="FACTURACION" />
-          <NavigationProperty Name="NOTA_COBRO_DETALLE" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" FromRole="FACTURA" ToRole="NOTA_COBRO_DETALLE" />
-          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
-          <Property Type="Int32" Name="DESCUENTO" />
-          <Property Type="String" Name="NOMBRE_CLIENTE" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="RUT_CLIENTE" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DIRECCION" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="NOMBRE_COMUNA" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="FONO" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="GIRO" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="DETALLE" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="NETO" Nullable="false" />
-          <Property Type="Int32" Name="IVA" Nullable="false" />
-          <Property Type="Int32" Name="TOTAL" Nullable="false" />
-          <NavigationProperty Name="TIPO_FACTURA" Relationship="LQCEModelo.FK_FACTURA_TIPO_FACTURA" FromRole="FACTURA" ToRole="TIPO_FACTURA" />
-          <Property Type="Boolean" Name="PAGADA" />
-          <NavigationProperty Name="NOTA_CREDITO" Relationship="LQCEModelo.FK_NOTA_CREDITO_FACTURA" FromRole="FACTURA" ToRole="NOTA_CREDITO" />
-        </EntityType>
         <EntityType Name="FACTURA_DETALLE">
           <Key>
             <PropertyRef Name="ID" />
@@ -1988,10 +1973,10 @@
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="MONTO_TOTAL" Nullable="false" />
           <Property Type="Int32" Name="MONTO_COBRADO" Nullable="false" />
-          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" FromRole="FACTURA_DETALLE" ToRole="FACTURA" />
           <NavigationProperty Name="PAGO_DETALLE" Relationship="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE" FromRole="FACTURA_DETALLE" ToRole="PAGO_DETALLE" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="PRESTACION" Relationship="LQCEModelo.FK_FACTURA_DETALLE_PRESTACION" FromRole="FACTURA_DETALLE" ToRole="PRESTACION" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" FromRole="FACTURA_DETALLE" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="FACTURACION">
           <Key>
@@ -1999,8 +1984,8 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="DateTime" Name="FECHA_FACTURACION" Nullable="false" />
-          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_FACTURACION" FromRole="FACTURACION" ToRole="FACTURA" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_FACTURACION" FromRole="FACTURACION" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="GARANTIA">
           <Key>
@@ -2019,9 +2004,9 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="MONTO_PENDIENTE" Nullable="false" />
-          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" FromRole="NOTA_COBRO_DETALLE" ToRole="FACTURA" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="NOTA_COBRO" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO" FromRole="NOTA_COBRO_DETALLE" ToRole="NOTA_COBRO" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" FromRole="NOTA_COBRO_DETALLE" ToRole="FACTURA" />
         </EntityType>
         <EntityType Name="PAGO">
           <Key>
@@ -2158,10 +2143,6 @@
           <End Type="LQCEModelo.TIPO_PRESTACION" Role="TIPO_PRESTACION" Multiplicity="1" />
           <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="*" />
         </Association>
-        <Association Name="FK_FACTURA_CLIENTE">
-          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="1" />
-          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
-        </Association>
         <Association Name="FK_PAGO_CLIENTE">
           <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="1" />
           <End Type="LQCEModelo.PAGO" Role="PAGO" Multiplicity="*" />
@@ -2217,18 +2198,6 @@
         <Association Name="FK_PRESTACION_EXAMEN_EXAMEN">
           <End Type="LQCEModelo.EXAMEN" Role="EXAMEN" Multiplicity="1" />
           <End Type="LQCEModelo.PRESTACION_EXAMEN" Role="PRESTACION_EXAMEN" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_FACTURA_DETALLE_FACTURA">
-          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="1" />
-          <End Type="LQCEModelo.FACTURA_DETALLE" Role="FACTURA_DETALLE" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_FACTURA_FACTURACION">
-          <End Type="LQCEModelo.FACTURACION" Role="FACTURACION" Multiplicity="1" />
-          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_NOTA_COBRO_DETALLE_FACTURA">
-          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="1" />
-          <End Type="LQCEModelo.NOTA_COBRO_DETALLE" Role="NOTA_COBRO_DETALLE" Multiplicity="*" />
         </Association>
         <Association Name="FK_PAGO_DETALLE_FACTURA_DETALLE">
           <End Type="LQCEModelo.FACTURA_DETALLE" Role="FACTURA_DETALLE" Multiplicity="1" />
@@ -2478,17 +2447,13 @@
           <Property Type="Boolean" Name="AFECTO_IVA" Nullable="false" />
           <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
           <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_CLIENTE_TIPO_FACTURA" FromRole="TIPO_FACTURA" ToRole="CLIENTE" />
-          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_TIPO_FACTURA" FromRole="TIPO_FACTURA" ToRole="FACTURA" />
           <Property Type="String" Name="NOMBRE_REPORTE_FACTURA" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="NOMBRE_REPORTE_FACTURA_INDIVIDUAL" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FACTURA" Relationship="LQCEModelo.FK_FACTURA_TIPO_FACTURA" FromRole="TIPO_FACTURA" ToRole="FACTURA" />
         </EntityType>
         <Association Name="FK_CLIENTE_TIPO_FACTURA">
           <End Type="LQCEModelo.TIPO_FACTURA" Role="TIPO_FACTURA" Multiplicity="1" />
           <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_FACTURA_TIPO_FACTURA">
-          <End Type="LQCEModelo.TIPO_FACTURA" Role="TIPO_FACTURA" Multiplicity="1" />
-          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
         </Association>
         <EntityType Name="NOTA_COBRO">
           <Key>
@@ -2590,9 +2555,9 @@
         <EntityType Name="VISTA_REPORTE_FACTURA">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="ID_FACTURA" />
           </Key>
           <Property Type="Int32" Name="ID_FACTURACION" Nullable="false" />
+          <Property Type="Int32" Name="ID_TIPO_FACTURA" Nullable="false" />
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="DateTime" Name="FECHA_FACTURACION" Nullable="false" />
           <Property Type="String" Name="NOMBRE_CLIENTE" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -2612,9 +2577,55 @@
           <Property Type="Int32" Name="PAGOS_REGISTRADOS" />
           <Property Type="Int32" Name="SALDO_DEUDOR" />
           <Property Type="Boolean" Name="PAGADA" Nullable="false" />
-          <Property Type="Int32" Name="ID_TIPO_FACTURA" Nullable="false" />
-          <Property Type="Int32" Name="ID_FACTURA" Nullable="false" />
         </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CORRELATIVO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE_CLIENTE" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RUT_CLIENTE" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DIRECCION" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="NOMBRE_COMUNA" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="NUMERO_FACTURA" />
+          <Property Type="String" Name="RUT_LABORATORIO" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="ACTIVO" Nullable="false" />
+          <Property Type="Int32" Name="DESCUENTO" />
+          <Property Type="String" Name="FONO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GIRO" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DETALLE" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="NETO" Nullable="false" />
+          <Property Type="Int32" Name="IVA" Nullable="false" />
+          <Property Type="Int32" Name="TOTAL" Nullable="false" />
+          <Property Type="Boolean" Name="PAGADA" />
+          <NavigationProperty Name="CLIENTE" Relationship="LQCEModelo.FK_FACTURA_CLIENTE" FromRole="FACTURA" ToRole="CLIENTE" />
+          <NavigationProperty Name="FACTURA_DETALLE" Relationship="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" FromRole="FACTURA" ToRole="FACTURA_DETALLE" />
+          <NavigationProperty Name="FACTURACION" Relationship="LQCEModelo.FK_FACTURA_FACTURACION" FromRole="FACTURA" ToRole="FACTURACION" />
+          <NavigationProperty Name="TIPO_FACTURA" Relationship="LQCEModelo.FK_FACTURA_TIPO_FACTURA" FromRole="FACTURA" ToRole="TIPO_FACTURA" />
+          <NavigationProperty Name="NOTA_COBRO_DETALLE" Relationship="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" FromRole="FACTURA" ToRole="NOTA_COBRO_DETALLE" />
+          <NavigationProperty Name="NOTA_CREDITO" Relationship="LQCEModelo.FK_NOTA_CREDITO_FACTURA" FromRole="FACTURA" ToRole="NOTA_CREDITO" />
+        </EntityType>
+        <Association Name="FK_FACTURA_CLIENTE">
+          <End Type="LQCEModelo.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_FACTURA_DETALLE_FACTURA">
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA_DETALLE" Role="FACTURA_DETALLE" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_FACTURA_FACTURACION">
+          <End Type="LQCEModelo.FACTURACION" Role="FACTURACION" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_FACTURA_TIPO_FACTURA">
+          <End Type="LQCEModelo.TIPO_FACTURA" Role="TIPO_FACTURA" Multiplicity="1" />
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_NOTA_COBRO_DETALLE_FACTURA">
+          <End Type="LQCEModelo.FACTURA" Role="FACTURA" Multiplicity="1" />
+          <End Type="LQCEModelo.NOTA_COBRO_DETALLE" Role="NOTA_COBRO_DETALLE" Multiplicity="*" />
+        </Association>
         <EntityType Name="NOTA_CREDITO">
           <Key>
             <PropertyRef Name="ID" />
@@ -2736,28 +2747,6 @@
               <MappingFragment StoreEntitySet="EXAMEN_SINONIMO">
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FACTURA">
-            <EntityTypeMapping TypeName="LQCEModelo.FACTURA">
-              <MappingFragment StoreEntitySet="FACTURA">
-                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
-                <ScalarProperty Name="IVA" ColumnName="IVA" />
-                <ScalarProperty Name="NETO" ColumnName="NETO" />
-                <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
-                <ScalarProperty Name="GIRO" ColumnName="GIRO" />
-                <ScalarProperty Name="FONO" ColumnName="FONO" />
-                <ScalarProperty Name="NOMBRE_COMUNA" ColumnName="NOMBRE_COMUNA" />
-                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
-                <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
-                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
-                <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
-                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
-                <ScalarProperty Name="RUT_LABORATORIO" ColumnName="RUT_LABORATORIO" />
-                <ScalarProperty Name="NUMERO_FACTURA" ColumnName="NUMERO_FACTURA" />
-                <ScalarProperty Name="CORRELATIVO" ColumnName="CORRELATIVO" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2937,14 +2926,6 @@
               <ScalarProperty Name="ID" ColumnName="ID_TIPO_PRESTACION" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_FACTURA_CLIENTE" TypeName="LQCEModelo.FK_FACTURA_CLIENTE" StoreEntitySet="FACTURA">
-            <EndProperty Name="FACTURA">
-              <ScalarProperty Name="ID" ColumnName="ID" />
-            </EndProperty>
-            <EndProperty Name="CLIENTE">
-              <ScalarProperty Name="ID" ColumnName="ID_CLIENTE" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_PAGO_CLIENTE" TypeName="LQCEModelo.FK_PAGO_CLIENTE" StoreEntitySet="PAGO">
             <EndProperty Name="PAGO">
               <ScalarProperty Name="ID" ColumnName="ID" />
@@ -3055,30 +3036,6 @@
             </EndProperty>
             <EndProperty Name="EXAMEN">
               <ScalarProperty Name="ID" ColumnName="ID_EXAMEN" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_FACTURA_DETALLE_FACTURA" TypeName="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" StoreEntitySet="FACTURA_DETALLE">
-            <EndProperty Name="FACTURA_DETALLE">
-              <ScalarProperty Name="ID" ColumnName="ID" />
-            </EndProperty>
-            <EndProperty Name="FACTURA">
-              <ScalarProperty Name="ID" ColumnName="ID_FACTURA" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_FACTURA_FACTURACION" TypeName="LQCEModelo.FK_FACTURA_FACTURACION" StoreEntitySet="FACTURA">
-            <EndProperty Name="FACTURA">
-              <ScalarProperty Name="ID" ColumnName="ID" />
-            </EndProperty>
-            <EndProperty Name="FACTURACION">
-              <ScalarProperty Name="ID" ColumnName="ID_FACTURACION" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_NOTA_COBRO_DETALLE_FACTURA" TypeName="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" StoreEntitySet="NOTA_COBRO_DETALLE">
-            <EndProperty Name="NOTA_COBRO_DETALLE">
-              <ScalarProperty Name="ID" ColumnName="ID" />
-            </EndProperty>
-            <EndProperty Name="FACTURA">
-              <ScalarProperty Name="ID" ColumnName="ID_FACTURA" />
             </EndProperty>
           </AssociationSetMapping>
           <AssociationSetMapping Name="FK_PAGO_DETALLE_FACTURA_DETALLE" TypeName="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE" StoreEntitySet="PAGO_DETALLE">
@@ -3418,14 +3375,6 @@
               <ScalarProperty Name="ID" ColumnName="ID_TIPO_FACTURA" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_FACTURA_TIPO_FACTURA" TypeName="LQCEModelo.FK_FACTURA_TIPO_FACTURA" StoreEntitySet="FACTURA">
-            <EndProperty Name="FACTURA">
-              <ScalarProperty Name="ID" ColumnName="ID" />
-            </EndProperty>
-            <EndProperty Name="TIPO_FACTURA">
-              <ScalarProperty Name="ID" ColumnName="ID_TIPO_FACTURA" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="NOTA_COBRO">
             <EntityTypeMapping TypeName="LQCEModelo.NOTA_COBRO">
               <MappingFragment StoreEntitySet="NOTA_COBRO">
@@ -3548,7 +3497,10 @@
           <EntitySetMapping Name="VISTA_REPORTE_FACTURA">
             <EntityTypeMapping TypeName="LQCEModelo.VISTA_REPORTE_FACTURA">
               <MappingFragment StoreEntitySet="VISTA_REPORTE_FACTURA">
-                <ScalarProperty Name="ID_FACTURA" ColumnName="ID_FACTURA" />
+                <ScalarProperty Name="PAGADA" ColumnName="PAGADA" />
+                <ScalarProperty Name="SALDO_DEUDOR" ColumnName="SALDO_DEUDOR" />
+                <ScalarProperty Name="PAGOS_REGISTRADOS" ColumnName="PAGOS_REGISTRADOS" />
+                <ScalarProperty Name="VALOR_PAGADO" ColumnName="VALOR_PAGADO" />
                 <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
                 <ScalarProperty Name="IVA" ColumnName="IVA" />
                 <ScalarProperty Name="NETO" ColumnName="NETO" />
@@ -3563,10 +3515,75 @@
                 <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
                 <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
                 <ScalarProperty Name="FECHA_FACTURACION" ColumnName="FECHA_FACTURACION" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_TIPO_FACTURA" ColumnName="ID_TIPO_FACTURA" />
                 <ScalarProperty Name="ID_FACTURACION" ColumnName="ID_FACTURACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="LQCEModelo.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="PAGADA" ColumnName="PAGADA" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="NETO" ColumnName="NETO" />
+                <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
+                <ScalarProperty Name="GIRO" ColumnName="GIRO" />
+                <ScalarProperty Name="FONO" ColumnName="FONO" />
+                <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="RUT_LABORATORIO" ColumnName="RUT_LABORATORIO" />
+                <ScalarProperty Name="NUMERO_FACTURA" ColumnName="NUMERO_FACTURA" />
+                <ScalarProperty Name="NOMBRE_COMUNA" ColumnName="NOMBRE_COMUNA" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="RUT_CLIENTE" ColumnName="RUT_CLIENTE" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="CORRELATIVO" ColumnName="CORRELATIVO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_CLIENTE" TypeName="LQCEModelo.FK_FACTURA_CLIENTE" StoreEntitySet="FACTURA">
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="CLIENTE">
+              <ScalarProperty Name="ID" ColumnName="ID_CLIENTE" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_DETALLE_FACTURA" TypeName="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" StoreEntitySet="FACTURA_DETALLE">
+            <EndProperty Name="FACTURA_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID_FACTURA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_FACTURACION" TypeName="LQCEModelo.FK_FACTURA_FACTURACION" StoreEntitySet="FACTURA">
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="FACTURACION">
+              <ScalarProperty Name="ID" ColumnName="ID_FACTURACION" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_FACTURA_TIPO_FACTURA" TypeName="LQCEModelo.FK_FACTURA_TIPO_FACTURA" StoreEntitySet="FACTURA">
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="TIPO_FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID_TIPO_FACTURA" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_NOTA_COBRO_DETALLE_FACTURA" TypeName="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" StoreEntitySet="NOTA_COBRO_DETALLE">
+            <EndProperty Name="NOTA_COBRO_DETALLE">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+            <EndProperty Name="FACTURA">
+              <ScalarProperty Name="ID" ColumnName="ID_FACTURA" />
+            </EndProperty>
+          </AssociationSetMapping>
           <EntitySetMapping Name="NOTA_CREDITO">
             <EntityTypeMapping TypeName="LQCEModelo.NOTA_CREDITO">
               <MappingFragment StoreEntitySet="NOTA_CREDITO">
@@ -3586,7 +3603,7 @@
               <ScalarProperty Name="ID" ColumnName="ID_FACTURA" />
             </EndProperty>
           </AssociationSetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -3618,7 +3635,6 @@
         <EntityTypeShape EntityType="LQCEModelo.EXAMEN" Width="1.5" PointX="3" PointY="34.625" Height="3.326396484374996" />
         <EntityTypeShape EntityType="LQCEModelo.EXAMEN_DETALLE" Width="1.5" PointX="5.25" PointY="34.125" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LQCEModelo.EXAMEN_SINONIMO" Width="1.5" PointX="5.25" PointY="36.625" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="LQCEModelo.FACTURA" Width="1.5" PointX="7.5" PointY="21.625" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="LQCEModelo.FACTURA_DETALLE" Width="1.5" PointX="9.75" PointY="20.25" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="LQCEModelo.FACTURACION" Width="1.5" PointX="5.25" PointY="22.25" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LQCEModelo.GARANTIA" Width="1.5" PointX="5.25" PointY="14.25" Height="2.1725878906250031" />
@@ -3636,42 +3652,30 @@
         <EntityTypeShape EntityType="LQCEModelo.TIPO_PRESTACION" Width="1.5" PointX="0.75" PointY="24.75" Height="2.5571907552083317" />
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_COMUNA" >
           <ConnectorPoint PointX="4.5" PointY="29.115143229166666" />
-          <ConnectorPoint PointX="4.854166666666667" PointY="29.115143229166666" />
-          <ConnectorPoint PointX="5.020833333333333" PointY="29.115143229166666" />
           <ConnectorPoint PointX="5.25" PointY="29.115143229166666" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_CONVENIO" >
           <ConnectorPoint PointX="4.5" PointY="31.251152846153843" />
-          <ConnectorPoint PointX="4.8785744349011209" PointY="30.872578411252722" />
-          <ConnectorPoint PointX="4.9964255650988791" PointY="30.754727281054965" />
-          <ConnectorPoint PointX="5.125" PointY="30.626152846153843" />
-          <ConnectorPoint PointX="5.125" PointY="31.048659356570511" />
+          <ConnectorPoint PointX="4.875" PointY="30.876152846153843" />
+          <ConnectorPoint PointX="4.875" PointY="31.298659356570511" />
           <ConnectorPoint PointX="5.2511528461538459" PointY="30.922506510416667" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" >
           <ConnectorPoint PointX="6.75" PointY="30.922506510416667" />
-          <ConnectorPoint PointX="7.25" PointY="31.422506510416667" />
-          <ConnectorPoint PointX="7.25" PointY="50.393992513020834" />
+          <ConnectorPoint PointX="7.1875" PointY="31.360006510416667" />
+          <ConnectorPoint PointX="7.1875" PointY="50.393992513020834" />
           <ConnectorPoint PointX="7.5" PointY="50.393992513020834" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" >
-          <ConnectorPoint PointX="1.5" PointY="27.307190755208335" />
-          <ConnectorPoint PointX="1.5" PointY="27.875" />
-          <ConnectorPoint PointX="2.5416666666666665" PointY="27.875" />
-          <ConnectorPoint PointX="2.7708333333333335" PointY="27.875" />
-          <ConnectorPoint PointX="4.75" PointY="27.875" />
-          <ConnectorPoint PointX="4.75" PointY="27.651319614583333" />
-          <ConnectorPoint PointX="4.854166666666667" PointY="27.651319614583333" />
-          <ConnectorPoint PointX="5.020833333333333" PointY="27.651319614583333" />
+          <ConnectorPoint PointX="1.5" PointY="24.75" />
+          <ConnectorPoint PointX="1.5" PointY="24.5" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="24.5" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="24.5" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="24.5" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="24.5" />
+          <ConnectorPoint PointX="4.875" PointY="24.5" />
+          <ConnectorPoint PointX="4.875" PointY="27.651319614583333" />
           <ConnectorPoint PointX="5.25" PointY="27.651319614583333" />
-        </AssociationConnector>
-        <AssociationConnector Association="LQCEModelo.FK_FACTURA_CLIENTE" >
-          <ConnectorPoint PointX="6.75" PointY="26.658356119791669" />
-          <ConnectorPoint PointX="6.916666666666667" PointY="26.658356119791669" />
-          <ConnectorPoint PointX="7.083333333333333" PointY="26.658356119791669" />
-          <ConnectorPoint PointX="7.166666666666667" PointY="26.658356119791669" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="26.658356119791669" />
-          <ConnectorPoint PointX="7.5" PointY="26.658356119791669" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PAGO_CLIENTE" >
           <ConnectorPoint PointX="6.7130769230769225" PointY="30.922506510416667" />
@@ -3681,8 +3685,6 @@
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_COBRO_TIPO_COBRO" >
           <ConnectorPoint PointX="7.5" PointY="18.177643229166669" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="18.177643229166669" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="18.177643229166669" />
           <ConnectorPoint PointX="8.25" PointY="18.177643229166669" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_COMUNA_REGION" >
@@ -3704,7 +3706,7 @@
         <AssociationConnector Association="LQCEModelo.FK_CONVENIO_EXAMEN_CONVENIO_TARIFARIO" >
           <ConnectorPoint PointX="6.75" PointY="32.240143229166669" />
           <ConnectorPoint PointX="7.041666666666667" PointY="32.240143229166669" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="32.240143229166669" />
+          <ConnectorPoint PointX="7.364583333333333" PointY="32.240143229166669" />
           <ConnectorPoint PointX="8.25" PointY="32.240143229166669" />
           <ConnectorPoint PointX="8.25" PointY="33.625" />
         </AssociationConnector>
@@ -3713,7 +3715,7 @@
           <ConnectorPoint PointX="4.916666666666667" PointY="35.506316030649039" />
           <ConnectorPoint PointX="5.083333333333333" PointY="35.506316030649039" />
           <ConnectorPoint PointX="7.041666666666667" PointY="35.506316030649039" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="35.506316030649039" />
+          <ConnectorPoint PointX="7.364583333333333" PointY="35.506316030649039" />
           <ConnectorPoint PointX="7.84375" PointY="35.506316030649039" />
           <ConnectorPoint PointX="7.84375" PointY="35.605286458333339" />
         </AssociationConnector>
@@ -3722,8 +3724,8 @@
           <ConnectorPoint PointX="14.308593125" PointY="34.980286458333339" />
           <ConnectorPoint PointX="14.426431354166665" PointY="34.980286458333339" />
           <ConnectorPoint PointX="14.739582833333335" PointY="34.980286458333339" />
-          <ConnectorPoint PointX="14.958333333333332" PointY="34.980286458333339" />
-          <ConnectorPoint PointX="15.21875" PointY="34.980286458333339" />
+          <ConnectorPoint PointX="14.968749999999998" PointY="34.980286458333339" />
+          <ConnectorPoint PointX="15.218750000000002" PointY="34.980286458333339" />
           <ConnectorPoint PointX="15.25" PointY="34.980286458333339" />
           <ConnectorPoint PointX="15.25" PointY="27.403595377604169" />
           <ConnectorPoint PointX="15.75" PointY="27.403595377604169" />
@@ -3737,8 +3739,8 @@
           <ConnectorPoint PointX="14.391926458333334" PointY="35.105286458333339" />
           <ConnectorPoint PointX="14.426431354166665" PointY="35.105286458333339" />
           <ConnectorPoint PointX="14.739582833333335" PointY="35.105286458333339" />
-          <ConnectorPoint PointX="14.958333333333332" PointY="35.105286458333339" />
-          <ConnectorPoint PointX="15.21875" PointY="35.105286458333339" />
+          <ConnectorPoint PointX="14.968749999999998" PointY="35.105286458333339" />
+          <ConnectorPoint PointX="15.218750000000002" PointY="35.105286458333339" />
           <ConnectorPoint PointX="15.28125" PointY="35.105286458333339" />
           <ConnectorPoint PointX="15.28125" PointY="17.602294899902347" />
           <ConnectorPoint PointX="15" PointY="17.602294899902347" />
@@ -3770,7 +3772,7 @@
           <ConnectorPoint PointX="4.916666666666667" PointY="36.028486269630591" />
           <ConnectorPoint PointX="5.083333333333333" PointY="36.028486269630591" />
           <ConnectorPoint PointX="7.041666666666667" PointY="36.028486269630591" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="36.028486269630591" />
+          <ConnectorPoint PointX="7.364583333333333" PointY="36.028486269630591" />
           <ConnectorPoint PointX="7.916666666666667" PointY="36.028486269630591" />
           <ConnectorPoint PointX="8.0833333333333339" PointY="36.028486269630591" />
           <ConnectorPoint PointX="9.3229166666666661" PointY="36.028486269630591" />
@@ -3784,32 +3786,13 @@
           <ConnectorPoint PointX="13.97656275" PointY="36.028486269630591" />
           <ConnectorPoint PointX="13.97656275" PointY="34.730286458333339" />
         </AssociationConnector>
-        <AssociationConnector Association="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" >
-          <ConnectorPoint PointX="9" PointY="22.119944661458334" />
-          <ConnectorPoint PointX="9.75" PointY="22.119944661458334" />
-        </AssociationConnector>
-        <AssociationConnector Association="LQCEModelo.FK_FACTURA_FACTURACION" >
-          <ConnectorPoint PointX="6.75" PointY="23.143992513020834" />
-          <ConnectorPoint PointX="6.916666666666667" PointY="23.143992513020834" />
-          <ConnectorPoint PointX="7.083333333333333" PointY="23.143992513020834" />
-          <ConnectorPoint PointX="7.5" PointY="23.143992513020834" />
-        </AssociationConnector>
-        <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" >
-          <ConnectorPoint PointX="9" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="11.666666666666666" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="11.833333333333334" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="12.260416666666666" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="12.427083333333334" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="13.09375" PointY="23.213694661458334" />
-          <ConnectorPoint PointX="13.09375" PointY="22.105286458333332" />
-        </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PAGO_DETALLE_FACTURA_DETALLE" >
-          <ConnectorPoint PointX="11.25" PointY="22.391337890625" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="22.391337890625" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="22.391337890625" />
-          <ConnectorPoint PointX="12.34375" PointY="22.391337890625" />
+          <ConnectorPoint PointX="11.25" PointY="22.391337890625003" />
+          <ConnectorPoint PointX="11.424479166666666" PointY="22.391337890625003" />
+          <ConnectorPoint PointX="11.591145833333334" PointY="22.391337890625003" />
+          <ConnectorPoint PointX="11.791666666666666" PointY="22.391337890625003" />
+          <ConnectorPoint PointX="11.958333333333334" PointY="22.391337890625003" />
+          <ConnectorPoint PointX="12.34375" PointY="22.391337890625003" />
           <ConnectorPoint PointX="12.34375" PointY="36.25" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PAGO_DETALLE_PAGO" >
@@ -3819,7 +3802,7 @@
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_RAZA" >
           <ConnectorPoint PointX="15" PointY="18.356193895263669" />
-          <ConnectorPoint PointX="15.135416666666666" PointY="18.356193895263669" />
+          <ConnectorPoint PointX="15.197916666666666" PointY="18.356193895263669" />
           <ConnectorPoint PointX="15.364583333333334" PointY="18.356193895263669" />
           <ConnectorPoint PointX="17.15625" PointY="18.356193895263669" />
           <ConnectorPoint PointX="17.15625" PointY="26.125" />
@@ -3830,38 +3813,27 @@
         <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Width="1.5" PointX="13.5" PointY="23.625" Height="7.364726562499996" />
         <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN" Width="1.5" PointX="18.75" PointY="29.5" Height="2.5571907552083388" />
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" >
-          <ConnectorPoint PointX="4.156252" PointY="24.75" />
-          <ConnectorPoint PointX="4.156252" PointY="24.484375" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="24.484375" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="24.484375" />
-          <ConnectorPoint PointX="6.1433760224358975" PointY="24.484375" />
-          <ConnectorPoint PointX="6.3100426891025636" PointY="24.484375" />
-          <ConnectorPoint PointX="7.25" PointY="24.484375" />
-          <ConnectorPoint PointX="7.25" PointY="28.256299456050762" />
-          <ConnectorPoint PointX="9.125" PointY="28.256299456050762" />
+          <ConnectorPoint PointX="4.5" PointY="24.96875025" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="24.96875025" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="24.96875025" />
+          <ConnectorPoint PointX="8.7916666666666661" PointY="24.96875025" />
+          <ConnectorPoint PointX="8.9583333333333339" PointY="24.96875025" />
+          <ConnectorPoint PointX="9.125" PointY="24.96875025" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_ENCABEZADO" >
-          <ConnectorPoint PointX="4.5" PointY="25.228371209635419" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="25.228371209635419" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="25.228371209635419" />
-          <ConnectorPoint PointX="6.1433760224358975" PointY="25.228371209635419" />
-          <ConnectorPoint PointX="6.3100426891025636" PointY="25.228371209635419" />
-          <ConnectorPoint PointX="7" PointY="25.228371209635419" />
-          <ConnectorPoint PointX="7" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="9.3229166666666661" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="9.4895833333333339" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="10.151038916666666" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="10.317705583333334" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="11.666666666666666" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="11.833333333333334" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="12.260416666666666" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="12.427083333333334" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="13.166666666666666" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="13.333333333333334" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="14.25" PointY="31.239726562499996" />
-          <ConnectorPoint PointX="14.25" PointY="30.989726562499996" />
+          <ConnectorPoint PointX="4.1562525" PointY="24.75" />
+          <ConnectorPoint PointX="4.1562525" PointY="23.985341796875" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="23.985341796875" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="23.985341796875" />
+          <ConnectorPoint PointX="8.7916666666666661" PointY="23.985341796875" />
+          <ConnectorPoint PointX="8.9583333333333339" PointY="23.985341796875" />
+          <ConnectorPoint PointX="10.229166666666666" PointY="23.985341796875" />
+          <ConnectorPoint PointX="10.395833333333334" PointY="23.985341796875" />
+          <ConnectorPoint PointX="11.666666666666666" PointY="23.985341796875" />
+          <ConnectorPoint PointX="11.958333333333334" PointY="23.985341796875" />
+          <ConnectorPoint PointX="12.260416666666666" PointY="23.985341796875" />
+          <ConnectorPoint PointX="12.427083333333334" PointY="23.985341796875" />
+          <ConnectorPoint PointX="13.5" PointY="23.985341796875" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_EXAMEN_CARGA_PRESTACIONES_HUMANAS_DETALLE" >
           <ConnectorPoint PointX="10.23437225" PointY="30.720520833333332" />
@@ -3911,26 +3883,30 @@
           <ConnectorPoint PointX="14.391926458333334" PointY="38.324036458333339" />
           <ConnectorPoint PointX="14.426431354166665" PointY="38.324036458333339" />
           <ConnectorPoint PointX="14.593098020833333" PointY="38.324036458333339" />
-          <ConnectorPoint PointX="14.71093625" PointY="38.324036458333339" />
-          <ConnectorPoint PointX="14.71093625" PointY="30.989726562499996" />
+          <ConnectorPoint PointX="14.656249500000001" PointY="38.324036458333339" />
+          <ConnectorPoint PointX="14.656249500000001" PointY="30.989726562499996" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CLIENTE" >
-          <ConnectorPoint PointX="6.75" PointY="29.638193104809844" />
-          <ConnectorPoint PointX="9.125" PointY="29.638193104809844" />
+          <ConnectorPoint PointX="6.75" PointY="27.850244173527646" />
+          <ConnectorPoint PointX="8.7916666666666661" PointY="27.850244173527646" />
+          <ConnectorPoint PointX="8.9583333333333339" PointY="27.850244173527646" />
+          <ConnectorPoint PointX="9.125" PointY="27.850244173527646" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_GARANTIA" >
-          <ConnectorPoint PointX="6.75" PointY="15.953837890625" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="15.953837890625" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="15.953837890625" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="15.953837890625" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="15.953837890625" />
-          <ConnectorPoint PointX="11.40625" PointY="15.953837890625" />
-          <ConnectorPoint PointX="11.40625" PointY="24.125" />
+          <ConnectorPoint PointX="6.75" PointY="15.336293945312502" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="15.336293945312502" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="15.336293945312502" />
+          <ConnectorPoint PointX="10.3125" PointY="15.336293945312502" />
+          <ConnectorPoint PointX="10.3125" PointY="20.125" />
+          <ConnectorPoint PointX="9.5" PointY="20.125" />
+          <ConnectorPoint PointX="9.5" PointY="23.75" />
+          <ConnectorPoint PointX="10.3125" PointY="23.75" />
+          <ConnectorPoint PointX="10.3125" PointY="24.125" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION" >
           <ConnectorPoint PointX="6.75" PointY="44.336293945312505" />
           <ConnectorPoint PointX="7.041666666666667" PointY="44.336293945312505" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="44.336293945312505" />
+          <ConnectorPoint PointX="7.270833333333333" PointY="44.336293945312505" />
           <ConnectorPoint PointX="11.40625" PointY="44.336293945312505" />
           <ConnectorPoint PointX="11.40625" PointY="30.720520833333332" />
         </AssociationConnector>
@@ -3952,14 +3928,12 @@
           <ConnectorPoint PointX="14.391926458333334" PointY="36" />
           <ConnectorPoint PointX="14.426431354166665" PointY="36" />
           <ConnectorPoint PointX="14.739582833333335" PointY="36" />
-          <ConnectorPoint PointX="15.041666666666666" PointY="36" />
-          <ConnectorPoint PointX="15.041666666666666" PointY="33.625" />
+          <ConnectorPoint PointX="15.052083333333332" PointY="36" />
+          <ConnectorPoint PointX="15.052083333333332" PointY="33.625" />
           <ConnectorPoint PointX="15.052083333333332" PointY="33.625" />
           <ConnectorPoint PointX="15.458333333333332" PointY="33.625" />
-          <ConnectorPoint PointX="15.640425713813066" PointY="33.625" />
-          <ConnectorPoint PointX="15.807092380479734" PointY="33.625" />
           <ConnectorPoint PointX="15.947919166666667" PointY="33.625" />
-          <ConnectorPoint PointX="16.114585833333333" PointY="33.625" />
+          <ConnectorPoint PointX="16.138395110008272" PointY="33.625" />
           <ConnectorPoint PointX="16.5" PointY="33.625" />
           <ConnectorPoint PointX="16.5" PointY="32.307190755208339" />
         </AssociationConnector>
@@ -3982,37 +3956,43 @@
           <ConnectorPoint PointX="14.509764687499999" PointY="30.989726562499996" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA" >
-          <ConnectorPoint PointX="6.75" PointY="15.0706669453125" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="15.0706669453125" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="15.0706669453125" />
-          <ConnectorPoint PointX="9.5" PointY="15.0706669453125" />
-          <ConnectorPoint PointX="9.5" PointY="16.625" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="16.625" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="16.625" />
-          <ConnectorPoint PointX="13.25" PointY="16.625" />
-          <ConnectorPoint PointX="13.25" PointY="19.625" />
+          <ConnectorPoint PointX="6.75" PointY="15.910692917968753" />
+          <ConnectorPoint PointX="10" PointY="15.910692917968753" />
+          <ConnectorPoint PointX="10" PointY="19.625" />
+          <ConnectorPoint PointX="10.041666666666666" PointY="19.625" />
+          <ConnectorPoint PointX="10.208333333333334" PointY="19.625" />
+          <ConnectorPoint PointX="10.229166666666666" PointY="19.625" />
+          <ConnectorPoint PointX="10.395833333333334" PointY="19.625" />
+          <ConnectorPoint PointX="10.791666666666666" PointY="19.625" />
+          <ConnectorPoint PointX="10.958333333333334" PointY="19.625" />
+          <ConnectorPoint PointX="11.424479166666666" PointY="19.625" />
+          <ConnectorPoint PointX="11.591145833333334" PointY="19.625" />
+          <ConnectorPoint PointX="11.608072916666666" PointY="19.625" />
+          <ConnectorPoint PointX="11.774739583333334" PointY="19.625" />
+          <ConnectorPoint PointX="11.791666666666666" PointY="19.625" />
+          <ConnectorPoint PointX="11.958333333333334" PointY="19.625" />
           <ConnectorPoint PointX="14.5" PointY="19.625" />
           <ConnectorPoint PointX="14.5" PointY="23.25" />
-          <ConnectorPoint PointX="14.25" PointY="23.25" />
-          <ConnectorPoint PointX="14.25" PointY="23.625" />
+          <ConnectorPoint PointX="14.124998" PointY="23.25" />
+          <ConnectorPoint PointX="14.124998" PointY="23.625" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_PREVISION" >
-          <ConnectorPoint PointX="6.75" PointY="43.312306692307693" />
-          <ConnectorPoint PointX="7.0660744349011209" PointY="42.996232257406575" />
-          <ConnectorPoint PointX="7.1839255650988791" PointY="42.878381127208812" />
-          <ConnectorPoint PointX="7.1875" PointY="42.874806692307693" />
-          <ConnectorPoint PointX="7.1875" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="9.3229166666666661" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="9.4895833333333339" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="10.151038916666666" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="10.317705583333334" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="11.666666666666666" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="11.833333333333334" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="12.260416666666666" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="12.427083333333334" PointY="31.364726562499996" />
-          <ConnectorPoint PointX="13.125" PointY="31.364726562499996" />
+          <ConnectorPoint PointX="6.75" PointY="43.281152846153852" />
+          <ConnectorPoint PointX="7.06607443490112" PointY="42.965078411252733" />
+          <ConnectorPoint PointX="7.2464255650988791" PointY="42.78472728105497" />
+          <ConnectorPoint PointX="7.28125" PointY="42.749902846153852" />
+          <ConnectorPoint PointX="7.28125" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="10.151038916666666" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="10.317705583333334" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="11.322916666666666" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="11.489583333333334" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="11.666666666666666" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="11.833333333333334" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="12.260416666666666" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="12.427083333333334" PointY="31.489726562499996" />
+          <ConnectorPoint PointX="13" PointY="31.489726562499996" />
           <ConnectorPoint PointX="13.5" PointY="30.989726562499996" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA" >
@@ -4042,7 +4022,9 @@
           <ConnectorPoint PointX="15.135416666666666" PointY="35.9375" />
           <ConnectorPoint PointX="15.135416666666666" PointY="33.375" />
           <ConnectorPoint PointX="15.135416666666666" PointY="33.375" />
-          <ConnectorPoint PointX="15.498928350703059" PointY="33.375" />
+          <ConnectorPoint PointX="15.458333333333334" PointY="33.375" />
+          <ConnectorPoint PointX="15.548328681555004" PointY="33.375" />
+          <ConnectorPoint PointX="15.714995348221672" PointY="33.375" />
           <ConnectorPoint PointX="16.416666666666668" PointY="33.375" />
           <ConnectorPoint PointX="16.583333333333332" PointY="33.375" />
           <ConnectorPoint PointX="19.5" PointY="33.375" />
@@ -4057,69 +4039,63 @@
           <ConnectorPoint PointX="3.125" PointY="14" />
           <ConnectorPoint PointX="5" PointY="14" />
           <ConnectorPoint PointX="5" PointY="25.875" />
-          <ConnectorPoint PointX="5.6409147115384615" PointY="25.875" />
-          <ConnectorPoint PointX="5.6409147115384615" PointY="26.25" />
-        </AssociationConnector>
-        <AssociationConnector Association="LQCEModelo.FK_FACTURA_TIPO_FACTURA" >
-          <ConnectorPoint PointX="2.25" PointY="7.7494921875" />
-          <ConnectorPoint PointX="2.625" PointY="8.1244921875" />
-          <ConnectorPoint PointX="2.625" PointY="21.9062505" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="21.9062505" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="21.9062505" />
-          <ConnectorPoint PointX="6.916666666666667" PointY="21.9062505" />
-          <ConnectorPoint PointX="7.083333333333333" PointY="21.9062505" />
-          <ConnectorPoint PointX="7.5" PointY="21.9062505" />
+          <ConnectorPoint PointX="6" PointY="25.875" />
+          <ConnectorPoint PointX="6" PointY="26.25" />
         </AssociationConnector>
         <EntityTypeShape EntityType="LQCEModelo.NOTA_COBRO" Width="1.5" PointX="15.5" PointY="19.875" Height="2.1725878906250102" />
         <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_CLIENTE" >
-          <ConnectorPoint PointX="6.2267093557692306" PointY="26.25" />
-          <ConnectorPoint PointX="6.2267093557692306" PointY="24.287985026041667" />
-          <ConnectorPoint PointX="7" PointY="24.287985026041667" />
-          <ConnectorPoint PointX="7" PointY="19.75" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="19.75" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="19.75" />
-          <ConnectorPoint PointX="9.2916666666666661" PointY="19.75" />
-          <ConnectorPoint PointX="9.4583333333333339" PointY="19.75" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="19.75" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="19.75" />
-          <ConnectorPoint PointX="14.416666666666666" PointY="19.75" />
-          <ConnectorPoint PointX="14.583333333333334" PointY="19.75" />
-          <ConnectorPoint PointX="14.729166666666666" PointY="19.75" />
-          <ConnectorPoint PointX="14.895833333333334" PointY="19.75" />
-          <ConnectorPoint PointX="15.125" PointY="19.75" />
-          <ConnectorPoint PointX="15.125" PointY="20.961293945312505" />
-          <ConnectorPoint PointX="15.135416666666666" PointY="20.961293945312505" />
-          <ConnectorPoint PointX="15.364583333333334" PointY="20.961293945312505" />
-          <ConnectorPoint PointX="15.5" PointY="20.961293945312505" />
+          <ConnectorPoint PointX="6.75" PointY="29.364402688126" />
+          <ConnectorPoint PointX="8.875" PointY="29.364402688126" />
+          <ConnectorPoint PointX="8.875" PointY="23.375" />
+          <ConnectorPoint PointX="9.4166666666666661" PointY="23.375" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="23.375" />
+          <ConnectorPoint PointX="11.666666666666666" PointY="23.375" />
+          <ConnectorPoint PointX="11.958333333333334" PointY="23.375" />
+          <ConnectorPoint PointX="12.260416666666666" PointY="23.375" />
+          <ConnectorPoint PointX="12.427083333333334" PointY="23.375" />
+          <ConnectorPoint PointX="14.041664666666666" PointY="23.375" />
+          <ConnectorPoint PointX="14.208331333333334" PointY="23.375" />
+          <ConnectorPoint PointX="14.729166666666666" PointY="23.375" />
+          <ConnectorPoint PointX="14.895833333333334" PointY="23.375" />
+          <ConnectorPoint PointX="15.135416666666666" PointY="23.375" />
+          <ConnectorPoint PointX="15.364583333333334" PointY="23.375" />
+          <ConnectorPoint PointX="16.25" PointY="23.375" />
+          <ConnectorPoint PointX="16.25" PointY="22.04758789062501" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_COBRO" >
-          <ConnectorPoint PointX="9.375" PointY="19.105286458333339" />
-          <ConnectorPoint PointX="9.375" PointY="19.9687505" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="19.9687505" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="19.9687505" />
-          <ConnectorPoint PointX="14.416666666666666" PointY="19.9687505" />
-          <ConnectorPoint PointX="14.583333333333334" PointY="19.9687505" />
-          <ConnectorPoint PointX="14.729166666666666" PointY="19.9687505" />
-          <ConnectorPoint PointX="14.895833333333334" PointY="19.9687505" />
-          <ConnectorPoint PointX="15.041666666666666" PointY="19.9687505" />
-          <ConnectorPoint PointX="15.364583333333334" PointY="19.9687505" />
-          <ConnectorPoint PointX="15.5" PointY="19.9687505" />
+          <ConnectorPoint PointX="8.96875" PointY="19.105286458333339" />
+          <ConnectorPoint PointX="8.96875" PointY="19.96875" />
+          <ConnectorPoint PointX="10.229166666666666" PointY="19.96875" />
+          <ConnectorPoint PointX="10.395833333333334" PointY="19.96875" />
+          <ConnectorPoint PointX="10.791666666666666" PointY="19.96875" />
+          <ConnectorPoint PointX="10.958333333333334" PointY="19.96875" />
+          <ConnectorPoint PointX="11.424479166666666" PointY="19.96875" />
+          <ConnectorPoint PointX="11.591145833333334" PointY="19.96875" />
+          <ConnectorPoint PointX="11.608072916666666" PointY="19.96875" />
+          <ConnectorPoint PointX="11.774739583333334" PointY="19.96875" />
+          <ConnectorPoint PointX="11.791666666666666" PointY="19.96875" />
+          <ConnectorPoint PointX="11.958333333333334" PointY="19.96875" />
+          <ConnectorPoint PointX="14.416666666666666" PointY="19.96875" />
+          <ConnectorPoint PointX="14.583333333333334" PointY="19.96875" />
+          <ConnectorPoint PointX="14.729166666666666" PointY="19.96875" />
+          <ConnectorPoint PointX="14.895833333333334" PointY="19.96875" />
+          <ConnectorPoint PointX="15.135416666666666" PointY="19.96875" />
+          <ConnectorPoint PointX="15.364583333333334" PointY="19.96875" />
+          <ConnectorPoint PointX="15.5" PointY="19.96875" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_NOTA_COBRO" >
-          <ConnectorPoint PointX="15.5" PointY="21.566940917968758" />
-          <ConnectorPoint PointX="15.364583333333334" PointY="21.566940917968758" />
-          <ConnectorPoint PointX="15.135416666666666" PointY="21.566940917968758" />
-          <ConnectorPoint PointX="14.895833333333334" PointY="21.566940917968758" />
-          <ConnectorPoint PointX="14.729166666666666" PointY="21.566940917968758" />
-          <ConnectorPoint PointX="14.583333333333334" PointY="21.566940917968758" />
-          <ConnectorPoint PointX="14.416666666666666" PointY="21.566940917968758" />
-          <ConnectorPoint PointX="14.25" PointY="21.566940917968758" />
+          <ConnectorPoint PointX="15.5" PointY="21.086293945312505" />
+          <ConnectorPoint PointX="15.364583333333334" PointY="21.086293945312505" />
+          <ConnectorPoint PointX="15.135416666666666" PointY="21.086293945312505" />
+          <ConnectorPoint PointX="14.895833333333334" PointY="21.086293945312505" />
+          <ConnectorPoint PointX="14.729166666666666" PointY="21.086293945312505" />
+          <ConnectorPoint PointX="14.583333333333334" PointY="21.086293945312505" />
+          <ConnectorPoint PointX="14.416666666666666" PointY="21.086293945312505" />
+          <ConnectorPoint PointX="14.25" PointY="21.086293945312505" />
         </AssociationConnector>
         <EntityTypeShape EntityType="LQCEModelo.PRESTACION" Width="1.5" PointX="15.5" PointY="33.875" Height="3.9033007812500102" />
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_CLIENTE" >
           <ConnectorPoint PointX="6.75" PointY="30.885582433493589" />
-          <ConnectorPoint PointX="6.9410744349011217" PointY="31.076656868394711" />
-          <ConnectorPoint PointX="7.0589255650988791" PointY="31.194507998592467" />
           <ConnectorPoint PointX="7.1619240769230785" PointY="31.297506510416667" />
           <ConnectorPoint PointX="9.3229166666666661" PointY="31.297506510416667" />
           <ConnectorPoint PointX="9.4895833333333339" PointY="31.297506510416667" />
@@ -4142,50 +4118,58 @@
           <ConnectorPoint PointX="15.5" PointY="33.875" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_FACTURA_DETALLE_PRESTACION" >
-          <ConnectorPoint PointX="15.5" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="15.21875" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="14.958333333333332" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="14.739582833333335" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="14.426431354166665" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="14.391926458333334" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="14.225259791666666" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="14.059896083333333" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="13.893229416666665" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="13.786458833333333" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="13.619792166666665" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="12.427083333333334" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="12.260416666666666" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="11.75" PointY="35.521393229166669" />
-          <ConnectorPoint PointX="11.75" PointY="22.864889322916667" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="22.864889322916667" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="22.864889322916667" />
-          <ConnectorPoint PointX="10.5" PointY="22.864889322916667" />
+          <ConnectorPoint PointX="15.5" PointY="35.711358671875" />
+          <ConnectorPoint PointX="15.21875" PointY="35.711358671875" />
+          <ConnectorPoint PointX="14.96875" PointY="35.711358671875" />
+          <ConnectorPoint PointX="14.739582833333335" PointY="35.711358671875" />
+          <ConnectorPoint PointX="14.426431354166665" PointY="35.711358671875" />
+          <ConnectorPoint PointX="14.391926458333334" PointY="35.711358671875" />
+          <ConnectorPoint PointX="14.225259791666666" PointY="35.711358671875" />
+          <ConnectorPoint PointX="14.059896083333333" PointY="35.711358671875" />
+          <ConnectorPoint PointX="13.893229416666665" PointY="35.711358671875" />
+          <ConnectorPoint PointX="13.786458833333333" PointY="35.711358671875" />
+          <ConnectorPoint PointX="13.619792166666665" PointY="35.711358671875" />
+          <ConnectorPoint PointX="12.427083333333334" PointY="35.711358671875" />
+          <ConnectorPoint PointX="12.260416666666666" PointY="35.711358671875" />
+          <ConnectorPoint PointX="11.75" PointY="35.711358671875" />
+          <ConnectorPoint PointX="11.75" PointY="22.989889322916667" />
+          <ConnectorPoint PointX="11.591145833333334" PointY="22.989889322916667" />
+          <ConnectorPoint PointX="11.424479166666666" PointY="22.989889322916667" />
+          <ConnectorPoint PointX="10.5" PointY="22.989889322916667" />
           <ConnectorPoint PointX="10.5" PointY="22.614889322916667" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_GARANTIA" >
-          <ConnectorPoint PointX="6.75" PointY="15.51225241796875" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="15.51225241796875" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="15.51225241796875" />
-          <ConnectorPoint PointX="9.25" PointY="15.51225241796875" />
-          <ConnectorPoint PointX="9.25" PointY="15.672587890624996" />
-          <ConnectorPoint PointX="9.4166666666666661" PointY="15.672587890624996" />
-          <ConnectorPoint PointX="9.5833333333333339" PointY="15.672587890624996" />
-          <ConnectorPoint PointX="15.21875" PointY="15.672587890624996" />
+          <ConnectorPoint PointX="6.75" PointY="14.761894972656251" />
+          <ConnectorPoint PointX="10.125" PointY="14.761894972656251" />
+          <ConnectorPoint PointX="10.125" PointY="19.75" />
+          <ConnectorPoint PointX="10.229166666666666" PointY="19.75" />
+          <ConnectorPoint PointX="10.395833333333334" PointY="19.75" />
+          <ConnectorPoint PointX="10.791666666666666" PointY="19.75" />
+          <ConnectorPoint PointX="10.958333333333334" PointY="19.75" />
+          <ConnectorPoint PointX="11.424479166666666" PointY="19.75" />
+          <ConnectorPoint PointX="11.591145833333334" PointY="19.75" />
+          <ConnectorPoint PointX="11.608072916666666" PointY="19.75" />
+          <ConnectorPoint PointX="11.774739583333334" PointY="19.75" />
+          <ConnectorPoint PointX="11.791666666666666" PointY="19.75" />
+          <ConnectorPoint PointX="11.958333333333334" PointY="19.75" />
+          <ConnectorPoint PointX="14.416666666666666" PointY="19.75" />
+          <ConnectorPoint PointX="14.583333333333334" PointY="19.75" />
+          <ConnectorPoint PointX="14.729166666666666" PointY="19.75" />
+          <ConnectorPoint PointX="14.895833333333334" PointY="19.75" />
+          <ConnectorPoint PointX="15.21875" PointY="19.75" />
           <ConnectorPoint PointX="15.21875" PointY="33.5" />
           <ConnectorPoint PointX="15.291666666666666" PointY="33.5" />
           <ConnectorPoint PointX="15.458333333333334" PointY="33.5" />
-          <ConnectorPoint PointX="15.486343698924728" PointY="33.5" />
-          <ConnectorPoint PointX="15.653010365591396" PointY="33.5" />
+          <ConnectorPoint PointX="15.760028562448305" PointY="33.5" />
+          <ConnectorPoint PointX="15.926695229114973" PointY="33.5" />
           <ConnectorPoint PointX="16.0312525" PointY="33.5" />
           <ConnectorPoint PointX="16.0312525" PointY="33.875" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_EXAMEN_PRESTACION" >
           <ConnectorPoint PointX="15.5" PointY="34.333895729166663" />
           <ConnectorPoint PointX="15.364583333333334" PointY="34.333895729166663" />
-          <ConnectorPoint PointX="14.916666666666666" PointY="34.333895729166663" />
-          <ConnectorPoint PointX="14.794269583333334" PointY="34.333895729166663" />
-          <ConnectorPoint PointX="14.627602916666666" PointY="34.333895729166663" />
-          <ConnectorPoint PointX="14.593098020833333" PointY="34.333895729166663" />
+          <ConnectorPoint PointX="14.968749999999998" PointY="34.333895729166663" />
+          <ConnectorPoint PointX="14.739582833333335" PointY="34.333895729166663" />
           <ConnectorPoint PointX="14.426431354166665" PointY="34.333895729166663" />
           <ConnectorPoint PointX="14.25" PointY="34.333895729166663" />
         </AssociationConnector>
@@ -4198,44 +4182,42 @@
           <ConnectorPoint PointX="12.635416666666666" PointY="42.237488606770832" />
           <ConnectorPoint PointX="11.489583333333334" PointY="42.237488606770832" />
           <ConnectorPoint PointX="11.322916666666666" PointY="42.237488606770832" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="42.237488606770832" />
+          <ConnectorPoint PointX="7.364583333333333" PointY="42.237488606770832" />
           <ConnectorPoint PointX="7.041666666666667" PointY="42.237488606770832" />
           <ConnectorPoint PointX="6.75" PointY="42.237488606770832" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_MUESTRA_PRESTACION" >
-          <ConnectorPoint PointX="15.5" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="15.208333333333334" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.916666666666666" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.794269583333334" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.627602916666666" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.593098020833333" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.426431354166665" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.391926458333334" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.225259791666666" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="14.059896083333333" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="13.893229416666665" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="13.786458833333333" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="13.619792166666665" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="12.427083333333334" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="12.260416666666666" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="11.833333333333334" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="11.666666666666666" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="35.282087343750007" />
-          <ConnectorPoint PointX="10.53125" PointY="35.282087343750007" />
+          <ConnectorPoint PointX="15.5" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="15.21875" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="14.96875" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="14.739582833333335" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="14.426431354166665" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="14.391926458333334" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="14.225259791666666" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="14.059896083333333" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="13.893229416666665" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="13.786458833333333" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="13.619792166666665" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="12.427083333333334" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="12.260416666666666" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="11.833333333333334" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="11.666666666666666" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="11.489583333333334" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="11.322916666666666" PointY="35.566806490384621" />
+          <ConnectorPoint PointX="10.53125" PointY="35.566806490384621" />
           <ConnectorPoint PointX="10.53125" PointY="34.287985026041667" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_PREVISION" >
           <ConnectorPoint PointX="6.75" PointY="44.910693417968751" />
           <ConnectorPoint PointX="7.041666666666667" PointY="44.910693417968751" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="44.910693417968751" />
+          <ConnectorPoint PointX="7.270833333333333" PointY="44.910693417968751" />
           <ConnectorPoint PointX="12.635416666666666" PointY="44.910693417968751" />
           <ConnectorPoint PointX="12.802083333333334" PointY="44.910693417968751" />
           <ConnectorPoint PointX="15.8437475" PointY="44.910693417968751" />
           <ConnectorPoint PointX="15.8437475" PointY="37.77830078125001" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" >
-          <ConnectorPoint PointX="1.093748" PointY="27.307190755208335" />
+          <ConnectorPoint PointX="1.093748" PointY="27.307190755208332" />
           <ConnectorPoint PointX="1.093748" PointY="28" />
           <ConnectorPoint PointX="2.5416666666666665" PointY="28" />
           <ConnectorPoint PointX="2.7083333333333335" PointY="28" />
@@ -4244,35 +4226,39 @@
           <ConnectorPoint PointX="5" PointY="34.375" />
           <ConnectorPoint PointX="5" PointY="36.162985026041667" />
           <ConnectorPoint PointX="7.041666666666667" PointY="36.162985026041667" />
-          <ConnectorPoint PointX="7.333333333333333" PointY="36.162985026041667" />
+          <ConnectorPoint PointX="7.364583333333333" PointY="36.162985026041667" />
           <ConnectorPoint PointX="7.916666666666667" PointY="36.162985026041667" />
           <ConnectorPoint PointX="8.0833333333333339" PointY="36.162985026041667" />
           <ConnectorPoint PointX="9.3229166666666661" PointY="36.162985026041667" />
           <ConnectorPoint PointX="9.4895833333333339" PointY="36.162985026041667" />
           <ConnectorPoint PointX="9.5" PointY="36.162985026041667" />
-          <ConnectorPoint PointX="9.5" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="11.322916666666666" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="11.489583333333334" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="12.260416666666666" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="12.427083333333334" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="13.619792166666665" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="13.786458833333333" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="13.893229416666665" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.059896083333333" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.225259791666666" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.391926458333334" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.426431354166665" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.593098020833333" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.627602916666666" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.794269583333334" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="14.916666666666666" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="15.208333333333334" PointY="35.760699114583332" />
-          <ConnectorPoint PointX="15.5" PointY="35.760699114583332" />
+          <ConnectorPoint PointX="9.5" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="10.447916666666666" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="10.614583333333334" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="11.322916666666666" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="11.489583333333334" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="11.666666666666666" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="11.833333333333334" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="12.260416666666666" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="12.427083333333334" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="13.619792166666665" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="13.786458833333333" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="13.893229416666665" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="14.059896083333333" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="14.225259791666666" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="14.391926458333334" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="14.426431354166665" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="14.739582833333335" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="14.968749999999998" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="15.218750000000002" PointY="35.422712343750007" />
+          <ConnectorPoint PointX="15.5" PointY="35.422712343750007" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION" >
-          <ConnectorPoint PointX="16.031923076923075" PointY="33.875" />
-          <ConnectorPoint PointX="15.439715540739549" PointY="33.3945679257142" />
-          <ConnectorPoint PointX="15.154034459260451" PointY="33.16280735839058" />
+          <ConnectorPoint PointX="16.478461538461538" PointY="33.875" />
+          <ConnectorPoint PointX="16.103010533863941" PointY="33.653311752577913" />
+          <ConnectorPoint PointX="15.959494466136063" PointY="33.568571466516879" />
+          <ConnectorPoint PointX="15.44675803386394" PointY="33.265821867586688" />
+          <ConnectorPoint PointX="15.14699196613606" PointY="33.088822436562587" />
           <ConnectorPoint PointX="14.837787461538461" PointY="32.90625" />
           <ConnectorPoint PointX="15.135416666666666" PointY="32.90625" />
           <ConnectorPoint PointX="15.364583333333334" PointY="32.90625" />
@@ -4280,12 +4266,50 @@
           <ConnectorPoint PointX="15.4375" PointY="28.994690755208339" />
           <ConnectorPoint PointX="15.75" PointY="28.682190755208339" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="LQCEModelo.VISTA_REPORTE_FACTURA" Width="1.5" PointX="3.375" PointY="4.75" Height="4.6725065104166674" />
-        <EntityTypeShape EntityType="LQCEModelo.NOTA_CREDITO" Width="1.5" PointX="9.75" PointY="13.25" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="LQCEModelo.VISTA_REPORTE_FACTURA" Width="1.5" PointX="3.375" PointY="4.75" Height="5.05710937500001" />
+        <EntityTypeShape EntityType="LQCEModelo.FACTURA" Width="1.5" PointX="10.5" PointY="13.375" Height="5.249410807291639" />
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_CLIENTE" >
+          <ConnectorPoint PointX="6.75" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="9.3229166666666661" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="9.4895833333333339" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="10.151038916666666" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="10.317705583333334" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="11.322916666666666" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="11.489583333333334" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="11.666666666666666" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="11.833333333333334" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="11.875" PointY="30.847308702724355" />
+          <ConnectorPoint PointX="11.875" PointY="18.816712239583335" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_DETALLE_FACTURA" >
+          <ConnectorPoint PointX="10.875" PointY="18.816712239583335" />
+          <ConnectorPoint PointX="10.875" PointY="20.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_FACTURACION" >
+          <ConnectorPoint PointX="6.75" PointY="23.182444661458334" />
+          <ConnectorPoint PointX="9.4166666666666661" PointY="23.182444661458334" />
+          <ConnectorPoint PointX="9.5833333333333339" PointY="23.182444661458334" />
+          <ConnectorPoint PointX="11.5078125" PointY="23.182444661458334" />
+          <ConnectorPoint PointX="11.5078125" PointY="18.816712239583335" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_FACTURA_TIPO_FACTURA" >
+          <ConnectorPoint PointX="1.5" PointY="7.7494921875" />
+          <ConnectorPoint PointX="1.5" PointY="13.6875" />
+          <ConnectorPoint PointX="3.0416666666666665" PointY="13.6875" />
+          <ConnectorPoint PointX="3.2083333333333335" PointY="13.6875" />
+          <ConnectorPoint PointX="10.5" PointY="13.6875" />
+        </AssociationConnector>
+        <AssociationConnector Association="LQCEModelo.FK_NOTA_COBRO_DETALLE_FACTURA" >
+          <ConnectorPoint PointX="11.69140625" PointY="18.816712239583335" />
+          <ConnectorPoint PointX="11.69140625" PointY="20.15625" />
+          <ConnectorPoint PointX="11.791666666666666" PointY="20.15625" />
+          <ConnectorPoint PointX="11.958333333333334" PointY="20.15625" />
+          <ConnectorPoint PointX="12.75" PointY="20.15625" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="LQCEModelo.NOTA_CREDITO" Width="1.5" PointX="12.75" PointY="13" Height="2.1725878906250102" />
         <AssociationConnector Association="LQCEModelo.FK_NOTA_CREDITO_FACTURA" >
-          <ConnectorPoint PointX="7.875" PointY="21.625" />
-          <ConnectorPoint PointX="7.875" PointY="14.16033347265625" />
-          <ConnectorPoint PointX="9.75" PointY="14.16033347265625" />
+          <ConnectorPoint PointX="12" PointY="14.273793945312505" />
+          <ConnectorPoint PointX="12.75" PointY="14.273793945312505" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

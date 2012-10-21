@@ -449,39 +449,27 @@ namespace LQCE.Transaccion
             }
         }
 
-        protected List<DTO_REPORTE_NOTA_COBRO_DETALLE> GetReporteNotaCobroByID_COBRO(int IdCobro)
+        private List<DTO_REPORTE_NOTA_COBRO_DETALLE> GetReporteNotaCobroByID_COBRO(LQCEEntities context, int IdCobro)
         {
-            Init();
-            try
-            {
-                using (LQCEEntities context = new LQCEEntities())
-                {
-                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+            RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
 
-                    var q = _RepositorioFACTURACION.GetNotaCobroDetalleByIdCobro(IdCobro);
+            var q = _RepositorioFACTURACION.GetNotaCobroDetalleByIdCobro(IdCobro);
 
-                    return (from nd in q
-                            select new DTO_REPORTE_NOTA_COBRO_DETALLE
-                            {
-                                ID_COBRO = nd.NOTA_COBRO.COBRO.ID,
-                                ID_CLIENTE = nd.NOTA_COBRO.CLIENTE.ID,
-                                CORRELATIVO = nd.NOTA_COBRO.CORRELATIVO,
-                                NOMBRE_CLIENTE = nd.NOTA_COBRO.CLIENTE.NOMBRE,
-                                RUT_CLIENTE = nd.NOTA_COBRO.CLIENTE.RUT,
-                                NOMBRE_REPORTE = nd.NOTA_COBRO.COBRO.TIPO_COBRO.REPORTE,
-                                ID_NOTA_COBRO_DETALLE = nd.ID,
-                                NUMERO_FACTURA = nd.FACTURA.NUMERO_FACTURA.HasValue ? nd.FACTURA.NUMERO_FACTURA.Value : 0,
-                                MONTO_TOTAL = nd.FACTURA.TOTAL,
-                                MONTO_PENDIENTE = nd.MONTO_PENDIENTE
-                            }).ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                Error = ex.Message;
-                throw ex;
-            }
+            return (from nd in q
+                    select new DTO_REPORTE_NOTA_COBRO_DETALLE
+                    {
+                        FECHA_FACTURACION = nd.FACTURA.FACTURACION.FECHA_FACTURACION,
+                        ID_COBRO = nd.NOTA_COBRO.COBRO.ID,
+                        ID_CLIENTE = nd.NOTA_COBRO.CLIENTE.ID,
+                        CORRELATIVO = nd.NOTA_COBRO.CORRELATIVO,
+                        NOMBRE_CLIENTE = nd.NOTA_COBRO.CLIENTE.NOMBRE,
+                        RUT_CLIENTE = nd.NOTA_COBRO.CLIENTE.RUT,
+                        NOMBRE_REPORTE = nd.NOTA_COBRO.COBRO.TIPO_COBRO.REPORTE,
+                        ID_NOTA_COBRO_DETALLE = nd.ID,
+                        NUMERO_FACTURA = nd.FACTURA.NUMERO_FACTURA.HasValue ? nd.FACTURA.NUMERO_FACTURA.Value : 0,
+                        MONTO_TOTAL = nd.FACTURA.TOTAL,
+                        MONTO_PENDIENTE = nd.MONTO_PENDIENTE
+                    }).ToList();
         }
 
         protected List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> GetReporteDetalleFacturaByID_FACTURACION(int IdFacturacion)
@@ -991,8 +979,11 @@ namespace LQCE.Transaccion
                                             select new
                                             {
                                                 IdCliente = g.Key,
-                                                Facturas = g.ToList<VISTA_FACTURAS_POR_NOTIFICAR>()
+                                                Facturas = g
                                             }).ToList();
+
+                    if (!cliente_facturas.Any())
+                        throw new Exception("No hay facturas que notificar");
 
                     int correlativo = 1;
                     foreach (var cf in cliente_facturas)
@@ -1031,7 +1022,7 @@ namespace LQCE.Transaccion
                     try
                     {
                         // PENDIENTE: Generar PDFs
-                        ListaNotaCobro = GetReporteNotaCobroByID_COBRO(_COBRO.ID);
+                        ListaNotaCobro = GetReporteNotaCobroByID_COBRO(context, _COBRO.ID);
 
                         string deviceInfo =
                                       "<DeviceInfo>" +
@@ -1080,7 +1071,7 @@ namespace LQCE.Transaccion
                         using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
                         {
                             SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
-                            string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobro_" + _COBRO.ID.ToString() + ".pdf";
+                            string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobro_" + _COBRO.TIPO_COBRO.NOMBRE + ".pdf";
                             spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobro[0], propiedades, true);
                             spList.Update();
                         }
@@ -1104,8 +1095,8 @@ namespace LQCE.Transaccion
                             _ReportViewerDetalle.LocalReport.ShowDetailedSubreportMessages = true;
                             _ReportViewerDetalle.LocalReport.DataSources.Clear();
                             _ReportViewerDetalle.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", LISTA_DTO_REPORTE_NOTA_COBRO2));
-                            _ReportViewerDetalle.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteDetalleFactura_SubreportProcessingEventHandler);
-                            _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + LISTA_DTO_REPORTE_NOTA_COBRO2.FirstOrDefault().NOMBRE_REPORTE;
+                            _ReportViewerDetalle.LocalReport.SubreportProcessing += new SubreportProcessingEventHandler(ReporteNotaCobro_SubreportProcessingEventHandler);
+                            _ReportViewerDetalle.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + item.NOMBRE_REPORTE;
 
                             _ReportViewerDetalle.LocalReport.Render("PDF", deviceInfo, CreateStreamNotaCobroIndividual, out warnings);
                             foreach (Stream stream in m_streams_NotaCobroIndividual)
@@ -1114,7 +1105,7 @@ namespace LQCE.Transaccion
                             using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
                             {
                                 SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
-                                string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobroIndividual_" + _COBRO.ID.ToString() + "_" + item.NOMBRE_CLIENTE + ".pdf";
+                                string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_NotaCobroIndividual_" + _COBRO.TIPO_COBRO.NOMBRE + "_" + item.NOMBRE_CLIENTE + ".pdf";
                                 spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_NotaCobroIndividual[0], propiedadesDetalle, true);
                                 spList.Update();
                             }

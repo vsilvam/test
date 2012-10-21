@@ -117,7 +117,7 @@ namespace App.Infrastructure.Base
                 return dtHelper;
             }
 
-            return DateTime.MinValue;
+            throw new Exception("Formato de fecha no válido");
         }
 
         public static TimeSpan ToTimeSpam(object obj)

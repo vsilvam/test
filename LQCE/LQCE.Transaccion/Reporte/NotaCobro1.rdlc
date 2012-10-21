@@ -204,10 +204,24 @@
                                 <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>PRIMER AVISO</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox5</rd:DefaultName>
-                          <Height>0.6cm</Height>
-                          <Width>16.51cm</Width>
+                          <Left>0.39688cm</Left>
+                          <Height>1.06723cm</Height>
+                          <Width>16.11312cm</Width>
                           <ZIndex>5</ZIndex>
                           <Style>
                             <Border>
@@ -245,9 +259,10 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <KeepTogether>true</KeepTogether>
         <DataSetName>DataSet1</DataSetName>
         <PageBreak>
-          <BreakLocation>End</BreakLocation>
+          <BreakLocation>StartAndEnd</BreakLocation>
         </PageBreak>
         <Height>4.52237cm</Height>
         <Width>16.51cm</Width>

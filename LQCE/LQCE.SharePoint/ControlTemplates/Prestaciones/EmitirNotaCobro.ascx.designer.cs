@@ -40,6 +40,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtDesde;
         
         /// <summary>
+        /// Control RequiredtxtDesde.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredtxtDesde;
+        
+        /// <summary>
         /// Control txtHasta.
         /// </summary>
         /// <remarks>
@@ -47,6 +56,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtHasta;
+        
+        /// <summary>
+        /// Control RequiredtxtHasta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredtxtHasta;
         
         /// <summary>
         /// Control ddlClientes.
@@ -67,30 +85,21 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.DropDownList ddlNotaCobro;
         
         /// <summary>
-        /// Control btnBuscar.
+        /// Control RequiredFieldValidator_ddlNotaCobro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBuscar;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_ddlNotaCobro;
         
         /// <summary>
-        /// Control pnNotas.
+        /// Control btnEmitir.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnNotas;
-        
-        /// <summary>
-        /// Control grdNotaCobro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdNotaCobro;
+        protected global::System.Web.UI.WebControls.Button btnEmitir;
     }
 }

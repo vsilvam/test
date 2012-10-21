@@ -14,6 +14,7 @@ namespace LQCE.Transaccion.DTO
         public string RUT_CLIENTE { get; set; }
         public string NOMBRE_REPORTE { get; set; }
 
+        public DateTime FECHA_FACTURACION { get; set; }
         public int ID_NOTA_COBRO_DETALLE { get; set; }
         public int NUMERO_FACTURA { get; set; }
         public int MONTO_TOTAL { get; set; }

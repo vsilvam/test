@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using App.Infrastructure.Base;
 using App.Infrastructure.Runtime;
+using LQCE.Modelo;
 using LQCE.SharePoint.ControlTemplates.App_Code;
 using LQCE.Transaccion;
 using LQCE.Transaccion.DTO;
@@ -19,6 +20,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
+                    //getFacturas();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.Page.IsValid)
+                {
                     getFacturas();
                 }
             }
@@ -33,8 +52,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         private void getFacturas()
         {
+            DateTime FechaDesde = ISConvert.ToDateTime(txtFechaEmisionDesde.Text);
+            DateTime FechaHasta = ISConvert.ToDateTime(txtFechaEmisionHasta.Text);
+
             var facturacion = new TrxFACTURACION();
-            gridFacturacion.DataSource = facturacion.GetResumenFacturacion();
+            gridFacturacion.DataSource = facturacion.GetResumenFacturacion(FechaDesde, FechaHasta);
             gridFacturacion.DataBind();
         }
 
@@ -71,9 +93,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                     int index = int.Parse(e.CommandArgument.ToString());
                     panelEmitir.Visible = true;
+                    panelNota.Visible = false;
                     hdnID_FACTURACION.Value = this.gridFacturacion.DataKeys[index]["ID_FACTURACION"].ToString();
                     hdnID_TIPO_FACTURA.Value = this.gridFacturacion.DataKeys[index]["ID_TIPO_FACTURA"].ToString();
-
                     Facturas();
                 }
             }
@@ -132,15 +154,31 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        protected void grdFacturas_RowDataBound(object sender, GridViewRowEventArgs e)
+
+
+        protected void grdFacturas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             try
             {
-                if (e.Row.RowType == DataControlRowType.DataRow)
+                if (e.CommandName == "Seleccionar")
                 {
-                    DTO_RESUMEN_FACTURA dto = (DTO_RESUMEN_FACTURA)e.Row.DataItem;
-                    CheckBox chkSeleccionar = (CheckBox)e.Row.FindControl("chkSeleccionar");
-                    chkSeleccionar.Visible = dto.NUMERO_FACTURA.HasValue;
+                    int IdFactura = int.Parse(e.CommandArgument.ToString());
+
+                    TrxFACTURA _TrxFACTURA = new TrxFACTURA();
+                    FACTURA _FACTURA = _TrxFACTURA.GetById(IdFactura);
+                    if (_FACTURA == null)
+                        throw new Exception("No se encuentra informacion de la factura");
+
+                    if (!_FACTURA.NUMERO_FACTURA.HasValue)
+                        throw new Exception("La factura no ha sido numerada");
+
+                    if (_FACTURA.PAGADA.HasValue && _FACTURA.PAGADA.Value == true)
+                        throw new Exception("La factura ya ha sido pagada");
+
+                    panelNota.Visible = true;
+                    hdnIdFactura.Value = IdFactura.ToString();
+                    lblNumeroFactura.Text = _FACTURA.NUMERO_FACTURA.ToString();
+                    txtNumeroNotaCredito.Text = "";
                 }
             }
             catch (Exception ex)
@@ -156,29 +194,39 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                throw new Exception("No implementado");
-                //List<int> ListaFacturas = new List<int>();
-                //foreach (GridViewRow fila in grdFacturas.Rows)
-                //{
-                //    if (fila.RowType == DataControlRowType.DataRow)
-                //    {
-                //        CheckBox chkSeleccionar = (CheckBox)fila.FindControl("chkSeleccionar");
-                //        if (chkSeleccionar.Checked)
-                //        {
-                //            int IdFactura = int.Parse(this.grdFacturas.DataKeys[fila.RowIndex]["ID_FACTURA"].ToString());
-                //            ListaFacturas.Add(IdFactura);
-                //        }
-                //    }
-                //}
+                if (Page.IsValid)
+                {
+                    int IdFactura = int.Parse(hdnIdFactura.Value);
+                    int NumeroNotaCredito = int.Parse(txtNumeroNotaCredito.Text);
+                    bool CorreccionTotal = (radioCorreccionTotal.SelectedValue == "1");
 
-                //if (ListaFacturas.Count == 0)
-                //    throw new Exception("Debe seleccionar factura");
-                //else
-                //{
-                //    TrxFACTURACION _TrxFACTURACION = new TrxFACTURACION();
-                //    _TrxFACTURACION.AnularFacturas(ListaFacturas);
-                //    Response.Redirect("MensajeExito.aspx?t=Anular Factura&m=Se han anulado las facturas seleccionadas", false);
-                //}
+                    TrxFACTURACION _TrxFACTURACION = new TrxFACTURACION();
+                    _TrxFACTURACION.EmitirNotaCredito(IdFactura, NumeroNotaCredito, CorreccionTotal);
+
+                    Response.Redirect("MensajeExito.aspx?t=Emitir Nota de Crédito&m=Se ha emitido nota de crédito", false);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void grdFacturas_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            try
+            {
+                if (e.Row.RowType == DataControlRowType.DataRow)
+                {
+                    DTO_RESUMEN_FACTURA dto = (DTO_RESUMEN_FACTURA)e.Row.DataItem;
+                    LinkButton linkSeleccionar = (LinkButton)e.Row.FindControl("linkSeleccionar");
+                    linkSeleccionar.Visible = (dto.NUMERO_FACTURA.HasValue && dto.PAGADA == false);
+                    linkSeleccionar.CommandArgument = dto.ID_FACTURA.ToString();
+                }
             }
             catch (Exception ex)
             {

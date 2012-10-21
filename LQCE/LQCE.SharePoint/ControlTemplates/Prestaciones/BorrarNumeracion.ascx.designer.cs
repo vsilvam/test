@@ -10,7 +10,7 @@
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
     
     
-    public partial class EmitirNotaCredito {
+    public partial class BorrarNumeracion {
         
         /// <summary>
         /// Control panelMensaje.
@@ -76,22 +76,22 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Button btnBuscar;
         
         /// <summary>
-        /// Control gridFacturacion.
+        /// Control grdFacturas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridFacturacion;
+        protected global::System.Web.UI.WebControls.GridView grdFacturas;
         
         /// <summary>
-        /// Control panelEmitir.
+        /// Control pnNumerar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelEmitir;
+        protected global::System.Web.UI.WebControls.Panel pnNumerar;
         
         /// <summary>
         /// Control hdnID_FACTURACION.
@@ -112,93 +112,66 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.HiddenField hdnID_TIPO_FACTURA;
         
         /// <summary>
-        /// Control grdFacturas.
+        /// Control txtDesdeN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdFacturas;
+        protected global::System.Web.UI.WebControls.TextBox txtDesdeN;
         
         /// <summary>
-        /// Control Paginador1.
+        /// Control RequiredFieldValidator_txtDesdeN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::LQCE.SharePoint.ControlTemplates.Prestaciones.Paginador1 Paginador1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_txtDesdeN;
         
         /// <summary>
-        /// Control panelNota.
+        /// Control CompareValidator_txtDesdeN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelNota;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator_txtDesdeN;
         
         /// <summary>
-        /// Control hdnIdFactura.
+        /// Control txtHastaN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnIdFactura;
+        protected global::System.Web.UI.WebControls.TextBox txtHastaN;
         
         /// <summary>
-        /// Control lblNumeroFactura.
+        /// Control RequiredFieldValidator_txtHastaN.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNumeroFactura;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_txtHastaN;
         
         /// <summary>
-        /// Control txtNumeroNotaCredito.
+        /// Control CompareValidator_.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNumeroNotaCredito;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator_;
         
         /// <summary>
-        /// Control requiredtxtNumeroNotaCredito.
+        /// Control btnBorrarNumeracion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredtxtNumeroNotaCredito;
-        
-        /// <summary>
-        /// Control comparetxtNumeroNotaCredito.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator comparetxtNumeroNotaCredito;
-        
-        /// <summary>
-        /// Control radioCorreccionTotal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList radioCorreccionTotal;
-        
-        /// <summary>
-        /// Control btnEmitir.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEmitir;
+        protected global::System.Web.UI.WebControls.Button btnBorrarNumeracion;
     }
 }

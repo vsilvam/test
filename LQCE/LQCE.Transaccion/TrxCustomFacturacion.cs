@@ -624,6 +624,43 @@ namespace LQCE.Transaccion
             }
         }
 
+        public List<DTO_RESUMEN_FACTURACION> GetResumenFacturacion(DateTime FechaDesde, DateTime FechaHasta)
+        {
+            Init();
+            try
+            {
+                DateTime FechaInicio = FechaDesde.Date;
+                DateTime FechaTermino = FechaHasta.Date.AddDays(1);
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    return (from f in _RepositorioFACTURA.GetAllWithReferences()
+                            where f.ACTIVO && f.FACTURACION.ACTIVO
+                            && f.FACTURACION.FACTURA.Any(fd => fd.ACTIVO)
+                            && f.FACTURACION.FECHA_FACTURACION >= FechaInicio
+                            && f.FACTURACION.FECHA_FACTURACION < FechaTermino
+                            group f by new { ID_FACTURACION = f.FACTURACION.ID, ID_TIPO_FACTURA = f.TIPO_FACTURA.ID } into g
+                            select new DTO_RESUMEN_FACTURACION
+                            {
+                                ID_FACTURACION = g.Key.ID_FACTURACION,
+                                ID_TIPO_FACTURA = g.Key.ID_TIPO_FACTURA,
+                                NOMBRE_TIPO_FACTURA = g.FirstOrDefault().TIPO_FACTURA.NOMBRE_FACTURA,
+                                FECHA_FACTURACION = g.FirstOrDefault().FACTURACION.FECHA_FACTURACION,
+                                TOTAL_FACTURAS = g.Count(),
+                                TOTAL_FACTURAS_POR_NUMERAR = g.Count(fa => fa.NUMERO_FACTURA == null)
+                            }).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
+        }
+
+
         public void NumerarFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, bool NUMERAR_TODAS,
             int? CORRELATIVO_DESDE, int? CORRELATIVO_HASTA, int NUMERO_FACTURA_INICIAL)
         {
@@ -798,8 +835,7 @@ namespace LQCE.Transaccion
             }
         }
 
-        public void BorrarNumeracionFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, bool BORRAR_NUMERACION_TODAS,
-      int? CORRELATIVO_DESDE, int? CORRELATIVO_HASTA)
+        public void BorrarNumeracionFacturas(int ID_FACTURACION, int ID_TIPO_FACTURA, int CORRELATIVO_DESDE, int CORRELATIVO_HASTA)
         {
             Init();
             //ListaDetalleFactura = new List<DTO_REPORTE_DETALLEFACTURA_PRESTACION>();
@@ -807,36 +843,33 @@ namespace LQCE.Transaccion
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
+                    if (CORRELATIVO_DESDE > CORRELATIVO_HASTA)
+                        throw new Exception("El rango de facturas está mal definido, el valor inicial es mayor al valor final");
+
                     RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
 
                     var q = _RepositorioFACTURA.GetByFilterWithReferences(null, ID_FACTURACION, ID_TIPO_FACTURA,
-                        null, "", null, null, null, null, null, "", "", null, null, "", "", "", null);
-
-                    if (!BORRAR_NUMERACION_TODAS)
-                    {
-                        if (!CORRELATIVO_DESDE.HasValue)
-                            throw new Exception("Debe señalar factura inicial a borrar numeracion");
-                        if (!CORRELATIVO_HASTA.HasValue)
-                            throw new Exception("Debe señalar factura final a borrar numeracion");
-                        if (CORRELATIVO_DESDE.Value > CORRELATIVO_HASTA.Value)
-                            throw new Exception("El rango de facturas está mal definido, el valor inicial es mayor al valor final");
-
-                        q = q.Where(f => f.CORRELATIVO >= CORRELATIVO_DESDE.Value && f.CORRELATIVO <= CORRELATIVO_HASTA.Value);
-                    }
+                        null, "", null, null, null, "", "", "", "", null, null, "", "", "", null);
+                    q = q.Where(f => f.CORRELATIVO >= CORRELATIVO_DESDE && f.CORRELATIVO <= CORRELATIVO_HASTA);
 
                     if (q.Any(f => f.NOTA_COBRO_DETALLE.Any(n => n.ACTIVO)))
                         throw new Exception("Ya existen facturas cobradas al cliente en el rango señalado");
 
+                    if (q.Any(f => f.PAGADA.HasValue && f.PAGADA.Value == true))
+                        throw new Exception("Ya existen facturas pagadas en el rango señalado");
+
+                    if (q.Any(f => f.NOTA_CREDITO.Any(nc => nc.ACTIVO)))
+                        throw new Exception("Existen facturas con notas de crédito en el rango señalado");
+
                     foreach (var _FACTURA in q.OrderBy(f => f.CORRELATIVO).ToList())
                     {
-                        if (!_FACTURA.NUMERO_FACTURA.HasValue)
+                        if (_FACTURA.NUMERO_FACTURA.HasValue)
                         {
                             _FACTURA.NUMERO_FACTURA = null;
                             context.ApplyPropertyChanges("FACTURA", _FACTURA);
                         }
                     }
                     context.SaveChanges();
-
                 }
             }
             catch (Exception ex)
@@ -866,6 +899,9 @@ namespace LQCE.Transaccion
                         if (_FACTURA.NUMERO_FACTURA.HasValue)
                             throw new Exception("La factura ya ha sido numerada");
 
+                        if (_FACTURA.NOTA_CREDITO.Any(nc => nc.ACTIVO))
+                            throw new Exception("La factura tiene notas de créditos asociadas");
+
                         _FACTURA.ACTIVO = false;
                         foreach (FACTURA_DETALLE _FACTURA_DETALLE in _FACTURA.FACTURA_DETALLE.Where(fd => fd.ACTIVO))
                         {
@@ -888,9 +924,42 @@ namespace LQCE.Transaccion
             }
         }
 
-        public void EmitirNotaCredito()
+        public void EmitirNotaCredito(int IdFactura, int NumeroNotaCredito, bool CorreccionTotal)
         {
-            // PENDIENTE IMPLEMENTACION
+            Init();
+            try
+            {
+                using (LQCEEntities context = new LQCEEntities())
+                {
+                    RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
+
+                    FACTURA _FACTURA = _RepositorioFACTURA.GetByIdWithReferences(IdFactura);
+                    if (_FACTURA == null)
+                        throw new Exception("No se encuentra informacion de la factura");
+
+                    if (!_FACTURA.NUMERO_FACTURA.HasValue)
+                        throw new Exception("La factura no ha sido numerada");
+
+                    if (_FACTURA.PAGADA.HasValue && _FACTURA.PAGADA.Value == true)
+                        throw new Exception("La factura ya ha sido pagada");
+
+                    NOTA_CREDITO _NOTA_CREDITO = new NOTA_CREDITO();
+                    _NOTA_CREDITO.FACTURA = _FACTURA;
+                    _NOTA_CREDITO.FECHA_EMISION = DateTime.Now;
+                    _NOTA_CREDITO.NUMERO_NOTA_CREDITO = NumeroNotaCredito;
+                    _NOTA_CREDITO.CORRECCION_TOTAL_PARCIAL = CorreccionTotal;
+                    _NOTA_CREDITO.ACTIVO = true;
+                    context.AddToNOTA_CREDITO(_NOTA_CREDITO);
+
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                Error = ex.Message;
+                throw ex;
+            }
         }
 
         public void EmitirNotasCobros(DateTime FechaFacturacionDesde, DateTime FechaFacturacionHasta,

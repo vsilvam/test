@@ -73,12 +73,26 @@
     <Compile Include="ControlTemplates\Prestaciones\AnularFactura.ascx.designer.cs">
       <DependentUpon>AnularFactura.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\BorrarNumeracion.ascx.cs">
+      <DependentUpon>BorrarNumeracion.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\BorrarNumeracion.ascx.designer.cs">
+      <DependentUpon>BorrarNumeracion.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\BuscarFactura.ascx.cs">
       <DependentUpon>BuscarFactura.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\BuscarFactura.ascx.designer.cs">
       <DependentUpon>BuscarFactura.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\CargaArchivo.ascx.cs">
+      <DependentUpon>CargaArchivo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\CargaArchivo.ascx.designer.cs">
+      <DependentUpon>CargaArchivo.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\DetalleFactura.ascx.cs">
       <DependentUpon>DetalleFactura.ascx</DependentUpon>
@@ -150,6 +164,13 @@
     <Compile Include="ControlTemplates\Prestaciones\MensajeExito.ascx.designer.cs">
       <DependentUpon>MensajeExito.ascx.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\ModificarCliente.ascx.cs">
+      <DependentUpon>ModificarCliente.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\ModificarCliente.ascx.designer.cs">
+      <DependentUpon>ModificarCliente.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlTemplates\Prestaciones\ModificarConvenioPrecio.ascx.cs">
       <DependentUpon>ModificarConvenioPrecio.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -170,6 +191,13 @@
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\NumerarFactura.ascx.designer.cs">
       <DependentUpon>NumerarFactura.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.cs">
+      <DependentUpon>Paginador1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.designer.cs">
+      <DependentUpon>Paginador1.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx.cs">
       <DependentUpon>RegistroCargaArchivo.ascx</DependentUpon>
@@ -213,13 +241,6 @@
     <Compile Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx.designer.cs">
       <DependentUpon>UCCargaMasivaPrestacionesVeterinarias.ascx.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.cs">
-      <DependentUpon>Paginador1.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ControlTemplates\Prestaciones\Paginador1.ascx.designer.cs">
-      <DependentUpon>Paginador1.ascx.cs</DependentUpon>
-    </Compile>
     <Compile Include="Layouts\Prestaciones\ActualizarClientes.aspx.cs">
       <DependentUpon>ActualizarClientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -233,6 +254,13 @@
     </Compile>
     <Compile Include="Layouts\Prestaciones\AnularFactura.aspx.designer.cs">
       <DependentUpon>AnularFactura.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\BorrarNumeracion.aspx.cs">
+      <DependentUpon>BorrarNumeracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Prestaciones\BorrarNumeracion.aspx.designer.cs">
+      <DependentUpon>BorrarNumeracion.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="Layouts\Prestaciones\BuscarFactura.aspx.cs">
       <DependentUpon>BuscarFactura.aspx</DependentUpon>
@@ -416,9 +444,13 @@
     <Content Include="ControlTemplates\Prestaciones\AnularFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\BorrarNumeracion.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\BuscarFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\CargaArchivo.ascx" />
     <Content Include="ControlTemplates\Prestaciones\DetalleFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -449,6 +481,7 @@
     <Content Include="ControlTemplates\Prestaciones\MensajeExito.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="ControlTemplates\Prestaciones\ModificarCliente.ascx" />
     <Content Include="ControlTemplates\Prestaciones\ModificarConvenioPrecio.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -456,6 +489,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\NumerarFactura.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="ControlTemplates\Prestaciones\Paginador1.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="ControlTemplates\Prestaciones\RegistroCargaArchivo.ascx">
@@ -476,9 +512,6 @@
     <Content Include="ControlTemplates\Prestaciones\UCCargaMasivaPrestacionesVeterinarias.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\Prestaciones\Paginador1.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="Layouts\JScript\jquery-1.4.1.min.js" />
     <Content Include="Layouts\JScript\jquery-ui-sliderAccess.js" />
     <Content Include="Layouts\JScript\jquery-ui-timepicker-addon.js" />
@@ -488,6 +521,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Layouts\Prestaciones\AnularFactura.aspx" />
+    <Content Include="Layouts\Prestaciones\BorrarNumeracion.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="Layouts\Prestaciones\BuscarFactura.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

@@ -49,7 +49,7 @@
         <tr>
             <td colspan="2">
                 <asp:GridView ID="grdPrestacionesPendientes" runat="server" GridLines="None" AutoGenerateColumns='true'
-                    Width='100%' CssClass="tablesorter" EnableModelValidation="True" DataKeyNames="NUMERO_FACTURA">
+                    Width='100%' CssClass="tablesorter" EnableModelValidation="True" DataKeyNames="ID">
                     <Columns>
                         <asp:TemplateField HeaderText="Seleccionar">
                             <ItemTemplate>
@@ -59,17 +59,17 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="N° FACTURA">
                             <ItemTemplate>
-                                <asp:Label ID="lblNroFactura" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                                <asp:Label ID="lblNroFactura" runat="server" Text='<%# Eval("NUMERO_FACTURA") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="PRESTACION">
                             <ItemTemplate>
-                                <asp:Label ID="lblPrestacion" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                                <asp:Label ID="lblPrestacion" runat="server" Text='<%# Eval("LISTA_PRESTACIONES.PRESTACION.PRESTACION_HUMANA") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="EXAMEN">
                             <ItemTemplate>
-                                <asp:Label ID="lblPrestacion" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                                <asp:Label ID="lblExamen" runat="server" Text='<%# Eval("") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="VALOR PRESTACION">

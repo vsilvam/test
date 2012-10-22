@@ -84,7 +84,7 @@
         <div>
             <asp:GridView ID="grdDetalleFactura" runat="server" AutoGenerateColumns='false' Width="100%">
                 <Columns>
-                    <asp:BoundField DataField="ID_FACTURA_DETALLE" HeaderText="N° FACTURA" Visible="false" />
+                    <asp:BoundField DataField="ID_FACTURA_DETALLE" HeaderText="N° FACTURA" Visible="true" />
                     <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° FICHA" />
                     <asp:BoundField DataField="MONTO_TOTAL" HeaderText="MONTO TOTAL" />
                     <asp:BoundField DataField="MONTO_COBRADO" HeaderText="MONTO COBRADO" />
@@ -92,8 +92,11 @@
                     <asp:BoundField DataField="NOMBRE_PACIENTE" HeaderText="NOMBRE PACIENTE" />
                     <asp:TemplateField HeaderText="PAGAR">
                         <ItemTemplate>
-                            <asp:ImageButton ID="imgPagar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/pagar.jpeg"
-                                CommandArgument='<%# Eval("ID_FACTURA_DETALLE") %>' Height="15px" ToolTip="Pagar" OnClick="imgPagar_Click" />
+                            <%--<asp:ImageButton ID="imgPagar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/pagar.jpeg"
+                                CommandArgument='<%# Eval("ID_FACTURA_DETALLE") %>' Height="15px" 
+                                ToolTip="Pagar" onclick="imgPagar_Click" />--%>
+                            <asp:LinkButton ID="lnkPagar" runat="server" 
+                                CommandArgument='<%# Eval("ID_FACTURA_DETALLE") %>' onclick="lnkPagar_Click">Pagar</asp:LinkButton>
                         </ItemTemplate>
                         <ItemStyle HorizontalAlign="Center" />
                     </asp:TemplateField>

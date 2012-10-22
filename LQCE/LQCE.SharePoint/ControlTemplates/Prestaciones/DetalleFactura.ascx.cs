@@ -3,6 +3,7 @@ using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Modelo;
 using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -50,11 +51,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        protected void imgPagar_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        protected void lnkPagar_Click(object sender, EventArgs e)
         {
-            try 
+            try
             {
-                ImageButton image = sender as ImageButton;
+                LinkButton image = sender as LinkButton;
                 int? Id = int.Parse(image.CommandArgument);
                 if (Id.HasValue)
                 {
@@ -69,5 +70,25 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 return;
             }
         }
+
+        //protected void imgPagar_Click(object sender, ImageClickEventArgs e)
+        //{
+        //    try
+        //    {
+        //        ImageButton image = sender as ImageButton;
+        //        int? Id = int.Parse(image.CommandArgument);
+        //        if (Id.HasValue)
+        //        {
+        //            Response.Redirect("RegistroPago.aspx?Id=" + Id, false);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ISException.RegisterExcepcion(ex);
+        //        panelMensaje.CssClass = "MostrarMensaje";
+        //        lblMensaje.Text = ex.Message;
+        //        return;
+        //    }
+        //}
     }
 }

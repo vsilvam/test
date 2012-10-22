@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
+using System.Globalization;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -16,8 +17,42 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-                    getFacturas();
+                    if (Request.QueryString["Id"] != null)
+                    {
+                        //throw new Exception("No se ha indicado identificador de la factura");
+                        int? IdFactura = int.Parse(Request.QueryString["Id"].ToString());
+                        if (IdFactura.HasValue)
+                        {
+                            pnRegistroPagos.Visible = true;
+                            getDatos(IdFactura.Value);
+
+                        }
+                    }
+                    else
+                    {
+                        pnBuscarPagos.Visible = true;
+                        getFacturas();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        private void getDatos(int factura)
+        {
+            try 
+            {
+                var facturaDetalle = new TrxFACTURA_DETALLE();
+                grdPrestacionesPendientes.DataSource = facturaDetalle.GetByFilterWithReferences(null,factura,null,null);
+                grdPrestacionesPendientes.DataBind();
+                pnRegistroPagos.Visible = true;
+                pnBuscarPagos.Visible = false;
             }
             catch (Exception ex)
             {
@@ -31,13 +66,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void getFacturas()
         {
             try
-            {
-                panelMensaje.CssClass = "OcultarMensaje";
+            {                
                 var factura = new TrxFACTURA();
                 ddlFacturas.Items.Clear();
                 ddlFacturas.Items.Add(new ListItem("(Todos)", ""));
-                //ddlFacturas.DataSource = factura.GetByFilter(ACTIVO = true , estado = pagado);
-                //ddlFacturas.DataBind();
+                ddlFacturas.DataSource = factura.GetAllWithReferences();//GetByFilter(ACTIVO = true, estado = pagado);
+                ddlFacturas.DataBind();
 
                 
             }
@@ -54,7 +88,25 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";
+                foreach (GridViewRow fila in grdPrestacionesPendientes.Rows)
+                {
+                    if (fila.RowType == DataControlRowType.DataRow)
+                    {
+                        CheckBox chkSeleccionar = (CheckBox)fila.FindControl("chkSeleccionar");
+                        if (chkSeleccionar.Checked)
+                        {
+                            IFormatProvider culture = new CultureInfo("es-CL", true);
+                            DateTime? fechaPago = null;
+                            int IdFactura = int.Parse(this.grdPrestacionesPendientes.DataKeys[fila.RowIndex]["PRESTACION.ID"].ToString());
+                            if (!string.IsNullOrEmpty(txtFechaPago.Text))
+                                fechaPago = DateTime.Parse(txtFechaPago.Text, culture);
+                            string medioPago = !string.IsNullOrEmpty(txtMedioPago.Text) ? txtMedioPago.Text: string.Empty;
+                            string Observaciones = !string.IsNullOrEmpty(txtObservaciones.Text) ? txtObservaciones.Text: string.Empty;
+
+                            //guardar pago
+                        }
+                    }
+                }
 
 
 
@@ -73,7 +125,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 panelMensaje.CssClass = "OcultarMensaje";
+                int Id = int.Parse(ddlFacturas.SelectedValue);
                 //carga grilla con las prestaciones asociadas a la factura seleccionada
+                getDatos(Id);
 
 
             }

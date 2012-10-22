@@ -231,5 +231,6 @@ namespace LQCE.Repositorio
                 throw ex;
             }
         }
+
     }
 }

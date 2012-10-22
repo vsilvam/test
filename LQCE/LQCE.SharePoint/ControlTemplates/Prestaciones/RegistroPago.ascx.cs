@@ -47,9 +47,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         private void getDatos(int factura)
         {
             try 
-            {
-                var facturaDetalle = new TrxFACTURA_DETALLE();
-                grdPrestacionesPendientes.DataSource = facturaDetalle.GetByFilterWithReferences(null,factura,null,null);
+            {                
+                var facturacion = new TrxFACTURACION();
+                grdPrestacionesPendientes.DataSource = facturacion.GetDetalleFacturaById(factura);
                 grdPrestacionesPendientes.DataBind();
                 pnRegistroPagos.Visible = true;
                 pnBuscarPagos.Visible = false;

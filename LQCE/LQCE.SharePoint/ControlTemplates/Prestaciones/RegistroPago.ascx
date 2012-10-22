@@ -48,8 +48,8 @@
         </tr>
         <tr>
             <td colspan="2">
-                <asp:GridView ID="grdPrestacionesPendientes" runat="server" GridLines="None" AutoGenerateColumns='False'
-                    Width='100%' CssClass="tablesorter" EnableModelValidation="True" DataKeyNames="PRESTACION.ID">
+                <asp:GridView ID="grdPrestacionesPendientes" runat="server" GridLines="None" AutoGenerateColumns='true'
+                    Width='100%' CssClass="tablesorter" EnableModelValidation="True" DataKeyNames="NUMERO_FACTURA">
                     <Columns>
                         <asp:TemplateField HeaderText="Seleccionar">
                             <ItemTemplate>
@@ -57,14 +57,34 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="ID">
+                        <asp:TemplateField HeaderText="N° FACTURA">
                             <ItemTemplate>
-                                <asp:Label ID="lblIdPrestacion" runat="server" Text='<%# Bind("PRESTACION.ID") %>'></asp:Label>
+                                <asp:Label ID="lblNroFactura" runat="server" Text='<%# Eval("") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="PRESTACION">
                             <ItemTemplate>
-                                <asp:Label ID="lblPrestacion" runat="server" Text='<%# Bind("PRESTACION.FECHA_RECEPCION") %>'></asp:Label>
+                                <asp:Label ID="lblPrestacion" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="EXAMEN">
+                            <ItemTemplate>
+                                <asp:Label ID="lblPrestacion" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="VALOR PRESTACION">
+                            <ItemTemplate>
+                                <asp:Label ID="lblValorPrestacion" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="FECHA RECEPCION">
+                            <ItemTemplate>
+                                <asp:Label ID="lblFechaRecepcion" runat="server" Text='<%# Eval("") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="NOMBRE PACIENTE">
+                            <ItemTemplate>
+                                <asp:Label ID="lblnombrePaciente" runat="server" Text='<%# Eval("") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

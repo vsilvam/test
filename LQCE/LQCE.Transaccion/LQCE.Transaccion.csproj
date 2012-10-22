@@ -58,6 +58,7 @@
     <Compile Include="DTO\DTOPaginador.cs" />
     <Compile Include="DTO\DTO_DETALLE_FACTURA.cs" />
     <Compile Include="DTO\DTO_EMISION_FACTURA.cs" />
+    <Compile Include="DTO\DTO_PAGO_PRESTACIONES.cs" />
     <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_FACTURA.cs" />
     <Compile Include="DTO\DTO_REPORTE_DETALLEFACTURA_PRESTACION.cs" />
     <Compile Include="DTO\DTO_REPORTE_FACTURA.cs" />

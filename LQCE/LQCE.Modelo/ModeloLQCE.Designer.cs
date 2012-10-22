@@ -70,7 +70,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_NOTA_CREDITO_FACTURA", "FACTURA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(LQCE.Modelo.FACTURA), "NOTA_CREDITO", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.NOTA_CREDITO))]
 
 // Nombre de archivo original:
-// Fecha de generación: 20-10-2012 13:19:13
+// Fecha de generación: 22/10/2012 17:30:17
 namespace LQCE.Modelo
 {
     

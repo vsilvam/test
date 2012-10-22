@@ -234,9 +234,6 @@
                           </Style>
                         </Textbox>
                       </ReportItems>
-                      <PageBreak>
-                        <BreakLocation>End</BreakLocation>
-                      </PageBreak>
                       <KeepTogether>true</KeepTogether>
                       <Style>
                         <Border>

@@ -6,23 +6,79 @@
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>ebca26ce-7cd3-4113-a3b4-bd775c6a8ad6</rd:DataSourceID>
+      <rd:DataSourceID>4c22af99-55df-4876-99f0-d5e6e9653072</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="DataSet1">
       <Fields>
-        <Field Name="ID_CLIENTE">
-          <DataField>ID_CLIENTE</DataField>
+        <Field Name="AÑO">
+          <DataField>AÑO</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="COMUNA">
+          <DataField>COMUNA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DETALLE">
+          <DataField>DETALLE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DIA">
+          <DataField>DIA</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DIRECCION">
+          <DataField>DIRECCION</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FONO">
+          <DataField>FONO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GIRO">
+          <DataField>GIRO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IVA">
+          <DataField>IVA</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="MES">
+          <DataField>MES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NETO">
+          <DataField>NETO</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="NOMBRE_CLIENTE">
           <DataField>NOMBRE_CLIENTE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="NOMBRE_REPORTE_FACTURA">
+          <DataField>NOMBRE_REPORTE_FACTURA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOMBRE_REPORTE_FACTURA_INDIVIDUAL">
+          <DataField>NOMBRE_REPORTE_FACTURA_INDIVIDUAL</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NOMBRE_TIPO_FACTURA">
+          <DataField>NOMBRE_TIPO_FACTURA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NUMERO_FACTURA">
+          <DataField>NUMERO_FACTURA</DataField>
+          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+        </Field>
         <Field Name="RUT_CLIENTE">
           <DataField>RUT_CLIENTE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TOTAL">
+          <DataField>TOTAL</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
       <Query>
@@ -31,8 +87,8 @@
       </Query>
       <rd:DataSetInfo>
         <rd:DataSetName>LQCE.Transaccion.DTO</rd:DataSetName>
-        <rd:TableName>DTO_REPORTE_NOTA_COBRO</rd:TableName>
-        <rd:ObjectDataSourceType>LQCE.Transaccion.DTO.DTO_REPORTE_NOTA_COBRO, LQCE.Transaccion, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e8616c68d579ae6f</rd:ObjectDataSourceType>
+        <rd:TableName>DTO_REPORTE_FACTURA</rd:TableName>
+        <rd:ObjectDataSourceType>LQCE.Transaccion.DTO.DTO_REPORTE_FACTURA, LQCE.Transaccion, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e8616c68d579ae6f</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -47,28 +103,39 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>1.78046in</Height>
+              <Height>1.27083in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
                     <Rectangle Name="Rectangle1">
                       <ReportItems>
-                        <Subreport Name="Subreport1">
-                          <ReportName>LQCE.Transaccion.Reporte.NotaCobro1Subreporte.rdlc</ReportName>
-                          <Parameters>
-                            <Parameter Name="ID_CLIENTE">
-                              <Value>=Fields!ID_CLIENTE.Value</Value>
-                            </Parameter>
-                          </Parameters>
-                          <Top>2.82258cm</Top>
-                          <Height>1.69979cm</Height>
-                          <Width>16.51cm</Width>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Nombre</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Height>0.6cm</Height>
+                          <Width>2.5cm</Width>
                           <Style>
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
                           </Style>
-                        </Subreport>
+                        </Textbox>
                         <Textbox Name="NOMBRE_CLIENTE">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -84,41 +151,10 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>NOMBRE_CLIENTE</rd:DefaultName>
-                          <Top>1.17306cm</Top>
-                          <Left>3.43112cm</Left>
+                          <Left>2.79612cm</Left>
                           <Height>0.6cm</Height>
-                          <Width>13.07888cm</Width>
+                          <Width>13.37438cm</Width>
                           <ZIndex>1</ZIndex>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <Textbox Name="RUT_CLIENTE">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!RUT_CLIENTE.Value</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>RUT_CLIENTE</rd:DefaultName>
-                          <Top>1.84362cm</Top>
-                          <Left>3.43112cm</Left>
-                          <Height>0.6cm</Height>
-                          <Width>13.07888cm</Width>
-                          <ZIndex>2</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -136,7 +172,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>CLIENTE</Value>
+                                  <Value>Dirección</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -144,10 +180,10 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox3</rd:DefaultName>
-                          <Top>1.17306cm</Top>
+                          <Top>0.97049cm</Top>
                           <Height>0.6cm</Height>
                           <Width>2.5cm</Width>
-                          <ZIndex>3</ZIndex>
+                          <ZIndex>2</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -158,25 +194,26 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <Textbox Name="Textbox4">
+                        <Textbox Name="DIRECCION">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>RUT</Value>
+                                  <Value>=Fields!DIRECCION.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox4</rd:DefaultName>
-                          <Top>1.87889cm</Top>
+                          <rd:DefaultName>DIRECCION</rd:DefaultName>
+                          <Top>0.97049cm</Top>
+                          <Left>2.79612cm</Left>
                           <Height>0.6cm</Height>
-                          <Width>2.5cm</Width>
-                          <ZIndex>4</ZIndex>
+                          <Width>13.37438cm</Width>
+                          <ZIndex>3</ZIndex>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -194,34 +231,47 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>NOTA DE COBRO</Value>
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
+                                  <Value>Comuna</Value>
+                                  <Style />
                                 </TextRun>
                               </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>PRIMER AVISO</Value>
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox5</rd:DefaultName>
-                          <Left>0.39688cm</Left>
-                          <Height>1.06723cm</Height>
-                          <Width>16.11312cm</Width>
+                          <Top>2.05528cm</Top>
+                          <Height>0.6cm</Height>
+                          <Width>2.5cm</Width>
+                          <ZIndex>4</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <Textbox Name="COMUNA">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!COMUNA.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>COMUNA</rd:DefaultName>
+                          <Top>2.05528cm</Top>
+                          <Left>2.79612cm</Left>
+                          <Height>0.6cm</Height>
+                          <Width>13.37438cm</Width>
                           <ZIndex>5</ZIndex>
                           <Style>
                             <Border>
@@ -259,12 +309,8 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <KeepTogether>true</KeepTogether>
         <DataSetName>DataSet1</DataSetName>
-        <PageBreak>
-          <BreakLocation>StartAndEnd</BreakLocation>
-        </PageBreak>
-        <Height>4.52237cm</Height>
+        <Height>3.22792cm</Height>
         <Width>16.51cm</Width>
         <Style>
           <Border>
@@ -273,20 +319,20 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.78046in</Height>
+    <Height>1.27083in</Height>
     <Style />
   </Body>
   <Width>6.5in</Width>
   <Page>
-    <PageHeight>29.7cm</PageHeight>
+    <PageHeight>5cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
+    <LeftMargin>0.5cm</LeftMargin>
     <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
+    <TopMargin>0.5cm</TopMargin>
     <BottomMargin>2cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>
-  <rd:ReportID>8fe4df36-4211-4a36-8c85-710ce97945fd</rd:ReportID>
+  <rd:ReportID>fd24fdab-b6cc-4ce2-9319-4f7bd1663840</rd:ReportID>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
 </Report>

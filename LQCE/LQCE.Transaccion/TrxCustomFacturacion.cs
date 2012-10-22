@@ -47,6 +47,15 @@ namespace LQCE.Transaccion
             return streamDetalleFactura;
         }
 
+        private IList<Stream> m_streams_Direccion;
+        private Stream CreateStreamDireccion(string name, string fileNameExtension, Encoding encoding,
+            string mimeType, bool willSeek)
+        {
+            Stream streamDireccion = new MemoryStream();
+            m_streams_Direccion.Add(streamDireccion);
+            return streamDireccion;
+        }
+
         private IList<Stream> m_streams_NotaCobro;
         private Stream CreateStreamNotaCobro(string name, string fileNameExtension, Encoding encoding,
             string mimeType, bool willSeek)
@@ -186,7 +195,6 @@ namespace LQCE.Transaccion
 
                     try
                     {
-                        // PENDIENTE: Generar PDFs
                         var LISTA_DTO_REPORTE_FACTURA = GetReporteFacturaByID_FACTURACION(_FACTURACION.ID);
 
                         ListaDetalleFactura = GetReporteDetalleFacturaByID_FACTURACION(_FACTURACION.ID);
@@ -205,7 +213,18 @@ namespace LQCE.Transaccion
                         m_streams_matriz = new List<Stream>();
                         m_streams_DetalleFactura = new List<Stream>();
 
-                        // m_streams_individual = new List<Stream>();
+                        string deviceInfoDireccion =
+                                     "<DeviceInfo>" +
+                                     "  <OutputFormat>PDF</OutputFormat>" +
+                                     "  <PageWidth>11in</PageWidth>" +
+                                     "  <PageHeight>1.3in</PageHeight>" +
+                                     "  <MarginTop>0.5in</MarginTop>" +
+                                     "  <MarginLeft>1in</MarginLeft>" +
+                                     "  <MarginRight>1in</MarginRight>" +
+                                     "  <MarginBottom>0.5in</MarginBottom>" +
+                                     "</DeviceInfo>";
+                        Warning[] warningsDireccion;
+                        m_streams_Direccion = new List<Stream>();
 
                         // Documento 1: Un archivo con todas las facturas sin fondo para imprimir en matriz de punto
                         var tf = from f in LISTA_DTO_REPORTE_FACTURA
@@ -219,23 +238,40 @@ namespace LQCE.Transaccion
                             propiedades.Add("Tipo de Documento", "Factura " + facturas.FirstOrDefault().NOMBRE_TIPO_FACTURA);
                             propiedades.Add("Formato", "Consolidado");
 
+                            Hashtable propiedadesDireccion = new Hashtable();
+                            propiedadesDireccion.Add("Fecha de Documento", _FACTURACION.FECHA_FACTURACION);
+                            propiedadesDireccion.Add("Tipo de Documento", "Direcciones " + facturas.FirstOrDefault().NOMBRE_TIPO_FACTURA);
+                            propiedadesDireccion.Add("Formato", "Consolidado");
+
                             ReportViewer _ReportViewer = new ReportViewer();
                             _ReportViewer.ProcessingMode = ProcessingMode.Local;
                             _ReportViewer.LocalReport.ShowDetailedSubreportMessages = true;
                             _ReportViewer.LocalReport.DataSources.Clear();
                             _ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", facturas));
-
                             _ReportViewer.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte." + facturas.Key;
-
                             _ReportViewer.LocalReport.Render("PDF", deviceInfo, CreateStream, out warnings);
                             foreach (Stream stream in m_streams_matriz)
+                                stream.Position = 0;
+
+                            ReportViewer _ReportViewerDireccion = new ReportViewer();
+                            _ReportViewerDireccion.ProcessingMode = ProcessingMode.Local;
+                            _ReportViewerDireccion.LocalReport.DataSources.Clear();
+                            _ReportViewerDireccion.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", facturas));
+                            _ReportViewerDireccion.LocalReport.ReportEmbeddedResource = "LQCE.Transaccion.Reporte.DireccionFactura.rdlc";
+                            _ReportViewerDireccion.LocalReport.Render("PDF", deviceInfoDireccion, CreateStreamDireccion, out warningsDireccion);
+                            foreach (Stream stream in m_streams_Direccion)
                                 stream.Position = 0;
 
                             using (SPWeb spWeb = new SPSite(Settings.Default.SP_WEB).OpenWeb())
                             {
                                 SPList spList = spWeb.GetList(Settings.Default.SP_LIBRERIA_FACTURAS);
+                                
                                 string strNombreFactura = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + facturas.Key + ".pdf";
                                 spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreFactura, m_streams_matriz[0], propiedades, true);
+                                spList.Update();
+
+                                string strNombreDirecciones = DateTime.Now.ToString("yyyyMMddhhmmss") + "_" + facturas.Key + " - Direcciones.pdf";
+                                spList.RootFolder.Files.Add(spList.RootFolder.Url + "/" + strNombreDirecciones, m_streams_Direccion[0], propiedadesDireccion, true);
                                 spList.Update();
                             }
                         }

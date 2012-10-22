@@ -251,6 +251,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reporte\DireccionFactura.rdlc" />
     <EmbeddedResource Include="Reporte\NotaCobro3.rdlc">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

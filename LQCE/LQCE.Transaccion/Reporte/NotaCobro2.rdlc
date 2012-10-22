@@ -53,8 +53,8 @@
                   <CellContents>
                     <Rectangle Name="Rectangle1">
                       <ReportItems>
-                        <Subreport Name="Subreport1">
-                          <ReportName>LQCE.Transaccion.Reporte.NotaCobro1Subreporte.rdlc</ReportName>
+                        <Subreport Name="Subreport2">
+                          <ReportName>LQCE.Transaccion.Reporte.NotaCobro2Subreporte.rdlc</ReportName>
                           <Parameters>
                             <Parameter Name="ID_CLIENTE">
                               <Value>=Fields!ID_CLIENTE.Value</Value>
@@ -207,7 +207,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>PRIMER AVISO</Value>
+                                  <Value>SEGUNDO AVISO</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>

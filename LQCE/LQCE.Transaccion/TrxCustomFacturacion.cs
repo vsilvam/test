@@ -962,6 +962,7 @@ namespace LQCE.Transaccion
                     RepositorioTIPO_COBRO _RepositorioTIPO_COBRO = new RepositorioTIPO_COBRO(context);
                     RepositorioFACTURA _RepositorioFACTURA = new RepositorioFACTURA(context);
                     RepositorioCLIENTE _RepositorioCLIENTE = new RepositorioCLIENTE(context);
+                    RepositorioVISTA_REPORTE_FACTURA _RepositorioVISTA_REPORTE_FACTURA = new RepositorioVISTA_REPORTE_FACTURA(context);
 
                     TIPO_COBRO _TIPO_COBRO = _RepositorioTIPO_COBRO.GetById(IdTipoCobro);
                     if (_TIPO_COBRO == null)
@@ -1005,10 +1006,22 @@ namespace LQCE.Transaccion
                             if (_FACTURA == null)
                                 throw new Exception("No se encuentra información de la factura ");
 
+                            VISTA_REPORTE_FACTURA _VISTA_REPORTE_FACTURA = _RepositorioVISTA_REPORTE_FACTURA.GetById(f.ID);
+                            if (_VISTA_REPORTE_FACTURA == null)
+                                throw new Exception("No se encuentra información de la factura ");
+
+
                             NOTA_COBRO_DETALLE _NOTA_COBRO_DETALLE = new NOTA_COBRO_DETALLE();
                             _NOTA_COBRO_DETALLE.NOTA_COBRO = _NOTA_COBRO;
                             _NOTA_COBRO_DETALLE.FACTURA = _FACTURA;
-                            _NOTA_COBRO_DETALLE.MONTO_PENDIENTE = 0; // PENDIENTE: Calcular saldo pendiente
+                            if (_FACTURA.PAGADA.HasValue && _FACTURA.PAGADA.Value == true)
+                            {
+                                _NOTA_COBRO_DETALLE.MONTO_PENDIENTE = 0;
+                            }
+                            else
+                            {
+                                _NOTA_COBRO_DETALLE.MONTO_PENDIENTE = _VISTA_REPORTE_FACTURA.SALDO_DEUDOR ?? 0;
+                            }
                             _NOTA_COBRO_DETALLE.ACTIVO = true;
                             context.AddToNOTA_COBRO_DETALLE(_NOTA_COBRO_DETALLE);
                         }
@@ -1018,10 +1031,8 @@ namespace LQCE.Transaccion
 
                     context.SaveChanges();
 
-                    // PENDIENTE: Generar PDFs
                     try
                     {
-                        // PENDIENTE: Generar PDFs
                         ListaNotaCobro = GetReporteNotaCobroByID_COBRO(context, _COBRO.ID);
 
                         string deviceInfo =

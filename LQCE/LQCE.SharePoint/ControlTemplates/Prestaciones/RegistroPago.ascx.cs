@@ -49,7 +49,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try 
             {                
                 var facturacion = new TrxFACTURACION();
-                grdPrestacionesPendientes.DataSource = facturacion.GetDetalleFacturaById(factura);
+                grdPrestacionesPendientes.DataSource = facturacion.FacturaForPagos(factura);
                 grdPrestacionesPendientes.DataBind();
                 pnRegistroPagos.Visible = true;
                 pnBuscarPagos.Visible = false;

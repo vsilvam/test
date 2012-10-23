@@ -1325,27 +1325,23 @@ namespace LQCE.Transaccion
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioVISTA_REPORTE_FACTURA _RepositorioVISTA_REPORTE_FACTURA = new RepositorioVISTA_REPORTE_FACTURA(context);
-                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
-
-                    var f = _RepositorioVISTA_REPORTE_FACTURA.GetById(IdFactura);
-                    if (f == null)
-                        throw new Exception("No se encuentra información de la factura");
-                    var pagos = _RepositorioFACTURACION.GetPagosByIdFacturaWithReferencesFull(IdFactura);
+                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);                    
                     var detalle_factura = _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(IdFactura);
-                    var notas_cobro = _RepositorioFACTURACION.GetNotasCobrosByIdFacturaWithReferencesFull(IdFactura);
-
-                    DTO_PAGO_PRESTACIONES _DTO_PAGO_PRESTACIONES = new DTO_PAGO_PRESTACIONES();
-                    _DTO_PAGO_PRESTACIONES.ID_FACTURA = f.ID;
-                    _DTO_PAGO_PRESTACIONES.NUMERO_FACTURA = f.NUMERO_FACTURA;
-                    _DTO_PAGO_PRESTACIONES.NOMBRE_PACIENTE = f.NOMBRE_CLIENTE;
-                    _DTO_PAGO_PRESTACIONES.PRESTACION = ;
-                    _DTO_PAGO_PRESTACIONES.EXAMEN = ;
-                    _DTO_PAGO_PRESTACIONES.VALOR_EXAMEN = ;
-                    _DTO_PAGO_PRESTACIONES.FECHA_RECEPCION = ;
-
-                    _DTO_PAGO_PRESTACIONES.ID_FACTURA_DETALLE = detalle_factura.First();
-                             
+                    List<DTO_PAGO_PRESTACIONES> lista = new List<DTO_PAGO_PRESTACIONES>();
+                    foreach (var lis in detalle_factura)
+                    {
+                        DTO_PAGO_PRESTACIONES _DTO_PAGO_PRESTACIONES = new DTO_PAGO_PRESTACIONES();
+                        _DTO_PAGO_PRESTACIONES.ID_FACTURA = lis.FACTURA.ID;
+                        _DTO_PAGO_PRESTACIONES.NUMERO_FACTURA = lis.FACTURA.NUMERO_FACTURA;
+                        _DTO_PAGO_PRESTACIONES.NOMBRE_CLIENTE = lis.FACTURA.NOMBRE_CLIENTE;
+                        _DTO_PAGO_PRESTACIONES.PRESTACION = lis.PRESTACION.TIPO_PRESTACION.NOMBRE;
+                        //_DTO_PAGO_PRESTACIONES.EXAMEN = lis.PRESTACION.PRESTACION_EXAMEN;
+                        //_DTO_PAGO_PRESTACIONES.VALOR_EXAMEN = ;
+                        //_DTO_PAGO_PRESTACIONES.FECHA_RECEPCION = ;
+                        _DTO_PAGO_PRESTACIONES.ID_FACTURA_DETALLE = lis.ID;
+                        lista.Add(_DTO_PAGO_PRESTACIONES);
+                    }
+                    return lista;
                 }
             }
             catch (Exception ex)

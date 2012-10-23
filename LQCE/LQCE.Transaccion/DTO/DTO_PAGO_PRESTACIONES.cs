@@ -14,6 +14,6 @@ namespace LQCE.Transaccion.DTO
         public string EXAMEN { get; set; }
         public int VALOR_EXAMEN { get; set; }
         public DateTime FECHA_RECEPCION { get; set; }
-        public string NOMBRE_PACIENTE { get; set; }
+        public string NOMBRE_CLIENTE { get; set; }
     }
 }

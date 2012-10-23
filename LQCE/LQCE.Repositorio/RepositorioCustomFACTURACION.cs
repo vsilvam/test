@@ -61,6 +61,8 @@ namespace LQCE.Repositorio
                             .Include("FACTURA.CLIENTE")
                             .Include("PRESTACION.PRESTACION_HUMANA")
                             .Include("PRESTACION.PRESTACION_VETERINARIA")
+                            .Include("PRESTACION.PRESTACION_EXAMEN")
+                            .Include("PRESTACION.PRESTACION_EXAMEN.EXAMEN")
                         where i.ACTIVO
                         && i.FACTURA.ACTIVO
                         && i.FACTURA.FACTURACION.ACTIVO

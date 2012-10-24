@@ -46,8 +46,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         private void getDatos(int factura)
         {
-            try 
-            {                
+            try
+            {
                 var facturacion = new TrxFACTURACION();
                 grdPrestacionesPendientes.DataSource = facturacion.FacturaForPagos(factura);
                 grdPrestacionesPendientes.DataBind();
@@ -97,13 +97,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         {
                             IFormatProvider culture = new CultureInfo("es-CL", true);
                             DateTime? fechaPago = null;
-                            int IdFactura = int.Parse(this.grdPrestacionesPendientes.DataKeys[fila.RowIndex]["PRESTACION.ID"].ToString());
+                            int IdFactura = int.Parse(this.grdPrestacionesPendientes.DataKeys[fila.RowIndex]["ID_FACTURA"].ToString());
                             if (!string.IsNullOrEmpty(txtFechaPago.Text))
                                 fechaPago = DateTime.Parse(txtFechaPago.Text, culture);
                             string medioPago = !string.IsNullOrEmpty(txtMedioPago.Text) ? txtMedioPago.Text: string.Empty;
                             string Observaciones = !string.IsNullOrEmpty(txtObservaciones.Text) ? txtObservaciones.Text: string.Empty;
 
                             //guardar pago
+                            TrxPAGO _pago = new TrxPAGO();
+                            int pago = _pago.Add(1,int.Parse(fechaPago.ToString()),10);
+
+                            TrxPAGO_DETALLE _pagoDetalle = new TrxPAGO_DETALLE();
+                            var detalle = _pagoDetalle.Add(IdFactura,pago,10);
                         }
                     }
                 }

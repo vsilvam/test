@@ -1325,20 +1325,30 @@ namespace LQCE.Transaccion
             {
                 using (LQCEEntities context = new LQCEEntities())
                 {
-                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);                    
+                    RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
+                    RepositorioPRESTACION_EXAMEN _RepositorioPRESTACION_EXAMEN = new RepositorioPRESTACION_EXAMEN(context);
                     var detalle_factura = _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(IdFactura);
                     List<DTO_PAGO_PRESTACIONES> lista = new List<DTO_PAGO_PRESTACIONES>();
                     foreach (var lis in detalle_factura)
                     {
                         DTO_PAGO_PRESTACIONES _DTO_PAGO_PRESTACIONES = new DTO_PAGO_PRESTACIONES();
                         _DTO_PAGO_PRESTACIONES.ID_FACTURA = lis.FACTURA.ID;
-                        _DTO_PAGO_PRESTACIONES.NUMERO_FACTURA = lis.FACTURA.NUMERO_FACTURA;
-                        _DTO_PAGO_PRESTACIONES.NOMBRE_CLIENTE = lis.FACTURA.NOMBRE_CLIENTE;
+                        _DTO_PAGO_PRESTACIONES.NUMERO_FACTURA = lis.FACTURA.NUMERO_FACTURA;                        
+                        _DTO_PAGO_PRESTACIONES.NOMBRE_PACIENTE = lis.PRESTACION.PRESTACION_HUMANA != null ? lis.PRESTACION.PRESTACION_HUMANA.NOMBRE : lis.PRESTACION.PRESTACION_VETERINARIA.NOMBRE;// lis.FACTURA.NOMBRE_CLIENTE;
                         _DTO_PAGO_PRESTACIONES.PRESTACION = lis.PRESTACION.TIPO_PRESTACION.NOMBRE;
-                        //_DTO_PAGO_PRESTACIONES.EXAMEN = lis.PRESTACION.PRESTACION_EXAMEN;
-                        //_DTO_PAGO_PRESTACIONES.VALOR_EXAMEN = ;
-                        //_DTO_PAGO_PRESTACIONES.FECHA_RECEPCION = ;
+                        //_DTO_PAGO_PRESTACIONES.EXAMEN = ;
+                        //_DTO_PAGO_PRESTACIONES.VALOR_EXAMEN = lis.PRESTACION;
+                        _DTO_PAGO_PRESTACIONES.FECHA_RECEPCION = lis.PRESTACION.FECHA_RECEPCION;
                         _DTO_PAGO_PRESTACIONES.ID_FACTURA_DETALLE = lis.ID;
+
+
+                        var prestacion = _RepositorioPRESTACION_EXAMEN.GetByFilterWithReferences(null, lis.PRESTACION.ID, null);
+                        foreach (var pre in prestacion)
+                        {
+                            _DTO_PAGO_PRESTACIONES.EXAMEN = pre.EXAMEN.NOMBRE;
+                            _DTO_PAGO_PRESTACIONES.VALOR_EXAMEN = int.Parse(pre.VALOR.ToString());
+                        }
+
                         lista.Add(_DTO_PAGO_PRESTACIONES);
                     }
                     return lista;

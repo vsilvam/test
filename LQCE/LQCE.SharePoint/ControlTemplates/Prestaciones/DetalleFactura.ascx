@@ -34,24 +34,15 @@
 <asp:Panel ID='pnDetalleFacturas' runat='server'>
     <h3>
         Ficha de Factura</h3>
-    <table>
+    <table width="100%">
         <tr>
             <td>
                 Nombre Cliente
             </td>
             <td>
+                <asp:HiddenField ID="hdIdCliente" runat="server" />
                 <asp:Label ID="lblNombreCliente" runat="server"></asp:Label>
             </td>
-        </tr>
-        <tr>
-            <td>
-                Rut Cliente
-            </td>
-            <td>
-                <asp:Label ID="lblRutCliente" runat="server"></asp:Label>
-            </td>
-        </tr>
-        <tr>
             <td>
                 Fecha Emision
             </td>
@@ -61,6 +52,12 @@
         </tr>
         <tr>
             <td>
+                Rut Cliente
+            </td>
+            <td>
+                <asp:Label ID="lblRutCliente" runat="server"></asp:Label>
+            </td>
+             <td>
                 Numero Factura
             </td>
             <td>
@@ -82,19 +79,16 @@
         <h3>
             <a href="#">Detalle Factura</a></h3>
         <div>
-            <asp:GridView ID="grdDetalleFactura" runat="server" AutoGenerateColumns='false' Width="100%">
+            <asp:GridView ID="grdDetalleFactura" runat="server" EnableModelValidation="true" AutoGenerateColumns='false' Width="100%">
                 <Columns>
-                    <asp:BoundField DataField="ID_FACTURA_DETALLE" HeaderText="N° FACTURA" Visible="true" />
-                    <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° FICHA" />
-                    <asp:BoundField DataField="MONTO_TOTAL" HeaderText="MONTO TOTAL" />
-                    <asp:BoundField DataField="MONTO_COBRADO" HeaderText="MONTO COBRADO" />
-                    <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA RECEPCION" />
-                    <asp:BoundField DataField="NOMBRE_PACIENTE" HeaderText="NOMBRE PACIENTE" />
+                    <asp:BoundField DataField="ID_FACTURA_DETALLE" HeaderText="ID FACTURA DETALLE" Visible="true" ItemStyle-HorizontalAlign="Center" />
+                    <asp:BoundField DataField="NUMERO_FICHA" HeaderText="N° FICHA"  ItemStyle-HorizontalAlign="Center"/>
+                    <asp:BoundField DataField="MONTO_TOTAL" HeaderText="MONTO TOTAL"  ItemStyle-HorizontalAlign="Center"/>
+                    <asp:BoundField DataField="MONTO_COBRADO" HeaderText="MONTO COBRADO"  ItemStyle-HorizontalAlign="Center"/>
+                    <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA RECEPCION" ItemStyle-HorizontalAlign="Center"/>
+                    <asp:BoundField DataField="NOMBRE_PACIENTE" HeaderText="NOMBRE PACIENTE" ItemStyle-HorizontalAlign="Center"/>
                     <asp:TemplateField HeaderText="PAGAR">
                         <ItemTemplate>
-                            <%--<asp:ImageButton ID="imgPagar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/pagar.jpeg"
-                                CommandArgument='<%# Eval("ID_FACTURA_DETALLE") %>' Height="15px" 
-                                ToolTip="Pagar" onclick="imgPagar_Click" />--%>
                             <asp:LinkButton ID="lnkPagar" runat="server" 
                                 CommandArgument='<%# Eval("ID_FACTURA_DETALLE") %>' onclick="lnkPagar_Click">Pagar</asp:LinkButton>
                         </ItemTemplate>

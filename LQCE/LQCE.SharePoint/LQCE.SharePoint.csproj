@@ -43,19 +43,44 @@
     <Reference Include="AjaxControlToolkit, Version=3.0.20820.23026, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\APP\Microsoft\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.SharePoint" />
-    <Reference Include="Microsoft.SharePoint.Security" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Security">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlTemplates\App_Code\CustomPageChangeArgs.cs" />
@@ -515,6 +540,7 @@
     <Content Include="Layouts\JScript\jquery-1.4.1.min.js" />
     <Content Include="Layouts\JScript\jquery-ui-sliderAccess.js" />
     <Content Include="Layouts\JScript\jquery-ui-timepicker-addon.js" />
+    <Content Include="Layouts\JScript\JsScripts.js" />
     <Content Include="Layouts\JScript\ui.accordion.js" />
     <Content Include="Layouts\JScript\ui.datepicker-es.js" />
     <Content Include="Layouts\Prestaciones\ActualizarClientes.aspx">
@@ -593,25 +619,29 @@
     <Content Include="Layouts\Style\Imagenes\editar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Layouts\Style\Imagenes\pagar.jpeg" />
+    <Content Include="Layouts\Style\Imagenes\pagar.jpg" />
     <Content Include="LEEME.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Infrastructure\App.Infrastructure.csproj">
       <Project>{3332CA54-3AA9-4BBF-A561-FEC8EA6CE53B}</Project>
       <Name>App.Infrastructure</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\LQCE.Modelo\LQCE.Modelo.csproj">
       <Project>{C4ACE72E-D657-4A1C-829D-BBD2888EB72C}</Project>
       <Name>LQCE.Modelo</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\LQCE.Repositorio\LQCE.Repositorio.csproj">
       <Project>{21822DC6-6BF0-4DF6-B351-2B912FA6FA0A}</Project>
       <Name>LQCE.Repositorio</Name>
+      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\LQCE.Transaccion\LQCE.Transaccion.csproj">
       <Project>{1205D298-04AA-4A24-AE36-D4024E471B5D}</Project>
       <Name>LQCE.Transaccion</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

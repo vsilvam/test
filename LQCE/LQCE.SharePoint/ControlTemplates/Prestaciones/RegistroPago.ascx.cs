@@ -20,11 +20,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     if (Request.QueryString["Id"] != null)
                     {
                         //throw new Exception("No se ha indicado identificador de la factura");
-                        int? IdFactura = int.Parse(Request.QueryString["Id"].ToString());
-                        if (IdFactura.HasValue)
+                        int? IdDetalleFactura = int.Parse(Request.QueryString["Id"].ToString());
+                        if (IdDetalleFactura.HasValue)
                         {
                             pnRegistroPagos.Visible = true;
-                            getDatos(IdFactura.Value);
+                            getDatos(IdDetalleFactura.Value);
 
                         }
                     }
@@ -44,12 +44,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
-        private void getDatos(int factura)
+        private void getDatos(int IdDtetalleFactura)
         {
             try
             {
                 var facturacion = new TrxFACTURACION();
-                grdPrestacionesPendientes.DataSource = facturacion.FacturaForPagos(factura);
+                grdPrestacionesPendientes.DataSource = facturacion.FacturaForPagos(IdDtetalleFactura);
                 grdPrestacionesPendientes.DataBind();
                 pnRegistroPagos.Visible = true;
                 pnBuscarPagos.Visible = false;
@@ -95,9 +95,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         CheckBox chkSeleccionar = (CheckBox)fila.FindControl("chkSeleccionar");
                         if (chkSeleccionar.Checked)
                         {
+                            int? IdCliente = int.Parse(Request.QueryString["cliente"].ToString());
+                            if (!IdCliente.HasValue)
+                                throw new Exception("No se ha señalado el Id del cliente");
+
+                            Label lblValorPrestacion = (Label)fila.FindControl("lblValorPrestacion");
                             IFormatProvider culture = new CultureInfo("es-CL", true);
                             DateTime? fechaPago = null;
-                            int IdFactura = int.Parse(this.grdPrestacionesPendientes.DataKeys[fila.RowIndex]["ID_FACTURA"].ToString());
+                            int IdDetalleFactura = int.Parse(this.grdPrestacionesPendientes.DataKeys[fila.RowIndex]["ID_FACTURA_DETALLE"].ToString());
                             if (!string.IsNullOrEmpty(txtFechaPago.Text))
                                 fechaPago = DateTime.Parse(txtFechaPago.Text, culture);
                             string medioPago = !string.IsNullOrEmpty(txtMedioPago.Text) ? txtMedioPago.Text: string.Empty;
@@ -105,10 +110,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                             //guardar pago
                             TrxPAGO _pago = new TrxPAGO();
-                            int pago = _pago.Add(1,int.Parse(fechaPago.ToString()),10);
+                            //int pago = _pago.Add(IdCliente.Value, Convert.ToInt32(fechaPago.ToString()), int.Parse(lblValorPrestacion.Text));
+                            int pago = _pago.Add(IdCliente.Value, 10, int.Parse(lblValorPrestacion.Text));
+                            if (pago > 0)
+                            {
+                                TrxPAGO_DETALLE _pagoDetalle = new TrxPAGO_DETALLE();
+                                var detalle = _pagoDetalle.Add(IdDetalleFactura, pago, int.Parse(lblValorPrestacion.Text));
 
-                            TrxPAGO_DETALLE _pagoDetalle = new TrxPAGO_DETALLE();
-                            var detalle = _pagoDetalle.Add(IdFactura,pago,10);
+                                lblMensaje.Text = "El pago ha sido exitoso";
+                            }
                         }
                     }
                 }

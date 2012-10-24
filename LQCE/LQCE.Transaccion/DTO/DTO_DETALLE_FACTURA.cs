@@ -6,7 +6,7 @@ namespace LQCE.Transaccion.DTO
     public class DTO_DETALLE_FACTURA
     {
         public int? NUMERO_FACTURA { get; set; }
-        public int ID_FACTURA { get; set; }
+        public int ID_FACTURA { get; set; }        
         public string RUT_CLIENTE { get; set; }
         public string NOMBRE_CLIENTE { get; set; }
         public DateTime FECHA_EMISION { get; set; }
@@ -29,6 +29,7 @@ namespace LQCE.Transaccion.DTO
 
     public class DTO_DETALLE_FACTURA_PRESTACION
     {
+        public int ID_CLIENTE { get; set; }
         public int ID_FACTURA_DETALLE { get; set; }
         public int NUMERO_FICHA { get; set; }
         public int MONTO_TOTAL { get; set; }

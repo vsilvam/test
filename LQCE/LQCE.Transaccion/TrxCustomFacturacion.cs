@@ -1279,6 +1279,7 @@ namespace LQCE.Transaccion
                                                        where df.ACTIVO && df.PRESTACION.ACTIVO
                                                        select new DTO_DETALLE_FACTURA_PRESTACION
                                                        {
+                                                           ID_CLIENTE = df.FACTURA.CLIENTE.ID,
                                                            ID_FACTURA_DETALLE = df.ID,
                                                            NUMERO_FICHA = df.PRESTACION.ID,
                                                            MONTO_TOTAL = df.MONTO_TOTAL,
@@ -1319,7 +1320,7 @@ namespace LQCE.Transaccion
             }
         }
 
-        public List<DTO_PAGO_PRESTACIONES> FacturaForPagos(int IdFactura)
+        public List<DTO_PAGO_PRESTACIONES> FacturaForPagos(int IdDetalleFactura)
         {
             try
             {
@@ -1327,7 +1328,7 @@ namespace LQCE.Transaccion
                 {
                     RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
                     RepositorioPRESTACION_EXAMEN _RepositorioPRESTACION_EXAMEN = new RepositorioPRESTACION_EXAMEN(context);
-                    var detalle_factura = _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(IdFactura);
+                    var detalle_factura = _RepositorioFACTURACION.GetFacturaDetalleByIdDetalleFactura(IdDetalleFactura);
                     List<DTO_PAGO_PRESTACIONES> lista = new List<DTO_PAGO_PRESTACIONES>();
                     foreach (var lis in detalle_factura)
                     {

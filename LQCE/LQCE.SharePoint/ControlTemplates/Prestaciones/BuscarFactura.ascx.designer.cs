@@ -49,13 +49,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtRutCliente;
         
         /// <summary>
-        /// Control lblRut.
+        /// Control txtFechaEmision.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRut;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaEmision;
         
         /// <summary>
         /// Control txtNombreCliente.
@@ -65,15 +65,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNombreCliente;
-        
-        /// <summary>
-        /// Control txtFechaEmision.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaEmision;
         
         /// <summary>
         /// Control txtNroFactura.

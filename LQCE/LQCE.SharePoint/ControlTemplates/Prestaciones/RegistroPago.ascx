@@ -49,7 +49,7 @@
         <tr>
             <td colspan="2">
                 <asp:GridView ID="grdPrestacionesPendientes" runat="server" GridLines="None" AutoGenerateColumns='false'
-                    Width='100%' CssClass="tablesorter" EnableModelValidation="True" DataKeyNames="ID_FACTURA">
+                    Width='100%' CssClass="tablesorter" EnableModelValidation="True" DataKeyNames="ID_FACTURA_DETALLE">
                     <Columns>
                         <asp:TemplateField HeaderText="Seleccionar">
                             <ItemTemplate>
@@ -57,6 +57,7 @@
                             </ItemTemplate>
                             <ItemStyle HorizontalAlign="Center" />
                         </asp:TemplateField>
+
                         <asp:TemplateField HeaderText="N° FACTURA">
                             <ItemTemplate>
                                 <asp:Label ID="lblNroFactura" runat="server" Text='<%# Eval("NUMERO_FACTURA") %>'></asp:Label>

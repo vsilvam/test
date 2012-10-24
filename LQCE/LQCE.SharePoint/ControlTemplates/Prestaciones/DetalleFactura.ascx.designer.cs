@@ -40,6 +40,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Panel pnDetalleFacturas;
         
         /// <summary>
+        /// Control hdIdCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdIdCliente;
+        
+        /// <summary>
         /// Control lblNombreCliente.
         /// </summary>
         /// <remarks>
@@ -49,15 +58,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Label lblNombreCliente;
         
         /// <summary>
-        /// Control lblRutCliente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRutCliente;
-        
-        /// <summary>
         /// Control lblFechaEmision.
         /// </summary>
         /// <remarks>
@@ -65,6 +65,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFechaEmision;
+        
+        /// <summary>
+        /// Control lblRutCliente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRutCliente;
         
         /// <summary>
         /// Control lblNroFactura.

@@ -21,12 +21,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 int IdFactura = int.Parse(Request.QueryString["Id"].ToString());
 
                 TrxFACTURACION trxFacturacion = new TrxFACTURACION();
+                TrxCLIENTE trxCliente = new TrxCLIENTE();
                 var detalle = trxFacturacion.GetDetalleFacturaById(IdFactura);
+                var cliente = trxCliente.GetByFilter(null,null,null,null,detalle.RUT_CLIENTE.ToString(),"",null,"","","");
 
+                foreach (var cli in cliente)
+                {
+                    hdIdCliente.Value = cli.ID.ToString();
+                }
                 lblNombreCliente.Text = detalle.NOMBRE_CLIENTE;
                 lblRutCliente.Text = detalle.RUT_CLIENTE;
                 lblFechaEmision.Text = detalle.FECHA_EMISION.ToString();
-                lblNroFactura.Text = detalle.ID_FACTURA.ToString();
+                lblNroFactura.Text = detalle.NUMERO_FACTURA.ToString();
                 lblEstadoPago.Text = detalle.PAGADA ? "PAGADA" : "PENDIENTE";
                 
                 //carga grilla detalle factura
@@ -59,7 +65,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 int? Id = int.Parse(image.CommandArgument);
                 if (Id.HasValue)
                 {
-                    Response.Redirect("RegistroPago.aspx?Id=" + Id, false);
+                    Response.Redirect("RegistroPago.aspx?Id=" + Id + "&cliente=" + hdIdCliente.Value, false);
                 }
             }
             catch (Exception ex)
@@ -70,25 +76,5 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 return;
             }
         }
-
-        //protected void imgPagar_Click(object sender, ImageClickEventArgs e)
-        //{
-        //    try
-        //    {
-        //        ImageButton image = sender as ImageButton;
-        //        int? Id = int.Parse(image.CommandArgument);
-        //        if (Id.HasValue)
-        //        {
-        //            Response.Redirect("RegistroPago.aspx?Id=" + Id, false);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ISException.RegisterExcepcion(ex);
-        //        panelMensaje.CssClass = "MostrarMensaje";
-        //        lblMensaje.Text = ex.Message;
-        //        return;
-        //    }
-        //}
     }
 }

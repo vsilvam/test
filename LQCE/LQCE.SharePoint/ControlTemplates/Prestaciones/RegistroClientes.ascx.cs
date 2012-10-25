@@ -51,6 +51,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                if (!string.IsNullOrEmpty(txtRutCliente.Text))
+                    if (!ValidaRut(txtRutCliente.Text))
+                        throw new Exception("Rut no es valido");
+
                 int? Comuna = null;
                 int? Convenio = null;
 
@@ -106,6 +110,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 txtNombreCliente.Text = string.Empty;
                 ddlComuna.ClearSelection();
                 ddlConvenio.ClearSelection();
+                grdClientes.Visible = false;
                 
             }
             catch (Exception ex)
@@ -114,6 +119,68 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
+            }
+        }
+
+        private bool ValidaRut(string rut)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(rut))
+                {
+                    return false;
+                }
+                if (rut == "1-9")
+                {
+                    return false;
+                }
+                rut = rut.Trim();
+                if (string.IsNullOrEmpty(rut))
+                {
+                    return false;
+                }
+                rut = rut.Replace(".", "");
+                rut = rut.Replace("-", "");
+                string digit = rut.Substring(rut.Length - 1, 1);
+                digit = digit.ToUpper();
+                string digitComparer = "";
+                rut = rut.Substring(0, rut.Length - 1);
+                int wiMultiplicador = 9;
+                int wiSumatoria = 0;
+                int wiSubTotal = 0;
+                int wiLargo = rut.Length;
+                for (int i = wiLargo; i > 0; i--)
+                {
+                    wiSubTotal = Convert.ToInt32(rut.Substring(i - 1, 1));
+                    wiSumatoria = wiSumatoria + (wiSubTotal * wiMultiplicador);
+                    if (wiMultiplicador == 4)
+                    {
+                        wiMultiplicador = 10;
+                    }
+                    wiMultiplicador = wiMultiplicador - 1;
+                }
+                wiSumatoria = wiSumatoria % 11;
+                if (wiSumatoria == 10)
+                {
+                    digitComparer = "K";
+                }
+                else
+                {
+                    digitComparer = wiSumatoria.ToString();
+                }
+
+                if (digit.Equals(digitComparer))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
     }

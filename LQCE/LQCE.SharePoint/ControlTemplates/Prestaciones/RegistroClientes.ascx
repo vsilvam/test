@@ -56,20 +56,23 @@
     <asp:GridView ID="grdClientes" runat="server" GridLines="None" AutoGenerateColumns='False'
         Width='100%' CssClass="tablesorter" EnableModelValidation="True">
         <Columns>
-            <asp:BoundField DataField="ID" HeaderText="ID" />
-            <asp:BoundField DataField="RUT" HeaderText="RUT" />
-            <asp:BoundField DataField="NOMBRE" HeaderText="NOMBRE" />
-            <asp:TemplateField HeaderText="COMUNA">
+            <asp:BoundField DataField="ID" HeaderText="Id" />
+            <asp:BoundField DataField="RUT" HeaderText="Rut" />
+            <asp:BoundField DataField="NOMBRE" HeaderText="Nombre Comercial" />            
+            <asp:TemplateField HeaderText="Comuna">
                 <ItemTemplate>
                     <asp:Label ID="lblComuna" runat="server" Text='<%# Bind("COMUNA.NOMBRE") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="CONVENIO">
+            <asp:TemplateField HeaderText="Convenio">
                 <ItemTemplate>
                     <asp:Label ID="lblConvenio" runat="server" Text='<%# Bind("CONVENIO.NOMBRE") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="ACTUALIZAR">
+            <asp:BoundField DataField="" HeaderText="Razon Social" />
+            <asp:BoundField DataField="" HeaderText="Giro" />
+            <asp:BoundField DataField="" HeaderText="Tipo Factura" />
+            <asp:TemplateField HeaderText="Actualizar">
                 <ItemTemplate>
                     <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
                         CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Actualizar" 

@@ -13,69 +13,134 @@
 </asp:Panel>
 
 <asp:Panel ID="pnActualiza" runat="server">
-    <table>
+<h3>
+        Actualizar Clientes</h3>
+    <table width="80%">
         <tr>
-            <td>Rut</td>
-            <td>
-                <asp:TextBox ID="txtRut" runat="server"></asp:TextBox>
+            <td style="width: 150px">
+                Rut
             </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombre" runat="server"></asp:TextBox>
+            <td class="style1">
+                <asp:TextBox ID="txtRut" runat="server" ReadOnly="true"></asp:TextBox>
+                12345678-9
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator' runat='server' ControlToValidate='txtRut' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
-        </tr>
-        <tr>
-            <td>Direccion</td>
             <td>
-                <asp:TextBox ID="txtDireccion" runat="server"></asp:TextBox>
+                Telefono
             </td>
-        </tr>
-        <tr>
-            <td>Fono</td>
-            <td>
+            <td class="style2">
                 <asp:TextBox ID="txtFono" runat="server"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Giro</td>
             <td>
-                <asp:TextBox ID="txtGiro" runat="server"></asp:TextBox>
+                Nombre Comercial
             </td>
-        </tr>        
-        <tr>
-            <td>Convenio</td>
-            <td>
-                <asp:DropDownList ID="ddlConvenio" runat="server" DataTextField="NOMBRE" 
-                    DataValueField="ID" AppendDataBoundItems="True">
-                </asp:DropDownList>
+            <td colspan="3">
+                <asp:TextBox ID="txtNombre" runat="server" Width="80%"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator1' runat='server' ControlToValidate='txtNombre' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
-            <td>Comuna</td>
             <td>
-                <asp:DropDownList ID="ddlComuna" runat="server" DataTextField="NOMBRE" 
-                    DataValueField="ID" AppendDataBoundItems="True">
-                </asp:DropDownList>
+                Razón Social
+            </td>
+            <td colspan="4">
+                <asp:TextBox ID="txtRazonSocial" runat="server" Width="80%"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator2' runat='server' ControlToValidate='txtRazonSocial' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
-            <td>Descuento</td>
             <td>
+                Direccion Comercial
+            </td>
+            <td colspan="4">
+                <asp:TextBox ID="txtDireccion" runat="server" Width="80%"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator3' runat='server' ControlToValidate='txtDireccion' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Direccion Entrega
+            </td>
+            <td colspan="4">
+                <asp:TextBox ID="txtDireccionEntrega" runat="server" Width="80%"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtDireccionEntrega' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Region
+            </td>
+            <td class="style1">
+                <asp:DropDownList ID="ddlRegion" runat="server" DataTextField="NOMBRE" DataValueField="ID"
+                    AppendDataBoundItems="True">
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator5' runat='server' ControlToValidate='ddlRegion' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+            </td>
+            <td>
+                Comuna
+            </td>
+            <td class="style2">
+                <asp:DropDownList ID="ddlComuna" runat="server" DataTextField="NOMBRE" DataValueField="ID"
+                    AppendDataBoundItems="True">
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator6' runat='server' ControlToValidate='ddlComuna' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Ciudad
+            </td>
+            <td class="style1">
+                <asp:TextBox ID="txtCiudad" runat="server" Width="80%"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator7' runat='server' ControlToValidate='txtCiudad' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Giro
+            </td>
+            <td class="style1">
+                <asp:TextBox ID="txtGiro" runat="server" Width="80%"></asp:TextBox>
+            </td>
+            <td>
+                Tipo Facturación
+            </td>
+            <td class="style2">
+                <asp:DropDownList ID="ddlTipoFacturacion" runat="server" DataTextField="NOMBRE_FACTURA"
+                    DataValueField="ID" AppendDataBoundItems="True">
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator8' runat='server' ControlToValidate='ddlTipoFacturacion' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Convenio
+            </td>
+            <td class="style1">
+                <asp:DropDownList ID="ddlConvenio" runat="server" DataTextField="NOMBRE" DataValueField="ID"
+                    AppendDataBoundItems="True">
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator9' runat='server' ControlToValidate='ddlConvenio' ValidationGroup="Ingreso"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+            </td>
+            <td>
+                Descuento
+            </td>
+            <td class="style2">
                 <asp:TextBox ID="txtDescuento" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Datos de Contacto</td>
-            <td>
-                <asp:TextBox ID="txtContacto" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Convenio de Precios</td>
-            <td>
-                <asp:TextBox ID="txtConvenioPrecios" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator10' runat='server' ControlToValidate='txtDescuento' ValidationGroup="Ingreso" 
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
         </tr>
     </table>

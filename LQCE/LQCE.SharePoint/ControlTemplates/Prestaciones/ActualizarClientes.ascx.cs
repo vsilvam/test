@@ -17,8 +17,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
+                    getRegion();
                     getComuna();
                     getConvenio();
+                    getTipoFactura();
 
                     if (Request.QueryString["Id"] == null)
                         throw new Exception("No se ha indicado identificador de la cuenta registrada");
@@ -29,14 +31,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                     txtRut.Text = objCliente.RUT;
                     txtNombre.Text = objCliente.NOMBRE;
+                    //txtRazonSocial.Text = ;
                     txtDireccion.Text = objCliente.DIRECCION;
+                    //txtDireccionEntrega.Text = ;
+                    //txtCiudad.Text = ;
                     txtFono.Text = objCliente.FONO;
                     txtGiro.Text = objCliente.GIRO;
-                    ddlConvenio.SelectedIndex = int.Parse(objCliente.CONVENIO.ID.ToString());
-                    ddlComuna.SelectedIndex = int.Parse(objCliente.COMUNA.ID.ToString());
                     txtDescuento.Text = objCliente.DESCUENTO.ToString();
-                    //txtContacto.Text = objCliente;
-                    txtConvenioPrecios.Text = objCliente.CONVENIO.ToString();
+                    ddlConvenio.SelectedIndex = int.Parse(objCliente.CONVENIO.ID.ToString());
+                    //ddlRegion.SelectedIndex = int.Parse(objCliente.REGION.ID.ToString());
+                    ddlComuna.SelectedIndex = int.Parse(objCliente.COMUNA.ID.ToString());
+                    ddlTipoFacturacion.SelectedIndex = int.Parse(objCliente.TIPO_FACTURA.ID.ToString());
                 }
             }
             catch (Exception ex)
@@ -59,19 +64,23 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 int Id = int.Parse(Request.QueryString["Id"]);
                 var trxCliente = new TrxCLIENTE();
-                string rut = txtRut.Text;
-                string nombre =txtNombre.Text;
-                string direccion = txtDireccion.Text;
-                string fono = txtFono.Text;
-                string giro = txtGiro.Text;
-                int? convenio = int.Parse(ddlConvenio.SelectedValue);
-                int? comuna = int.Parse(ddlConvenio.SelectedValue);
+
+                string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
+                string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
+                string razonSocial = !string.IsNullOrEmpty(txtRazonSocial.Text) ? txtRazonSocial.Text : string.Empty;
+                string direccion = !string.IsNullOrEmpty(txtDireccion.Text) ? txtDireccion.Text : string.Empty;
+                string direccinEntrega = !string.IsNullOrEmpty(txtDireccionEntrega.Text) ? txtDireccionEntrega.Text : string.Empty;
+                string fono = !string.IsNullOrEmpty(txtFono.Text) ? txtFono.Text : string.Empty;
+                string giro = !string.IsNullOrEmpty(txtGiro.Text) ? txtGiro.Text : string.Empty;
+                string ciudad = !string.IsNullOrEmpty(txtCiudad.Text) ? txtCiudad.Text : string.Empty;
+                int convenio = int.Parse(ddlConvenio.SelectedValue);
+                int region = int.Parse(ddlRegion.SelectedValue);
+                int comuna = int.Parse(ddlComuna.SelectedValue);
                 int descuento = int.Parse(txtDescuento.Text);
-                string contacto = txtContacto.Text;
-                string convenioPrecios = txtConvenioPrecios.Text;
+                int tipoFactura = int.Parse(ddlTipoFacturacion.SelectedValue); //(int)ENUM_TIPO_FACTURA.Monari_con_IVA;
                 int tipoPrestacion = (int)ENUM_TIPO_PRESTACION.Humanas;
-                int tipoFactura = (int)ENUM_TIPO_FACTURA.Monari_con_IVA;
-                trxCliente.Update(Id, comuna.Value, convenio.Value, tipoPrestacion, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
+
+                trxCliente.Update(Id, comuna, convenio, tipoPrestacion, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
                 Response.Redirect("MensajeExito.aspx?t=Actualizar Clientes&m=Se ha modificado la informacion del cliente " + nombre, false);
                 
             }
@@ -88,17 +97,20 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";                
-                txtRut.Text = string.Empty;
+                panelMensaje.CssClass = "OcultarMensaje";
+                //txtRut.Text = string.Empty;
                 txtNombre.Text = string.Empty;
+                txtRazonSocial.Text = string.Empty;
                 txtDireccion.Text = string.Empty;
+                txtDireccionEntrega.Text = string.Empty;
+                txtCiudad.Text = string.Empty;
                 txtFono.Text = string.Empty;
                 txtGiro.Text = string.Empty;
+                txtDescuento.Text = string.Empty;
+                ddlRegion.ClearSelection();
                 ddlConvenio.ClearSelection();
                 ddlComuna.ClearSelection();
-                txtDescuento.Text = string.Empty;
-                //txtContacto.Text = string.Empty;
-                txtConvenioPrecios.Text = string.Empty;               
+                ddlTipoFacturacion.ClearSelection();
             }
             catch (Exception ex)
             {
@@ -125,6 +137,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             ddlConvenio.Items.Add(new ListItem("(Todos)", ""));
             ddlConvenio.DataSource = _trx.GetAll();
             ddlConvenio.DataBind();
+        }
+
+        private void getRegion()
+        {
+            TrxREGION _trx = new TrxREGION();
+            ddlRegion.Items.Clear();
+            ddlRegion.Items.Add(new ListItem("(Todos)", ""));
+            ddlRegion.DataSource = _trx.GetAll();
+            ddlRegion.DataBind();
+        }
+
+        private void getTipoFactura()
+        {
+            TrxTIPO_FACTURA _trx = new TrxTIPO_FACTURA();
+            ddlTipoFacturacion.Items.Clear();
+            ddlTipoFacturacion.Items.Add(new ListItem("(Todos)", ""));
+            ddlTipoFacturacion.DataSource = _trx.GetAll();
+            ddlTipoFacturacion.DataBind();
         }
     }
 }

@@ -17,8 +17,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
+                    getRegion();
                     getComuna();
                     getConvenio();
+                    getTipoFactura();
                 }
             }
             catch (Exception ex)
@@ -28,6 +30,24 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
+        }
+
+        private void getTipoFactura()
+        {
+            TrxTIPO_FACTURA _trx = new TrxTIPO_FACTURA();
+            ddlTipoFacturacion.Items.Clear();
+            ddlTipoFacturacion.Items.Add(new ListItem("(Todos)", ""));
+            ddlTipoFacturacion.DataSource = _trx.GetAll();
+            ddlTipoFacturacion.DataBind();
+        }
+
+        private void getRegion()
+        {
+            TrxREGION _trx = new TrxREGION();
+            ddlRegion.Items.Clear();
+            ddlRegion.Items.Add(new ListItem("(Todos)", ""));
+            ddlRegion.DataSource = _trx.GetAll();
+            ddlRegion.DataBind();
         }
 
         private void getComuna()
@@ -52,17 +72,26 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                panelMensaje.CssClass = "OcultarMensaje";                
-                string rut = txtRut.Text;
-                string nombre = txtNombre.Text;
-                string direccion = txtDireccion.Text;
-                string fono = txtFono.Text;
-                string giro = txtGiro.Text;
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (!string.IsNullOrEmpty(txtRut.Text))
+                    if (!ValidaRut(txtRut.Text))
+                        throw new Exception("Rut no es valido");
+
+                string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
+                string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
+                string razonSocial = !string.IsNullOrEmpty(txtRazonSocial.Text) ? txtRazonSocial.Text : string.Empty;
+                string direccion = !string.IsNullOrEmpty(txtDireccion.Text) ? txtDireccion.Text : string.Empty;
+                string direccinEntrega = !string.IsNullOrEmpty(txtDireccionEntrega.Text) ? txtDireccionEntrega.Text : string.Empty;
+                string fono = !string.IsNullOrEmpty(txtFono.Text) ? txtFono.Text : string.Empty;
+                string giro = !string.IsNullOrEmpty(txtGiro.Text) ? txtGiro.Text : string.Empty;
+                string ciudad = !string.IsNullOrEmpty(txtCiudad.Text) ? txtCiudad.Text : string.Empty;
                 int convenio = int.Parse(ddlConvenio.SelectedValue);
+                int region = int.Parse(ddlRegion.SelectedValue);
                 int comuna = int.Parse(ddlComuna.SelectedValue);
-                int descuento = int.Parse(txtDescuento.Text);
+                int descuento = int.Parse(txtDescuento.Text);                
+                int tipoFactura = int.Parse(ddlTipoFacturacion.SelectedValue); //(int)ENUM_TIPO_FACTURA.Monari_con_IVA;
                 int tipoPrestacio = (int)ENUM_TIPO_PRESTACION.Humanas;
-                int tipoFactura = (int)ENUM_TIPO_FACTURA.Monari_con_IVA;
 
                 var cliente = new TrxCLIENTE();
                 var ingreso = cliente.Add(comuna, convenio, tipoPrestacio, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
@@ -85,14 +114,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 panelMensaje.CssClass = "OcultarMensaje";               
-                txtRut.Text = string.Empty;
+                txtRut.Text = string.Empty;                
                 txtNombre.Text = string.Empty;
+                txtRazonSocial.Text = string.Empty;
                 txtDireccion.Text = string.Empty;
+                txtDireccionEntrega.Text = string.Empty;
+                txtCiudad.Text = string.Empty;                
                 txtFono.Text = string.Empty;
                 txtGiro.Text = string.Empty;
+                txtDescuento.Text = string.Empty;
+                ddlRegion.ClearSelection();
                 ddlConvenio.ClearSelection();
                 ddlComuna.ClearSelection();
-                txtDescuento.Text = string.Empty;
+                ddlTipoFacturacion.ClearSelection();
                 
             }
             catch (Exception ex)
@@ -101,6 +135,68 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "MostrarMensaje";
                 lblMensaje.Text = ex.Message;
                 return;
+            }
+        }
+
+        private bool ValidaRut(string rut)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(rut))
+                {
+                    return false;
+                }
+                if (rut == "1-9")
+                {
+                    return false;
+                }
+                rut = rut.Trim();
+                if (string.IsNullOrEmpty(rut))
+                {
+                    return false;
+                }
+                rut = rut.Replace(".", "");
+                rut = rut.Replace("-", "");
+                string digit = rut.Substring(rut.Length - 1, 1);
+                digit = digit.ToUpper();
+                string digitComparer = "";
+                rut = rut.Substring(0, rut.Length - 1);
+                int wiMultiplicador = 9;
+                int wiSumatoria = 0;
+                int wiSubTotal = 0;
+                int wiLargo = rut.Length;
+                for (int i = wiLargo; i > 0; i--)
+                {
+                    wiSubTotal = Convert.ToInt32(rut.Substring(i - 1, 1));
+                    wiSumatoria = wiSumatoria + (wiSubTotal * wiMultiplicador);
+                    if (wiMultiplicador == 4)
+                    {
+                        wiMultiplicador = 10;
+                    }
+                    wiMultiplicador = wiMultiplicador - 1;
+                }
+                wiSumatoria = wiSumatoria % 11;
+                if (wiSumatoria == 10)
+                {
+                    digitComparer = "K";
+                }
+                else
+                {
+                    digitComparer = wiSumatoria.ToString();
+                }
+
+                if (digit.Equals(digitComparer))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
     }

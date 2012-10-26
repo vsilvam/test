@@ -9,6 +9,7 @@
     Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EditarPrestacionesHumanas.ascx.cs"
     Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.EditarPrestacionesHumanas" %>
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.23/themes/smoothness/jquery-ui.css" type="text/css" media="all" />
 <link rel="stylesheet" href="<%= ResolveUrl("~/_layouts/Style/css/lqce.css")%>" type="text/css" media="all" />
@@ -19,12 +20,12 @@
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/jquery-ui-timepicker-addon.js")%>"></script>
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/jquery-ui-sliderAccess.js")%>"></script>
 
-<%--<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
         $('#<%=txtFechaRecepcion.ClientID %>').datetimepicker();
         $('#<%=txtHoraRecepcion.ClientID %>').datetimepicker();
     });
-</script>--%>
+</script>
 
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
@@ -60,7 +61,7 @@
             </td>
             <td>
                 <asp:TextBox ID="txtNombre" runat="server" Enabled="false" Columns="30"></asp:TextBox>
-                <asp:RequiredFieldValidator ID='RequiredFieldValidator1' runat='server' ControlToValidate='txtNumeroFicha' ValidationGroup="validado"
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator1' runat='server' ControlToValidate='txtNombre' ValidationGroup="validado"
                     Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
             <td>
@@ -216,14 +217,14 @@
                         <asp:TemplateField HeaderText="Examen">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtExamen' ValidationGroup="validado"
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidatortxtExamen' runat='server' ControlToValidate='txtExamen' ValidationGroup="validado"
                     Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Valor">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>' Columns="30"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtValor' ValidationGroup="validado"
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidatortxtValor' runat='server' ControlToValidate='txtValor' ValidationGroup="validado"
                     Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -232,7 +233,7 @@
                 </asp:GridView>
                 Monto total prestacioones
                 <asp:TextBox ID="txtMontoTotal" runat="server" Columns="30" ReadOnly="true"></asp:TextBox>
-               <asp:RequiredFieldValidator ID='RequiredFieldValidator5' runat='server' ControlToValidate='txtMontoTotal' ValidationGroup="validado"
+               <asp:RequiredFieldValidator ID='RequiredFieldValidatortxtMontoTotal' runat='server' ControlToValidate='txtMontoTotal' ValidationGroup="validado"
                     Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
     </article>
 <footer>

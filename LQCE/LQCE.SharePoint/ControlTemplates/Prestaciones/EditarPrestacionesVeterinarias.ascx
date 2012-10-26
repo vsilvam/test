@@ -60,12 +60,16 @@
             </td>
             <td>
                 <asp:TextBox ID="txtNombre" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator' runat='server' ControlToValidate='txtNombre' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
             <td>
                 Especie<span>:</span>
             </td>
             <td>
                 <asp:TextBox ID="txtEspecie" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator1' runat='server' ControlToValidate='txtEspecie' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
@@ -96,6 +100,9 @@
             </td>
             <td>
                 <asp:TextBox ID="txtSolicitante" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator2' runat='server' ControlToValidate='txtSolicitante' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+
             </td>
             <td>
                 Telefono
@@ -124,12 +131,16 @@
             </td>
             <td>
                 <asp:TextBox ID="txtFechaRecepción" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator3' runat='server' ControlToValidate='txtFechaRecepción' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
             <td>
                 Hora Recepcion
             </td>
             <td>
                 <asp:TextBox ID="txtHoraRecepcion" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtHoraRecepcion' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
             </td>
            <%-- <td>
                 Fecha Entrega de Resultados
@@ -212,29 +223,37 @@
                 <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="50%" GridLines="None"
                    EnableModelValidation="True">
                     <Columns>
-                       <asp:TemplateField HeaderText="Examen">
+                       <asp:TemplateField HeaderText="Examen" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"></asp:TextBox>
+                                <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30" Enabled="false"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtExamen' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Valor">
+                        <asp:TemplateField HeaderText="Valor" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>' Columns="30"></asp:TextBox>
+                                <asp:TextBox ID="txtValorNuevoExamen" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>' Columns="30" Enabled="false"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtValor' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                     <HeaderStyle CssClass="head" />
                </asp:GridView>
+               Monto total prestacioones
+               <asp:TextBox ID="txtMontoTotal" runat="server" Columns="30" ReadOnly="true"></asp:TextBox>
+               <asp:RequiredFieldValidator ID='RequiredFieldValidator5' runat='server' ControlToValidate='txtMontoTotal' ValidationGroup="validado"
+                    Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
     </article>
 <article class="module width_full">
     <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
                     <table>
                         <tr>
-                            <td>
-                                Examen
+                            <td><center>
+                                Examen</center>
                             </td>
-                            <td>
-                                Valor
+                            <td><center>
+                                Valor</center>
                             </td>
                         </tr>
                         <tr>
@@ -254,12 +273,9 @@
                     </table>
     </asp:Panel>
     </article>
-<!--Validar, marcar error,guarda temporal  "dejar con botones" 
-    En caso de error mostrar mensaje u observacions en la ficha
-    -->
 <footer>
       <div class="submit_link">
-      <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" />
+      <asp:Button ID="btnValidado" runat="server" Text="Validado" OnClick="btnValidado_Click" ValidationGroup="validado"/>
        <asp:Button ID="btnCancelar" runat="server" Text="Cerrar Revisión" CausesValidation="false"
               onclick="btnCancelar_Click" />
       </div>

@@ -35,7 +35,7 @@
     <b>Procesos de Facturación</b>
     <table>
         <tr>
-            <td>
+            <td style="width:150px">
                 Fecha de Emisión
             </td>
             <td>
@@ -43,8 +43,9 @@
                 <asp:TextBox ID="txtFechaEmisionDesde" runat="server" Columns="10" MaxLength="10"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator_txtFechaEmisionDesde" runat="server"
                     ControlToValidate="txtFechaEmisionDesde" ErrorMessage="Requerido" Display="Dynamic"
-                    ValidationGroup="buscar">Requerido</asp:RequiredFieldValidator>
-                <br />
+                    ValidationGroup="buscar">Requerido</asp:RequiredFieldValidator>                
+            </td>            
+            <td>
                 Hasta
                 <asp:TextBox ID="txtFechaEmisionHasta" runat="server" Columns="10" MaxLength="10"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator_txtFechaEmisionHasta" runat="server"
@@ -89,9 +90,10 @@
                     ControlToValidate="txtDesdeN" ErrorMessage="Requerido" Display="Dynamic" ValidationGroup="numerar">Requerido</asp:RequiredFieldValidator>
                 <asp:CompareValidator ID="CompareValidator_txtDesdeN" runat="server" Type="Integer"
                     Operator="DataTypeCheck" ControlToValidate="txtDesdeN" ErrorMessage="Formato no válido"
-                    Display="Dynamic" ValidationGroup="numerar">Formato no válido</asp:CompareValidator>
-                <br />
-                Hasta
+                    Display="Dynamic" ValidationGroup="numerar">Formato no válido</asp:CompareValidator>               
+            </td>
+            <td>
+                 Hasta
                 <asp:TextBox ID="txtHastaN" runat="server" Columns="10" MaxLength="8"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator_txtHastaN" runat="server"
                     ControlToValidate="txtHastaN" Display="Dynamic" ErrorMessage="Requerido" ValidationGroup="numerar">Requerido</asp:RequiredFieldValidator>

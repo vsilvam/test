@@ -60,50 +60,84 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         private void CargaFicha(int Id)
         {
-            TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
-            var prestaciones = PrestacionesHumanas.GetByIdWithReferencesFull(Id);
-            if (prestaciones == null)
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
-
-            //cargar ficha
-            txtNumeroFicha.Text = prestaciones.FICHA;
-            txtNombre.Text = prestaciones.NOMBRE;
-            txtRut.Text = prestaciones.RUT;
-            txtMedico.Text = prestaciones.MEDICO;
-            txtEdad.Text = prestaciones.EDAD;
-            txtTelefono.Text = prestaciones.TELEFONO;
-            txtProcedencia.Text = prestaciones.PROCEDENCIA;
-            txtFechaHora1.Text = prestaciones.FECHA_RECEPCION.Replace("/","-");
-            txtPrevision.Text = prestaciones.PREVISION;
-            txtPagado.Text = prestaciones.PAGADO;
-            txtGarantia.Text = prestaciones.GARANTIA;
-            txtPendiente.Text = prestaciones.PENDIENTE;
-            txtFechaHoraEntrega1.Text = prestaciones.FECHA_RESULTADOS.Replace("/", "-"); 
-            txtTotal.Text = prestaciones.TOTAL;
-            txtMuestra.Text = prestaciones.MUESTRA;
-
-            var lista = prestaciones.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(e => e.ACTIVO);
-            List<DTOExamen> listaDTO = new List<DTOExamen>();
-            foreach (var item in lista)
+            try
             {
-                listaDTO.Add(new DTOExamen(item));
+                TrxCARGA_PRESTACIONES_HUMANAS_DETALLE PrestacionesHumanas = new TrxCARGA_PRESTACIONES_HUMANAS_DETALLE();
+                var prestaciones = PrestacionesHumanas.GetByIdWithReferencesFull(Id);
+                if (prestaciones == null)
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
+
+                //cargar ficha
+                txtNumeroFicha.Text = prestaciones.FICHA;
+                txtNombre.Text = prestaciones.NOMBRE;
+                txtRut.Text = prestaciones.RUT;
+                txtMedico.Text = prestaciones.MEDICO;
+                txtEdad.Text = prestaciones.EDAD;
+                txtTelefono.Text = prestaciones.TELEFONO;
+                txtProcedencia.Text = prestaciones.PROCEDENCIA;
+                txtFechaRecepcion.Text = prestaciones.FECHA_RECEPCION.Replace("/", "-");
+                txtPrevision.Text = prestaciones.PREVISION;
+                txtPagado.Text = prestaciones.PAGADO;
+                txtGarantia.Text = prestaciones.GARANTIA;
+                txtPendiente.Text = prestaciones.PENDIENTE;
+                txtHoraRecepcion.Text = prestaciones.FECHA_RESULTADOS.Replace("/", "-");
+                txtTotal.Text = prestaciones.TOTAL;
+                txtMuestra.Text = prestaciones.MUESTRA;
+
+                var lista = prestaciones.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(e => e.ACTIVO);
+                List<DTOExamen> listaDTO = new List<DTOExamen>();
+                foreach (var item in lista)
+                {
+                    listaDTO.Add(new DTOExamen(item));
+                }
+                this.ListaExamen = listaDTO;
+
+                //se carga grilla
+                grdExamen.DataSource = listaDTO;
+                grdExamen.DataBind();
+
+                // validar
+                TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                var listaErrores = PrestacionesEncabezado.ValidarPrestacionHumana(Id);
+                grdErroresHumanos.DataSource = listaErrores;
+                grdErroresHumanos.DataBind();
+                panelErrores.Visible = listaErrores.Any();
+
+                //Habilitar Edicion de Ficha
+                if (prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente) //o con errores 
+                    EditarFicha();
+
+                CalculoMontoPrestaciones();
             }
-            this.ListaExamen = listaDTO;
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
 
-            //se carga grilla
-            grdExamen.DataSource = listaDTO;
-            grdExamen.DataBind();
-            
-            // validar
-            TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-            var listaErrores = PrestacionesEncabezado.ValidarPrestacionHumana(Id);
-            grdErroresHumanos.DataSource = listaErrores;
-            grdErroresHumanos.DataBind();
-            panelErrores.Visible = listaErrores.Any();
+        private void CalculoMontoPrestaciones()
+        {
+            try
+            {
+                int montoTotal = !string.IsNullOrEmpty(txtValor.Text) ? int.Parse(txtValor.Text) : 0;
+                foreach (GridViewRow grilla in grdExamen.Rows)
+                {
+                    TextBox Valor = (TextBox)grilla.FindControl("txtValor");
+                    montoTotal = int.Parse(Valor.Text) + montoTotal;
+                }
 
-            //Habilitar Edicion de Ficha
-            //if (prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente) //o con errores 
-            EditarFicha();
+                txtMontoTotal.Text = montoTotal.ToString();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         private void EditarFicha()
@@ -116,14 +150,16 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtEdad.Enabled = true;
             txtTelefono.Enabled = true;
             txtProcedencia.Enabled = true;
-            txtFechaHora1.Enabled = true;
+            txtFechaRecepcion.Enabled = true;
             txtPrevision.Enabled = true;
             txtPagado.Enabled = true;
             txtGarantia.Enabled = true;
             txtPendiente.Enabled = true;
-            txtFechaHoraEntrega1.Enabled = true;
+            txtRecepcion.Enabled = true;
             txtTotal.Enabled = true;
             txtMuestra.Enabled = true;
+            txtValor.Enabled = true;
+            txtExamen.Enabled = true;
 
         }
 
@@ -150,12 +186,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
                 string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
                 string procedencia = txtProcedencia.Text.Trim();
-                string fechaRecepcion = !string.IsNullOrEmpty(txtFechaHora1.Text) ? txtFechaHora1.Text : string.Empty;
+                string fechaRecepcion = !string.IsNullOrEmpty(txtFechaRecepcion.Text) ? txtFechaRecepcion.Text : string.Empty;
                 string prevision = !string.IsNullOrEmpty(txtPrevision.Text) ? txtPrevision.Text : string.Empty;
                 string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
                 string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
                 string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
-                string fechaResultado = !string.IsNullOrEmpty(txtFechaHoraEntrega1.Text) ? txtFechaHoraEntrega1.Text : string.Empty;
+                string fechaResultado = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
                 string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
                 string muestra = txtMuestra.Text.Trim();
 
@@ -226,6 +262,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 txtExamen.Text = string.Empty;
                 txtValor.Text = string.Empty;
                 pnAgregaFila.Visible = false;
+
+                CalculoMontoPrestaciones();
             }
             catch (Exception ex)
             {

@@ -105,10 +105,33 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             panelErrores.Visible = listaErrores.Any();
 
             //Habilitar Edicion de Ficha
-            //string estado = prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.NOMBRE;
-            //if (estado == ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente.ToString())
+            string estado = prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.NOMBRE;
+            if (estado == ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente.ToString())
                 EditarFicha();
 
+            CalculoMontoPrestaciones();
+        }
+
+        private void CalculoMontoPrestaciones()
+        {
+            try
+            {
+                int montoTotal = !string.IsNullOrEmpty(txtValor.Text) ? int.Parse(txtValor.Text) : 0;
+                foreach (GridViewRow grilla in grdExamen.Rows)
+                {
+                    TextBox Valor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
+                    montoTotal = int.Parse(Valor.Text) + montoTotal;
+                }
+
+                txtMontoTotal.Text = montoTotal.ToString();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         private void EditarFicha()
@@ -244,6 +267,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 txtExamen.Text = string.Empty;
                 txtValor.Text = string.Empty;
                 pnAgregaFila.Visible = false;
+
+                CalculoMontoPrestaciones();
             }
             catch (Exception ex)
             {
@@ -252,7 +277,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
-            //guardar datos y cargar nuevamente la grilla
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

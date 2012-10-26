@@ -112,13 +112,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtSexo;
         
         /// <summary>
-        /// Control txtSolicita.
+        /// Control txtSolicitante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSolicita;
+        protected global::System.Web.UI.WebControls.TextBox txtSolicitante;
         
         /// <summary>
         /// Control txtTelefono.
@@ -139,15 +139,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtMedico;
         
         /// <summary>
-        /// Control txtProcedencia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProcedencia;
-        
-        /// <summary>
         /// Control txtRecepcion.
         /// </summary>
         /// <remarks>
@@ -157,6 +148,60 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtRecepcion;
         
         /// <summary>
+        /// Control txtFechaRecepción.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaRecepción;
+        
+        /// <summary>
+        /// Control txtHoraRecepcion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtHoraRecepcion;
+        
+        /// <summary>
+        /// Control txtProcedencia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProcedencia;
+        
+        /// <summary>
+        /// Control txtGarantia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtGarantia;
+        
+        /// <summary>
+        /// Control txtTotal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTotal;
+        
+        /// <summary>
+        /// Control txtSolicita.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSolicita;
+        
+        /// <summary>
         /// Control txtMuestraFecha.
         /// </summary>
         /// <remarks>
@@ -164,15 +209,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMuestraFecha;
-        
-        /// <summary>
-        /// Control txtFechaEntrega.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaEntrega;
         
         /// <summary>
         /// Control txtPendiente.
@@ -193,22 +229,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtPagado;
         
         /// <summary>
-        /// Control txtGarantia.
+        /// Control txtFechaEntrega.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtGarantia;
-        
-        /// <summary>
-        /// Control txtTotal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTotal;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaEntrega;
         
         /// <summary>
         /// Control lnkAgregaFicha.

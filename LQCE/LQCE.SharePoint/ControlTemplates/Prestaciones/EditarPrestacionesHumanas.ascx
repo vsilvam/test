@@ -47,8 +47,7 @@
         
     <table>
         <tr>
-        <td colspan="4"></td>
-            <td>
+            <td style="width:150px">
                 Numero de Ficha
             </td>
             <td>
@@ -58,8 +57,8 @@
         <tr>
             <td>Nombre
             </td>
-            <td colspan="3">
-                <asp:TextBox ID="txtNombre" runat="server" Enabled="false" Columns="90"></asp:TextBox>
+            <td>
+                <asp:TextBox ID="txtNombre" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
                 RUT
@@ -69,12 +68,6 @@
             </td>
         </tr>
         <tr>
-            <td>
-                Médico
-            </td>
-            <td>
-                <asp:TextBox ID="txtMedico" runat="server" Enabled="false" Columns="30"></asp:TextBox>
-            </td>
             <td>
                 Edad
             </td>
@@ -89,6 +82,14 @@
             </td>
         </tr>
         <tr>
+            <td>
+                Médico
+            </td>
+            <td>
+                <asp:TextBox ID="txtMedico" runat="server" Enabled="false" Columns="30"></asp:TextBox>
+            </td>            
+        </tr>
+        <tr>
         <td>Procedencia</td>
         <td>
         <asp:TextBox ID="txtProcedencia" runat="server" Enabled="false" Columns="30"></asp:TextBox>
@@ -99,19 +100,13 @@
             <td>
                 <asp:TextBox ID="txtFechaHora1" runat="server" Enabled="true" Columns="30" CssClass="hasDatePicker"></asp:TextBox>
             </td>
-            <td>
-                
-            </td>
-            <td>
-                
-            </td>
         </tr>
         <tr>
             <td>
                 Prevision
             </td>
-            <td colspan="3">
-                <asp:TextBox ID="txtPrevision" runat="server" Enabled="false" Columns="90"></asp:TextBox>
+            <td>
+                <asp:TextBox ID="txtPrevision" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
                 Pagado
@@ -124,8 +119,8 @@
             <td>
                 Garantia
             </td>
-            <td colspan="3">
-                <asp:TextBox ID="txtGarantia" runat="server" Enabled="false" Columns="90"></asp:TextBox>
+            <td>
+                <asp:TextBox ID="txtGarantia" runat="server" Enabled="false" Columns="30"></asp:TextBox>
             </td>
             <td>
                 Pendiente
@@ -142,12 +137,6 @@
                 <asp:TextBox ID="txtFechaHoraEntrega1" runat="server" Enabled="true" Columns="30" CssClass="hasDatePicker"></asp:TextBox>
             </td>
             <td>
-                
-            </td>
-            <td>
-                
-            </td>
-            <td>
                 Total
             </td>
             <td>
@@ -157,7 +146,7 @@
         <tr>
         <td>Muestra</td>
         <td colspan="5">
-        <asp:TextBox ID="txtMuestra" runat="server" Enabled="false" Columns="150"></asp:TextBox>
+        <asp:TextBox ID="txtMuestra" runat="server" Enabled="false" Columns="30"></asp:TextBox>
         </td>
         </tr>
     </table>
@@ -177,10 +166,10 @@
                     <table>
                         <tr>
                             <td>
-                                EXAMEN
+                                Examen
                             </td>
                             <td>
-                                VALOR
+                                Valor
                             </td>
                         </tr>
                         <tr>
@@ -207,14 +196,14 @@
    </article>
 <article class="module width_full">
   <header><h3>Exámenes</h3></header> 
-     <asp:GridView ID="grdExamen"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="False" Width="100%" EnableModelValidation="True">
+     <asp:GridView ID="grdExamen"  CssClass="tablesorter" GridLines="None" runat="server" AutoGenerateColumns="False" Width="50%" EnableModelValidation="True">
                     <Columns>
-                        <asp:TemplateField HeaderText="EXAMEN">
+                        <asp:TemplateField HeaderText="Examen">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"></asp:TextBox>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="VALOR">
+                        <asp:TemplateField HeaderText="Valor">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtValor" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>' Columns="30"></asp:TextBox>
                             </ItemTemplate>

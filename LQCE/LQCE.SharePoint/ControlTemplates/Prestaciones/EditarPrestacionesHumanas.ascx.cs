@@ -156,6 +156,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtRecepcion.Enabled = true;
             txtEdad.Enabled = true;
             txtRut.Enabled = true;
+            foreach (GridViewRow grilla in grdExamen.Rows)
+            {
+                if (grilla.RowType == DataControlRowType.DataRow)
+                {
+                    TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
+                    TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
+                    txtExamen.Enabled = true;
+                    txtValor.Enabled = true;
+                }
+            }
+
         }
 
         protected void btnValidado_Click(object sender, EventArgs e)

@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<PRESTACION_HUMANA> GetByFilter(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "")
+		public List<PRESTACION_HUMANA> GetByFilter(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", string PAGADO = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
-                    return repositorio.GetByFilter(NOMBRE, RUT, EDAD, TELEFONO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(NOMBRE, RUT, EDAD, TELEFONO, PAGADO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<PRESTACION_HUMANA> GetByFilterWithReferences(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "")
+		public List<PRESTACION_HUMANA> GetByFilterWithReferences(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", string PAGADO = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_HUMANA repositorio = new RepositorioPRESTACION_HUMANA(context);
-                    return repositorio.GetByFilterWithReferences(NOMBRE, RUT, EDAD, TELEFONO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(NOMBRE, RUT, EDAD, TELEFONO, PAGADO).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(string NOMBRE, string RUT, string EDAD, string TELEFONO)
+		        public int Add(string NOMBRE, string RUT = "", string EDAD = "", string TELEFONO = "", string PAGADO = "")
         {
 		Init();
             try
@@ -159,6 +159,7 @@ namespace LQCE.Transaccion
                     _PRESTACION_HUMANA.RUT = RUT;				
                     _PRESTACION_HUMANA.EDAD = EDAD;				
                     _PRESTACION_HUMANA.TELEFONO = TELEFONO;				
+                    _PRESTACION_HUMANA.PAGADO = PAGADO;				
                     _PRESTACION_HUMANA.ACTIVO = true;				
 
 					//parents
@@ -178,7 +179,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, string NOMBRE, string RUT, string EDAD, string TELEFONO)
+		public void Update(int Id, string NOMBRE, string RUT = "", string EDAD = "", string TELEFONO = "", string PAGADO = "")
 		{
 		Init();
 			try
@@ -209,6 +210,10 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(TELEFONO))
 					{
 						_PRESTACION_HUMANA.TELEFONO = TELEFONO;
+					}
+					if (!string.IsNullOrEmpty(PAGADO))
+					{
+						_PRESTACION_HUMANA.PAGADO = PAGADO;
 					}
 	
 					//parents

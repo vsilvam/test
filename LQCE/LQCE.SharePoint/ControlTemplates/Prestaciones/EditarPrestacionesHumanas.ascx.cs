@@ -68,21 +68,20 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     ScriptManager.RegisterStartupScript(Page, Page.GetType(), "js_carga_prestaciones", "javascript:alert('No existe información asociada.');", true);
 
                 //cargar ficha
-                txtNumeroFicha.Text = prestaciones.FICHA;
                 txtNombre.Text = prestaciones.NOMBRE;
-                txtRut.Text = prestaciones.RUT;
-                txtMedico.Text = prestaciones.MEDICO;
-                txtEdad.Text = prestaciones.EDAD;
-                txtTelefono.Text = prestaciones.TELEFONO;
-                txtProcedencia.Text = prestaciones.PROCEDENCIA;
+                txtNumeroFicha.Text = prestaciones.FICHA;
                 txtFechaRecepcion.Text = prestaciones.FECHA_RECEPCION.Replace("/", "-");
+                txtTelefono.Text = prestaciones.TELEFONO;
+                txtMedico.Text = prestaciones.MEDICO;
+                txtProcedencia.Text = prestaciones.PROCEDENCIA;
                 txtPrevision.Text = prestaciones.PREVISION;
-                txtPagado.Text = prestaciones.PAGADO;
                 txtGarantia.Text = prestaciones.GARANTIA;
                 txtPendiente.Text = prestaciones.PENDIENTE;
-                txtHoraRecepcion.Text = prestaciones.FECHA_RESULTADOS.Replace("/", "-");
-                txtTotal.Text = prestaciones.TOTAL;
-                txtMuestra.Text = prestaciones.MUESTRA;
+                txtPagado.Text = prestaciones.PAGADO;
+                txtMontoTotal.Text = prestaciones.TOTAL;
+                txtRecepcion.Text = prestaciones.RECEPCION;
+                txtEdad.Text = prestaciones.EDAD;
+                txtRut.Text = prestaciones.RUT;
 
                 var lista = prestaciones.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(e => e.ACTIVO);
                 List<DTOExamen> listaDTO = new List<DTOExamen>();
@@ -107,7 +106,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (prestaciones.CARGA_PRESTACIONES_ENCABEZADO.CARGA_PRESTACIONES_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente) //o con errores 
                     EditarFicha();
 
-                CalculoMontoPrestaciones();
+                //CalculoMontoPrestaciones();
             }
             catch (Exception ex)
             {
@@ -122,7 +121,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                int montoTotal = !string.IsNullOrEmpty(txtValor.Text) ? int.Parse(txtValor.Text) : 0;
+                int montoTotal = 0;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
                     TextBox Valor = (TextBox)grilla.FindControl("txtValor");
@@ -145,22 +144,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             //Se habilita la ficha para edicion   
             txtNumeroFicha.Enabled = false;
             txtNombre.Enabled = true;
-            txtRut.Enabled = true;
-            txtMedico.Enabled = true;
-            txtEdad.Enabled = true;
-            txtTelefono.Enabled = true;
-            txtProcedencia.Enabled = true;
             txtFechaRecepcion.Enabled = true;
+            txtTelefono.Enabled = true;
+            txtMedico.Enabled = true;
+            txtProcedencia.Enabled = true;
             txtPrevision.Enabled = true;
-            txtPagado.Enabled = true;
             txtGarantia.Enabled = true;
             txtPendiente.Enabled = true;
+            txtPagado.Enabled = true;
+            txtMontoTotal.Enabled = true;
             txtRecepcion.Enabled = true;
-            txtTotal.Enabled = true;
-            txtMuestra.Enabled = true;
-            txtValor.Enabled = true;
-            txtExamen.Enabled = true;
-
+            txtEdad.Enabled = true;
+            txtRut.Enabled = true;
         }
 
         protected void btnValidado_Click(object sender, EventArgs e)
@@ -181,20 +176,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 int IdCargaPrestacionesDetalleEstado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
                 string ficha = !string.IsNullOrEmpty(txtNumeroFicha.Text) ? txtNumeroFicha.Text : string.Empty;
                 string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
-                string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
-                string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
-                string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
-                string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
-                string procedencia = txtProcedencia.Text.Trim();
                 string fechaRecepcion = !string.IsNullOrEmpty(txtFechaRecepcion.Text) ? txtFechaRecepcion.Text : string.Empty;
+                string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
+                string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
+                string procedencia = txtProcedencia.Text.Trim();
                 string prevision = !string.IsNullOrEmpty(txtPrevision.Text) ? txtPrevision.Text : string.Empty;
-                string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
                 string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
                 string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
-                string fechaResultado = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
-                string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
-                string muestra = txtMuestra.Text.Trim();
-
+                string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
+                string total = !string.IsNullOrEmpty(txtMontoTotal.Text) ? txtMontoTotal.Text : string.Empty;
+                string recepcion = txtRecepcion.Text.Trim();
+                string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
+                string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
+                
                 //se recorren los examenes para guardar
                 List<DTOExamen> listaDTO = this.ListaExamen;
                 int numeroFila = 0;
@@ -211,9 +205,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 this.ListaExamen = listaDTO;
 
                 TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                DTO_RESULTADO_ACTUALIZACION_FICHA resultado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(Id, ficha, nombre, rut,
-                    medico, edad, telefono, procedencia, fechaRecepcion, muestra,
-                    fechaResultado, prevision, garantia, pagado, pendiente,
+                DTO_RESULTADO_ACTUALIZACION_FICHA resultado = PrestacionesEncabezado.ActualizarCargaPrestacionHumana(Id,
+                    ficha, nombre, fechaRecepcion, telefono, medico, procedencia, prevision, garantia,
+                    pendiente, pagado, total, recepcion, edad, rut,
                     IdCargaPrestacionesDetalleEstado, "", this.ListaExamen);
 
                 if (!resultado.RESULTADO)

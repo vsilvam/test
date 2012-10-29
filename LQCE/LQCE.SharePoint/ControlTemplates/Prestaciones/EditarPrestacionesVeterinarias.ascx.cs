@@ -70,20 +70,19 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtNombre.Text = prestaciones.NOMBRE;
             txtEspecie.Text = prestaciones.ESPECIE;
             txtRaza.Text = prestaciones.RAZA;
-            txtEdad.Text = prestaciones.EDAD;
             txtSexo.Text = prestaciones.SEXO;
-            txtSolicita.Text = prestaciones.SOLICITA;
+            txtEdad.Text = prestaciones.EDAD;
             txtTelefono.Text = prestaciones.TELEFONO;
-            txtMedico.Text = prestaciones.MEDICO;
             txtProcedencia.Text = prestaciones.PROCEDENCIA;
-            txtRecepcion.Text = prestaciones.FECHA_RECEPCION.Replace("/", "-");
-            txtMuestraFecha.Text = prestaciones.FECHA_MUESTRA.Replace("/", "-");
-            txtPendiente.Text = prestaciones.PENDIENTE;
-            txtPagado.Text = prestaciones.PAGADO;
             txtGarantia.Text = prestaciones.GARANTIA;
-            txtTotal.Text = prestaciones.TOTAL;
-            txtFechaEntrega.Text = prestaciones.FECHA_RESULTADOS.Replace("/", "-");
-            
+            txtPendiente.Text = prestaciones.PENDIENTE;
+            txtMontoTotal.Text = prestaciones.TOTAL;
+            txtRecepcion.Text = prestaciones.FECHA_RECEPCION.Replace("/", "-");
+            txtMedico.Text = prestaciones.MEDICO;
+            txtSolicitante.Text = prestaciones.SOLICITA;
+            txtFechaRecepción.Text = prestaciones.FECHA_RECEPCION;
+            txtFichaClinica.Text = prestaciones.FICHA_CLINICA;
+
             //carga grilla
             var lista = prestaciones.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(e => e.ACTIVO);
             List<DTOExamen> listaDTO = new List<DTOExamen>();
@@ -109,14 +108,14 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             if (estado == ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente.ToString())
                 EditarFicha();
 
-            CalculoMontoPrestaciones();
+            //CalculoMontoPrestaciones();
         }
 
         private void CalculoMontoPrestaciones()
         {
             try
             {
-                int montoTotal = !string.IsNullOrEmpty(txtValor.Text) ? int.Parse(txtValor.Text) : 0;
+                int montoTotal = 0;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
                     TextBox Valor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
@@ -140,19 +139,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtNombre.Enabled = true;
             txtEspecie.Enabled = true;
             txtRaza.Enabled = true;
-            txtEdad.Enabled = true;
             txtSexo.Enabled = true;
-            txtSolicita.Enabled = true;
+            txtEdad.Enabled = true;
             txtTelefono.Enabled = true;
-            txtMedico.Enabled = true;
             txtProcedencia.Enabled = true;
-            txtRecepcion.Enabled = true;
-            txtMuestraFecha.Enabled = true;
-            txtPendiente.Enabled = true;
-            txtPagado.Enabled = true;
             txtGarantia.Enabled = true;
-            txtTotal.Enabled = true;
-            txtFechaEntrega.Enabled = true;
+            txtPendiente.Enabled = true;
+            txtMontoTotal.Enabled = true;
+            txtRecepcion.Enabled = true;
+            txtMedico.Enabled = true;
+            txtSolicitante.Enabled = true;
+            txtFechaRecepción.Enabled = true;
+            txtFichaClinica.Enabled = true;
         }
 
         protected void btnValidado_Click(object sender, EventArgs e)
@@ -172,19 +170,18 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
                 string especie = !string.IsNullOrEmpty(txtEspecie.Text) ? txtEspecie.Text : string.Empty;
                 string raza = !string.IsNullOrEmpty(txtRaza.Text) ? txtRaza.Text : string.Empty;
-                string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
                 string sexo = !string.IsNullOrEmpty(txtSexo.Text) ? txtSexo.Text : string.Empty;
-                string solicita = !string.IsNullOrEmpty(txtSolicita.Text) ? txtSolicita.Text : string.Empty;
+                string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
                 string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
-                string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
                 string procedencia = !string.IsNullOrEmpty(txtProcedencia.Text) ? txtProcedencia.Text : string.Empty;
-                string fechaRecepcion = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
-                string fechaMuestra = !string.IsNullOrEmpty(txtMuestraFecha.Text) ? txtMuestraFecha.Text : string.Empty;
-                string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
-                string pagado = !string.IsNullOrEmpty(txtPagado.Text) ? txtPagado.Text : string.Empty;
                 string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
-                string total = !string.IsNullOrEmpty(txtTotal.Text) ? txtTotal.Text : string.Empty;
-                string fechaEntrega = !string.IsNullOrEmpty(txtFechaEntrega.Text) ? txtFechaEntrega.Text : string.Empty;
+                string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
+                string total = !string.IsNullOrEmpty(txtMontoTotal.Text) ? txtMontoTotal.Text : string.Empty;
+                string recepcion = txtRecepcion.Text.Trim();
+                string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
+                string solicitante = txtSolicitante.Text.Trim();
+                string fechaRecepcion = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
+                string fichaClinica = txtFichaClinica.Text.Trim();
 
                 //se recorren los examenes para guardar
                 List<DTOExamen> listaDTO = this.ListaExamen;
@@ -203,8 +200,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
                 DTO_RESULTADO_ACTUALIZACION_FICHA resultado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(Id, ficha, nombre,
-                    especie, raza, edad, sexo, solicita, telefono, medico, procedencia, fechaRecepcion, fechaMuestra, fechaEntrega, pendiente, garantia,
-                    pagado, total, IdCargaPrestacionesDetalleEstado, "", this.ListaExamen);
+                    especie, raza, sexo, edad, telefono, procedencia, garantia, pendiente, 
+                    total, recepcion, medico, solicitante, fechaRecepcion, fichaClinica,
+                    IdCargaPrestacionesDetalleEstado, "", this.ListaExamen);
 
                 if (!resultado.RESULTADO)
                 {

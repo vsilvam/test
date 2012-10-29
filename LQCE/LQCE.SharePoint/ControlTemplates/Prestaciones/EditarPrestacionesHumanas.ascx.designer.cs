@@ -94,22 +94,22 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// Control txtRut.
+        /// Control txtFechaRecepcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRut;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaRecepcion;
         
         /// <summary>
-        /// Control txtEdad.
+        /// Control RequiredFieldValidator3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEdad;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
         /// Control txtTelefono.
@@ -148,42 +148,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
         
         /// <summary>
-        /// Control txtFechaRecepcion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaRecepcion;
-        
-        /// <summary>
-        /// Control RequiredFieldValidator3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
-        
-        /// <summary>
-        /// Control txtHoraRecepcion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHoraRecepcion;
-        
-        /// <summary>
-        /// Control RequiredFieldValidator6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
-        
-        /// <summary>
         /// Control txtPrevision.
         /// </summary>
         /// <remarks>
@@ -191,15 +155,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPrevision;
-        
-        /// <summary>
-        /// Control txtPagado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPagado;
         
         /// <summary>
         /// Control txtGarantia.
@@ -220,6 +175,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtPendiente;
         
         /// <summary>
+        /// Control txtPagado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPagado;
+        
+        /// <summary>
         /// Control txtRecepcion.
         /// </summary>
         /// <remarks>
@@ -229,22 +193,22 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.TextBox txtRecepcion;
         
         /// <summary>
-        /// Control txtTotal.
+        /// Control txtEdad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTotal;
+        protected global::System.Web.UI.WebControls.TextBox txtEdad;
         
         /// <summary>
-        /// Control txtMuestra.
+        /// Control txtRut.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMuestra;
+        protected global::System.Web.UI.WebControls.TextBox txtRut;
         
         /// <summary>
         /// Control LinkButton1.

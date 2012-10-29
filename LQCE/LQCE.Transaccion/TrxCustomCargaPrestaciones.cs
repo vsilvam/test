@@ -78,20 +78,21 @@ namespace LQCE.Transaccion
                             {
                                 CARGA_PRESTACIONES_HUMANAS_DETALLE objDetalle = new CARGA_PRESTACIONES_HUMANAS_DETALLE();
                                 objDetalle.CARGA_PRESTACIONES_ENCABEZADO = objEncabezado;
-                                objDetalle.FICHA = item["FICHA"].ToString();
                                 objDetalle.NOMBRE = item["NOMBRE"].ToString();
-                                objDetalle.RUT = item["RUT"].ToString();
-                                objDetalle.MEDICO = item["MEDICO"].ToString();
-                                objDetalle.EDAD = item["EDAD"].ToString();
+                                objDetalle.FICHA = item["FICHA"].ToString();
+                                objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString() + " " + item["HORA RECEPCION"].ToString();
                                 objDetalle.TELEFONO = item["TELEFONO"].ToString();
+                                objDetalle.MEDICO = item["MEDICO"].ToString();
                                 objDetalle.PROCEDENCIA = item["PROCEDENCIA"].ToString();
-                                objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString();
-                                objDetalle.MUESTRA = item["MUESTRA"].ToString();
-                                objDetalle.FECHA_RESULTADOS = item["FECHA RESULTADOS"].ToString();
                                 objDetalle.PREVISION = item["PREVISION"].ToString();
                                 objDetalle.GARANTIA = item["GARANTIA"].ToString();
-                                objDetalle.PAGADO = item["PAGADO"].ToString();
                                 objDetalle.PENDIENTE = item["PENDIENTE"].ToString();
+                                objDetalle.PAGADO = item["PAGADO"].ToString();
+                                objDetalle.TOTAL = item["TOTAL"].ToString();
+                                objDetalle.RECEPCION = item["RECEPCION"].ToString();
+                                objDetalle.EDAD = item["EDAD"].ToString();
+                                objDetalle.RUT = item["RUT"].ToString();
+                                
                                 objDetalle.ACTIVO = true;
                                 objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
                                 objDetalle.MENSAJE_ERROR = "";
@@ -112,6 +113,7 @@ namespace LQCE.Transaccion
                                 AgregarExamenHumano(context, objDetalle, item, "EXAMEN 6", "VALOR 6");
                                 AgregarExamenHumano(context, objDetalle, item, "EXAMEN 7", "VALOR 7");
                                 AgregarExamenHumano(context, objDetalle, item, "EXAMEN 8", "VALOR 8");
+                                AgregarExamenHumano(context, objDetalle, item, "EXAMEN 9", "VALOR 9");
 
                                 ValidarPrestacionHumana(context, objDetalle);
 
@@ -125,34 +127,36 @@ namespace LQCE.Transaccion
                         {
                             CARGA_PRESTACIONES_VETERINARIAS_DETALLE objDetalle = new CARGA_PRESTACIONES_VETERINARIAS_DETALLE();
                             objDetalle.CARGA_PRESTACIONES_ENCABEZADO = objEncabezado;
-                            objDetalle.FICHA = item["FICHA"].ToString();
+                            objDetalle.FICHA = item["INGRESO"].ToString();
                             objDetalle.NOMBRE = item["NOMBRE"].ToString();
                             objDetalle.ESPECIE = item["ESPECIE"].ToString();
                             objDetalle.RAZA = item["RAZA"].ToString();
-                            objDetalle.EDAD = item["EDAD"].ToString();
                             objDetalle.SEXO = item["SEXO"].ToString();
-                            objDetalle.SOLICITA = item["SOLICITA"].ToString();
+                            objDetalle.EDAD = item["EDAD"].ToString();
                             objDetalle.TELEFONO = item["TELEFONO"].ToString();
-                            objDetalle.MEDICO = item["MEDICO"].ToString();
                             objDetalle.PROCEDENCIA = item["PROCEDENCIA"].ToString();
-                            objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString();
-                            objDetalle.FECHA_MUESTRA = item["FECHA MUESTRA"].ToString();
-                            objDetalle.FECHA_RESULTADOS = item["FECHA RESULTADOS"].ToString();
-                            objDetalle.PENDIENTE = item["PENDIENTE"].ToString();
                             objDetalle.GARANTIA = item["GARANTIA"].ToString();
-                            objDetalle.PAGADO = item["PAGADO"].ToString();
+                            objDetalle.PENDIENTE = item["PENDIENTE"].ToString();
                             objDetalle.TOTAL = item["TOTAL"].ToString();
+                            objDetalle.RECEPCION = item["RECEPCION"].ToString();
+                            objDetalle.MEDICO = item["MEDICO"].ToString();
+                            objDetalle.SOLICITA = item["SOLICITANTE"].ToString();
+                            objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString() + " " + item["HORA RECEPCION"].ToString();
+                            objDetalle.FICHA_CLINICA = item["FICHA"].ToString();
+                            //objDetalle.FECHA_MUESTRA = item["FECHA MUESTRA"].ToString();
+                            //objDetalle.FECHA_RESULTADOS = item["FECHA RESULTADOS"].ToString();
+                            //objDetalle.PAGADO = item["PAGADO"].ToString();
                             objDetalle.ACTIVO = true;
                             objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
                             objDetalle.MENSAJE_ERROR = "";
                             objDetalle.FECHA_ACTUALIZACION = DateTime.Now;
                             objDetalle.VALOR_FICHA = null;
                             objDetalle.CLIENTE = null;
-                            objDetalle.VALOR_FECHA_MUESTRA = null;
+                            //objDetalle.VALOR_FECHA_MUESTRA = null;
                             objDetalle.VALOR_FECHA_RECEPCION = null;
                             objDetalle.PREVISION = null;
                             objDetalle.GARANTIA1 = null;
-                            objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
+                            //objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = null;
                             objDetalle.ESPECIE1 = null;
                             objDetalle.RAZA1 = null;
                             
@@ -281,9 +285,9 @@ namespace LQCE.Transaccion
 
                     if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
                     {
-                        var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(dto.id,
-                                dto.estado, null, null, null, null, dto.numero, dto.nombre,
-                                "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(dto.estado, dto.id,
+                                null, null, null, null, dto.numero, dto.nombre,
+                                "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", "", null, null, null, null, null)
                                 select d;
 
                         var r = from item in q.OrderBy(d => d.VALOR_FICHA).ThenBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
@@ -303,10 +307,11 @@ namespace LQCE.Transaccion
                     }
                     else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
                     {
-                        var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(dto.id,
-                                dto.estado, null, null, null, null, null, null,
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(dto.estado, dto.id,
+                                null, null, null, null, null, null,
                                 dto.numero, dto.nombre, "", "", "", "", "", "", "", dto.prodedencia,
-                                "", "", "", "", "", "", "", "", null, null, null, null)
+                                "", "", "", "", "", "", "", "", "", "",
+                                null, null, null, null, null, null)
                                 select d;
 
                         var r = from item in q.OrderBy(d => d.VALOR_FICHA).ThenBy(d => d.ID).Skip((dto.PageIndex - 1) * dto.PageSize).Take(dto.PageSize)
@@ -428,9 +433,9 @@ namespace LQCE.Transaccion
 
                     if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
                     {
-                        var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(dto.id,
-                                dto.estado, null, null, null, null, dto.numero, dto.nombre,
-                                "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", null, null, null, null)
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetByFilterWithReferences(dto.estado, 
+                                   dto.id, null, null, null, null, dto.numero, dto.nombre,
+                                "", "", "", "", dto.prodedencia, "", "", "", "", "", "", "", "", "", "", null, null, null, null, null)
                                 select d;
 
 
@@ -438,13 +443,11 @@ namespace LQCE.Transaccion
                     }
                     else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
                     {
-                        var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(dto.id,
-                                dto.estado, null, null, null, null, null, null,
+                        var q = from d in _RepositorioCARGA_PRESTACIONES_VETERINARIAS_DETALLE.GetByFilterWithReferences(dto.estado, dto.id,
+                                null, null, null, null, null, null,
                                 dto.numero, dto.nombre, "", "", "", "", "", "", "", dto.prodedencia,
-                                "", "", "", "", "", "", "", "", null, null, null, null)
+                                "", "", "", "", "", "", "", "", "", null, null, null, null, null, null)
                                 select d;
-
-                        
 
                         return q.Count();
                     }
@@ -597,32 +600,37 @@ namespace LQCE.Transaccion
                             foreach (CARGA_PRESTACIONES_HUMANAS_DETALLE _CARGA_PRESTACIONES_HUMANAS_DETALLE in objEncabezado.CARGA_PRESTACIONES_HUMANAS_DETALLE
                                  .Where(d => d.ACTIVO && d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado))
                             {
+                                if (string.IsNullOrEmpty(_CARGA_PRESTACIONES_HUMANAS_DETALLE.NOMBRE))
+                                    throw new Exception("No se ha señalado nombre");
+                                if (!_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FICHA.HasValue)
+                                    throw new Exception("No se ha señalado ficha");
+                                if (!_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION.HasValue)
+                                    throw new Exception("Fecha de recepción debe tener valor");
+                                if(_CARGA_PRESTACIONES_HUMANAS_DETALLE.CLIENTE == null)
+                                    throw new Exception("No se ha identificado al cliente");
+                                if (!_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_TOTAL.HasValue)
+                                    throw new Exception("No se ha señalado valor total de prestaciones");
+
                                 PRESTACION _PRESTACION = new PRESTACION();
                                 _PRESTACION.ID = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FICHA.Value;
                                 _PRESTACION.TIPO_PRESTACION = _TIPO_PRESTACION;
+                                _PRESTACION.FECHA_RECEPCION = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION.Value;
                                 _PRESTACION.MEDICO = _CARGA_PRESTACIONES_HUMANAS_DETALLE.MEDICO;
                                 _PRESTACION.CLIENTE = _CARGA_PRESTACIONES_HUMANAS_DETALLE.CLIENTE;
-                                _PRESTACION.FECHA_MUESTRA = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_MUESTRA;
-                                if (!_CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION.HasValue)
-                                    throw new Exception("Fecha de recepción debe tener valor");
-
-                                _PRESTACION.FECHA_RECEPCION = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_RECEPCION.Value;
                                 _PRESTACION.PREVISION = _CARGA_PRESTACIONES_HUMANAS_DETALLE.PREVISION1;
                                 _PRESTACION.GARANTIA = _CARGA_PRESTACIONES_HUMANAS_DETALLE.GARANTIA1;
-                                _PRESTACION.FECHA_ENTREGA_RESULTADOS = _CARGA_PRESTACIONES_HUMANAS_DETALLE.VALOR_FECHA_ENTREGA_RESULTADOS;
+                                _PRESTACION.PENDIENTE = _CARGA_PRESTACIONES_HUMANAS_DETALLE.PENDIENTE;
+                                _PRESTACION.RECEPCION = _CARGA_PRESTACIONES_HUMANAS_DETALLE.RECEPCION;
                                 _PRESTACION.ACTIVO = true;
-
                                 context.AddToPRESTACION(_PRESTACION);
 
                                 PRESTACION_HUMANA _PRESTACION_HUMANA = new PRESTACION_HUMANA();
                                 _PRESTACION_HUMANA.PRESTACION = _PRESTACION;
-                                //_PRESTACION_HUMANA.ID = _PRESTACION.ID;
                                 _PRESTACION_HUMANA.NOMBRE = _CARGA_PRESTACIONES_HUMANAS_DETALLE.NOMBRE;
-                                _PRESTACION_HUMANA.RUT = _CARGA_PRESTACIONES_HUMANAS_DETALLE.RUT;
-                                _PRESTACION_HUMANA.EDAD = _CARGA_PRESTACIONES_HUMANAS_DETALLE.EDAD;
                                 _PRESTACION_HUMANA.TELEFONO = _CARGA_PRESTACIONES_HUMANAS_DETALLE.TELEFONO;
+                                _PRESTACION_HUMANA.EDAD = _CARGA_PRESTACIONES_HUMANAS_DETALLE.EDAD;
+                                _PRESTACION_HUMANA.RUT = _CARGA_PRESTACIONES_HUMANAS_DETALLE.RUT;
                                 _PRESTACION_HUMANA.ACTIVO = true;
-
                                 context.AddToPRESTACION_HUMANA(_PRESTACION_HUMANA);
 
                                 foreach (CARGA_PRESTACIONES_HUMANAS_EXAMEN _CARGA_PRESTACIONES_HUMANAS_EXAMEN in _CARGA_PRESTACIONES_HUMANAS_DETALLE
@@ -646,31 +654,45 @@ namespace LQCE.Transaccion
                             foreach (CARGA_PRESTACIONES_VETERINARIAS_DETALLE _CARGA_PRESTACIONES_VETERINARIAS_DETALLE in objEncabezado.CARGA_PRESTACIONES_VETERINARIAS_DETALLE
                                  .Where(d => d.ACTIVO && d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado))
                             {
-                                PRESTACION _PRESTACION = new PRESTACION();
-                                _PRESTACION.ID = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FICHA.Value;
-                                _PRESTACION.TIPO_PRESTACION = _TIPO_PRESTACION;
-                                _PRESTACION.MEDICO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.MEDICO;
-                                _PRESTACION.CLIENTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.CLIENTE;
-                                _PRESTACION.FECHA_MUESTRA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_MUESTRA;
+                                if (string.IsNullOrEmpty(_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.NOMBRE))
+                                    throw new Exception("No se ha señalado nombre");
+                                if (!_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FICHA.HasValue)
+                                    throw new Exception("No se ha señalado ingreso");
+                                if (_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.ESPECIE1 == null)
+                                    throw new Exception("No se ha identificado ESPECIE");
+                                if (_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.CLIENTE == null)
+                                    throw new Exception("No se ha identificado al cliente");
+                                if (!_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_TOTAL.HasValue)
+                                    throw new Exception("No se ha señalado valor total de prestaciones");
+                                if (string.IsNullOrEmpty(_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.SOLICITA))
+                                    throw new Exception("No se ha señalado solicitante");
                                 if (!_CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_RECEPCION.HasValue)
                                     throw new Exception("Fecha de recepción debe tener valor");
 
+                                PRESTACION _PRESTACION = new PRESTACION();
+                                _PRESTACION.ID = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FICHA.Value;
+                                _PRESTACION.TIPO_PRESTACION = _TIPO_PRESTACION;
+                                _PRESTACION.CLIENTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.CLIENTE;
+                                _PRESTACION.GARANTIA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.GARANTIA1;
+                                _PRESTACION.PENDIENTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.PENDIENTE;
+                                _PRESTACION.RECEPCION = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.RECEPCION;
+                                _PRESTACION.MEDICO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.MEDICO;
                                 _PRESTACION.FECHA_RECEPCION = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_RECEPCION.Value;
                                 _PRESTACION.PREVISION = null;
-                                _PRESTACION.GARANTIA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.GARANTIA1;
-                                _PRESTACION.FECHA_ENTREGA_RESULTADOS = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FECHA_ENTREGA_RESULTADOS;
                                 _PRESTACION.ACTIVO = true;
 
                                 context.AddToPRESTACION(_PRESTACION);
 
                                 PRESTACION_VETERINARIA _PRESTACION_VETERINARIA = new PRESTACION_VETERINARIA();
                                 _PRESTACION_VETERINARIA.PRESTACION = _PRESTACION;
-                                //_PRESTACION_VETERINARIA.ID = _PRESTACION.ID;
                                 _PRESTACION_VETERINARIA.NOMBRE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.NOMBRE;
-                                _PRESTACION_VETERINARIA.EDAD = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.EDAD;
-                                _PRESTACION_VETERINARIA.TELEFONO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.TELEFONO;
                                 _PRESTACION_VETERINARIA.ESPECIE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.ESPECIE1;
                                 _PRESTACION_VETERINARIA.RAZA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.RAZA1;
+                                _PRESTACION_VETERINARIA.SEXO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.SEXO;
+                                _PRESTACION_VETERINARIA.EDAD = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.EDAD;
+                                _PRESTACION_VETERINARIA.TELEFONO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.TELEFONO;
+                                _PRESTACION_VETERINARIA.SOLICITANTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.SOLICITA;
+                                _PRESTACION_VETERINARIA.FICHA_CLINICA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FICHA_CLINICA;
                                 _PRESTACION_VETERINARIA.ACTIVO = true;
 
                                 context.AddToPRESTACION_VETERINARIA(_PRESTACION_VETERINARIA);
@@ -701,10 +723,11 @@ namespace LQCE.Transaccion
             }
         }
 
-        public DTO_RESULTADO_ACTUALIZACION_FICHA ActualizarCargaPrestacionHumana(int IdCargaPrestacionHumanaDetalle, string Ficha, string Nombre,
-            string Rut, string Medico, string Edad, string Telefono, string Procedencia, string FechaRecepcion,
-            string Muestra, string FechaResultados, string Prevision, string Garantia, string Pagado,
-            string Pendiente, int IdCargaPrestacionesDetalleEstado, string MensajeError,
+        public DTO_RESULTADO_ACTUALIZACION_FICHA ActualizarCargaPrestacionHumana(int IdCargaPrestacionHumanaDetalle,
+            string Ficha, string Nombre, string FechaRecepcion, string Telefono, string Medico,
+            string Procedencia, string Prevision, string Garantia, string Pendiente, string Pagado,
+            string Total, string Recepcion, string Edad, string Rut,
+             int IdCargaPrestacionesDetalleEstado, string MensajeError,
             List<DTOExamen> Examenes)
         {
             Init();
@@ -728,18 +751,18 @@ namespace LQCE.Transaccion
 
                     objDetalle.FICHA = Ficha;
                     objDetalle.NOMBRE = Nombre;
-                    objDetalle.RUT = Rut;
-                    objDetalle.MEDICO = Medico;
-                    objDetalle.EDAD = Edad;
-                    objDetalle.TELEFONO = Telefono;
-                    objDetalle.PROCEDENCIA = Procedencia;
                     objDetalle.FECHA_RECEPCION = FechaRecepcion;
-                    objDetalle.MUESTRA = Muestra;
-                    objDetalle.FECHA_RESULTADOS = FechaResultados;
+                    objDetalle.TELEFONO = Telefono;
+                    objDetalle.MEDICO = Medico;
+                    objDetalle.PROCEDENCIA = Procedencia;
                     objDetalle.PREVISION = Prevision;
                     objDetalle.GARANTIA = Garantia;
-                    objDetalle.PAGADO = Pagado;
                     objDetalle.PENDIENTE = Pendiente;
+                    objDetalle.PAGADO = Pagado;
+                    objDetalle.TOTAL = Total;
+                    objDetalle.RECEPCION = Recepcion;
+                    objDetalle.EDAD = Edad;
+                    objDetalle.RUT = Rut;
                     objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
                     objDetalle.MENSAJE_ERROR = MensajeError;
                     context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_DETALLE", objDetalle);
@@ -789,10 +812,11 @@ namespace LQCE.Transaccion
             }
         }
 
-        public DTO_RESULTADO_ACTUALIZACION_FICHA ActualizarCargaPrestacionVeterinarias(int IdCargaPrestacionVeterinariaDetalle, string Ficha, string Nombre,
-               string Especie, string Raza, string Edad, string Sexo, string Solicita, string Telefono, string Medico,
-            string Procedencia, string FechaRecepcion, string FechaMuestra, string FechaResultados, string Pendiente,
-            string Garantia, string Pagado, string Total,
+        public DTO_RESULTADO_ACTUALIZACION_FICHA ActualizarCargaPrestacionVeterinarias(int IdCargaPrestacionVeterinariaDetalle, 
+            string Ficha, string Nombre,
+               string Especie, string Raza, string Sexo, string Edad, string Telefono, string Procedencia,
+            string Garantia, string Pendiente, string Total, string Recepcion,
+            string Medico, string Solicitante, string FechaRecepcion, string FichaClinica,
                int IdCargaPrestacionesDetalleEstado, string MensajeError,
                List<DTOExamen> Examenes)
         {
@@ -817,19 +841,18 @@ namespace LQCE.Transaccion
                     objDetalle.NOMBRE = Nombre;
                     objDetalle.ESPECIE = Especie;
                     objDetalle.RAZA = Raza;
-                    objDetalle.EDAD = Edad;
                     objDetalle.SEXO = Sexo;
-                    objDetalle.SOLICITA = Solicita;
+                    objDetalle.EDAD = Edad;
                     objDetalle.TELEFONO = Telefono;
-                    objDetalle.MEDICO = Medico;
                     objDetalle.PROCEDENCIA = Procedencia;
-                    objDetalle.FECHA_RECEPCION = FechaRecepcion;
-                    objDetalle.FECHA_MUESTRA = FechaMuestra;
-                    objDetalle.FECHA_RESULTADOS = FechaResultados;
-                    objDetalle.PENDIENTE = Pendiente;
                     objDetalle.GARANTIA = Garantia;
-                    objDetalle.PAGADO = Pagado;
+                    objDetalle.PENDIENTE = Pendiente;
                     objDetalle.TOTAL = Total;
+                    objDetalle.RECEPCION = Recepcion;
+                    objDetalle.MEDICO = Medico;
+                    objDetalle.SOLICITA = Solicitante;
+                    objDetalle.FECHA_RECEPCION = FechaRecepcion;
+                    objDetalle.FICHA_CLINICA = FichaClinica;
                     objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = objEstadoDetalle;
                     objDetalle.MENSAJE_ERROR = MensajeError;
                     objDetalle.FECHA_ACTUALIZACION = DateTime.Now;
@@ -945,6 +968,12 @@ namespace LQCE.Transaccion
 
             List<string> ListaValidaciones = new List<string>();
 
+            // Nombre
+            if (string.IsNullOrEmpty(objDetalle.NOMBRE))
+            {
+                ListaValidaciones.Add("No se ha señalado nombre del paciente");
+            }
+
             // Ficha
             if (string.IsNullOrEmpty(objDetalle.FICHA))
             {
@@ -964,6 +993,24 @@ namespace LQCE.Transaccion
                     var objPrestacionHumana = _RepositorioPRESTACION_HUMANA.GetById(_ficha.Value);
                     if (objPrestacionHumana != null)
                         ListaValidaciones.Add("Ya existe una prestación en el sistema con el mismo número de ficha");
+                }
+            }
+
+            // Fecha de Recepcion
+            if (string.IsNullOrEmpty(objDetalle.FECHA_RECEPCION))
+            {
+                ListaValidaciones.Add("No se ha señalado FECHA DE RECEPCIÓN en la ficha");
+            }
+            else
+            {
+                DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
+                if (!_fechaRecepcion.HasValue)
+                {
+                    ListaValidaciones.Add("FECHA DE RECEPCIÓN no tiene el formato correcto");
+                }
+                else
+                {
+                    objDetalle.VALOR_FECHA_RECEPCION = _fechaRecepcion.Value;
                 }
             }
 
@@ -990,27 +1037,6 @@ namespace LQCE.Transaccion
                     {
                         ListaValidaciones.Add("No se ha podido identificar cliente de la prestación");
                     }
-                }
-            }
-
-            // Fecha de Muestra
-
-
-            // Fecha de Recepcion
-            if (string.IsNullOrEmpty(objDetalle.FECHA_RECEPCION))
-            {
-                ListaValidaciones.Add("No se ha señalado FECHA DE RECEPCIÓN en la ficha");
-            }
-            else
-            {
-                DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
-                if (!_fechaRecepcion.HasValue)
-                {
-                    ListaValidaciones.Add("FECHA DE RECEPCIÓN no tiene el formato correcto");
-                }
-                else
-                {
-                    objDetalle.VALOR_FECHA_RECEPCION = _fechaRecepcion.Value;
                 }
             }
 
@@ -1050,23 +1076,27 @@ namespace LQCE.Transaccion
                 }
             }
 
-            // Fecha de Entrega de Resultados
-            if (string.IsNullOrEmpty(objDetalle.FECHA_RESULTADOS))
+           // Total
+            if (string.IsNullOrEmpty(objDetalle.TOTAL))
             {
-                //ListaValidaciones.Add("No se ha señalado FECHA DE ENTREGA DE RESULTADOS en la ficha");
+                ListaValidaciones.Add("No se ha señalado TOTAL en la ficha");
             }
             else
             {
-                DateTime? _fechaResultados = ISConvert.ToNullableDateTime(objDetalle.FECHA_RESULTADOS);
-                if (!_fechaResultados.HasValue)
+                int? _total = ISConvert.ToNullableInteger(objDetalle.TOTAL);
+                if (!_total.HasValue)
                 {
-                    ListaValidaciones.Add("FECHA DE ENTREGA DE RESULTADOS no tiene el formato correcto");
+                    ListaValidaciones.Add("Total no tiene el formato correcto");
                 }
                 else
                 {
-                    objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = _fechaResultados.Value;
+                    objDetalle.VALOR_TOTAL = _total.Value;
                 }
             }
+
+           
+
+
 
             // Examenes
             int contadorExamen = 1;
@@ -1074,7 +1104,6 @@ namespace LQCE.Transaccion
             int contadorValorExamen = 0;
             foreach (var item in objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN)
             {
-                // PENDIENTE: Validar Examen
                 if (!string.IsNullOrEmpty(item.VALOR_EXAMEN) || !string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                 {
                     contadorExamenesRegistrados++;
@@ -1124,6 +1153,10 @@ namespace LQCE.Transaccion
 
                     //context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_EXAMEN", item);
                 }
+                else if (contadorExamen == 1)
+                {
+                    ListaValidaciones.Add("No ha señalado nombre y valor de examen [" + contadorExamen.ToString() + "]");
+                }
                 contadorExamen++;
             }
 
@@ -1164,17 +1197,17 @@ namespace LQCE.Transaccion
 
             List<string> ListaValidaciones = new List<string>();
 
-            // Ficha
+            // Ingreso
             if (string.IsNullOrEmpty(objDetalle.FICHA))
             {
-                ListaValidaciones.Add("No se ha señalado numero de ficha");
+                ListaValidaciones.Add("No se ha señalado numero de ingreso");
             }
             else
             {
                 int? _ficha = ISConvert.ToNullableInteger(objDetalle.FICHA);
                 if (!_ficha.HasValue)
                 {
-                    ListaValidaciones.Add("FICHA debe ser numérico");
+                    ListaValidaciones.Add("INGRESO debe ser numérico");
                 }
                 else
                 {
@@ -1182,14 +1215,20 @@ namespace LQCE.Transaccion
 
                     var objPrestacionVeterinaria = _RepositorioPRESTACION_VETERINARIA.GetById(_ficha.Value);
                     if (objPrestacionVeterinaria != null)
-                        ListaValidaciones.Add("Ya existe una prestación en el sistema con el mismo número de ficha");
+                        ListaValidaciones.Add("Ya existe una prestación en el sistema con el mismo número de ingreso");
                 }
+            }
+
+            // Nombre
+            if (string.IsNullOrEmpty(objDetalle.NOMBRE))
+            {
+                ListaValidaciones.Add("No se ha señalado nombre del paciente");
             }
 
             // Especie
             if (string.IsNullOrEmpty(objDetalle.ESPECIE))
             {
-                //ListaValidaciones.Add("No se ha señalado ESPECIE en la ficha");
+                ListaValidaciones.Add("No se ha señalado ESPECIE en la ficha");
             }
             else
             {
@@ -1201,7 +1240,7 @@ namespace LQCE.Transaccion
                     // Raza
                     if (string.IsNullOrEmpty(objDetalle.RAZA))
                     {
-                        ListaValidaciones.Add("No se ha señalado RAZA en la ficha");
+                        //ListaValidaciones.Add("No se ha señalado RAZA en la ficha");
                     }
                     else
                     {
@@ -1221,8 +1260,6 @@ namespace LQCE.Transaccion
                     ListaValidaciones.Add("No se ha podido identificar la ESPECIE en la ficha");
                 }
             }
-
-            
 
             // Cliente
             if (string.IsNullOrEmpty(objDetalle.PROCEDENCIA))
@@ -1250,45 +1287,6 @@ namespace LQCE.Transaccion
                 }
             }
 
-            // Fecha de Muestra
-            if (string.IsNullOrEmpty(objDetalle.FECHA_MUESTRA))
-            {
-                //ListaValidaciones.Add("No se ha señalado FECHA DE MUESTRA en la ficha");
-            }
-            else
-            {
-                DateTime? _fechaMuestra = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
-                if (!_fechaMuestra.HasValue)
-                {
-                    ListaValidaciones.Add("FECHA DE MUESTRA no tiene el formato correcto");
-                }
-                else
-                {
-                    objDetalle.VALOR_FECHA_MUESTRA = _fechaMuestra.Value;
-                }
-            }
-
-            // Fecha de Recepcion
-            if (string.IsNullOrEmpty(objDetalle.FECHA_RECEPCION))
-            {
-                ListaValidaciones.Add("No se ha señalado FECHA DE RECEPCIÓN en la ficha");
-            }
-            else
-            {
-                DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
-                if (!_fechaRecepcion.HasValue)
-                {
-                    ListaValidaciones.Add("FECHA DE RECEPCIÓN no tiene el formato correcto");
-                }
-                else
-                {
-                    objDetalle.VALOR_FECHA_RECEPCION = _fechaRecepcion.Value;
-                }
-            }
-
-            // Prevision
-            
-
             // Garantia
             if (string.IsNullOrEmpty(objDetalle.GARANTIA))
             {
@@ -1307,23 +1305,69 @@ namespace LQCE.Transaccion
                 }
             }
 
-            // Fecha de Entrega de Resultados
-            if (string.IsNullOrEmpty(objDetalle.FECHA_RESULTADOS))
+            // Total
+            if (string.IsNullOrEmpty(objDetalle.TOTAL))
             {
-                //ListaValidaciones.Add("No se ha señalado FECHA DE ENTREGA DE RESULTADOS en la ficha");
+                ListaValidaciones.Add("No se ha señalado TOTAL en la ficha");
             }
             else
             {
-                DateTime? _fechaResultados = ISConvert.ToNullableDateTime(objDetalle.FECHA_RESULTADOS);
-                if (!_fechaResultados.HasValue)
+                int? _total = ISConvert.ToNullableInteger(objDetalle.TOTAL);
+                if (!_total.HasValue)
                 {
-                    ListaValidaciones.Add("FECHA DE ENTREGA DE RESULTADOS no tiene el formato correcto");
+                    ListaValidaciones.Add("Total no tiene el formato correcto");
                 }
                 else
                 {
-                    objDetalle.VALOR_FECHA_ENTREGA_RESULTADOS = _fechaResultados.Value;
+                    objDetalle.VALOR_TOTAL = _total.Value;
                 }
             }
+
+            // Solicitante
+            if (string.IsNullOrEmpty(objDetalle.SOLICITA))
+            {
+                ListaValidaciones.Add("No se ha señalado SOLICITANTE en la ficha");
+            }
+            else
+            {
+            }
+            
+            // Fecha de Recepcion
+            if (string.IsNullOrEmpty(objDetalle.FECHA_RECEPCION))
+            {
+                ListaValidaciones.Add("No se ha señalado FECHA DE RECEPCIÓN en la ficha");
+            }
+            else
+            {
+                DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
+                if (!_fechaRecepcion.HasValue)
+                {
+                    ListaValidaciones.Add("HORA DE RECEPCIÓN no tiene el formato correcto");
+                }
+                else
+                {
+                    objDetalle.VALOR_FECHA_RECEPCION = _fechaRecepcion.Value;
+                }
+            }
+
+            // Ficha Clinica
+            if (string.IsNullOrEmpty(objDetalle.FICHA_CLINICA))
+            {
+                //ListaValidaciones.Add("No se ha señalado TOTAL en la ficha");
+            }
+            else
+            {
+                int? _ficha = ISConvert.ToNullableInteger(objDetalle.FICHA_CLINICA);
+                if (!_ficha.HasValue)
+                {
+                    ListaValidaciones.Add("FICHA no tiene el formato correcto");
+                }
+                else
+                {
+                    objDetalle.VALOR_FICHA_CLINICA = _ficha.Value;
+                }
+            }
+          
 
             // Examenes
             int contadorExamen = 1;
@@ -1331,7 +1375,6 @@ namespace LQCE.Transaccion
             int contadorValorExamen = 0;
             foreach (var item in objDetalle.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN)
             {
-                // PENDIENTE: Validar Examen
                 if (!string.IsNullOrEmpty(item.VALOR_EXAMEN) || !string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                 {
                     contadorExamenesRegistrados++;
@@ -1381,6 +1424,10 @@ namespace LQCE.Transaccion
 
                     //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_EXAMEN", item);
                 }
+                else if (contadorExamen == 1)
+                {
+                    ListaValidaciones.Add("No ha señalado nombre y valor de examen [" + contadorExamen.ToString() + "]");
+                }
                 contadorExamen++;
             }
 
@@ -1397,7 +1444,7 @@ namespace LQCE.Transaccion
                     errores += item + Environment.NewLine;
                 objDetalle.MENSAJE_ERROR = errores;
             }
-            context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
+            //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
 
             return ListaValidaciones;
         }

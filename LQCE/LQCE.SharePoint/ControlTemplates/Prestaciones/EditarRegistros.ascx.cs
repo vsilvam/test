@@ -59,7 +59,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     }
                     else
                     {
-                        Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + Id);
+                        Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + Id, false);
                     }
 
                 }

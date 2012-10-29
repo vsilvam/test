@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilter(int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
+		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilter(int? EXAMENId = null, int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN(context);
-                    return repositorio.GetByFilter(CARGA_PRESTACIONES_HUMANAS_DETALLEId, EXAMENId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN, VALOR_VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(EXAMENId, CARGA_PRESTACIONES_HUMANAS_DETALLEId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN, VALOR_VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilterWithReferences(int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, int? EXAMENId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
+		public List<CARGA_PRESTACIONES_HUMANAS_EXAMEN> GetByFilterWithReferences(int? EXAMENId = null, int? CARGA_PRESTACIONES_HUMANAS_DETALLEId = null, System.DateTime? FECHA_ACTUALIZACION = null, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN repositorio = new RepositorioCARGA_PRESTACIONES_HUMANAS_EXAMEN(context);
-                    return repositorio.GetByFilterWithReferences(CARGA_PRESTACIONES_HUMANAS_DETALLEId, EXAMENId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN, VALOR_VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(EXAMENId, CARGA_PRESTACIONES_HUMANAS_DETALLEId, FECHA_ACTUALIZACION, NOMBRE_EXAMEN, VALOR_EXAMEN, VALOR_VALOR_EXAMEN).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,25 +144,25 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(int CARGA_PRESTACIONES_HUMANAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
+		        public int Add(int EXAMENId, int CARGA_PRESTACIONES_HUMANAS_DETALLEId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
         {
 		Init();
             try
             {
 				 using (LQCEEntities context = new LQCEEntities())
 				{
-					RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
-					CARGA_PRESTACIONES_HUMANAS_DETALLE _objCARGA_PRESTACIONES_HUMANAS_DETALLE = _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetById(CARGA_PRESTACIONES_HUMANAS_DETALLEId);
-					if(Equals(_objCARGA_PRESTACIONES_HUMANAS_DETALLE,null))
-					{
-						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_HUMANAS_DETALLE con Id =",CARGA_PRESTACIONES_HUMANAS_DETALLEId.ToString()));
-					}
-
 					RepositorioEXAMEN _repositorioEXAMEN = new RepositorioEXAMEN(context);
 					EXAMEN _objEXAMEN = _repositorioEXAMEN.GetById(EXAMENId);
 					if(Equals(_objEXAMEN,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado EXAMEN con Id =",EXAMENId.ToString()));
+					}
+
+					RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
+					CARGA_PRESTACIONES_HUMANAS_DETALLE _objCARGA_PRESTACIONES_HUMANAS_DETALLE = _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetById(CARGA_PRESTACIONES_HUMANAS_DETALLEId);
+					if(Equals(_objCARGA_PRESTACIONES_HUMANAS_DETALLE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_HUMANAS_DETALLE con Id =",CARGA_PRESTACIONES_HUMANAS_DETALLEId.ToString()));
 					}
 
 					CARGA_PRESTACIONES_HUMANAS_EXAMEN _CARGA_PRESTACIONES_HUMANAS_EXAMEN = new CARGA_PRESTACIONES_HUMANAS_EXAMEN();
@@ -177,8 +177,8 @@ namespace LQCE.Transaccion
 
 					//parents
 						 
-                    _CARGA_PRESTACIONES_HUMANAS_EXAMEN.CARGA_PRESTACIONES_HUMANAS_DETALLE = _objCARGA_PRESTACIONES_HUMANAS_DETALLE;
                     _CARGA_PRESTACIONES_HUMANAS_EXAMEN.EXAMEN = _objEXAMEN;
+                    _CARGA_PRESTACIONES_HUMANAS_EXAMEN.CARGA_PRESTACIONES_HUMANAS_DETALLE = _objCARGA_PRESTACIONES_HUMANAS_DETALLE;
                     
 					context.AddObject("CARGA_PRESTACIONES_HUMANAS_EXAMEN",_CARGA_PRESTACIONES_HUMANAS_EXAMEN);
                     context.SaveChanges();
@@ -194,7 +194,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CARGA_PRESTACIONES_HUMANAS_DETALLEId, int EXAMENId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
+		public void Update(int Id, int EXAMENId, int CARGA_PRESTACIONES_HUMANAS_DETALLEId, System.DateTime FECHA_ACTUALIZACION, string NOMBRE_EXAMEN = "", string VALOR_EXAMEN = "", int? VALOR_VALOR_EXAMEN = null)
 		{
 		Init();
 			try
@@ -208,18 +208,18 @@ namespace LQCE.Transaccion
 						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_HUMANAS_EXAMEN con Id =",Id.ToString()));
 					}
 					
-					RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
-					CARGA_PRESTACIONES_HUMANAS_DETALLE _objCARGA_PRESTACIONES_HUMANAS_DETALLE = _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetById(CARGA_PRESTACIONES_HUMANAS_DETALLEId);
-					if(Equals(_objCARGA_PRESTACIONES_HUMANAS_DETALLE,null))
-					{
-						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_HUMANAS_DETALLE con Id =",CARGA_PRESTACIONES_HUMANAS_DETALLEId.ToString()));
-					}
-						
 					RepositorioEXAMEN _repositorioEXAMEN = new RepositorioEXAMEN(context);
 					EXAMEN _objEXAMEN = _repositorioEXAMEN.GetById(EXAMENId);
 					if(Equals(_objEXAMEN,null))
 					{
 						throw new Exception(String.Concat("No se ha encontrado EXAMEN con Id =",EXAMENId.ToString()));
+					}
+						
+					RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE = new RepositorioCARGA_PRESTACIONES_HUMANAS_DETALLE(context);
+					CARGA_PRESTACIONES_HUMANAS_DETALLE _objCARGA_PRESTACIONES_HUMANAS_DETALLE = _repositorioCARGA_PRESTACIONES_HUMANAS_DETALLE.GetById(CARGA_PRESTACIONES_HUMANAS_DETALLEId);
+					if(Equals(_objCARGA_PRESTACIONES_HUMANAS_DETALLE,null))
+					{
+						throw new Exception(String.Concat("No se ha encontrado CARGA_PRESTACIONES_HUMANAS_DETALLE con Id =",CARGA_PRESTACIONES_HUMANAS_DETALLEId.ToString()));
 					}
 	
 					//properties
@@ -240,8 +240,8 @@ namespace LQCE.Transaccion
 	
 					//parents
 					 
-                    _CARGA_PRESTACIONES_HUMANAS_EXAMEN.CARGA_PRESTACIONES_HUMANAS_DETALLE = _objCARGA_PRESTACIONES_HUMANAS_DETALLE;
                     _CARGA_PRESTACIONES_HUMANAS_EXAMEN.EXAMEN = _objEXAMEN;
+                    _CARGA_PRESTACIONES_HUMANAS_EXAMEN.CARGA_PRESTACIONES_HUMANAS_DETALLE = _objCARGA_PRESTACIONES_HUMANAS_DETALLE;
 
 					context.SaveChanges();
 				}

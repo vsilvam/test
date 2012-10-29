@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public List<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_RECEPCION = null, string MEDICO = "", string RECEPCION = "", string PENDIENTE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION repositorio = new RepositorioPRESTACION(context);
-                    return repositorio.GetByFilter(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, MEDICO, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, FECHA_RECEPCION, MEDICO, RECEPCION, PENDIENTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public List<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_RECEPCION = null, string MEDICO = "", string RECEPCION = "", string PENDIENTE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION repositorio = new RepositorioPRESTACION(context);
-                    return repositorio.GetByFilterWithReferences(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, MEDICO, FECHA_RECEPCION, FECHA_MUESTRA, FECHA_ENTREGA_RESULTADOS).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(CLIENTEId, GARANTIAId, PREVISIONId, TIPO_PRESTACIONId, FECHA_RECEPCION, MEDICO, RECEPCION, PENDIENTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(int CLIENTEId, int GARANTIAId, int PREVISIONId, int TIPO_PRESTACIONId, string MEDICO, System.DateTime FECHA_RECEPCION, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		        public int Add(int CLIENTEId, int GARANTIAId, int PREVISIONId, int TIPO_PRESTACIONId, System.DateTime FECHA_RECEPCION, string MEDICO = "", string RECEPCION = "", string PENDIENTE = "")
         {
 		Init();
             try
@@ -184,9 +184,9 @@ namespace LQCE.Transaccion
 					//properties
 
                     _PRESTACION.MEDICO = MEDICO;				
-                    _PRESTACION.FECHA_MUESTRA = FECHA_MUESTRA;
                     _PRESTACION.FECHA_RECEPCION = FECHA_RECEPCION;
-                    _PRESTACION.FECHA_ENTREGA_RESULTADOS = FECHA_ENTREGA_RESULTADOS;
+                    _PRESTACION.RECEPCION = RECEPCION;				
+                    _PRESTACION.PENDIENTE = PENDIENTE;				
                     _PRESTACION.ACTIVO = true;				
 
 					//parents
@@ -210,7 +210,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int CLIENTEId, int GARANTIAId, int PREVISIONId, int TIPO_PRESTACIONId, string MEDICO, System.DateTime FECHA_RECEPCION, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public void Update(int Id, int CLIENTEId, int GARANTIAId, int PREVISIONId, int TIPO_PRESTACIONId, System.DateTime FECHA_RECEPCION, string MEDICO = "", string RECEPCION = "", string PENDIENTE = "")
 		{
 		Init();
 			try
@@ -258,14 +258,14 @@ namespace LQCE.Transaccion
 					{
 						_PRESTACION.MEDICO = MEDICO;
 					}
-					if (FECHA_MUESTRA.HasValue)
-					{
-						_PRESTACION.FECHA_MUESTRA = FECHA_MUESTRA.Value;
-					}
 						_PRESTACION.FECHA_RECEPCION = FECHA_RECEPCION;
-					if (FECHA_ENTREGA_RESULTADOS.HasValue)
+					if (!string.IsNullOrEmpty(RECEPCION))
 					{
-						_PRESTACION.FECHA_ENTREGA_RESULTADOS = FECHA_ENTREGA_RESULTADOS.Value;
+						_PRESTACION.RECEPCION = RECEPCION;
+					}
+					if (!string.IsNullOrEmpty(PENDIENTE))
+					{
+						_PRESTACION.PENDIENTE = PENDIENTE;
 					}
 	
 					//parents

@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public IQueryable<PRESTACION> GetByFilter(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_RECEPCION = null, string MEDICO = "", string RECEPCION = "", string PENDIENTE = "")
 		{
 			Error = string.Empty;
 			try
@@ -95,17 +95,17 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.MEDICO.Contains(MEDICO));
 				}
-				if (FECHA_MUESTRA.HasValue)
-				{
-				  q = q.Where(i => i.FECHA_MUESTRA == FECHA_MUESTRA.Value);
-				}
 				if (FECHA_RECEPCION.HasValue)
 				{
 				  q = q.Where(i => i.FECHA_RECEPCION == FECHA_RECEPCION.Value);
 				}
-				if (FECHA_ENTREGA_RESULTADOS.HasValue)
+				if (!string.IsNullOrEmpty(RECEPCION))
 				{
-				  q = q.Where(i => i.FECHA_ENTREGA_RESULTADOS == FECHA_ENTREGA_RESULTADOS.Value);
+				   q = q.Where(i => i.RECEPCION.Contains(RECEPCION));
+				}
+				if (!string.IsNullOrEmpty(PENDIENTE))
+				{
+				   q = q.Where(i => i.PENDIENTE.Contains(PENDIENTE));
 				}
 				if (CLIENTEId.HasValue)
 				{
@@ -133,7 +133,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, string MEDICO = "", System.DateTime? FECHA_RECEPCION = null, DateTime? FECHA_MUESTRA = null, DateTime? FECHA_ENTREGA_RESULTADOS = null)
+		public IQueryable<PRESTACION> GetByFilterWithReferences(int? CLIENTEId = null, int? GARANTIAId = null, int? PREVISIONId = null, int? TIPO_PRESTACIONId = null, System.DateTime? FECHA_RECEPCION = null, string MEDICO = "", string RECEPCION = "", string PENDIENTE = "")
 		{
 			Error = string.Empty;
 			try
@@ -147,17 +147,17 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.MEDICO.Contains(MEDICO));
 				}
-				if (FECHA_MUESTRA.HasValue)
-				{
-					q = q.Where(i => i.FECHA_MUESTRA == FECHA_MUESTRA.Value);
-				}
 				if (FECHA_RECEPCION.HasValue)
 				{
 					q = q.Where(i => i.FECHA_RECEPCION == FECHA_RECEPCION.Value);
 				}
-				if (FECHA_ENTREGA_RESULTADOS.HasValue)
+				if (!string.IsNullOrEmpty(RECEPCION))
 				{
-					q = q.Where(i => i.FECHA_ENTREGA_RESULTADOS == FECHA_ENTREGA_RESULTADOS.Value);
+					q = q.Where(i => i.RECEPCION.Contains(RECEPCION));
+				}
+				if (!string.IsNullOrEmpty(PENDIENTE))
+				{
+					q = q.Where(i => i.PENDIENTE.Contains(PENDIENTE));
 				}
 				if (CLIENTEId.HasValue)
 				{

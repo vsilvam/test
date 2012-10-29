@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+							return _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1") where i.ACTIVO  select i;
+								var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, int? CLIENTEId = null, int? GARANTIA1Id = null, int? PREVISION1Id = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
+		public IQueryable<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilter(int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CLIENTEId = null, int? GARANTIA1Id = null, int? PREVISION1Id = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string RECEPCION = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null, int? VALOR_TOTAL = null)
 		{
 			Error = string.Empty;
 			try
@@ -151,6 +151,10 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.TOTAL.Contains(TOTAL));
 				}
+				if (!string.IsNullOrEmpty(RECEPCION))
+				{
+				   q = q.Where(i => i.RECEPCION.Contains(RECEPCION));
+				}
 				if (!string.IsNullOrEmpty(MENSAJE_ERROR))
 				{
 				   q = q.Where(i => i.MENSAJE_ERROR.Contains(MENSAJE_ERROR));
@@ -175,13 +179,17 @@ namespace LQCE.Repositorio
 				{
 				  q = q.Where(i => i.VALOR_FECHA_ENTREGA_RESULTADOS == VALOR_FECHA_ENTREGA_RESULTADOS.Value);
 				}
-				if (CARGA_PRESTACIONES_ENCABEZADOId.HasValue)
+				if (VALOR_TOTAL.HasValue)
 				{
-				  q = q.Where(i => i.CARGA_PRESTACIONES_ENCABEZADO.ID == CARGA_PRESTACIONES_ENCABEZADOId.Value);
+				  q = q.Where(i => i.VALOR_TOTAL == VALOR_TOTAL.Value);
 				}
 				if (CARGA_PRESTACIONES_DETALLE_ESTADOId.HasValue)
 				{
 				  q = q.Where(i => i.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == CARGA_PRESTACIONES_DETALLE_ESTADOId.Value);
+				}
+				if (CARGA_PRESTACIONES_ENCABEZADOId.HasValue)
+				{
+				  q = q.Where(i => i.CARGA_PRESTACIONES_ENCABEZADO.ID == CARGA_PRESTACIONES_ENCABEZADOId.Value);
 				}
 				if (CLIENTEId.HasValue)
 				{
@@ -205,13 +213,13 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, int? CLIENTEId = null, int? GARANTIA1Id = null, int? PREVISION1Id = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null)
+		public IQueryable<CARGA_PRESTACIONES_HUMANAS_DETALLE> GetByFilterWithReferences(int? CARGA_PRESTACIONES_DETALLE_ESTADOId = null, int? CARGA_PRESTACIONES_ENCABEZADOId = null, int? CLIENTEId = null, int? GARANTIA1Id = null, int? PREVISION1Id = null, System.DateTime? FECHA_ACTUALIZACION = null, string FICHA = "", string NOMBRE = "", string RUT = "", string MEDICO = "", string EDAD = "", string TELEFONO = "", string PROCEDENCIA = "", string FECHA_RECEPCION = "", string MUESTRA = "", string FECHA_RESULTADOS = "", string PREVISION = "", string GARANTIA = "", string PAGADO = "", string PENDIENTE = "", string TOTAL = "", string RECEPCION = "", string MENSAJE_ERROR = "", int? VALOR_FICHA = null, DateTime? VALOR_FECHA_MUESTRA = null, DateTime? VALOR_FECHA_RECEPCION = null, DateTime? VALOR_FECHA_ENTREGA_RESULTADOS = null, int? VALOR_TOTAL = null)
 		{
 			Error = string.Empty;
 			try
 			{
 
-							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN").Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1")  where i.ACTIVO select i;
+							var q = from i in _context.CARGA_PRESTACIONES_HUMANAS_DETALLE.Include("CARGA_PRESTACIONES_DETALLE_ESTADO").Include("CARGA_PRESTACIONES_ENCABEZADO").Include("CLIENTE").Include("GARANTIA1").Include("PREVISION1").Include("CARGA_PRESTACIONES_HUMANAS_EXAMEN")  where i.ACTIVO select i;
 			
 				
 
@@ -275,6 +283,10 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.TOTAL.Contains(TOTAL));
 				}
+				if (!string.IsNullOrEmpty(RECEPCION))
+				{
+					q = q.Where(i => i.RECEPCION.Contains(RECEPCION));
+				}
 				if (!string.IsNullOrEmpty(MENSAJE_ERROR))
 				{
 					q = q.Where(i => i.MENSAJE_ERROR.Contains(MENSAJE_ERROR));
@@ -299,13 +311,17 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.VALOR_FECHA_ENTREGA_RESULTADOS == VALOR_FECHA_ENTREGA_RESULTADOS.Value);
 				}
-				if (CARGA_PRESTACIONES_ENCABEZADOId.HasValue)
+				if (VALOR_TOTAL.HasValue)
 				{
-					q = q.Where(i => i.CARGA_PRESTACIONES_ENCABEZADO.ID == CARGA_PRESTACIONES_ENCABEZADOId.Value);
+					q = q.Where(i => i.VALOR_TOTAL == VALOR_TOTAL.Value);
 				}
 				if (CARGA_PRESTACIONES_DETALLE_ESTADOId.HasValue)
 				{
 					q = q.Where(i => i.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == CARGA_PRESTACIONES_DETALLE_ESTADOId.Value);
+				}
+				if (CARGA_PRESTACIONES_ENCABEZADOId.HasValue)
+				{
+					q = q.Where(i => i.CARGA_PRESTACIONES_ENCABEZADO.ID == CARGA_PRESTACIONES_ENCABEZADOId.Value);
 				}
 				if (CLIENTEId.HasValue)
 				{

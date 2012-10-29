@@ -37,7 +37,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-							return _context.ESPECIE.Include("PRESTACION_VETERINARIA").Include("RAZA").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").FirstOrDefault(i => i.ID == id && i.ACTIVO );
+							return _context.ESPECIE.Include("RAZA").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("PRESTACION_VETERINARIA").FirstOrDefault(i => i.ID == id && i.ACTIVO );
 			
 			}
 			catch (Exception ex)
@@ -71,7 +71,7 @@ namespace LQCE.Repositorio
 			try
 			{
 				
-								var q = from i in _context.ESPECIE.Include("PRESTACION_VETERINARIA").Include("RAZA").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE") where i.ACTIVO  select i;
+								var q = from i in _context.ESPECIE.Include("RAZA").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("PRESTACION_VETERINARIA") where i.ACTIVO  select i;
 							return q;
 			}
 			catch (Exception ex)
@@ -111,7 +111,7 @@ namespace LQCE.Repositorio
 			try
 			{
 
-							var q = from i in _context.ESPECIE.Include("PRESTACION_VETERINARIA").Include("RAZA").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE")  where i.ACTIVO select i;
+							var q = from i in _context.ESPECIE.Include("RAZA").Include("CARGA_PRESTACIONES_VETERINARIAS_DETALLE").Include("PRESTACION_VETERINARIA")  where i.ACTIVO select i;
 			
 				
 

@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "")
+		public List<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", int? FICHA_CLINICA = null, string SEXO = "", string SOLICITANTE = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_VETERINARIA repositorio = new RepositorioPRESTACION_VETERINARIA(context);
-                    return repositorio.GetByFilter(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO, FICHA_CLINICA, SEXO, SOLICITANTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "")
+		public List<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", int? FICHA_CLINICA = null, string SEXO = "", string SOLICITANTE = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioPRESTACION_VETERINARIA repositorio = new RepositorioPRESTACION_VETERINARIA(context);
-                    return repositorio.GetByFilterWithReferences(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(ESPECIEId, RAZAId, NOMBRE, EDAD, TELEFONO, FICHA_CLINICA, SEXO, SOLICITANTE).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(int ESPECIEId, int RAZAId, string NOMBRE, string EDAD, string TELEFONO)
+		        public int Add(int ESPECIEId, int RAZAId, string NOMBRE, string EDAD = "", string TELEFONO = "", int? FICHA_CLINICA = null, string SEXO = "", string SOLICITANTE = "")
         {
 		Init();
             try
@@ -172,6 +172,9 @@ namespace LQCE.Transaccion
                     _PRESTACION_VETERINARIA.NOMBRE = NOMBRE;				
                     _PRESTACION_VETERINARIA.EDAD = EDAD;				
                     _PRESTACION_VETERINARIA.TELEFONO = TELEFONO;				
+                    _PRESTACION_VETERINARIA.FICHA_CLINICA = FICHA_CLINICA;
+                    _PRESTACION_VETERINARIA.SEXO = SEXO;				
+                    _PRESTACION_VETERINARIA.SOLICITANTE = SOLICITANTE;				
                     _PRESTACION_VETERINARIA.ACTIVO = true;				
 
 					//parents
@@ -193,7 +196,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, int ESPECIEId, int RAZAId, string NOMBRE, string EDAD, string TELEFONO)
+		public void Update(int Id, int ESPECIEId, int RAZAId, string NOMBRE, string EDAD = "", string TELEFONO = "", int? FICHA_CLINICA = null, string SEXO = "", string SOLICITANTE = "")
 		{
 		Init();
 			try
@@ -234,6 +237,18 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(TELEFONO))
 					{
 						_PRESTACION_VETERINARIA.TELEFONO = TELEFONO;
+					}
+					if (FICHA_CLINICA.HasValue)
+					{
+						_PRESTACION_VETERINARIA.FICHA_CLINICA = FICHA_CLINICA.Value;
+					}
+					if (!string.IsNullOrEmpty(SEXO))
+					{
+						_PRESTACION_VETERINARIA.SEXO = SEXO;
+					}
+					if (!string.IsNullOrEmpty(SOLICITANTE))
+					{
+						_PRESTACION_VETERINARIA.SOLICITANTE = SOLICITANTE;
 					}
 	
 					//parents

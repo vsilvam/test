@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_HUMANA> GetByFilter(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "")
+		public IQueryable<PRESTACION_HUMANA> GetByFilter(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", string PAGADO = "")
 		{
 			Error = string.Empty;
 			try
@@ -107,6 +107,10 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
 				}
+				if (!string.IsNullOrEmpty(PAGADO))
+				{
+				   q = q.Where(i => i.PAGADO.Contains(PAGADO));
+				}
 				return q;
 			}
 			catch (Exception ex)
@@ -117,7 +121,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_HUMANA> GetByFilterWithReferences(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "")
+		public IQueryable<PRESTACION_HUMANA> GetByFilterWithReferences(string NOMBRE = "", string RUT = "", string EDAD = "", string TELEFONO = "", string PAGADO = "")
 		{
 			Error = string.Empty;
 			try
@@ -142,6 +146,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(TELEFONO))
 				{
 					q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
+				}
+				if (!string.IsNullOrEmpty(PAGADO))
+				{
+					q = q.Where(i => i.PAGADO.Contains(PAGADO));
 				}
 				return q;
 			}

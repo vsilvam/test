@@ -180,18 +180,18 @@
                             <ItemTemplate>
                                 <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"
                                     Enabled="false"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtExamen'
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidator_txtExamen' runat='server' ControlToValidate='txtExamen'
                                     ValidationGroup="validado" Display='Dynamic' Font-Size='7pt' ForeColor='red'
-                                    ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+                                    ErrorMessage='Requerido'>Requerido.</asp:RequiredFieldValidator>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Valor" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtValorNuevoExamen" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>'
                                     Columns="30" Enabled="false"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtValor'
+                                <asp:RequiredFieldValidator ID='RequiredFieldValidator_txtValorNuevoExamen' runat='server' ControlToValidate='txtValorNuevoExamen'
                                     ValidationGroup="validado" Display='Dynamic' Font-Size='7pt' ForeColor='red'
-                                    ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
+                                    ErrorMessage='Requerido'>Requerido.</asp:RequiredFieldValidator>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

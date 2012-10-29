@@ -1342,7 +1342,7 @@ namespace LQCE.Transaccion
                 DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
                 if (!_fechaRecepcion.HasValue)
                 {
-                    ListaValidaciones.Add("HORA DE RECEPCIÓN no tiene el formato correcto");
+                    ListaValidaciones.Add("FECHA DE RECEPCIÓN no tiene el formato correcto");
                 }
                 else
                 {

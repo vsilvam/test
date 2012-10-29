@@ -118,8 +118,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 int montoTotal = 0;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
-                    TextBox Valor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
-                    montoTotal = int.Parse(Valor.Text) + montoTotal;
+                    if (grilla.RowType == DataControlRowType.DataRow)
+                    {
+                        TextBox Valor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
+                        montoTotal = int.Parse(Valor.Text) + montoTotal;
+                    }
                 }
 
                 txtMontoTotal.Text = montoTotal.ToString();
@@ -157,7 +160,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (grilla.RowType == DataControlRowType.DataRow)
                 {
                     TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
-                    TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
+                    TextBox txtValor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
                     txtExamen.Enabled = true;
                     txtValor.Enabled = true;
                 }
@@ -199,13 +202,16 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 int numeroFila = 0;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
-                    TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
-                    TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
+                    if (grilla.RowType == DataControlRowType.DataRow)
+                    {
+                        TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
+                        TextBox txtValor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
 
-                    listaDTO[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
-                    listaDTO[numeroFila].VALOR_EXAMEN = txtValor.Text;
+                        listaDTO[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
+                        listaDTO[numeroFila].VALOR_EXAMEN = txtValor.Text;
 
-                    numeroFila++;
+                        numeroFila++;
+                    }
                 }
                 this.ListaExamen = listaDTO;
 

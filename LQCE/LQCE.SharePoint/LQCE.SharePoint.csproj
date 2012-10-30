@@ -485,9 +485,7 @@
     <Content Include="ControlTemplates\Prestaciones\EditarPrestacionesVeterinarias.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\Prestaciones\EditarRegistros.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="ControlTemplates\Prestaciones\EditarRegistros.ascx" />
     <Content Include="ControlTemplates\Prestaciones\EmitirFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

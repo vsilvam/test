@@ -172,10 +172,18 @@
     </div>
 </article>
 <article class="module width_full">
-     <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Examen</asp:LinkButton>
-                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="50%"
+     <asp:LinkButton ID="lnkAgregaFicha" runat="server" OnClick="lnkAgregaFicha_Click">Agrega Examen</asp:LinkButton>&nbsp&nbsp
+     <asp:LinkButton ID="lnkEliminaFicha" runat="server" 
+    onclick="lnkEliminaFicha_Click" >Elimina Examen</asp:LinkButton>
+                <asp:GridView ID="grdExamen" runat="server" AutoGenerateColumns="False" Width="70%"
                     GridLines="None" EnableModelValidation="True">
                     <Columns>
+                        <asp:TemplateField HeaderText="Seleccionar">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="ChkSeleccionar" runat="server" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Examen" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"

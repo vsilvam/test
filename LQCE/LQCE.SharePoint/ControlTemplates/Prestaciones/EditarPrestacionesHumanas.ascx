@@ -159,7 +159,8 @@
         <h3>
             Agregar Nuevo Examen</h3>
     </header>
-    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agrega Examen</asp:LinkButton>
+    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agrega Examen</asp:LinkButton>&nbsp&nbsp
+    <asp:LinkButton ID="LinkButton2" runat="server" onclick="LinkButton2_Click">Elimina Examen</asp:LinkButton>
     <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
         <table>
             <tr>
@@ -198,8 +199,14 @@
           Exámenes</h3>
   </header> 
      <asp:GridView ID="grdExamen" CssClass="tablesorter" GridLines="None" runat="server"
-         AutoGenerateColumns="False" Width="50%" EnableModelValidation="True">
+         AutoGenerateColumns="False" Width="70%" EnableModelValidation="True">
          <Columns>
+            <asp:TemplateField HeaderText="Seleccionar">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="ChkSeleccionar" runat="server" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
              <asp:TemplateField HeaderText="Examen">
                  <ItemTemplate>
                      <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"></asp:TextBox>

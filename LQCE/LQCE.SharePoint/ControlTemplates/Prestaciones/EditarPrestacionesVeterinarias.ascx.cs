@@ -264,6 +264,43 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
+        protected void lnkEliminaFicha_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<DTOExamen> listaDTO = this.ListaExamen;
+                int numeroFila = 0;
+                foreach (GridViewRow grilla in grdExamen.Rows)
+                {
+                    if (grilla.RowType == DataControlRowType.DataRow)
+                    {
+                        CheckBox ChkSeleccionar = (CheckBox)grilla.FindControl("ChkSeleccionar");
+                        if (!ChkSeleccionar.Checked)
+                        {
+                            TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
+                            TextBox txtValor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
+
+                            listaDTO[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
+                            listaDTO[numeroFila].VALOR_EXAMEN = txtValor.Text;
+
+                            numeroFila++;
+                        }
+                    }
+                }
+                this.ListaExamen = listaDTO;
+
+                grdExamen.DataSource = this.ListaExamen;
+                grdExamen.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
         protected void btnAgrega_Click(object sender, EventArgs e)
         {
             try
@@ -315,6 +352,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
-        }
+        }        
     }
 }

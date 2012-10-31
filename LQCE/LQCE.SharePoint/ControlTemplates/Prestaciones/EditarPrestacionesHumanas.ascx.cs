@@ -298,8 +298,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                List<DTOExamen> listaDTO = this.ListaExamen;
-                int numeroFila = 0;
+                DTOExamen _dto;
+                List<DTOExamen> _lis = new List<DTOExamen>();
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
                     CheckBox ChkSeleccionar = (CheckBox)grilla.FindControl("ChkSeleccionar");
@@ -308,15 +308,13 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
                         TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
 
-                        listaDTO[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
-                        listaDTO[numeroFila].VALOR_EXAMEN = txtValor.Text;
-
-                        numeroFila++;
+                        _dto = new DTOExamen();
+                        _dto.NOMBRE_EXAMEN = txtExamen.Text;
+                        _dto.VALOR_EXAMEN = txtValor.Text;
+                        _lis.Add(_dto);
                     }
                 }
-                this.ListaExamen = listaDTO;
-
-                grdExamen.DataSource = this.ListaExamen;
+                grdExamen.DataSource = _lis;
                 grdExamen.DataBind();
             }
             catch (Exception ex)

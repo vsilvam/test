@@ -314,6 +314,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         _lis.Add(_dto);
                     }
                 }
+                this.ListaExamen = _lis;
                 grdExamen.DataSource = _lis;
                 grdExamen.DataBind();
             }

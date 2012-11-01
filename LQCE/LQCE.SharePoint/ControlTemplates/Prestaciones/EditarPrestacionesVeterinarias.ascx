@@ -187,7 +187,7 @@
                         <asp:TemplateField HeaderText="Examen" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"
-                                    Enabled="false"></asp:TextBox>
+                                    Enabled="true"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID='RequiredFieldValidator_txtExamen' runat='server' ControlToValidate='txtExamen'
                                     ValidationGroup="validado" Display='Dynamic' Font-Size='7pt' ForeColor='red'
                                     ErrorMessage='Requerido'>Requerido.</asp:RequiredFieldValidator>
@@ -196,7 +196,7 @@
                         <asp:TemplateField HeaderText="Valor" HeaderStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:TextBox ID="txtValorNuevoExamen" runat="server" Text='<%# Eval("VALOR_EXAMEN") %>'
-                                    Columns="30" Enabled="false"></asp:TextBox>
+                                    Columns="30" Enabled="true"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID='RequiredFieldValidator_txtValorNuevoExamen' runat='server' ControlToValidate='txtValorNuevoExamen'
                                     ValidationGroup="validado" Display='Dynamic' Font-Size='7pt' ForeColor='red'
                                     ErrorMessage='Requerido'>Requerido.</asp:RequiredFieldValidator>

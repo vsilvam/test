@@ -108,7 +108,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             if (estado == ENUM_CARGA_PRESTACIONES_ESTADO.Pendiente.ToString())
                 EditarFicha();
 
-            //CalculoMontoPrestaciones();
+            CalculoMontoPrestaciones();
         }
 
         private void CalculoMontoPrestaciones()
@@ -121,7 +121,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     if (grilla.RowType == DataControlRowType.DataRow)
                     {
                         TextBox Valor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
-                        montoTotal = int.Parse(Valor.Text) + montoTotal;
+                        if (!string.IsNullOrEmpty(Valor.Text))
+                            montoTotal = int.Parse(Valor.Text) + montoTotal;
                     }
                 }
 
@@ -290,6 +291,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 this.ListaExamen = _lis;
                 grdExamen.DataSource = _lis;
                 grdExamen.DataBind();
+
+                CalculoMontoPrestaciones();
                 
             }
             catch (Exception ex)
@@ -305,6 +308,12 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                if (string.IsNullOrEmpty(txtExamen.Text))
+                    throw new Exception("Debe ingrsesar un nombre para el examen");
+
+                if (string.IsNullOrEmpty(txtValor.Text))
+                    throw new Exception("Debe ingresar el valor del examen");
+
                 DTOExamen dto = new DTOExamen();
                 dto.NOMBRE_EXAMEN = txtExamen.Text;
                 dto.ID = 0;

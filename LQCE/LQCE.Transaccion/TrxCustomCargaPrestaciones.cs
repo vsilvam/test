@@ -1035,7 +1035,7 @@ namespace LQCE.Transaccion
                     }
                     else
                     {
-                        ListaValidaciones.Add("No se ha podido identificar cliente de la prestación");
+                        ListaValidaciones.Add("No se ha podido identificar PROCEDENCIA de la prestación");
                     }
                 }
             }
@@ -1282,7 +1282,7 @@ namespace LQCE.Transaccion
                     }
                     else
                     {
-                        ListaValidaciones.Add("No se ha podido identificar cliente de la prestación");
+                        ListaValidaciones.Add("No se ha podido identificar PROCEDENCIA de la prestación");
                     }
                 }
             }

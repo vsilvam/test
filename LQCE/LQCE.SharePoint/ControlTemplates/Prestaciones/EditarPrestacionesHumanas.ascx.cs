@@ -291,6 +291,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 pnAgregaFila.Visible = true;
+                txtExamen.Enabled = true;
+                txtValor.Enabled = true;
             }
             catch (Exception ex)
             {

@@ -174,13 +174,14 @@
             <tr>
                 <td>
                     <asp:TextBox ID="txtExamen" runat="server" Columns="30" Enabled="false"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ControlToValidate='txtExamen'
-                        Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Examen'></asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ValidationGroup='btnAgrega' ControlToValidate='txtExamen'
+                        Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Examen'>Requerido</asp:RequiredFieldValidator>
                 </td>
                 <td>
                     <asp:TextBox ID="txtValor" runat="server" Columns="30" Enabled="false"></asp:TextBox>
                     <asp:RequiredFieldValidator ID='RequiredFieldValidator2' runat='server' ControlToValidate='txtValor'
-                        Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Valor'></asp:RequiredFieldValidator>
+                        Display='Dynamic' Font-Size='7pt'  ValidationGroup='btnAgrega' ForeColor='red' ErrorMessage='Ingrese Valor'>
+                        Requerido</asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtValor"
                         ErrorMessage="solo se admiten numeros." ValidationGroup='btnAgrega' ToolTip="debe ingresar un valor numerico."
                         ValidationExpression="\d+">*</asp:RegularExpressionValidator>

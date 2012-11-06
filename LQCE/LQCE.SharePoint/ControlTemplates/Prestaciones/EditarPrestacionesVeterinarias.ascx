@@ -227,15 +227,20 @@
             <tr>
                 <td>
                     <asp:TextBox ID="txtExamen" runat="server" Columns="30"></asp:TextBox>
+                     <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ValidationGroup='btnAgrega' ControlToValidate='txtExamen'
+                        Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Examen'>Requerido</asp:RequiredFieldValidator>
                 </td>
                 <td>
                     <asp:TextBox ID="txtValor" runat="server" Columns="30"></asp:TextBox>
+                     <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtValor'
+                        Display='Dynamic' Font-Size='7pt'  ValidationGroup='btnAgrega' ForeColor='red' ErrorMessage='Ingrese Valor'>
+                        Requerido</asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txtValor"
                         ErrorMessage="solo se admiten numeros." ValidationGroup='btnAgrega' ToolTip="debe ingresar un valor numerico."
                         ValidationExpression="\d+">*</asp:RegularExpressionValidator>
                 </td>
                 <td>
-                    <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" OnClick="btnAgrega_Click" />
+                    <asp:Button ID="btnAgrega" runat="server" Text="Agrega Registro" OnClick="btnAgrega_Click" ValidationGroup='btnAgrega' />
                 </td>
             </tr>
         </table>

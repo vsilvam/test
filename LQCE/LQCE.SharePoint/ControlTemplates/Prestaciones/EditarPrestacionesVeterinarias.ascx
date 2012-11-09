@@ -22,7 +22,7 @@
 <script type="text/javascript" src="<%= ResolveUrl("~/_layouts/JScript/jquery-ui-sliderAccess.js")%>"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#<%=txtRecepcion.ClientID %>').datetimepicker();
+        $('#<%=txtFechaRecepción.ClientID %>').datetimepicker();
     });
 </script>
 <asp:Panel ID="panelMensaje" runat="server">
@@ -159,7 +159,7 @@
                     <asp:TextBox ID="txtFichaClinica" runat="server" Enabled="false" Columns="30" MaxLength="9"></asp:TextBox>
                 </td>
                 <td>
-                    FECHA RECEPCION
+                    FECHA/HORA RECEPCION
                 </td>
                 <td>
                     <asp:TextBox ID="txtFechaRecepción" runat="server" Enabled="false" Columns="30"></asp:TextBox>

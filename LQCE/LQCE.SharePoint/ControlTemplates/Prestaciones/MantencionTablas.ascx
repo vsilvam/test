@@ -54,7 +54,15 @@
 <asp:Panel ID="pnGrilla" runat="server" Visible= "true">
     <asp:GridView ID="grdTablas" runat="server" Width="100%">
         <Columns>
-            <asp:TemplateField HeaderText="EDITAR">
+            <asp:TemplateField HeaderText="Eliminar">
+                <ItemTemplate>
+                    <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                        CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" 
+                        onclick="imgEliminar_Click"  />
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Editar">
                 <ItemTemplate>
                     <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
                         CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" 

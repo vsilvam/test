@@ -51,6 +51,23 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                BuscarCliente();
+                
+                
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        private void BuscarCliente()
+        {
+            try
+            {
                 if (!string.IsNullOrEmpty(txtRutCliente.Text))
                     if (!ValidaRut(txtRutCliente.Text))
                         throw new Exception("Rut no es valido");
@@ -61,16 +78,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 string Rut = txtRutCliente.Text;
                 string Nombre = txtNombreCliente.Text;
-                if(!string.IsNullOrEmpty(ddlComuna.SelectedValue))
+                if (!string.IsNullOrEmpty(ddlComuna.SelectedValue))
                     Comuna = int.Parse(ddlComuna.SelectedValue);
-                if(!string.IsNullOrEmpty(ddlConvenio.SelectedValue))
+                if (!string.IsNullOrEmpty(ddlConvenio.SelectedValue))
                     Convenio = int.Parse(ddlConvenio.SelectedValue);
 
                 pnClientes.Visible = true;
-                var trx = new TrxCLIENTE();                
+                var trx = new TrxCLIENTE();
                 grdClientes.DataSource = trx.GetByFilterWithReferences(Comuna, Convenio, null, null, Rut, Nombre, null, "", "", "");
                 grdClientes.DataBind();
-                
             }
             catch (Exception ex)
             {
@@ -182,6 +198,31 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 return false;
             }
+        }
+
+        protected void imgEliminar_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int? Id = int.Parse(_link.CommandArgument);
+                if (Id.HasValue)
+                {
+                    TrxCLIENTE trxCliente = new TrxCLIENTE();
+                    trxCliente.Delete(Id.Value);
+
+                    BuscarCliente();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+
         }
     }
 }

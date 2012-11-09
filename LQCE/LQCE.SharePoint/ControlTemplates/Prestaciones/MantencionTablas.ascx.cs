@@ -614,5 +614,90 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             ddlExamenES.DataSource = _trx.GetAll();
             ddlExamenES.DataBind();
         }
+
+        protected void imgEliminar_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int? Id = int.Parse(_link.CommandArgument);
+
+                switch (int.Parse(ddlTablas.SelectedValue))
+                {
+                    case 1:
+                        var comuna = new TrxCOMUNA();
+                        comuna.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 2:
+                        var clienteSinonimo = new TrxCLIENTE_SINONIMO();
+                        clienteSinonimo.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 3: 
+                        var especie = new TrxESPECIE();
+                        especie.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 4:                         
+                        var examen = new TrxEXAMEN();
+                        examen.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 5: 
+                        var examenDetalle = new TrxEXAMEN_DETALLE();
+                        examenDetalle.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 6:                         
+                        var examenSinonimo = new TrxEXAMEN_SINONIMO();
+                        examenSinonimo.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 7: 
+                        var garantia = new TrxGARANTIA();
+                        garantia.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 8: 
+                        var prevision = new TrxPREVISION();
+                        prevision.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 9: 
+                        var raza = new TrxRAZA();
+                        raza.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 10: 
+                        var region = new TrxREGION();
+                        region.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 11: 
+                        var tipoCobro = new TrxTIPO_COBRO();
+                        tipoCobro.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                    case 12:
+                        ViewGrilla();
+                        break;
+                    case 13: 
+                        var tipoPrestacion = new TrxTIPO_PRESTACION();
+                        tipoPrestacion.Delete(Id.Value);
+                        ViewGrilla();
+                        break;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }        
     }
 }

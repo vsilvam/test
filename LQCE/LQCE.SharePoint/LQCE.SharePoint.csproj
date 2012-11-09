@@ -475,7 +475,9 @@
     <Content Include="ControlTemplates\Prestaciones\BuscarFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="ControlTemplates\Prestaciones\CargaArchivo.ascx" />
+    <Content Include="ControlTemplates\Prestaciones\CargaArchivo.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\DetalleFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -617,6 +619,7 @@
     <Content Include="Layouts\Style\Imagenes\editar.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Layouts\Style\Imagenes\eliminar.jpg" />
     <Content Include="Layouts\Style\Imagenes\pagar.jpg" />
     <Content Include="LEEME.txt" />
   </ItemGroup>

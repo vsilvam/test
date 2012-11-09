@@ -80,6 +80,14 @@
                 </ItemTemplate>
                 <ItemStyle HorizontalAlign="Center" />
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="Eliminar">
+                <ItemTemplate>
+                    <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                        CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" 
+                        onclick="imgEliminar_Click" />
+                </ItemTemplate>
+                <ItemStyle HorizontalAlign="Center" />
+            </asp:TemplateField>
         </Columns>
         <EmptyDataTemplate>
             No se encontraron clientes.

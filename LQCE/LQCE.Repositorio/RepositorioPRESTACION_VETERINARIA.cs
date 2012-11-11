@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", int? FICHA_CLINICA = null, string SEXO = "", string SOLICITANTE = "")
+		public IQueryable<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", string SEXO = "", string PROCEDENCIA = "", int? FICHA_CLINICA = null)
 		{
 			Error = string.Empty;
 			try
@@ -103,17 +103,17 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
 				}
-				if (FICHA_CLINICA.HasValue)
-				{
-				  q = q.Where(i => i.FICHA_CLINICA == FICHA_CLINICA.Value);
-				}
 				if (!string.IsNullOrEmpty(SEXO))
 				{
 				   q = q.Where(i => i.SEXO.Contains(SEXO));
 				}
-				if (!string.IsNullOrEmpty(SOLICITANTE))
+				if (!string.IsNullOrEmpty(PROCEDENCIA))
 				{
-				   q = q.Where(i => i.SOLICITANTE.Contains(SOLICITANTE));
+				   q = q.Where(i => i.PROCEDENCIA.Contains(PROCEDENCIA));
+				}
+				if (FICHA_CLINICA.HasValue)
+				{
+				  q = q.Where(i => i.FICHA_CLINICA == FICHA_CLINICA.Value);
 				}
 				if (ESPECIEId.HasValue)
 				{
@@ -133,7 +133,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", int? FICHA_CLINICA = null, string SEXO = "", string SOLICITANTE = "")
+		public IQueryable<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", string SEXO = "", string PROCEDENCIA = "", int? FICHA_CLINICA = null)
 		{
 			Error = string.Empty;
 			try
@@ -155,17 +155,17 @@ namespace LQCE.Repositorio
 				{
 					q = q.Where(i => i.TELEFONO.Contains(TELEFONO));
 				}
-				if (FICHA_CLINICA.HasValue)
-				{
-					q = q.Where(i => i.FICHA_CLINICA == FICHA_CLINICA.Value);
-				}
 				if (!string.IsNullOrEmpty(SEXO))
 				{
 					q = q.Where(i => i.SEXO.Contains(SEXO));
 				}
-				if (!string.IsNullOrEmpty(SOLICITANTE))
+				if (!string.IsNullOrEmpty(PROCEDENCIA))
 				{
-					q = q.Where(i => i.SOLICITANTE.Contains(SOLICITANTE));
+					q = q.Where(i => i.PROCEDENCIA.Contains(PROCEDENCIA));
+				}
+				if (FICHA_CLINICA.HasValue)
+				{
+					q = q.Where(i => i.FICHA_CLINICA == FICHA_CLINICA.Value);
 				}
 				if (ESPECIEId.HasValue)
 				{

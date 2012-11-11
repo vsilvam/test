@@ -76,11 +76,42 @@ namespace LQCE.Transaccion
                             }
                             if (TieneDatos)
                             {
+                                // Convertir fecha formato dd.mm.aa
+                                DateTime? pasoFR = null;
+                                if (!string.IsNullOrEmpty(item["FECHA RECEPCION"].ToString()))
+                                {
+                                    string[] arrFechaRecepcion = item["FECHA RECEPCION"].ToString().Split('.');
+                                    if (arrFechaRecepcion.Count() == 3)
+                                    {
+                                        int? dias = ISConvert.ToNullableInteger(arrFechaRecepcion[0]);
+                                        int? mes = ISConvert.ToNullableInteger(arrFechaRecepcion[1]);
+                                        int? año = ISConvert.ToNullableInteger(arrFechaRecepcion[2]);
+                                        if (dias.HasValue && mes.HasValue && año.HasValue)
+                                        {
+                                            if (año < 100)
+                                            {
+                                                año = año + 2000;
+                                            }
+                                            string fr = dias.Value.ToString() + "-"
+                                                + mes.Value.ToString() + "-"
+                                                + año.Value.ToString();
+                                            pasoFR = ISConvert.ToNullableDateTime(fr);
+                                        }
+                                    }
+                                }
+
                                 CARGA_PRESTACIONES_HUMANAS_DETALLE objDetalle = new CARGA_PRESTACIONES_HUMANAS_DETALLE();
                                 objDetalle.CARGA_PRESTACIONES_ENCABEZADO = objEncabezado;
                                 objDetalle.NOMBRE = item["NOMBRE"].ToString();
                                 objDetalle.FICHA = item["FICHA"].ToString();
-                                objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString() + " " + item["HORA RECEPCION"].ToString();
+                                if (pasoFR.HasValue)
+                                {
+                                    objDetalle.FECHA_RECEPCION = pasoFR.Value.ToString("dd-MM-yyyy") + " " + item["HORA RECEPCION"].ToString();
+                                }
+                                else
+                                {
+                                    objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString() + "." + item["HORA RECEPCION"].ToString();
+                                }
                                 objDetalle.TELEFONO = item["TELEFONO"].ToString();
                                 objDetalle.MEDICO = item["MEDICO"].ToString();
                                 objDetalle.PROCEDENCIA = item["PROCEDENCIA"].ToString();
@@ -125,6 +156,30 @@ namespace LQCE.Transaccion
                     {
                         foreach (DataRow item in datos.Rows)
                         {
+                            // Convertir fecha formato dd.mm.aa
+                            DateTime? pasoFR = null;
+                            if (!string.IsNullOrEmpty(item["FECHA RECEPCION"].ToString()))
+                            {
+                                string[] arrFechaRecepcion = item["FECHA RECEPCION"].ToString().Split('.');
+                                if (arrFechaRecepcion.Count() == 3)
+                                {
+                                    int? dias = ISConvert.ToNullableInteger(arrFechaRecepcion[0]);
+                                    int? mes = ISConvert.ToNullableInteger(arrFechaRecepcion[1]);
+                                    int? año = ISConvert.ToNullableInteger(arrFechaRecepcion[2]);
+                                    if (dias.HasValue && mes.HasValue && año.HasValue)
+                                    {
+                                        if (año < 100)
+                                        {
+                                            año = año + 2000;
+                                        }
+                                        string fr = dias.Value.ToString() + "-"
+                                            + mes.Value.ToString() + "-"
+                                            + año.Value.ToString();
+                                        pasoFR = ISConvert.ToNullableDateTime(fr);
+                                    }
+                                }
+                            }
+
                             CARGA_PRESTACIONES_VETERINARIAS_DETALLE objDetalle = new CARGA_PRESTACIONES_VETERINARIAS_DETALLE();
                             objDetalle.CARGA_PRESTACIONES_ENCABEZADO = objEncabezado;
                             objDetalle.FICHA = item["INGRESO"].ToString();
@@ -141,7 +196,14 @@ namespace LQCE.Transaccion
                             objDetalle.RECEPCION = item["RECEPCION"].ToString();
                             objDetalle.MEDICO = item["MEDICO"].ToString();
                             objDetalle.SOLICITA = item["SOLICITANTE"].ToString();
-                            objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString() + " " + item["HORA RECEPCION"].ToString();
+                            if (pasoFR.HasValue)
+                            {
+                                objDetalle.FECHA_RECEPCION = pasoFR.Value.ToString("dd-MM-yyyy") + " " + item["HORA RECEPCION"].ToString();
+                            }
+                            else
+                            {
+                                objDetalle.FECHA_RECEPCION = item["FECHA RECEPCION"].ToString() + "." + item["HORA RECEPCION"].ToString();
+                            }
                             objDetalle.FICHA_CLINICA = item["FICHA"].ToString();
                             //objDetalle.FECHA_MUESTRA = item["FECHA MUESTRA"].ToString();
                             //objDetalle.FECHA_RESULTADOS = item["FECHA RESULTADOS"].ToString();
@@ -691,7 +753,7 @@ namespace LQCE.Transaccion
                                 _PRESTACION_VETERINARIA.SEXO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.SEXO;
                                 _PRESTACION_VETERINARIA.EDAD = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.EDAD;
                                 _PRESTACION_VETERINARIA.TELEFONO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.TELEFONO;
-                                _PRESTACION_VETERINARIA.SOLICITANTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.SOLICITA;
+                                _PRESTACION_VETERINARIA.PROCEDENCIA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.PROCEDENCIA;
                                 _PRESTACION_VETERINARIA.FICHA_CLINICA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FICHA_CLINICA;
                                 _PRESTACION_VETERINARIA.ACTIVO = true;
 
@@ -1003,14 +1065,14 @@ namespace LQCE.Transaccion
             }
             else
             {
-                DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
-                if (!_fechaRecepcion.HasValue)
+                DateTime? pasoFR = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
+                if (!pasoFR.HasValue)
                 {
                     ListaValidaciones.Add("FECHA DE RECEPCIÓN no tiene el formato correcto");
                 }
                 else
                 {
-                    objDetalle.VALOR_FECHA_RECEPCION = _fechaRecepcion.Value;
+                    objDetalle.VALOR_FECHA_RECEPCION = pasoFR.Value;
                 }
             }
 
@@ -1261,31 +1323,12 @@ namespace LQCE.Transaccion
                 }
             }
 
-            // Cliente
-            if (string.IsNullOrEmpty(objDetalle.PROCEDENCIA))
-            {
-                ListaValidaciones.Add("No se ha señalado PROCEDENCIA en la ficha");
-            }
-            else
-            {
-                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, null, "", objDetalle.PROCEDENCIA).FirstOrDefault();
-                if (objCliente != null)
-                {
-                    objDetalle.CLIENTE = objCliente;
-                }
-                else
-                {
-                    var objClienteSinonimo = _RepositorioCLIENTE_SINONIMO.GetByFilterWithReferences(null, objDetalle.PROCEDENCIA).FirstOrDefault();
-                    if (objClienteSinonimo != null)
-                    {
-                        objClienteSinonimo.CLIENTE = objClienteSinonimo.CLIENTE;
-                    }
-                    else
-                    {
-                        ListaValidaciones.Add("No se ha podido identificar PROCEDENCIA de la prestación");
-                    }
-                }
-            }
+            // Procedencia
+            ////if (string.IsNullOrEmpty(objDetalle.PROCEDENCIA))
+            ////{
+            ////    ListaValidaciones.Add("No se ha señalado PROCEDENCIA en la ficha");
+            ////}
+           
 
             // Garantia
             if (string.IsNullOrEmpty(objDetalle.GARANTIA))
@@ -1330,8 +1373,25 @@ namespace LQCE.Transaccion
             }
             else
             {
+                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, null, "", objDetalle.SOLICITA).FirstOrDefault();
+                if (objCliente != null)
+                {
+                    objDetalle.CLIENTE = objCliente;
+                }
+                else
+                {
+                    var objClienteSinonimo = _RepositorioCLIENTE_SINONIMO.GetByFilterWithReferences(null, objDetalle.SOLICITA).FirstOrDefault();
+                    if (objClienteSinonimo != null)
+                    {
+                        objClienteSinonimo.CLIENTE = objClienteSinonimo.CLIENTE;
+                    }
+                    else
+                    {
+                        ListaValidaciones.Add("No se ha podido identificar SOLICITANTE de la prestación");
+                    }
+                }
             }
-            
+
             // Fecha de Recepcion
             if (string.IsNullOrEmpty(objDetalle.FECHA_RECEPCION))
             {
@@ -1339,14 +1399,14 @@ namespace LQCE.Transaccion
             }
             else
             {
-                DateTime? _fechaRecepcion = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
-                if (!_fechaRecepcion.HasValue)
+                DateTime? pasoFR = ISConvert.ToNullableDateTime(objDetalle.FECHA_RECEPCION);
+                if (!pasoFR.HasValue)
                 {
                     ListaValidaciones.Add("FECHA DE RECEPCIÓN no tiene el formato correcto");
                 }
                 else
                 {
-                    objDetalle.VALOR_FECHA_RECEPCION = _fechaRecepcion.Value;
+                    objDetalle.VALOR_FECHA_RECEPCION = pasoFR.Value;
                 }
             }
 

@@ -70,7 +70,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 //cargar ficha
                 txtNombre.Text = prestaciones.NOMBRE;
                 txtNumeroFicha.Text = prestaciones.FICHA;
-                txtFechaRecepcion.Text = prestaciones.FECHA_RECEPCION.Replace("/", "-");
+                txtFechaRecepcion.Text = prestaciones.FECHA_RECEPCION;
                 txtTelefono.Text = prestaciones.TELEFONO;
                 txtMedico.Text = prestaciones.MEDICO;
                 txtProcedencia.Text = prestaciones.PROCEDENCIA;

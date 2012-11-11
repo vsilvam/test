@@ -77,10 +77,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtGarantia.Text = prestaciones.GARANTIA;
             txtPendiente.Text = prestaciones.PENDIENTE;
             txtMontoTotal.Text = prestaciones.TOTAL;
-            txtRecepcion.Text = prestaciones.RECEPCION;//.FECHA_RECEPCION.Replace("/", "-");
+            txtRecepcion.Text = prestaciones.RECEPCION;
             txtMedico.Text = prestaciones.MEDICO;
             txtSolicitante.Text = prestaciones.SOLICITA;
-            txtFechaRecepción.Text = prestaciones.VALOR_FECHA_RECEPCION.ToString();//.FECHA_RECEPCION;
+            txtFechaRecepción.Text = prestaciones.FECHA_RECEPCION;
             txtFichaClinica.Text = prestaciones.FICHA_CLINICA;            
 
             //carga grilla

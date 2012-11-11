@@ -754,6 +754,7 @@ namespace LQCE.Transaccion
                                 _PRESTACION_VETERINARIA.EDAD = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.EDAD;
                                 _PRESTACION_VETERINARIA.TELEFONO = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.TELEFONO;
                                 _PRESTACION_VETERINARIA.PROCEDENCIA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.PROCEDENCIA;
+                                _PRESTACION_VETERINARIA.SOLICITANTE = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.SOLICITA;
                                 _PRESTACION_VETERINARIA.FICHA_CLINICA = _CARGA_PRESTACIONES_VETERINARIAS_DETALLE.VALOR_FICHA_CLINICA;
                                 _PRESTACION_VETERINARIA.ACTIVO = true;
 
@@ -854,6 +855,7 @@ namespace LQCE.Transaccion
                         objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
                         objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
                         objExamen.ACTIVO = true;
+                        objExamen.FECHA_ACTUALIZACION = DateTime.Now;
                         context.AddToCARGA_PRESTACIONES_HUMANAS_EXAMEN(objExamen);
                     }
 
@@ -945,6 +947,7 @@ namespace LQCE.Transaccion
                         objExamen.NOMBRE_EXAMEN = dtoExamen.NOMBRE_EXAMEN;
                         objExamen.VALOR_EXAMEN = dtoExamen.VALOR_EXAMEN;
                         objExamen.ACTIVO = true;
+                        objExamen.FECHA_ACTUALIZACION = DateTime.Now;
                         context.AddToCARGA_PRESTACIONES_VETERINARIAS_EXAMEN(objExamen);
                     }
 
@@ -1026,6 +1029,10 @@ namespace LQCE.Transaccion
 
             var EstadoConError = _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById((int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.ConError);
             if(EstadoConError == null)
+                throw new Exception("No se encuentra registro de error en la tabla Estado de Detalle Carga Prestaciones");
+
+            var EstadoValidado = _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById((int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado);
+            if (EstadoValidado == null)
                 throw new Exception("No se encuentra registro de error en la tabla Estado de Detalle Carga Prestaciones");
 
             List<string> ListaValidaciones = new List<string>();
@@ -1164,7 +1171,7 @@ namespace LQCE.Transaccion
             int contadorExamen = 1;
             int contadorExamenesRegistrados = 0;
             int contadorValorExamen = 0;
-            foreach (var item in objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN)
+            foreach (var item in objDetalle.CARGA_PRESTACIONES_HUMANAS_EXAMEN.Where(pe => pe.ACTIVO))
             {
                 if (!string.IsNullOrEmpty(item.VALOR_EXAMEN) || !string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                 {
@@ -1199,14 +1206,18 @@ namespace LQCE.Transaccion
                     }
                     else
                     {
-                        contadorValorExamen++;
                         int? _valorExamen = ISConvert.ToNullableInteger(item.VALOR_EXAMEN);
                         if (!_valorExamen.HasValue)
                         {
                             ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
                         }
+                        else if (_valorExamen == 0)
+                        {
+                            //ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
+                        }
                         else
                         {
+                            contadorValorExamen++;
                             item.VALOR_VALOR_EXAMEN = _valorExamen;
                         }
                     }
@@ -1231,9 +1242,14 @@ namespace LQCE.Transaccion
             {
                 objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = EstadoConError;
                 string errores = "";
-                foreach(var item in ListaValidaciones)
+                foreach (var item in ListaValidaciones)
                     errores += item + Environment.NewLine;
                 objDetalle.MENSAJE_ERROR = errores;
+            }
+            else
+            {
+                objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = EstadoValidado;
+                objDetalle.MENSAJE_ERROR = "";
             }
             //context.ApplyPropertyChanges("CARGA_PRESTACIONES_HUMANAS_DETALLE", objDetalle);
 
@@ -1255,6 +1271,10 @@ namespace LQCE.Transaccion
 
             var EstadoConError = _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById((int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.ConError);
             if (EstadoConError == null)
+                throw new Exception("No se encuentra registro de error en la tabla Estado de Detalle Carga Prestaciones");
+
+            var EstadoValidado = _RepositorioCARGA_PRESTACIONES_DETALLE_ESTADO.GetById((int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado);
+            if (EstadoValidado == null)
                 throw new Exception("No se encuentra registro de error en la tabla Estado de Detalle Carga Prestaciones");
 
             List<string> ListaValidaciones = new List<string>();
@@ -1373,21 +1393,44 @@ namespace LQCE.Transaccion
             }
             else
             {
-                var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, null, "", objDetalle.SOLICITA).FirstOrDefault();
-                if (objCliente != null)
+                if (objDetalle.SOLICITA.ToUpper().Trim() == "PARTICULAR")
                 {
-                    objDetalle.CLIENTE = objCliente;
-                }
-                else
-                {
-                    var objClienteSinonimo = _RepositorioCLIENTE_SINONIMO.GetByFilterWithReferences(null, objDetalle.SOLICITA).FirstOrDefault();
-                    if (objClienteSinonimo != null)
+                    var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, null, "", objDetalle.MEDICO).FirstOrDefault();
+                    if (objCliente != null)
                     {
-                        objClienteSinonimo.CLIENTE = objClienteSinonimo.CLIENTE;
+                        objDetalle.CLIENTE = objCliente;
                     }
                     else
                     {
-                        ListaValidaciones.Add("No se ha podido identificar SOLICITANTE de la prestación");
+                        var objClienteSinonimo = _RepositorioCLIENTE_SINONIMO.GetByFilterWithReferences(null, objDetalle.MEDICO).FirstOrDefault();
+                        if (objClienteSinonimo != null)
+                        {
+                            objClienteSinonimo.CLIENTE = objClienteSinonimo.CLIENTE;
+                        }
+                        else
+                        {
+                            ListaValidaciones.Add("No se ha podido identificar CLIENTE MEDICO de la prestación");
+                        }
+                    }
+                }
+                else
+                {
+                    var objCliente = _RepositorioCLIENTE.GetByFilter(null, null, null, null, "", objDetalle.SOLICITA).FirstOrDefault();
+                    if (objCliente != null)
+                    {
+                        objDetalle.CLIENTE = objCliente;
+                    }
+                    else
+                    {
+                        var objClienteSinonimo = _RepositorioCLIENTE_SINONIMO.GetByFilterWithReferences(null, objDetalle.SOLICITA).FirstOrDefault();
+                        if (objClienteSinonimo != null)
+                        {
+                            objClienteSinonimo.CLIENTE = objClienteSinonimo.CLIENTE;
+                        }
+                        else
+                        {
+                            ListaValidaciones.Add("No se ha podido identificar CLIENTE SOLICITANTE de la prestación");
+                        }
                     }
                 }
             }
@@ -1433,7 +1476,7 @@ namespace LQCE.Transaccion
             int contadorExamen = 1;
             int contadorExamenesRegistrados = 0;
             int contadorValorExamen = 0;
-            foreach (var item in objDetalle.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN)
+            foreach (var item in objDetalle.CARGA_PRESTACIONES_VETERINARIAS_EXAMEN.Where(pe => pe.ACTIVO))
             {
                 if (!string.IsNullOrEmpty(item.VALOR_EXAMEN) || !string.IsNullOrEmpty(item.NOMBRE_EXAMEN))
                 {
@@ -1468,14 +1511,18 @@ namespace LQCE.Transaccion
                     }
                     else
                     {
-                        contadorValorExamen++;
                         int? _valorExamen = ISConvert.ToNullableInteger(item.VALOR_EXAMEN);
                         if (!_valorExamen.HasValue)
                         {
                             ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
                         }
+                        else if (_valorExamen == 0)
+                        {
+                            //ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
+                        }
                         else
                         {
+                            contadorValorExamen++;
                             item.VALOR_VALOR_EXAMEN = _valorExamen;
                         }
                     }
@@ -1503,6 +1550,11 @@ namespace LQCE.Transaccion
                 foreach (var item in ListaValidaciones)
                     errores += item + Environment.NewLine;
                 objDetalle.MENSAJE_ERROR = errores;
+            }
+            else
+            {
+                objDetalle.CARGA_PRESTACIONES_DETALLE_ESTADO = EstadoValidado;
+                objDetalle.MENSAJE_ERROR = "";
             }
             //context.ApplyPropertyChanges("CARGA_PRESTACIONES_VETERINARIAS_DETALLE", objDetalle);
 

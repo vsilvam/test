@@ -7,6 +7,7 @@ namespace LQCE.Transaccion.DTO
         public int ID_CLIENTE { get; set; }
         public string NOMBRE_CLIENTE { get; set; }
         public string RUT_CLIENTE { get; set; }
+        public string DETALLE { get; set; }
 
         //public List<DTO_REPORTE_DETALLEFACTURA_PRESTACION> DETALLE { get; set; }
 

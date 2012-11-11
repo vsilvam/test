@@ -70,7 +70,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_RAZA", "RAZA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.RAZA), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 10-11-2012 22:49:48
+// Fecha de generación: 10-11-2012 23:14:18
 namespace LQCE.Modelo
 {
     
@@ -12280,6 +12280,33 @@ namespace LQCE.Modelo
         partial void OnSEXOChanging(string value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnSEXOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad SOLICITANTE en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string SOLICITANTE
+        {
+            get
+            {
+                return this._SOLICITANTE;
+            }
+            set
+            {
+                this.OnSOLICITANTEChanging(value);
+                this.ReportPropertyChanging("SOLICITANTE");
+                this._SOLICITANTE = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("SOLICITANTE");
+                this.OnSOLICITANTEChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _SOLICITANTE;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnSOLICITANTEChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnSOLICITANTEChanged();
         /// <summary>
         /// No hay ningún comentario para la propiedad PROCEDENCIA en el esquema.
         /// </summary>

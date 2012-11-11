@@ -271,6 +271,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\DetalleFactura.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\DetalleFacturaSubreporte.rdlc">
       <SubType>Designer</SubType>

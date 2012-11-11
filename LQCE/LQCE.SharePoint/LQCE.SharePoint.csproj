@@ -620,6 +620,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Layouts\Style\Imagenes\eliminar.jpg" />
+    <Content Include="Layouts\Style\Imagenes\logo-lqce-header.png" />
     <Content Include="Layouts\Style\Imagenes\pagar.jpg" />
     <Content Include="LEEME.txt" />
   </ItemGroup>

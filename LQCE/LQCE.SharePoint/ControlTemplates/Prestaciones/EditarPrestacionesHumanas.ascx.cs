@@ -174,6 +174,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                CalculoMontoPrestaciones();
+
                 if (Request.QueryString["Id"] == null)
                         throw new Exception("No se ha indicado identificador de la cuenta registrada");
 
@@ -307,24 +309,20 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                DTOExamen _dto;
-                List<DTOExamen> _lis = new List<DTOExamen>();
+                List<DTOExamen> listaDTO = this.ListaExamen;
+                int numeroFila = 0;
                 foreach (GridViewRow grilla in grdExamen.Rows)
                 {
                     CheckBox ChkSeleccionar = (CheckBox)grilla.FindControl("ChkSeleccionar");
-                    if (!ChkSeleccionar.Checked)
+                    if (ChkSeleccionar.Checked)
                     {
-                        TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
-                        TextBox txtValor = (TextBox)grilla.FindControl("txtValor");
-
-                        _dto = new DTOExamen();
-                        _dto.NOMBRE_EXAMEN = txtExamen.Text;
-                        _dto.VALOR_EXAMEN = txtValor.Text;
-                        _lis.Add(_dto);
+                        listaDTO[numeroFila].ID = -1;
                     }
+                    numeroFila++;
                 }
-                this.ListaExamen = _lis;
-                grdExamen.DataSource = _lis;
+                listaDTO.RemoveAll(d => d.ID == -1);
+                this.ListaExamen = listaDTO;
+                grdExamen.DataSource = listaDTO;
                 grdExamen.DataBind();
 
                 CalculoMontoPrestaciones();

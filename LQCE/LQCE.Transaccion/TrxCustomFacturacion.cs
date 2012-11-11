@@ -285,7 +285,8 @@ namespace LQCE.Transaccion
                                  ID_FACTURA = g.Key,
                                  ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
                                  NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
-                                 RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE
+                                 RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
+                                 DETALLE = g.FirstOrDefault().DETALLE
                              }).ToList();
 
 
@@ -519,19 +520,45 @@ namespace LQCE.Transaccion
 
                     var q = _RepositorioFACTURACION.GetFacturaDetalleByIdFacturacion(IdFacturacion);
 
-                    return (from fd in q
+                    var lista = (from fd in q
                             select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
                             {
                                 ID_FACTURA = fd.FACTURA.ID,
                                 ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
                                 NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
                                 RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
+                                DETALLE = fd.FACTURA.DETALLE,
                                 ID_FACTURA_DETALLE = fd.ID,
                                 NUMERO_FICHA = fd.PRESTACION.ID,
                                 MONTO_TOTAL = fd.MONTO_TOTAL,
                                 FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
-                                NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
+                                NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE,
+                                MEDICO = fd.PRESTACION.MEDICO,
+                                EXAMENES = ""
                             }).ToList();
+
+                    foreach (var i in lista)
+                    {
+                        string examenes = "";
+                        FACTURA_DETALLE _FACTURA_DETALLE = _RepositorioFACTURACION.GetFacturaDetalleByIdDetalleFactura(i.ID_FACTURA_DETALLE).FirstOrDefault();
+                        if (_FACTURA_DETALLE != null)
+                        {
+                            if(_FACTURA_DETALLE.PRESTACION != null)
+                            {
+                                foreach (var e in _FACTURA_DETALLE.PRESTACION.PRESTACION_EXAMEN.Where(pe => pe.ACTIVO))
+                                {
+                                    if (e.EXAMEN != null)
+                                    {
+                                        if (!string.IsNullOrEmpty(examenes))
+                                            examenes += ", ";
+                                        examenes += e.EXAMEN.NOMBRE;
+                                    }
+                                }
+                            }
+                        }
+                        i.EXAMENES = examenes;
+                    }
+                    return lista;
                 }
             }
             catch (Exception ex)
@@ -553,19 +580,45 @@ namespace LQCE.Transaccion
 
                     var q = _RepositorioFACTURACION.GetFacturaDetalleByIdFactura(IdFactura);
 
-                    return (from fd in q
+                    var lista = (from fd in q
                             select new DTO_REPORTE_DETALLEFACTURA_PRESTACION
                             {
                                 ID_FACTURA = fd.FACTURA.ID,
                                 ID_CLIENTE = fd.FACTURA.CLIENTE.ID,
                                 NOMBRE_CLIENTE = fd.FACTURA.NOMBRE_CLIENTE,
                                 RUT_CLIENTE = fd.FACTURA.RUT_CLIENTE,
+                                DETALLE = fd.FACTURA.DETALLE,
                                 ID_FACTURA_DETALLE = fd.ID,
                                 NUMERO_FICHA = fd.PRESTACION.ID,
                                 MONTO_TOTAL = fd.MONTO_TOTAL,
                                 FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
-                                NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE
+                                NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE,
+                                MEDICO = fd.PRESTACION.MEDICO,
+                                EXAMENES = ""
                             }).ToList();
+
+                    foreach (var i in lista)
+                    {
+                        string examenes = "";
+                        FACTURA_DETALLE _FACTURA_DETALLE = _RepositorioFACTURACION.GetFacturaDetalleByIdDetalleFactura(i.ID_FACTURA_DETALLE).FirstOrDefault();
+                        if (_FACTURA_DETALLE != null)
+                        {
+                            if(_FACTURA_DETALLE.PRESTACION != null)
+                            {
+                                foreach (var e in _FACTURA_DETALLE.PRESTACION.PRESTACION_EXAMEN.Where(pe => pe.ACTIVO))
+                                {
+                                    if(e.EXAMEN != null)
+                                    {
+                                    if (!string.IsNullOrEmpty(examenes))
+                                        examenes += ", ";
+                                    examenes += e.EXAMEN.NOMBRE;
+                                    }
+                                }
+                            }
+                        }
+                        i.EXAMENES = examenes;
+                    }
+                    return lista;
                 }
             }
             catch (Exception ex)
@@ -805,7 +858,8 @@ namespace LQCE.Transaccion
                                      ID_FACTURA = g.Key,
                                      ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
                                      NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
-                                     RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE
+                                     RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
+                                     DETALLE = g.FirstOrDefault().DETALLE
                                  }).ToList();
 
 

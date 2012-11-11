@@ -48,6 +48,14 @@
           <DataField>RUT_CLIENTE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="MEDICO">
+          <DataField>MEDICO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EXAMENES">
+          <DataField>EXAMENES</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>LQCETransaccionDTO</DataSourceName>
@@ -66,16 +74,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>2.16667in</Width>
+              <Width>0.89583in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.44792in</Width>
+              <Width>0.77084in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.01042in</Width>
+              <Width>1.25in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.85925in</Width>
+              <Width>0.98425in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.46367in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>1.11967in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -91,8 +105,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>FECHA RECEPCION</Value>
-                              <Style />
+                              <Value>FECHA REC</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -121,8 +138,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>NUMERO FICHA</Value>
-                              <Style />
+                              <Value>INGRESO</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -152,13 +172,82 @@
                           <TextRuns>
                             <TextRun>
                               <Value>NOMBRE</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox2">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>MEDICO</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox2</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox4">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>EXAMENES</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox4</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -181,8 +270,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>MONTO TOTAL</Value>
-                              <Style />
+                              <Value>TOTAL</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -217,7 +309,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!FECHA_RECEPCION.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -247,7 +341,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!NUMERO_FICHA.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -277,13 +373,79 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!NOMBRE.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>NOMBRE</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="MEDICO">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!MEDICO.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>MEDICO</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="EXAMENES">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!EXAMENES.Value</Value>
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>EXAMENES</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -307,7 +469,9 @@
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!MONTO_TOTAL.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontSize>9pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
@@ -337,6 +501,8 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -351,11 +517,12 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>1.2cm</Height>
-        <Width>19.01cm</Width>
+        <Width>19.01002cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
+          <FontSize>9pt</FontSize>
         </Style>
       </Tablix>
     </ReportItems>
@@ -367,7 +534,8 @@
       <DataType>Integer</DataType>
       <Prompt>ID_FACTURA</Prompt>
     </ReportParameter>
-  </ReportParameters> <Width>7.48425in</Width>
+  </ReportParameters>
+  <Width>7.48426in</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

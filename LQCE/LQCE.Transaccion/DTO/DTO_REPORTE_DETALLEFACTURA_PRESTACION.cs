@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+
 namespace LQCE.Transaccion.DTO
 {
     public class DTO_REPORTE_DETALLEFACTURA_PRESTACION
@@ -9,6 +9,7 @@ namespace LQCE.Transaccion.DTO
         public int ID_CLIENTE { get; set; }
         public string NOMBRE_CLIENTE { get; set; }
         public string RUT_CLIENTE { get; set; }
+        public string DETALLE { get; set; }
 
         // Detalle
         public int ID_FACTURA_DETALLE { get; set; }
@@ -16,5 +17,7 @@ namespace LQCE.Transaccion.DTO
         public int MONTO_TOTAL { get; set; }
         public DateTime FECHA_RECEPCION { get; set; }
         public string NOMBRE { get; set; }
+        public string MEDICO { get; set; }
+        public string EXAMENES { get; set; }
     }
 }

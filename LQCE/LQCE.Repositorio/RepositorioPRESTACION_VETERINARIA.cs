@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", string SEXO = "", string PROCEDENCIA = "", int? FICHA_CLINICA = null)
+		public IQueryable<PRESTACION_VETERINARIA> GetByFilter(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", string SEXO = "", string SOLICITANTE = "", string PROCEDENCIA = "", int? FICHA_CLINICA = null)
 		{
 			Error = string.Empty;
 			try
@@ -106,6 +106,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(SEXO))
 				{
 				   q = q.Where(i => i.SEXO.Contains(SEXO));
+				}
+				if (!string.IsNullOrEmpty(SOLICITANTE))
+				{
+				   q = q.Where(i => i.SOLICITANTE.Contains(SOLICITANTE));
 				}
 				if (!string.IsNullOrEmpty(PROCEDENCIA))
 				{
@@ -133,7 +137,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", string SEXO = "", string PROCEDENCIA = "", int? FICHA_CLINICA = null)
+		public IQueryable<PRESTACION_VETERINARIA> GetByFilterWithReferences(int? ESPECIEId = null, int? RAZAId = null, string NOMBRE = "", string EDAD = "", string TELEFONO = "", string SEXO = "", string SOLICITANTE = "", string PROCEDENCIA = "", int? FICHA_CLINICA = null)
 		{
 			Error = string.Empty;
 			try
@@ -158,6 +162,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(SEXO))
 				{
 					q = q.Where(i => i.SEXO.Contains(SEXO));
+				}
+				if (!string.IsNullOrEmpty(SOLICITANTE))
+				{
+					q = q.Where(i => i.SOLICITANTE.Contains(SOLICITANTE));
 				}
 				if (!string.IsNullOrEmpty(PROCEDENCIA))
 				{

@@ -50,7 +50,7 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>7.72917in</Width>
+              <Width>7.48031in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -69,9 +69,8 @@
                             </Parameter>
                           </Parameters>
                           <Top>4.33071cm</Top>
-                          <Left>0.00001cm</Left>
                           <Height>1.48812cm</Height>
-                          <Width>19.63208cm</Width>
+                          <Width>19cm</Width>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -88,6 +87,7 @@
                                   <Value>EXAMENES REALIZADOS A </Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -97,6 +97,7 @@
                                   <Value>=Fields!NOMBRE_CLIENTE.Value</Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                     <TextDecoration>None</TextDecoration>
                                     <Color>#000000</Color>
@@ -109,7 +110,7 @@
                           <rd:DefaultName>Textbox2</rd:DefaultName>
                           <Top>2.76083cm</Top>
                           <Height>0.6cm</Height>
-                          <Width>19.63208cm</Width>
+                          <Width>19cm</Width>
                           <ZIndex>1</ZIndex>
                           <Style>
                             <Border>
@@ -125,7 +126,6 @@
                           <Source>Embedded</Source>
                           <Value>logolqceheader</Value>
                           <Sizing>FitProportional</Sizing>
-                          <Left>0.00001cm</Left>
                           <Height>2.21437cm</Height>
                           <Width>5.23062cm</Width>
                           <ZIndex>2</ZIndex>
@@ -144,6 +144,7 @@
                                 <TextRun>
                                   <Value>LABORATORIO DE QUÍMICA CLÍNICA ESPECIALIZADA LIMITADA</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -157,6 +158,7 @@
                                 <TextRun>
                                   <Value>DIVISIÓN VETERINARIA</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -170,6 +172,7 @@
                                 <TextRun>
                                   <Value>EDIFICIO GALENO - AV. SALVADOR 149 - DPTO. 510-511-512 - PROVIDENCIA</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -183,6 +186,7 @@
                                 <TextRun>
                                   <Value>TELÉFONO: 2518116-3432377-2256173 - FONOFAX: 2746774</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -196,6 +200,7 @@
                                 <TextRun>
                                   <Value>e-mail: labmonari@terra.cl - lqce@lqce.cl - www.lqce.cl</Value>
                                   <Style>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Normal</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -208,7 +213,7 @@
                           <rd:DefaultName>Textbox4</rd:DefaultName>
                           <Left>5.37175cm</Left>
                           <Height>2.21437cm</Height>
-                          <Width>14.00938cm</Width>
+                          <Width>13.62825cm</Width>
                           <ZIndex>3</ZIndex>
                           <Style>
                             <Border>
@@ -222,9 +227,8 @@
                         </Textbox>
                         <Line Name="Line1">
                           <Top>2.35549cm</Top>
-                          <Left>0.00001cm</Left>
                           <Height>0cm</Height>
-                          <Width>19.63207cm</Width>
+                          <Width>19cm</Width>
                           <ZIndex>4</ZIndex>
                           <Style>
                             <Border>
@@ -241,7 +245,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!DETALLE.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -251,7 +257,7 @@
                           <Top>3.53695cm</Top>
                           <Left>0.00001cm</Left>
                           <Height>0.6cm</Height>
-                          <Width>19.63207cm</Width>
+                          <Width>19cm</Width>
                           <ZIndex>5</ZIndex>
                           <Style>
                             <Border>
@@ -294,7 +300,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>5.81884cm</Height>
-        <Width>19.63209cm</Width>
+        <Width>19cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -305,14 +311,14 @@
     <Height>2.29088in</Height>
     <Style />
   </Body>
-  <Width>7.72917in</Width>
+  <Width>19cm</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>1cm</LeftMargin>
+    <RightMargin>1cm</RightMargin>
+    <TopMargin>1cm</TopMargin>
+    <BottomMargin>1cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

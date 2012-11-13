@@ -202,12 +202,12 @@ namespace LQCE.Transaccion
                         string deviceInfo =
                                       "<DeviceInfo>" +
                                       "  <OutputFormat>PDF</OutputFormat>" +
-                                      "  <PageWidth>11in</PageWidth>" +
-                                      "  <PageHeight>8.5in</PageHeight>" +
-                                      "  <MarginTop>0.5in</MarginTop>" +
-                                      "  <MarginLeft>1in</MarginLeft>" +
-                                      "  <MarginRight>1in</MarginRight>" +
-                                      "  <MarginBottom>0.5in</MarginBottom>" +
+                                      "  <PageWidth>21cm</PageWidth>" +
+                                      "  <PageHeight>29.7cm</PageHeight>" +
+                                      "  <MarginTop>1cm</MarginTop>" +
+                                      "  <MarginLeft>1cm</MarginLeft>" +
+                                      "  <MarginRight>1cm</MarginRight>" +
+                                      "  <MarginBottom>1cm</MarginBottom>" +
                                       "</DeviceInfo>";
                         Warning[] warnings;
                         m_streams_matriz = new List<Stream>();
@@ -801,12 +801,12 @@ namespace LQCE.Transaccion
                             string deviceInfo =
                                           "<DeviceInfo>" +
                                           "  <OutputFormat>PDF</OutputFormat>" +
-                                          "  <PageWidth>11in</PageWidth>" +
-                                          "  <PageHeight>8.5in</PageHeight>" +
-                                          "  <MarginTop>0.5in</MarginTop>" +
-                                          "  <MarginLeft>1in</MarginLeft>" +
-                                          "  <MarginRight>1in</MarginRight>" +
-                                          "  <MarginBottom>0.5in</MarginBottom>" +
+                                         "  <PageWidth>8.2in</PageWidth>" +
+                                      "  <PageHeight>11.7in</PageHeight>" +
+                                      "  <MarginTop>0in</MarginTop>" +
+                                      "  <MarginLeft>0in</MarginLeft>" +
+                                      "  <MarginRight>0in</MarginRight>" +
+                                      "  <MarginBottom>0in</MarginBottom>" +
                                           "</DeviceInfo>";
                             Warning[] warnings;
                             m_streams_matriz = new List<Stream>();
@@ -1128,12 +1128,12 @@ namespace LQCE.Transaccion
                         string deviceInfo =
                                       "<DeviceInfo>" +
                                       "  <OutputFormat>PDF</OutputFormat>" +
-                                      "  <PageWidth>11in</PageWidth>" +
-                                      "  <PageHeight>8.5in</PageHeight>" +
-                                      "  <MarginTop>0.5in</MarginTop>" +
-                                      "  <MarginLeft>1in</MarginLeft>" +
-                                      "  <MarginRight>1in</MarginRight>" +
-                                      "  <MarginBottom>0.5in</MarginBottom>" +
+                                      "  <PageWidth>8.2in</PageWidth>" +
+                                      "  <PageHeight>11.7in</PageHeight>" +
+                                      "  <MarginTop>0in</MarginTop>" +
+                                      "  <MarginLeft>0in</MarginLeft>" +
+                                      "  <MarginRight>0in</MarginRight>" +
+                                      "  <MarginBottom>0in</MarginBottom>" +
                                       "</DeviceInfo>";
                         Warning[] warnings;
                         m_streams_NotaCobro = new List<Stream>();

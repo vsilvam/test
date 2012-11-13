@@ -74,22 +74,22 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.89583in</Width>
+              <Width>0.82362in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.77084in</Width>
+              <Width>0.85488in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.25in</Width>
+              <Width>1.28417in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.98425in</Width>
+              <Width>1.14121in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.46367in</Width>
+              <Width>2.54771in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.11967in</Width>
+              <Width>0.82871in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -517,7 +517,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>1.2cm</Height>
-        <Width>19.01002cm</Width>
+        <Width>19cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -535,14 +535,14 @@
       <Prompt>ID_FACTURA</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>7.48426in</Width>
+  <Width>19cm</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>
-    <LeftMargin>2cm</LeftMargin>
-    <RightMargin>2cm</RightMargin>
-    <TopMargin>2cm</TopMargin>
-    <BottomMargin>2cm</BottomMargin>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
     <ColumnSpacing>0.13cm</ColumnSpacing>
     <Style />
   </Page>

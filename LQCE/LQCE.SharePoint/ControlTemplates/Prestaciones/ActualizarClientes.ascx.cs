@@ -156,5 +156,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             ddlTipoFacturacion.DataSource = _trx.GetAll();
             ddlTipoFacturacion.DataBind();
         }
+
+        protected void btnAgrega_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnIngreso_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

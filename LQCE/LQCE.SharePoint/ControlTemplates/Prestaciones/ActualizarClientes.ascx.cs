@@ -5,11 +5,13 @@ using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.Enum;
+using LQCE.Modelo;
+using System.Collections.Generic;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
     public partial class ActualizarClientes : UserControl
-    {
+    {       
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -28,7 +30,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     int Id = int.Parse(Request.QueryString["Id"]);
                     var trxCliente = new TrxCLIENTE();
                     var objCliente = trxCliente.GetByIdWithReferences(Id);
-                    /*
+                    
                     txtRut.Text = objCliente.RUT;
                     txtNombre.Text = objCliente.NOMBRE;
                     //txtRazonSocial.Text = ;
@@ -42,7 +44,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     //ddlRegion.SelectedIndex = int.Parse(objCliente.REGION.ID.ToString());
                     ddlComuna.SelectedIndex = int.Parse(objCliente.COMUNA.ID.ToString());
                     ddlTipoFacturacion.SelectedIndex = int.Parse(objCliente.TIPO_FACTURA.ID.ToString());
-               */
+               
                 }
             }
             catch (Exception ex)
@@ -65,7 +67,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 int Id = int.Parse(Request.QueryString["Id"]);
                 var trxCliente = new TrxCLIENTE();
-                /*
+                
                 string rut = !string.IsNullOrEmpty(txtRut.Text) ? txtRut.Text : string.Empty;
                 string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
                 string razonSocial = !string.IsNullOrEmpty(txtRazonSocial.Text) ? txtRazonSocial.Text : string.Empty;
@@ -83,7 +85,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 trxCliente.Update(Id, comuna, convenio, tipoPrestacion, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
                 Response.Redirect("MensajeExito.aspx?t=Actualizar Clientes&m=Se ha modificado la informacion del cliente " + nombre, false);
-                */
+                
             }
             catch (Exception ex)
             {
@@ -100,7 +102,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 panelMensaje.CssClass = "OcultarMensaje";
                 //txtRut.Text = string.Empty;
-                /*
+                
                 txtNombre.Text = string.Empty;
                 txtRazonSocial.Text = string.Empty;
                 txtDireccion.Text = string.Empty;
@@ -113,7 +115,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 ddlConvenio.ClearSelection();
                 ddlComuna.ClearSelection();
                 ddlTipoFacturacion.ClearSelection();
-                 */ 
+                 
             }
             catch (Exception ex)
             {
@@ -125,51 +127,64 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         }
 
         private void getComuna()
-        {/*
+        {
             TrxCOMUNA _trx = new TrxCOMUNA();
             ddlComuna.Items.Clear();
             ddlComuna.Items.Add(new ListItem("(Todos)", ""));
             ddlComuna.DataSource = _trx.GetAll();
-            ddlComuna.DataBind();*/
+            ddlComuna.DataBind();
         }
 
         private void getConvenio()
-        {/*
+        {
             TrxCONVENIO _trx = new TrxCONVENIO();
             ddlConvenio.Items.Clear();
             ddlConvenio.Items.Add(new ListItem("(Todos)", ""));
             ddlConvenio.DataSource = _trx.GetAll();
-            ddlConvenio.DataBind();*/
+            ddlConvenio.DataBind();
         }
 
         private void getRegion()
-        {/*
+        {
             TrxREGION _trx = new TrxREGION();
             ddlRegion.Items.Clear();
             ddlRegion.Items.Add(new ListItem("(Todos)", ""));
             ddlRegion.DataSource = _trx.GetAll();
-            ddlRegion.DataBind();*/
+            ddlRegion.DataBind();
         }
 
         private void getTipoFactura()
-        {/*
+        {
             TrxTIPO_FACTURA _trx = new TrxTIPO_FACTURA();
             ddlTipoFacturacion.Items.Clear();
             ddlTipoFacturacion.Items.Add(new ListItem("(Todos)", ""));
             ddlTipoFacturacion.DataSource = _trx.GetAll();
-            ddlTipoFacturacion.DataBind();*/
+            ddlTipoFacturacion.DataBind();
         }
 
         protected void btnAgrega_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (Request.QueryString["Id"] == null)
+                        throw new Exception("No se ha indicado identificador de la cuenta registrada");
 
+                int Id = int.Parse(Request.QueryString["Id"]);
+                string sinonimo = !string.IsNullOrEmpty(txtSinonimo.Text) ? txtSinonimo.Text : string.Empty;
+
+                var _trxClienteSinonimo = new TrxCLIENTE_SINONIMO();
+                _trxClienteSinonimo.Add(Id, sinonimo);
+
+                grdSinonimoCliente.DataSource = _trxClienteSinonimo.GetByFilterWithReferences(Id,"");
+                grdSinonimoCliente.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
-
-        protected void btnIngreso_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
     }
 }

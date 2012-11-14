@@ -144,9 +144,6 @@
             </td>
         </tr>
     </table>
-    <asp:Button ID="btnIngreso" runat="server" Text="Ingresar" OnClick="btnIngreso_Click"
-        ValidationGroup="Ingreso" />
-    <asp:Button ID="Button2" runat="server" Text="Limpiar" OnClick="btnLimpiar_Click" />
 </asp:Panel>
 <asp:Panel ID="pnSinonimoCliente" runat="server">
     <table>
@@ -166,7 +163,8 @@
             <td>
                 <asp:GridView ID="grdSinonimoCliente" runat="server" AutoGenerateColumns="false">
                     <Columns>
-                        <asp:BoundField DataField="ID" HeaderText="Sinonimo" />
+                        <asp:BoundField DataField="ID" HeaderText="Id" />
+                        <asp:BoundField DataField="NOMBRE" HeaderText="Sinonimo" />
                     </Columns>
                     <EmptyDataTemplate>
                         No se encontraron clientes.

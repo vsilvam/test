@@ -109,10 +109,7 @@
                 </td>
                 <td>
                     <asp:TextBox ID="txtProcedencia" runat="server" Enabled="false" Columns="30"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID='RequiredFieldValidator_txtProcedencia' runat='server'
-                        ControlToValidate='txtProcedencia' ValidationGroup="validado" Display='Dynamic'
-                        Font-Size='7pt' ForeColor='red' ErrorMessage='Requerido'>Requerido.</asp:RequiredFieldValidator>
-                </td>
+                 </td>
                 <td>
                     GARANTIA
                 </td>

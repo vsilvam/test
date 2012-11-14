@@ -253,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reporte\DireccionFactura.rdlc" />
+    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_IVA.rdlc" />
     <EmbeddedResource Include="Reporte\NotaCobro3.rdlc">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -291,9 +292,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_Exento.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reporte\FacturaMatrizPunto_Monari_IVA.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\FacturaMatrizPunto_LQCE_Exento.rdlc">

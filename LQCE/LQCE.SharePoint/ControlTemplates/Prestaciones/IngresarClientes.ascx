@@ -58,7 +58,7 @@
             <td>
                 Razón Social
             </td>
-            <td colspan="4">
+            <td colspan="3">
                 <asp:TextBox ID="txtRazonSocial" runat="server" Width="80%"></asp:TextBox>
                 <asp:RequiredFieldValidator ID='RequiredFieldValidator2' runat='server' ControlToValidate='txtRazonSocial' ValidationGroup="Ingreso"
                     Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
@@ -68,7 +68,7 @@
             <td>
                 Direccion Comercial
             </td>
-            <td colspan="4">
+            <td colspan="3">
                 <asp:TextBox ID="txtDireccion" runat="server" Width="80%"></asp:TextBox>
                 <asp:RequiredFieldValidator ID='RequiredFieldValidator3' runat='server' ControlToValidate='txtDireccion' ValidationGroup="Ingreso"
                     Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
@@ -78,7 +78,7 @@
             <td>
                 Direccion Entrega
             </td>
-            <td colspan="4">
+            <td colspan="3">
                 <asp:TextBox ID="txtDireccionEntrega" runat="server" Width="80%"></asp:TextBox>
                 <asp:RequiredFieldValidator ID='RequiredFieldValidator4' runat='server' ControlToValidate='txtDireccionEntrega' ValidationGroup="Ingreso"
                     Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='RequiredFieldValidator'>Requerido.</asp:RequiredFieldValidator>
@@ -155,7 +155,43 @@
             </td>
         </tr>
     </table>
+</asp:Panel>
+<asp:Panel ID="pnSinonimoCliente" runat="server">
+    <table>
+        <tr>
+            <td>
+                Ingrese sinonimo para el cliente
+            </td>
+            <td>
+                <asp:TextBox ID="txtSinonimo" runat="server"></asp:TextBox>
+            </td>
+            <td>
+                <asp:Button ID="btnAgrega" runat="server" Text="Agregar Sinonimo" 
+                    onclick="btnAgrega_Click" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:GridView ID="grdSinonimoCliente" runat="server" 
+                    AutoGenerateColumns="False" EnableModelValidation="True">
+                    <Columns>                        
+                        <asp:TemplateField HeaderText="Sinonimo">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtNombreSinonimo" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <EmptyDataTemplate>
+                        No se encontraron clientes.
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
     <asp:Button ID="btnIngreso" runat="server" Text="Ingresar" OnClick="btnIngreso_Click"
         ValidationGroup="Ingreso" />
     <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" OnClick="btnLimpiar_Click" />
-</asp:Panel>

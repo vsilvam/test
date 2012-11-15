@@ -86,6 +86,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     case 2: Limpiar();
                         pnGrilla.Visible = false;
                         pnClienteSinonimo.Visible = true;
+                        getClientes();
                         var clienteSinonimo = new TrxCLIENTE_SINONIMO();
                         var objClienteSinonimo = clienteSinonimo.GetByIdWithReferences(Id.Value);
                         txtIdClienteSinonimo.Text  = objClienteSinonimo.ID.ToString();
@@ -215,6 +216,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
+        }
+
+        private void getClientes()
+        {
+            TrxCLIENTE _trx = new TrxCLIENTE();
+            ddlClienteSinonimo.Items.Clear();
+            ddlClienteSinonimo.Items.Add(new ListItem("(Todos)", ""));
+            ddlClienteSinonimo.DataSource = _trx.GetAll();
+            ddlClienteSinonimo.DataBind();
         }                
 
         protected void btnCommand_Click(object sender, EventArgs e)
@@ -418,6 +428,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     case 2: Limpiar();
                         pnGrilla.Visible = false;
                         pnClienteSinonimo.Visible = true;
+                        getClientes();
                         btnClienteSinonimo.Text = "Agregar";
                         break;
                     case 3: Limpiar();

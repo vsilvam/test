@@ -177,6 +177,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 grdSinonimoCliente.DataSource = _trxClienteSinonimo.GetByFilterWithReferences(Id,"");
                 grdSinonimoCliente.DataBind();
+
+                txtSinonimo.Text = string.Empty;
             }
             catch (Exception ex)
             {

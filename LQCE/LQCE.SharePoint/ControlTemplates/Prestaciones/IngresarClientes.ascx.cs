@@ -5,11 +5,15 @@ using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
 using LQCE.Transaccion.Enum;
+using LQCE.Modelo;
+using System.Collections.Generic;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
     public partial class IngresarClientes : UserControl
     {
+        public static List<CLIENTE_SINONIMO> _listaClienteSinonimo = new List<CLIENTE_SINONIMO>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -95,9 +99,26 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
                 var cliente = new TrxCLIENTE();
                 var ingreso = cliente.Add(comuna, convenio, tipoPrestacio, tipoFactura, rut, nombre, descuento, direccion, fono, giro);
+                var ingreso_sinonimo = 0;
+
+                /*guardar datos del cliente sinonimo desde la grilla*/
+                foreach (GridViewRow grilla in grdSinonimoCliente.Rows)
+                {
+                    if (grilla.RowType == DataControlRowType.DataRow)
+                    {
+                        TextBox txtNombreSinonimo = (TextBox)grilla.FindControl("txtNombreSinonimo");
+                        var trxClienteSinonimo = new TrxCLIENTE_SINONIMO();
+                        ingreso_sinonimo = trxClienteSinonimo.Add(ingreso, txtNombreSinonimo.Text);
+                    }
+                }
+
                 //se despliega mensaje de exito
-                if(ingreso > 0)
+                if (ingreso > 0 && ingreso_sinonimo > 0 )
                     Response.Redirect("MensajeExito.aspx?t=Ingreso Clientes&m=Se ha registrado un nuevo cliente", false);
+                else if (ingreso == 0)
+                    Response.Redirect("MensajeError.aspx?t=Ingreso Clientes&m=Ha ocurrido un error al ingresar el cliente", false);
+                else if (ingreso_sinonimo == 0)
+                    Response.Redirect("MensajeError.aspx?t=Ingreso Cliente_Sinonimo&m=Ha ocurrido un error al ingresar el Sinonimo del cliente", false);
                 
             }
             catch (Exception ex)
@@ -197,6 +218,28 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             catch
             {
                 return false;
+            }
+        }
+
+        protected void btnAgrega_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var objClienteSinonimo = new CLIENTE_SINONIMO();
+                objClienteSinonimo.NOMBRE = !string.IsNullOrEmpty(txtSinonimo.Text) ? txtSinonimo.Text : string.Empty;
+                _listaClienteSinonimo.Add(objClienteSinonimo);
+
+                grdSinonimoCliente.DataSource = _listaClienteSinonimo;
+                grdSinonimoCliente.DataBind();
+
+                txtSinonimo.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
             }
         }
     }

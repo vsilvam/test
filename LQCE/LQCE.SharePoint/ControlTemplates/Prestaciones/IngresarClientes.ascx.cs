@@ -225,14 +225,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                var objClienteSinonimo = new CLIENTE_SINONIMO();
-                objClienteSinonimo.NOMBRE = !string.IsNullOrEmpty(txtSinonimo.Text) ? txtSinonimo.Text : string.Empty;
-                _listaClienteSinonimo.Add(objClienteSinonimo);
+                if (!string.IsNullOrEmpty(txtSinonimo.Text))
+                {
+                    var objClienteSinonimo = new CLIENTE_SINONIMO();
+                    objClienteSinonimo.NOMBRE = !string.IsNullOrEmpty(txtSinonimo.Text) ? txtSinonimo.Text : string.Empty;
+                    _listaClienteSinonimo.Add(objClienteSinonimo);
 
-                grdSinonimoCliente.DataSource = _listaClienteSinonimo;
-                grdSinonimoCliente.DataBind();
+                    grdSinonimoCliente.DataSource = _listaClienteSinonimo;
+                    grdSinonimoCliente.DataBind();
 
-                txtSinonimo.Text = string.Empty;
+                    txtSinonimo.Text = string.Empty;
+                }
             }
             catch (Exception ex)
             {

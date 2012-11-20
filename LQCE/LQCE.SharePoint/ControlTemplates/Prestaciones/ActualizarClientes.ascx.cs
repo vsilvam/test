@@ -40,10 +40,10 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     txtFono.Text = objCliente.FONO;
                     txtGiro.Text = objCliente.GIRO;
                     txtDescuento.Text = objCliente.DESCUENTO.ToString();
-                    ddlConvenio.SelectedIndex = int.Parse(objCliente.CONVENIO.ID.ToString());
-                    //ddlRegion.SelectedIndex = int.Parse(objCliente.REGION.ID.ToString());
-                    ddlComuna.SelectedIndex = int.Parse(objCliente.COMUNA.ID.ToString());
-                    ddlTipoFacturacion.SelectedIndex = int.Parse(objCliente.TIPO_FACTURA.ID.ToString());
+                    ddlConvenio.SelectedValue = objCliente.CONVENIO.ID.ToString();
+                    //ddlRegion.SelectedValue = objCliente.REGION.ID.ToString();
+                    ddlComuna.SelectedValue = objCliente.COMUNA.ID.ToString();
+                    ddlTipoFacturacion.SelectedValue = objCliente.TIPO_FACTURA.ID.ToString();
                
                 }
             }
@@ -166,19 +166,22 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                if (Request.QueryString["Id"] == null)
+                if (!string.IsNullOrEmpty(txtSinonimo.Text))
+                {
+                    if (Request.QueryString["Id"] == null)
                         throw new Exception("No se ha indicado identificador de la cuenta registrada");
 
-                int Id = int.Parse(Request.QueryString["Id"]);
-                string sinonimo = !string.IsNullOrEmpty(txtSinonimo.Text) ? txtSinonimo.Text : string.Empty;
+                    int Id = int.Parse(Request.QueryString["Id"]);
+                    string sinonimo = !string.IsNullOrEmpty(txtSinonimo.Text) ? txtSinonimo.Text : string.Empty;
 
-                var _trxClienteSinonimo = new TrxCLIENTE_SINONIMO();
-                _trxClienteSinonimo.Add(Id, sinonimo);
+                    var _trxClienteSinonimo = new TrxCLIENTE_SINONIMO();
+                    _trxClienteSinonimo.Add(Id, sinonimo);
 
-                grdSinonimoCliente.DataSource = _trxClienteSinonimo.GetByFilterWithReferences(Id,"");
-                grdSinonimoCliente.DataBind();
+                    grdSinonimoCliente.DataSource = _trxClienteSinonimo.GetByFilterWithReferences(Id, "");
+                    grdSinonimoCliente.DataBind();
 
-                txtSinonimo.Text = string.Empty;
+                    txtSinonimo.Text = string.Empty;
+                }
             }
             catch (Exception ex)
             {

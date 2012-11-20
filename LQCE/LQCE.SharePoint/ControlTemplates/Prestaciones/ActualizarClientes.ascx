@@ -14,7 +14,7 @@
 
 <asp:Panel ID="pnIngresoClientes" runat="server">
     <h3>
-        Ingreso Clientes</h3>
+        Actualizar Clientes</h3>
     <table width="80%">
         <tr>
             <td style="width: 150px">

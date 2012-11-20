@@ -463,7 +463,9 @@
     <Folder Include="Features\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx" />
+    <Content Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="ControlTemplates\Prestaciones\AnularFactura.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

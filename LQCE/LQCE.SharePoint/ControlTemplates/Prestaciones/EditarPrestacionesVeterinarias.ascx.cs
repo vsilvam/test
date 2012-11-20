@@ -197,7 +197,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 string recepcion = txtRecepcion.Text.Trim();
                 string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
                 string solicitante = txtSolicitante.Text.Trim();
-                string fechaRecepcion = !string.IsNullOrEmpty(txtRecepcion.Text) ? txtRecepcion.Text : string.Empty;
+                string fechaRecepcion = !string.IsNullOrEmpty(this.txtFechaRecepción.Text) ? txtFechaRecepción.Text : string.Empty;
                 string fichaClinica = txtFichaClinica.Text.Trim();
 
                 //se recorren los examenes para guardar

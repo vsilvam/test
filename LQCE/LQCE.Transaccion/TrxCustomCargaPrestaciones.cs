@@ -626,23 +626,24 @@ namespace LQCE.Transaccion
                         throw new Exception("La carga seleccionada no esta en revision pendiente");
 
                     int IdCargaDetalleEstadoPendiente = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Pendiente;
+                    int IdCargaDetalleEstadoValidado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
 
                     if (objEstado.ID == (int)ENUM_CARGA_PRESTACIONES_ESTADO.Completado)
                     {
                         if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
                         {
                             if (objEncabezado.CARGA_PRESTACIONES_HUMANAS_DETALLE
-                           .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == IdCargaDetalleEstadoPendiente))
+                           .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID != IdCargaDetalleEstadoValidado))
                             {
-                                throw new Exception("La carga no se puede completar mientras tenga fichas pendientes");
+                                throw new Exception("La carga no se puede completar mientras tenga fichas pendientes o con errores");
                             }
                         }
-                        else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Humanas)
+                        else if (objEncabezado.TIPO_PRESTACION.ID == (int)ENUM_TIPO_PRESTACION.Veterinarias)
                         {
                             if (objEncabezado.CARGA_PRESTACIONES_VETERINARIAS_DETALLE
-                           .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID == IdCargaDetalleEstadoPendiente))
+                           .Any(d => d.CARGA_PRESTACIONES_DETALLE_ESTADO.ID != IdCargaDetalleEstadoValidado))
                             {
-                                throw new Exception("La carga no se puede completar mientras tenga fichas pendientes");
+                                throw new Exception("La carga no se puede completar mientras tenga fichas pendientes o con errores");
                             }
                         }
                     }

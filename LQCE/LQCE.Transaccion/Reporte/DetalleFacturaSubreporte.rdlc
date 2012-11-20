@@ -56,6 +56,10 @@
           <DataField>EXAMENES</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="GARANTIA">
+          <DataField>GARANTIA</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>LQCETransaccionDTO</DataSourceName>
@@ -86,7 +90,10 @@
               <Width>1.14121in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.54771in</Width>
+              <Width>1.86021in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.98425in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.82871in</Width>
@@ -107,7 +114,7 @@
                             <TextRun>
                               <Value>FECHA REC</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -140,7 +147,7 @@
                             <TextRun>
                               <Value>INGRESO</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -173,7 +180,7 @@
                             <TextRun>
                               <Value>NOMBRE</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -206,7 +213,7 @@
                             <TextRun>
                               <Value>MEDICO</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -239,7 +246,7 @@
                             <TextRun>
                               <Value>EXAMENES</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -263,7 +270,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox7">
+                    <Textbox Name="Textbox6">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -272,7 +279,40 @@
                             <TextRun>
                               <Value>TOTAL</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
+                                <TextDecoration>Underline</TextDecoration>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox6</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox7">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>GARANTIA</Value>
+                              <Style>
+                                <FontSize>6pt</FontSize>
                                 <TextDecoration>Underline</TextDecoration>
                               </Style>
                             </TextRun>
@@ -310,7 +350,7 @@
                             <TextRun>
                               <Value>=Fields!FECHA_RECEPCION.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -342,7 +382,7 @@
                             <TextRun>
                               <Value>=Fields!NUMERO_FICHA.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -374,7 +414,7 @@
                             <TextRun>
                               <Value>=Fields!NOMBRE.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -406,7 +446,7 @@
                             <TextRun>
                               <Value>=Fields!MEDICO.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -438,7 +478,7 @@
                             <TextRun>
                               <Value>=Fields!EXAMENES.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -461,7 +501,7 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="MONTO_TOTAL">
+                    <Textbox Name="MONTO_TOTAL1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
@@ -470,14 +510,46 @@
                             <TextRun>
                               <Value>=Fields!MONTO_TOTAL.Value</Value>
                               <Style>
-                                <FontSize>9pt</FontSize>
+                                <FontSize>6pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>MONTO_TOTAL</rd:DefaultName>
+                      <rd:DefaultName>MONTO_TOTAL1</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="GARANTIA">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!GARANTIA.Value</Value>
+                              <Style>
+                                <FontSize>6pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>GARANTIA</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -503,6 +575,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -517,7 +590,7 @@
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
         <Height>1.2cm</Height>
-        <Width>19cm</Width>
+        <Width>19.75371cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -535,7 +608,7 @@
       <Prompt>ID_FACTURA</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <Width>19cm</Width>
+  <Width>19.75371cm</Width>
   <Page>
     <PageHeight>29.7cm</PageHeight>
     <PageWidth>21cm</PageWidth>

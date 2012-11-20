@@ -175,22 +175,30 @@ namespace LQCE.Transaccion
                             context.AddToFACTURA_DETALLE(_FACTURA_DETALLE);
                         }
 
-                        _FACTURA.NETO = suma_total;
                         if (_CLIENTE.TIPO_FACTURA.AFECTO_IVA)
                         {
-                            _FACTURA.IVA = (int)(suma_total * 0.19);
-                            _FACTURA.TOTAL = (int)(suma_total * 1.19);
+                            if (_CLIENTE.TIPO_PRESTACION.ID == (int)Enum.ENUM_TIPO_PRESTACION.Humanas)
+                            {
+                                _FACTURA.NETO = suma_total;
+                                _FACTURA.IVA = (int)(suma_total * 0.19);
+                                _FACTURA.TOTAL = (int)(suma_total * 1.19);
+                            }
+                            else
+                            {
+                                _FACTURA.NETO = (int)(suma_total / 1.19);
+                                _FACTURA.IVA = suma_total - (int)(suma_total / 1.19);
+                                _FACTURA.TOTAL = suma_total;
+                            }
                         }
                         else
                         {
+                            _FACTURA.NETO = suma_total;
                             _FACTURA.IVA = 0;
                             _FACTURA.TOTAL = suma_total;
                         }
                         //context.ApplyPropertyChanges("FACTURA", _FACTURA);
-
                         correlativo++;
                     }
-
                     context.SaveChanges();
 
                     try
@@ -205,8 +213,8 @@ namespace LQCE.Transaccion
                                       "  <PageWidth>21cm</PageWidth>" +
                                       "  <PageHeight>29.7cm</PageHeight>" +
                                       "  <MarginTop>1cm</MarginTop>" +
-                                      "  <MarginLeft>1cm</MarginLeft>" +
-                                      "  <MarginRight>1cm</MarginRight>" +
+                                      "  <MarginLeft>0.5cm</MarginLeft>" +
+                                      "  <MarginRight>0.5cm</MarginRight>" +
                                       "  <MarginBottom>1cm</MarginBottom>" +
                                       "</DeviceInfo>";
                         Warning[] warnings;
@@ -286,7 +294,8 @@ namespace LQCE.Transaccion
                                  ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
                                  NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
                                  RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
-                                 DETALLE = g.FirstOrDefault().DETALLE
+                                 DETALLE = g.FirstOrDefault().DETALLE,
+                                 SUMA_PENDIENTE = g.Where(p => p.GARANTIA != "PAGADO").Sum(p => p.MONTO_TOTAL)
                              }).ToList();
 
 
@@ -534,7 +543,8 @@ namespace LQCE.Transaccion
                                 FECHA_RECEPCION = fd.PRESTACION.FECHA_RECEPCION,
                                 NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE,
                                 MEDICO = fd.PRESTACION.MEDICO,
-                                EXAMENES = ""
+                                EXAMENES = "",
+                                GARANTIA = fd.PRESTACION.GARANTIA != null ? fd.PRESTACION.GARANTIA.NOMBRE : ""
                             }).ToList();
 
                     foreach (var i in lista)
@@ -859,7 +869,8 @@ namespace LQCE.Transaccion
                                      ID_CLIENTE = g.FirstOrDefault().ID_CLIENTE,
                                      NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
                                      RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
-                                     DETALLE = g.FirstOrDefault().DETALLE
+                                     DETALLE = g.FirstOrDefault().DETALLE,
+                                     SUMA_PENDIENTE = g.Where(p => p.GARANTIA != "PAGADO").Sum(p => p.MONTO_TOTAL)
                                  }).ToList();
 
 

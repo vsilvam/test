@@ -32,6 +32,10 @@
           <DataField>DETALLE</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="SUMA_PENDIENTE">
+          <DataField>SUMA_PENDIENTE</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>LQCETransaccionDTO</DataSourceName>
@@ -55,7 +59,7 @@
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>2.29088in</Height>
+              <Height>2.71205in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -269,6 +273,68 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <Textbox Name="SUMA_PENDIENTE">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!SUMA_PENDIENTE.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SUMA_PENDIENTE</rd:DefaultName>
+                          <Top>5.95994cm</Top>
+                          <Left>14.70237cm</Left>
+                          <Height>0.6cm</Height>
+                          <Width>2.5cm</Width>
+                          <ZIndex>6</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>TOTAL PENDIENTE</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Top>5.95994cm</Top>
+                          <Left>10.86591cm</Left>
+                          <Height>0.6cm</Height>
+                          <Width>3.53188cm</Width>
+                          <ZIndex>7</ZIndex>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
                       </ReportItems>
                       <PageBreak>
                         <BreakLocation>End</BreakLocation>
@@ -280,6 +346,7 @@
                         </Border>
                       </Style>
                     </Rectangle>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -299,8 +366,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>DataSet1</DataSetName>
-        <Height>5.81884cm</Height>
-        <Width>19cm</Width>
+        <Height>6.88862cm</Height>
+        <Width>18.99999cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -308,7 +375,7 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>2.29088in</Height>
+    <Height>2.71205in</Height>
     <Style />
   </Body>
   <Width>19cm</Width>

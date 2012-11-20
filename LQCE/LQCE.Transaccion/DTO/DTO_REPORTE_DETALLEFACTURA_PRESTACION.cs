@@ -10,6 +10,7 @@ namespace LQCE.Transaccion.DTO
         public string NOMBRE_CLIENTE { get; set; }
         public string RUT_CLIENTE { get; set; }
         public string DETALLE { get; set; }
+        public int SUMA_PENDIENTE { get; set; }
 
         // Detalle
         public int ID_FACTURA_DETALLE { get; set; }
@@ -19,5 +20,6 @@ namespace LQCE.Transaccion.DTO
         public string NOMBRE { get; set; }
         public string MEDICO { get; set; }
         public string EXAMENES { get; set; }
+        public string GARANTIA { get; set; }
     }
 }

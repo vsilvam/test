@@ -160,7 +160,7 @@
             Agregar Nuevo Examen</h3>
     </header>
     <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click">Agrega Examen</asp:LinkButton>&nbsp&nbsp
-    <asp:LinkButton ID="LinkButton2" runat="server" onclick="LinkButton2_Click">Elimina Examen</asp:LinkButton>
+    <asp:LinkButton ID="LinkButton2" runat="server" OnClick="LinkButton2_Click">Elimina Examen</asp:LinkButton>
     <asp:Panel ID="pnAgregaFila" runat="server" Visible="false">
         <table>
             <tr>
@@ -174,13 +174,15 @@
             <tr>
                 <td>
                     <asp:TextBox ID="txtExamen" runat="server" Columns="30" Enabled="false"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ValidationGroup='btnAgrega' ControlToValidate='txtExamen'
-                        Display='Dynamic' Font-Size='7pt' ForeColor='red' ErrorMessage='Ingrese Examen'>Requerido</asp:RequiredFieldValidator>
+                    <asp:RequiredFieldValidator ID='RequiredFieldValidator18' runat='server' ValidationGroup='btnAgrega'
+                        ControlToValidate='txtExamen' Display='Dynamic' Font-Size='7pt' ForeColor='red'
+                        ErrorMessage='Ingrese Examen'>Requerido</asp:RequiredFieldValidator>
                 </td>
                 <td>
                     <asp:TextBox ID="txtValor" runat="server" Columns="30" Enabled="false"></asp:TextBox>
                     <asp:RequiredFieldValidator ID='RequiredFieldValidator2' runat='server' ControlToValidate='txtValor'
-                        Display='Dynamic' Font-Size='7pt'  ValidationGroup='btnAgrega' ForeColor='red' ErrorMessage='Ingrese Valor'>
+                        Display='Dynamic' Font-Size='7pt' ValidationGroup='btnAgrega' ForeColor='red'
+                        ErrorMessage='Ingrese Valor'>
                         Requerido</asp:RequiredFieldValidator>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtValor"
                         ErrorMessage="solo se admiten numeros." ValidationGroup='btnAgrega' ToolTip="debe ingresar un valor numerico."
@@ -202,12 +204,12 @@
      <asp:GridView ID="grdExamen" CssClass="tablesorter" GridLines="None" runat="server"
          AutoGenerateColumns="False" Width="70%" EnableModelValidation="True">
          <Columns>
-            <asp:TemplateField HeaderText="Seleccionar">
-                            <ItemTemplate>
-                                <asp:CheckBox ID="ChkSeleccionar" runat="server" />
-                            </ItemTemplate>
-                            <ItemStyle HorizontalAlign="Center" />
-                        </asp:TemplateField>
+             <asp:TemplateField HeaderText="Seleccionar">
+                 <ItemTemplate>
+                     <asp:CheckBox ID="ChkSeleccionar" runat="server" />
+                 </ItemTemplate>
+                 <ItemStyle HorizontalAlign="Center" />
+             </asp:TemplateField>
              <asp:TemplateField HeaderText="Examen">
                  <ItemTemplate>
                      <asp:TextBox ID="txtExamen" runat="server" Text='<%# Eval("NOMBRE_EXAMEN") %>' Columns="30"></asp:TextBox>

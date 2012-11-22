@@ -66,6 +66,12 @@ namespace App.Infrastructure.Base
                     con.Close();
                     return excelDataSet.Tables[0];
                 }
+                catch (InvalidOperationException ex)
+                {
+                    var ex2 = new Exception("No se pudo abrir el archivo Excel", ex);
+                    ISException.RegisterExcepcion(ex2);
+                    throw ex2;
+                }
                 catch (Exception ex)
                 {
                     ISException.RegisterExcepcion(ex);

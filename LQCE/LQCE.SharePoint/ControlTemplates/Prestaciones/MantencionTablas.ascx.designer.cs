@@ -67,687 +67,984 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones {
         protected global::System.Web.UI.WebControls.Button btnAgregar;
         
         /// <summary>
-        /// Control pnGrilla.
+        /// Control panelComuna.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnGrilla;
+        protected global::System.Web.UI.WebControls.Panel panelComuna;
         
         /// <summary>
-        /// Control grdTablas.
+        /// Control panelComunaListar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdTablas;
+        protected global::System.Web.UI.WebControls.Panel panelComunaListar;
         
         /// <summary>
-        /// Control pnComuna.
+        /// Control gridComunas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnComuna;
+        protected global::System.Web.UI.WebControls.GridView gridComunas;
         
         /// <summary>
-        /// Control txtIdComuna.
+        /// Control panelComunaAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdComuna;
+        protected global::System.Web.UI.WebControls.Panel panelComunaAgregar;
         
         /// <summary>
-        /// Control txtNombreComuna.
+        /// Control txtComunaAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreComuna;
+        protected global::System.Web.UI.WebControls.TextBox txtComunaAgregarNombre;
         
         /// <summary>
-        /// Control ddlRegionComuna.
+        /// Control requiredtxtComunaAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlRegionComuna;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredtxtComunaAgregarNombre;
         
         /// <summary>
-        /// Control rblEstadoComuna.
+        /// Control selComunaAgregarRegion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblEstadoComuna;
+        protected global::System.Web.UI.WebControls.DropDownList selComunaAgregarRegion;
         
         /// <summary>
-        /// Control btnModificarComuna.
+        /// Control requiredselComunaAgregarRegion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificarComuna;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator requiredselComunaAgregarRegion;
         
         /// <summary>
-        /// Control pnClienteSinonimo.
+        /// Control btnComunaAgregarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnClienteSinonimo;
+        protected global::System.Web.UI.WebControls.Button btnComunaAgregarGuardar;
         
         /// <summary>
-        /// Control txtIdClienteSinonimo.
+        /// Control btnComunaAgregarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdClienteSinonimo;
+        protected global::System.Web.UI.WebControls.Button btnComunaAgregarCancelar;
         
         /// <summary>
-        /// Control txtNombreSinonimo.
+        /// Control panelComunaActualizar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreSinonimo;
+        protected global::System.Web.UI.WebControls.Panel panelComunaActualizar;
         
         /// <summary>
-        /// Control ddlClienteSinonimo.
+        /// Control hdnComunaActualizarId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlClienteSinonimo;
+        protected global::System.Web.UI.WebControls.HiddenField hdnComunaActualizarId;
         
         /// <summary>
-        /// Control rblEstadoClienteSinonimo.
+        /// Control txtComunaActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblEstadoClienteSinonimo;
+        protected global::System.Web.UI.WebControls.TextBox txtComunaActualizarNombre;
         
         /// <summary>
-        /// Control btnClienteSinonimo.
+        /// Control RequiredtxtComunaActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnClienteSinonimo;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredtxtComunaActualizarNombre;
         
         /// <summary>
-        /// Control pnEspecie.
+        /// Control selComunaActualizarRegion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnEspecie;
+        protected global::System.Web.UI.WebControls.DropDownList selComunaActualizarRegion;
         
         /// <summary>
-        /// Control txtIdEspecie.
+        /// Control RequiredselComunaActualizarRegion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdEspecie;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredselComunaActualizarRegion;
         
         /// <summary>
-        /// Control txtNombreEspecie.
+        /// Control btnComunaActualizarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreEspecie;
+        protected global::System.Web.UI.WebControls.Button btnComunaActualizarGuardar;
         
         /// <summary>
-        /// Control rblEstadoEspecie.
+        /// Control btnComunaActualizarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblEstadoEspecie;
+        protected global::System.Web.UI.WebControls.Button btnComunaActualizarCancelar;
         
         /// <summary>
-        /// Control btnEspecie.
+        /// Control panelEspecie.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEspecie;
+        protected global::System.Web.UI.WebControls.Panel panelEspecie;
         
         /// <summary>
-        /// Control pnExamen.
+        /// Control panelEspecieListar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnExamen;
+        protected global::System.Web.UI.WebControls.Panel panelEspecieListar;
         
         /// <summary>
-        /// Control txtIdExamen.
+        /// Control gridEspecies.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdExamen;
+        protected global::System.Web.UI.WebControls.GridView gridEspecies;
         
         /// <summary>
-        /// Control ddlTipoPrestacionExamen.
+        /// Control panelEspecieAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoPrestacionExamen;
+        protected global::System.Web.UI.WebControls.Panel panelEspecieAgregar;
         
         /// <summary>
-        /// Control txtCodigoExamen.
+        /// Control txtEspecieAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoExamen;
+        protected global::System.Web.UI.WebControls.TextBox txtEspecieAgregarNombre;
         
         /// <summary>
-        /// Control txtNombreExamen.
+        /// Control RequiredtxtEspecieAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreExamen;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredtxtEspecieAgregarNombre;
         
         /// <summary>
-        /// Control rblEstadoExamen.
+        /// Control btnEspecieAgregarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblEstadoExamen;
+        protected global::System.Web.UI.WebControls.Button btnEspecieAgregarGuardar;
         
         /// <summary>
-        /// Control btnExamen.
+        /// Control btnEspecieAgregarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExamen;
+        protected global::System.Web.UI.WebControls.Button btnEspecieAgregarCancelar;
         
         /// <summary>
-        /// Control pnExamenDetalle.
+        /// Control panelEspecieActualizar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnExamenDetalle;
+        protected global::System.Web.UI.WebControls.Panel panelEspecieActualizar;
         
         /// <summary>
-        /// Control txtIdExamenDetalle.
+        /// Control hdnEspecieActualizarId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdExamenDetalle;
+        protected global::System.Web.UI.WebControls.HiddenField hdnEspecieActualizarId;
         
         /// <summary>
-        /// Control txtExameExamenDetalle.
+        /// Control txtEspecieActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtExameExamenDetalle;
+        protected global::System.Web.UI.WebControls.TextBox txtEspecieActualizarNombre;
         
         /// <summary>
-        /// Control txtSubExamenExamenDetalle.
+        /// Control RequiredFieldValidator3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSubExamenExamenDetalle;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
         
         /// <summary>
-        /// Control rblActivoExamenDetalle.
+        /// Control btnEspecieActualizarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblActivoExamenDetalle;
+        protected global::System.Web.UI.WebControls.Button btnEspecieActualizarGuardar;
         
         /// <summary>
-        /// Control btnExamenDetalle.
+        /// Control btnEspecieActualizarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExamenDetalle;
+        protected global::System.Web.UI.WebControls.Button btnEspecieActualizarCancelar;
         
         /// <summary>
-        /// Control pnExamenSinonimo.
+        /// Control panelGarantia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnExamenSinonimo;
+        protected global::System.Web.UI.WebControls.Panel panelGarantia;
         
         /// <summary>
-        /// Control txtIdES.
+        /// Control panelGarantiaListar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdES;
+        protected global::System.Web.UI.WebControls.Panel panelGarantiaListar;
         
         /// <summary>
-        /// Control ddlExamenES.
+        /// Control gridGarantia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlExamenES;
+        protected global::System.Web.UI.WebControls.GridView gridGarantia;
         
         /// <summary>
-        /// Control txtSinonimoES.
+        /// Control panelGarantiaAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSinonimoES;
+        protected global::System.Web.UI.WebControls.Panel panelGarantiaAgregar;
         
         /// <summary>
-        /// Control rblActivoES.
+        /// Control txtGarantiaAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblActivoES;
+        protected global::System.Web.UI.WebControls.TextBox txtGarantiaAgregarNombre;
         
         /// <summary>
-        /// Control btnExamenSinonimo.
+        /// Control RequiredFieldValidatortxtGarantiaAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExamenSinonimo;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtGarantiaAgregarNombre;
         
         /// <summary>
-        /// Control pnGarantia.
+        /// Control btnGarantiaAgregarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnGarantia;
+        protected global::System.Web.UI.WebControls.Button btnGarantiaAgregarGuardar;
         
         /// <summary>
-        /// Control txtIdG.
+        /// Control btnGarantiaAgregarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdG;
+        protected global::System.Web.UI.WebControls.Button btnGarantiaAgregarCancelar;
         
         /// <summary>
-        /// Control txtNombreG.
+        /// Control panelGarantiaActualizar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreG;
+        protected global::System.Web.UI.WebControls.Panel panelGarantiaActualizar;
         
         /// <summary>
-        /// Control rblActivoG.
+        /// Control hdnGarantiaActualizarId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblActivoG;
+        protected global::System.Web.UI.WebControls.HiddenField hdnGarantiaActualizarId;
         
         /// <summary>
-        /// Control btnGarantia.
+        /// Control txtGarantiaActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGarantia;
+        protected global::System.Web.UI.WebControls.TextBox txtGarantiaActualizarNombre;
         
         /// <summary>
-        /// Control pnPrevision.
+        /// Control RequiredFieldValidator_txtGarantiaActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnPrevision;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_txtGarantiaActualizarNombre;
         
         /// <summary>
-        /// Control txtIdP.
+        /// Control btnGarantiaActualizarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdP;
+        protected global::System.Web.UI.WebControls.Button btnGarantiaActualizarGuardar;
         
         /// <summary>
-        /// Control txtNombreP.
+        /// Control btnGarantiaActualizarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreP;
+        protected global::System.Web.UI.WebControls.Button btnGarantiaActualizarCancelar;
         
         /// <summary>
-        /// Control rblActivoP.
+        /// Control panelPrevision.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblActivoP;
+        protected global::System.Web.UI.WebControls.Panel panelPrevision;
         
         /// <summary>
-        /// Control btnPrevision.
+        /// Control panelPrevisionListar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPrevision;
+        protected global::System.Web.UI.WebControls.Panel panelPrevisionListar;
         
         /// <summary>
-        /// Control pnRaza.
+        /// Control gridPrevision.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnRaza;
+        protected global::System.Web.UI.WebControls.GridView gridPrevision;
         
         /// <summary>
-        /// Control txtIdR.
+        /// Control panelPrevisionAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdR;
+        protected global::System.Web.UI.WebControls.Panel panelPrevisionAgregar;
         
         /// <summary>
-        /// Control txtNombreR.
+        /// Control txtPrevisionAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreR;
+        protected global::System.Web.UI.WebControls.TextBox txtPrevisionAgregarNombre;
         
         /// <summary>
-        /// Control ddlEspecieR.
+        /// Control RequiredFieldValidatortxtPrevisionAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEspecieR;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtPrevisionAgregarNombre;
         
         /// <summary>
-        /// Control rdbActivoR.
+        /// Control btnPrevisionAgregarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdbActivoR;
+        protected global::System.Web.UI.WebControls.Button btnPrevisionAgregarGuardar;
         
         /// <summary>
-        /// Control btnRaza.
+        /// Control btnPrevisionAgregarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRaza;
+        protected global::System.Web.UI.WebControls.Button btnPrevisionAgregarCancelar;
         
         /// <summary>
-        /// Control pnRegion.
+        /// Control panelPrevisionActualizar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnRegion;
+        protected global::System.Web.UI.WebControls.Panel panelPrevisionActualizar;
         
         /// <summary>
-        /// Control txtIdRegion.
+        /// Control hdnPrevisionActualizarId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdRegion;
+        protected global::System.Web.UI.WebControls.HiddenField hdnPrevisionActualizarId;
         
         /// <summary>
-        /// Control txtNombreRegion.
+        /// Control txtPrevisionActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreRegion;
+        protected global::System.Web.UI.WebControls.TextBox txtPrevisionActualizarNombre;
         
         /// <summary>
-        /// Control rblActivoRegion.
+        /// Control RequiredtxtPrevisionActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblActivoRegion;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredtxtPrevisionActualizarNombre;
         
         /// <summary>
-        /// Control btnRegion.
+        /// Control btnPrevisionActualizarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegion;
+        protected global::System.Web.UI.WebControls.Button btnPrevisionActualizarGuardar;
         
         /// <summary>
-        /// Control pnTipoCobro.
+        /// Control btnPrevisionActualizarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnTipoCobro;
+        protected global::System.Web.UI.WebControls.Button btnPrevisionActualizarCancelar;
         
         /// <summary>
-        /// Control txtIdTC.
+        /// Control panelRaza.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdTC;
+        protected global::System.Web.UI.WebControls.Panel panelRaza;
         
         /// <summary>
-        /// Control txtNombreTC.
+        /// Control panelRazaListar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreTC;
+        protected global::System.Web.UI.WebControls.Panel panelRazaListar;
         
         /// <summary>
-        /// Control txtReporteTC.
+        /// Control gridRazas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReporteTC;
+        protected global::System.Web.UI.WebControls.GridView gridRazas;
         
         /// <summary>
-        /// Control rblActivoTC.
+        /// Control panelRazaAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblActivoTC;
+        protected global::System.Web.UI.WebControls.Panel panelRazaAgregar;
         
         /// <summary>
-        /// Control btnTipoCobro.
+        /// Control txtRazaAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTipoCobro;
+        protected global::System.Web.UI.WebControls.TextBox txtRazaAgregarNombre;
         
         /// <summary>
-        /// Control pntipoFactura.
+        /// Control RequiredFieldValidatortxtRazaAgregarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pntipoFactura;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtRazaAgregarNombre;
         
         /// <summary>
-        /// Control txtIdTF.
+        /// Control selRazaAgregarEspecie.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdTF;
+        protected global::System.Web.UI.WebControls.DropDownList selRazaAgregarEspecie;
         
         /// <summary>
-        /// Control txtNombreTF.
+        /// Control RequiredFieldValidator_selRazaAgregarEspecie.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreTF;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator_selRazaAgregarEspecie;
         
         /// <summary>
-        /// Control TextBox3.
+        /// Control btnRazaAgregarGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.Button btnRazaAgregarGuardar;
         
         /// <summary>
-        /// Control RadioButtonList1.
+        /// Control btnRazaAgregarCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList RadioButtonList1;
+        protected global::System.Web.UI.WebControls.Button btnRazaAgregarCancelar;
         
         /// <summary>
-        /// Control btntipoFactura.
+        /// Control panelRazaActualizar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btntipoFactura;
+        protected global::System.Web.UI.WebControls.Panel panelRazaActualizar;
         
         /// <summary>
-        /// Control pnTipoPrestacion.
+        /// Control hdnRazaActualizarId.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnTipoPrestacion;
+        protected global::System.Web.UI.WebControls.HiddenField hdnRazaActualizarId;
         
         /// <summary>
-        /// Control txtIdTP.
+        /// Control txtRazaActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIdTP;
+        protected global::System.Web.UI.WebControls.TextBox txtRazaActualizarNombre;
         
         /// <summary>
-        /// Control txtNombreTP.
+        /// Control RequiredFieldValidatortxtRazaActualizarNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreTP;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtRazaActualizarNombre;
         
         /// <summary>
-        /// Control rblActivoTP.
+        /// Control selRazaActualizarEspecie.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rblActivoTP;
+        protected global::System.Web.UI.WebControls.DropDownList selRazaActualizarEspecie;
         
         /// <summary>
-        /// Control btnTipoPrestacion.
+        /// Control RequiredFieldValidatorselRazaActualizarEspecie.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTipoPrestacion;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorselRazaActualizarEspecie;
+        
+        /// <summary>
+        /// Control btnRazaActualizarGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRazaActualizarGuardar;
+        
+        /// <summary>
+        /// Control btnRazaActualizarCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRazaActualizarCancelar;
+        
+        /// <summary>
+        /// Control panelRegion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelRegion;
+        
+        /// <summary>
+        /// Control panelRegionListar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelRegionListar;
+        
+        /// <summary>
+        /// Control gridRegiones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridRegiones;
+        
+        /// <summary>
+        /// Control panelRegionAgregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelRegionAgregar;
+        
+        /// <summary>
+        /// Control txtRegionAgregarId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRegionAgregarId;
+        
+        /// <summary>
+        /// Control RequiredtxtRegionAgregarId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredtxtRegionAgregarId;
+        
+        /// <summary>
+        /// Control compareRegionAgregarId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator compareRegionAgregarId;
+        
+        /// <summary>
+        /// Control txtRegionAgregarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRegionAgregarNombre;
+        
+        /// <summary>
+        /// Control RequiredFieldValidatortxtRegionAgregarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtRegionAgregarNombre;
+        
+        /// <summary>
+        /// Control btnRegionAgregarGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegionAgregarGuardar;
+        
+        /// <summary>
+        /// Control btnRegionAgregarCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegionAgregarCancelar;
+        
+        /// <summary>
+        /// Control panelRegionActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelRegionActualizar;
+        
+        /// <summary>
+        /// Control lblRegionActualizarId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRegionActualizarId;
+        
+        /// <summary>
+        /// Control txtRegionActualizarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtRegionActualizarNombre;
+        
+        /// <summary>
+        /// Control RequiredFieldValidatortxtRegionActualizarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtRegionActualizarNombre;
+        
+        /// <summary>
+        /// Control btnRegionActualizarGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegionActualizarGuardar;
+        
+        /// <summary>
+        /// Control btnRegionActualizarCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegionActualizarCancelar;
+        
+        /// <summary>
+        /// Control panelTipoCobro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelTipoCobro;
+        
+        /// <summary>
+        /// Control panelTipoCobroListar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelTipoCobroListar;
+        
+        /// <summary>
+        /// Control gridTiposCobro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridTiposCobro;
+        
+        /// <summary>
+        /// Control panelTipoCobroAgregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelTipoCobroAgregar;
+        
+        /// <summary>
+        /// Control txtTipoCobroAgregarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTipoCobroAgregarNombre;
+        
+        /// <summary>
+        /// Control RequiredFieldValidatortxtTipoCobroAgregarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtTipoCobroAgregarNombre;
+        
+        /// <summary>
+        /// Control btnTipoCobroAgregarGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTipoCobroAgregarGuardar;
+        
+        /// <summary>
+        /// Control btnTipoCobroAgregarCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTipoCobroAgregarCancelar;
+        
+        /// <summary>
+        /// Control panelTipoCobroActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelTipoCobroActualizar;
+        
+        /// <summary>
+        /// Control hdnTipoCobroActualizarId.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnTipoCobroActualizarId;
+        
+        /// <summary>
+        /// Control txtTipoCobroActualizarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTipoCobroActualizarNombre;
+        
+        /// <summary>
+        /// Control RequiredFieldValidatortxtTipoCobroActualizarNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtTipoCobroActualizarNombre;
+        
+        /// <summary>
+        /// Control btnTipoCobroActualizarGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTipoCobroActualizarGuardar;
+        
+        /// <summary>
+        /// Control btnTipoCobroActualizarCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnTipoCobroActualizarCancelar;
     }
 }

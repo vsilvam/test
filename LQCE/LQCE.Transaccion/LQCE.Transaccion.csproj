@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\DTOExamen.cs" />
+    <Compile Include="DTO\DTOFindCliente.cs" />
     <Compile Include="DTO\DTOFindFactura.cs" />
     <Compile Include="DTO\DTOFindPrestaciones.cs" />
     <Compile Include="DTO\DTOPaginador.cs" />
@@ -127,7 +128,9 @@
     </Compile>
     <Compile Include="TrxCustomCargaPrestaciones.cs" />
     <Compile Include="TrxCustomCARGA_PRESTACIONES_HUMANAS_DETALLE.cs" />
+    <Compile Include="TrxCustomCliente.cs" />
     <Compile Include="TrxCustomFacturacion.cs" />
+    <Compile Include="TrxCustomRegion.cs" />
     <Compile Include="TrxESPECIE.cs">
       <DependentUpon>TrxTemplate.tt</DependentUpon>
     </Compile>

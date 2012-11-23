@@ -93,7 +93,9 @@
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="RepositorioCustomCARGA_PRESTACIONES_HUMANAS_DETALLE.cs" />
+    <Compile Include="RepositorioCustomCLIENTE.cs" />
     <Compile Include="RepositorioCustomFACTURACION.cs" />
+    <Compile Include="RepositorioCustomREGION.cs" />
     <Compile Include="RepositorioESPECIE.cs">
       <DependentUpon>RepositorioTemplate.tt</DependentUpon>
     </Compile>

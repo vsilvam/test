@@ -1,19 +1,19 @@
 ﻿<%@ Assembly Name="$SharePoint.Project.AssemblyFullName$" %>
 <%@ Assembly Name="Microsoft.Web.CommandUI, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register Tagprefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
-<%@ Import Namespace="Microsoft.SharePoint" %> 
-<%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MantencionTablas.ascx.cs" Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.MantencionTablas" %>
-
-
+<%@ Register TagPrefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls"
+    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="Utilities" Namespace="Microsoft.SharePoint.Utilities" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register TagPrefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages"
+    Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MantencionTablas.ascx.cs"
+    Inherits="LQCE.SharePoint.ControlTemplates.Prestaciones.MantencionTablas" %>
 <asp:Panel ID="panelMensaje" runat="server">
     <h4 class="alert_warning">
         <asp:Label ID="lblMensaje" runat="server" EnableViewState="false" ForeColor="Red"></asp:Label>
     </h4>
 </asp:Panel>
-
 <asp:Panel ID="pnTablas" runat="server">
     <table>
         <tr>
@@ -25,18 +25,12 @@
                     AutoPostBack="True">
                     <asp:ListItem Value="">Seleccione</asp:ListItem>
                     <asp:ListItem Value="1">Comuna</asp:ListItem>
-                    <asp:ListItem Value="2">Cliente Sinonimo</asp:ListItem>
                     <asp:ListItem Value="3">Especie</asp:ListItem>
-                    <asp:ListItem Value="4">Examen</asp:ListItem>
-                    <asp:ListItem Value="5">Examen Detalle</asp:ListItem>
-                    <asp:ListItem Value="6">Examen Sinonimo</asp:ListItem>
                     <asp:ListItem Value="7">Garantia</asp:ListItem>
                     <asp:ListItem Value="8">Prevision</asp:ListItem>
                     <asp:ListItem Value="9">Raza</asp:ListItem>
                     <asp:ListItem Value="10">Region</asp:ListItem>
                     <asp:ListItem Value="11">Tipo Cobro</asp:ListItem>
-                    <asp:ListItem Value="12">Tipo Factura</asp:ListItem>
-                    <asp:ListItem Value="13">Tipo Prestacion</asp:ListItem>
                 </asp:DropDownList>
             </td>
             <td>
@@ -51,485 +45,566 @@
         </tr>
     </table>
 </asp:Panel>
-<asp:Panel ID="pnGrilla" runat="server" Visible= "true">
-    <asp:GridView ID="grdTablas" runat="server" Width="100%">
-        <Columns>
-            <asp:TemplateField HeaderText="Eliminar">
-                <ItemTemplate>
-                    <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
-                        CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" 
-                        onclick="imgEliminar_Click"  />
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Editar">
-                <ItemTemplate>
-                    <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
-                        CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" 
-                        onclick="imgActualizar_Click" />
-                </ItemTemplate>
-                <ItemStyle HorizontalAlign="Center" />
-            </asp:TemplateField>
-        </Columns>
-    </asp:GridView>
+<asp:Panel ID="panelComuna" runat="server" Visible="false">
+    <asp:Panel ID="panelComunaListar" runat="server" Visible="true">
+        <h3>
+            Comunas</h3>
+        <asp:GridView ID="gridComunas" runat="server" Width="100%" AutoGenerateColumns="false"
+            GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:TemplateField HeaderText="REGIÓN">
+                    <ItemTemplate>
+                        <asp:Label ID="lblRegion" runat="server" Text='<%# Bind("REGION.NOMBRE") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarComuna_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarComuna_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelComunaAgregar" runat="server" Visible="false">
+        <h3>
+            Agregar Comuna</h3>
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtComunaAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="requiredtxtComunaAgregarNombre" runat="server" ControlToValidate="txtComunaAgregarNombre"
+                        ValidationGroup="ComunaAgregar" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Region
+                </td>
+                <td>
+                    <asp:DropDownList ID="selComunaAgregarRegion" runat="server" AppendDataBoundItems="True"
+                        DataTextField="NOMBRE" DataValueField="ID">
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="requiredselComunaAgregarRegion" runat="server" ControlToValidate="selComunaAgregarRegion"
+                        ValidationGroup="ComunaAgregar" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnComunaAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="ComunaAgregar"
+            OnClick="btnComunaAgregarGuardar_Click" />
+        <asp:Button ID="btnComunaAgregarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnComunaAgregarCancelar_Click" />
+    </asp:Panel>
+    <asp:Panel ID="panelComunaActualizar" runat="server" Visible="false">
+        <h3>
+            Actualizar Comuna</h3>
+        <asp:HiddenField ID="hdnComunaActualizarId" runat="server" />
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtComunaActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredtxtComunaActualizarNombre" runat="server"
+                        ControlToValidate="txtComunaActualizarNombre" ValidationGroup="ComunaActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Region
+                </td>
+                <td>
+                    <asp:DropDownList ID="selComunaActualizarRegion" runat="server" AppendDataBoundItems="True"
+                        DataTextField="NOMBRE" DataValueField="ID">
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredselComunaActualizarRegion" runat="server"
+                        ControlToValidate="selComunaActualizarRegion" ValidationGroup="ComunaActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnComunaActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="ComunaActualizar"
+            OnClick="btnComunaActualizarGuardar_Click" />
+        <asp:Button ID="btnComunaActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnComunaActualizarCancelar_Click" />
+    </asp:Panel>
 </asp:Panel>
-
-<asp:Panel ID="pnComuna" runat="server" Visible="false">
-    <table>
-        <tr id="IdComuna">
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdComuna" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Nombre
-            </td>
-            <td>
-                <asp:TextBox ID="txtNombreComuna" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Region
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlRegionComuna" runat="server" AppendDataBoundItems="True"
-                    DataTextField="NOMBRE" DataValueField="ID">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Activo
-            </td>
-            <td>
-                <asp:RadioButtonList ID="rblEstadoComuna" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnModificarComuna" runat="server" Text="Modificar"
-    CommandName='1' OnClick='btnCommand_Click' />
+<asp:Panel ID="panelEspecie" runat="server" Visible="false">
+    <asp:Panel ID="panelEspecieListar" runat="server" Visible="true">
+        <h3>
+            Especies</h3>
+        <asp:GridView ID="gridEspecies" runat="server" Width="100%" AutoGenerateColumns="false"
+            GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarEspecie_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarEspecie_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelEspecieAgregar" runat="server" Visible="false">
+        <h3>
+            Agregar Especie</h3>
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEspecieAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredtxtEspecieAgregarNombre" runat="server" ControlToValidate="txtEspecieAgregarNombre"
+                        ValidationGroup="EspecieAgregar" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnEspecieAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="EspecieAgregar"
+            OnClick="btnEspecieAgregarGuardar_Click" />
+        <asp:Button ID="btnEspecieAgregarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnEspecieAgregarCancelar_Click" />
+    </asp:Panel>
+    <asp:Panel ID="panelEspecieActualizar" runat="server" Visible="false">
+        <h3>
+            Actualizar Especie</h3>
+        <asp:HiddenField ID="hdnEspecieActualizarId" runat="server" />
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtEspecieActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtEspecieActualizarNombre"
+                        ValidationGroup="EspecieActualizar" ForeColor="Red" ErrorMessage="Requerido"
+                        Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnEspecieActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="EspecieActualizar"
+            OnClick="btnEspecieActualizarGuardar_Click" />
+        <asp:Button ID="btnEspecieActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnEspecieActualizarCancelar_Click" />
+    </asp:Panel>
 </asp:Panel>
-
-<asp:Panel ID="pnClienteSinonimo" runat="server" Visible="false">
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>
-                <asp:TextBox ID="txtIdClienteSinonimo" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre - Sinonimo</td>
-            <td>
-                <asp:TextBox ID="txtNombreSinonimo" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Cliente</td>
-            <td>
-                <asp:DropDownList ID="ddlClienteSinonimo" runat="server" 
-                    AppendDataBoundItems="True" DataTextField="NOMBRE" DataValueField="ID">
-                </asp:DropDownList>                
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblEstadoClienteSinonimo" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnClienteSinonimo" runat="server" Text="Modificar"
-    CommandName='2' OnClick='btnCommand_Click' />
+<asp:Panel ID="panelGarantia" runat="server" Visible="false">
+    <asp:Panel ID="panelGarantiaListar" runat="server" Visible="true">
+        <h3>
+            Garantia</h3>
+        <asp:GridView ID="gridGarantia" runat="server" Width="100%" AutoGenerateColumns="false"
+            GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarGarantia_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarGarantia_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelGarantiaAgregar" runat="server" Visible="false">
+        <h3>
+            Agregar Garantia</h3>
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtGarantiaAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtGarantiaAgregarNombre" runat="server"
+                        ControlToValidate="txtGarantiaAgregarNombre" ValidationGroup="GarantiaAgregar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnGarantiaAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="GarantiaAgregar"
+            OnClick="btnGarantiaAgregarGuardar_Click" />
+        <asp:Button ID="btnGarantiaAgregarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnGarantiaAgregarCancelar_Click" />
+    </asp:Panel>
+    <asp:Panel ID="panelGarantiaActualizar" runat="server" Visible="false">
+        <h3>
+            Actualizar Garantia</h3>
+        <asp:HiddenField ID="hdnGarantiaActualizarId" runat="server" />
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtGarantiaActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator_txtGarantiaActualizarNombre"
+                        runat="server" ControlToValidate="txtGarantiaActualizarNombre" ValidationGroup="GarantiaActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnGarantiaActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="GarantiaActualizar"
+            OnClick="btnGarantiaActualizarGuardar_Click" />
+        <asp:Button ID="btnGarantiaActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnGarantiaActualizarCancelar_Click" />
+    </asp:Panel>
 </asp:Panel>
-
-<asp:Panel ID="pnEspecie" runat="server" Visible="false">
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>
-                <asp:TextBox ID="txtIdEspecie" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreEspecie" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblEstadoEspecie" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnEspecie" runat="server" Text="Modificar"
-    CommandName='3' OnClick='btnCommand_Click' />
+<asp:Panel ID="panelPrevision" runat="server" Visible="false">
+    <asp:Panel ID="panelPrevisionListar" runat="server" Visible="true">
+        <h3>
+            Previsión</h3>
+        <asp:GridView ID="gridPrevision" runat="server" Width="100%" AutoGenerateColumns="false"
+            GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarPrevision_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarPrevision_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelPrevisionAgregar" runat="server" Visible="false">
+        <h3>
+            Agregar Prevision</h3>
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPrevisionAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtPrevisionAgregarNombre"
+                        runat="server" ControlToValidate="txtPrevisionAgregarNombre" ValidationGroup="PrevisionAgregar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnPrevisionAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="PrevisionAgregar"
+            OnClick="btnPrevisionAgregarGuardar_Click" />
+        <asp:Button ID="btnPrevisionAgregarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnPrevisionAgregarCancelar_Click" />
+    </asp:Panel>
+    <asp:Panel ID="panelPrevisionActualizar" runat="server" Visible="false">
+        <h3>
+            Actualizar Prevision</h3>
+        <asp:HiddenField ID="hdnPrevisionActualizarId" runat="server" />
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtPrevisionActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredtxtPrevisionActualizarNombre" runat="server"
+                        ControlToValidate="txtPrevisionActualizarNombre" ValidationGroup="PrevisionActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnPrevisionActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="PrevisionActualizar"
+            OnClick="btnPrevisionActualizarGuardar_Click" />
+        <asp:Button ID="btnPrevisionActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnPrevisionActualizarCancelar_Click" />
+    </asp:Panel>
 </asp:Panel>
-
-<asp:Panel ID="pnExamen" runat="server" Visible="false">
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>
-                <asp:TextBox ID="txtIdExamen" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Tipo Prestacion</td>
-            <td>
-                <asp:DropDownList ID="ddlTipoPrestacionExamen" runat="server" 
-                    AppendDataBoundItems="True">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td>Codigo</td>
-            <td>
-                <asp:TextBox ID="txtCodigoExamen" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreExamen" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblEstadoExamen" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnExamen" runat="server" Text="Modificar"
-    CommandName='4' OnClick='btnCommand_Click' />
+<asp:Panel ID="panelRaza" runat="server" Visible="false">
+    <asp:Panel ID="panelRazaListar" runat="server" Visible="true">
+        <h3>
+            Razas</h3>
+        <asp:GridView ID="gridRazas" runat="server" Width="100%" AutoGenerateColumns="false"
+            GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:TemplateField HeaderText="ESPECIE">
+                    <ItemTemplate>
+                        <asp:Label ID="lblEspecie" runat="server" Text='<%# Bind("ESPECIE.NOMBRE") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarRaza_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarRaza_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelRazaAgregar" runat="server" Visible="false">
+        <h3>
+            Agregar Raza</h3>
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtRazaAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtRazaAgregarNombre" runat="server"
+                        ControlToValidate="txtRazaAgregarNombre" ValidationGroup="RazaAgregar" ForeColor="Red"
+                        ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Especie
+                </td>
+                <td>
+                    <asp:DropDownList ID="selRazaAgregarEspecie" runat="server" AppendDataBoundItems="True"
+                        DataTextField="NOMBRE" DataValueField="ID">
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator_selRazaAgregarEspecie" runat="server"
+                        ControlToValidate="selRazaAgregarEspecie" ValidationGroup="RazaAgregar" ForeColor="Red"
+                        ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnRazaAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="RazaAgregar"
+            OnClick="btnRazaAgregarGuardar_Click" />
+        <asp:Button ID="btnRazaAgregarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnRazaAgregarCancelar_Click" />
+    </asp:Panel>
+    <asp:Panel ID="panelRazaActualizar" runat="server" Visible="false">
+        <h3>
+            Actualizar Raza</h3>
+        <asp:HiddenField ID="hdnRazaActualizarId" runat="server" />
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtRazaActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtRazaActualizarNombre" runat="server"
+                        ControlToValidate="txtRazaActualizarNombre" ValidationGroup="RazaActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Especie
+                </td>
+                <td>
+                    <asp:DropDownList ID="selRazaActualizarEspecie" runat="server" AppendDataBoundItems="True"
+                        DataTextField="NOMBRE" DataValueField="ID">
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorselRazaActualizarEspecie" runat="server"
+                        ControlToValidate="selRazaActualizarEspecie" ValidationGroup="RazaActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnRazaActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="RazaActualizar"
+            OnClick="btnRazaActualizarGuardar_Click" />
+        <asp:Button ID="btnRazaActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnRazaActualizarCancelar_Click" />
+    </asp:Panel>
 </asp:Panel>
-
-<asp:Panel ID="pnExamenDetalle" runat="server" Visible="false">
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>
-                <asp:TextBox ID="txtIdExamenDetalle" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Examen
-            </td>
-            <td>
-                <asp:TextBox ID="txtExameExamenDetalle" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Sub Examen</td>
-            <td>
-                <asp:TextBox ID="txtSubExamenExamenDetalle" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblActivoExamenDetalle" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnExamenDetalle" runat="server" Text="Modificar"
-    CommandName='5' OnClick='btnCommand_Click' />
+<asp:Panel ID="panelRegion" runat="server" Visible="false">
+    <asp:Panel ID="panelRegionListar" runat="server" Visible="true">
+        <h3>
+            Regiones</h3>
+        <asp:GridView ID="gridRegiones" runat="server" Width="100%" AutoGenerateColumns="false"
+            GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="ID" DataField="ID" />
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarRegion_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarRegion_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelRegionAgregar" runat="server" Visible="false">
+        <h3>
+            Agregar Region</h3>
+        <table>
+            <tr>
+                <td>
+                    ID
+                </td>
+                <td>
+                    <asp:TextBox ID="txtRegionAgregarId" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredtxtRegionAgregarId" runat="server" ControlToValidate="txtRegionAgregarId"
+                        ValidationGroup="RegionAgregar"  Display="Dynamic" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                    <asp:CompareValidator ID="compareRegionAgregarId" runat="server" ControlToValidate="txtRegionAgregarId"
+                        ValidationGroup="RegionAgregar" ForeColor="Red" ErrorMessage="Formato no válido"
+                        Text="Formato no válido" Display="Dynamic" Type="Integer" Operator="DataTypeCheck">Formato no válido</asp:CompareValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtRegionAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtRegionAgregarNombre" runat="server"
+                        ControlToValidate="txtRegionAgregarNombre" ValidationGroup="RegionAgregar" ForeColor="Red"
+                        ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnRegionAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="RegionAgregar"
+            OnClick="btnRegionAgregarGuardar_Click" />
+        <asp:Button ID="btnRegionAgregarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnRegionAgregarCancelar_Click" />
+    </asp:Panel>
+    <asp:Panel ID="panelRegionActualizar" runat="server" Visible="false">
+        <h3>
+            Actualizar Region</h3>
+        <table>
+            <tr>
+                <td>
+                    Id
+                </td>
+                <td>
+                    <asp:Label ID="lblRegionActualizarId" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtRegionActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtRegionActualizarNombre"
+                        runat="server" ControlToValidate="txtRegionActualizarNombre" ValidationGroup="RegionActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnRegionActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="RegionActualizar"
+            OnClick="btnRegionActualizarGuardar_Click" />
+        <asp:Button ID="btnRegionActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnRegionActualizarCancelar_Click" />
+    </asp:Panel>
 </asp:Panel>
-
-<asp:Panel ID="pnExamenSinonimo" runat="server" Visible="false">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdES" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Examen
-            </td>
-            <td>
-                <asp:DropDownList ID="ddlExamenES" runat="server" AppendDataBoundItems="True" DataTextField="NOMBRE"
-                    DataValueField="ID">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Nombre Sinonimo
-            </td>
-            <td>
-                <asp:TextBox ID="txtSinonimoES" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Activo
-            </td>
-            <td>
-                <asp:RadioButtonList ID="rblActivoES" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnExamenSinonimo" runat="server" Text="Modificar"
-    CommandName='6' OnClick='btnCommand_Click' />
-</asp:Panel>
-
-<asp:Panel ID="pnGarantia" runat="server" Visible="false">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdG" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreG" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblActivoG" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnGarantia" runat="server" Text="Modificar"
-    CommandName='7' OnClick='btnCommand_Click' />
-</asp:Panel>
-
-<asp:Panel id="pnPrevision" Visible="false" runat="server">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdP" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreP" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblActivoP" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnPrevision" runat="server" Text="Modificar"
-    CommandName='8' OnClick='btnCommand_Click' />
-</asp:Panel>
-
-<asp:Panel id="pnRaza" Visible="false" runat="server">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdR" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreR" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Especie</td>
-            <td>
-                <asp:DropDownList ID="ddlEspecieR" runat="server" AppendDataBoundItems="True" DataTextField="NOMBRE"
-                    DataValueField="ID">
-                </asp:DropDownList>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rdbActivoR" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnRaza" runat="server" Text="Modificar"
-    CommandName='9' OnClick='btnCommand_Click' />
-</asp:Panel>
-
-<asp:Panel id="pnRegion" Visible="false" runat="server">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdRegion" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreRegion" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblActivoRegion" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnRegion" runat="server" Text="Modificar"
-    CommandName='10' OnClick='btnCommand_Click' />
-</asp:Panel>
-
-<asp:Panel id="pnTipoCobro" Visible="false" runat="server">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdTC" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreTC" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Reporte</td>
-            <td>
-                <asp:TextBox ID="txtReporteTC" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblActivoTC" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnTipoCobro" runat="server" Text="Modificar"
-    CommandName='11' OnClick='btnCommand_Click' />
-</asp:Panel>
-
-<asp:Panel id="pntipoFactura" Visible="false" runat="server">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdTF" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreTF" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Reporte</td>
-            <td>
-                <asp:TextBox ID="TextBox3" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btntipoFactura" runat="server" Text="Modificar"
-    CommandName='12' OnClick='btnCommand_Click' />
-</asp:Panel>
-
-<asp:Panel id="pnTipoPrestacion" Visible="false" runat="server">
-    <table>
-        <tr>
-            <td>
-                Id
-            </td>
-            <td>
-                <asp:TextBox ID="txtIdTP" runat="server" ReadOnly="true"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Nombre</td>
-            <td>
-                <asp:TextBox ID="txtNombreTP" runat="server" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Activo</td>
-            <td>
-                <asp:RadioButtonList ID="rblActivoTP" runat="server">
-                    <asp:ListItem Value="1">Si</asp:ListItem>
-                    <asp:ListItem Value="2">No</asp:ListItem>
-                </asp:RadioButtonList>
-            </td>
-        </tr>
-    </table>
-    <asp:Button ID="btnTipoPrestacion" runat="server" Text="Modificar"
-    CommandName='13' OnClick='btnCommand_Click' />
+<asp:Panel ID="panelTipoCobro" runat="server" Visible="false">
+    <asp:Panel ID="panelTipoCobroListar" runat="server" Visible="true">
+        <h3>
+            Tipos de Cobro</h3>
+        <asp:GridView ID="gridTiposCobro" runat="server" Width="100%" AutoGenerateColumns="false"
+            GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarTipoCobro_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarTipoCobro_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelTipoCobroAgregar" runat="server" Visible="false">
+        <h3>
+            Agregar Tipo de Cobro</h3>
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTipoCobroAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtTipoCobroAgregarNombre"
+                        runat="server" ControlToValidate="txtTipoCobroAgregarNombre" ValidationGroup="TipoCobroAgregar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnTipoCobroAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="TipoCobroAgregar"
+            OnClick="btnTipoCobroAgregarGuardar_Click" />
+        <asp:Button ID="btnTipoCobroAgregarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnTipoCobroAgregarCancelar_Click" />
+    </asp:Panel>
+    <asp:Panel ID="panelTipoCobroActualizar" runat="server" Visible="false">
+        <h3>
+            Actualizar Tipo de Cobro</h3>
+        <asp:HiddenField ID="hdnTipoCobroActualizarId" runat="server" />
+        <table>
+            <tr>
+                <td>
+                    Nombre
+                </td>
+                <td>
+                    <asp:TextBox ID="txtTipoCobroActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtTipoCobroActualizarNombre"
+                        runat="server" ControlToValidate="txtTipoCobroActualizarNombre" ValidationGroup="TipoCobroActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnTipoCobroActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="TipoCobroActualizar"
+            OnClick="btnTipoCobroActualizarGuardar_Click" />
+        <asp:Button ID="btnTipoCobroActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false"
+            OnClick="btnTipoCobroActualizarCancelar_Click" />
+    </asp:Panel>
 </asp:Panel>

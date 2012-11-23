@@ -16,7 +16,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
-
+                    
                 }
             }
             catch (Exception ex)
@@ -26,6 +26,38 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
+        }
+
+        private void MostrarRegiones()
+        {
+            TrxREGION trx = new TrxREGION();
+            var lista = trx.GetAll();
+
+            selComunaActualizarRegion.Items.Clear();
+            selComunaActualizarRegion.Items.Add(new ListItem("(Seleccionar)", ""));
+            selComunaActualizarRegion.DataSource = lista;
+            selComunaActualizarRegion.DataBind();
+
+            selComunaAgregarRegion.Items.Clear();
+            selComunaAgregarRegion.Items.Add(new ListItem("(Seleccionar)", ""));
+            selComunaAgregarRegion.DataSource = lista;
+            selComunaAgregarRegion.DataBind();
+        }
+
+        private void MostrarEspecies()
+        {
+            TrxESPECIE trx = new TrxESPECIE();
+            var lista = trx.GetAll();
+
+            selRazaActualizarEspecie.Items.Clear();
+            selRazaActualizarEspecie.Items.Add(new ListItem("(Seleccionar)", ""));
+            selRazaActualizarEspecie.DataSource = lista;
+            selRazaActualizarEspecie.DataBind();
+
+            selRazaAgregarEspecie.Items.Clear();
+            selRazaAgregarEspecie.Items.Add(new ListItem("(Seleccionar)", ""));
+            selRazaAgregarEspecie.DataSource = lista;
+            selRazaAgregarEspecie.DataBind();
         }
 
         protected void ddlTablas_SelectedIndexChanged(object sender, EventArgs e)
@@ -33,8 +65,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             try
             {
                 panelMensaje.CssClass = "OcultarMensaje";
-                pnGrilla.Visible = true;
-                ViewGrilla();                
+                ViewGrilla();
             }
             catch (Exception ex)
             {
@@ -43,7 +74,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
-        }       
+        }
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
@@ -51,352 +82,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             {
                 panelMensaje.CssClass = "OcultarMensaje";
                 Limpiar();
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                panelMensaje.CssClass = "MostrarMensaje";
-                lblMensaje.Text = ex.Message;
-                return;
-            }
-        }
-
-        protected void imgActualizar_Click(object sender, ImageClickEventArgs e)
-        {
-            try
-            {
-                panelMensaje.CssClass = "OcultarMensaje";
-                ImageButton _link = sender as ImageButton;
-                int? Id = int.Parse(_link.CommandArgument);
-
-                switch (int.Parse(ddlTablas.SelectedValue))
-                {
-                    case 1: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnComuna.Visible = true;
-                        getRegion();
-                        var comuna = new TrxCOMUNA();
-                        var objComuna = comuna.GetByIdWithReferences(Id.Value);
-                        txtIdComuna.Text = objComuna.ID.ToString();
-                        txtNombreComuna.Text = objComuna.NOMBRE;
-                        ddlRegionComuna.SelectedValue = objComuna.REGION.ID.ToString();
-                        rblEstadoComuna.SelectedValue = objComuna.ACTIVO == true ? "1" : "2" ;
-                        btnModificarComuna.Text = "Modificar";
-                        break;
-                    case 2: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnClienteSinonimo.Visible = true;
-                        getClientes();
-                        var clienteSinonimo = new TrxCLIENTE_SINONIMO();
-                        var objClienteSinonimo = clienteSinonimo.GetByIdWithReferences(Id.Value);
-                        txtIdClienteSinonimo.Text  = objClienteSinonimo.ID.ToString();
-                        txtNombreSinonimo.Text = objClienteSinonimo.NOMBRE;
-                        ddlClienteSinonimo.SelectedValue = objClienteSinonimo.CLIENTE.ID.ToString();
-                        rblEstadoClienteSinonimo.SelectedValue = objClienteSinonimo.ACTIVO == true ? "1" : "2";
-                        btnClienteSinonimo.Text = "Modificar";
-                        break;
-                    case 3: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnEspecie.Visible = true;
-                        var especie = new TrxESPECIE();
-                        var objEspecie = especie.GetByIdWithReferences(Id.Value);
-                        txtIdEspecie.Text = objEspecie.ID.ToString();
-                        txtNombreEspecie.Text = objEspecie.NOMBRE;
-                        rblEstadoEspecie.SelectedValue = objEspecie.ACTIVO == true ? "1" : "2";
-                        btnEspecie.Text = "Modificar";
-                        break;
-                    case 4: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnExamen.Visible = true;
-                        var examen = new TrxEXAMEN();
-                        var objExamen = examen.GetByIdWithReferences(Id.Value);
-                        txtIdExamen.Text = objExamen.ID.ToString();
-                        ddlTipoPrestacionExamen.SelectedValue = objExamen.TIPO_PRESTACION.ID.ToString();
-                        txtCodigoExamen.Text = objExamen.CODIGO;
-                        txtNombreExamen.Text = objExamen.NOMBRE;
-                        rblEstadoExamen.SelectedValue = objExamen.ACTIVO == true ? "1" : "2" ;
-                        btnExamen.Text = "Modificar";
-                        break;
-                    case 5: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnExamenDetalle.Visible = true;
-                        var examenDetalle = new TrxEXAMEN_DETALLE();
-                        var objExmenDetalle = examenDetalle.GetByIdWithReferences(Id.Value);
-                        txtIdExamenDetalle.Text = objExmenDetalle.ID.ToString();
-                        txtExameExamenDetalle.Text = objExmenDetalle.EXAMEN.NOMBRE;
-                        txtSubExamenExamenDetalle.Text = objExmenDetalle.EXAMEN1.NOMBRE;
-                        rblActivoExamenDetalle.SelectedValue = objExmenDetalle.ACTIVO == true ? "1" : "2" ;
-                        btnExamenDetalle.Text = "Modificar";
-                        break;
-                    case 6: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnExamenSinonimo.Visible = true;
-                        getExamen();
-                        var examenSinonimo = new TrxEXAMEN_SINONIMO();
-                        var objExamenSinonimo = examenSinonimo.GetByIdWithReferences(Id.Value);
-                        txtIdES.Text = objExamenSinonimo.ID.ToString();
-                        ddlExamenES.SelectedValue = objExamenSinonimo.EXAMEN.ID.ToString();
-                        txtSinonimoES.Text = objExamenSinonimo.NOMBRE;
-                        rblActivoES.SelectedValue = objExamenSinonimo.ACTIVO == true ? "1": "2";
-                        btnExamenSinonimo.Text = "Modificar";
-                        break;
-                    case 7: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnGarantia.Visible = true;
-                        var garantia = new TrxGARANTIA();
-                        var objGarantia = garantia.GetByIdWithReferences(Id.Value);
-                        txtIdG.Text = objGarantia.ID.ToString();
-                        txtNombreG.Text = objGarantia.NOMBRE;
-                        rblActivoG.Text = objGarantia.ACTIVO == true ? "1" : "2";
-                        btnGarantia.Text = "Modificar";
-                        break;
-                    case 8: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnPrevision.Visible = true;
-                        var prevision = new TrxPREVISION();
-                        var objPrevision = prevision.GetByIdWithReferences(Id.Value);
-                        txtIdP.Text = objPrevision.ID.ToString();
-                        txtNombreP.Text = objPrevision.NOMBRE;
-                        rblActivoP.SelectedValue = objPrevision.ACTIVO == true ? "1" : "2";
-                        btnPrevision.Text = "Modificar";
-                        break;
-                    case 9: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnRaza.Visible = true;
-                        getEspecie();
-                        var raza = new TrxRAZA();
-                        var objRaza = raza.GetByIdWithReferences(Id.Value);
-                        txtIdR.Text = objRaza.ID.ToString();
-                        txtNombreR.Text = objRaza.NOMBRE;
-                        ddlEspecieR.SelectedValue = objRaza.ESPECIE.ID.ToString();
-                        rdbActivoR.SelectedValue = objRaza.ACTIVO == true ? "1" : "2";
-                        btnRaza.Text = "Modificar";
-                        break;
-                    case 10: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnRegion.Visible = true;
-                        var region = new TrxREGION();
-                        var objRegion = region.GetByIdWithReferences(Id.Value);
-                        txtIdRegion.Text = objRegion.ID.ToString();
-                        txtNombreRegion.Text  = objRegion.NOMBRE;
-                        rblActivoRegion.SelectedValue = objRegion.ACTIVO == true ? "1" : "2";
-                        btnRegion.Text = "Modificar";
-                        break;
-                    case 11: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnTipoCobro.Visible = true;
-                        var tipoCobro = new TrxTIPO_COBRO();
-                        var objTipoCobro = tipoCobro.GetByIdWithReferences(Id.Value);
-                        txtIdTC.Text = objTipoCobro.ID.ToString();
-                        txtNombreTC.Text = objTipoCobro.NOMBRE;
-                        txtReporteTC.Text = objTipoCobro.REPORTE;
-                        rblActivoTC.SelectedValue = objTipoCobro.ACTIVO == true ? "1" : "2";
-                        btnTipoCobro.Text = "Modificar";
-                        break;
-                    case 12: Limpiar();
-                        pnGrilla.Visible = false;
-                        pntipoFactura.Visible = true;
-                        break;
-                    case 13: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnTipoPrestacion.Visible = true;
-                        var tipoPrestacion = new TrxTIPO_PRESTACION();
-                        var objTipoPrestacion = tipoPrestacion.GetByIdWithReferences(Id.Value);
-                        txtIdTP.Text = objTipoPrestacion.ID.ToString();
-                        txtNombreTP.Text = objTipoPrestacion.NOMBRE;
-                        rblActivoTP.SelectedValue = objTipoPrestacion.ACTIVO == true ? "1" : "2";
-                        btnTipoPrestacion.Text = "Modificar";
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                ISException.RegisterExcepcion(ex);
-                panelMensaje.CssClass = "MostrarMensaje";
-                lblMensaje.Text = ex.Message;
-                return;
-            }
-        }
-
-        private void getClientes()
-        {
-            TrxCLIENTE _trx = new TrxCLIENTE();
-            ddlClienteSinonimo.Items.Clear();
-            ddlClienteSinonimo.Items.Add(new ListItem("(Todos)", ""));
-            ddlClienteSinonimo.DataSource = _trx.GetAll();
-            ddlClienteSinonimo.DataBind();
-        }                
-
-        protected void btnCommand_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var btnCommand = (Button)sender;
-                var accionPagina = Convert.ToInt16(btnCommand.CommandName);
-                int? Id = null;
-                bool Activo;
-
-                switch (accionPagina)
-                {
-                    case 1: 
-                        int? Region = null;
-                        if (!string.IsNullOrEmpty(txtIdComuna.Text))
-                            Id = int.Parse(txtIdComuna.Text);
-                        string Nombre = txtNombreComuna.Text;
-                        if (!string.IsNullOrEmpty(ddlRegionComuna.SelectedValue))
-                            Region = int.Parse(ddlRegionComuna.SelectedValue);
-                        Activo = rblEstadoComuna.SelectedValue == "1" ? true : false;
-                        var Comuna = new TrxCOMUNA();
-                        if (Id != null)
-                            Comuna.Update(Id.Value, Region.Value, Nombre);
-                        else
-                            Comuna.Add(Region.Value, Nombre);
-                        ViewGrilla();
-                        break;
-                    case 2:
-                        if (!string.IsNullOrEmpty(txtIdClienteSinonimo.Text))
-                            Id = int.Parse(txtIdClienteSinonimo.Text);
-                        string sinonimo = txtNombreSinonimo.Text;
-                        int cliente = int.Parse(ddlClienteSinonimo.SelectedValue);
-                        Activo = rblEstadoClienteSinonimo.SelectedValue == "1" ? true: false;
-                        var clienteSinonimo = new TrxCLIENTE_SINONIMO();
-                        if (Id != null)
-                            clienteSinonimo.Update(Id.Value,cliente,sinonimo);
-                        else
-                            clienteSinonimo.Add(cliente,sinonimo);
-                        ViewGrilla();
-                        break;
-                    case 3:
-                        if (!string.IsNullOrEmpty(txtIdEspecie.Text))
-                            Id = int.Parse(txtIdEspecie.Text);
-                        string nombre = txtNombreEspecie.Text;
-                        Activo = rblEstadoEspecie.SelectedValue == "1" ? true : false;
-                        var especie = new TrxESPECIE();
-                        if(Id != null)
-                            especie.Update(Id.Value,nombre);
-                        else
-                            especie.Add(nombre);
-                        ViewGrilla();                        
-                        break;
-                    case 4:
-                        if (!string.IsNullOrEmpty(txtIdExamen.Text))
-                            Id = int.Parse(txtIdExamen.Text);
-                        int tipoPrestacionEX = int.Parse(ddlTipoPrestacionExamen.SelectedValue);
-                        string codigo = txtCodigoExamen.Text;
-                        string nombreExamen = txtNombreExamen.Text;
-                        Activo = rblEstadoExamen.SelectedValue == "1" ? true : false;
-                        var examen = new TrxEXAMEN();
-                        if (Id != null)
-                            examen.Update(Id.Value,tipoPrestacionEX,codigo,nombreExamen);
-                        else
-                            examen.Add(tipoPrestacionEX, codigo, nombreExamen);
-                        ViewGrilla();                        
-                        break;
-                    case 5:
-                        if (!string.IsNullOrEmpty(txtIdExamenDetalle.Text))
-                            Id = int.Parse(txtIdExamenDetalle.Text);
-                        string nomExamen = txtExameExamenDetalle.Text;
-                        string SubExamen = txtSubExamenExamenDetalle.Text;
-                        Activo = rblActivoExamenDetalle.SelectedValue == "1" ? true : false;
-                        var examenDetalle = new TrxEXAMEN_DETALLE();
-                        //if (Id != null)
-                        //    examenDetalle.Update(Id.Value, nomExamen, SubExamen);
-                        //else
-                        //    examenDetalle.Add(nomExamen, SubExamen);
-                        ViewGrilla();
-                        break;
-                    case 6:
-                        if (!string.IsNullOrEmpty(txtIdES.Text))
-                            Id = int.Parse(txtIdES.Text);
-                        int nomExamenSin = int.Parse(ddlExamenES.SelectedValue);
-                        string ExSinonimo = txtSinonimoES.Text;
-                        Activo = rblActivoES.SelectedValue == "1" ? true : false;
-                        var examenSinonimo = new TrxEXAMEN_SINONIMO();
-                        if (Id != null)
-                            examenSinonimo.Update(Id.Value,nomExamenSin,ExSinonimo);
-                        else
-                            examenSinonimo.Add(nomExamenSin, ExSinonimo);
-                        ViewGrilla();
-                        break;
-                    case 7:
-                        if (!string.IsNullOrEmpty(txtIdG.Text))
-                            Id = int.Parse(txtIdG.Text);
-                        string nomGarantia = txtNombreG.Text;
-                        Activo = rblActivoG.SelectedValue == "1" ? true : false;
-                        var garantia = new TrxGARANTIA();
-                        if (Id != null)
-                            garantia.Update(Id.Value,nomGarantia);
-                        else
-                            garantia.Add(nomGarantia);
-                        ViewGrilla();
-                        break;
-                    case 8:
-                        if (!string.IsNullOrEmpty(txtIdP.Text))
-                            Id = int.Parse(txtIdP.Text);
-                        string nomPrevision = txtNombreP.Text;
-                        Activo = rblActivoP.SelectedValue == "1" ? true : false;
-                        var prevision = new TrxPREVISION();
-                        if (Id != null)
-                            prevision.Update(Id.Value,nomPrevision);
-                        else
-                            prevision.Add(nomPrevision);
-                        ViewGrilla();
-                        break;
-                    case 9:
-                        if (!string.IsNullOrEmpty(txtIdR.Text))
-                            Id = int.Parse(txtIdR.Text);
-                        string nomRaza = txtNombreR.Text;
-                        int especieRaza = int.Parse(ddlEspecieR.SelectedValue);
-                        Activo = rdbActivoR.SelectedValue == "1" ? true : false;
-                        var raza = new TrxRAZA();
-                        if (Id != null)
-                            raza.Update(Id.Value,especieRaza,nomRaza);
-                        else
-                            raza.Add(especieRaza, nomRaza);
-                        ViewGrilla();
-                        break;
-                    case 10:
-                        if (!string.IsNullOrEmpty(txtIdRegion.Text))
-                            Id = int.Parse(txtIdRegion.Text);
-                        string nomRegion = txtNombreRegion.Text;
-                        Activo = rblActivoRegion.SelectedValue == "1" ? true : false;
-                        var region = new TrxREGION();
-                        if (Id != null)
-                            region.Update(Id.Value,nomRegion);
-                        else
-                            region.Add(nomRegion);
-                        ViewGrilla();
-                        break;
-                    case 11:
-                        if (!string.IsNullOrEmpty(txtIdTC.Text))
-                            Id = int.Parse(txtIdTC.Text);
-                        string nomTipoCobro = txtNombreTC.Text;
-                        string reporte = txtReporteTC.Text;
-                        Activo = rblActivoTC.SelectedValue == "1" ? true : false;
-                        var tipoCobro = new TrxTIPO_COBRO();
-                        if (Id != null)
-                            tipoCobro.Update(Id.Value,nomTipoCobro,reporte);
-                        else
-                            tipoCobro.Add(nomTipoCobro, reporte);
-                        break;
-                    case 12://pendiente
-                        //if (!string.IsNullOrEmpty(txtIdTF.Text))
-                        //    Id = int.Parse(txtIdTF.Text);
-                        ViewGrilla();
-                        break;
-                    case 13:
-                        if (!string.IsNullOrEmpty(txtIdTP.Text))
-                            Id = int.Parse(txtIdTP.Text);
-                        string nomTipoPrestacion = txtNombreTP.Text;
-                        Activo = rblActivoTP.SelectedValue == "1" ? true : false;
-                        var tipoPrestacion = new TrxTIPO_PRESTACION();
-                        if (Id != null)
-                            tipoPrestacion.Update(Id.Value,nomTipoPrestacion);
-                        else
-                            tipoPrestacion.Add(nomTipoPrestacion);
-                        ViewGrilla();
-                        break;
-                }
             }
             catch (Exception ex)
             {
@@ -416,78 +101,69 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                     lblMensaje.Text = "Debe seleccionar una tabla";
                     return;
                 }
-
+                Limpiar();
                 switch (int.Parse(ddlTablas.SelectedValue))
                 {
-                    case 1: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnComuna.Visible = true;
-                        getRegion();
-                        btnModificarComuna.Text = "Agregar";
+                    case 1:
+                        panelComuna.Visible = true;
+                        panelComunaAgregar.Visible = true;
+                        panelComunaListar.Visible = false;
+                        panelComunaActualizar.Visible = false;
+
+                        txtComunaAgregarNombre.Text = "";
+                        selComunaAgregarRegion.SelectedIndex = 0;
                         break;
-                    case 2: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnClienteSinonimo.Visible = true;
-                        getClientes();
-                        btnClienteSinonimo.Text = "Agregar";
+                    case 3:
+                        panelEspecie.Visible = true;
+                        panelEspecieAgregar.Visible = true;
+                        panelEspecieListar.Visible = false;
+                        panelEspecieActualizar.Visible = false;
+
+                        txtEspecieAgregarNombre.Text = "";
                         break;
-                    case 3: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnEspecie.Visible = true;
-                        btnEspecie.Text = "Agregar";
+                    case 7:
+                        panelGarantia.Visible = true;
+                        panelGarantiaAgregar.Visible = true;
+                        panelGarantiaListar.Visible = false;
+                        panelGarantiaActualizar.Visible = false;
+
+                        txtGarantiaAgregarNombre.Text = "";
                         break;
-                    case 4: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnExamen.Visible = true;
-                        btnExamen.Text = "Agregar";
+                    case 8:
+                        panelPrevision.Visible = true;
+                        panelPrevisionAgregar.Visible = true;
+                        panelPrevisionListar.Visible = false;
+                        panelPrevisionActualizar.Visible = false;
+
+                        txtPrevisionAgregarNombre.Text = "";
                         break;
-                    case 5: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnExamenDetalle.Visible = true;
-                        btnExamenDetalle.Text = "Agregar";
+                    case 9:
+                        panelRaza.Visible = true;
+                        panelRazaAgregar.Visible = true;
+                        panelRazaListar.Visible = false;
+                        panelRazaActualizar.Visible = false;
+
+                        txtRazaAgregarNombre.Text = "";
+                        selRazaAgregarEspecie.SelectedIndex = 0;
                         break;
-                    case 6: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnExamenSinonimo.Visible = true;
-                        btnExamenSinonimo.Text = "Agregar";
+                    case 10:
+                        panelRegion.Visible = true;
+                        panelRegionAgregar.Visible = true;
+                        panelRegionListar.Visible = false;
+                        panelRegionActualizar.Visible = false;
+
+                        txtRegionAgregarId.Text = "";
+                        txtRegionAgregarNombre.Text = "";
                         break;
-                    case 7: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnGarantia.Visible = true;
-                        btnGarantia.Text = "Agregar";
-                        break;
-                    case 8: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnPrevision.Visible = true;
-                        btnPrevision.Text = "Agregar";
-                        break;
-                    case 9: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnRaza.Visible = true;
-                        btnRaza.Text = "Agregar";
-                        break;
-                    case 10: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnRegion.Visible = true;
-                        btnRegion.Text = "Agregar";
-                        break;
-                    case 11: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnTipoCobro.Visible = true;
-                        btnTipoCobro.Text = "Agregar";
-                        break;
-                    case 12: Limpiar();
-                        pnGrilla.Visible = false;
-                        pntipoFactura.Visible = true;
-                        btntipoFactura.Text = "Agregar";
-                        break;
-                    case 13: Limpiar();
-                        pnGrilla.Visible = false;
-                        pnTipoPrestacion.Visible = true;
-                        btnTipoPrestacion.Text = "Agregar";
+                    case 11:
+                        panelTipoCobro.Visible = true;
+                        panelTipoCobroAgregar.Visible = true;
+                        panelTipoCobroListar.Visible = false;
+                        panelTipoCobroActualizar.Visible = false;
+
+                        txtTipoCobroAgregarNombre.Text = "";
                         break;
                 }
-
             }
             catch (Exception ex)
             {
@@ -502,73 +178,80 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                pnGrilla.Visible = true;
+                Limpiar();
+                MostrarRegiones();
+                MostrarEspecies();
                 switch (ddlTablas.SelectedValue)
                 {
-                    case "1": Limpiar();
+                    case "1":
+                        panelComuna.Visible = true;
+                        panelComunaListar.Visible = true;
+                        panelComunaAgregar.Visible = false;
+                        panelComunaActualizar.Visible = false;
+
                         var comuna = new TrxCOMUNA();
-                        grdTablas.DataSource = comuna.GetAll();
-                        grdTablas.DataBind();
+                        gridComunas.DataSource = comuna.GetAllWithReferences();
+                        gridComunas.DataBind();
                         break;
-                    case "2": Limpiar();
-                        var clienteSinonimo = new TrxCLIENTE_SINONIMO();
-                        grdTablas.DataSource = clienteSinonimo.GetAll();
-                        grdTablas.DataBind();
+                    case "3":
+                        panelEspecie.Visible = true;
+                        panelEspecieListar.Visible = true;
+                        panelEspecieAgregar.Visible = false;
+                        panelEspecieActualizar.Visible = false;
+
+                        var Especie = new TrxESPECIE();
+                        gridEspecies.DataSource = Especie.GetAllWithReferences();
+                        gridEspecies.DataBind();
                         break;
-                    case "3": Limpiar();
-                        var especie = new TrxESPECIE();
-                        grdTablas.DataSource = especie.GetAll();
-                        grdTablas.DataBind();
+                    case "7":
+                        panelGarantia.Visible = true;
+                        panelGarantiaListar.Visible = true;
+                        panelGarantiaAgregar.Visible = false;
+                        panelGarantiaActualizar.Visible = false;
+
+                        var Garantia = new TrxGARANTIA();
+                        gridGarantia.DataSource = Garantia.GetAllWithReferences();
+                        gridGarantia.DataBind();
                         break;
-                    case "4": Limpiar();
-                        var examen = new TrxEXAMEN();
-                        grdTablas.DataSource = examen.GetAll();
-                        grdTablas.DataBind();
+                    case "8":
+                        panelPrevision.Visible = true;
+                        panelPrevisionListar.Visible = true;
+                        panelPrevisionAgregar.Visible = false;
+                        panelPrevisionActualizar.Visible = false;
+
+                        var Prevision = new TrxPREVISION();
+                        gridPrevision.DataSource = Prevision.GetAllWithReferences();
+                        gridPrevision.DataBind();
                         break;
-                    case "5": Limpiar();
-                        var examenDetalle = new TrxEXAMEN_DETALLE();
-                        grdTablas.DataSource = examenDetalle.GetAll();
-                        grdTablas.DataBind();
+                    case "9":
+                        panelRaza.Visible = true;
+                        panelRazaListar.Visible = true;
+                        panelRazaAgregar.Visible = false;
+                        panelRazaActualizar.Visible = false;
+
+                        var Raza = new TrxRAZA();
+                        gridRazas.DataSource = Raza.GetAllWithReferences();
+                        gridRazas.DataBind();
                         break;
-                    case "6": Limpiar();
-                        var examenSinonimo = new TrxEXAMEN_SINONIMO();
-                        grdTablas.DataSource = examenSinonimo.GetAll();
-                        grdTablas.DataBind();
+                    case "10":
+                        panelRegion.Visible = true;
+                        panelRegionListar.Visible = true;
+                        panelRegionAgregar.Visible = false;
+                        panelRegionActualizar.Visible = false;
+
+                        var Region = new TrxREGION();
+                        gridRegiones.DataSource = Region.GetAll();
+                        gridRegiones.DataBind();
                         break;
-                    case "7": Limpiar();
-                        var garantia = new TrxGARANTIA();
-                        grdTablas.DataSource = garantia.GetAll();
-                        grdTablas.DataBind();
-                        break;
-                    case "8": Limpiar();
-                        var prevision = new TrxPREVISION();
-                        grdTablas.DataSource = prevision.GetAll();
-                        grdTablas.DataBind();
-                        break;
-                    case "9": Limpiar();
-                        var raza = new TrxRAZA();
-                        grdTablas.DataSource = raza.GetAll();
-                        grdTablas.DataBind();
-                        break;
-                    case "10": Limpiar();
-                        var region = new TrxREGION();
-                        grdTablas.DataSource = region.GetAll();
-                        grdTablas.DataBind();
-                        break;
-                    case "11": Limpiar();
-                        var tipoCobro = new TrxTIPO_COBRO();
-                        grdTablas.DataSource = tipoCobro.GetAll();
-                        grdTablas.DataBind();
-                        break;
-                    case "12": Limpiar();
-                        var tipoFactura = new TrxTIPO_FACTURA();
-                        grdTablas.DataSource = tipoFactura.GetAll();
-                        grdTablas.DataBind();
-                        break;
-                    case "13": Limpiar();
-                        var tipoPrestacion = new TrxTIPO_PRESTACION();
-                        grdTablas.DataSource = tipoPrestacion.GetAll();
-                        grdTablas.DataBind();
+                    case "11":
+                        panelTipoCobro.Visible = true;
+                        panelTipoCobroListar.Visible = true;
+                        panelTipoCobroAgregar.Visible = false;
+                        panelTipoCobroActualizar.Visible = false;
+
+                        var TipoCobro = new TrxTIPO_COBRO();
+                        gridTiposCobro.DataSource = TipoCobro.GetAll();
+                        gridTiposCobro.DataBind();
                         break;
                 }
             }
@@ -579,128 +262,31 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
-
         }
 
         private void Limpiar()
         {
-            pnComuna.Visible = false;
-            pnClienteSinonimo.Visible = false;
-            pnEspecie.Visible = false;
-            pnExamen.Visible = false;
-            pnExamenDetalle.Visible = false;
-            pnExamenSinonimo.Visible = false;
-            pnGarantia.Visible = false;
-            pnPrevision.Visible = false;
-            pnRaza.Visible = false;
-            pnRegion.Visible = false;
-            pnTipoCobro.Visible = false;
-            pntipoFactura.Visible = false;
-            pnTipoPrestacion.Visible = false;
+            panelComuna.Visible = false;
+            panelEspecie.Visible = false;
+            panelGarantia.Visible = false;
+            panelPrevision.Visible = false;
+            panelRaza.Visible = false;
+            panelRegion.Visible = false;
+            panelTipoCobro.Visible = false;
         }
 
-        private void getRegion()
-        {
-            TrxREGION _trx = new TrxREGION();
-            ddlRegionComuna.Items.Clear();
-            ddlRegionComuna.Items.Add(new ListItem("(Todos)", ""));
-            ddlRegionComuna.DataSource = _trx.GetAll();
-            ddlRegionComuna.DataBind();
-        }
-
-        private void getEspecie()
-        {
-            TrxESPECIE _trx = new TrxESPECIE();
-            ddlEspecieR.Items.Clear();
-            ddlEspecieR.Items.Add(new ListItem("(Todos)", ""));
-            ddlEspecieR.DataSource = _trx.GetAll();
-            ddlEspecieR.DataBind();
-        }
-
-        private void getExamen()
-        {
-            TrxEXAMEN _trx = new TrxEXAMEN();
-            ddlExamenES.Items.Clear();
-            ddlExamenES.Items.Add(new ListItem("(Todos)", ""));
-            ddlExamenES.DataSource = _trx.GetAll();
-            ddlExamenES.DataBind();
-        }
-
-        protected void imgEliminar_Click(object sender, ImageClickEventArgs e)
+        /* COMUNA */
+        protected void imgEliminarComuna_Click(object sender, ImageClickEventArgs e)
         {
             try
             {
                 panelMensaje.CssClass = "OcultarMensaje";
                 ImageButton _link = sender as ImageButton;
-                int? Id = int.Parse(_link.CommandArgument);
+                int Id = int.Parse(_link.CommandArgument);
 
-                switch (int.Parse(ddlTablas.SelectedValue))
-                {
-                    case 1:
-                        var comuna = new TrxCOMUNA();
-                        comuna.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 2:
-                        var clienteSinonimo = new TrxCLIENTE_SINONIMO();
-                        clienteSinonimo.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 3: 
-                        var especie = new TrxESPECIE();
-                        especie.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 4:                         
-                        var examen = new TrxEXAMEN();
-                        examen.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 5: 
-                        var examenDetalle = new TrxEXAMEN_DETALLE();
-                        examenDetalle.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 6:                         
-                        var examenSinonimo = new TrxEXAMEN_SINONIMO();
-                        examenSinonimo.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 7: 
-                        var garantia = new TrxGARANTIA();
-                        garantia.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 8: 
-                        var prevision = new TrxPREVISION();
-                        prevision.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 9: 
-                        var raza = new TrxRAZA();
-                        raza.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 10: 
-                        var region = new TrxREGION();
-                        region.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 11: 
-                        var tipoCobro = new TrxTIPO_COBRO();
-                        tipoCobro.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                    case 12:
-                        ViewGrilla();
-                        break;
-                    case 13: 
-                        var tipoPrestacion = new TrxTIPO_PRESTACION();
-                        tipoPrestacion.Delete(Id.Value);
-                        ViewGrilla();
-                        break;
-                }
-
+                var comuna = new TrxCOMUNA();
+                comuna.Delete(Id);
+                ViewGrilla();
             }
             catch (Exception ex)
             {
@@ -709,6 +295,913 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
-        }        
+        }
+
+        protected void imgActualizarComuna_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelComunaListar.Visible = false;
+                panelComunaActualizar.Visible = true;
+                panelComunaAgregar.Visible = false;
+
+                var comuna = new TrxCOMUNA();
+                var objComuna = comuna.GetByIdWithReferences(Id);
+                hdnComunaActualizarId.Value = objComuna.ID.ToString();
+                txtComunaActualizarNombre.Text = objComuna.NOMBRE;
+                selComunaActualizarRegion.SelectedValue = objComuna.REGION.ID.ToString();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnComunaAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    string Nombre = txtComunaAgregarNombre.Text;
+                    int RegionId = int.Parse(selComunaAgregarRegion.SelectedValue);
+
+                    var comuna = new TrxCOMUNA();
+                    comuna.Add(RegionId, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnComunaAgregarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnComunaActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(hdnComunaActualizarId.Value);
+                    string Nombre = txtComunaActualizarNombre.Text;
+                    int RegionId = int.Parse(selComunaActualizarRegion.SelectedValue);
+
+                    var comuna = new TrxCOMUNA();
+                    comuna.Update(Id, RegionId, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnComunaActualizarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+
+        /* ESPECIE */
+        protected void imgEliminarEspecie_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+
+                var especie = new TrxESPECIE();
+                especie.Delete(Id);
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgActualizarEspecie_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelEspecieListar.Visible = false;
+                panelEspecieActualizar.Visible = true;
+                panelEspecieAgregar.Visible = false;
+
+                var Especie = new TrxESPECIE();
+                var objEspecie = Especie.GetByIdWithReferences(Id);
+                hdnEspecieActualizarId.Value = objEspecie.ID.ToString();
+                txtEspecieActualizarNombre.Text = objEspecie.NOMBRE;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnEspecieAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    string Nombre = txtEspecieAgregarNombre.Text;
+
+                    var Especie = new TrxESPECIE();
+                    Especie.Add(Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnEspecieAgregarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnEspecieActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(hdnEspecieActualizarId.Value);
+                    string Nombre = txtEspecieActualizarNombre.Text;
+
+                    var Especie = new TrxESPECIE();
+                    Especie.Update(Id, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnEspecieActualizarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+
+        /* GARANTIA */
+        protected void imgEliminarGarantia_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+
+                var Garantia = new TrxGARANTIA();
+                Garantia.Delete(Id);
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgActualizarGarantia_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelGarantiaListar.Visible = false;
+                panelGarantiaActualizar.Visible = true;
+                panelGarantiaAgregar.Visible = false;
+
+                var Garantia = new TrxGARANTIA();
+                var objGarantia = Garantia.GetByIdWithReferences(Id);
+                hdnGarantiaActualizarId.Value = objGarantia.ID.ToString();
+                txtGarantiaActualizarNombre.Text = objGarantia.NOMBRE;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnGarantiaAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    string Nombre = txtGarantiaAgregarNombre.Text;
+
+                    var Garantia = new TrxGARANTIA();
+                    Garantia.Add(Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnGarantiaAgregarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnGarantiaActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(hdnGarantiaActualizarId.Value);
+                    string Nombre = txtGarantiaActualizarNombre.Text;
+
+                    var Garantia = new TrxGARANTIA();
+                    Garantia.Update(Id, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnGarantiaActualizarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+
+        /* PREVISION */
+        protected void imgEliminarPrevision_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+
+                var Prevision = new TrxPREVISION();
+                Prevision.Delete(Id);
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgActualizarPrevision_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelPrevisionListar.Visible = false;
+                panelPrevisionActualizar.Visible = true;
+                panelPrevisionAgregar.Visible = false;
+
+                var Prevision = new TrxPREVISION();
+                var objPrevision = Prevision.GetByIdWithReferences(Id);
+                hdnPrevisionActualizarId.Value = objPrevision.ID.ToString();
+                txtPrevisionActualizarNombre.Text = objPrevision.NOMBRE;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnPrevisionAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    string Nombre = txtPrevisionAgregarNombre.Text;
+
+                    var Prevision = new TrxPREVISION();
+                    Prevision.Add(Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnPrevisionAgregarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnPrevisionActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(hdnPrevisionActualizarId.Value);
+                    string Nombre = txtPrevisionActualizarNombre.Text;
+
+                    var Prevision = new TrxPREVISION();
+                    Prevision.Update(Id, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnPrevisionActualizarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        /* RAZA */
+        protected void imgEliminarRaza_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+
+                var Raza = new TrxRAZA();
+                Raza.Delete(Id);
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgActualizarRaza_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelRazaListar.Visible = false;
+                panelRazaActualizar.Visible = true;
+                panelRazaAgregar.Visible = false;
+
+                var Raza = new TrxRAZA();
+                var objRaza = Raza.GetByIdWithReferences(Id);
+                hdnRazaActualizarId.Value = objRaza.ID.ToString();
+                txtRazaActualizarNombre.Text = objRaza.NOMBRE;
+                selRazaActualizarEspecie.SelectedValue = objRaza.ESPECIE.ID.ToString();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRazaAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    string Nombre = txtRazaAgregarNombre.Text;
+                    int EspecieId = int.Parse(selRazaAgregarEspecie.SelectedValue);
+
+                    var Raza = new TrxRAZA();
+                    Raza.Add(EspecieId, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRazaAgregarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRazaActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(hdnRazaActualizarId.Value);
+                    string Nombre = txtRazaActualizarNombre.Text;
+                    int EspecieId = int.Parse(selRazaActualizarEspecie.SelectedValue);
+
+                    var Raza = new TrxRAZA();
+                    Raza.Update(Id, EspecieId, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRazaActualizarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+
+        /* REGION */
+        protected void imgEliminarRegion_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+
+                var Region = new TrxREGION();
+                Region.Delete(Id);
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgActualizarRegion_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelRegionListar.Visible = false;
+                panelRegionActualizar.Visible = true;
+                panelRegionAgregar.Visible = false;
+
+                var Region = new TrxREGION();
+                var objRegion = Region.GetByIdWithReferences(Id);
+                lblRegionActualizarId.Text = objRegion.ID.ToString();
+                txtRegionActualizarNombre.Text = objRegion.NOMBRE;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRegionAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(txtRegionAgregarId.Text);
+                    string Nombre = txtRegionAgregarNombre.Text;
+
+                    var Region = new TrxREGION();
+                    Region.Add(Id, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRegionAgregarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRegionActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(lblRegionActualizarId.Text);
+                    string Nombre = txtRegionActualizarNombre.Text;
+
+                    var Region = new TrxREGION();
+                    Region.Update(Id, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnRegionActualizarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+
+        /* TIPOS DE COBRO */
+        protected void imgEliminarTipoCobro_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+
+                var TipoCobro = new TrxTIPO_COBRO();
+                TipoCobro.Delete(Id);
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgActualizarTipoCobro_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelTipoCobroListar.Visible = false;
+                panelTipoCobroActualizar.Visible = true;
+                panelTipoCobroAgregar.Visible = false;
+
+                var TipoCobro = new TrxTIPO_COBRO();
+                var objTipoCobro = TipoCobro.GetByIdWithReferences(Id);
+                hdnTipoCobroActualizarId.Value = objTipoCobro.ID.ToString();
+                txtTipoCobroActualizarNombre.Text = objTipoCobro.NOMBRE;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnTipoCobroAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    string Nombre = txtTipoCobroAgregarNombre.Text;
+
+                    var TipoCobro = new TrxTIPO_COBRO();
+                    TipoCobro.Add(Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnTipoCobroAgregarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnTipoCobroActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                if (Page.IsValid)
+                {
+                    int Id = int.Parse(hdnTipoCobroActualizarId.Value);
+                    string Nombre = txtTipoCobroActualizarNombre.Text;
+
+                    var TipoCobro = new TrxTIPO_COBRO();
+                    TipoCobro.Update(Id, Nombre);
+                    ViewGrilla();
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnTipoCobroActualizarCancelar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
     }
 }

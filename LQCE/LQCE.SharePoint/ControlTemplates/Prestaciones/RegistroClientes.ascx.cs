@@ -4,6 +4,8 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
+using LQCE.Transaccion.DTO;
+using LQCE.SharePoint.ControlTemplates.App_Code;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -16,7 +18,9 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 panelMensaje.CssClass = "OcultarMensaje";
                 if (!Page.IsPostBack && !Page.IsCallback)
                 {
+                    getRegion();
                     getComuna();
+                    getTipoPrestacion();
                     getConvenio();
                 }
             }
@@ -29,13 +33,34 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
+        private void getRegion()
+        {
+            TrxREGION _trx = new TrxREGION();
+            ddlRegion.Items.Clear();
+            ddlRegion.Items.Add(new ListItem("(Todos)", ""));
+            ddlRegion.DataSource = _trx.GetAll();
+            ddlRegion.DataBind();
+        }
+
         private void getComuna()
         {
             TrxCOMUNA _trx = new TrxCOMUNA();
             ddlComuna.Items.Clear();
             ddlComuna.Items.Add(new ListItem("(Todos)", ""));
-            ddlComuna.DataSource = _trx.GetAll();
-            ddlComuna.DataBind();
+            if (!string.IsNullOrEmpty(ddlRegion.SelectedValue))
+            {
+                ddlComuna.DataSource = _trx.GetByFilter(int.Parse(ddlRegion.SelectedValue), "");
+                ddlComuna.DataBind();
+            }
+        }
+
+        private void getTipoPrestacion()
+        {
+            TrxTIPO_PRESTACION _trx = new TrxTIPO_PRESTACION();
+            ddlTipoPrestacion.Items.Clear();
+            ddlTipoPrestacion.Items.Add(new ListItem("(Todos)", ""));
+            ddlTipoPrestacion.DataSource = _trx.GetAll();
+            ddlTipoPrestacion.DataBind();
         }
 
         private void getConvenio()
@@ -43,17 +68,25 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             TrxCONVENIO _trx = new TrxCONVENIO();
             ddlConvenio.Items.Clear();
             ddlConvenio.Items.Add(new ListItem("(Todos)", ""));
-            ddlConvenio.DataSource = _trx.GetAll();
-            ddlConvenio.DataBind();
+            if (!string.IsNullOrEmpty(ddlTipoPrestacion.SelectedValue))
+            {
+                ddlConvenio.DataSource = _trx.GetByFilter(int.Parse(ddlTipoPrestacion.SelectedValue), "");
+                ddlConvenio.DataBind();
+            }
+            else
+            {
+                ddlConvenio.DataSource = _trx.GetAll();
+                ddlConvenio.DataBind();
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try
             {
+                grdClientes.PageIndex = 1;
                 BuscarCliente();
-                
-                
+                Paginador1.SetPage(1);
             }
             catch (Exception ex)
             {
@@ -71,22 +104,52 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 if (!string.IsNullOrEmpty(txtRutCliente.Text))
                     if (!ValidaRut(txtRutCliente.Text))
                         throw new Exception("Rut no es valido");
-
-                int? Comuna = null;
-                int? Convenio = null;
-
+                
                 panelMensaje.CssClass = "OcultarMensaje";
-                string Rut = txtRutCliente.Text;
-                string Nombre = txtNombreCliente.Text;
+
+                DTOFindCliente dto = new DTOFindCliente();
+                dto.PageIndex = grdClientes.PageIndex;
+                dto.PageSize = grdClientes.PageSize;
+
+                dto.RUT = txtRutCliente.Text;
+                dto.NOMBRE = txtNombreCliente.Text;
+                if (!string.IsNullOrEmpty(ddlRegion.SelectedValue))
+                    dto.ID_REGION = int.Parse(ddlRegion.SelectedValue);
                 if (!string.IsNullOrEmpty(ddlComuna.SelectedValue))
-                    Comuna = int.Parse(ddlComuna.SelectedValue);
+                    dto.ID_COMUNA = int.Parse(ddlComuna.SelectedValue);
+                if (!string.IsNullOrEmpty(ddlTipoPrestacion.SelectedValue))
+                    dto.ID_TIPO_PRESTACION = int.Parse(ddlTipoPrestacion.SelectedValue);
                 if (!string.IsNullOrEmpty(ddlConvenio.SelectedValue))
-                    Convenio = int.Parse(ddlConvenio.SelectedValue);
+                    dto.ID_CONVENIO = int.Parse(ddlConvenio.SelectedValue);
 
                 pnClientes.Visible = true;
                 var trx = new TrxCLIENTE();
-                grdClientes.DataSource = trx.GetByFilterWithReferences(Comuna, Convenio, null, null, Rut, Nombre, null, "", "", "");
+                //grdClientes.DataSource = trx.GetByFilterWithReferences(Comuna, Convenio, null, null, Rut, Nombre, null, "", "", "");
+                //grdClientes.DataBind();
+                int Total = trx.GetByFilterWithFullReferencesCount(dto.RUT, dto.NOMBRE, dto.ID_REGION, dto.ID_COMUNA, dto.ID_TIPO_PRESTACION, dto.ID_CONVENIO);
+                grdClientes.DataSource = trx.GetByFilterWithFullReferences(dto.RUT, dto.NOMBRE, dto.ID_REGION, dto.ID_COMUNA, dto.ID_TIPO_PRESTACION, dto.ID_CONVENIO, dto.PageIndex, dto.PageSize);
                 grdClientes.DataBind();
+
+                Paginador1.TotalPages = Total % grdClientes.PageSize == 0 ? Total / grdClientes.PageSize : Total / grdClientes.PageSize + 1;
+                Paginador1.Visible = (Total > 0);
+                Paginador1.Inicializar(dto);
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void Paginador1_PageChanged(object sender, CustomPageChangeArgs e)
+        {
+            try
+            {
+                grdClientes.PageSize = (e.CurrentPageSize == 0 ? 20 : e.CurrentPageSize);
+                grdClientes.PageIndex = e.CurrentPageNumber;
+                BuscarCliente();
             }
             catch (Exception ex)
             {
@@ -222,7 +285,36 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
+        }
 
+        protected void ddlRegion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                getComuna();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void ddlTipoPrestacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                getConvenio();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
     }
 }

@@ -172,75 +172,78 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                CalculoMontoPrestaciones();
-
-                if (Request.QueryString["Id"] == null)
-                    throw new Exception("No se ha indicado identificador de la cuenta registrada");
-
-                int Id = int.Parse(Request.QueryString["Id"].ToString());
-
-
-                //se obtienen los datos desde el formuario
-                IFormatProvider culture = new CultureInfo("es-CL", true);
-                int IdCargaPrestacionesDetalleEstado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
-                string ficha = !string.IsNullOrEmpty(txtNumeroFicha.Text) ? txtNumeroFicha.Text : string.Empty;
-                string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
-                string especie = !string.IsNullOrEmpty(txtEspecie.Text) ? txtEspecie.Text : string.Empty;
-                string raza = !string.IsNullOrEmpty(txtRaza.Text) ? txtRaza.Text : string.Empty;
-                string sexo = !string.IsNullOrEmpty(txtSexo.Text) ? txtSexo.Text : string.Empty;
-                string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
-                string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
-                string procedencia = !string.IsNullOrEmpty(txtProcedencia.Text) ? txtProcedencia.Text : string.Empty;
-                string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
-                string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
-                string total = !string.IsNullOrEmpty(txtMontoTotal.Text) ? txtMontoTotal.Text : string.Empty;
-                string recepcion = txtRecepcion.Text.Trim();
-                string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
-                string solicitante = txtSolicitante.Text.Trim();
-                string fechaRecepcion = !string.IsNullOrEmpty(this.txtFechaRecepción.Text) ? txtFechaRecepción.Text : string.Empty;
-                string fichaClinica = txtFichaClinica.Text.Trim();
-
-                //se recorren los examenes para guardar
-                List<DTOExamen> listaDTO = this.ListaExamen;
-                int numeroFila = 0;
-                foreach (GridViewRow grilla in grdExamen.Rows)
+                if (Page.IsValid)
                 {
-                    if (grilla.RowType == DataControlRowType.DataRow)
+                    CalculoMontoPrestaciones();
+
+                    if (Request.QueryString["Id"] == null)
+                        throw new Exception("No se ha indicado identificador de la cuenta registrada");
+
+                    int Id = int.Parse(Request.QueryString["Id"].ToString());
+
+
+                    //se obtienen los datos desde el formuario
+                    IFormatProvider culture = new CultureInfo("es-CL", true);
+                    int IdCargaPrestacionesDetalleEstado = (int)ENUM_CARGA_PRESTACIONES_DETALLE_ESTADO.Validado;
+                    string ficha = !string.IsNullOrEmpty(txtNumeroFicha.Text) ? txtNumeroFicha.Text : string.Empty;
+                    string nombre = !string.IsNullOrEmpty(txtNombre.Text) ? txtNombre.Text : string.Empty;
+                    string especie = !string.IsNullOrEmpty(txtEspecie.Text) ? txtEspecie.Text : string.Empty;
+                    string raza = !string.IsNullOrEmpty(txtRaza.Text) ? txtRaza.Text : string.Empty;
+                    string sexo = !string.IsNullOrEmpty(txtSexo.Text) ? txtSexo.Text : string.Empty;
+                    string edad = !string.IsNullOrEmpty(txtEdad.Text) ? txtEdad.Text : string.Empty;
+                    string telefono = !string.IsNullOrEmpty(txtTelefono.Text) ? txtTelefono.Text : string.Empty;
+                    string procedencia = !string.IsNullOrEmpty(txtProcedencia.Text) ? txtProcedencia.Text : string.Empty;
+                    string garantia = !string.IsNullOrEmpty(txtGarantia.Text) ? txtGarantia.Text : string.Empty;
+                    string pendiente = !string.IsNullOrEmpty(txtPendiente.Text) ? txtPendiente.Text : string.Empty;
+                    string total = !string.IsNullOrEmpty(txtMontoTotal.Text) ? txtMontoTotal.Text : string.Empty;
+                    string recepcion = txtRecepcion.Text.Trim();
+                    string medico = !string.IsNullOrEmpty(txtMedico.Text) ? txtMedico.Text : string.Empty;
+                    string solicitante = txtSolicitante.Text.Trim();
+                    string fechaRecepcion = !string.IsNullOrEmpty(this.txtFechaRecepción.Text) ? txtFechaRecepción.Text : string.Empty;
+                    string fichaClinica = txtFichaClinica.Text.Trim();
+
+                    //se recorren los examenes para guardar
+                    List<DTOExamen> listaDTO = this.ListaExamen;
+                    int numeroFila = 0;
+                    foreach (GridViewRow grilla in grdExamen.Rows)
                     {
-                        TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
-                        TextBox txtValor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
+                        if (grilla.RowType == DataControlRowType.DataRow)
+                        {
+                            TextBox txtExamen = (TextBox)grilla.FindControl("txtExamen");
+                            TextBox txtValor = (TextBox)grilla.FindControl("txtValorNuevoExamen");
 
-                        listaDTO[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
-                        listaDTO[numeroFila].VALOR_EXAMEN = txtValor.Text;
+                            listaDTO[numeroFila].NOMBRE_EXAMEN = txtExamen.Text;
+                            listaDTO[numeroFila].VALOR_EXAMEN = txtValor.Text;
 
-                        numeroFila++;
+                            numeroFila++;
+                        }
                     }
-                }
-                this.ListaExamen = listaDTO;
+                    this.ListaExamen = listaDTO;
 
-                TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                DTO_RESULTADO_ACTUALIZACION_FICHA resultado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(Id, ficha, nombre,
-                    especie, raza, sexo, edad, telefono, procedencia, garantia, pendiente, 
-                    total, recepcion, medico, solicitante, fechaRecepcion, fichaClinica,
-                    IdCargaPrestacionesDetalleEstado, "", this.ListaExamen);
+                    TrxCARGA_PRESTACIONES_ENCABEZADO PrestacionesEncabezado = new TrxCARGA_PRESTACIONES_ENCABEZADO();
+                    DTO_RESULTADO_ACTUALIZACION_FICHA resultado = PrestacionesEncabezado.ActualizarCargaPrestacionVeterinarias(Id, ficha, nombre,
+                        especie, raza, sexo, edad, telefono, procedencia, garantia, pendiente,
+                        total, recepcion, medico, solicitante, fechaRecepcion, fichaClinica,
+                        IdCargaPrestacionesDetalleEstado, "", this.ListaExamen);
 
-                if (!resultado.RESULTADO)
-                {
-                    // mostrar errores en grilla
-                    var listaErrores = resultado.ERRORES_VALIDACION;
-                    grdErroresVeterinarios.DataSource = listaErrores;
-                    grdErroresVeterinarios.DataBind();
-                    panelErrores.Visible = listaErrores.Any();
-                }
-                else
-                {
-                    //si no existio errores pasa al regsitro siguiente
-                    string id = Request.QueryString["Id"].ToString();
-                    int? IdSiguiente = PrestacionesEncabezado.GetIdSiguienteFichaVeterinaria(int.Parse(id));
-                    if (IdSiguiente.HasValue)
-                        Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + (IdSiguiente.Value).ToString(), false);
+                    if (!resultado.RESULTADO)
+                    {
+                        // mostrar errores en grilla
+                        var listaErrores = resultado.ERRORES_VALIDACION;
+                        grdErroresVeterinarios.DataSource = listaErrores;
+                        grdErroresVeterinarios.DataBind();
+                        panelErrores.Visible = listaErrores.Any();
+                    }
                     else
-                        btnCancelar_Click(null, null);
+                    {
+                        //si no existio errores pasa al regsitro siguiente
+                        string id = Request.QueryString["Id"].ToString();
+                        int? IdSiguiente = PrestacionesEncabezado.GetIdSiguienteFichaVeterinaria(int.Parse(id));
+                        if (IdSiguiente.HasValue)
+                            Response.Redirect("EditarPrestacionesVeterinarias.aspx?Id=" + (IdSiguiente.Value).ToString(), false);
+                        else
+                            btnCancelar_Click(null, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -304,28 +307,31 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
-                if (string.IsNullOrEmpty(txtExamen.Text))
-                    throw new Exception("Debe ingrsesar un nombre para el examen");
+                if (Page.IsValid)
+                {
+                    if (string.IsNullOrEmpty(txtExamen.Text))
+                        throw new Exception("Debe ingrsesar un nombre para el examen");
 
-                if (string.IsNullOrEmpty(txtValor.Text))
-                    throw new Exception("Debe ingresar el valor del examen");
+                    if (string.IsNullOrEmpty(txtValor.Text))
+                        throw new Exception("Debe ingresar el valor del examen");
 
-                DTOExamen dto = new DTOExamen();
-                dto.NOMBRE_EXAMEN = txtExamen.Text;
-                dto.ID = 0;
-                dto.VALOR_EXAMEN = txtValor.Text;
-                var lista = this.ListaExamen;
-                lista.Add(dto);
-                this.ListaExamen = lista;
+                    DTOExamen dto = new DTOExamen();
+                    dto.NOMBRE_EXAMEN = txtExamen.Text;
+                    dto.ID = 0;
+                    dto.VALOR_EXAMEN = txtValor.Text;
+                    var lista = this.ListaExamen;
+                    lista.Add(dto);
+                    this.ListaExamen = lista;
 
-                grdExamen.DataSource = lista;
-                grdExamen.DataBind();
+                    grdExamen.DataSource = lista;
+                    grdExamen.DataBind();
 
-                txtExamen.Text = string.Empty;
-                txtValor.Text = string.Empty;
-                pnAgregaFila.Visible = false;
+                    txtExamen.Text = string.Empty;
+                    txtValor.Text = string.Empty;
+                    pnAgregaFila.Visible = false;
 
-                CalculoMontoPrestaciones();
+                    CalculoMontoPrestaciones();
+                }
             }
             catch (Exception ex)
             {

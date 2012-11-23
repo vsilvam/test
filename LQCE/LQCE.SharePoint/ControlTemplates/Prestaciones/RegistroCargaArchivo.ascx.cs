@@ -107,6 +107,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
         {
             try
             {
+                string Mensaje = "";
                 //verificar los registros selecionados
                 foreach (GridViewRow grilla in gridRegistroCargaArchivo.Rows)
                 {
@@ -117,10 +118,21 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         int IdCargaPrestacionesEncabezado = int.Parse(hdnId.Value);
                         
                         TrxCARGA_PRESTACIONES_ENCABEZADO carga = new TrxCARGA_PRESTACIONES_ENCABEZADO();
-                        carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, (int)ENUM_CARGA_PRESTACIONES_ESTADO.Eliminado);
+                        try
+                        {
+                            carga.CambiarEstadoCarga(IdCargaPrestacionesEncabezado, (int)ENUM_CARGA_PRESTACIONES_ESTADO.Eliminado);
+                        }
+                        catch (Exception ex2)
+                        {
+                            Mensaje = Mensaje + ex2.Message + ". ";
+                        }
                     }
                 }
                 btnBuscar_Click(null, null);
+                if (!string.IsNullOrEmpty(Mensaje))
+                {
+                    throw new Exception(Mensaje);
+                }
             }
             catch (Exception ex)
             {

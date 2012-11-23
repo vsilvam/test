@@ -80,7 +80,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             txtRecepcion.Text = prestaciones.RECEPCION;
             txtMedico.Text = prestaciones.MEDICO;
             txtSolicitante.Text = prestaciones.SOLICITA;
-            txtFechaRecepción.Text = prestaciones.FECHA_RECEPCION;
+            txtFechaRecepción.Text = prestaciones.VALOR_FECHA_RECEPCION.ToString();//.FECHA_RECEPCION;
             txtFichaClinica.Text = prestaciones.FICHA_CLINICA;            
 
             //carga grilla

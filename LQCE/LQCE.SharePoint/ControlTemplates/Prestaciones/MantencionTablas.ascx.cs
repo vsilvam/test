@@ -60,6 +60,23 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             selRazaAgregarEspecie.DataBind();
         }
 
+        private void MostrarTipoPrestaciones()
+        {
+            TrxTIPO_PRESTACION trx = new TrxTIPO_PRESTACION();
+            var lista = trx.GetAll();
+
+            selExamenActualizarTipoPrestacion.Items.Clear();
+            selExamenActualizarTipoPrestacion.Items.Add(new ListItem("(Seleccionar)",""));
+            selExamenActualizarTipoPrestacion.DataSource = lista;
+            selExamenActualizarTipoPrestacion.DataBind();
+
+            selExamenAgregaTipoPrestacion.Items.Clear();
+            selExamenAgregaTipoPrestacion.Items.Add(new ListItem("(Seleccionar)",""));
+            selExamenAgregaTipoPrestacion.DataSource = lista;
+            selExamenAgregaTipoPrestacion.DataBind();
+
+        }
+
         protected void ddlTablas_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -181,6 +198,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 Limpiar();
                 MostrarRegiones();
                 MostrarEspecies();
+                MostrarTipoPrestaciones();
                 switch (ddlTablas.SelectedValue)
                 {
                     case "1":
@@ -192,6 +210,17 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         var comuna = new TrxCOMUNA();
                         gridComunas.DataSource = comuna.GetAllWithReferences();
                         gridComunas.DataBind();
+                        break;
+                    case "2":
+                        panelExamen.Visible = true;
+                        panelExamenListar.Visible = true;
+                        panelExamenAgregar.Visible = false;
+                        panelExamenActualizar.Visible = false;
+
+                        var examen = new TrxEXAMEN();
+
+
+
                         break;
                     case "3":
                         panelEspecie.Visible = true;
@@ -263,6 +292,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 return;
             }
         }
+        
 
         private void Limpiar()
         {
@@ -1202,6 +1232,11 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 lblMensaje.Text = ex.Message;
                 return;
             }
+        }
+
+        protected void gridActualizarSinonimoExamen_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
         }
     }
 }

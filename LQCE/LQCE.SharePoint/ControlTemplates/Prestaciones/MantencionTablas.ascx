@@ -25,6 +25,7 @@
                     AutoPostBack="True">
                     <asp:ListItem Value="">Seleccione</asp:ListItem>
                     <asp:ListItem Value="1">Comuna</asp:ListItem>
+                    <asp:ListItem Value="2">Examen</asp:ListItem>
                     <asp:ListItem Value="3">Especie</asp:ListItem>
                     <asp:ListItem Value="7">Garantia</asp:ListItem>
                     <asp:ListItem Value="8">Prevision</asp:ListItem>
@@ -44,6 +45,153 @@
             </td>
         </tr>
     </table>
+</asp:Panel>
+<asp:Panel Id="panelExamen" runat="server" Visible="false">
+    <asp:Panel ID="panelExamenListar" runat="server" Visible="true">
+        <h3>Examen</h3>
+        <asp:GridView ID="gridExamen" runat="server"  Width="100%" AutoGenerateColumns="false" GridLines="Both" DataKeyNames="ID">
+            <Columns>
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:BoundField HeaderText="CODIGO" DataField="CODIGO" />
+                <asp:BoundField HeaderText="TIPOPRESTACION" DataField="TIPOPRESTACION" />
+                <asp:BoundField HeaderText="SINONIMO" DataField="SINONIMO" />
+                <asp:BoundField HeaderText="DETALLE" DataField="DETALLE" />
+                <asp:TemplateField HeaderText="Eliminar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarEspecie_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Editar">
+                    <ItemTemplate>
+                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarEspecie_Click" />
+                    </ItemTemplate>
+                    <ItemStyle HorizontalAlign="Center" />
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </asp:Panel>
+    <asp:Panel ID="panelExamenAgregar" runat="server" Visible="false">
+        <h3>AgregarExamen</h3>
+        <table>
+            <tr>
+                <td>Nombre</td>
+                <td>
+                    <asp:TextBox ID="txtExamenAgregarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtExamenAgregarNombre"
+                        ValidationGroup="ExamenAgregar" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Codigo</td>
+                <td>
+                    <asp:TextBox ID="txtExamenAgregarCodigo" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txtExamenAgregarCodigo"
+                        ValidationGroup="ExamenAgregar" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Tipo Prestacion</td>
+                <td>
+                    <asp:DropDownList ID="selExamenAgregaTipoPrestacion" runat="server" 
+                        AppendDataBoundItems="True" DataTextField="NOMBRE" DataValueField="ID">
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="selExamenAgregaTipoPrestacion"
+                        ValidationGroup="ExamenAgregar" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Sinonimo</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Ingresa Sinonimo</td>
+                            <td>
+                                <asp:TextBox ID="txtExamenAgregarIngresaSinonimo" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:Button ID="btnExamenAgregarIngresaSinonimo" runat="server" Text="Ingresar" />
+                            </td>
+                        </tr>
+                    </table>
+                    <asp:GridView ID="gridAgregarSinonimoExamen" runat="server" AutoGenerateColumns="false"
+                        GridLines="Both" Width="100%" DataKeyNames="ID">
+                        <Columns>
+                            <asp:BoundField DataField="NOMBRE" HeaderText="Sinonimo" />
+                        </Columns>
+                        <EmptyDataTemplate>
+                            El Examne no tiene sinónimos registrados.
+                        </EmptyDataTemplate>
+                    </asp:GridView>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnExamenAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="ExamenAgregar" />
+        <asp:Button ID="btnExamenAgregaCancelar" runat="server" Text="Cancelar" CausesValidation="false" />
+    </asp:Panel>
+    <asp:Panel ID="panelExamenActualizar" runat="server" Visible="false">
+        <h3>Actualizar Examen</h3>
+        <asp:HiddenField ID="hdnExamenActuaizarId" runat="server" />
+        <table>
+            <tr>
+                <td>Nombre</td>
+                <td>
+                    <asp:TextBox ID="txtExamenActualizarNombre" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtExamenActualizarNombre" ValidationGroup="ExamenActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Codigo</td>
+                <td>
+                    <asp:TextBox ID="txtExamenActualizarCodigo" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtExamenActualizarCodigo" ValidationGroup="ExamenActualizar"
+                        ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Tipo Prestacion</td>
+                <td>
+                    <asp:DropDownList ID="selExamenActualizarTipoPrestacion" runat="server" 
+                        AppendDataBoundItems="True" DataTextField="NOMBRE" DataValueField="ID">
+                    </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="selExamenActualizarTipoPrestacion"
+                        ValidationGroup="ExamenActualizar" ForeColor="Red" ErrorMessage="Requerido" Text="Requerido">Requerido</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td>Sinonimo</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Ingresa Sinonimo</td>
+                            <td>
+                                <asp:TextBox ID="txtExamenActualizarIngresaSinonimo" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                <asp:Button ID="btnExamenActualizarIngresaSinonimo" runat="server" Text="Ingresar" />
+                            </td>
+                        </tr>
+                    </table>
+                    <asp:GridView ID="gridActualizarSinonimoExamen" runat="server" AutoGenerateColumns="false"
+                        GridLines="Both" Width="100%" DataKeyNames="ID" 
+                        onrowcommand="gridActualizarSinonimoExamen_RowCommand">
+                        <Columns>
+                            <asp:BoundField DataField="NOMBRE" HeaderText="Sinonimo" />
+                            <asp:ButtonField CommandName="Eliminar" Text="Eliminar" />
+                        </Columns>
+                        <EmptyDataTemplate>
+                            El Examne no tiene sinónimos registrados.
+                        </EmptyDataTemplate>
+                    </asp:GridView>
+                </td>
+            </tr>
+        </table>
+        <asp:Button ID="btnExamenActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="ExamenActualizar" />
+        <asp:Button ID="btnExamenActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false" />
+    </asp:Panel>
 </asp:Panel>
 <asp:Panel ID="panelComuna" runat="server" Visible="false">
     <asp:Panel ID="panelComunaListar" runat="server" Visible="true">

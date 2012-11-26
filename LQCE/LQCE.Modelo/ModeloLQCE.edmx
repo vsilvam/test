@@ -3657,7 +3657,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="ModeloLQCE" ZoomLevel="42">
+      <Diagram Name="ModeloLQCE" ZoomLevel="55">
         <EntityTypeShape EntityType="LQCEModelo.CLIENTE" Width="1.5" PointX="5.25" PointY="26.25" Height="3.7109993489583388" />
         <EntityTypeShape EntityType="LQCEModelo.CLIENTE_SINONIMO" Width="1.5" PointX="7.5" PointY="49.5" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LQCEModelo.COBRO" Width="1.5" PointX="8.25" PointY="17.125" Height="1.9802864583333388" />
@@ -3666,7 +3666,7 @@
         <EntityTypeShape EntityType="LQCEModelo.CONVENIO_EXAMEN" Width="1.5" PointX="7.5" PointY="33.625" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="LQCEModelo.CONVENIO_TARIFARIO" Width="1.5" PointX="5.25" PointY="31.25" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="LQCEModelo.ESPECIE" Width="1.5" PointX="13.5" PointY="39.75" Height="2.172587890624996" />
-        <EntityTypeShape EntityType="LQCEModelo.EXAMEN" Width="1.5" PointX="3" PointY="34.625" Height="3.326396484374996" />
+        <EntityTypeShape EntityType="LQCEModelo.EXAMEN" Width="1.875" PointX="2.625" PointY="34.625" Height="3.326396484374996" />
         <EntityTypeShape EntityType="LQCEModelo.EXAMEN_DETALLE" Width="1.5" PointX="5.25" PointY="34.125" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LQCEModelo.EXAMEN_SINONIMO" Width="1.5" PointX="5.25" PointY="36.625" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="LQCEModelo.FACTURA_DETALLE" Width="1.5" PointX="9.75" PointY="20.25" Height="2.3648893229166674" />
@@ -3693,11 +3693,11 @@
           <ConnectorPoint PointX="5.2511528461538459" PointY="30.922506510416667" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_SINONIMO_CLIENTE" >
-          <ConnectorPoint PointX="6.75" PointY="30.89712089503205" />
-          <ConnectorPoint PointX="7.0660744349011217" PointY="31.213195329933171" />
-          <ConnectorPoint PointX="7.1839255650988791" PointY="31.331046460130928" />
-          <ConnectorPoint PointX="7.1875" PointY="31.33462089503205" />
-          <ConnectorPoint PointX="7.1875" PointY="50.393992513020834" />
+          <ConnectorPoint PointX="6.75" PointY="30.865967048878204" />
+          <ConnectorPoint PointX="7.0973244349011217" PointY="31.213291483779326" />
+          <ConnectorPoint PointX="7.2151755650988791" PointY="31.331142613977082" />
+          <ConnectorPoint PointX="7.21875" PointY="31.334717048878204" />
+          <ConnectorPoint PointX="7.21875" PointY="50.393992513020834" />
           <ConnectorPoint PointX="7.5" PointY="50.393992513020834" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CLIENTE_TIPO_PRESTACION" >
@@ -3712,11 +3712,9 @@
           <ConnectorPoint PointX="5.25" PointY="27.651319614583333" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PAGO_CLIENTE" >
-          <ConnectorPoint PointX="6.75" PointY="30.91558243349359" />
-          <ConnectorPoint PointX="7.0660744349011217" PointY="31.231656868394712" />
-          <ConnectorPoint PointX="7.1839255650988791" PointY="31.349507998592468" />
-          <ConnectorPoint PointX="7.21875" PointY="31.38433243349359" />
-          <ConnectorPoint PointX="7.21875" PointY="53.2112939453125" />
+          <ConnectorPoint PointX="6.72576923076923" PointY="30.922506510416667" />
+          <ConnectorPoint PointX="7.125" PointY="31.321737279647436" />
+          <ConnectorPoint PointX="7.125" PointY="53.2112939453125" />
           <ConnectorPoint PointX="7.5" PointY="53.2112939453125" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_COBRO_TIPO_COBRO" >
@@ -3750,10 +3748,10 @@
           <ConnectorPoint PointX="7.5" PointY="33.625" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CONVENIO_EXAMEN_EXAMEN" >
-          <ConnectorPoint PointX="4.5" PointY="36.198998457031244" />
-          <ConnectorPoint PointX="7.041666666666667" PointY="36.198998457031244" />
-          <ConnectorPoint PointX="7.302083333333333" PointY="36.198998457031244" />
-          <ConnectorPoint PointX="7.84375" PointY="36.198998457031244" />
+          <ConnectorPoint PointX="4.5" PointY="36.262563753255208" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="36.262563753255208" />
+          <ConnectorPoint PointX="7.302083333333333" PointY="36.262563753255208" />
+          <ConnectorPoint PointX="7.84375" PointY="36.262563753255208" />
           <ConnectorPoint PointX="7.84375" PointY="35.605286458333339" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_RAZA_ESPECIE" >
@@ -3761,27 +3759,30 @@
           <ConnectorPoint PointX="14.89196533203125" PointY="19.047587890625003" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN" >
-          <ConnectorPoint PointX="4.5" PointY="35.26899251333127" />
-          <ConnectorPoint PointX="5.25" PointY="35.26899251333127" />
+          <ConnectorPoint PointX="4.5" PointY="35.461240641409532" />
+          <ConnectorPoint PointX="5.25" PointY="35.461240641409532" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_EXAMEN_DETALLE_EXAMEN1" >
-          <ConnectorPoint PointX="4.5" PointY="34.884496256777396" />
-          <ConnectorPoint PointX="5.25" PointY="34.884496256777396" />
+          <ConnectorPoint PointX="4.5" PointY="34.980620320704766" />
+          <ConnectorPoint PointX="5.25" PointY="34.980620320704766" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_EXAMEN_SINONIMO_EXAMEN" >
-          <ConnectorPoint PointX="4.5" PointY="37.288198241877055" />
-          <ConnectorPoint PointX="5.25" PointY="37.288198241877055" />
+          <ConnectorPoint PointX="4.5" PointY="37.2881982421875" />
+          <ConnectorPoint PointX="5.25" PointY="37.2881982421875" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_EXAMEN_TIPO_PRESTACION" >
-          <ConnectorPoint PointX="1.2819230769230774" PointY="27.307190755208332" />
-          <ConnectorPoint PointX="2.625" PointY="27.706421524439108" />
-          <ConnectorPoint PointX="2.625" PointY="36.2881982421875" />
-          <ConnectorPoint PointX="3" PointY="36.2881982421875" />
+          <ConnectorPoint PointX="2.2499999999999996" PointY="27.307190755208332" />
+          <ConnectorPoint PointX="2.625" PointY="27.682190755208332" />
+          <ConnectorPoint PointX="2.625" PointY="34.25" />
+          <ConnectorPoint PointX="2.25" PointY="34.25" />
+          <ConnectorPoint PointX="2.625" PointY="34.625" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_EXAMEN_EXAMEN" >
           <ConnectorPoint PointX="4.5" PointY="36.150122506510414" />
           <ConnectorPoint PointX="7.041666666666667" PointY="36.150122506510414" />
           <ConnectorPoint PointX="7.302083333333333" PointY="36.150122506510414" />
+          <ConnectorPoint PointX="7.760416666666667" PointY="36.150122506510414" />
+          <ConnectorPoint PointX="7.927083333333333" PointY="36.150122506510414" />
           <ConnectorPoint PointX="9.1354166666666661" PointY="36.150122506510414" />
           <ConnectorPoint PointX="9.3020833333333339" PointY="36.150122506510414" />
           <ConnectorPoint PointX="9.4791691666666669" PointY="36.150122506510414" />
@@ -3983,20 +3984,20 @@
         <EntityTypeShape EntityType="LQCEModelo.CARGA_PRESTACIONES_VETERINARIAS_DETALLE" Width="1.5" PointX="21.75" PointY="25.75" Height="8.133932291666639" />
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_CARGA_PRESTACIONES_DETALLE_ESTADO" >
           <ConnectorPoint PointX="9.21875" PointY="36.375" />
-          <ConnectorPoint PointX="9.21875" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="11.572916666666666" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="11.739583333333334" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="12.260416666666666" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="12.427083333333334" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="14.370458082682292" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="14.53712474934896" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="14.574254498697917" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="14.740921165364584" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="14.808631998697916" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="14.975298665364583" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="15.416666666666666" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="15.583333333333334" PointY="23.814615208288828" />
-          <ConnectorPoint PointX="18.5" PointY="23.814615208288828" />
+          <ConnectorPoint PointX="9.21875" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="11.572916666666666" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="11.739583333333334" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="12.260416666666666" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="12.427083333333334" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="14.370458082682292" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="14.53712474934896" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="14.574254498697917" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="14.740921165364584" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="14.808631998697916" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="14.975298665364583" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="15.041666666666666" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="15.208333333333334" PointY="23.737963639311797" />
+          <ConnectorPoint PointX="18.5" PointY="23.737963639311797" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_CARGA_PRESTACIONES_DETALLE_ESTADO" >
           <ConnectorPoint PointX="9.5625025" PointY="36.375" />
@@ -4007,8 +4008,8 @@
           <ConnectorPoint PointX="13.583333333333334" PointY="32.403595377604169" />
           <ConnectorPoint PointX="14.402381998697916" PointY="32.403595377604169" />
           <ConnectorPoint PointX="14.569048665364583" PointY="32.403595377604169" />
-          <ConnectorPoint PointX="14.660190748697916" PointY="32.403595377604169" />
-          <ConnectorPoint PointX="14.975298665364582" PointY="32.403595377604169" />
+          <ConnectorPoint PointX="14.574254498697917" PointY="32.403595377604169" />
+          <ConnectorPoint PointX="14.975298665364585" PointY="32.403595377604169" />
           <ConnectorPoint PointX="16.416666666666668" PointY="32.403595377604169" />
           <ConnectorPoint PointX="16.583333333333332" PointY="32.403595377604169" />
           <ConnectorPoint PointX="18.510416666666668" PointY="32.403595377604169" />
@@ -4121,7 +4122,7 @@
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_HUMANAS_DETALLE_PREVISION" >
           <ConnectorPoint PointX="6.75" PointY="44.654361881384666" />
-          <ConnectorPoint PointX="7.104166666666667" PointY="44.654361881384666" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="44.654361881384666" />
           <ConnectorPoint PointX="7.302083333333333" PointY="44.654361881384666" />
           <ConnectorPoint PointX="12.635416666666666" PointY="44.654361881384666" />
           <ConnectorPoint PointX="12.802083333333334" PointY="44.654361881384666" />
@@ -4172,18 +4173,16 @@
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_ESPECIE" >
           <ConnectorPoint PointX="14.48571533203125" PointY="39.75" />
-          <ConnectorPoint PointX="14.48571533203125" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="14.660190748697916" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="14.975298665364582" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="15.166666666666666" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="15.333333333333334" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="15.541666666666666" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="15.708333333333334" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="18.479164166666667" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="18.677083333333332" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="21.166666666666668" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="21.333333333333332" PointY="28.833811848958334" />
-          <ConnectorPoint PointX="21.75" PointY="28.833811848958334" />
+          <ConnectorPoint PointX="14.48571533203125" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="14.574254498697917" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="14.975298665364585" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="15.166666666666666" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="15.333333333333334" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="15.416666666666666" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="15.583333333333334" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="18.479164166666667" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="18.677083333333332" PointY="28.927561848958334" />
+          <ConnectorPoint PointX="21.75" PointY="28.927561848958334" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_GARANTIA" >
           <ConnectorPoint PointX="6.75" PointY="16.090192440673832" />
@@ -4215,18 +4214,16 @@
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_DETALLE_RAZA" >
           <ConnectorPoint PointX="14.657587832031251" PointY="19.047587890625003" />
-          <ConnectorPoint PointX="14.657587832031251" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="14.660190748697916" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="14.975298665364582" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="15.166666666666666" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="15.333333333333334" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="15.541666666666666" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="15.708333333333334" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="18.479164166666667" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="18.677083333333332" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="21.166666666666668" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="21.333333333333332" PointY="28.59446527343745" />
-          <ConnectorPoint PointX="21.75" PointY="28.59446527343745" />
+          <ConnectorPoint PointX="14.657587832031251" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="14.660190748697916" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="14.975298665364582" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="16.416666666666668" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="16.583333333333332" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="18.510416666666668" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="18.677083333333332" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="19.416666666666668" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="19.583333333333332" PointY="33.12681102343749" />
+          <ConnectorPoint PointX="21.75" PointY="33.12681102343749" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_CARGA_PRESTACIONES_VETERINARIAS_EXAMEN_CARGA_PRESTACIONES_VETERINARIAS_DETALLE" >
           <ConnectorPoint PointX="21.75" PointY="30.778595377604166" />
@@ -4276,10 +4273,10 @@
           <ConnectorPoint PointX="9.75" PointY="33.393992513020834" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_PREVISION" >
-          <ConnectorPoint PointX="6.7500000000000018" PointY="43.25" />
-          <ConnectorPoint PointX="7.125" PointY="42.875" />
-          <ConnectorPoint PointX="7.125" PointY="30.770851192565623" />
-          <ConnectorPoint PointX="7.5" PointY="30.770851192565623" />
+          <ConnectorPoint PointX="6.75" PointY="43.281152846153852" />
+          <ConnectorPoint PointX="7.15625" PointY="42.874902846153852" />
+          <ConnectorPoint PointX="7.15625" PointY="30.590017902844544" />
+          <ConnectorPoint PointX="7.5" PointY="30.590017902844544" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_TIPO_PRESTACION" >
           <ConnectorPoint PointX="1.5" PointY="27.307190755208332" />
@@ -4294,11 +4291,11 @@
           <ConnectorPoint PointX="4.958333333333333" PointY="31" />
           <ConnectorPoint PointX="5.0903260232371785" PointY="31" />
           <ConnectorPoint PointX="5.2569926899038446" PointY="31" />
-          <ConnectorPoint PointX="6.7510842331730769" PointY="31" />
-          <ConnectorPoint PointX="6.9362124383012835" PointY="31" />
-          <ConnectorPoint PointX="7.1875" PointY="31" />
-          <ConnectorPoint PointX="7.1875" PointY="28.756696801940635" />
-          <ConnectorPoint PointX="7.5" PointY="28.756696801940635" />
+          <ConnectorPoint PointX="6.7199293870192314" PointY="31" />
+          <ConnectorPoint PointX="6.9673662844551281" PointY="31" />
+          <ConnectorPoint PointX="7.0625" PointY="31" />
+          <ConnectorPoint PointX="7.0625" PointY="28.575863512219556" />
+          <ConnectorPoint PointX="7.5" PointY="28.575863512219556" />
         </AssociationConnector>
         <EntityTypeShape EntityType="LQCEModelo.PRESTACION_VETERINARIA" Width="1.5" PointX="15.75" PointY="24.75" Height="3.3263964843750102" />
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_ESPECIE" >
@@ -4308,8 +4305,8 @@
           <ConnectorPoint PointX="14.975298665364583" PointY="27.163774665264427" />
           <ConnectorPoint PointX="15.166666666666666" PointY="27.163774665264427" />
           <ConnectorPoint PointX="15.333333333333334" PointY="27.163774665264427" />
-          <ConnectorPoint PointX="15.541666666666666" PointY="27.163774665264427" />
-          <ConnectorPoint PointX="15.708333333333334" PointY="27.163774665264427" />
+          <ConnectorPoint PointX="15.416666666666666" PointY="27.163774665264427" />
+          <ConnectorPoint PointX="15.583333333333334" PointY="27.163774665264427" />
           <ConnectorPoint PointX="15.75" PointY="27.163774665264427" />
         </AssociationConnector>
         <AssociationConnector Association="LQCEModelo.FK_PRESTACION_VETERINARIA_PRESTACION" >

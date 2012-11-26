@@ -4,6 +4,9 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using App.Infrastructure.Runtime;
 using LQCE.Transaccion;
+using LQCE.Transaccion.DTO;
+using LQCE.Modelo;
+using System.Collections.Generic;
 
 namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
@@ -218,6 +221,22 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         panelExamenActualizar.Visible = false;
 
                         var examen = new TrxEXAMEN();
+                        List<EXAMEN> _listaExamen = examen.GetAllWithReferences();
+                        List<DTOExamen> lista = new List<DTOExamen>();
+                        //gridExamen.DataSource = _listaExamen;
+                        //gridExamen.DataBind();
+                        foreach (var lis in _listaExamen)
+                        {
+                            DTOExamen _dtoExamen = new DTOExamen();
+                            _dtoExamen.NOMBRE_EXAMEN = lis.NOMBRE;
+                            _dtoExamen.CODIGO = lis.CODIGO;
+                            _dtoExamen.TIPO_PRESTACION = lis.TIPO_PRESTACION.NOMBRE;
+                            //_dtoExamen.NOMBRE_SINONIMO = lis.EXAMEN_SINONIMO;
+                            lista.Add(_dtoExamen);
+ 
+                        }
+                        gridExamen.DataSource = lista;
+                        gridExamen.DataBind();
 
 
 

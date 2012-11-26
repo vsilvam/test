@@ -11,6 +11,9 @@ namespace LQCE.Transaccion.DTO
         public string NOMBRE_EXAMEN { get; set; }
         public int ID { get; set; }
         public string VALOR_EXAMEN { get; set; }
+        public string CODIGO { get; set; }
+        public string TIPO_PRESTACION { get; set; }
+        public string NOMBRE_SINONIMO { get; set; }
 
         public DTOExamen()
         {

@@ -51,11 +51,11 @@
         <h3>Examen</h3>
         <asp:GridView ID="gridExamen" runat="server"  Width="100%" AutoGenerateColumns="false" GridLines="Both" DataKeyNames="ID">
             <Columns>
-                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE" />
+                <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE_EXAMEN" />
                 <asp:BoundField HeaderText="CODIGO" DataField="CODIGO" />
-                <asp:BoundField HeaderText="TIPOPRESTACION" DataField="TIPOPRESTACION" />
-                <asp:BoundField HeaderText="SINONIMO" DataField="SINONIMO" />
-                <asp:BoundField HeaderText="DETALLE" DataField="DETALLE" />
+                <asp:BoundField HeaderText="TIPOPRESTACION" DataField="TIPO_PRESTACION" />
+                <asp:BoundField HeaderText="SINONIMO" DataField="" />
+                <asp:BoundField HeaderText="DETALLE" DataField="" />
                 <asp:TemplateField HeaderText="Eliminar">
                     <ItemTemplate>
                         <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"

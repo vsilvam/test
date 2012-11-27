@@ -77,7 +77,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             selExamenAgregaTipoPrestacion.Items.Add(new ListItem("(Seleccionar)",""));
             selExamenAgregaTipoPrestacion.DataSource = lista;
             selExamenAgregaTipoPrestacion.DataBind();
-
         }
 
         protected void ddlTablas_SelectedIndexChanged(object sender, EventArgs e)
@@ -231,7 +230,6 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                             _dtoExamen.NOMBRE_EXAMEN = lis.NOMBRE;
                             _dtoExamen.CODIGO = lis.CODIGO;
                             _dtoExamen.TIPO_PRESTACION = lis.TIPO_PRESTACION.NOMBRE;
-                            //_dtoExamen.NOMBRE_SINONIMO = lis.EXAMEN_SINONIMO;
                             lista.Add(_dtoExamen);
  
                         }
@@ -1253,9 +1251,75 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
             }
         }
 
+        /*  EXAMEN  */
+
         protected void gridActualizarSinonimoExamen_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
+        }
+
+        protected void imgEliminarExamen_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+
+
+                var examen_sinonimo = new TrxEXAMEN_SINONIMO();
+                var objExamen_sinonimo = examen_sinonimo.GetByFilter(Id,"");
+                foreach (var lis in objExamen_sinonimo)
+                {
+                    examen_sinonimo.Delete(lis.ID);
+                }
+
+                var examen = new TrxEXAMEN();
+                examen.Delete(Id);
+                ViewGrilla();
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void imgActualizarExamen_Click(object sender, ImageClickEventArgs e)
+        {
+            try
+            {
+                panelMensaje.CssClass = "OcultarMensaje";
+
+                ImageButton _link = sender as ImageButton;
+                int Id = int.Parse(_link.CommandArgument);
+                panelExamenListar.Visible = false;
+                panelExamenAgregar.Visible = false;
+                panelExamenActualizar.Visible = true;
+
+                MostrarTipoPrestaciones();
+                var examen = new TrxEXAMEN();
+                var objExamen = examen.GetByIdWithReferences(Id);
+                hdnExamenActuaizarId.Value = objExamen.ID.ToString();
+                txtExamenActualizarNombre.Text = objExamen.NOMBRE;
+                txtExamenActualizarCodigo.Text = objExamen.CODIGO;
+                selExamenActualizarTipoPrestacion.SelectedValue = objExamen.TIPO_PRESTACION.ID.ToString();
+
+                var examen_sinonimo = new TrxEXAMEN_SINONIMO();
+                var objexamen_sinonimo = examen_sinonimo.GetByFilter(Id,"");
+                gridActualizarSinonimoExamen.DataSource = objexamen_sinonimo;
+                gridActualizarSinonimoExamen.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
     }
 }

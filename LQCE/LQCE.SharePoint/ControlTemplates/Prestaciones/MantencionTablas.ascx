@@ -54,19 +54,17 @@
                 <asp:BoundField HeaderText="NOMBRE" DataField="NOMBRE_EXAMEN" />
                 <asp:BoundField HeaderText="CODIGO" DataField="CODIGO" />
                 <asp:BoundField HeaderText="TIPOPRESTACION" DataField="TIPO_PRESTACION" />
-                <asp:BoundField HeaderText="SINONIMO" DataField="" />
-                <asp:BoundField HeaderText="DETALLE" DataField="" />
                 <asp:TemplateField HeaderText="Eliminar">
                     <ItemTemplate>
-                        <asp:ImageButton ID="imgEliminar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
-                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" OnClick="imgEliminarEspecie_Click" />
+                        <asp:ImageButton ID="imgEliminarExamen" runat="server" ImageUrl="../../_layouts/Style/Imagenes/eliminar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Eliminar" onclick="imgEliminarExamen_Click" />
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Editar">
                     <ItemTemplate>
-                        <asp:ImageButton ID="imgActualizar" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
-                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" OnClick="imgActualizarEspecie_Click" />
+                        <asp:ImageButton ID="imgActualizarExamen" runat="server" ImageUrl="../../_layouts/Style/Imagenes/editar.jpg"
+                            CommandArgument='<%# Eval("ID") %>' Height="15px" ToolTip="Editar" onclick="imgActualizarExamen_Click" />
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center" />
                 </asp:TemplateField>

@@ -12,6 +12,8 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 {
     public partial class MantencionTablas : UserControl
     {
+        public static List<EXAMEN> _list = new List<EXAMEN>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -227,6 +229,7 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         foreach (var lis in _listaExamen)
                         {
                             DTOExamen _dtoExamen = new DTOExamen();
+                            _dtoExamen.ID = lis.ID;
                             _dtoExamen.NOMBRE_EXAMEN = lis.NOMBRE;
                             _dtoExamen.CODIGO = lis.CODIGO;
                             _dtoExamen.TIPO_PRESTACION = lis.TIPO_PRESTACION.NOMBRE;
@@ -1255,7 +1258,48 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
 
         protected void gridActualizarSinonimoExamen_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            try
+            {
+                if (e.CommandName == "Eliminar")
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+                    _list.RemoveAt(index);
 
+                    gridActualizarSinonimoExamen.DataSource = _list;
+                    gridActualizarSinonimoExamen.DataBind();                    
+                }
+ 
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void gridAgregarSinonimoExamen_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            try
+            {
+                if (e.CommandName == "Eliminar")
+                {
+                    int index = int.Parse(e.CommandArgument.ToString());
+                    _list.RemoveAt(index);
+
+                    gridAgregarSinonimoExamen.DataSource = _list;
+                    gridAgregarSinonimoExamen.DataBind();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
         }
 
         protected void imgEliminarExamen_Click(object sender, ImageClickEventArgs e)
@@ -1321,5 +1365,129 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 return;
             }
         }
+
+        protected void btnExamenAgregarIngresaSinonimo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txtExamenAgregarIngresaSinonimo.Text))
+                {
+                    List<EXAMEN> _list = new List<EXAMEN>();
+                    EXAMEN objExamen = new EXAMEN();
+                    objExamen.NOMBRE = txtExamenAgregarIngresaSinonimo.Text;
+                    _list.Add(objExamen);
+
+                    gridAgregarSinonimoExamen.DataSource = _list;
+                    gridAgregarSinonimoExamen.DataBind();
+
+                    txtExamenAgregarIngresaSinonimo.Text = string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnExamenAgregarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TrxEXAMEN _examen = new TrxEXAMEN();
+                TrxEXAMEN_SINONIMO _sinonimoExamen = new TrxEXAMEN_SINONIMO();
+
+                string NombreExamen = txtExamenAgregarNombre.Text;
+                string CodigoExamen = txtExamenAgregarCodigo.Text;
+                int TipoPrestacionExamen = int.Parse(selExamenAgregaTipoPrestacion.SelectedValue);
+
+                /*Agrega examen*/
+                var ingresoExamen = _examen.Add(TipoPrestacionExamen, CodigoExamen, NombreExamen);
+
+                /*Guardar los sinonimos del examen desde la grilla*/
+                foreach (GridViewRow grilla in gridAgregarSinonimoExamen.Rows)
+                {
+                    if (grilla.RowType == DataControlRowType.DataRow)
+                    {
+                        string IdSinonimo = gridAgregarSinonimoExamen.DataKeyNames[int.Parse("ID")];
+                        TextBox txtNombreAgregaSinonimo = (TextBox)grilla.FindControl("txtNombreAgregaSinonimo");
+
+                        _sinonimoExamen.Add(ingresoExamen, txtNombreAgregaSinonimo.Text);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnExamenActualizarIngresaSinonimo_Click(object sender, EventArgs e)
+        {
+            try
+            {                
+                EXAMEN objExamen = new EXAMEN();
+                objExamen.NOMBRE = txtExamenActualizarIngresaSinonimo.Text;
+                _list.Add(objExamen);
+
+                gridActualizarSinonimoExamen.DataSource = _list;
+                gridActualizarSinonimoExamen.DataBind();
+
+                txtExamenActualizarIngresaSinonimo.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        protected void btnExamenActualizarGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TrxEXAMEN _examen = new TrxEXAMEN();
+                TrxEXAMEN_SINONIMO _sinonimoExamen = new TrxEXAMEN_SINONIMO();
+
+                int IdExamen = int.Parse(hdnExamenActuaizarId.Value);
+                string NombreExamen = txtExamenActualizarNombre.Text;
+                string CodigoExamen = txtExamenActualizarCodigo.Text;
+                int TipoPrestacionExamen = int.Parse(selExamenActualizarTipoPrestacion.SelectedValue);
+
+                /*Guardar los sinonimos del examen desde la grilla*/
+                foreach (GridViewRow grilla in gridActualizarSinonimoExamen.Rows)
+                {
+                    if (grilla.RowType == DataControlRowType.DataRow)
+                    {
+                        string IdSinonimo = gridActualizarSinonimoExamen.DataKeyNames[int.Parse("ID")];
+                        TextBox txtNombre = (TextBox)grilla.FindControl("txtNombre");
+
+                        _sinonimoExamen.Update(int.Parse(IdSinonimo), IdExamen, txtNombre.Text);
+                    }
+                }
+                     
+                /*Actualiza examen*/                
+                _examen.Update(IdExamen,TipoPrestacionExamen,CodigoExamen,NombreExamen);
+            }
+            catch (Exception ex)
+            {
+                ISException.RegisterExcepcion(ex);
+                panelMensaje.CssClass = "MostrarMensaje";
+                lblMensaje.Text = ex.Message;
+                return;
+            }
+        }
+
+        
+
+        
     }
 }

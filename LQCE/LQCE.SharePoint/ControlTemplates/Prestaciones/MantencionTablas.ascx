@@ -110,14 +110,25 @@
                                 <asp:TextBox ID="txtExamenAgregarIngresaSinonimo" runat="server"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:Button ID="btnExamenAgregarIngresaSinonimo" runat="server" Text="Ingresar" />
+                                <asp:Button ID="btnExamenAgregarIngresaSinonimo" runat="server" Text="Ingresar" 
+                                    onclick="btnExamenAgregarIngresaSinonimo_Click" />
                             </td>
                         </tr>
                     </table>
-                    <asp:GridView ID="gridAgregarSinonimoExamen" runat="server" AutoGenerateColumns="false"
-                        GridLines="Both" Width="100%" DataKeyNames="ID">
+                    <asp:GridView ID="gridAgregarSinonimoExamen" runat="server" 
+                        AutoGenerateColumns="False" Width="100%" DataKeyNames="ID" 
+                        EnableModelValidation="True" 
+                        onrowcommand="gridAgregarSinonimoExamen_RowCommand">
                         <Columns>
-                            <asp:BoundField DataField="NOMBRE" HeaderText="Sinonimo" />
+                            <asp:TemplateField HeaderText="Sinonimo">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtNombreAgregaSinonimo" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
+                            <asp:ButtonField CommandName="Eliminar" Text="Eliminar" />
                         </Columns>
                         <EmptyDataTemplate>
                             El Examne no tiene sinónimos registrados.
@@ -126,7 +137,8 @@
                 </td>
             </tr>
         </table>
-        <asp:Button ID="btnExamenAgregarGuardar" runat="server" Text="Guardar" ValidationGroup="ExamenAgregar" />
+        <asp:Button ID="btnExamenAgregarGuardar" runat="server" Text="Guardar" 
+            ValidationGroup="ExamenAgregar" onclick="btnExamenAgregarGuardar_Click" />
         <asp:Button ID="btnExamenAgregaCancelar" runat="server" Text="Cancelar" CausesValidation="false" />
     </asp:Panel>
     <asp:Panel ID="panelExamenActualizar" runat="server" Visible="false">
@@ -169,25 +181,35 @@
                                 <asp:TextBox ID="txtExamenActualizarIngresaSinonimo" runat="server"></asp:TextBox>
                             </td>
                             <td>
-                                <asp:Button ID="btnExamenActualizarIngresaSinonimo" runat="server" Text="Ingresar" />
+                                <asp:Button ID="btnExamenActualizarIngresaSinonimo" runat="server" 
+                                    Text="Ingresar" onclick="btnExamenActualizarIngresaSinonimo_Click" />
                             </td>
                         </tr>
                     </table>
-                    <asp:GridView ID="gridActualizarSinonimoExamen" runat="server" AutoGenerateColumns="false"
-                        GridLines="Both" Width="100%" DataKeyNames="ID" 
-                        onrowcommand="gridActualizarSinonimoExamen_RowCommand">
+                    <asp:GridView ID="gridActualizarSinonimoExamen" runat="server" 
+                        AutoGenerateColumns="False" Width="100%" DataKeyNames="ID" 
+                        onrowcommand="gridActualizarSinonimoExamen_RowCommand" 
+                        EnableModelValidation="True">
                         <Columns>
-                            <asp:BoundField DataField="NOMBRE" HeaderText="Sinonimo" />
+                            <asp:TemplateField HeaderText="Sinonimo">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtNombre" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:TextBox>
+                                </EditItemTemplate>
+                            </asp:TemplateField>
                             <asp:ButtonField CommandName="Eliminar" Text="Eliminar" />
                         </Columns>
                         <EmptyDataTemplate>
-                            El Examne no tiene sinónimos registrados.
+                            El Examen no tiene sinónimos registrados.
                         </EmptyDataTemplate>
                     </asp:GridView>
                 </td>
             </tr>
         </table>
-        <asp:Button ID="btnExamenActualizarGuardar" runat="server" Text="Guardar" ValidationGroup="ExamenActualizar" />
+        <asp:Button ID="btnExamenActualizarGuardar" runat="server" Text="Guardar" 
+            ValidationGroup="ExamenActualizar" onclick="btnExamenActualizarGuardar_Click" />
         <asp:Button ID="btnExamenActualizarCancelar" runat="server" Text="Cancelar" CausesValidation="false" />
     </asp:Panel>
 </asp:Panel>

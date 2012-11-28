@@ -464,15 +464,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ControlTemplates\Prestaciones\ActualizarClientes.ascx" />
-    <Content Include="ControlTemplates\Prestaciones\AnularFactura.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="ControlTemplates\Prestaciones\BorrarNumeracion.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-    <Content Include="ControlTemplates\Prestaciones\BuscarFactura.ascx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    <Content Include="ControlTemplates\Prestaciones\AnularFactura.ascx" />
+    <Content Include="ControlTemplates\Prestaciones\BorrarNumeracion.ascx" />
+    <Content Include="ControlTemplates\Prestaciones\BuscarFactura.ascx" />
     <Content Include="ControlTemplates\Prestaciones\CargaArchivo.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

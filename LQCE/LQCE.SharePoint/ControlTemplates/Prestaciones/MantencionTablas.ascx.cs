@@ -134,6 +134,15 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                         txtComunaAgregarNombre.Text = "";
                         selComunaAgregarRegion.SelectedIndex = 0;
                         break;
+                    case 2:
+                        panelExamenListar.Visible = false;
+                        panelExamenAgregar.Visible = true;
+                        panelExamenActualizar.Visible = false;
+
+                        txtExamenAgregarNombre.Text = string.Empty;
+                        txtExamenAgregarCodigo.Text = string.Empty;
+                        selExamenAgregaTipoPrestacion.SelectedIndex = 0;
+                        break;
                     case 3:
                         panelEspecie.Visible = true;
                         panelEspecieAgregar.Visible = true;
@@ -1411,10 +1420,16 @@ namespace LQCE.SharePoint.ControlTemplates.Prestaciones
                 {
                     if (grilla.RowType == DataControlRowType.DataRow)
                     {
-                        string IdSinonimo = gridAgregarSinonimoExamen.DataKeyNames[int.Parse("ID")];
-                        TextBox txtNombreAgregaSinonimo = (TextBox)grilla.FindControl("txtNombreAgregaSinonimo");
+                        //TextBox txtNombreAgregaSinonimo = (TextBox)grilla.FindControl("txtNombreAgregaSinonimo");
+                        Label lblNombreAgregaSinonimo = (Label)grilla.FindControl("lblNombreAgregaSinonimo");
 
-                        _sinonimoExamen.Add(ingresoExamen, txtNombreAgregaSinonimo.Text);
+                        _sinonimoExamen.Add(ingresoExamen, lblNombreAgregaSinonimo.Text);
+
+
+                        txtExamenAgregarNombre.Text = string.Empty;
+                        txtExamenAgregarCodigo.Text = string.Empty;
+                        selExamenAgregaTipoPrestacion.SelectedIndex = 0;
+                        txtExamenAgregarIngresaSinonimo.Text = string.Empty;
                     }
                 }
 

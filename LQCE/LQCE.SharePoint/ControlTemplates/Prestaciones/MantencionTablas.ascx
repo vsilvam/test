@@ -122,7 +122,7 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Sinonimo">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:Label>
+                                    <asp:Label ID="lblNombreAgregaSinonimo" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
                                     <asp:TextBox ID="txtNombreAgregaSinonimo" runat="server" Text='<%# Bind("NOMBRE") %>'></asp:TextBox>

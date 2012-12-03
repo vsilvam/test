@@ -106,7 +106,7 @@ namespace LQCE.Transaccion
             }
         }
 	 	
-		public List<TIPO_PRESTACION> GetByFilter(string NOMBRE = "")
+		public List<TIPO_PRESTACION> GetByFilter(string NOMBRE = "", string NOMBRE_REPORTE_DETALLE_FACTURA = "")
         {
 			Init();
 			try
@@ -114,7 +114,7 @@ namespace LQCE.Transaccion
                 using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_PRESTACION repositorio = new RepositorioTIPO_PRESTACION(context);
-                    return repositorio.GetByFilter(NOMBRE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilter(NOMBRE, NOMBRE_REPORTE_DETALLE_FACTURA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		public List<TIPO_PRESTACION> GetByFilterWithReferences(string NOMBRE = "")
+		public List<TIPO_PRESTACION> GetByFilterWithReferences(string NOMBRE = "", string NOMBRE_REPORTE_DETALLE_FACTURA = "")
         {
 			Init();
             try
@@ -133,7 +133,7 @@ namespace LQCE.Transaccion
                  using (LQCEEntities context = new LQCEEntities())
                 {
                     RepositorioTIPO_PRESTACION repositorio = new RepositorioTIPO_PRESTACION(context);
-                    return repositorio.GetByFilterWithReferences(NOMBRE).OrderBy(i => i.ID).ToList();
+                    return repositorio.GetByFilterWithReferences(NOMBRE, NOMBRE_REPORTE_DETALLE_FACTURA).OrderBy(i => i.ID).ToList();
                 }
             }
             catch (Exception ex)
@@ -144,7 +144,7 @@ namespace LQCE.Transaccion
             }
         } 
 
-		        public int Add(string NOMBRE)
+		        public int Add(string NOMBRE, string NOMBRE_REPORTE_DETALLE_FACTURA = "")
         {
 		Init();
             try
@@ -156,6 +156,7 @@ namespace LQCE.Transaccion
 					//properties
 
                     _TIPO_PRESTACION.NOMBRE = NOMBRE;				
+                    _TIPO_PRESTACION.NOMBRE_REPORTE_DETALLE_FACTURA = NOMBRE_REPORTE_DETALLE_FACTURA;				
                     _TIPO_PRESTACION.ACTIVO = true;				
 
 					//parents
@@ -175,7 +176,7 @@ namespace LQCE.Transaccion
 			}
         }
 
-		public void Update(int Id, string NOMBRE)
+		public void Update(int Id, string NOMBRE, string NOMBRE_REPORTE_DETALLE_FACTURA = "")
 		{
 		Init();
 			try
@@ -194,6 +195,10 @@ namespace LQCE.Transaccion
 					if (!string.IsNullOrEmpty(NOMBRE))
 					{
 						_TIPO_PRESTACION.NOMBRE = NOMBRE;
+					}
+					if (!string.IsNullOrEmpty(NOMBRE_REPORTE_DETALLE_FACTURA))
+					{
+						_TIPO_PRESTACION.NOMBRE_REPORTE_DETALLE_FACTURA = NOMBRE_REPORTE_DETALLE_FACTURA;
 					}
 	
 					//parents

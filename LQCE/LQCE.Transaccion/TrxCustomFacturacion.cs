@@ -295,7 +295,7 @@ namespace LQCE.Transaccion
                                  NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
                                  RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
                                  DETALLE = g.FirstOrDefault().DETALLE,
-                                 SUMA_PENDIENTE = g.Where(p => p.GARANTIA != "PAGADO").Sum(p => p.MONTO_TOTAL)
+                                 SUMA_PENDIENTE = g.Where(p => p.ESTADO_PENDIENTE == "INPAGO" || p.ESTADO_PREVISION == "INPAGO").Sum(p => p.MONTO_TOTAL)
                              }).ToList();
 
 
@@ -421,6 +421,7 @@ namespace LQCE.Transaccion
                             where f.ACTIVO
                             select new DTO_REPORTE_FACTURA
                             {
+                                NOMBRE_REPORTE_DETALLE_FACTURA = f.CLIENTE.TIPO_PRESTACION.NOMBRE_REPORTE_DETALLE_FACTURA,
                                 NOMBRE_REPORTE_FACTURA = f.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA,
                                 NOMBRE_REPORTE_FACTURA_INDIVIDUAL = f.TIPO_FACTURA.NOMBRE_REPORTE_FACTURA_INDIVIDUAL,
                                 DIA = f.FACTURACION.FECHA_FACTURACION.Day,
@@ -527,6 +528,9 @@ namespace LQCE.Transaccion
                 {
                     RepositorioFACTURACION _RepositorioFACTURACION = new RepositorioFACTURACION(context);
 
+                    int IdTipoPrestacionVeterinaria = (int)Enum.ENUM_TIPO_PRESTACION.Veterinarias;
+                    int IdTipoPrestacionHumana = (int)Enum.ENUM_TIPO_PRESTACION.Humanas;
+
                     var q = _RepositorioFACTURACION.GetFacturaDetalleByIdFacturacion(IdFacturacion);
 
                     var lista = (from fd in q
@@ -544,7 +548,11 @@ namespace LQCE.Transaccion
                                 NOMBRE = fd.PRESTACION.PRESTACION_HUMANA != null ? fd.PRESTACION.PRESTACION_HUMANA.NOMBRE : fd.PRESTACION.PRESTACION_VETERINARIA.NOMBRE,
                                 MEDICO = fd.PRESTACION.MEDICO,
                                 EXAMENES = "",
-                                GARANTIA = fd.PRESTACION.GARANTIA != null ? fd.PRESTACION.GARANTIA.NOMBRE : ""
+                                //ESTADO = fd.PRESTACION.GARANTIA != null ? fd.PRESTACION.GARANTIA.NOMBRE : ""
+                                ESTADO_PENDIENTE = fd.PRESTACION.TIPO_PRESTACION.ID == IdTipoPrestacionVeterinaria ? 
+                                    ((fd.PRESTACION.PENDIENTE == "CANCELADO" || fd.PRESTACION.PENDIENTE == "PAGADO") ? "PAGADO" : "INPAGO") : "",
+                                ESTADO_PREVISION = fd.PRESTACION.TIPO_PRESTACION.ID == IdTipoPrestacionHumana ?
+                                    ((fd.PRESTACION.PREVISION.NOMBRE == "CANCELADO" || fd.PRESTACION.PREVISION.NOMBRE == "PAGADO") ? "PAGADO" : "INPAGO") : "",
                             }).ToList();
 
                     foreach (var i in lista)
@@ -870,7 +878,7 @@ namespace LQCE.Transaccion
                                      NOMBRE_CLIENTE = g.FirstOrDefault().NOMBRE_CLIENTE,
                                      RUT_CLIENTE = g.FirstOrDefault().RUT_CLIENTE,
                                      DETALLE = g.FirstOrDefault().DETALLE,
-                                     SUMA_PENDIENTE = g.Where(p => p.GARANTIA != "PAGADO").Sum(p => p.MONTO_TOTAL)
+                                     SUMA_PENDIENTE = g.Where(p => p.ESTADO_PENDIENTE == "INPAGO" || p.ESTADO_PREVISION == "INPAGO").Sum(p => p.MONTO_TOTAL)
                                  }).ToList();
 
 

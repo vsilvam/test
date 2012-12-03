@@ -82,7 +82,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<TIPO_PRESTACION> GetByFilter(string NOMBRE = "")
+		public IQueryable<TIPO_PRESTACION> GetByFilter(string NOMBRE = "", string NOMBRE_REPORTE_DETALLE_FACTURA = "")
 		{
 			Error = string.Empty;
 			try
@@ -95,6 +95,10 @@ namespace LQCE.Repositorio
 				{
 				   q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
 				}
+				if (!string.IsNullOrEmpty(NOMBRE_REPORTE_DETALLE_FACTURA))
+				{
+				   q = q.Where(i => i.NOMBRE_REPORTE_DETALLE_FACTURA.Contains(NOMBRE_REPORTE_DETALLE_FACTURA));
+				}
 				return q;
 			}
 			catch (Exception ex)
@@ -105,7 +109,7 @@ namespace LQCE.Repositorio
             }
 		}
 
-		public IQueryable<TIPO_PRESTACION> GetByFilterWithReferences(string NOMBRE = "")
+		public IQueryable<TIPO_PRESTACION> GetByFilterWithReferences(string NOMBRE = "", string NOMBRE_REPORTE_DETALLE_FACTURA = "")
 		{
 			Error = string.Empty;
 			try
@@ -118,6 +122,10 @@ namespace LQCE.Repositorio
 				if (!string.IsNullOrEmpty(NOMBRE))
 				{
 					q = q.Where(i => i.NOMBRE.Contains(NOMBRE));
+				}
+				if (!string.IsNullOrEmpty(NOMBRE_REPORTE_DETALLE_FACTURA))
+				{
+					q = q.Where(i => i.NOMBRE_REPORTE_DETALLE_FACTURA.Contains(NOMBRE_REPORTE_DETALLE_FACTURA));
 				}
 				return q;
 			}

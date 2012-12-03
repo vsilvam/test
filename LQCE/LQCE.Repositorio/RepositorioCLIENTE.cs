@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
-using App.Infrastructure.Runtime;
 using LQCE.Modelo;
+using App.Infrastructure.Runtime;
 
 namespace LQCE.Repositorio
 {

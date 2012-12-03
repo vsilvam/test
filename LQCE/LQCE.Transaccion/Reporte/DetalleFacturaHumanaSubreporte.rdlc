@@ -537,14 +537,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="ESTADO">
+                    <Textbox Name="ESTADO_PREVISION">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!ESTADO.Value</Value>
+                              <Value>=Fields!ESTADO_PREVISION.Value</Value>
                               <Style>
                                 <FontSize>6pt</FontSize>
                               </Style>
@@ -553,7 +553,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>ESTADO</rd:DefaultName>
+                      <rd:DefaultName>ESTADO_PREVISION</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
 using App.Infrastructure.Base;
 using App.Infrastructure.Runtime;
 using LQCE.Modelo;
 using LQCE.Repositorio;
 using LQCE.Transaccion.DTO;
 using LQCE.Transaccion.Enum;
-using System.Linq;
 
 namespace LQCE.Transaccion
 {
@@ -1164,10 +1164,6 @@ namespace LQCE.Transaccion
                 }
             }
 
-           
-
-
-
             // Examenes
             int contadorExamen = 1;
             int contadorExamenesRegistrados = 0;
@@ -1183,9 +1179,11 @@ namespace LQCE.Transaccion
                     }
                     else
                     {
+                        bool ExamenExiste = false;
                         var objExamen = _RepositorioEXAMEN.GetByFilter((int)ENUM_TIPO_PRESTACION.Humanas, "", item.NOMBRE_EXAMEN).FirstOrDefault();
                         if (objExamen != null)
                         {
+                            ExamenExiste = true;
                             item.EXAMEN = objExamen;
                         }
                         else
@@ -1193,12 +1191,17 @@ namespace LQCE.Transaccion
                             var objExamenSinonimo = _RepositorioEXAMEN_SINONIMO.GetByFilterWithReferences(null, item.NOMBRE_EXAMEN).FirstOrDefault();
                             if (objExamenSinonimo != null)
                             {
+                                ExamenExiste = true;
                                 item.EXAMEN = objExamenSinonimo.EXAMEN;
                             }
                             else
                             {
-                                ListaValidaciones.Add("No se ha encontrado información del examen [" + contadorExamen.ToString() + "]");
+                                ListaValidaciones.Add("No se ha encontrado información del examen [" + contadorExamen.ToString() + "; " + item.NOMBRE_EXAMEN  + "]");
                             }
+                        }
+                        if (ExamenExiste && string.IsNullOrEmpty(item.VALOR_EXAMEN))
+                        {
+                            ListaValidaciones.Add("No se ha señalado valor del examen [" + contadorExamen.ToString() + "; " + item.NOMBRE_EXAMEN + "]");
                         }
                     }
                     if (string.IsNullOrEmpty(item.VALOR_EXAMEN))
@@ -1212,10 +1215,10 @@ namespace LQCE.Transaccion
                         {
                             ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
                         }
-                        else if (_valorExamen == 0)
-                        {
-                            //ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
-                        }
+                        //else if (_valorExamen == 0)
+                        //{
+                        //    //ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
+                        //}
                         else
                         {
                             contadorValorExamen++;
@@ -1488,9 +1491,11 @@ namespace LQCE.Transaccion
                     }
                     else
                     {
+                        bool ExamenExiste = false;
                         var objExamen = _RepositorioEXAMEN.GetByFilter((int)ENUM_TIPO_PRESTACION.Humanas, "", item.NOMBRE_EXAMEN).FirstOrDefault();
                         if (objExamen != null)
                         {
+                            ExamenExiste = true;
                             item.EXAMEN = objExamen;
                         }
                         else
@@ -1498,12 +1503,17 @@ namespace LQCE.Transaccion
                             var objExamenSinonimo = _RepositorioEXAMEN_SINONIMO.GetByFilterWithReferences(null, item.NOMBRE_EXAMEN).FirstOrDefault();
                             if (objExamenSinonimo != null)
                             {
+                                ExamenExiste = true;
                                 item.EXAMEN = objExamenSinonimo.EXAMEN;
                             }
                             else
                             {
                                 ListaValidaciones.Add("No se ha encontrado información del examen [" + contadorExamen.ToString() + "]");
                             }
+                        }
+                        if (ExamenExiste && string.IsNullOrEmpty(item.VALOR_EXAMEN))
+                        {
+                            ListaValidaciones.Add("No se ha señalado valor del examen [" + contadorExamen.ToString() + "; " + item.NOMBRE_EXAMEN + "]");
                         }
                     }
                     if (string.IsNullOrEmpty(item.VALOR_EXAMEN))
@@ -1517,10 +1527,10 @@ namespace LQCE.Transaccion
                         {
                             ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
                         }
-                        else if (_valorExamen == 0)
-                        {
-                            //ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
-                        }
+                        //else if (_valorExamen == 0)
+                        //{
+                        //    //ListaValidaciones.Add("Valor de examen no tiene el formato correcto [" + contadorExamen.ToString() + "]");
+                        //}
                         else
                         {
                             contadorValorExamen++;

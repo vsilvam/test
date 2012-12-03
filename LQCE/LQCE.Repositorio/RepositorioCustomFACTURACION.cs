@@ -13,6 +13,7 @@ namespace LQCE.Repositorio
             try
             {
                 return _context.FACTURACION
+                    .Include("FACTURA.CLIENTE.TIPO_PRESTACION")
                     .Include("FACTURA.TIPO_FACTURA")
                     .FirstOrDefault(i => i.ID == ID);
             }
@@ -33,6 +34,8 @@ namespace LQCE.Repositorio
                 var q = from i in _context.FACTURA_DETALLE
                             .Include("FACTURA.FACTURACION")
                             .Include("FACTURA.CLIENTE")
+                            .Include("PRESTACION.TIPO_PRESTACION")
+                            .Include("PRESTACION.PREVISION")
                             .Include("PRESTACION.PRESTACION_HUMANA")
                             .Include("PRESTACION.PRESTACION_VETERINARIA")
                         where i.ACTIVO

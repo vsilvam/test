@@ -70,7 +70,6 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("LQCEModelo", "FK_PRESTACION_VETERINARIA_RAZA", "RAZA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(LQCE.Modelo.RAZA), "PRESTACION_VETERINARIA", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(LQCE.Modelo.PRESTACION_VETERINARIA))]
 
 // Nombre de archivo original:
-// Fecha de generación: 26/11/2012 15:41:35
 namespace LQCE.Modelo
 {
     
@@ -5725,6 +5724,33 @@ namespace LQCE.Modelo
         partial void OnACTIVOChanging(bool value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnACTIVOChanged();
+        /// <summary>
+        /// No hay ningún comentario para la propiedad NOMBRE_REPORTE_DETALLE_FACTURA en el esquema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string NOMBRE_REPORTE_DETALLE_FACTURA
+        {
+            get
+            {
+                return this._NOMBRE_REPORTE_DETALLE_FACTURA;
+            }
+            set
+            {
+                this.OnNOMBRE_REPORTE_DETALLE_FACTURAChanging(value);
+                this.ReportPropertyChanging("NOMBRE_REPORTE_DETALLE_FACTURA");
+                this._NOMBRE_REPORTE_DETALLE_FACTURA = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+                this.ReportPropertyChanged("NOMBRE_REPORTE_DETALLE_FACTURA");
+                this.OnNOMBRE_REPORTE_DETALLE_FACTURAChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _NOMBRE_REPORTE_DETALLE_FACTURA;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_REPORTE_DETALLE_FACTURAChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnNOMBRE_REPORTE_DETALLE_FACTURAChanged();
         /// <summary>
         /// No hay ningún comentario para CLIENTE en el esquema.
         /// </summary>

@@ -20,6 +20,7 @@ namespace LQCE.Transaccion.DTO
         public string NOMBRE { get; set; }
         public string MEDICO { get; set; }
         public string EXAMENES { get; set; }
-        public string GARANTIA { get; set; }
+        public string ESTADO_PREVISION { get; set; }
+        public string ESTADO_PENDIENTE { get; set; }
     }
 }
